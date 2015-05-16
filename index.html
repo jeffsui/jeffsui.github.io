@@ -1,0 +1,820 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>pinghailinfeng&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Jeff Sui">
+    
+
+    
+    <meta name="description" content="pinghailinfeng&apos;s blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="pinghailinfeng's blog">
+<meta property="og:url" content="http://jeffsui.github.io/index.html">
+<meta property="og:site_name" content="pinghailinfeng's blog">
+<meta property="og:description" content="pinghailinfeng&apos;s blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pinghailinfeng's blog">
+<meta name="twitter:description" content="pinghailinfeng&apos;s blog">
+
+    
+    <link rel="alternative" href="/atom.xml" title="pinghailinfeng&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="pinghailinfeng&#39;s blog" title="pinghailinfeng&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="pinghailinfeng&#39;s blog">pinghailinfeng&#39;s blog</a></h1>
+				<h2 class="blog-motto">pinghailinfeng&#39;s blog</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:jeffsui.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/16/how-git-version-rollback/" title="how git version rollback" itemprop="url">how git version rollback</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jeff Sui" target="_blank" itemprop="author">Jeff Sui</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-16T13:58:30.000Z" itemprop="datePublished"> 发表于 2015-05-16</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <blockquote>
+<p>如何进行远程版本回退……</p>
+</blockquote>
+<h1 id="引言">引言</h1><blockquote>
+<p>一切都要从一个蛋疼的需求开始,老板说,能给远程仓库的版本回退吗？我说为毛？他说我就是试试看git好使不,我……</p>
+</blockquote>
+<h1 id="咋搞">咋搞</h1><ul>
+<li>背景 </li>
+</ul>
+<p>gitcafe 国内知名的源码托管平台</p>
+<ul>
+<li>分析</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1</span>、git checkout the_branch</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、git pull</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、git branch the_branch_backup <span class="comment">//备份一下这个分支当前的情况</span></span><br><span class="line"></span><br><span class="line"><span class="number">4</span>、git reset --hard the_commit_id <span class="comment">//把the_branch本地回滚到the_commit_id</span></span><br><span class="line"></span><br><span class="line"><span class="number">5</span>、git <span class="keyword">push</span> origin :the_branch <span class="comment">//删除远程 the_branch</span></span><br><span class="line"></span><br><span class="line"><span class="number">6</span>、git <span class="keyword">push</span> origin the_branch <span class="comment">//用回滚后的本地分支重新建立远程分支</span></span><br><span class="line"></span><br><span class="line"><span class="number">7</span>、git <span class="keyword">push</span> origin :the_branch_backup <span class="comment">//如果前面都成功了，删除这个备份分支</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除远程分支</li>
+</ul>
+<p>首先,任何一个git源码托管平台都会告诉你,别删除远程master分支,因为它是默认的分支……,请移步<a href="https://gitcafe.com/GitCafe/Help/wiki/%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4-Master-%E5%88%86%E6%94%AF" target="_blank" rel="external">这里</a> </p>
+<ul>
+<li>操作步骤 </li>
+</ul>
+<p>如果远程只有一个master分支,请你创建一个非master分支,然后推送到远程。<br>有人会问我为什么？打个比方,你见过上旱厕的时候,给自己脚下站着的板子抽走吗？</p>
+<p>脚本类似下面这样</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git branch the_master_backup</span><br><span class="line"></span><br><span class="line">git <span class="keyword">push</span> origin the_master_backup</span><br></pre></td></tr></table></figure>
+<p>此时你查看远程分支应该有两个:master和the_master_backup</p>
+<p>设置默认的分支为 the_master_backup</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git branch -D branch_name <span class="comment">//删除本地master分支</span></span><br><span class="line"></span><br><span class="line">git <span class="keyword">push</span> :master <span class="comment">//推送一个空分支,相当于删除远程master分支</span></span><br></pre></td></tr></table></figure>
+<p>然后你在the_master_backup分支上 回滚到你要回滚的commit_id,然后重建master分支并推送到远程,顺便删除the_master_backup分支(包括远程the_master_backup分支)。</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git checkout the_master_backup</span><br><span class="line"></span><br><span class="line">git reset --hard commit_id</span><br><span class="line"></span><br><span class="line">git branch master <span class="comment">//重新创建master分支</span></span><br><span class="line"></span><br><span class="line">git <span class="keyword">push</span> origin master <span class="comment">//重新推送master分支</span></span><br><span class="line"></span><br><span class="line">git branch -D the_master_backup <span class="comment">//删除本地the_master_backup分支</span></span><br><span class="line"></span><br><span class="line">git <span class="keyword">push</span> origin :the_master_backup<span class="comment">//删除远程the_master_backup分支</span></span><br></pre></td></tr></table></figure>
+<h1 id="遇到的问题">遇到的问题</h1><ol>
+<li>忘记设置默认分支为非master分支</li>
+</ol>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">remote: <span class="keyword">error</span>: By default, deleting <span class="keyword">the</span> current branch <span class="keyword">is</span> denied, because <span class="keyword">the</span> ne</span><br><span class="line">xt</span><br><span class="line">remote: <span class="keyword">error</span>: 'git clone' won't <span class="constant">result</span> <span class="keyword">in</span> any <span class="type">file</span> checked out, causing confusi</span><br><span class="line"><span class="function_start"><span class="keyword">on</span>.</span></span><br><span class="line">remote: <span class="keyword">error</span>:</span><br><span class="line">remote: <span class="keyword">error</span>: You can <span class="keyword">set</span> 'receive.denyDeleteCurrent' configuration variable <span class="keyword">to</span></span><br><span class="line"></span><br><span class="line">remote: <span class="keyword">error</span>: 'warn' <span class="keyword">or</span> 'ignore' <span class="keyword">in</span> <span class="keyword">the</span> remote repository <span class="keyword">to</span> allow deleting <span class="keyword">the</span></span><br><span class="line"></span><br><span class="line">remote: <span class="keyword">error</span>: current branch, <span class="keyword">with</span> <span class="keyword">or</span> <span class="keyword">without</span> a warning message.</span><br><span class="line">remote: <span class="keyword">error</span>:</span><br><span class="line">remote: <span class="keyword">error</span>: To squelch this message, you can <span class="keyword">set</span> <span class="keyword">it</span> <span class="keyword">to</span> 'refuse'.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h1 id="总结">总结</h1><p>如果你遇到的是所有提交只有master分支,那么希望我这个博文能帮到你。当然git强大的分支功能你基本也用不到了。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/git/">git</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/git/">git</a><a href="/tags/gitcafe/">gitcafe</a><a href="/tags/版本管理/">版本管理</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/16/how-git-version-rollback/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/16/how-git-version-rollback/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/23/javascript-oop-15-min-programming/" title="javascript oop 15 min programming" itemprop="url">javascript oop 15 min programming</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jeff Sui" target="_blank" itemprop="author">Jeff Sui</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-23T05:13:30.000Z" itemprop="datePublished"> 发表于 2015-04-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="javascript的面向对象15分钟教程">javascript的面向对象15分钟教程</h1><h2 id="第一种面向对象的写法">第一种面向对象的写法</h2><h2 id="创建空对象">创建空对象</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable"><span class="keyword">var</span> bill</span> =&#123;&#125;;<span class="comment">//创建一个空对象</span></span><br></pre></td></tr></table></figure>
+<h2 id="给对象添加属性和方法">给对象添加属性和方法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">bill.name = <span class="string">"Bill Goat"</span>;</span><br><span class="line">bill.work = <span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"programming...."</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="一步完成上面的两件事">一步完成上面的两件事</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> bill =&#123;</span><br><span class="line">    name : <span class="string">"Bill Goat"</span>;</span><br><span class="line">    work : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"programming...."</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="访问对象和属性">访问对象和属性</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">console.<span class="command">log</span>(bill.<span class="property">name</span>);</span><br><span class="line">bill.work();</span><br></pre></td></tr></table></figure>
+<h2 id="方法重写">方法重写</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">bill.name = <span class="string">"Bill Goat"</span>;</span><br><span class="line">bill.work =<span class="function"><span class="keyword">function</span><span class="params">(who)</span></span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">"programming for "</span>+who);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="通过this关键字访问内部属性">通过this关键字访问内部属性</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">bill.say = <span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"bill's name  is"</span>+<span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="对象引用">对象引用</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var silly = bill;</span><br><span class="line">console.<span class="command">log</span>(silly.<span class="property">name</span>);</span><br><span class="line">sally.<span class="property">name</span> = <span class="string">"Silly"</span>;</span><br><span class="line">console.<span class="command">log</span>(silly.<span class="property">name</span>);</span><br><span class="line">console.<span class="command">log</span>(bill.<span class="property">name</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="另一个方式引用">另一个方式引用</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">bill.<span class="property">name</span> = <span class="string">"Bill Goat"</span>;</span><br><span class="line">bill.<span class="command">say</span>();</span><br><span class="line"></span><br><span class="line">var sayName = bill.<span class="command">say</span>();</span><br><span class="line">sayName;</span><br><span class="line">sayName();</span><br></pre></td></tr></table></figure>
+<h2 id="有意思的地方_：全局属性">有意思的地方 ：全局属性</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var <span class="property">name</span> = <span class="string">"Global"</span>;</span><br><span class="line">bill.<span class="command">say</span>();</span><br></pre></td></tr></table></figure>
+<p>发现此时输出的是<br><code>bill&#39;s name is Global</code></p>
+<h2 id="另一种面向对象的写法">另一种面向对象的写法</h2><h2 id="定义对象及属性">定义对象及属性</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Game</span><span class="params">()</span></span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="创建对象">创建对象</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> DF = <span class="keyword">new</span> Game();</span><br></pre></td></tr></table></figure>
+<h2 id="对象属性">对象属性</h2><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DF.<span class="variable">title =</span> <span class="string">"星际争霸2"</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="构造方法">构造方法</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Game</span> <span class="params">(title)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.title = <span class="keyword">typeof</span> title !== <span class="string">'undifined'</span> ? title :<span class="string">""</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> d3 = <span class="keyword">new</span> Game(<span class="string">"d3"</span>);</span><br><span class="line">d3.title;</span><br><span class="line">d3.title =<span class="string">"starcraft2"</span>;</span><br></pre></td></tr></table></figure>
+<p><code>this.title = typeof title !== &#39;undifined&#39; ? title :&quot;&quot;;</code>相当于</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> title !== <span class="string">"undifined"</span>）&#123;</span><br><span class="line">	<span class="keyword">this</span>.title = title;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.title = <span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="创建一个方法来访问这个属性">创建一个方法来访问这个属性</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">d3.loveTitle = <span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"I love "</span>+<span class="keyword">this</span>.title);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="更好的写法">更好的写法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Game.prototype.heartIt = <span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"I love "</span>+<span class="keyword">this</span>.title);</span><br><span class="line">&#125;</span><br><span class="line">d3.heartIt();</span><br></pre></td></tr></table></figure>
+<p>下次详解javascript的原生对象模型</p>
+<p>to be continued~~~~</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/javascript/">javascript</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/javascript/">javascript</a><a href="/tags/oop/">oop</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/23/javascript-oop-15-min-programming/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/23/javascript-oop-15-min-programming/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/22/talk-about-software-engineering/" title="talk about software engineering" itemprop="url">talk about software engineering</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jeff Sui" target="_blank" itemprop="author">Jeff Sui</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-22T01:12:54.000Z" itemprop="datePublished"> 发表于 2015-04-22</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="关于软件工程的讨论—质量篇">关于软件工程的讨论—质量篇</h1><blockquote>
+<p>那为什么软件系统的质量不容易高呢？我觉得主要原因是流程不完善。那为什么不完善？需求容易变。为什么容易变？是因为不论程序员自己，还是需求方，其实潜意识都认为自己做的东西是变更成本较低的。</p>
+<p>试想一下，为什么没人在盖高楼盖一半变更需求？为什么没人修大桥修一半变更需求？甚至做衣服做一半的时候变更需求，理发到一半变更需求，都会被人认为是不讲理。但是在软件领域，好像这倒成了普遍现象。</p>
+<p>因为整个软件系统的实现，都是虚拟的，看不见摸不着，并不消耗什么物料，所以从这个角度想，变起来当然是容易的。但软件系统的架构，其实也跟实体的没本质区别，变更时候要考虑很多关联因素，并不是就那么孤立的看一小块地方，当然，也会有一些不影响全局的变更。打个比方说，如果你在盖房子盖到一半，那变更外墙颜色肯定是要比变更窗户大小容易的。要是想变得太多，估计只好拆了重来。</p>
+</blockquote>
+<p>下面的讨论更加精彩:</p>
+<p>A:其实不是流程问题，老板和甲方问题</p>
+<p>A:甲方尤其关键 </p>
+<p>A:尼玛，要8层楼房，付2层费用</p>
+<p>……</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/软件工程/">软件工程</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/软件工程/">软件工程</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/22/talk-about-software-engineering/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/22/talk-about-software-engineering/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/20/javascript-asynchronous-programming-learning-event/" title="javascript asynchronous programming learning :event" itemprop="url">javascript asynchronous programming learning :event</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jeff Sui" target="_blank" itemprop="author">Jeff Sui</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-20T13:05:16.000Z" itemprop="datePublished"> 发表于 2015-04-20</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="javascript异步编程读书笔记之事件机制">javascript异步编程读书笔记之事件机制</h1><h2 id="事件的调度">事件的调度</h2><ul>
+<li>异步执行</li>
+</ul>
+<p><code>setTimeout</code>函数的解释:给定一个回调及n毫秒的延迟,setTimeout会在n毫秒后运行该回调。</p>
+<p>代码清单1:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">3</span>; i++) &#123;</span><br><span class="line">	setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123; </span><br><span class="line">		<span class="built_in">console</span>.log(i); &#125;, </span><br><span class="line">	<span class="number">0</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>输出结果:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">4</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>线程阻塞<br>代码清单2:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> start = <span class="keyword">new</span> <span class="built_in">Date</span>;</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">var</span> end = <span class="keyword">new</span> <span class="built_in">Date</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Time elapsed:'</span>, end - start, <span class="string">'ms'</span>);</span><br><span class="line">&#125;, <span class="number">500</span>);</span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">new</span> <span class="built_in">Date</span> - start &lt; <span class="number">1000</span>) &#123;&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>队列</p>
+</li>
+</ul>
+<p>javascript使用队列的方式来循环处理请求,这种机制被称为<strong>事件循环</strong>。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/javascript/">javascript</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/javascript/">javascript</a><a href="/tags/异步/">异步</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/20/javascript-asynchronous-programming-learning-event/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/20/javascript-asynchronous-programming-learning-event/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/20/use-shorturl-and-two-dimensional-barcodes-to-beautify-blog/" title="use-shorturl and two-dimensional-barcodes to beautify blog" itemprop="url">use-shorturl and two-dimensional-barcodes to beautify blog</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jeff Sui" target="_blank" itemprop="author">Jeff Sui</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-20T07:37:14.000Z" itemprop="datePublished"> 发表于 2015-04-20</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="如何使用短网址和二维码简化网站访问">如何使用短网址和二维码简化网站访问</h1><ol>
+<li>短网址(shorturl)<br> web2.0时代的潮流,借助短网址您可以用简短的网址替代原来冗长的网址，让使用者可以更容易的分享链接。<br>这里我使用的是百度的短网址服务:<a href="http://dwz.cn/" title="百度短网址" target="_blank" rel="external">http://dwz.cn/</a><ol>
+<li>访问<a href="http://dwz.cn/主页" target="_blank" rel="external">http://dwz.cn/主页</a><br><img src="http://7xindo.com1.z0.glb.clouddn.com/百度短网址.png" alt=""></li>
+<li>输入你的博客地址<br>我输入<a href="http://jeffsui.github.io/pinghailinfeng_blog/" target="_blank" rel="external">http://jeffsui.github.io/pinghailinfeng_blog/</a></li>
+<li>复制短网址<br><img src="http://7xindo.com1.z0.glb.clouddn.com/百度短网址生成.png" alt=""></li>
+</ol>
+</li>
+<li>二维码(two-dimensional-barcodes)<br>微信时代,不知道二维码的基本都属于外星球人了。<br>这里我选择的是草料二维码:<br><a href="http://cli.im/" title="草料二维码" target="_blank" rel="external">http://cli.im/</a><ol>
+<li>输入二维码地址<br><img src="http://7xindo.com1.z0.glb.clouddn.com/在线二维码输入地址.jpg" alt=""></li>
+<li>进行一些基本设置<br>包括前景色、背景色、渐变色等等。</li>
+<li>嵌入图片</li>
+<li>选用你喜欢的模板</li>
+<li>保存二维码</li>
+</ol>
+</li>
+<li>在线存储<br>这里我选择国内知名的七牛云存储。<br> <img src="http://7xindo.com1.z0.glb.clouddn.com/云存储图片.jpg" alt=""><br>4.在博客中引用图片地址就可以了</li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/搭建博客/">搭建博客</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/二维码/">二维码</a><a href="/tags/博客/">博客</a><a href="/tags/短网址/">短网址</a><a href="/tags/美化/">美化</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/20/use-shorturl-and-two-dimensional-barcodes-to-beautify-blog/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/20/use-shorturl-and-two-dimensional-barcodes-to-beautify-blog/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+  </nav>
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/git/" title="git">git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/javascript/" title="javascript">javascript<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/工具篇/" title="工具篇">工具篇<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/搭建博客/" title="搭建博客">搭建博客<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/软件工程/" title="软件工程">软件工程<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/博客/" title="博客">博客<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/杂记/" title="杂记">杂记<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/javascript/" title="javascript">javascript<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/二维码/" title="二维码">二维码<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/软件工程/" title="软件工程">软件工程<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/sublime/" title="sublime">sublime<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/GitGutter/" title="GitGutter">GitGutter<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/搭建/" title="搭建">搭建<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/美化/" title="美化">美化<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/文章/" title="文章">文章<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/版本管理/" title="版本管理">版本管理<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/短网址/" title="短网址">短网址<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/oop/" title="oop">oop<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/异步/" title="异步">异步<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/gitcafe/" title="gitcafe">gitcafe<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/笔记/" title="笔记">笔记<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://dockerone.com" target="_blank" title="致力于国内docker推广的新行社区">dockerone</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.oschina.net" target="_blank" title="开源中国">开源中国</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.wangmurong.org.cn" target="_blank" title="Latexer">Latexer</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;sBlog">Jark&#39;sBlog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Pinghailinfeng in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Jeff Sui">Jeff Sui</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"pinghailinfeng"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6f572beec72bba251e71ac4f49fc5ebb' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>
