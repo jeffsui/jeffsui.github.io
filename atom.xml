@@ -4,7 +4,7 @@
   <subtitle><![CDATA[pinghailinfeng's blog]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jeffsui.github.io/"/>
-  <updated>2015-07-21T15:54:17.397Z</updated>
+  <updated>2015-07-21T15:57:55.611Z</updated>
   <id>http://jeffsui.github.io/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://jeffsui.github.io/2015/07/21/how-to-build-a-private-docker-registry/"/>
     <id>http://jeffsui.github.io/2015/07/21/how-to-build-a-private-docker-registry/</id>
     <published>2015-07-21T15:09:19.000Z</published>
-    <updated>2015-07-21T15:54:17.397Z</updated>
+    <updated>2015-07-21T15:57:55.611Z</updated>
     <content type="html"><![CDATA[<h1 id="如何搭建docker私服">如何搭建docker私服</h1><h2 id="环境准备">环境准备</h2><p>软件包：</p>
 <ul>
 <li><p>centos6.5_x86_64</p>
@@ -53,17 +53,9 @@
 <h2 id="查看私服状态">查看私服状态</h2><p><code>curl http://localhost:5000</code></p>
 <p>显示如下信息,证明registry启动成功:</p>
 <p><code>&quot;\&quot;docker-registry server\&quot;&quot;</code></p>
-<h2 id="推送本地镜像库到registry私服">推送本地镜像库到registry私服</h2><ol>
-<li>第一步 给本地镜像 打tag<br>例如给官方的nginx镜像打tag,执行下面的命令行<br><code>docker pull nginx</code><br><code>docker tag nginx:latest localhost:5000/nginx:latest</code><br>查看镜像库,发现<code>localhost:5000/nginx</code>的镜像已经有了。</li>
-</ol>
-<ol>
-<li>第二步 推送tag到registry私服</li>
-</ol>
-<p><code>docker push localhost:5000/nginx:latest</code></p>
-<ol>
-<li>第三步 查看私服镜像列表</li>
-</ol>
-<p><code>curl http://localhost：5000/V1/search</code></p>
+<h2 id="推送本地镜像库到registry私服">推送本地镜像库到registry私服</h2><h3 id="1-_第一步_给本地镜像_打tag">1. 第一步 给本地镜像 打tag</h3><p>例如给官方的nginx镜像打tag,执行下面的命令行<br><code>docker pull nginx</code><br><code>docker tag nginx:latest localhost:5000/nginx:latest</code><br>查看镜像库,发现<code>localhost:5000/nginx</code>的镜像已经有了。</p>
+<h3 id="2-_第二步_推送tag到registry私服">2. 第二步 推送tag到registry私服</h3><p><code>docker push localhost:5000/nginx:latest</code></p>
+<h3 id="3-_第三步_查看私服镜像列表">3. 第三步 查看私服镜像列表</h3><p><code>curl http://localhost：5000/V1/search</code></p>
 <p>看到类似这样的信息</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;"<span class="attribute">num_results</span>": <span class="value"><span class="number">5</span></span>, "<span class="attribute">query</span>": <span class="value"><span class="string">""</span></span>, "<span class="attribute">results</span>": <span class="value">[&#123;"<span class="attribute">description</span>": <span class="value"><span class="literal">null</span></span>, "<span class="attribute">name</span>": <span class="value"><span class="string">"correl/erlang"</span></span>&#125;, &#123;"<span class="attribute">description</span>": <span class="value"><span class="literal">null</span></span>, "<span class="attribute">name</span>": <span class="value"><span class="string">"linfeng/cmd"</span></span>&#125;, &#123;"<span class="attribute">description</span>": <span class="value"><span class="literal">null</span></span>, "<span class="attribute">name</span>": <span class="value"><span class="string">"library/my_nodejs_image"</span></span>&#125;, &#123;"<span class="attribute">description</span>": <span class="value"><span class="literal">null</span></span>, "<span class="attribute">name</span>": <span class="value"><span class="string">"library/centos"</span></span>&#125;, &#123;"<span class="attribute">description</span>": <span class="value"><span class="string">""</span></span>, "<span class="attribute">name</span>": <span class="value"><span class="string">"library/nginx"</span></span>&#125;]</span>&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="拉取私服镜像">拉取私服镜像</h2><p><code>docker pull 192.168.20.85:5000/library/centos:7</code></p>
