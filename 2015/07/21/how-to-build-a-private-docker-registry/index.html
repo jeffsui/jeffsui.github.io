@@ -4,58 +4,46 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>how git version rollback | pinghailinfeng&#39;s blog</title>
+    <title>how to build a private docker registry | pinghailinfeng&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Jeff Sui">
     
 
     
-    <meta name="description" content="如何进行远程版本回退……
+    <meta name="description" content="如何搭建docker私服环境准备软件包：
 
-引言
-一切都要从一个蛋疼的需求开始,老板说,能给远程仓库的版本回退吗？我说为毛？他说我就是试试看git好使不,我……
+centos6.5_x86_64
 
-咋搞
-背景 
+docker-engine-1.7.0-1.el6.x86_64.rpm
 
-gitcafe 国内知名的源码托管平台
 
-分析
-
-12345678910111213141、git checkout the_branch2、git pull3、git branch the_branch_backup //备份一下这个">
+docker环境搭建,请参照官方说明，本文采用的是官方的rpm包
+何谓私服官方的image镜像站位dockerhub,因为伟大的墙的缘故,所以下载镜像是很痛苦的一件事。当然你可以采用其他科学上网或者镜像加速的方法来获取image。docker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="how git version rollback">
-<meta property="og:url" content="http://jeffsui.github.io/2015/05/16/how-git-version-rollback/index.html">
+<meta property="og:title" content="how to build a private docker registry">
+<meta property="og:url" content="http://jeffsui.github.io/2015/07/21/how-to-build-a-private-docker-registry/index.html">
 <meta property="og:site_name" content="pinghailinfeng's blog">
-<meta property="og:description" content="如何进行远程版本回退……
+<meta property="og:description" content="如何搭建docker私服环境准备软件包：
 
-引言
-一切都要从一个蛋疼的需求开始,老板说,能给远程仓库的版本回退吗？我说为毛？他说我就是试试看git好使不,我……
+centos6.5_x86_64
 
-咋搞
-背景 
+docker-engine-1.7.0-1.el6.x86_64.rpm
 
-gitcafe 国内知名的源码托管平台
 
-分析
-
-12345678910111213141、git checkout the_branch2、git pull3、git branch the_branch_backup //备份一下这个">
+docker环境搭建,请参照官方说明，本文采用的是官方的rpm包
+何谓私服官方的image镜像站位dockerhub,因为伟大的墙的缘故,所以下载镜像是很痛苦的一件事。当然你可以采用其他科学上网或者镜像加速的方法来获取image。docker">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="how git version rollback">
-<meta name="twitter:description" content="如何进行远程版本回退……
+<meta name="twitter:title" content="how to build a private docker registry">
+<meta name="twitter:description" content="如何搭建docker私服环境准备软件包：
 
-引言
-一切都要从一个蛋疼的需求开始,老板说,能给远程仓库的版本回退吗？我说为毛？他说我就是试试看git好使不,我……
+centos6.5_x86_64
 
-咋搞
-背景 
+docker-engine-1.7.0-1.el6.x86_64.rpm
 
-gitcafe 国内知名的源码托管平台
 
-分析
-
-12345678910111213141、git checkout the_branch2、git pull3、git branch the_branch_backup //备份一下这个">
+docker环境搭建,请参照官方说明，本文采用的是官方的rpm包
+何谓私服官方的image镜像站位dockerhub,因为伟大的墙的缘故,所以下载镜像是很痛苦的一件事。当然你可以采用其他科学上网或者镜像加速的方法来获取image。docker">
 
     
     <link rel="alternative" href="/atom.xml" title="pinghailinfeng&#39;s blog" type="application/atom+xml">
@@ -115,14 +103,14 @@ gitcafe 国内知名的源码托管平台
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/16/how-git-version-rollback/" title="how git version rollback" itemprop="url">how git version rollback</a>
+      <a href="/2015/07/21/how-to-build-a-private-docker-registry/" title="how to build a private docker registry" itemprop="url">how to build a private docker registry</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Jeff Sui" target="_blank" itemprop="author">Jeff Sui</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-16T13:58:30.000Z" itemprop="datePublished"> 发表于 2015-05-16</time>
+    <time datetime="2015-07-21T15:09:19.000Z" itemprop="datePublished"> 发表于 2015-07-21</time>
     
   </p>
 </header>
@@ -131,44 +119,58 @@ gitcafe 国内知名的源码托管平台
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#引言"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#咋搞"><span class="toc-number">2.</span> <span class="toc-text">咋搞</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#遇到的问题"><span class="toc-number">3.</span> <span class="toc-text">遇到的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#如何搭建docker私服"><span class="toc-number">1.</span> <span class="toc-text">如何搭建docker私服</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境准备"><span class="toc-number">1.1.</span> <span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#何谓私服"><span class="toc-number">1.2.</span> <span class="toc-text">何谓私服</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载官方registry镜像"><span class="toc-number">1.3.</span> <span class="toc-text">下载官方registry镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动镜像"><span class="toc-number">1.4.</span> <span class="toc-text">启动镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看镜像状态"><span class="toc-number">1.5.</span> <span class="toc-text">查看镜像状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看私服状态"><span class="toc-number">1.6.</span> <span class="toc-text">查看私服状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推送本地镜像库到registry私服"><span class="toc-number">1.7.</span> <span class="toc-text">推送本地镜像库到registry私服</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拉取私服镜像"><span class="toc-number">1.8.</span> <span class="toc-text">拉取私服镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">1.9.</span> <span class="toc-text">结论</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<blockquote>
-<p>如何进行远程版本回退……</p>
-</blockquote>
-<h1 id="引言">引言</h1><blockquote>
-<p>一切都要从一个蛋疼的需求开始,老板说,能给远程仓库的版本回退吗？我说为毛？他说我就是试试看git好使不,我……</p>
-</blockquote>
-<h1 id="咋搞">咋搞</h1><ul>
-<li>背景 </li>
-</ul>
-<p>gitcafe 国内知名的源码托管平台</p>
+		<h1 id="如何搭建docker私服">如何搭建docker私服</h1><h2 id="环境准备">环境准备</h2><p>软件包：</p>
 <ul>
-<li>分析</li>
+<li><p>centos6.5_x86_64</p>
+</li>
+<li><p>docker-engine-1.7.0-1.el6.x86_64.rpm</p>
+</li>
 </ul>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="number">1</span>、git checkout the_branch</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、git pull</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、git branch the_branch_backup <span class="comment">//备份一下这个分支当前的情况</span></span><br><span class="line"></span><br><span class="line"><span class="number">4</span>、git reset --hard the_commit_id <span class="comment">//把the_branch本地回滚到the_commit_id</span></span><br><span class="line"></span><br><span class="line"><span class="number">5</span>、git <span class="keyword">push</span> origin :the_branch <span class="comment">//删除远程 the_branch</span></span><br><span class="line"></span><br><span class="line"><span class="number">6</span>、git <span class="keyword">push</span> origin the_branch <span class="comment">//用回滚后的本地分支重新建立远程分支</span></span><br><span class="line"></span><br><span class="line"><span class="number">7</span>、git <span class="keyword">push</span> origin :the_branch_backup <span class="comment">//如果前面都成功了，删除这个备份分支</span></span><br></pre></td></tr></table></figure>
+<p>docker环境搭建,请参照官方说明，本文采用的是官方的rpm包</p>
+<h2 id="何谓私服">何谓私服</h2><p>官方的image镜像站位dockerhub,因为伟大的墙的缘故,所以下载镜像是很痛苦的一件事。当然你可以采用其他科学上网或者镜像加速的方法来获取image。<br>docker官方也提供了一个私服镜像,大家可以通过<code>docker search registry</code>来查找该镜像。</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NAME                                     DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line"><span class="keyword">registry</span>                                 Containerized docker <span class="keyword">registry</span>                   <span class="number">320</span>       [OK]       </span><br><span class="line">atcol/docker-<span class="keyword">registry</span>-ui                 A web UI <span class="keyword">for</span> easy private/local Docker Reg...   <span class="number">55</span>                   [OK]</span><br><span class="line">konradkleine/docker-<span class="keyword">registry</span>-frontend    Browse and modify your Docker <span class="keyword">registry</span> in ...   <span class="number">40</span>                   [OK]</span><br><span class="line">samalba/docker-<span class="keyword">registry</span>                                                                  <span class="number">35</span></span><br></pre></td></tr></table></figure>
+<h2 id="下载官方registry镜像">下载官方registry镜像</h2><ul>
+<li>下载镜像</li>
+</ul>
+<p>使用命令<code>docker pull registry</code>执行下载镜像。</p>
 <ul>
-<li>删除远程分支</li>
+<li>查看镜像</li>
 </ul>
-<p>首先,任何一个git源码托管平台都会告诉你,别删除远程master分支,因为它是默认的分支……,请移步<a href="https://gitcafe.com/GitCafe/Help/wiki/%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4-Master-%E5%88%86%E6%94%AF" target="_blank" rel="external">这里</a> </p>
+<p>下载完毕后,通过<code>docker images</code> 查看该镜像。</p>
 <ul>
-<li>操作步骤 </li>
+<li>给镜像打标签</li>
 </ul>
-<p>如果远程只有一个master分支,请你创建一个非master分支,然后推送到远程。<br>有人会问我为什么？打个比方,你见过上旱厕的时候,给自己脚下站着的板子抽走吗？</p>
-<p>脚本类似下面这样</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git branch the_master_backup</span><br><span class="line"></span><br><span class="line">git <span class="keyword">push</span> origin the_master_backup</span><br></pre></td></tr></table></figure>
-<p>此时你查看远程分支应该有两个:master和the_master_backup</p>
-<p>设置默认的分支为 the_master_backup</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git branch -D branch_name <span class="comment">//删除本地master分支</span></span><br><span class="line"></span><br><span class="line">git <span class="keyword">push</span> :master <span class="comment">//推送一个空分支,相当于删除远程master分支</span></span><br></pre></td></tr></table></figure>
-<p>然后你在the_master_backup分支上 回滚到你要回滚的commit_id,然后重建master分支并推送到远程,顺便删除the_master_backup分支(包括远程the_master_backup分支)。</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git checkout the_master_backup</span><br><span class="line"></span><br><span class="line">git reset --hard commit_id</span><br><span class="line"></span><br><span class="line">git branch master <span class="comment">//重新创建master分支</span></span><br><span class="line"></span><br><span class="line">git <span class="keyword">push</span> origin master <span class="comment">//重新推送master分支</span></span><br><span class="line"></span><br><span class="line">git branch -D the_master_backup <span class="comment">//删除本地the_master_backup分支</span></span><br><span class="line"></span><br><span class="line">git <span class="keyword">push</span> origin :the_master_backup<span class="comment">//删除远程the_master_backup分支</span></span><br></pre></td></tr></table></figure>
-<h1 id="遇到的问题">遇到的问题</h1><ol>
-<li>忘记设置默认分支为非master分支</li>
+<p>执行这个命令<br><code>docker tag registry:latest localhost:5000/registry:latest</code></p>
+<h2 id="启动镜像">启动镜像</h2><p><code>docker run -d -e SETTINGS_FLAVOR=dev -e STORAGE_PATH=/tmp/registry -v /opt/data/registry:/tmp/registry  -p 5000:5000 registry</code></p>
+<p>这里有几个参数说明下:</p>
+<ul>
+<li>1.<code>-e STORAGE_PATH=/tmp/registry</code> :强制使用存储路径</li>
+<li>2.<code>-v /opt/data/registry:/tmp/registry</code> :绑定本地镜像存储路径</li>
+<li>3.<code>-p 5000:5000</code>:映射容器5000端口到本地5000端口</li>
+</ul>
+<h2 id="查看镜像状态">查看镜像状态</h2><p><code>docker ps</code></p>
+<h2 id="查看私服状态">查看私服状态</h2><p><code>curl http://localhost:5000</code></p>
+<p>显示如下信息,证明registry启动成功:</p>
+<p><code>&quot;\&quot;docker-registry server\&quot;&quot;</code></p>
+<h2 id="推送本地镜像库到registry私服">推送本地镜像库到registry私服</h2><ol>
+<li>第一步 给本地镜像 打tag<br>例如给官方的nginx镜像打tag,执行下面的命令行<br><code>docker pull nginx</code><br><code>docker tag nginx:latest localhost:5000/nginx:latest</code><br>查看镜像库,发现<code>localhost:5000/nginx</code>的镜像已经有了。</li>
 </ol>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">remote: <span class="keyword">error</span>: By default, deleting <span class="keyword">the</span> current branch <span class="keyword">is</span> denied, because <span class="keyword">the</span> ne</span><br><span class="line">xt</span><br><span class="line">remote: <span class="keyword">error</span>: 'git clone' won't <span class="constant">result</span> <span class="keyword">in</span> any <span class="type">file</span> checked out, causing confusi</span><br><span class="line"><span class="function_start"><span class="keyword">on</span>.</span></span><br><span class="line">remote: <span class="keyword">error</span>:</span><br><span class="line">remote: <span class="keyword">error</span>: You can <span class="keyword">set</span> 'receive.denyDeleteCurrent' configuration variable <span class="keyword">to</span></span><br><span class="line"></span><br><span class="line">remote: <span class="keyword">error</span>: 'warn' <span class="keyword">or</span> 'ignore' <span class="keyword">in</span> <span class="keyword">the</span> remote repository <span class="keyword">to</span> allow deleting <span class="keyword">the</span></span><br><span class="line"></span><br><span class="line">remote: <span class="keyword">error</span>: current branch, <span class="keyword">with</span> <span class="keyword">or</span> <span class="keyword">without</span> a warning message.</span><br><span class="line">remote: <span class="keyword">error</span>:</span><br><span class="line">remote: <span class="keyword">error</span>: To squelch this message, you can <span class="keyword">set</span> <span class="keyword">it</span> <span class="keyword">to</span> 'refuse'.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<h1 id="总结">总结</h1><p>如果你遇到的是所有提交只有master分支,那么希望我这个博文能帮到你。当然git强大的分支功能你基本也用不到了。</p>
+<ol>
+<li>第二步 推送tag到registry私服</li>
+</ol>
+<p><code>docker push localhost:5000/nginx:latest</code></p>
+<ol>
+<li>第三步 查看私服镜像列表</li>
+</ol>
+<p><code>curl http://localhost：5000/V1/search</code></p>
+<p>看到类似这样的信息</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;"<span class="attribute">num_results</span>": <span class="value"><span class="number">5</span></span>, "<span class="attribute">query</span>": <span class="value"><span class="string">""</span></span>, "<span class="attribute">results</span>": <span class="value">[&#123;"<span class="attribute">description</span>": <span class="value"><span class="literal">null</span></span>, "<span class="attribute">name</span>": <span class="value"><span class="string">"correl/erlang"</span></span>&#125;, &#123;"<span class="attribute">description</span>": <span class="value"><span class="literal">null</span></span>, "<span class="attribute">name</span>": <span class="value"><span class="string">"linfeng/cmd"</span></span>&#125;, &#123;"<span class="attribute">description</span>": <span class="value"><span class="literal">null</span></span>, "<span class="attribute">name</span>": <span class="value"><span class="string">"library/my_nodejs_image"</span></span>&#125;, &#123;"<span class="attribute">description</span>": <span class="value"><span class="literal">null</span></span>, "<span class="attribute">name</span>": <span class="value"><span class="string">"library/centos"</span></span>&#125;, &#123;"<span class="attribute">description</span>": <span class="value"><span class="string">""</span></span>, "<span class="attribute">name</span>": <span class="value"><span class="string">"library/nginx"</span></span>&#125;]</span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="拉取私服镜像">拉取私服镜像</h2><p><code>docker pull 192.168.20.85:5000/library/centos:7</code></p>
+<h2 id="结论">结论</h2><p>这只是演示如何搭建一个简单的registry私服。因为只有通过命令行方式才能查看私服信息,所以不是很便于操作。下面的博文将演示如何给registry添加web界面。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -176,13 +178,13 @@ gitcafe 国内知名的源码托管平台
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/git/">git</a>
+  <a class="article-category-link" href="/categories/docker/">docker</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/git/">git</a><a href="/tags/gitcafe/">gitcafe</a><a href="/tags/版本管理/">版本管理</a>
+  <span></span> <a href="/tags/docker/">docker</a><a href="/tags/registry/">registry</a><a href="/tags/registry-ui/">registry-ui</a>
   </div>
 
 </div>
@@ -191,7 +193,7 @@ gitcafe 国内知名的源码托管平台
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://jeffsui.github.io/2015/05/16/how-git-version-rollback/" data-title="how git version rollback | pinghailinfeng&#39;s blog" data-tsina="null" class="share clearfix">
+	  <div data-url="http://jeffsui.github.io/2015/07/21/how-to-build-a-private-docker-registry/" data-title="how to build a private docker registry | pinghailinfeng&#39;s blog" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -204,19 +206,11 @@ gitcafe 国内知名的源码托管平台
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/07/21/how-to-build-a-private-docker-registry/" title="how to build a private docker registry">
-  <strong>上一篇：</strong><br/>
-  <span>
-  how to build a private docker registry</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/04/23/javascript-oop-15-min-programming/"  title="javascript oop 15 min programming">
+<a href="/2015/05/16/how-git-version-rollback/"  title="how git version rollback">
  <strong>下一篇：</strong><br/> 
- <span>javascript oop 15 min programming
+ <span>how git version rollback
 </span>
 </a>
 </div>
@@ -225,7 +219,7 @@ gitcafe 国内知名的源码托管平台
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/05/16/how-git-version-rollback/" data-title="how git version rollback" data-url="http://jeffsui.github.io/2015/05/16/how-git-version-rollback/"></div>
+	<div class="ds-thread" data-thread-key="2015/07/21/how-to-build-a-private-docker-registry/" data-title="how to build a private docker registry" data-url="http://jeffsui.github.io/2015/07/21/how-to-build-a-private-docker-registry/"></div>
 </section>
 
 
@@ -235,7 +229,7 @@ gitcafe 国内知名的源码托管平台
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#引言"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#咋搞"><span class="toc-number">2.</span> <span class="toc-text">咋搞</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#遇到的问题"><span class="toc-number">3.</span> <span class="toc-text">遇到的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#如何搭建docker私服"><span class="toc-number">1.</span> <span class="toc-text">如何搭建docker私服</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#环境准备"><span class="toc-number">1.1.</span> <span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#何谓私服"><span class="toc-number">1.2.</span> <span class="toc-text">何谓私服</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载官方registry镜像"><span class="toc-number">1.3.</span> <span class="toc-text">下载官方registry镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动镜像"><span class="toc-number">1.4.</span> <span class="toc-text">启动镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看镜像状态"><span class="toc-number">1.5.</span> <span class="toc-text">查看镜像状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查看私服状态"><span class="toc-number">1.6.</span> <span class="toc-text">查看私服状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#推送本地镜像库到registry私服"><span class="toc-number">1.7.</span> <span class="toc-text">推送本地镜像库到registry私服</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#拉取私服镜像"><span class="toc-number">1.8.</span> <span class="toc-text">拉取私服镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">1.9.</span> <span class="toc-text">结论</span></a></li></ol></li></ol>
  
   </div>
 

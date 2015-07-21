@@ -81,6 +81,116 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/07/21/how-to-build-a-private-docker-registry/" title="how to build a private docker registry" itemprop="url">how to build a private docker registry</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jeff Sui" target="_blank" itemprop="author">Jeff Sui</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-21T15:09:19.000Z" itemprop="datePublished"> 发表于 2015-07-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="如何搭建docker私服">如何搭建docker私服</h1><h2 id="环境准备">环境准备</h2><p>软件包：</p>
+<ul>
+<li><p>centos6.5_x86_64</p>
+</li>
+<li><p>docker-engine-1.7.0-1.el6.x86_64.rpm</p>
+</li>
+</ul>
+<p>docker环境搭建,请参照官方说明，本文采用的是官方的rpm包</p>
+<h2 id="何谓私服">何谓私服</h2><p>官方的image镜像站位dockerhub,因为伟大的墙的缘故,所以下载镜像是很痛苦的一件事。当然你可以采用其他科学上网或者镜像加速的方法来获取image。<br>docker官方也提供了一个私服镜像,大家可以通过<code>docker search registry</code>来查找该镜像。</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NAME                                     DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line"><span class="keyword">registry</span>                                 Containerized docker <span class="keyword">registry</span>                   <span class="number">320</span>       [OK]       </span><br><span class="line">atcol/docker-<span class="keyword">registry</span>-ui                 A web UI <span class="keyword">for</span> easy private/local Docker Reg...   <span class="number">55</span>                   [OK]</span><br><span class="line">konradkleine/docker-<span class="keyword">registry</span>-frontend    Browse and modify your Docker <span class="keyword">registry</span> in ...   <span class="number">40</span>                   [OK]</span><br><span class="line">samalba/docker-<span class="keyword">registry</span>                                                                  <span class="number">35</span></span><br></pre></td></tr></table></figure>
+<h2 id="下载官方registry镜像">下载官方registry镜像</h2><ul>
+<li>下载镜像</li>
+</ul>
+<p>使用命令<code>docker pull registry</code>执行下载镜像。</p>
+<ul>
+<li>查看镜像</li>
+</ul>
+<p>下载完毕后,通过<code>docker images</code> 查看该镜像。</p>
+<ul>
+<li>给镜像打标签</li>
+</ul>
+<p>执行这个命令<br><code>docker tag registry:latest localhost:5000/registry:latest</code></p>
+<h2 id="启动镜像">启动镜像</h2><p><code>docker run -d -e SETTINGS_FLAVOR=dev -e STORAGE_PATH=/tmp/registry -v /opt/data/registry:/tmp/registry  -p 5000:5000 registry</code></p>
+<p>这里有几个参数说明下:</p>
+<ul>
+<li>1.<code>-e STORAGE_PATH=/tmp/registry</code> :强制使用存储路径</li>
+<li>2.<code>-v /opt/data/registry:/tmp/registry</code> :绑定本地镜像存储路径</li>
+<li>3.<code>-p 5000:5000</code>:映射容器5000端口到本地5000端口</li>
+</ul>
+<h2 id="查看镜像状态">查看镜像状态</h2><p><code>docker ps</code></p>
+<h2 id="查看私服状态">查看私服状态</h2><p><code>curl http://localhost:5000</code></p>
+<p>显示如下信息,证明registry启动成功:</p>
+<p><code>&quot;\&quot;docker-registry server\&quot;&quot;</code></p>
+<h2 id="推送本地镜像库到registry私服">推送本地镜像库到registry私服</h2><ol>
+<li>第一步 给本地镜像 打tag<br>例如给官方的nginx镜像打tag,执行下面的命令行<br><code>docker pull nginx</code><br><code>docker tag nginx:latest localhost:5000/nginx:latest</code><br>查看镜像库,发现<code>localhost:5000/nginx</code>的镜像已经有了。</li>
+</ol>
+<ol>
+<li>第二步 推送tag到registry私服</li>
+</ol>
+<p><code>docker push localhost:5000/nginx:latest</code></p>
+<ol>
+<li>第三步 查看私服镜像列表</li>
+</ol>
+<p><code>curl http://localhost：5000/V1/search</code></p>
+<p>看到类似这样的信息</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;"<span class="attribute">num_results</span>": <span class="value"><span class="number">5</span></span>, "<span class="attribute">query</span>": <span class="value"><span class="string">""</span></span>, "<span class="attribute">results</span>": <span class="value">[&#123;"<span class="attribute">description</span>": <span class="value"><span class="literal">null</span></span>, "<span class="attribute">name</span>": <span class="value"><span class="string">"correl/erlang"</span></span>&#125;, &#123;"<span class="attribute">description</span>": <span class="value"><span class="literal">null</span></span>, "<span class="attribute">name</span>": <span class="value"><span class="string">"linfeng/cmd"</span></span>&#125;, &#123;"<span class="attribute">description</span>": <span class="value"><span class="literal">null</span></span>, "<span class="attribute">name</span>": <span class="value"><span class="string">"library/my_nodejs_image"</span></span>&#125;, &#123;"<span class="attribute">description</span>": <span class="value"><span class="literal">null</span></span>, "<span class="attribute">name</span>": <span class="value"><span class="string">"library/centos"</span></span>&#125;, &#123;"<span class="attribute">description</span>": <span class="value"><span class="string">""</span></span>, "<span class="attribute">name</span>": <span class="value"><span class="string">"library/nginx"</span></span>&#125;]</span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="拉取私服镜像">拉取私服镜像</h2><p><code>docker pull 192.168.20.85:5000/library/centos:7</code></p>
+<h2 id="结论">结论</h2><p>这只是演示如何搭建一个简单的registry私服。因为只有通过命令行方式才能查看私服信息,所以不是很便于操作。下面的博文将演示如何给registry添加web界面。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/docker/">docker</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/docker/">docker</a><a href="/tags/registry/">registry</a><a href="/tags/registry-ui/">registry-ui</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/07/21/how-to-build-a-private-docker-registry/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/07/21/how-to-build-a-private-docker-registry/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/05/16/how-git-version-rollback/" title="how git version rollback" itemprop="url">how git version rollback</a>
   </h1>
   <p class="article-author">By
@@ -402,85 +512,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/20/use-shorturl-and-two-dimensional-barcodes-to-beautify-blog/" title="use-shorturl and two-dimensional-barcodes to beautify blog" itemprop="url">use-shorturl and two-dimensional-barcodes to beautify blog</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Jeff Sui" target="_blank" itemprop="author">Jeff Sui</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-20T07:37:14.000Z" itemprop="datePublished"> 发表于 2015-04-20</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="如何使用短网址和二维码简化网站访问">如何使用短网址和二维码简化网站访问</h1><ol>
-<li>短网址(shorturl)<br> web2.0时代的潮流,借助短网址您可以用简短的网址替代原来冗长的网址，让使用者可以更容易的分享链接。<br>这里我使用的是百度的短网址服务:<a href="http://dwz.cn/" title="百度短网址" target="_blank" rel="external">http://dwz.cn/</a><ol>
-<li>访问<a href="http://dwz.cn/主页" target="_blank" rel="external">http://dwz.cn/主页</a><br><img src="http://7xindo.com1.z0.glb.clouddn.com/百度短网址.png" alt=""></li>
-<li>输入你的博客地址<br>我输入<a href="http://jeffsui.github.io/pinghailinfeng_blog/" target="_blank" rel="external">http://jeffsui.github.io/pinghailinfeng_blog/</a></li>
-<li>复制短网址<br><img src="http://7xindo.com1.z0.glb.clouddn.com/百度短网址生成.png" alt=""></li>
-</ol>
-</li>
-<li>二维码(two-dimensional-barcodes)<br>微信时代,不知道二维码的基本都属于外星球人了。<br>这里我选择的是草料二维码:<br><a href="http://cli.im/" title="草料二维码" target="_blank" rel="external">http://cli.im/</a><ol>
-<li>输入二维码地址<br><img src="http://7xindo.com1.z0.glb.clouddn.com/在线二维码输入地址.jpg" alt=""></li>
-<li>进行一些基本设置<br>包括前景色、背景色、渐变色等等。</li>
-<li>嵌入图片</li>
-<li>选用你喜欢的模板</li>
-<li>保存二维码</li>
-</ol>
-</li>
-<li>在线存储<br>这里我选择国内知名的七牛云存储。<br> <img src="http://7xindo.com1.z0.glb.clouddn.com/云存储图片.jpg" alt=""><br>4.在博客中引用图片地址就可以了</li>
-</ol>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/搭建博客/">搭建博客</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/二维码/">二维码</a><a href="/tags/博客/">博客</a><a href="/tags/短网址/">短网址</a><a href="/tags/美化/">美化</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/20/use-shorturl-and-two-dimensional-barcodes-to-beautify-blog/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/20/use-shorturl-and-two-dimensional-barcodes-to-beautify-blog/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -497,6 +528,10 @@
 <div class="categorieslist">
 	<p class="asidetitle">分类</p>
 		<ul>
+		
+		  
+			<li><a href="/categories/docker/" title="docker">docker<sup>1</sup></a></li>
+		  
 		
 		  
 			<li><a href="/categories/git/" title="git">git<sup>1</sup></a></li>
@@ -568,11 +603,11 @@
 			
 		
 			
-				<li><a href="/tags/美化/" title="美化">美化<sup>1</sup></a></li>
+				<li><a href="/tags/笔记/" title="笔记">笔记<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/文章/" title="文章">文章<sup>1</sup></a></li>
+				<li><a href="/tags/美化/" title="美化">美化<sup>1</sup></a></li>
 			
 		
 			
@@ -592,15 +627,23 @@
 			
 		
 			
+				<li><a href="/tags/docker/" title="docker">docker<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/registry/" title="registry">registry<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/registry-ui/" title="registry-ui">registry-ui<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/gitcafe/" title="gitcafe">gitcafe<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/笔记/" title="笔记">笔记<sup>1</sup></a></li>
 			
 		
 		</ul>
