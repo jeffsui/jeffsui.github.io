@@ -4,7 +4,7 @@
   <subtitle><![CDATA[pinghailinfeng's blog]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jeffsui.github.io/"/>
-  <updated>2015-07-21T15:57:55.611Z</updated>
+  <updated>2015-08-11T22:22:11.630Z</updated>
   <id>http://jeffsui.github.io/</id>
   
   <author>
@@ -13,6 +13,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[how make cygwin multi-color]]></title>
+    <link href="http://jeffsui.github.io/2015/08/12/how-make-cygwin-multi-color/"/>
+    <id>http://jeffsui.github.io/2015/08/12/how-make-cygwin-multi-color/</id>
+    <published>2015-08-11T22:16:59.000Z</published>
+    <updated>2015-08-11T22:22:11.630Z</updated>
+    <content type="html"><![CDATA[<ul>
+<li>打开.bashrc</li>
+</ul>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">Default</span> <span class="keyword">to</span> human readable figures</span><br><span class="line"># <span class="keyword">alias</span> df=<span class="attribute">'df</span> -h'</span><br><span class="line"># <span class="keyword">alias</span> du=<span class="attribute">'du</span> -h'</span><br><span class="line">#</span><br><span class="line"># Misc  </span><br><span class="line"># <span class="keyword">alias</span> less=<span class="attribute">'less</span> -r'                          # raw control characters</span><br><span class="line"># <span class="keyword">alias</span> whence=<span class="attribute">'type</span> -a'                        # where, <span class="keyword">of</span> a sort</span><br><span class="line"># <span class="keyword">alias</span> grep=<span class="attribute">'grep</span> <span class="comment">--color'                     # show differences in colour</span></span><br><span class="line"># <span class="keyword">alias</span> egrep=<span class="attribute">'egrep</span> <span class="comment">--color=auto'              # show differences in colour</span></span><br><span class="line"># <span class="keyword">alias</span> fgrep=<span class="attribute">'fgrep</span> <span class="comment">--color=auto'              # show differences in colour</span></span><br><span class="line">#</span><br><span class="line"># Some shortcuts <span class="keyword">for</span> different directory listings</span><br><span class="line"># <span class="keyword">alias</span> ls=<span class="attribute">'ls</span> -hF <span class="comment">--color=tty'                 # classify files in colour</span></span><br><span class="line"># <span class="keyword">alias</span> dir=<span class="attribute">'ls</span> <span class="comment">--color=auto --format=vertical'</span></span><br><span class="line"># <span class="keyword">alias</span> vdir=<span class="attribute">'ls</span> <span class="comment">--color=auto --format=long'</span></span><br><span class="line"># <span class="keyword">alias</span> ll=<span class="attribute">'ls</span> -l'                              # long list</span><br><span class="line"># <span class="keyword">alias</span> la=<span class="attribute">'ls</span> -A'                              # <span class="keyword">all</span> but . <span class="keyword">and</span> ..</span><br><span class="line"># <span class="keyword">alias</span> l=<span class="attribute">'ls</span> -CF'                              #</span><br></pre></td></tr></table></figure>
+<ul>
+<li>而我们要做的只是去掉#，启动即可：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Default to human readable figures</span></span><br><span class="line"><span class="built_in">alias</span> df=<span class="string">'df -h'</span></span><br><span class="line"><span class="built_in">alias</span> du=<span class="string">'du -h'</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Misc  </span></span><br><span class="line"><span class="built_in">alias</span> less=<span class="string">'less -r'</span>                          <span class="comment"># raw control characters</span></span><br><span class="line"><span class="built_in">alias</span> <span class="built_in">whence</span>=<span class="string">'type -a'</span>                        <span class="comment"># where, of a sort</span></span><br><span class="line"><span class="built_in">alias</span> grep=<span class="string">'grep --color'</span>                     <span class="comment"># show differences in colour</span></span><br><span class="line"><span class="built_in">alias</span> egrep=<span class="string">'egrep --color=auto'</span>              <span class="comment"># show differences in colour</span></span><br><span class="line"><span class="built_in">alias</span> fgrep=<span class="string">'fgrep --color=auto'</span>              <span class="comment"># show differences in colour</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Some shortcuts for different directory listings</span></span><br><span class="line"><span class="built_in">alias</span> ls=<span class="string">'ls -hF --color=tty'</span>                 <span class="comment"># classify files in colour</span></span><br><span class="line"><span class="built_in">alias</span> dir=<span class="string">'ls --color=auto --format=vertical'</span></span><br><span class="line"><span class="built_in">alias</span> vdir=<span class="string">'ls --color=auto --format=long'</span></span><br><span class="line"><span class="built_in">alias</span> ll=<span class="string">'ls -l'</span>                              <span class="comment"># long list</span></span><br><span class="line"><span class="built_in">alias</span> la=<span class="string">'ls -A'</span>                              <span class="comment"># all but . and ..</span></span><br><span class="line"><span class="built_in">alias</span> l=<span class="string">'ls -CF'</span>                              <span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>然后保存一下，再重启cygwin<br>（或者直接用：<code>source ~/.bashrc</code></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<ul>
+<li>打开.bashrc</li>
+</ul>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="]]>
+    </summary>
+    
+      <category term="cygwin" scheme="http://jeffsui.github.io/tags/cygwin/"/>
+    
+      <category term="linux" scheme="http://jeffsui.github.io/categories/linux/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[how to build a private docker registry]]></title>

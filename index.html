@@ -81,6 +81,79 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/08/12/how-make-cygwin-multi-color/" title="how make cygwin multi-color" itemprop="url">how make cygwin multi-color</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jeff Sui" target="_blank" itemprop="author">Jeff Sui</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-11T22:16:59.000Z" itemprop="datePublished"> 发表于 2015-08-12</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <ul>
+<li>打开.bashrc</li>
+</ul>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">Default</span> <span class="keyword">to</span> human readable figures</span><br><span class="line"># <span class="keyword">alias</span> df=<span class="attribute">'df</span> -h'</span><br><span class="line"># <span class="keyword">alias</span> du=<span class="attribute">'du</span> -h'</span><br><span class="line">#</span><br><span class="line"># Misc  </span><br><span class="line"># <span class="keyword">alias</span> less=<span class="attribute">'less</span> -r'                          # raw control characters</span><br><span class="line"># <span class="keyword">alias</span> whence=<span class="attribute">'type</span> -a'                        # where, <span class="keyword">of</span> a sort</span><br><span class="line"># <span class="keyword">alias</span> grep=<span class="attribute">'grep</span> <span class="comment">--color'                     # show differences in colour</span></span><br><span class="line"># <span class="keyword">alias</span> egrep=<span class="attribute">'egrep</span> <span class="comment">--color=auto'              # show differences in colour</span></span><br><span class="line"># <span class="keyword">alias</span> fgrep=<span class="attribute">'fgrep</span> <span class="comment">--color=auto'              # show differences in colour</span></span><br><span class="line">#</span><br><span class="line"># Some shortcuts <span class="keyword">for</span> different directory listings</span><br><span class="line"># <span class="keyword">alias</span> ls=<span class="attribute">'ls</span> -hF <span class="comment">--color=tty'                 # classify files in colour</span></span><br><span class="line"># <span class="keyword">alias</span> dir=<span class="attribute">'ls</span> <span class="comment">--color=auto --format=vertical'</span></span><br><span class="line"># <span class="keyword">alias</span> vdir=<span class="attribute">'ls</span> <span class="comment">--color=auto --format=long'</span></span><br><span class="line"># <span class="keyword">alias</span> ll=<span class="attribute">'ls</span> -l'                              # long list</span><br><span class="line"># <span class="keyword">alias</span> la=<span class="attribute">'ls</span> -A'                              # <span class="keyword">all</span> but . <span class="keyword">and</span> ..</span><br><span class="line"># <span class="keyword">alias</span> l=<span class="attribute">'ls</span> -CF'                              #</span><br></pre></td></tr></table></figure>
+<ul>
+<li>而我们要做的只是去掉#，启动即可：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Default to human readable figures</span></span><br><span class="line"><span class="built_in">alias</span> df=<span class="string">'df -h'</span></span><br><span class="line"><span class="built_in">alias</span> du=<span class="string">'du -h'</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Misc  </span></span><br><span class="line"><span class="built_in">alias</span> less=<span class="string">'less -r'</span>                          <span class="comment"># raw control characters</span></span><br><span class="line"><span class="built_in">alias</span> <span class="built_in">whence</span>=<span class="string">'type -a'</span>                        <span class="comment"># where, of a sort</span></span><br><span class="line"><span class="built_in">alias</span> grep=<span class="string">'grep --color'</span>                     <span class="comment"># show differences in colour</span></span><br><span class="line"><span class="built_in">alias</span> egrep=<span class="string">'egrep --color=auto'</span>              <span class="comment"># show differences in colour</span></span><br><span class="line"><span class="built_in">alias</span> fgrep=<span class="string">'fgrep --color=auto'</span>              <span class="comment"># show differences in colour</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Some shortcuts for different directory listings</span></span><br><span class="line"><span class="built_in">alias</span> ls=<span class="string">'ls -hF --color=tty'</span>                 <span class="comment"># classify files in colour</span></span><br><span class="line"><span class="built_in">alias</span> dir=<span class="string">'ls --color=auto --format=vertical'</span></span><br><span class="line"><span class="built_in">alias</span> vdir=<span class="string">'ls --color=auto --format=long'</span></span><br><span class="line"><span class="built_in">alias</span> ll=<span class="string">'ls -l'</span>                              <span class="comment"># long list</span></span><br><span class="line"><span class="built_in">alias</span> la=<span class="string">'ls -A'</span>                              <span class="comment"># all but . and ..</span></span><br><span class="line"><span class="built_in">alias</span> l=<span class="string">'ls -CF'</span>                              <span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>然后保存一下，再重启cygwin<br>（或者直接用：<code>source ~/.bashrc</code></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux/">linux</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/cygwin/">cygwin</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/08/12/how-make-cygwin-multi-color/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/08/12/how-make-cygwin-multi-color/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/07/21/how-to-build-a-private-docker-registry/" title="how to build a private docker registry" itemprop="url">how to build a private docker registry</a>
   </h1>
   <p class="article-author">By
@@ -427,86 +500,9 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/20/javascript-asynchronous-programming-learning-event/" title="javascript asynchronous programming learning :event" itemprop="url">javascript asynchronous programming learning :event</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Jeff Sui" target="_blank" itemprop="author">Jeff Sui</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-20T13:05:16.000Z" itemprop="datePublished"> 发表于 2015-04-20</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="javascript异步编程读书笔记之事件机制">javascript异步编程读书笔记之事件机制</h1><h2 id="事件的调度">事件的调度</h2><ul>
-<li>异步执行</li>
-</ul>
-<p><code>setTimeout</code>函数的解释:给定一个回调及n毫秒的延迟,setTimeout会在n毫秒后运行该回调。</p>
-<p>代码清单1:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">3</span>; i++) &#123;</span><br><span class="line">	setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123; </span><br><span class="line">		<span class="built_in">console</span>.log(i); &#125;, </span><br><span class="line">	<span class="number">0</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>输出结果:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">4</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>线程阻塞<br>代码清单2:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> start = <span class="keyword">new</span> <span class="built_in">Date</span>;</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line"><span class="keyword">var</span> end = <span class="keyword">new</span> <span class="built_in">Date</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Time elapsed:'</span>, end - start, <span class="string">'ms'</span>);</span><br><span class="line">&#125;, <span class="number">500</span>);</span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">new</span> <span class="built_in">Date</span> - start &lt; <span class="number">1000</span>) &#123;&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>队列</p>
-</li>
-</ul>
-<p>javascript使用队列的方式来循环处理请求,这种机制被称为<strong>事件循环</strong>。</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/javascript/">javascript</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/javascript/">javascript</a><a href="/tags/异步/">异步</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/20/javascript-asynchronous-programming-learning-event/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/20/javascript-asynchronous-programming-learning-event/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
   </nav>
 
 </div>
@@ -538,6 +534,10 @@
 		  
 		
 		  
+			<li><a href="/categories/linux/" title="linux">linux<sup>1</sup></a></li>
+		  
+		
+		  
 			<li><a href="/categories/工具篇/" title="工具篇">工具篇<sup>1</sup></a></li>
 		  
 		
@@ -559,11 +559,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/博客/" title="博客">博客<sup>2</sup></a></li>
+				<li><a href="/tags/杂记/" title="杂记">杂记<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/杂记/" title="杂记">杂记<sup>2</sup></a></li>
+				<li><a href="/tags/博客/" title="博客">博客<sup>2</sup></a></li>
 			
 		
 			
@@ -571,11 +571,11 @@
 			
 		
 			
-				<li><a href="/tags/二维码/" title="二维码">二维码<sup>1</sup></a></li>
+				<li><a href="/tags/短网址/" title="短网址">短网址<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/软件工程/" title="软件工程">软件工程<sup>1</sup></a></li>
+				<li><a href="/tags/二维码/" title="二维码">二维码<sup>1</sup></a></li>
 			
 		
 			
@@ -599,15 +599,15 @@
 			
 		
 			
+				<li><a href="/tags/文章/" title="文章">文章<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/美化/" title="美化">美化<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/版本管理/" title="版本管理">版本管理<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/短网址/" title="短网址">短网址<sup>1</sup></a></li>
+				<li><a href="/tags/软件工程/" title="软件工程">软件工程<sup>1</sup></a></li>
 			
 		
 			
@@ -631,11 +631,11 @@
 			
 		
 			
-				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+				<li><a href="/tags/cygwin/" title="cygwin">cygwin<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/gitcafe/" title="gitcafe">gitcafe<sup>1</sup></a></li>
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
 			
 		
 		</ul>
