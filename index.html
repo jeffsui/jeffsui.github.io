@@ -81,6 +81,97 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/02/13/windows-mongodb-install/" title="windows-mongodb-install" itemprop="url">windows-mongodb-install</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jeff Sui" target="_blank" itemprop="author">Jeff Sui</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-13T11:27:09.000Z" itemprop="datePublished"> 发表于 2016-02-13</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="windows下mongodb安装">windows下mongodb安装</h1><h2 id="下载mongodb">下载mongodb</h2><p><a href="http://www.mongodb.org/downloads" target="_blank" rel="external">http://www.mongodb.org/downloads</a></p>
+<h2 id="选择自定义安装">选择自定义安装</h2><p>本机路径为:<code>d:\tools\mongodb</code></p>
+<h2 id="建立如下文件目录">建立如下文件目录</h2><p>数据库路径:<code>d:\tools\mongodb\db</code><br>日志路径:<code>d:\tools\mongodb\log</code><br>配置文件目录<code>d:\tools\mongodb\etc</code><br>建立配置文件<code>d:\tools\mongodb\etc\mongodb.conf</code></p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">dbpath=</span>d:\tools\mongodb\db <span class="comment">#数据库路径</span></span><br><span class="line"><span class="variable">logpath=</span>d:\tools\mongodb\log\mongodb.log <span class="comment">#日志输出文件路径</span></span><br><span class="line"><span class="variable">logappend=</span><span class="constant">true</span> <span class="comment">#错误日志采用追加模式，配置这个选项后mongodb的日志会追加到现有的日志文件，而不是从新创建一个新文件</span></span><br><span class="line"><span class="variable">journal=</span><span class="constant">true</span> <span class="comment">#启用日志文件，默认启用</span></span><br><span class="line"><span class="variable">quiet=</span><span class="constant">true</span> <span class="comment">#这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false</span></span><br><span class="line"><span class="variable">port=</span><span class="number">27017</span> <span class="comment">#端口号 默认为27017</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>普通启动</li>
+</ul>
+<p><code>mongod --config d:\tools\mongodb\etc\mongodb.conf</code></p>
+<ul>
+<li>注册为windows服务</li>
+</ul>
+<p><code>mongod --config d:\tools\mongodb\etc\mongodb.conf --install</code></p>
+<p>启动成功后,通过浏览器访问 <code>http://localhost:27017</code></p>
+<blockquote>
+<p>It looks like you are trying to access MongoDB over HTTP on the native driver port.</p>
+</blockquote>
+<h1 id="图形化工具">图形化工具</h1><p>官方提供的很全:<a href="https://docs.mongodb.org/ecosystem/tools/administration-interfaces/" target="_blank" rel="external">https://docs.mongodb.org/ecosystem/tools/administration-interfaces/</a></p>
+<ul>
+<li><p><a href="http://www.npmjs.org/package/mongo-express" target="_blank" rel="external">mongo express </a> —Nodejs</p>
+</li>
+<li><p><a href="http://mongobooster.com" target="_blank" rel="external">MongoBooster </a></p>
+</li>
+<li><p><a href="http://edgytech.com/umongo/" target="_blank" rel="external">UMongo </a></p>
+</li>
+<li><p><a href="https://github.com/fotonauts/MongoHub-Mac" target="_blank" rel="external">MongoHub </a></p>
+</li>
+<li><p><a href="http://blog.mongovue.com/" target="_blank" rel="external">MongoVUE</a> —.NET </p>
+</li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/db/">db</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/mongodb/">mongodb</a><a href="/tags/windows/">windows</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/13/windows-mongodb-install/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/13/windows-mongodb-install/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/02/13/maven3-jdk1-7-problem-fixed/" title="maven3-jdk1.7-problem-fixed" itemprop="url">maven3-jdk1.7-problem-fixed</a>
   </h1>
   <p class="article-author">By
@@ -444,88 +535,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/23/javascript-oop-15-min-programming/" title="javascript oop 15 min programming" itemprop="url">javascript oop 15 min programming</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Jeff Sui" target="_blank" itemprop="author">Jeff Sui</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-23T05:13:30.000Z" itemprop="datePublished"> 发表于 2015-04-23</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="javascript的面向对象15分钟教程">javascript的面向对象15分钟教程</h1><h2 id="第一种面向对象的写法">第一种面向对象的写法</h2><h2 id="创建空对象">创建空对象</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="variable"><span class="keyword">var</span> bill</span> =&#123;&#125;;<span class="comment">//创建一个空对象</span></span><br></pre></td></tr></table></figure>
-<h2 id="给对象添加属性和方法">给对象添加属性和方法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">bill.name = <span class="string">"Bill Goat"</span>;</span><br><span class="line">bill.work = <span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"programming...."</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="一步完成上面的两件事">一步完成上面的两件事</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> bill =&#123;</span><br><span class="line">    name : <span class="string">"Bill Goat"</span>;</span><br><span class="line">    work : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"programming...."</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="访问对象和属性">访问对象和属性</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">console.<span class="command">log</span>(bill.<span class="property">name</span>);</span><br><span class="line">bill.work();</span><br></pre></td></tr></table></figure>
-<h2 id="方法重写">方法重写</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">bill.name = <span class="string">"Bill Goat"</span>;</span><br><span class="line">bill.work =<span class="function"><span class="keyword">function</span><span class="params">(who)</span></span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">"programming for "</span>+who);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="通过this关键字访问内部属性">通过this关键字访问内部属性</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">bill.say = <span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"bill's name  is"</span>+<span class="keyword">this</span>.name);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="对象引用">对象引用</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var silly = bill;</span><br><span class="line">console.<span class="command">log</span>(silly.<span class="property">name</span>);</span><br><span class="line">sally.<span class="property">name</span> = <span class="string">"Silly"</span>;</span><br><span class="line">console.<span class="command">log</span>(silly.<span class="property">name</span>);</span><br><span class="line">console.<span class="command">log</span>(bill.<span class="property">name</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="另一个方式引用">另一个方式引用</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">bill.<span class="property">name</span> = <span class="string">"Bill Goat"</span>;</span><br><span class="line">bill.<span class="command">say</span>();</span><br><span class="line"></span><br><span class="line">var sayName = bill.<span class="command">say</span>();</span><br><span class="line">sayName;</span><br><span class="line">sayName();</span><br></pre></td></tr></table></figure>
-<h2 id="有意思的地方_：全局属性">有意思的地方 ：全局属性</h2><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var <span class="property">name</span> = <span class="string">"Global"</span>;</span><br><span class="line">bill.<span class="command">say</span>();</span><br></pre></td></tr></table></figure>
-<p>发现此时输出的是<br><code>bill&#39;s name is Global</code></p>
-<h2 id="另一种面向对象的写法">另一种面向对象的写法</h2><h2 id="定义对象及属性">定义对象及属性</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Game</span><span class="params">()</span></span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="创建对象">创建对象</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> DF = <span class="keyword">new</span> Game();</span><br></pre></td></tr></table></figure>
-<h2 id="对象属性">对象属性</h2><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DF.<span class="variable">title =</span> <span class="string">"星际争霸2"</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="构造方法">构造方法</h2><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Game</span> <span class="params">(title)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.title = <span class="keyword">typeof</span> title !== <span class="string">'undifined'</span> ? title :<span class="string">""</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> d3 = <span class="keyword">new</span> Game(<span class="string">"d3"</span>);</span><br><span class="line">d3.title;</span><br><span class="line">d3.title =<span class="string">"starcraft2"</span>;</span><br></pre></td></tr></table></figure>
-<p><code>this.title = typeof title !== &#39;undifined&#39; ? title :&quot;&quot;;</code>相当于</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> title !== <span class="string">"undifined"</span>）&#123;</span><br><span class="line">	<span class="keyword">this</span>.title = title;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.title = <span class="string">""</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="创建一个方法来访问这个属性">创建一个方法来访问这个属性</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">d3.loveTitle = <span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"I love "</span>+<span class="keyword">this</span>.title);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="更好的写法">更好的写法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Game.prototype.heartIt = <span class="function"><span class="keyword">function</span> <span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"I love "</span>+<span class="keyword">this</span>.title);</span><br><span class="line">&#125;</span><br><span class="line">d3.heartIt();</span><br></pre></td></tr></table></figure>
-<p>下次详解javascript的原生对象模型</p>
-<p>to be continued~~~~</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/javascript/">javascript</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/javascript/">javascript</a><a href="/tags/oop/">oop</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/23/javascript-oop-15-min-programming/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/23/javascript-oop-15-min-programming/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -545,6 +554,10 @@
 		
 		  
 			<li><a href="/categories/ci/" title="ci">ci<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/db/" title="db">db<sup>1</sup></a></li>
 		  
 		
 		  
@@ -589,15 +602,23 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/博客/" title="博客">博客<sup>2</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/杂记/" title="杂记">杂记<sup>2</sup></a></li>
 			
 		
 			
+				<li><a href="/tags/博客/" title="博客">博客<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/javascript/" title="javascript">javascript<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/美化/" title="美化">美化<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/短网址/" title="短网址">短网址<sup>1</sup></a></li>
 			
 		
 			
@@ -633,11 +654,11 @@
 			
 		
 			
-				<li><a href="/tags/版本管理/" title="版本管理">版本管理<sup>1</sup></a></li>
+				<li><a href="/tags/windows/" title="windows">windows<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/美化/" title="美化">美化<sup>1</sup></a></li>
+				<li><a href="/tags/jdk/" title="jdk">jdk<sup>1</sup></a></li>
 			
 		
 			
@@ -649,7 +670,7 @@
 			
 		
 			
-				<li><a href="/tags/短网址/" title="短网址">短网址<sup>1</sup></a></li>
+				<li><a href="/tags/mongodb/" title="mongodb">mongodb<sup>1</sup></a></li>
 			
 		
 			
@@ -658,14 +679,6 @@
 		
 			
 				<li><a href="/tags/异步/" title="异步">异步<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/docker/" title="docker">docker<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/registry/" title="registry">registry<sup>1</sup></a></li>
 			
 		
 		</ul>
