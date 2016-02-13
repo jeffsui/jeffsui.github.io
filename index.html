@@ -81,6 +81,104 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/02/13/maven3-jdk1-7-problem-fixed/" title="maven3-jdk1.7-problem-fixed" itemprop="url">maven3-jdk1.7-problem-fixed</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Jeff Sui" target="_blank" itemprop="author">Jeff Sui</a>
+		
+  <p class="article-time">
+    <time datetime="2016-02-13T08:24:25.000Z" itemprop="datePublished"> 发表于 2016-02-13</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="maven3下jdk1-7编译错误解决">maven3下jdk1.7编译错误解决</h1><h1 id="环境">环境</h1><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Apache Maven <span class="number">3.3</span>.3 (<span class="number">7994120775791599e205</span>a5524ec3e0dfe41d4a06; <span class="number">2015</span>-<span class="number">04</span>-<span class="number">22</span><span class="string">T19:</span><span class="number">57</span>:<span class="number">3</span></span><br><span class="line"><span class="number">7</span>+<span class="number">08</span>:<span class="number">00</span>)</span><br><span class="line">Maven <span class="string">home:</span> <span class="string">d:</span>\tools\apache-maven-<span class="number">3.3</span>.3</span><br><span class="line">Java <span class="string">version:</span> <span class="number">1.7</span>.0_45, <span class="string">vendor:</span> Oracle Corporation</span><br><span class="line">Java <span class="string">home:</span> <span class="string">c:</span>\Program Files\Java\jdk1.7.0_45\jre</span><br><span class="line">Default <span class="string">locale:</span> zh_CN, platform <span class="string">encoding:</span> GBK</span><br><span class="line">OS <span class="string">name:</span> <span class="string">"windows 7"</span>, <span class="string">version:</span> <span class="string">"6.1"</span>, <span class="string">arch:</span> <span class="string">"amd64"</span>, <span class="string">family:</span> <span class="string">"windows"</span></span><br></pre></td></tr></table></figure>
+<h1 id="使用maven命令行创建java项目">使用<code>maven</code>命令行创建java项目</h1><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate <span class="variable">-DgroupId=</span>org.linfeng <span class="variable">-DartifactId=</span>mavendemo <span class="variable">-DarchetypeArtifactId=</span>maven-archetype-quickstart <span class="variable">-DinteractiveMode=</span><span class="constant">false</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建成功</li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">cd</span> mavendemo &amp;&amp; <span class="keyword">ls</span></span><br><span class="line">pom.xml  src</span><br></pre></td></tr></table></figure>
+<ul>
+<li>pom.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">project</span> <span class="attribute">xmlns</span>=<span class="value">"http://maven.apache.org/POM/4.0.0"</span> <span class="attribute">xmlns:xsi</span>=<span class="value">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">  <span class="attribute">xsi:schemaLocation</span>=<span class="value">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="title">modelVersion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.linfeng<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>mavendemo<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">packaging</span>&gt;</span>jar<span class="tag">&lt;/<span class="title">packaging</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>mavendemo<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">url</span>&gt;</span>http://maven.apache.org<span class="tag">&lt;/<span class="title">url</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>3.8.1<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="title">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>执行maven命令</li>
+</ul>
+<p><code>mvn test</code></p>
+<ul>
+<li>错误信息</li>
+</ul>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">[</span>ERROR] Failed to<span class="instruction"> execute </span>goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile<span class="function"> (</span>default-compile<span class="function">)</span> on project mavendemo: Compilation failure</span><br><span class="line"><span class="keyword">[</span>ERROR] No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?</span><br></pre></td></tr></table></figure>
+<h1 id="解决方案">解决方案</h1><ul>
+<li>修改<code>settings.xml</code>,添加jdk1.7相关内容</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">profile</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">id</span>&gt;</span>jdk-1.7<span class="tag">&lt;/<span class="title">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">activation</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="title">activeByDefault</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">jdk</span>&gt;</span>1.7<span class="tag">&lt;/<span class="title">jdk</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">activation</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">maven.compiler.source</span>&gt;</span>1.7<span class="tag">&lt;/<span class="title">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">maven.compiler.target</span>&gt;</span>1.7<span class="tag">&lt;/<span class="title">maven.compiler.target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">maven.compiler.compilerVersion</span>&gt;</span>1.7<span class="tag">&lt;/<span class="title">maven.compiler.compilerVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">profile</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><em>缺点</em>:修改所有项目的jre环境</p>
+<ul>
+<li>修改当前项目的<code>pom.xml</code></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">plugins</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">version</span>&gt;</span>3.1<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="title">source</span>&gt;</span>1.7<span class="tag">&lt;/<span class="title">source</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="title">target</span>&gt;</span>1.7<span class="tag">&lt;/<span class="title">target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>重新执行<code>mvn build</code> 成功！</p>
+<h1 id="问题分析">问题分析</h1><p>Maven官方文档有如下描述：</p>
+<blockquote>
+<p>编译器插件用来编译项目的源文件.从3.0版本开始, 用来编译Java源文件的默认编译器是javax.tools.JavaCompiler (如果你是用的是java 1.6) . 如果你想强制性的让插件使用javac,你必须配置插件选项 forceJavacCompilerUse.<br>同时需要注意的是目前source选项和target 选项的默认设置都是1.5, 与运行Maven时的JDK版本无关.如果你想要改变这些默认设置, 可以参考 Setting the -source and -target of the Java Compiler中的描述来设置 source 和target 选项.</p>
+</blockquote>
+<h1 id="参考资料">参考资料</h1><ul>
+<li><a href="http://stackoverflow.com/questions/15220392/maven-package-compilation-error" target="_blank" rel="external">http://stackoverflow.com/questions/15220392/maven-package-compilation-error</a></li>
+<li><a href="http://www.cnblogs.com/leo100w/p/4017647.html" target="_blank" rel="external">http://www.cnblogs.com/leo100w/p/4017647.html</a></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/ci/">ci</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/jdk/">jdk</a><a href="/tags/maven/">maven</a><a href="/tags/持续集成/">持续集成</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2016/02/13/maven3-jdk1-7-problem-fixed/#comments" class="ds-thread-count comments-count-link" data-thread-key="2016/02/13/maven3-jdk1-7-problem-fixed/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/08/12/how-make-cygwin-multi-color/" title="how make cygwin multi-color" itemprop="url">how make cygwin multi-color</a>
   </h1>
   <p class="article-author">By
@@ -428,78 +526,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/22/talk-about-software-engineering/" title="talk about software engineering" itemprop="url">talk about software engineering</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Jeff Sui" target="_blank" itemprop="author">Jeff Sui</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-22T01:12:54.000Z" itemprop="datePublished"> 发表于 2015-04-22</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="关于软件工程的讨论—质量篇">关于软件工程的讨论—质量篇</h1><blockquote>
-<p>那为什么软件系统的质量不容易高呢？我觉得主要原因是流程不完善。那为什么不完善？需求容易变。为什么容易变？是因为不论程序员自己，还是需求方，其实潜意识都认为自己做的东西是变更成本较低的。</p>
-<p>试想一下，为什么没人在盖高楼盖一半变更需求？为什么没人修大桥修一半变更需求？甚至做衣服做一半的时候变更需求，理发到一半变更需求，都会被人认为是不讲理。但是在软件领域，好像这倒成了普遍现象。</p>
-<p>因为整个软件系统的实现，都是虚拟的，看不见摸不着，并不消耗什么物料，所以从这个角度想，变起来当然是容易的。但软件系统的架构，其实也跟实体的没本质区别，变更时候要考虑很多关联因素，并不是就那么孤立的看一小块地方，当然，也会有一些不影响全局的变更。打个比方说，如果你在盖房子盖到一半，那变更外墙颜色肯定是要比变更窗户大小容易的。要是想变得太多，估计只好拆了重来。</p>
-</blockquote>
-<p>下面的讨论更加精彩:</p>
-<p>A:其实不是流程问题，老板和甲方问题</p>
-<p>A:甲方尤其关键 </p>
-<p>A:尼玛，要8层楼房，付2层费用</p>
-<p>……</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/软件工程/">软件工程</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/软件工程/">软件工程</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/22/talk-about-software-engineering/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/22/talk-about-software-engineering/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -516,6 +542,10 @@
 <div class="categorieslist">
 	<p class="asidetitle">分类</p>
 		<ul>
+		
+		  
+			<li><a href="/categories/ci/" title="ci">ci<sup>1</sup></a></li>
+		  
 		
 		  
 			<li><a href="/categories/docker/" title="docker">docker<sup>1</sup></a></li>
@@ -559,11 +589,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/杂记/" title="杂记">杂记<sup>2</sup></a></li>
+				<li><a href="/tags/博客/" title="博客">博客<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/博客/" title="博客">博客<sup>2</sup></a></li>
+				<li><a href="/tags/杂记/" title="杂记">杂记<sup>2</sup></a></li>
 			
 		
 			
@@ -571,11 +601,11 @@
 			
 		
 			
-				<li><a href="/tags/短网址/" title="短网址">短网址<sup>1</sup></a></li>
+				<li><a href="/tags/二维码/" title="二维码">二维码<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/二维码/" title="二维码">二维码<sup>1</sup></a></li>
+				<li><a href="/tags/软件工程/" title="软件工程">软件工程<sup>1</sup></a></li>
 			
 		
 			
@@ -603,11 +633,23 @@
 			
 		
 			
+				<li><a href="/tags/版本管理/" title="版本管理">版本管理<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/美化/" title="美化">美化<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/软件工程/" title="软件工程">软件工程<sup>1</sup></a></li>
+				<li><a href="/tags/maven/" title="maven">maven<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/持续集成/" title="持续集成">持续集成<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/短网址/" title="短网址">短网址<sup>1</sup></a></li>
 			
 		
 			
@@ -624,18 +666,6 @@
 		
 			
 				<li><a href="/tags/registry/" title="registry">registry<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/registry-ui/" title="registry-ui">registry-ui<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/cygwin/" title="cygwin">cygwin<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -718,7 +748,7 @@
 		
 
 		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
 		
 		<a href="/about" target="_blank" title="Jeff Sui">Jeff Sui</a>
 		

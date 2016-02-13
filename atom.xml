@@ -4,7 +4,7 @@
   <subtitle><![CDATA[pinghailinfeng's blog]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://jeffsui.github.io/"/>
-  <updated>2015-08-11T22:22:11.630Z</updated>
+  <updated>2016-02-13T08:40:43.670Z</updated>
   <id>http://jeffsui.github.io/</id>
   
   <author>
@@ -13,6 +13,63 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[maven3-jdk1.7-problem-fixed]]></title>
+    <link href="http://jeffsui.github.io/2016/02/13/maven3-jdk1-7-problem-fixed/"/>
+    <id>http://jeffsui.github.io/2016/02/13/maven3-jdk1-7-problem-fixed/</id>
+    <published>2016-02-13T08:24:25.000Z</published>
+    <updated>2016-02-13T08:40:43.670Z</updated>
+    <content type="html"><![CDATA[<h1 id="maven3下jdk1-7编译错误解决">maven3下jdk1.7编译错误解决</h1><h1 id="环境">环境</h1><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Apache Maven <span class="number">3.3</span>.3 (<span class="number">7994120775791599e205</span>a5524ec3e0dfe41d4a06; <span class="number">2015</span>-<span class="number">04</span>-<span class="number">22</span><span class="string">T19:</span><span class="number">57</span>:<span class="number">3</span></span><br><span class="line"><span class="number">7</span>+<span class="number">08</span>:<span class="number">00</span>)</span><br><span class="line">Maven <span class="string">home:</span> <span class="string">d:</span>\tools\apache-maven-<span class="number">3.3</span>.3</span><br><span class="line">Java <span class="string">version:</span> <span class="number">1.7</span>.0_45, <span class="string">vendor:</span> Oracle Corporation</span><br><span class="line">Java <span class="string">home:</span> <span class="string">c:</span>\Program Files\Java\jdk1.7.0_45\jre</span><br><span class="line">Default <span class="string">locale:</span> zh_CN, platform <span class="string">encoding:</span> GBK</span><br><span class="line">OS <span class="string">name:</span> <span class="string">"windows 7"</span>, <span class="string">version:</span> <span class="string">"6.1"</span>, <span class="string">arch:</span> <span class="string">"amd64"</span>, <span class="string">family:</span> <span class="string">"windows"</span></span><br></pre></td></tr></table></figure>
+<h1 id="使用maven命令行创建java项目">使用<code>maven</code>命令行创建java项目</h1><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate <span class="variable">-DgroupId=</span>org.linfeng <span class="variable">-DartifactId=</span>mavendemo <span class="variable">-DarchetypeArtifactId=</span>maven-archetype-quickstart <span class="variable">-DinteractiveMode=</span><span class="constant">false</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>创建成功</li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">cd</span> mavendemo &amp;&amp; <span class="keyword">ls</span></span><br><span class="line">pom.xml  src</span><br></pre></td></tr></table></figure>
+<ul>
+<li>pom.xml</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">project</span> <span class="attribute">xmlns</span>=<span class="value">"http://maven.apache.org/POM/4.0.0"</span> <span class="attribute">xmlns:xsi</span>=<span class="value">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">  <span class="attribute">xsi:schemaLocation</span>=<span class="value">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="title">modelVersion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.linfeng<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>mavendemo<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">packaging</span>&gt;</span>jar<span class="tag">&lt;/<span class="title">packaging</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>mavendemo<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">url</span>&gt;</span>http://maven.apache.org<span class="tag">&lt;/<span class="title">url</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>3.8.1<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="title">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>执行maven命令</li>
+</ul>
+<p><code>mvn test</code></p>
+<ul>
+<li>错误信息</li>
+</ul>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">[</span>ERROR] Failed to<span class="instruction"> execute </span>goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile<span class="function"> (</span>default-compile<span class="function">)</span> on project mavendemo: Compilation failure</span><br><span class="line"><span class="keyword">[</span>ERROR] No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?</span><br></pre></td></tr></table></figure>
+<h1 id="解决方案">解决方案</h1><ul>
+<li>修改<code>settings.xml</code>,添加jdk1.7相关内容</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">profile</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">id</span>&gt;</span>jdk-1.7<span class="tag">&lt;/<span class="title">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">activation</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">activeByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="title">activeByDefault</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">jdk</span>&gt;</span>1.7<span class="tag">&lt;/<span class="title">jdk</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">activation</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">maven.compiler.source</span>&gt;</span>1.7<span class="tag">&lt;/<span class="title">maven.compiler.source</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">maven.compiler.target</span>&gt;</span>1.7<span class="tag">&lt;/<span class="title">maven.compiler.target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">maven.compiler.compilerVersion</span>&gt;</span>1.7<span class="tag">&lt;/<span class="title">maven.compiler.compilerVersion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">profile</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><em>缺点</em>:修改所有项目的jre环境</p>
+<ul>
+<li>修改当前项目的<code>pom.xml</code></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">plugins</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">version</span>&gt;</span>3.1<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="title">source</span>&gt;</span>1.7<span class="tag">&lt;/<span class="title">source</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="title">target</span>&gt;</span>1.7<span class="tag">&lt;/<span class="title">target</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>重新执行<code>mvn build</code> 成功！</p>
+<h1 id="问题分析">问题分析</h1><p>Maven官方文档有如下描述：</p>
+<blockquote>
+<p>编译器插件用来编译项目的源文件.从3.0版本开始, 用来编译Java源文件的默认编译器是javax.tools.JavaCompiler (如果你是用的是java 1.6) . 如果你想强制性的让插件使用javac,你必须配置插件选项 forceJavacCompilerUse.<br>同时需要注意的是目前source选项和target 选项的默认设置都是1.5, 与运行Maven时的JDK版本无关.如果你想要改变这些默认设置, 可以参考 Setting the -source and -target of the Java Compiler中的描述来设置 source 和target 选项.</p>
+</blockquote>
+<h1 id="参考资料">参考资料</h1><ul>
+<li><a href="http://stackoverflow.com/questions/15220392/maven-package-compilation-error" target="_blank" rel="external">http://stackoverflow.com/questions/15220392/maven-package-compilation-error</a></li>
+<li><a href="http://www.cnblogs.com/leo100w/p/4017647.html" target="_blank" rel="external">http://www.cnblogs.com/leo100w/p/4017647.html</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="maven3下jdk1-7编译错误解决">maven3下jdk1.7编译错误解决</h1><h1 id="环境">环境</h1><figure class="highlight groovy"><table><tr><td class="gutter"><pre>]]>
+    </summary>
+    
+      <category term="jdk" scheme="http://jeffsui.github.io/tags/jdk/"/>
+    
+      <category term="maven" scheme="http://jeffsui.github.io/tags/maven/"/>
+    
+      <category term="持续集成" scheme="http://jeffsui.github.io/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
+    
+      <category term="ci" scheme="http://jeffsui.github.io/categories/ci/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[how make cygwin multi-color]]></title>
