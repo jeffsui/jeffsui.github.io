@@ -1,0 +1,110 @@
+# Hexo Configuration
+## Docs: http://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: pinghailinfeng's blog
+subtitle: pinghailinfeng's blog
+description: pinghailinfeng's blog
+author: Jeff Sui
+language: zh-CN
+email: pinghailinfeng79@gmail.com
+timezone:
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: http://jeffsui.github.io
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link: true # Open external links in new tab
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  tab_replace:
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Archives 默认值为2，这里都修改为1，相应页面就只会列出标题，而非全文
+## 2: Enable pagination
+## 1: Disable pagination
+## 0: Fully Disable
+archive: 2
+category: 1
+tag: 1
+
+# sitemap
+sitemap:
+    path: sitemap.xml
+
+# baidusitemap
+baidusitemap:
+    path: baidusitemap.xml
+
+image_stream:
+    jquery: //cdn.bootcss.com/jquery/2.1.0/jquery.min.js
+    jquery_lazyload: //cdn.bootcss.com/jquery.lazyload/1.9.1/jquery.lazyload.min.js
+    img_placeholder: http://7xindo.com1.z0.glb.clouddn.com/backspace.gif
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 5
+pagination_dir: page
+
+# Compress
+stylus: true
+
+
+
+# Extensions
+## Plugins: http://hexo.io/plugins/
+## Themes: http://hexo.io/themes/
+theme: jacman
+plugins:
+- hexo-generator-feed
+- hexo-generator-sitemap
+
+# Deployment
+## Docs: http://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repo: https://github.com/jeffsui/jeffsui.github.io.git
+  branch: master
+  message:
+
+# hexo-git-backup
+backup:
+  type: git
+  repository:
+     github: git@github.com:jeffsui/jeffsui.github.io.git,develop
+
