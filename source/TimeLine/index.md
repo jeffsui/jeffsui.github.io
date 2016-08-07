@@ -1,6 +1,10 @@
 title: "TimeLine"
-date: 2016-02-16 22:05:16
+date: 2016-08-07 21:27:16
 ---
+{% mood 2016-8-7 21:27:16 fa-camera-retro %}
+添加hexo-git-backup插件,once backup,write everywhere
+{% endmood %}
+
 {% mood 2016-2-16 22:22:12 fa-line-chart %}
 添加时间轴
 {% endmood %}
