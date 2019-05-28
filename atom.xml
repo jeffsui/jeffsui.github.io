@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2019-05-28T08:03:18.429Z</updated>
+  <updated>2019-05-28T09:17:42.007Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>using_selenium_visit_iqiyi_website</title>
+    <title>selenium元素操作封装</title>
+    <link href="https://pinghailinfeng.gitee.io/2019/05/28/selenium%E5%85%83%E7%B4%A0%E6%93%8D%E4%BD%9C%E5%B0%81%E8%A3%85/"/>
+    <id>https://pinghailinfeng.gitee.io/2019/05/28/selenium元素操作封装/</id>
+    <published>2019-05-28T09:14:18.000Z</published>
+    <updated>2019-05-28T09:17:42.007Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="selenium-常用的元素定位操作"><a href="#selenium-常用的元素定位操作" class="headerlink" title="selenium 常用的元素定位操作"></a>selenium 常用的元素定位操作</h1><h2 id="Selenium提供了8种定位方式。"><a href="#Selenium提供了8种定位方式。" class="headerlink" title="Selenium提供了8种定位方式。"></a>Selenium提供了8种定位方式。</h2><ul><li>id</li><li>name</li><li>class name</li><li>tag name</li><li>link text</li><li>partial link text</li><li>xpath</li><li>css selector</li></ul><h2 id="这8种定位方式在Python-selenium中所对应的方法为："><a href="#这8种定位方式在Python-selenium中所对应的方法为：" class="headerlink" title="这8种定位方式在Python selenium中所对应的方法为："></a>这8种定位方式在Python selenium中所对应的方法为：</h2><ul><li>find_element_by_id()</li><li>find_element_by_name()</li><li>find_element_by_class_name()</li><li>find_element_by_tag_name()</li><li>find_element_by_link_text()</li><li>find_element_by_partial_link_text()</li><li>find_element_by_xpath()</li><li>find_element_by_css_selector()</li></ul><h2 id="常用元素定位封装"><a href="#常用元素定位封装" class="headerlink" title="常用元素定位封装"></a>常用元素定位封装</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_locate_element</span><span class="params">(self, selector)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    to locate element by selector</span></span><br><span class="line"><span class="string">    :arg</span></span><br><span class="line"><span class="string">    selector should be passed by an example with "i,xxx"</span></span><br><span class="line"><span class="string">    "x,//*[@id='langs']/button"</span></span><br><span class="line"><span class="string">    :returns</span></span><br><span class="line"><span class="string">    DOM element</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">if</span> self.by_char <span class="keyword">not</span> <span class="keyword">in</span> selector:</span><br><span class="line">        <span class="keyword">return</span> self.base_driver.find_element_by_id(selector)</span><br><span class="line"></span><br><span class="line">    selector_by = selector.split(self.by_char)[<span class="number">0</span>].strip()</span><br><span class="line">    selector_value = selector.split(self.by_char)[<span class="number">1</span>].strip()</span><br><span class="line">    <span class="keyword">if</span> selector_by == <span class="string">"i"</span> <span class="keyword">or</span> selector_by == <span class="string">'id'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_id(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"n"</span> <span class="keyword">or</span> selector_by == <span class="string">'name'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_name(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"c"</span> <span class="keyword">or</span> selector_by == <span class="string">'class_name'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_class_name(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"l"</span> <span class="keyword">or</span> selector_by == <span class="string">'link_text'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_link_text(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"p"</span> <span class="keyword">or</span> selector_by == <span class="string">'partial_link_text'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_partial_link_text(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"t"</span> <span class="keyword">or</span> selector_by == <span class="string">'tag_name'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_tag_name(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"x"</span> <span class="keyword">or</span> selector_by == <span class="string">'xpath'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_xpath(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"s"</span> <span class="keyword">or</span> selector_by == <span class="string">'css_selector'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_css_selector(selector_value)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> NameError(<span class="string">"Please enter a valid type of targeting elements."</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> element</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;selenium-常用的元素定位操作&quot;&gt;&lt;a href=&quot;#selenium-常用的元素定位操作&quot; class=&quot;headerlink&quot; title=&quot;selenium 常用的元素定位操作&quot;&gt;&lt;/a&gt;selenium 常用的元素定位操作&lt;/h1&gt;&lt;h2 id=&quot;S
+      
+    
+    </summary>
+    
+      <category term="自动化测试" scheme="https://pinghailinfeng.gitee.io/categories/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="selenium" scheme="https://pinghailinfeng.gitee.io/tags/selenium/"/>
+    
+      <category term="web test" scheme="https://pinghailinfeng.gitee.io/tags/web-test/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用selenium访问爱奇艺网站</title>
     <link href="https://pinghailinfeng.gitee.io/2019/05/28/using-selenium-visit-iqiyi-website/"/>
     <id>https://pinghailinfeng.gitee.io/2019/05/28/using-selenium-visit-iqiyi-website/</id>
     <published>2019-05-28T07:23:36.000Z</published>
-    <updated>2019-05-28T08:03:18.429Z</updated>
+    <updated>2019-05-28T09:18:58.677Z</updated>
     
     <content type="html"><![CDATA[<h1 id="使用selenium访问爱奇艺网站"><a href="#使用selenium访问爱奇艺网站" class="headerlink" title="使用selenium访问爱奇艺网站"></a>使用<code>selenium</code>访问爱奇艺网站</h1><blockquote><p>selenium 是一种常用的自动化测试工具。它支持各种浏览器，包括 Chrome，Safari，Firefox 等主流界面式浏览器，如果你在这些浏览器里面安装一个 Selenium 的插件，还可以通过录制，快速生成脚本。</p><p>selenium 支持多种主流的开发语言，比如<code>Ruby</code>，<code>java</code>，<code>python</code>，<code>javascript</code>。</p></blockquote><h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>python3.7.3</p><p>运行 <code>pip install selenium</code> 就可以直接下载最新的selenium版本</p><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>浏览器:chrome 70.0.3538.77 </p><p>操作系统：win7</p><p>selenium版本: 3.14.1</p><p>chromedriver: <a href="https://npm.taobao.org/mirrors/chromedriver/70.0.3538.97/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/chromedriver/70.0.3538.97/</a></p><h2 id="使用selenium-打开和关闭浏览器"><a href="#使用selenium-打开和关闭浏览器" class="headerlink" title="使用selenium 打开和关闭浏览器"></a>使用selenium 打开和关闭浏览器</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(<span class="string">"http://www.iqiyi.com/"</span>)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure><h2 id="定位搜索框"><a href="#定位搜索框" class="headerlink" title="定位搜索框"></a>定位搜索框</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">search_xpath=<span class="string">r"//*[@id='nav_searchboxIn']/input"</span></span><br><span class="line">driver.find_element_by_xpath(search_xpath).send_keys(<span class="string">"复仇者联盟"</span>)</span><br></pre></td></tr></table></figure><h2 id="点击搜索图片"><a href="#点击搜索图片" class="headerlink" title="点击搜索图片"></a>点击搜索图片</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">search_button=<span class="string">r"//*[@id='nav_searchboxOut']/span"</span></span><br><span class="line">driver.find_element_by_xpath(search_button).click()</span><br></pre></td></tr></table></figure><h2 id="切换tab页"><a href="#切换tab页" class="headerlink" title="切换tab页"></a>切换tab页</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入键盘操作--20190528更新</span></span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.keys <span class="keyword">import</span> Keys</span><br><span class="line"><span class="comment">#此处通过键盘操作切换tab页</span></span><br><span class="line">driver.find_element_by_tag_name(<span class="string">"body"</span>).send_keys(Keys.CONTROL + <span class="string">"t"</span>)</span><br><span class="line"><span class="comment">#all_handles 保存所有已经打开的tab窗体</span></span><br><span class="line">all_handles = driver.window_handles</span><br><span class="line">print(driver.window_handles)</span><br><span class="line">index_handle=driver.current_window_handle</span><br><span class="line">print(index_handle)</span><br><span class="line"><span class="comment">#用switch_to方法切换到tab窗体</span></span><br><span class="line"><span class="keyword">for</span> handle <span class="keyword">in</span> all_handles:</span><br><span class="line">    <span class="keyword">if</span> handle!=index_handle:</span><br><span class="line">        print(<span class="string">'now is search window'</span>)</span><br><span class="line">        search_handle = handle</span><br><span class="line">driver.switch_to.window(search_handle)</span><br></pre></td></tr></table></figure><h2 id="打印页面的title，并截图"><a href="#打印页面的title，并截图" class="headerlink" title="打印页面的title，并截图"></a>打印页面的<code>title</code>，并截图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(driver.title)</span><br><span class="line">driver.get_screenshot_as_file(<span class="string">"aqiyi.png"</span>)</span><br></pre></td></tr></table></figure><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文主要介绍了自动化工具<code>selenium</code>的基本使用，如何对页面元素进行基本操作，实现自动抓取关键字图片功能。</p>]]></content>
     
@@ -44,36 +71,10 @@
   </entry>
   
   <entry>
-    <title>我的博客开张啦</title>
-    <link href="https://pinghailinfeng.gitee.io/2019/05/28/my-first-blog/"/>
-    <id>https://pinghailinfeng.gitee.io/2019/05/28/my-first-blog/</id>
-    <published>2019-05-28T01:10:06.365Z</published>
-    <updated>2019-05-28T02:59:20.793Z</updated>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="http://localhost:4000/" target="_blank" rel="noopener">我的博客</a>! 今天开始,正常访问啦。<br>欢迎大家来我的博客！</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;Welcome to &lt;a href=&quot;http://localhost:4000/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;我的博客&lt;/a&gt;! 今天开始,正常访问啦。&lt;br&gt;欢迎大家来我的博客！&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-      <category term="others" scheme="https://pinghailinfeng.gitee.io/categories/others/"/>
-    
-    
-      <category term="博客" scheme="https://pinghailinfeng.gitee.io/tags/%E5%8D%9A%E5%AE%A2/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Hello World</title>
     <link href="https://pinghailinfeng.gitee.io/2019/05/28/hello-world/"/>
     <id>https://pinghailinfeng.gitee.io/2019/05/28/hello-world/</id>
-    <published>2019-05-28T00:26:01.941Z</published>
+    <published>2019-05-27T16:00:00.000Z</published>
     <updated>2019-05-28T00:26:01.942Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
