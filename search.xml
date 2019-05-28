@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[using_selenium_visit_iqiyi_website]]></title>
+    <url>%2F2019%2F05%2F28%2Fusing-selenium-visit-iqiyi-website%2F</url>
+    <content type="text"><![CDATA[使用selenium访问爱奇艺网站 selenium 是一种常用的自动化测试工具。它支持各种浏览器，包括 Chrome，Safari，Firefox 等主流界面式浏览器，如果你在这些浏览器里面安装一个 Selenium 的插件，还可以通过录制，快速生成脚本。 selenium 支持多种主流的开发语言，比如Ruby，java，python，javascript。 环境搭建python3.7.3 运行 pip install selenium 就可以直接下载最新的selenium版本 准备浏览器:chrome 70.0.3538.77 操作系统：win7 selenium版本: 3.14.1 chromedriver: https://npm.taobao.org/mirrors/chromedriver/70.0.3538.97/ 使用selenium 打开和关闭浏览器1234from selenium import webdriverdriver = webdriver.Chrome()driver.get("http://www.iqiyi.com/")driver.quit() 定位搜索框12search_xpath=r"//*[@id='nav_searchboxIn']/input"driver.find_element_by_xpath(search_xpath).send_keys("复仇者联盟") 点击搜索图片12search_button=r"//*[@id='nav_searchboxOut']/span"driver.find_element_by_xpath(search_button).click() 切换tab页12345678910111213#此处通过键盘操作切换tab页driver.find_element_by_tag_name("body").send_keys(Keys.CONTROL + "t")#all_handles 保存所有已经打开的tab窗体all_handles = driver.window_handlesprint(driver.window_handles)index_handle=driver.current_window_handleprint(index_handle)#用switch_to方法切换到tab窗体for handle in all_handles: if handle!=index_handle: print('now is search window') search_handle = handledriver.switch_to.window(search_handle) 打印页面的title，并截图12print(driver.title)driver.get_screenshot_as_file("aqiyi.png") 总结本文主要介绍了自动化工具selenium的基本使用，如何对页面元素进行基本操作，实现自动抓取关键字图片功能。]]></content>
+      <categories>
+        <category>自动化测试</category>
+      </categories>
+      <tags>
+        <tag>selenium</tag>
+        <tag>web test</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[我的博客开张啦]]></title>
     <url>%2F2019%2F05%2F28%2Fmy-first-blog%2F</url>
     <content type="text"><![CDATA[Welcome to 我的博客! 今天开始,正常访问啦。欢迎大家来我的博客！]]></content>
