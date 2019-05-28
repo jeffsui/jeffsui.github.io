@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2019-05-28T09:26:35.995Z</updated>
+  <updated>2019-05-28T09:31:31.209Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python创建字典的几种方法</title>
+    <link href="https://pinghailinfeng.gitee.io/2019/05/28/python%E5%88%9B%E5%BB%BA%E5%AD%97%E5%85%B8%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/"/>
+    <id>https://pinghailinfeng.gitee.io/2019/05/28/python创建字典的几种方法/</id>
+    <published>2019-05-28T09:29:10.000Z</published>
+    <updated>2019-05-28T09:31:31.209Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="python创建字典的几种方法"><a href="#python创建字典的几种方法" class="headerlink" title="python创建字典的几种方法"></a>python创建字典的几种方法</h1><h2 id="1-创建空字典"><a href="#1-创建空字典" class="headerlink" title="1. 创建空字典"></a>1. 创建空字典</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = &#123;&#125;</span><br><span class="line">&gt;&gt;&gt; type(dic)</span><br><span class="line">&lt;type &apos;dict&apos;&gt;</span><br></pre></td></tr></table></figure><p>另一种形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp = dict()</span><br><span class="line">temp[&apos;name&apos;] = &apos;xiaoming&apos;</span><br></pre></td></tr></table></figure></p><h2 id="2-直接赋值创建"><a href="#2-直接赋值创建" class="headerlink" title="2. 直接赋值创建"></a>2. 直接赋值创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = &#123;&apos;spam&apos;:1, &apos;egg&apos;:2, &apos;bar&apos;:3&#125;</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;&apos;bar&apos;: 3, &apos;egg&apos;: 2, &apos;spam&apos;: 1&#125;</span><br></pre></td></tr></table></figure><h2 id="3-通过关键字dict和关键字参数创建"><a href="#3-通过关键字dict和关键字参数创建" class="headerlink" title="3. 通过关键字dict和关键字参数创建"></a>3. 通过关键字dict和关键字参数创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = dict(spam = 1, egg = 2, bar =3)</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;&apos;bar&apos;: 3, &apos;egg&apos;: 2, &apos;spam&apos;: 1&#125;</span><br></pre></td></tr></table></figure><h2 id="4-通过二元组列表创建"><a href="#4-通过二元组列表创建" class="headerlink" title="4. 通过二元组列表创建"></a>4. 通过二元组列表创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list = [(&apos;spam&apos;, 1), (&apos;egg&apos;, 2), (&apos;bar&apos;, 3)]</span><br><span class="line">&gt;&gt;&gt; dic = dict(list)</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;&apos;bar&apos;: 3, &apos;egg&apos;: 2, &apos;spam&apos;: 1&#125;</span><br></pre></td></tr></table></figure><h2 id="5-dict和zip结合创建"><a href="#5-dict和zip结合创建" class="headerlink" title="5. dict和zip结合创建"></a>5. dict和zip结合创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = dict(zip(&apos;abc&apos;, [1, 2, 3]))</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;&apos;a&apos;: 1, &apos;c&apos;: 3, &apos;b&apos;: 2&#125;</span><br></pre></td></tr></table></figure><h2 id="6-通过字典推导式创建"><a href="#6-通过字典推导式创建" class="headerlink" title="6. 通过字典推导式创建"></a>6. 通过字典推导式创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = &#123;i:2*i for i in range(3)&#125;</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;0: 0, 1: 2, 2: 4&#125;</span><br></pre></td></tr></table></figure><h2 id="7-通过dict-fromkeys-创建"><a href="#7-通过dict-fromkeys-创建" class="headerlink" title="7. 通过dict.fromkeys()创建"></a>7. 通过dict.fromkeys()创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = dict.fromkeys(range(3), &apos;x&apos;)</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;0: &apos;x&apos;, 1: &apos;x&apos;, 2: &apos;x&apos;&#125;</span><br></pre></td></tr></table></figure><h2 id="8-其他"><a href="#8-其他" class="headerlink" title="8. 其他"></a>8. 其他</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list = [&apos;x&apos;, 1, &apos;y&apos;, 2, &apos;z&apos;, 3]</span><br><span class="line">&gt;&gt;&gt; dic = dict(zip(list[::2], list[1::2]))</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;&apos;y&apos;: 2, &apos;x&apos;: 1, &apos;z&apos;: 3&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;python创建字典的几种方法&quot;&gt;&lt;a href=&quot;#python创建字典的几种方法&quot; class=&quot;headerlink&quot; title=&quot;python创建字典的几种方法&quot;&gt;&lt;/a&gt;python创建字典的几种方法&lt;/h1&gt;&lt;h2 id=&quot;1-创建空字典&quot;&gt;&lt;a h
+      
+    
+    </summary>
+    
+      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+    
+    
+      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+    
+      <category term="字典" scheme="https://pinghailinfeng.gitee.io/tags/%E5%AD%97%E5%85%B8/"/>
+    
+  </entry>
   
   <entry>
     <title>python操作sqlite3</title>
