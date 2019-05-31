@@ -98,18 +98,18 @@
 
 
 
-  <meta name="description" content="#javascript异步编程读书笔记之事件机制 ##事件的调度  异步执行  setTimeout函数的解释:给定一个回调及n毫秒的延迟,setTimeout会在n毫秒后运行该回调。 代码清单1:12345for (var i = 1; i &amp;lt;= 3; i++) &amp;#123;	setTimeout(function()&amp;#123; 		console.log(i); &amp;#125;, 	0)">
-<meta name="keywords" content="javascript,异步">
-<meta property="og:type" content="article">
-<meta property="og:title" content="javascript asynchronous programming learning :event">
-<meta property="og:url" content="https://pinghailinfeng.gitee.io/2015/04/20/javascript-asynchronous-programming-learning-event/index.html">
+  <meta name="description" content="关于我06年转行开始做it。经历了互联网泡沫,做过程序员、配置管理、项目管理,也曾经和朋友一起创业做培训,在外企从事性能测试和自动化测试。 曾经迷茫的学生时代树立过远大理想,但是被现实拍得粉碎。 70后曾经的码农,现在还在敲代码,混迹于OSC和一些开源社区。 开源中国大连城市圈的负责人之一(组织了唯一一届大连源创会)。 爱好美食、电影和户外运动。 一个微胖暖男。 这就是我,不一样的烟火。 晋升为爸">
+<meta name="keywords" content="自动化测试|性能测试|CI|CD|Devops">
+<meta property="og:type" content="website">
+<meta property="og:title" content="关于我">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/about/index.html">
 <meta property="og:site_name" content="凭海临风的IT江湖">
-<meta property="og:description" content="#javascript异步编程读书笔记之事件机制 ##事件的调度  异步执行  setTimeout函数的解释:给定一个回调及n毫秒的延迟,setTimeout会在n毫秒后运行该回调。 代码清单1:12345for (var i = 1; i &amp;lt;= 3; i++) &amp;#123;	setTimeout(function()&amp;#123; 		console.log(i); &amp;#125;, 	0)">
+<meta property="og:description" content="关于我06年转行开始做it。经历了互联网泡沫,做过程序员、配置管理、项目管理,也曾经和朋友一起创业做培训,在外企从事性能测试和自动化测试。 曾经迷茫的学生时代树立过远大理想,但是被现实拍得粉碎。 70后曾经的码农,现在还在敲代码,混迹于OSC和一些开源社区。 开源中国大连城市圈的负责人之一(组织了唯一一届大连源创会)。 爱好美食、电影和户外运动。 一个微胖暖男。 这就是我,不一样的烟火。 晋升为爸">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2016-08-19T15:08:13.442Z">
+<meta property="og:updated_time" content="2019-05-31T09:55:44.902Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="javascript asynchronous programming learning :event">
-<meta name="twitter:description" content="#javascript异步编程读书笔记之事件机制 ##事件的调度  异步执行  setTimeout函数的解释:给定一个回调及n毫秒的延迟,setTimeout会在n毫秒后运行该回调。 代码清单1:12345for (var i = 1; i &amp;lt;= 3; i++) &amp;#123;	setTimeout(function()&amp;#123; 		console.log(i); &amp;#125;, 	0)">
+<meta name="twitter:title" content="关于我">
+<meta name="twitter:description" content="关于我06年转行开始做it。经历了互联网泡沫,做过程序员、配置管理、项目管理,也曾经和朋友一起创业做培训,在外企从事性能测试和自动化测试。 曾经迷茫的学生时代树立过远大理想,但是被现实拍得粉碎。 70后曾经的码农,现在还在敲代码,混迹于OSC和一些开源社区。 开源中国大连城市圈的负责人之一(组织了唯一一届大连源创会)。 爱好美食、电影和户外运动。 一个微胖暖男。 这就是我,不一样的烟火。 晋升为爸">
 
 
 
@@ -119,7 +119,7 @@
 
   
   
-  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2015/04/20/javascript-asynchronous-programming-learning-event/">
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/about/">
 
 
 
@@ -129,7 +129,7 @@
   };
 </script>
 
-  <title>javascript asynchronous programming learning :event | 凭海临风的IT江湖</title>
+  <title>关于我 | 凭海临风的IT江湖</title>
   
 
 
@@ -232,7 +232,7 @@
         
         
           
-          <li class="menu-item menu-item-about">
+          <li class="menu-item menu-item-about menu-item-active">
 
     
     
@@ -405,256 +405,95 @@
           
             
 
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
           
           <div id="content" class="content">
             
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2015/04/20/javascript-asynchronous-programming-learning-event/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
     
+    
+    <div class="post-block page">
       <header class="post-header">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">javascript asynchronous programming learning :event
+<h1 class="post-title" itemprop="name headline">关于我
 
-              
-            
-          </h1>
-        
+</h1>
 
-        <div class="post-meta">
-          <span class="post-time">
+<div class="post-meta">
+  
+  
 
-            
-            
-            
 
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
 
-              
-                
-              
+</div>
 
-              <time title="创建时间：2015-04-20 21:05:16" itemprop="dateCreated datePublished" datetime="2015-04-20T21:05:16+08:00">2015-04-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2016-08-19 23:08:13" itemprop="dateModified" datetime="2016-08-19T23:08:13+08:00">2016-08-19</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon">
-            <i class="fa fa-eye"></i>
-             阅读次数： 
-            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
-            </span>
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">467</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
       
-
       
-        <p>#javascript异步编程读书笔记之事件机制</p>
-<p>##事件的调度</p>
-<ul>
-<li>异步执行</li>
-</ul>
-<p><code>setTimeout</code>函数的解释:给定一个回调及n毫秒的延迟,setTimeout会在n毫秒后运行该回调。</p>
-<p>代码清单1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (var i = 1; i &lt;= 3; i++) &#123;</span><br><span class="line">	setTimeout(function()&#123; </span><br><span class="line">		console.log(i); &#125;, </span><br><span class="line">	0);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>输出结果:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">4</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>线程阻塞<br>代码清单2:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var start = new Date;</span><br><span class="line">setTimeout(function()&#123;</span><br><span class="line">var end = new Date;</span><br><span class="line">console.log(&apos;Time elapsed:&apos;, end - start, &apos;ms&apos;);</span><br><span class="line">&#125;, 500);</span><br><span class="line">while (new Date - start &lt; 1000) &#123;&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>队列</p>
-</li>
-</ul>
-<p>javascript使用队列的方式来循环处理请求,这种机制被称为<strong>事件循环</strong>。</p>
+      <div class="post-body">
+        
+        
+          <h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><p>06年转行开始做it。经历了互联网泡沫,做过程序员、配置管理、项目管理,也曾经和朋友一起创业做培训,在外企从事性能测试和自动化测试。</p>
+<p>曾经迷茫的学生时代树立过远大理想,但是被现实拍得粉碎。</p>
+<p>70后曾经的码农,现在还在敲代码,混迹于OSC和一些开源社区。</p>
+<p>开源中国大连城市圈的负责人之一(组织了唯一一届大连源创会)。</p>
+<p>爱好美食、电影和户外运动。</p>
+<p>一个微胖暖男。</p>
+<p>这就是我,不一样的烟火。</p>
+<p>晋升为爸爸1.0后,对于做饭有独特的爱好,也喜欢洗尿布、喂奶等一系列奶爸工作。</p>
+<p>对于docker情有独钟,参与翻译组,合作开源图书《docker入门实战》。</p>
+<p>也曾参加《Pro Git》第二版的审校工作。</p>
+<p>闺女一天天长大,孩子终有一天会离开你,突然觉得自己也不再年轻了。</p>
+<p>2019年4月7号,父亲的突然离世,生命中那些珍重的东西就这么消失了。</p>
+<p>善待家人,珍惜身边的每个人, 希望和我的好朋友们共勉。</p>
 
+        
+      </div>
+      
+      
       
     </div>
-
     
 
+
+
     
     
     
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/javascript/" rel="tag"># javascript</a>
-          
-            <a href="/tags/异步/" rel="tag"># 异步</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2015/04/20/use-shorturl-and-two-dimensional-barcodes-to-beautify-blog/" rel="next" title="use-shorturl and two-dimensional-barcodes to beautify blog">
-                <i class="fa fa-chevron-left"></i> use-shorturl and two-dimensional-barcodes to beautify blog
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/04/22/talk-about-software-engineering/" rel="prev" title="talk about software engineering">
-                talk about software engineering <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
   </div>
 
 
@@ -683,8 +522,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -869,6 +717,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于我"><span class="nav-number">1.</span> <span class="nav-text">关于我</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
