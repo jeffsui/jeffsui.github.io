@@ -53,4 +53,214 @@
     <url>%2F2019%2F05%2F28%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
   </entry>
+  <entry>
+    <title><![CDATA[copy maven dependencies to a folder]]></title>
+    <url>%2F2016%2F09%2F30%2Fcopy-maven-dependencies-to-a-folder%2F</url>
+    <content type="text"><![CDATA[copy maven dependencies to a folderbackground一个简单的需求,当你的同事需要调试代码的时候,他并不想建立maven环境,这时候依赖的jar包 该如何导出呢? no code say nothing这时候你需要的是maven-dependency-plugin。 添加依赖配置123456789101112131415161718192021222324252627282930313233&lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;org.eclipse.m2e&lt;/groupId&gt; &lt;artifactId&gt;lifecycle-mapping&lt;/artifactId&gt; &lt;version&gt;1.0.0&lt;/version&gt; &lt;configuration&gt; &lt;lifecycleMappingMetadata&gt; &lt;pluginExecutions&gt; &lt;!-- copy-dependency plugin --&gt; &lt;pluginExecution&gt; &lt;pluginExecutionFilter&gt; &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt; &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt; &lt;versionRange&gt;[1.0.0,)&lt;/versionRange&gt; &lt;goals&gt; &lt;goal&gt;copy-dependencies&lt;/goal&gt; &lt;/goals&gt; &lt;configuration&gt; &lt;outputDirectory&gt;$&#123;project.build.directory&#125;/alternateLocation&lt;/outputDirectory&gt; &lt;overWriteReleases&gt;false&lt;/overWriteReleases&gt; &lt;overWriteSnapshots&gt;false&lt;/overWriteSnapshots&gt; &lt;overWriteIfNewer&gt;true&lt;/overWriteIfNewer&gt; &lt;/configuration&gt; &lt;/pluginExecutionFilter&gt; &lt;action&gt; &lt;ignore /&gt; &lt;/action&gt; &lt;/pluginExecution&gt; &lt;/pluginExecutions&gt; &lt;/lifecycleMappingMetadata&gt; &lt;/configuration&gt; &lt;/plugin&gt; &lt;/plugins&gt; 此处的&lt;outputDirectory&gt; 指定了你导出jar包的路径. 执行命令 mvn dependency:copy-dependencies查看项目多了一个/alternateLocation目录,并且依赖的jar包都下载到这个目录下了。]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>maven</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[how to use nginx on windows]]></title>
+    <url>%2F2016%2F09%2F27%2Fhow-to-use-nginx-on-windows%2F</url>
+    <content type="text"><![CDATA[how to use nginx on windows1. Download nginx lastest release from here.2. unzip to your local driver. eg: c:/apps/nginx3. start nginx12cd c:/apps/nginxstart nginx 4. monitoring nginx process12345tasklist /fi &quot;imagename eq nginx.exe&quot;Image Name PID Session Name Session# Mem Usage========================= ======== ================ =========== ============nginx.exe 11700 Console 1 10,696 Knginx.exe 1160 Console 1 11,180 K notice一个是主进程(main process),另一个是工作进程(work process).如果启动失败,请查看错误日志logs\error.log 5. visit http://localhost:80806. configuration file nginx.confreference config123456789101112131415161718error_log logs/error.log;http &#123; include mime.types; default_type application/octet-stream; server &#123; listen 8080; server_name localhost; location / &#123; root html; index index.html index.htm; &#125; error_page 500 502 503 504 /50x.html; location = /50x.html &#123; root html; &#125; &#125; ...&#125; 7. the command list of nginx：1234nginx -s stop 快速退出nginx -s quit 优雅退出nginx -s reload 更换配置，启动新的工作进程，优雅的关闭以往的工作进程nginx -s reopen 重新打开日志文件]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>nginx</tag>
+        <tag>windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[how git changing author info]]></title>
+    <url>%2F2016%2F09%2F22%2Fhow-git-changing-author-info%2F</url>
+    <content type="text"><![CDATA[how git changing author info背景 gitlab中的统计视图是根据用户的信息统计工作量 迁移git repo中经常会遇到用户和邮箱不一致的情况 解决思路那么如何修改已经推送到远程的author信息呢? github 官方提供的建议如何变更用户信息 同时也有类似的项托管在github上，git-tips-blame-someone-else 思路基本一致,就是替换提交记录、分支、标签里的author信息。 方案1.打开终端或命令行(git bash)2.创建一个你项目的全新裸库12git clone --bare https://github.com/user/repo.gitcd repo.git 3.复制粘贴脚本,并根据你的信息修改下面的变量:123OLD_EMAILCORRECT_NAMECORRECT_EMAIL 脚本replace.sh12345678910111213141516171819#!/bin/shgit filter-branch --env-filter &apos;OLD_EMAIL=&quot;your-old-email@example.com&quot;CORRECT_NAME=&quot;Your Correct Name&quot;CORRECT_EMAIL=&quot;your-correct-email@example.com&quot;if [ &quot;$GIT_COMMITTER_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]then export GIT_COMMITTER_NAME=&quot;$CORRECT_NAME&quot; export GIT_COMMITTER_EMAIL=&quot;$CORRECT_EMAIL&quot;fiif [ &quot;$GIT_AUTHOR_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]then export GIT_AUTHOR_NAME=&quot;$CORRECT_NAME&quot; export GIT_AUTHOR_EMAIL=&quot;$CORRECT_EMAIL&quot;fi&apos; --tag-name-filter cat -- --branches --tags 4.执行这个脚本sh replace.sh 5.察看Git历史有没有错误git log 6.强制推送到远程git push --force --tags origin &#39;refs/heads/*&#39; 7.清除repo.git仓库12cd ..rm -rf repo.git]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[how to understand git detached HEAD]]></title>
+    <url>%2F2016%2F08%2F08%2Fhow-to-understand-git-detached-HEAD%2F</url>
+    <content type="text"><![CDATA[场景远程有一个develop分支，我想获取到本地,但是clone该项目的时候这个远程分支还没有创建,于是执行 git checkout commit_id(develop) 提示如下 1234567891011121314$ git checkout f7c774bChecking out files: 100% (357/357), done.Note: checking out &apos;f7c774b&apos;.You are in &apos;detached HEAD&apos; state. You can look around, make experimentalchanges and commit them, and you can discard any commits you make in thisstate without impacting any branches by performing another checkout.If you want to create a new branch to retain commits you create, you maydo so (now or later) by using -b with the checkout command again. Example: git checkout -b new_branch_nameHEAD is now at f7c774b... update jeffsui.github.io 出现 detached from ...此时用git branch -av察看分支1234567$ git branch -av* (detached from f7c774b) f7c774b update jeffsui.github.io master 6ce1857 Site updated: 2016-08-07 22:09:10 remotes/origin/HEAD -&gt; origin/master remotes/origin/develop f7c774b update jeffsui.github.io remotes/origin/gh-pages 1eee93f Site updated: 2016-02-13 21:03:46 remotes/origin/master 6ce1857 Site updated: 2016-08-07 22:09:10 所谓的 detached HEAD 其实就是HEAD指向的是一个commit而不指向任何一个branch的临时分支,翻译过来就是游离. 众所周知,每一个分支都对应了一个commit,git checkout其实就是修改HEAD文件内容,让它指向不同的分支. 如何让detached HEAD所处分支指向远程分支此时的分支你可以执行commit操作,但是无法push到远程分支。那么我们如何把游离状态的分支指向我们指定的远程分支呢。123$ git fetch origin develop:developFrom https://github.com/jeffsui/jeffsui.github.io * [new branch] develop -&gt; develop 继续执行git branch -av 命令查看分支 12345678$ git branch -av* (detached from f7c774b) f7c774b update jeffsui.github.io develop f7c774b update jeffsui.github.io master 6ce1857 Site updated: 2016-08-07 22:09:10 remotes/origin/HEAD -&gt; origin/master remotes/origin/develop f7c774b update jeffsui.github.io remotes/origin/gh-pages 1eee93f Site updated: 2016-02-13 21:03:46 remotes/origin/master 6ce1857 Site updated: 2016-08-07 22:09:10 此时我们发现多了一个develop分支指向了远程develop 分支，这样我们就可以通过命令git push origin develop:develop到远程分支了。 更简洁的方法git fetch origin develop:develop or git checkount -b origin develop:develop 这样可以直接获取远程分支并创建一个本地分支。]]></content>
+      <tags>
+        <tag>git</tag>
+        <tag>版本管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[my-angle]]></title>
+    <url>%2F2016%2F02%2F15%2Fmy-angle%2F</url>
+    <content type="text"><![CDATA[]]></content>
+      <tags>
+        <tag>photo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[windows-mongodb-install]]></title>
+    <url>%2F2016%2F02%2F13%2Fwindows-mongodb-install%2F</url>
+    <content type="text"><![CDATA[#windows下mongodb安装 ##下载mongodb http://www.mongodb.org/downloads ##选择自定义安装 本机路径为:d:\tools\mongodb ##建立如下文件目录数据库路径:d:\tools\mongodb\db日志路径:d:\tools\mongodb\log配置文件目录d:\tools\mongodb\etc建立配置文件d:\tools\mongodb\etc\mongodb.conf 123456dbpath=d:\tools\mongodb\db #数据库路径logpath=d:\tools\mongodb\log\mongodb.log #日志输出文件路径logappend=true #错误日志采用追加模式，配置这个选项后mongodb的日志会追加到现有的日志文件，而不是从新创建一个新文件journal=true #启用日志文件，默认启用quiet=true #这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为falseport=27017 #端口号 默认为27017 ##启动服务 切换到d:\tools\mongodb\bin 目录下: 普通启动 mongod --config d:\tools\mongodb\etc\mongodb.conf 注册为windows服务 mongod --config d:\tools\mongodb\etc\mongodb.conf --install 补充 windows服务卸载 mongod --remove --serviceName &quot;MongoDB&quot; 启动服务net start mongodb 启动成功后,通过浏览器访问 http://localhost:27017 ,看到下面的文字,证明启动服务成功！ It looks like you are trying to access MongoDB over HTTP on the native driver port. 关闭服务net stop mongodb #图形化工具 官方提供的很全:https://docs.mongodb.org/ecosystem/tools/administration-interfaces/ mongo express –Nodejs MongoBooster UMongo MongoHub MongoVUE –.NET]]></content>
+      <categories>
+        <category>db</category>
+      </categories>
+      <tags>
+        <tag>windows</tag>
+        <tag>mongodb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[maven3-jdk1.7-problem-fixed]]></title>
+    <url>%2F2016%2F02%2F13%2Fmaven3-jdk1-7-problem-fixed%2F</url>
+    <content type="text"><![CDATA[#maven3下jdk1.7编译错误解决 #环境12345678Apache Maven 3.3.3 (7994120775791599e205a5524ec3e0dfe41d4a06; 2015-04-22T19:57:37+08:00)Maven home: d:\tools\apache-maven-3.3.3Java version: 1.7.0_45, vendor: Oracle CorporationJava home: c:\Program Files\Java\jdk1.7.0_45\jreDefault locale: zh_CN, platform encoding: GBKOS name: &quot;windows 7&quot;, version: &quot;6.1&quot;, arch: &quot;amd64&quot;, family: &quot;windows&quot; #使用maven命令行创建java项目1mvn archetype:generate -DgroupId=org.linfeng -DartifactId=mavendemo -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false 创建成功 12$ cd mavendemo &amp;&amp; lspom.xml src pom.xml 123456789101112131415161718&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt; &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt; &lt;groupId&gt;org.linfeng&lt;/groupId&gt; &lt;artifactId&gt;mavendemo&lt;/artifactId&gt; &lt;packaging&gt;jar&lt;/packaging&gt; &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt; &lt;name&gt;mavendemo&lt;/name&gt; &lt;url&gt;http://maven.apache.org&lt;/url&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; &lt;artifactId&gt;junit&lt;/artifactId&gt; &lt;version&gt;3.8.1&lt;/version&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;/dependencies&gt;&lt;/project&gt; 执行maven命令 mvn test 错误信息 12[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project mavendemo: Compilation failure[ERROR] No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK? #解决方案 修改settings.xml,添加jdk1.7相关内容 123456789101112&lt;profile&gt; &lt;id&gt;jdk-1.7&lt;/id&gt; &lt;activation&gt; &lt;activeByDefault&gt;true&lt;/activeByDefault&gt; &lt;jdk&gt;1.7&lt;/jdk&gt; &lt;/activation&gt; &lt;properties&gt; &lt;maven.compiler.source&gt;1.7&lt;/maven.compiler.source&gt; &lt;maven.compiler.target&gt;1.7&lt;/maven.compiler.target&gt; &lt;maven.compiler.compilerVersion&gt;1.7&lt;/maven.compiler.compilerVersion&gt; &lt;/properties&gt;&lt;/profile&gt; 缺点:修改所有项目的jre环境 修改当前项目的pom.xml 12345678910111213&lt;build&gt; &lt;plugins&gt; &lt;plugin&gt; &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt; &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt; &lt;version&gt;3.1&lt;/version&gt; &lt;configuration&gt; &lt;source&gt;1.7&lt;/source&gt; &lt;target&gt;1.7&lt;/target&gt; &lt;/configuration&gt; &lt;/plugin&gt; &lt;/plugins&gt;&lt;/build&gt; 重新执行mvn build 成功！ #问题分析Maven官方文档有如下描述： 编译器插件用来编译项目的源文件.从3.0版本开始, 用来编译Java源文件的默认编译器是javax.tools.JavaCompiler (如果你是用的是java 1.6) . 如果你想强制性的让插件使用javac,你必须配置插件选项 forceJavacCompilerUse.同时需要注意的是目前source选项和target 选项的默认设置都是1.5, 与运行Maven时的JDK版本无关.如果你想要改变这些默认设置, 可以参考 Setting the -source and -target of the Java Compiler中的描述来设置 source 和target 选项. #参考资料 http://stackoverflow.com/questions/15220392/maven-package-compilation-error http://www.cnblogs.com/leo100w/p/4017647.html]]></content>
+      <categories>
+        <category>ci</category>
+      </categories>
+      <tags>
+        <tag>maven</tag>
+        <tag>jdk</tag>
+        <tag>持续集成</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[how make cygwin multi-color]]></title>
+    <url>%2F2015%2F08%2F12%2Fhow-make-cygwin-multi-color%2F</url>
+    <content type="text"><![CDATA[打开.bashrc 123456789101112131415161718# Default to human readable figures# alias df=&apos;df -h&apos;# alias du=&apos;du -h&apos;## Misc # alias less=&apos;less -r&apos; # raw control characters# alias whence=&apos;type -a&apos; # where, of a sort# alias grep=&apos;grep --color&apos; # show differences in colour# alias egrep=&apos;egrep --color=auto&apos; # show differences in colour# alias fgrep=&apos;fgrep --color=auto&apos; # show differences in colour## Some shortcuts for different directory listings# alias ls=&apos;ls -hF --color=tty&apos; # classify files in colour# alias dir=&apos;ls --color=auto --format=vertical&apos;# alias vdir=&apos;ls --color=auto --format=long&apos;# alias ll=&apos;ls -l&apos; # long list# alias la=&apos;ls -A&apos; # all but . and ..# alias l=&apos;ls -CF&apos; # 而我们要做的只是去掉#，启动即可： 123456789101112131415161718# Default to human readable figuresalias df=&apos;df -h&apos;alias du=&apos;du -h&apos;## Misc alias less=&apos;less -r&apos; # raw control charactersalias whence=&apos;type -a&apos; # where, of a sortalias grep=&apos;grep --color&apos; # show differences in colouralias egrep=&apos;egrep --color=auto&apos; # show differences in colouralias fgrep=&apos;fgrep --color=auto&apos; # show differences in colour## Some shortcuts for different directory listingsalias ls=&apos;ls -hF --color=tty&apos; # classify files in colouralias dir=&apos;ls --color=auto --format=vertical&apos;alias vdir=&apos;ls --color=auto --format=long&apos;alias ll=&apos;ls -l&apos; # long listalias la=&apos;ls -A&apos; # all but . and ..alias l=&apos;ls -CF&apos; # 然后保存一下，再重启cygwin（或者直接用：source ~/.bashrc]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>cygwin</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[how to build a private docker registry]]></title>
+    <url>%2F2015%2F07%2F21%2Fhow-to-build-a-private-docker-registry%2F</url>
+    <content type="text"><![CDATA[如何搭建docker私服##环境准备 软件包： centos6.5_x86_64 docker-engine-1.7.0-1.el6.x86_64.rpm docker环境搭建,请参照官方说明，本文采用的是官方的rpm包 ##何谓私服 官方的image镜像站位dockerhub,因为伟大的墙的缘故,所以下载镜像是很痛苦的一件事。当然你可以采用其他科学上网或者镜像加速的方法来获取image。docker官方也提供了一个私服镜像,大家可以通过docker search registry来查找该镜像。 12345NAME DESCRIPTION STARS OFFICIAL AUTOMATEDregistry Containerized docker registry 320 [OK] atcol/docker-registry-ui A web UI for easy private/local Docker Reg... 55 [OK]konradkleine/docker-registry-frontend Browse and modify your Docker registry in ... 40 [OK]samalba/docker-registry 35 ##下载官方registry镜像 下载镜像 使用命令docker pull registry执行下载镜像。 查看镜像 下载完毕后,通过docker images 查看该镜像。 给镜像打标签 执行这个命令docker tag registry:latest localhost:5000/registry:latest ##启动镜像 docker run -d -e SETTINGS_FLAVOR=dev -e STORAGE_PATH=/tmp/registry -v /opt/data/registry:/tmp/registry -p 5000:5000 registry 这里有几个参数说明下: 1.-e STORAGE_PATH=/tmp/registry :强制使用存储路径 2.-v /opt/data/registry:/tmp/registry :绑定本地镜像存储路径 3.-p 5000:5000:映射容器5000端口到本地5000端口 ##查看镜像状态 docker ps ##查看私服状态 curl http://localhost:5000 显示如下信息,证明registry启动成功: &quot;\&quot;docker-registry server\&quot;&quot; ##推送本地镜像库到registry私服 ###1. 第一步 给本地镜像 打tag例如给官方的nginx镜像打tag,执行下面的命令行docker pull nginxdocker tag nginx:latest localhost:5000/nginx:latest查看镜像库,发现localhost:5000/nginx的镜像已经有了。 ###2. 第二步 推送tag到registry私服 docker push localhost:5000/nginx:latest ###3. 第三步 查看私服镜像列表 curl http://localhost：5000/V1/search 看到类似这样的信息 12&#123;&quot;num_results&quot;: 5, &quot;query&quot;: &quot;&quot;, &quot;results&quot;: [&#123;&quot;description&quot;: null, &quot;name&quot;: &quot;correl/erlang&quot;&#125;, &#123;&quot;description&quot;: null, &quot;name&quot;: &quot;linfeng/cmd&quot;&#125;, &#123;&quot;description&quot;: null, &quot;name&quot;: &quot;library/my_nodejs_image&quot;&#125;, &#123;&quot;description&quot;: null, &quot;name&quot;: &quot;library/centos&quot;&#125;, &#123;&quot;description&quot;: &quot;&quot;, &quot;name&quot;: &quot;library/nginx&quot;&#125;]&#125; ##拉取私服镜像 docker pull 192.168.20.85:5000/library/centos:7 ##结论 这只是演示如何搭建一个简单的registry私服。因为只有通过命令行方式才能查看私服信息,所以不是很便于操作。下面的博文将演示如何给registry添加web界面。]]></content>
+      <categories>
+        <category>docker</category>
+      </categories>
+      <tags>
+        <tag>docker</tag>
+        <tag>registry</tag>
+        <tag>registry-ui</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[how git version rollback]]></title>
+    <url>%2F2015%2F05%2F16%2Fhow-git-version-rollback%2F</url>
+    <content type="text"><![CDATA[如何进行远程版本回退…… #引言 一切都要从一个蛋疼的需求开始,老板说,能给远程仓库的版本回退吗？我说为毛？他说我就是试试看git好使不,我…… #咋搞 背景 gitcafe 国内知名的源码托管平台 分析 12345678910111213141、git checkout the_branch2、git pull3、git branch the_branch_backup //备份一下这个分支当前的情况4、git reset --hard the_commit_id //把the_branch本地回滚到the_commit_id5、git push origin :the_branch //删除远程 the_branch6、git push origin the_branch //用回滚后的本地分支重新建立远程分支7、git push origin :the_branch_backup //如果前面都成功了，删除这个备份分支 删除远程分支 首先,任何一个git源码托管平台都会告诉你,别删除远程master分支,因为它是默认的分支……,请移步这里 操作步骤 如果远程只有一个master分支,请你创建一个非master分支,然后推送到远程。有人会问我为什么？打个比方,你见过上旱厕的时候,给自己脚下站着的板子抽走吗？ 脚本类似下面这样 1234git branch the_master_backupgit push origin the_master_backup 此时你查看远程分支应该有两个:master和the_master_backup 设置默认的分支为 the_master_backup 1234git branch -D branch_name //删除本地master分支git push :master //推送一个空分支,相当于删除远程master分支 然后你在the_master_backup分支上 回滚到你要回滚的commit_id,然后重建master分支并推送到远程,顺便删除the_master_backup分支(包括远程the_master_backup分支)。 123456789101112git checkout the_master_backupgit reset --hard commit_idgit branch master //重新创建master分支git push origin master //重新推送master分支git branch -D the_master_backup //删除本地the_master_backup分支git push origin :the_master_backup//删除远程the_master_backup分支 #遇到的问题 忘记设置默认分支为非master分支 1234567891011121314remote: error: By default, deleting the current branch is denied, because the nextremote: error: &apos;git clone&apos; won&apos;t result in any file checked out, causing confusion.remote: error:remote: error: You can set &apos;receive.denyDeleteCurrent&apos; configuration variable toremote: error: &apos;warn&apos; or &apos;ignore&apos; in the remote repository to allow deleting theremote: error: current branch, with or without a warning message.remote: error:remote: error: To squelch this message, you can set it to &apos;refuse&apos;.... #总结 如果你遇到的是所有提交只有master分支,那么希望我这个博文能帮到你。当然git强大的分支功能你基本也用不到了。]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>gitcafe</tag>
+        <tag>版本管理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[javascript oop 15 min programming]]></title>
+    <url>%2F2015%2F04%2F23%2Fjavascript-oop-15-min-programming%2F</url>
+    <content type="text"><![CDATA[#javascript的面向对象15分钟教程 第一种面向对象的写法##创建空对象 12var bill =&#123;&#125;;//创建一个空对象 ##给对象添加属性和方法 12345bill.name = &quot;Bill Goat&quot;;bill.work = function ()&#123; console.log(&quot;programming....&quot;);&#125;; ##一步完成上面的两件事 1234567var bill =&#123; name : &quot;Bill Goat&quot;; work : function()&#123; console.log(&quot;programming....&quot;);&#125;&#125;; ##访问对象和属性 123console.log(bill.name);bill.work(); ##方法重写 12345bill.name = &quot;Bill Goat&quot;;bill.work =function(who)&#123; console.log(&quot;programming for &quot;+who);&#125;; ##通过this关键字访问内部属性 1234bill.say = function ()&#123; console.log(&quot;bill&apos;s name is&quot;+this.name);&#125;; ##对象引用123456var silly = bill;console.log(silly.name);sally.name = &quot;Silly&quot;;console.log(silly.name);console.log(bill.name); ##另一个方式引用1234567bill.name = &quot;Bill Goat&quot;;bill.say();var sayName = bill.say();sayName;sayName(); ##有意思的地方 ：全局属性123var name = &quot;Global&quot;;bill.say(); 发现此时输出的是bill&#39;s name is Global 另一种面向对象的写法##定义对象及属性 12function Game()&#123;&#125;; ##创建对象 1var DF = new Game(); ##对象属性 1DF.title = &quot;星际争霸2&quot;; ##构造方法 12345678function Game (title)&#123; this.title = typeof title !== &apos;undifined&apos; ? title :&quot;&quot;;&#125;;var d3 = new Game(&quot;d3&quot;);d3.title;d3.title =&quot;starcraft2&quot;; this.title = typeof title !== &#39;undifined&#39; ? title :&quot;&quot;;相当于 123456if(typeof title !== &quot;undifined&quot;）&#123; this.title = title;&#125;else&#123; this.title = &quot;&quot;;&#125; ##创建一个方法来访问这个属性1234d3.loveTitle = function ()&#123; console.log(&quot;I love &quot;+this.title);&#125; ##更好的写法 12345Game.prototype.heartIt = function ()&#123; console.log(&quot;I love &quot;+this.title);&#125;d3.heartIt(); 下次详解javascript的原生对象模型 to be continued~~~~]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>oop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[talk about software engineering]]></title>
+    <url>%2F2015%2F04%2F22%2Ftalk-about-software-engineering%2F</url>
+    <content type="text"><![CDATA[#关于软件工程的讨论–质量篇 那为什么软件系统的质量不容易高呢？我觉得主要原因是流程不完善。那为什么不完善？需求容易变。为什么容易变？是因为不论程序员自己，还是需求方，其实潜意识都认为自己做的东西是变更成本较低的。 试想一下，为什么没人在盖高楼盖一半变更需求？为什么没人修大桥修一半变更需求？甚至做衣服做一半的时候变更需求，理发到一半变更需求，都会被人认为是不讲理。但是在软件领域，好像这倒成了普遍现象。 因为整个软件系统的实现，都是虚拟的，看不见摸不着，并不消耗什么物料，所以从这个角度想，变起来当然是容易的。但软件系统的架构，其实也跟实体的没本质区别，变更时候要考虑很多关联因素，并不是就那么孤立的看一小块地方，当然，也会有一些不影响全局的变更。打个比方说，如果你在盖房子盖到一半，那变更外墙颜色肯定是要比变更窗户大小容易的。要是想变得太多，估计只好拆了重来。 下面的讨论更加精彩: A:其实不是流程问题，老板和甲方问题 A:甲方尤其关键 A:尼玛，要8层楼房，付2层费用 ……]]></content>
+      <categories>
+        <category>软件工程</category>
+      </categories>
+      <tags>
+        <tag>软件工程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[javascript asynchronous programming learning :event]]></title>
+    <url>%2F2015%2F04%2F20%2Fjavascript-asynchronous-programming-learning-event%2F</url>
+    <content type="text"><![CDATA[#javascript异步编程读书笔记之事件机制 ##事件的调度 异步执行 setTimeout函数的解释:给定一个回调及n毫秒的延迟,setTimeout会在n毫秒后运行该回调。 代码清单1:12345for (var i = 1; i &lt;= 3; i++) &#123; setTimeout(function()&#123; console.log(i); &#125;, 0);&#125;; 输出结果: 123444 线程阻塞代码清单2: 123456var start = new Date;setTimeout(function()&#123;var end = new Date;console.log(&apos;Time elapsed:&apos;, end - start, &apos;ms&apos;);&#125;, 500);while (new Date - start &lt; 1000) &#123;&#125;; 队列 javascript使用队列的方式来循环处理请求,这种机制被称为事件循环。]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>异步</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[use-shorturl and two-dimensional-barcodes to beautify blog]]></title>
+    <url>%2F2015%2F04%2F20%2Fuse-shorturl-and-two-dimensional-barcodes-to-beautify-blog%2F</url>
+    <content type="text"><![CDATA[#如何使用短网址和二维码简化网站访问 短网址(shorturl) web2.0时代的潮流,借助短网址您可以用简短的网址替代原来冗长的网址，让使用者可以更容易的分享链接。这里我使用的是百度的短网址服务:http://dwz.cn/ 访问http://dwz.cn/主页 输入你的博客地址我输入http://jeffsui.github.io/pinghailinfeng_blog/ 复制短网址 二维码(two-dimensional-barcodes)微信时代,不知道二维码的基本都属于外星球人了。这里我选择的是草料二维码:http://cli.im/ 输入二维码地址 进行一些基本设置包括前景色、背景色、渐变色等等。 嵌入图片 选用你喜欢的模板 保存二维码 在线存储这里我选择国内知名的七牛云存储。 4.在博客中引用图片地址就可以了]]></content>
+      <categories>
+        <category>搭建博客</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>美化</tag>
+        <tag>短网址</tag>
+        <tag>二维码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[我的新文章]]></title>
+    <url>%2F2015%2F04%2F17%2Fmy-new-post%2F</url>
+    <content type="text"><![CDATA[#我的新文章 这是我的第一篇在github上的博客。记录下我的工作和生活,慢慢给其他的文章都更新到这里。嬉笑怒骂也好,喜怒哀乐也罢,我就是一个俗人罢了。]]></content>
+      <tags>
+        <tag>杂记</tag>
+        <tag>博客</tag>
+        <tag>文章</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[push-hexo-to-github]]></title>
+    <url>%2F2015%2F04%2F17%2Fpush-hexo-to-github%2F</url>
+    <content type="text"><![CDATA[#如何使用hexo在github上建立静态博客 ##环境搭建 hexo环境搭建 请参考 hexo.io 官方站点, 强烈建议给基本操作下的内容快速浏览一遍,下面的操作是我一个一个命令敲出来的,遇到的坑也会记录下来,希望大家能少走弯路。 github上建立静态博客 github账号申请（略） 建立一个github项目 git clone 项目地址 到本地 项目初始化cd 项目名echo # hexo 实例站点 &gt;&gt; README.mdgit initgit add README.mdgit commit -m “first blood”git remote add origin 项目地址git push -u origin master github免费站点建立规则,请仔细阅读这个规则https://help.github.com/articles/user-organization-and-project-pages/ 默认github域名 默认github 分配了 一个name.github.io的域名,还有一个name.github.io/project_name的二级域名,请参照github的提示设置URL。 华丽的分割线 站点配置流程 建立站点文件夹,并站点初始化 安装hexo依赖 修改node_module/hexo-server/index.js,用于本地调试 安装hexo-git-deployer插件 修改全局配置文件_config.yml,配置deploy# Site 站点配置title: 凭海临风的测试江湖subtitle:description: 凭海临风的博客author: Jeff Suilanguage: zh-CNtimezone # URL 站点链接## If your site is put in a subdirectory, set url as ‘http://yoursite.com/child&#39; and root as ‘/child/‘url: http://jeffsui.github.ioroot: /pinghailinfeng_blog/permalink: :year/:month/:day/:title/permalink_defaults: # Deployment## Docs: http://hexo.io/docs/deployment.htmldeploy:type: gitrepo: https://github.com/jeffsui/pinghailinfeng_blog.gitbranch : mastermessage : 以上配置仅供参考 创建文章 执行hexo new 命令 例如:hexo new post my-first-blog 将会自动在source/_posts下创建一个my-first-blog.md的文件,使用的是scaffolds下的post.md模板 修改并保存my-first-blog.md文件 站点生成hexo g 站点部署 hexo d 如果没有报错,恭喜你已经成功推送到 项目的master分支。 创建gh-pages分支并推送到远程 git fetch origin master git checkout gh-pages git merge master git push origin gh-pages 访问http://jeffsui.github.io/pinghailinfeng_blog/ ##遇到的问题 github站点的规则不熟悉,url配置浪费我2个小时。项目建立的是二级域名,所以必须要按照我说的那样配置。 本地预览有可能不加载样式,重新删除node_module下所有,执行npm install,再hexo g,hexo server -i 127.0.0.1 -s -o即可。 hexo3.0版本的git插件必须要独立安装。 其他坑,自己填吧。 ##总结 大坑各种有,github特别多,还有伟大的墙,兄弟们,github好上,填坑需谨慎！]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>搭建</tag>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[sublime run slow problem]]></title>
+    <url>%2F2015%2F04%2F17%2Fsublime-run-slow-problem%2F</url>
+    <content type="text"><![CDATA[#解决sublime Text2运行缓慢的方法 今天打开sublime想写博客发现整个页面打开很慢,切换tab要等好几秒。发现了一个帖子,说GitGutter这个插件在st2下会影响切换tab速度。 于是 ctrl+shift+p调出命令,remove package,选择GitGutter,回车。重启sublime,世界都变得清静了。]]></content>
+      <categories>
+        <category>工具篇</category>
+      </categories>
+      <tags>
+        <tag>sublime</tag>
+        <tag>GitGutter</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[first-blog]]></title>
+    <url>%2F2015%2F04%2F17%2Ffirst-blog%2F</url>
+    <content type="text"><![CDATA[#第一个博客 ##记录使用hexo的各种填坑。]]></content>
+      <categories>
+        <category>搭建博客</category>
+      </categories>
+      <tags>
+        <tag>杂记</tag>
+      </tags>
+  </entry>
 </search>
