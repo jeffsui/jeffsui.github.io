@@ -98,18 +98,18 @@
 
 
 
-  <meta name="description" content="selenium 常用的元素定位操作Selenium提供了8种定位方式。 id name class name tag name link text partial link text xpath css selector  这8种定位方式在Python selenium中所对应的方法为： find_element_by_id() find_element_by_name() find_eleme">
+  <meta name="description" content="selenium 常用的元素定位操作Selenium提供了8种定位方式。 id name class name tag name link text partial link text xpath css selector  这8种定位方式在Python selenium中所对应的方法为： find_element_by_id()  find_element_by_name()  find_ele">
 <meta name="keywords" content="selenium,web test">
 <meta property="og:type" content="article">
 <meta property="og:title" content="selenium元素操作封装">
 <meta property="og:url" content="https://pinghailinfeng.gitee.io/2019/05/28/selenium元素操作封装/index.html">
 <meta property="og:site_name" content="凭海临风的IT江湖">
-<meta property="og:description" content="selenium 常用的元素定位操作Selenium提供了8种定位方式。 id name class name tag name link text partial link text xpath css selector  这8种定位方式在Python selenium中所对应的方法为： find_element_by_id() find_element_by_name() find_eleme">
+<meta property="og:description" content="selenium 常用的元素定位操作Selenium提供了8种定位方式。 id name class name tag name link text partial link text xpath css selector  这8种定位方式在Python selenium中所对应的方法为： find_element_by_id()  find_element_by_name()  find_ele">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-28T09:17:42.007Z">
+<meta property="og:updated_time" content="2019-06-03T07:57:15.074Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="selenium元素操作封装">
-<meta name="twitter:description" content="selenium 常用的元素定位操作Selenium提供了8种定位方式。 id name class name tag name link text partial link text xpath css selector  这8种定位方式在Python selenium中所对应的方法为： find_element_by_id() find_element_by_name() find_eleme">
+<meta name="twitter:description" content="selenium 常用的元素定位操作Selenium提供了8种定位方式。 id name class name tag name link text partial link text xpath css selector  这8种定位方式在Python selenium中所对应的方法为： find_element_by_id()  find_element_by_name()  find_ele">
 
 
 
@@ -468,12 +468,24 @@
                 
               
 
-              <time title="创建时间：2019-05-28 17:14:18 / 修改时间：17:17:42" itemprop="dateCreated datePublished" datetime="2019-05-28T17:14:18+08:00">2019-05-28</time>
+              <time title="创建时间：2019-05-28 17:14:18" itemprop="dateCreated datePublished" datetime="2019-05-28T17:14:18+08:00">2019-05-28</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-03 15:57:15" itemprop="dateModified" datetime="2019-06-03T15:57:15+08:00">2019-06-03</time>
               
             
           </span>
@@ -571,15 +583,24 @@
 <li>css selector</li>
 </ul>
 <h2 id="这8种定位方式在Python-selenium中所对应的方法为："><a href="#这8种定位方式在Python-selenium中所对应的方法为：" class="headerlink" title="这8种定位方式在Python selenium中所对应的方法为："></a>这8种定位方式在Python selenium中所对应的方法为：</h2><ul>
-<li>find_element_by_id()</li>
-<li>find_element_by_name()</li>
-<li>find_element_by_class_name()</li>
-<li>find_element_by_tag_name()</li>
-<li>find_element_by_link_text()</li>
-<li>find_element_by_partial_link_text()</li>
-<li>find_element_by_xpath()</li>
-<li>find_element_by_css_selector()</li>
+<li><p>find_element_by_id()</p>
+</li>
+<li><p>find_element_by_name()</p>
+</li>
+<li><p>find_element_by_class_name()</p>
+</li>
+<li><p>find_element_by_tag_name()</p>
+</li>
+<li><p>find_element_by_link_text()</p>
+</li>
+<li><p>find_element_by_partial_link_text()</p>
+</li>
+<li><p>find_element_by_xpath()</p>
+</li>
+<li><p>find_element_by_css_selector()</p>
+</li>
 </ul>
+<a id="more"></a>
 <h2 id="常用元素定位封装"><a href="#常用元素定位封装" class="headerlink" title="常用元素定位封装"></a>常用元素定位封装</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_locate_element</span><span class="params">(self, selector)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    to locate element by selector</span></span><br><span class="line"><span class="string">    :arg</span></span><br><span class="line"><span class="string">    selector should be passed by an example with "i,xxx"</span></span><br><span class="line"><span class="string">    "x,//*[@id='langs']/button"</span></span><br><span class="line"><span class="string">    :returns</span></span><br><span class="line"><span class="string">    DOM element</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">if</span> self.by_char <span class="keyword">not</span> <span class="keyword">in</span> selector:</span><br><span class="line">        <span class="keyword">return</span> self.base_driver.find_element_by_id(selector)</span><br><span class="line"></span><br><span class="line">    selector_by = selector.split(self.by_char)[<span class="number">0</span>].strip()</span><br><span class="line">    selector_value = selector.split(self.by_char)[<span class="number">1</span>].strip()</span><br><span class="line">    <span class="keyword">if</span> selector_by == <span class="string">"i"</span> <span class="keyword">or</span> selector_by == <span class="string">'id'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_id(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"n"</span> <span class="keyword">or</span> selector_by == <span class="string">'name'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_name(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"c"</span> <span class="keyword">or</span> selector_by == <span class="string">'class_name'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_class_name(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"l"</span> <span class="keyword">or</span> selector_by == <span class="string">'link_text'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_link_text(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"p"</span> <span class="keyword">or</span> selector_by == <span class="string">'partial_link_text'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_partial_link_text(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"t"</span> <span class="keyword">or</span> selector_by == <span class="string">'tag_name'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_tag_name(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"x"</span> <span class="keyword">or</span> selector_by == <span class="string">'xpath'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_xpath(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"s"</span> <span class="keyword">or</span> selector_by == <span class="string">'css_selector'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_css_selector(selector_value)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> NameError(<span class="string">"Please enter a valid type of targeting elements."</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> element</span><br></pre></td></tr></table></figure>
 
       
@@ -702,7 +723,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -842,7 +863,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">38</span>
+                      
+                    
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -920,7 +943,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">38k</span>
+    <span title="站点总字数">39k</span>
   
 
   

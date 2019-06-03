@@ -106,7 +106,7 @@
 <meta property="og:site_name" content="凭海临风的IT江湖">
 <meta property="og:description" content="使用selenium访问爱奇艺网站 selenium 是一种常用的自动化测试工具。它支持各种浏览器，包括 Chrome，Safari，Firefox 等主流界面式浏览器，如果你在这些浏览器里面安装一个 Selenium 的插件，还可以通过录制，快速生成脚本。 selenium 支持多种主流的开发语言，比如Ruby，java，python，javascript。  环境搭建python3.7.3 运">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-28T09:18:58.677Z">
+<meta property="og:updated_time" content="2019-06-03T07:57:33.701Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用selenium访问爱奇艺网站">
 <meta name="twitter:description" content="使用selenium访问爱奇艺网站 selenium 是一种常用的自动化测试工具。它支持各种浏览器，包括 Chrome，Safari，Firefox 等主流界面式浏览器，如果你在这些浏览器里面安装一个 Selenium 的插件，还可以通过录制，快速生成脚本。 selenium 支持多种主流的开发语言，比如Ruby，java，python，javascript。  环境搭建python3.7.3 运">
@@ -468,12 +468,24 @@
                 
               
 
-              <time title="创建时间：2019-05-28 15:23:36 / 修改时间：17:18:58" itemprop="dateCreated datePublished" datetime="2019-05-28T15:23:36+08:00">2019-05-28</time>
+              <time title="创建时间：2019-05-28 15:23:36" itemprop="dateCreated datePublished" datetime="2019-05-28T15:23:36+08:00">2019-05-28</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-03 15:57:33" itemprop="dateModified" datetime="2019-06-03T15:57:33+08:00">2019-06-03</time>
               
             
           </span>
@@ -571,6 +583,7 @@
 <p>selenium版本: 3.14.1</p>
 <p>chromedriver: <a href="https://npm.taobao.org/mirrors/chromedriver/70.0.3538.97/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/chromedriver/70.0.3538.97/</a></p>
 <h2 id="使用selenium-打开和关闭浏览器"><a href="#使用selenium-打开和关闭浏览器" class="headerlink" title="使用selenium 打开和关闭浏览器"></a>使用selenium 打开和关闭浏览器</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(<span class="string">"http://www.iqiyi.com/"</span>)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <h2 id="定位搜索框"><a href="#定位搜索框" class="headerlink" title="定位搜索框"></a>定位搜索框</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">search_xpath=<span class="string">r"//*[@id='nav_searchboxIn']/input"</span></span><br><span class="line">driver.find_element_by_xpath(search_xpath).send_keys(<span class="string">"复仇者联盟"</span>)</span><br></pre></td></tr></table></figure>
 <h2 id="点击搜索图片"><a href="#点击搜索图片" class="headerlink" title="点击搜索图片"></a>点击搜索图片</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">search_button=<span class="string">r"//*[@id='nav_searchboxOut']/span"</span></span><br><span class="line">driver.find_element_by_xpath(search_button).click()</span><br></pre></td></tr></table></figure>
 <h2 id="切换tab页"><a href="#切换tab页" class="headerlink" title="切换tab页"></a>切换tab页</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入键盘操作--20190528更新</span></span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.keys <span class="keyword">import</span> Keys</span><br><span class="line"><span class="comment">#此处通过键盘操作切换tab页</span></span><br><span class="line">driver.find_element_by_tag_name(<span class="string">"body"</span>).send_keys(Keys.CONTROL + <span class="string">"t"</span>)</span><br><span class="line"><span class="comment">#all_handles 保存所有已经打开的tab窗体</span></span><br><span class="line">all_handles = driver.window_handles</span><br><span class="line">print(driver.window_handles)</span><br><span class="line">index_handle=driver.current_window_handle</span><br><span class="line">print(index_handle)</span><br><span class="line"><span class="comment">#用switch_to方法切换到tab窗体</span></span><br><span class="line"><span class="keyword">for</span> handle <span class="keyword">in</span> all_handles:</span><br><span class="line">    <span class="keyword">if</span> handle!=index_handle:</span><br><span class="line">        print(<span class="string">'now is search window'</span>)</span><br><span class="line">        search_handle = handle</span><br><span class="line">driver.switch_to.window(search_handle)</span><br></pre></td></tr></table></figure>
@@ -697,7 +710,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -837,7 +850,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">38</span>
+                      
+                    
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -915,7 +930,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">38k</span>
+    <span title="站点总字数">39k</span>
   
 
   

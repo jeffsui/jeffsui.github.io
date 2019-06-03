@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Build path entry is missing /src/test/java missing问题解决]]></title>
+    <url>%2F2019%2F06%2F03%2FMaven-webapp-buildpath-missing-test-folder%2F</url>
+    <content type="text"><![CDATA[[问题描述]通过maven构建webapp,发现缺少java和test目录 [解决方案] project –right click –build path– config build path – libraries – double click “JRE System Library”–choose “workspace default JRE” OK 如下图所示]]></content>
+      <categories>
+        <category>javaweb</category>
+      </categories>
+      <tags>
+        <tag>maven</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse]]></title>
     <url>%2F2019%2F06%2F03%2Fhow-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse%2F</url>
     <content type="text"><![CDATA[1.问题描述 试图转换Dynamic Web Module 发生如下错误: 12Cannot change version of project facet Dynamic Web Module to 3.0 One or more constraints have not been satisfied 操作步骤： 右键点击项目 选择Properties 点击Project facet 选项 更改Dynamic Web Module, 2.3 到 3.1 ,如下图 2. 解决步骤Step 1： 选择navigator 视图 Step 2: 打开org.eclipse.wst.common.project.facet.core.xml 修改jst.web 的值2.3 为 3.1 12345678&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;faceted-project&gt; &lt;fixed facet="wst.jsdt.web"/&gt; &lt;installed facet="jst.jaxrs" version="2.0"/&gt; &lt;installed facet="wst.jsdt.web" version="1.0"/&gt; &lt;installed facet="java" version="1.8"/&gt; &lt;installed facet="jst.web" version="3.1"/&gt;&lt;/faceted-project&gt; 注意 jst.web版本3.1,那么java版本必须是1.7以上才可以 Step 3: 刷新项目 鼠标右键点击项目 F5刷新项目 清理项目 点击顶部菜单栏 Project 选择Clean maven更新 鼠标右键点击项目名称 选择Maven 选择Update project 3. 问题总结没有清理项目就直接更新,缓存造成更新失败。 参考链接 how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse]]></content>
@@ -188,8 +200,8 @@
       </categories>
       <tags>
         <tag>git</tag>
-        <tag>版本管理</tag>
         <tag>gitcafe</tag>
+        <tag>版本管理</tag>
       </tags>
   </entry>
   <entry>

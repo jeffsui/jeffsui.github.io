@@ -422,7 +422,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/06/03/how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse/">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/06/03/Maven-webapp-buildpath-missing-test-folder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeff Sui">
@@ -442,7 +442,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/06/03/how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse/" class="post-title-link" itemprop="url">how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse</a>
+                <a href="/2019/06/03/Maven-webapp-buildpath-missing-test-folder/" class="post-title-link" itemprop="url">Build path entry is missing /src/test/java missing问题解决</a>
               
             
           </h1>
@@ -467,7 +467,7 @@
                 
               
 
-              <time title="创建时间：2019-06-03 09:47:24 / 修改时间：14:42:58" itemprop="dateCreated datePublished" datetime="2019-06-03T09:47:24+08:00">2019-06-03</time>
+              <time title="创建时间：2019-06-03 17:04:00 / 修改时间：17:21:17" itemprop="dateCreated datePublished" datetime="2019-06-03T17:04:00+08:00">2019-06-03</time>
             
 
             
@@ -518,7 +518,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">959</span>
+                <span title="本文字数">187</span>
               
 
               
@@ -554,68 +554,210 @@
       
         
           
-            <h2 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1.问题描述"></a>1.问题描述</h2><p><img src="https://cdn.crunchify.com/wp-content/uploads/2015/06/Cannot-change-version-of-project-facet-Dynamic-Web-Module-to-3.0.png" alt></p>
-<p>试图转换Dynamic Web Module 发生如下错误:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cannot change version of project facet Dynamic Web Module to 3.0 </span><br><span class="line">One or more constraints have not been satisfied</span><br></pre></td></tr></table></figure>
-<p>操作步骤：</p>
-<ol>
-<li><p>右键点击项目</p>
-</li>
-<li><p>选择Properties</p>
-</li>
-<li><p>点击Project facet 选项</p>
-</li>
-<li><p>更改Dynamic Web Module, 2.3 到 3.1 ,如下图</p>
-<p><img src="https://i.loli.net/2019/06/03/5cf4ab68ec48777079.png" alt></p>
-</li>
-</ol>
-<h2 id="2-解决步骤"><a href="#2-解决步骤" class="headerlink" title="2. 解决步骤"></a>2. 解决步骤</h2><h3 id="Step-1："><a href="#Step-1：" class="headerlink" title="Step 1："></a>Step 1：</h3><ul>
-<li><p>选择navigator 视图 </p>
-<p><img src="https://i.loli.net/2019/06/03/5cf4aa24278d257489.png" alt></p>
-</li>
-</ul>
-<h3 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2:"></a>Step 2:</h3><ul>
-<li><p>打开<code>org.eclipse.wst.common.project.facet.core.xml</code></p>
-</li>
-<li><p>修改jst.web 的值2.3 为 3.1</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">faceted-project</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">fixed</span> <span class="attr">facet</span>=<span class="string">"wst.jsdt.web"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">installed</span> <span class="attr">facet</span>=<span class="string">"jst.jaxrs"</span> <span class="attr">version</span>=<span class="string">"2.0"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">installed</span> <span class="attr">facet</span>=<span class="string">"wst.jsdt.web"</span> <span class="attr">version</span>=<span class="string">"1.0"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">installed</span> <span class="attr">facet</span>=<span class="string">"java"</span> <span class="attr">version</span>=<span class="string">"1.8"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">installed</span> <span class="attr">facet</span>=<span class="string">"jst.web"</span> <span class="attr">version</span>=<span class="string">"3.1"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">faceted-project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><em>注意</em> jst.web版本3.1,那么java版本必须是1.7以上才可以</p>
-<h3 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3:"></a>Step 3:</h3><ul>
-<li><p>刷新项目</p>
-<ul>
-<li>鼠标右键点击项目</li>
-<li>F5刷新项目</li>
-</ul>
-</li>
-<li><p>清理项目</p>
-<ul>
-<li><p>点击顶部菜单栏 Project</p>
-</li>
-<li><p>选择Clean</p>
-<p><img src="https://i.loli.net/2019/06/03/5cf496162a2e253063.png" alt></p>
-</li>
-</ul>
-</li>
-<li><p>maven更新</p>
-<ul>
-<li><p>鼠标右键点击项目名称</p>
-</li>
-<li><p>选择Maven</p>
-</li>
-<li><p>选择Update project</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-问题总结"><a href="#3-问题总结" class="headerlink" title="3. 问题总结"></a>3. 问题总结</h2><p>没有清理项目就直接更新,缓存造成更新失败。</p>
-<p>参考链接</p>
-<ul>
-<li><a href="https://crunchify.com/how-to-fix-cannot-change-version-of-project-facet-dynamic-web-module-to-3-0-error-in-eclipse/" target="_blank" rel="noopener">how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse</a></li>
-</ul>
+            <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="[问题描述]"></a>[问题描述]</h2><p>通过maven构建webapp,发现缺少java和test目录</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="[解决方案]"></a>[解决方案]</h2><blockquote>
+<p>project –right click –build path– config build path – libraries – double click “JRE System Library”–choose “workspace default JRE”  OK</p>
+</blockquote>
+<p>如下图所示<br><img src="https://i.loli.net/2019/06/03/5cf4e41a0d68921253.png" alt></p>
 
           
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/06/03/how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/03/how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse/" class="post-title-link" itemprop="url">how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-03 09:47:24 / 修改时间：15:16:42" itemprop="dateCreated datePublished" datetime="2019-06-03T09:47:24+08:00">2019-06-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javaweb/" itemprop="url" rel="index"><span itemprop="name">javaweb</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">960</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1.问题描述"></a>1.问题描述</h2><p><img src="https://cdn.crunchify.com/wp-content/uploads/2015/06/Cannot-change-version-of-project-facet-Dynamic-Web-Module-to-3.0.png" alt></p>
+<p>试图转换Dynamic Web Module 发生如下错误:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cannot change version of project facet Dynamic Web Module to 3.0 </span><br><span class="line">One or more constraints have not been satisfied</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/03/how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -715,12 +857,24 @@
                 
               
 
-              <time title="创建时间：2019-05-31 13:49:12 / 修改时间：14:20:41" itemprop="dateCreated datePublished" datetime="2019-05-31T13:49:12+08:00">2019-05-31</time>
+              <time title="创建时间：2019-05-31 13:49:12" itemprop="dateCreated datePublished" datetime="2019-05-31T13:49:12+08:00">2019-05-31</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-03 15:57:59" itemprop="dateModified" datetime="2019-06-03T15:57:59+08:00">2019-06-03</time>
               
             
           </span>
@@ -930,12 +1084,24 @@
                 
               
 
-              <time title="创建时间：2019-05-28 17:29:10 / 修改时间：17:31:31" itemprop="dateCreated datePublished" datetime="2019-05-28T17:29:10+08:00">2019-05-28</time>
+              <time title="创建时间：2019-05-28 17:29:10" itemprop="dateCreated datePublished" datetime="2019-05-28T17:29:10+08:00">2019-05-28</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-03 15:57:50" itemprop="dateModified" datetime="2019-06-03T15:57:50+08:00">2019-06-03</time>
               
             
           </span>
@@ -1016,17 +1182,19 @@
 
       
         
-          
-            <h1 id="python创建字典的几种方法"><a href="#python创建字典的几种方法" class="headerlink" title="python创建字典的几种方法"></a>python创建字典的几种方法</h1><h2 id="1-创建空字典"><a href="#1-创建空字典" class="headerlink" title="1. 创建空字典"></a>1. 创建空字典</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = &#123;&#125;</span><br><span class="line">&gt;&gt;&gt; type(dic)</span><br><span class="line">&lt;type &apos;dict&apos;&gt;</span><br></pre></td></tr></table></figure>
+          <h1 id="python创建字典的几种方法"><a href="#python创建字典的几种方法" class="headerlink" title="python创建字典的几种方法"></a>python创建字典的几种方法</h1><h2 id="1-创建空字典"><a href="#1-创建空字典" class="headerlink" title="1. 创建空字典"></a>1. 创建空字典</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = &#123;&#125;</span><br><span class="line">&gt;&gt;&gt; type(dic)</span><br><span class="line">&lt;type &apos;dict&apos;&gt;</span><br></pre></td></tr></table></figure>
 <p>另一种形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp = dict()</span><br><span class="line">temp[&apos;name&apos;] = &apos;xiaoming&apos;</span><br></pre></td></tr></table></figure></p>
 <h2 id="2-直接赋值创建"><a href="#2-直接赋值创建" class="headerlink" title="2. 直接赋值创建"></a>2. 直接赋值创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = &#123;&apos;spam&apos;:1, &apos;egg&apos;:2, &apos;bar&apos;:3&#125;</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;&apos;bar&apos;: 3, &apos;egg&apos;: 2, &apos;spam&apos;: 1&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="3-通过关键字dict和关键字参数创建"><a href="#3-通过关键字dict和关键字参数创建" class="headerlink" title="3. 通过关键字dict和关键字参数创建"></a>3. 通过关键字dict和关键字参数创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = dict(spam = 1, egg = 2, bar =3)</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;&apos;bar&apos;: 3, &apos;egg&apos;: 2, &apos;spam&apos;: 1&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="4-通过二元组列表创建"><a href="#4-通过二元组列表创建" class="headerlink" title="4. 通过二元组列表创建"></a>4. 通过二元组列表创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list = [(&apos;spam&apos;, 1), (&apos;egg&apos;, 2), (&apos;bar&apos;, 3)]</span><br><span class="line">&gt;&gt;&gt; dic = dict(list)</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;&apos;bar&apos;: 3, &apos;egg&apos;: 2, &apos;spam&apos;: 1&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="5-dict和zip结合创建"><a href="#5-dict和zip结合创建" class="headerlink" title="5. dict和zip结合创建"></a>5. dict和zip结合创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = dict(zip(&apos;abc&apos;, [1, 2, 3]))</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;&apos;a&apos;: 1, &apos;c&apos;: 3, &apos;b&apos;: 2&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="6-通过字典推导式创建"><a href="#6-通过字典推导式创建" class="headerlink" title="6. 通过字典推导式创建"></a>6. 通过字典推导式创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = &#123;i:2*i for i in range(3)&#125;</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;0: 0, 1: 2, 2: 4&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="7-通过dict-fromkeys-创建"><a href="#7-通过dict-fromkeys-创建" class="headerlink" title="7. 通过dict.fromkeys()创建"></a>7. 通过dict.fromkeys()创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = dict.fromkeys(range(3), &apos;x&apos;)</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;0: &apos;x&apos;, 1: &apos;x&apos;, 2: &apos;x&apos;&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="8-其他"><a href="#8-其他" class="headerlink" title="8. 其他"></a>8. 其他</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; list = [&apos;x&apos;, 1, &apos;y&apos;, 2, &apos;z&apos;, 3]</span><br><span class="line">&gt;&gt;&gt; dic = dict(zip(list[::2], list[1::2]))</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;&apos;y&apos;: 2, &apos;x&apos;: 1, &apos;z&apos;: 3&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/05/28/python创建字典的几种方法/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1333,12 +1501,24 @@
                 
               
 
-              <time title="创建时间：2019-05-28 17:14:18 / 修改时间：17:17:42" itemprop="dateCreated datePublished" datetime="2019-05-28T17:14:18+08:00">2019-05-28</time>
+              <time title="创建时间：2019-05-28 17:14:18" itemprop="dateCreated datePublished" datetime="2019-05-28T17:14:18+08:00">2019-05-28</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-03 15:57:15" itemprop="dateModified" datetime="2019-06-03T15:57:15+08:00">2019-06-03</time>
               
             
           </span>
@@ -1419,8 +1599,7 @@
 
       
         
-          
-            <h1 id="selenium-常用的元素定位操作"><a href="#selenium-常用的元素定位操作" class="headerlink" title="selenium 常用的元素定位操作"></a>selenium 常用的元素定位操作</h1><h2 id="Selenium提供了8种定位方式。"><a href="#Selenium提供了8种定位方式。" class="headerlink" title="Selenium提供了8种定位方式。"></a>Selenium提供了8种定位方式。</h2><ul>
+          <h1 id="selenium-常用的元素定位操作"><a href="#selenium-常用的元素定位操作" class="headerlink" title="selenium 常用的元素定位操作"></a>selenium 常用的元素定位操作</h1><h2 id="Selenium提供了8种定位方式。"><a href="#Selenium提供了8种定位方式。" class="headerlink" title="Selenium提供了8种定位方式。"></a>Selenium提供了8种定位方式。</h2><ul>
 <li>id</li>
 <li>name</li>
 <li>class name</li>
@@ -1431,18 +1610,32 @@
 <li>css selector</li>
 </ul>
 <h2 id="这8种定位方式在Python-selenium中所对应的方法为："><a href="#这8种定位方式在Python-selenium中所对应的方法为：" class="headerlink" title="这8种定位方式在Python selenium中所对应的方法为："></a>这8种定位方式在Python selenium中所对应的方法为：</h2><ul>
-<li>find_element_by_id()</li>
-<li>find_element_by_name()</li>
-<li>find_element_by_class_name()</li>
-<li>find_element_by_tag_name()</li>
-<li>find_element_by_link_text()</li>
-<li>find_element_by_partial_link_text()</li>
-<li>find_element_by_xpath()</li>
-<li>find_element_by_css_selector()</li>
+<li><p>find_element_by_id()</p>
+</li>
+<li><p>find_element_by_name()</p>
+</li>
+<li><p>find_element_by_class_name()</p>
+</li>
+<li><p>find_element_by_tag_name()</p>
+</li>
+<li><p>find_element_by_link_text()</p>
+</li>
+<li><p>find_element_by_partial_link_text()</p>
+</li>
+<li><p>find_element_by_xpath()</p>
+</li>
+<li><p>find_element_by_css_selector()</p>
+</li>
 </ul>
-<h2 id="常用元素定位封装"><a href="#常用元素定位封装" class="headerlink" title="常用元素定位封装"></a>常用元素定位封装</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_locate_element</span><span class="params">(self, selector)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    to locate element by selector</span></span><br><span class="line"><span class="string">    :arg</span></span><br><span class="line"><span class="string">    selector should be passed by an example with "i,xxx"</span></span><br><span class="line"><span class="string">    "x,//*[@id='langs']/button"</span></span><br><span class="line"><span class="string">    :returns</span></span><br><span class="line"><span class="string">    DOM element</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">if</span> self.by_char <span class="keyword">not</span> <span class="keyword">in</span> selector:</span><br><span class="line">        <span class="keyword">return</span> self.base_driver.find_element_by_id(selector)</span><br><span class="line"></span><br><span class="line">    selector_by = selector.split(self.by_char)[<span class="number">0</span>].strip()</span><br><span class="line">    selector_value = selector.split(self.by_char)[<span class="number">1</span>].strip()</span><br><span class="line">    <span class="keyword">if</span> selector_by == <span class="string">"i"</span> <span class="keyword">or</span> selector_by == <span class="string">'id'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_id(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"n"</span> <span class="keyword">or</span> selector_by == <span class="string">'name'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_name(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"c"</span> <span class="keyword">or</span> selector_by == <span class="string">'class_name'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_class_name(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"l"</span> <span class="keyword">or</span> selector_by == <span class="string">'link_text'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_link_text(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"p"</span> <span class="keyword">or</span> selector_by == <span class="string">'partial_link_text'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_partial_link_text(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"t"</span> <span class="keyword">or</span> selector_by == <span class="string">'tag_name'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_tag_name(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"x"</span> <span class="keyword">or</span> selector_by == <span class="string">'xpath'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_xpath(selector_value)</span><br><span class="line">    <span class="keyword">elif</span> selector_by == <span class="string">"s"</span> <span class="keyword">or</span> selector_by == <span class="string">'css_selector'</span>:</span><br><span class="line">        element = self.base_driver.find_element_by_css_selector(selector_value)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> NameError(<span class="string">"Please enter a valid type of targeting elements."</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> element</span><br></pre></td></tr></table></figure>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/05/28/selenium元素操作封装/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1542,12 +1735,24 @@
                 
               
 
-              <time title="创建时间：2019-05-28 15:23:36 / 修改时间：17:18:58" itemprop="dateCreated datePublished" datetime="2019-05-28T15:23:36+08:00">2019-05-28</time>
+              <time title="创建时间：2019-05-28 15:23:36" itemprop="dateCreated datePublished" datetime="2019-05-28T15:23:36+08:00">2019-05-28</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-03 15:57:33" itemprop="dateModified" datetime="2019-06-03T15:57:33+08:00">2019-06-03</time>
               
             
           </span>
@@ -1628,8 +1833,7 @@
 
       
         
-          
-            <h1 id="使用selenium访问爱奇艺网站"><a href="#使用selenium访问爱奇艺网站" class="headerlink" title="使用selenium访问爱奇艺网站"></a>使用<code>selenium</code>访问爱奇艺网站</h1><blockquote>
+          <h1 id="使用selenium访问爱奇艺网站"><a href="#使用selenium访问爱奇艺网站" class="headerlink" title="使用selenium访问爱奇艺网站"></a>使用<code>selenium</code>访问爱奇艺网站</h1><blockquote>
 <p>selenium 是一种常用的自动化测试工具。它支持各种浏览器，包括 Chrome，Safari，Firefox 等主流界面式浏览器，如果你在这些浏览器里面安装一个 Selenium 的插件，还可以通过录制，快速生成脚本。</p>
 <p>selenium 支持多种主流的开发语言，比如<code>Ruby</code>，<code>java</code>，<code>python</code>，<code>javascript</code>。</p>
 </blockquote>
@@ -1640,13 +1844,15 @@
 <p>selenium版本: 3.14.1</p>
 <p>chromedriver: <a href="https://npm.taobao.org/mirrors/chromedriver/70.0.3538.97/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/chromedriver/70.0.3538.97/</a></p>
 <h2 id="使用selenium-打开和关闭浏览器"><a href="#使用selenium-打开和关闭浏览器" class="headerlink" title="使用selenium 打开和关闭浏览器"></a>使用selenium 打开和关闭浏览器</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(<span class="string">"http://www.iqiyi.com/"</span>)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
-<h2 id="定位搜索框"><a href="#定位搜索框" class="headerlink" title="定位搜索框"></a>定位搜索框</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">search_xpath=<span class="string">r"//*[@id='nav_searchboxIn']/input"</span></span><br><span class="line">driver.find_element_by_xpath(search_xpath).send_keys(<span class="string">"复仇者联盟"</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="点击搜索图片"><a href="#点击搜索图片" class="headerlink" title="点击搜索图片"></a>点击搜索图片</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">search_button=<span class="string">r"//*[@id='nav_searchboxOut']/span"</span></span><br><span class="line">driver.find_element_by_xpath(search_button).click()</span><br></pre></td></tr></table></figure>
-<h2 id="切换tab页"><a href="#切换tab页" class="headerlink" title="切换tab页"></a>切换tab页</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#导入键盘操作--20190528更新</span></span><br><span class="line"><span class="keyword">from</span> selenium.webdriver.common.keys <span class="keyword">import</span> Keys</span><br><span class="line"><span class="comment">#此处通过键盘操作切换tab页</span></span><br><span class="line">driver.find_element_by_tag_name(<span class="string">"body"</span>).send_keys(Keys.CONTROL + <span class="string">"t"</span>)</span><br><span class="line"><span class="comment">#all_handles 保存所有已经打开的tab窗体</span></span><br><span class="line">all_handles = driver.window_handles</span><br><span class="line">print(driver.window_handles)</span><br><span class="line">index_handle=driver.current_window_handle</span><br><span class="line">print(index_handle)</span><br><span class="line"><span class="comment">#用switch_to方法切换到tab窗体</span></span><br><span class="line"><span class="keyword">for</span> handle <span class="keyword">in</span> all_handles:</span><br><span class="line">    <span class="keyword">if</span> handle!=index_handle:</span><br><span class="line">        print(<span class="string">'now is search window'</span>)</span><br><span class="line">        search_handle = handle</span><br><span class="line">driver.switch_to.window(search_handle)</span><br></pre></td></tr></table></figure>
-<h2 id="打印页面的title，并截图"><a href="#打印页面的title，并截图" class="headerlink" title="打印页面的title，并截图"></a>打印页面的<code>title</code>，并截图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(driver.title)</span><br><span class="line">driver.get_screenshot_as_file(<span class="string">"aqiyi.png"</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文主要介绍了自动化工具<code>selenium</code>的基本使用，如何对页面元素进行基本操作，实现自动抓取关键字图片功能。</p>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/05/28/using-selenium-visit-iqiyi-website/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -2274,221 +2480,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2016/09/22/how-git-changing-author-info/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/09/22/how-git-changing-author-info/" class="post-title-link" itemprop="url">how git changing author info</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2016-09-22 16:39:05" itemprop="dateCreated datePublished" datetime="2016-09-22T16:39:05+08:00">2016-09-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-31 13:04:36" itemprop="dateModified" datetime="2019-05-31T13:04:36+08:00">2019-05-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">1.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="how-git-changing-author-info"><a href="#how-git-changing-author-info" class="headerlink" title="how git changing author info"></a>how git changing author info</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ol>
-<li><code>gitlab</code>中的统计视图是根据用户的信息统计工作量 </li>
-<li>迁移git repo中经常会遇到用户和邮箱不一致的情况</li>
-</ol>
-<h2 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h2><p>那么如何修改已经推送到远程的author信息呢?</p>
-<p> <code>github</code> 官方提供的建议<a href="https://help.github.com/articles/changing-author-info/" target="_blank" rel="noopener">如何变更用户信息</a></p>
-<p>同时也有类似的项托管在<code>github</code>上，<a href="https://github.com/jayphelps/git-blame-someone-else" target="_blank" rel="noopener">git-tips-blame-someone-else</a></p>
-<p>思路基本一致,就是替换提交记录、分支、标签里的author信息。</p>
-<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><h3 id="1-打开终端或命令行-git-bash"><a href="#1-打开终端或命令行-git-bash" class="headerlink" title="1.打开终端或命令行(git bash)"></a>1.打开终端或命令行(<code>git bash</code>)</h3><h3 id="2-创建一个你项目的全新裸库"><a href="#2-创建一个你项目的全新裸库" class="headerlink" title="2.创建一个你项目的全新裸库"></a>2.创建一个你项目的全新裸库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone --bare https://github.com/user/repo.git</span><br><span class="line">cd repo.git</span><br></pre></td></tr></table></figure>
-<h3 id="3-复制粘贴脚本-并根据你的信息修改下面的变量"><a href="#3-复制粘贴脚本-并根据你的信息修改下面的变量" class="headerlink" title="3.复制粘贴脚本,并根据你的信息修改下面的变量:"></a>3.复制粘贴脚本,并根据你的信息修改下面的变量:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OLD_EMAIL</span><br><span class="line">CORRECT_NAME</span><br><span class="line">CORRECT_EMAIL</span><br></pre></td></tr></table></figure>
-<p>脚本<code>replace.sh</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">git filter-branch --env-filter &apos;</span><br><span class="line"></span><br><span class="line">OLD_EMAIL=&quot;your-old-email@example.com&quot;</span><br><span class="line">CORRECT_NAME=&quot;Your Correct Name&quot;</span><br><span class="line">CORRECT_EMAIL=&quot;your-correct-email@example.com&quot;</span><br><span class="line"></span><br><span class="line">if [ &quot;$GIT_COMMITTER_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span><br><span class="line">then</span><br><span class="line">    export GIT_COMMITTER_NAME=&quot;$CORRECT_NAME&quot;</span><br><span class="line">    export GIT_COMMITTER_EMAIL=&quot;$CORRECT_EMAIL&quot;</span><br><span class="line">fi</span><br><span class="line">if [ &quot;$GIT_AUTHOR_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span><br><span class="line">then</span><br><span class="line">    export GIT_AUTHOR_NAME=&quot;$CORRECT_NAME&quot;</span><br><span class="line">    export GIT_AUTHOR_EMAIL=&quot;$CORRECT_EMAIL&quot;</span><br><span class="line">fi</span><br><span class="line">&apos; --tag-name-filter cat -- --branches --tags</span><br></pre></td></tr></table></figure></p>
-<h3 id="4-执行这个脚本"><a href="#4-执行这个脚本" class="headerlink" title="4.执行这个脚本"></a>4.执行这个脚本</h3><p><code>sh replace.sh</code></p>
-<h3 id="5-察看Git历史有没有错误"><a href="#5-察看Git历史有没有错误" class="headerlink" title="5.察看Git历史有没有错误"></a>5.察看Git历史有没有错误</h3><p><code>git log</code></p>
-<h3 id="6-强制推送到远程"><a href="#6-强制推送到远程" class="headerlink" title="6.强制推送到远程"></a>6.强制推送到远程</h3><p><code>git push --force --tags origin &#39;refs/heads/*&#39;</code></p>
-<h3 id="7-清除repo-git仓库"><a href="#7-清除repo-git仓库" class="headerlink" title="7.清除repo.git仓库"></a>7.清除repo.git仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br><span class="line">rm -rf repo.git</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2537,7 +2528,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2677,7 +2668,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">38</span>
+                      
+                    
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2738,7 +2731,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">38k</span>
+    <span title="站点总字数">39k</span>
   
 
   
