@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2019-05-31T06:20:41.032Z</updated>
+  <updated>2019-06-03T05:10:06.748Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse</title>
+    <link href="https://pinghailinfeng.gitee.io/2019/06/03/how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse/"/>
+    <id>https://pinghailinfeng.gitee.io/2019/06/03/how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse/</id>
+    <published>2019-06-03T01:47:24.000Z</published>
+    <updated>2019-06-03T05:10:06.748Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1.问题描述"></a>1.问题描述</h2><p><img src="https://cdn.crunchify.com/wp-content/uploads/2015/06/Cannot-change-version-of-project-facet-Dynamic-Web-Module-to-3.0.png" alt></p><p>试图转换Dynamic Web Module 发生如下错误:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cannot change version of project facet Dynamic Web Module to 3.0 </span><br><span class="line">One or more constraints have not been satisfied</span><br></pre></td></tr></table></figure><p>操作步骤：</p><ol><li><p>右键点击项目</p></li><li><p>选择Properties</p></li><li><p>点击Project facet 选项</p></li><li><p>更改Dynamic Web Module, 2.3 到 3.1 ,如下图</p><p><img src="https://i.loli.net/2019/06/03/5cf4ab68ec48777079.png" alt></p></li></ol><h2 id="2-解决步骤"><a href="#2-解决步骤" class="headerlink" title="2. 解决步骤"></a>2. 解决步骤</h2><h3 id="Step-1："><a href="#Step-1：" class="headerlink" title="Step 1："></a>Step 1：</h3><ul><li><p>选择navigator 视图 </p><p><img src="https://i.loli.net/2019/06/03/5cf4aa24278d257489.png" alt></p></li></ul><h3 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2:"></a>Step 2:</h3><ul><li><p>打开<code>org.eclipse.wst.common.project.facet.core.xml</code></p></li><li><p>修改jst.web 的值2.3 为 3.1</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">faceted-project</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">fixed</span> <span class="attr">facet</span>=<span class="string">"wst.jsdt.web"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">installed</span> <span class="attr">facet</span>=<span class="string">"jst.jaxrs"</span> <span class="attr">version</span>=<span class="string">"2.0"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">installed</span> <span class="attr">facet</span>=<span class="string">"wst.jsdt.web"</span> <span class="attr">version</span>=<span class="string">"1.0"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">installed</span> <span class="attr">facet</span>=<span class="string">"java"</span> <span class="attr">version</span>=<span class="string">"1.8"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">installed</span> <span class="attr">facet</span>=<span class="string">"jst.web"</span> <span class="attr">version</span>=<span class="string">"3.1"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">faceted-project</span>&gt;</span></span><br></pre></td></tr></table></figure></li></ul><p><em>注意</em> jst.web版本3.1,那么java版本必须是1.7以上才可以</p><h3 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3:"></a>Step 3:</h3><ul><li><p>刷新项目</p><ul><li>鼠标右键点击项目</li><li>F5刷新项目</li></ul></li><li><p>清理项目</p><ul><li><p>点击顶部菜单栏 Project</p></li><li><p>选择Clean</p><p><img src="https://i.loli.net/2019/06/03/5cf496162a2e253063.png" alt></p></li></ul></li><li><p>maven更新</p><ul><li><p>鼠标右键点击项目名称</p></li><li><p>选择Maven</p></li><li><p>选择Update project</p></li></ul></li></ul><h2 id="3-问题总结"><a href="#3-问题总结" class="headerlink" title="3. 问题总结"></a>3. 问题总结</h2><p>没有清理项目就直接更新,缓存造成更新失败。</p><p>参考链接</p><ul><li><a href="https://crunchify.com/how-to-fix-cannot-change-version-of-project-facet-dynamic-web-module-to-3-0-error-in-eclipse/" target="_blank" rel="noopener"></a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;1-问题描述&quot;&gt;&lt;a href=&quot;#1-问题描述&quot; class=&quot;headerlink&quot; title=&quot;1.问题描述&quot;&gt;&lt;/a&gt;1.问题描述&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://cdn.crunchify.com/wp-content/uploads
+      
+    
+    </summary>
+    
+      <category term="javaweb" scheme="https://pinghailinfeng.gitee.io/categories/javaweb/"/>
+    
+    
+      <category term="java" scheme="https://pinghailinfeng.gitee.io/tags/java/"/>
+    
+      <category term="maven" scheme="https://pinghailinfeng.gitee.io/tags/maven/"/>
+    
+      <category term="eclipse" scheme="https://pinghailinfeng.gitee.io/tags/eclipse/"/>
+    
+  </entry>
   
   <entry>
     <title>hexo建站搭建流程</title>
@@ -554,39 +583,6 @@
       <category term="javascript" scheme="https://pinghailinfeng.gitee.io/tags/javascript/"/>
     
       <category term="异步" scheme="https://pinghailinfeng.gitee.io/tags/%E5%BC%82%E6%AD%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>use-shorturl and two-dimensional-barcodes to beautify blog</title>
-    <link href="https://pinghailinfeng.gitee.io/2015/04/20/use-shorturl-and-two-dimensional-barcodes-to-beautify-blog/"/>
-    <id>https://pinghailinfeng.gitee.io/2015/04/20/use-shorturl-and-two-dimensional-barcodes-to-beautify-blog/</id>
-    <published>2015-04-20T07:37:14.000Z</published>
-    <updated>2016-08-19T15:08:13.445Z</updated>
-    
-    <content type="html"><![CDATA[<p>#如何使用短网址和二维码简化网站访问</p><ol><li>短网址(shorturl)<br> web2.0时代的潮流,借助短网址您可以用简短的网址替代原来冗长的网址，让使用者可以更容易的分享链接。<br>这里我使用的是百度的短网址服务:<a href="http://dwz.cn/" title="百度短网址" target="_blank" rel="noopener">http://dwz.cn/</a><ol><li>访问<a href="http://dwz.cn/主页" target="_blank" rel="noopener">http://dwz.cn/主页</a><br><img src="http://7xindo.com1.z0.glb.clouddn.com/百度短网址.png" alt></li><li>输入你的博客地址<br>我输入<a href="http://jeffsui.github.io/pinghailinfeng_blog/" target="_blank" rel="noopener">http://jeffsui.github.io/pinghailinfeng_blog/</a></li><li>复制短网址<br><img src="http://7xindo.com1.z0.glb.clouddn.com/百度短网址生成.png" alt></li></ol></li><li>二维码(two-dimensional-barcodes)<br>微信时代,不知道二维码的基本都属于外星球人了。<br>这里我选择的是草料二维码:<br><a href="http://cli.im/" title="草料二维码" target="_blank" rel="noopener">http://cli.im/</a><ol><li>输入二维码地址<br><img src="http://7xindo.com1.z0.glb.clouddn.com/在线二维码输入地址.jpg" alt></li><li>进行一些基本设置<br>包括前景色、背景色、渐变色等等。</li><li>嵌入图片</li><li>选用你喜欢的模板</li><li>保存二维码</li></ol></li><li>在线存储<br>这里我选择国内知名的七牛云存储。<br> <img src="http://7xindo.com1.z0.glb.clouddn.com/云存储图片.jpg" alt><br>4.在博客中引用图片地址就可以了</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;#如何使用短网址和二维码简化网站访问&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;短网址(shorturl)&lt;br&gt; web2.0时代的潮流,借助短网址您可以用简短的网址替代原来冗长的网址，让使用者可以更容易的分享链接。&lt;br&gt;这里我使用的是百度的短网址服务:&lt;a href=&quot;http://
-      
-    
-    </summary>
-    
-      <category term="搭建博客" scheme="https://pinghailinfeng.gitee.io/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
-    
-    
-      <category term="博客" scheme="https://pinghailinfeng.gitee.io/tags/%E5%8D%9A%E5%AE%A2/"/>
-    
-      <category term="美化" scheme="https://pinghailinfeng.gitee.io/tags/%E7%BE%8E%E5%8C%96/"/>
-    
-      <category term="短网址" scheme="https://pinghailinfeng.gitee.io/tags/%E7%9F%AD%E7%BD%91%E5%9D%80/"/>
-    
-      <category term="二维码" scheme="https://pinghailinfeng.gitee.io/tags/%E4%BA%8C%E7%BB%B4%E7%A0%81/"/>
     
   </entry>
   
