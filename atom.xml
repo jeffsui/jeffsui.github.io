@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2019-07-28T03:21:54.831Z</updated>
+  <updated>2019-09-06T05:44:36.261Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>how to add 163 music to hexo</title>
+    <link href="https://pinghailinfeng.gitee.io/2019/09/06/how-to-add-163-music-to-hexo/"/>
+    <id>https://pinghailinfeng.gitee.io/2019/09/06/how-to-add-163-music-to-hexo/</id>
+    <published>2019-09-06T05:25:19.000Z</published>
+    <updated>2019-09-06T05:44:36.261Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="如何给hexo添加网易音乐"><a href="#如何给hexo添加网易音乐" class="headerlink" title="如何给hexo添加网易音乐"></a>如何给hexo添加网易音乐</h2><h2 id="先看看效果"><a href="#先看看效果" class="headerlink" title="先看看效果"></a>先看看效果</h2><p><img src="https://i.loli.net/2019/09/06/3W96u4wDtHpeAa7.png" alt="博客添加网易音乐.png"></p><h3 id="1-访问网易云首页，选择你喜欢的音乐，点击生成外链-我不希望音乐一直播放-如果来访的朋友想听-点击下播放就好。"><a href="#1-访问网易云首页，选择你喜欢的音乐，点击生成外链-我不希望音乐一直播放-如果来访的朋友想听-点击下播放就好。" class="headerlink" title="1.访问网易云首页，选择你喜欢的音乐，点击生成外链,我不希望音乐一直播放,如果来访的朋友想听,点击下播放就好。"></a>1.访问网易云首页，选择你喜欢的音乐，点击生成外链,我不希望音乐一直播放,如果来访的朋友想听,点击下播放就好。</h3><blockquote><p>这里我选择二十岁的某一天</p></blockquote><a id="more"></a><h3 id="2-复制iframe插件下的src里的地址"><a href="#2-复制iframe插件下的src里的地址" class="headerlink" title="2. 复制iframe插件下的src里的地址"></a>2. 复制iframe插件下的src里的地址</h3><p><img src="https://i.loli.net/2019/09/06/5y4bDzKHTVpAJGF.png" alt="外链地址网易音乐.png"></p><h3 id="3-修改themes-next-layout-sidebar-swig文件"><a href="#3-修改themes-next-layout-sidebar-swig文件" class="headerlink" title="3. 修改themes/next/layout/sidebar.swig文件"></a>3. 修改themes/next/layout/sidebar.swig文件</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if theme.background_music %&#125;</span><br><span class="line">           <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">frameborder</span>=<span class="string">"no"</span> <span class="attr">border</span>=<span class="string">"0"</span> <span class="attr">marginwidth</span>=<span class="string">"0"</span> <span class="attr">marginheight</span>=<span class="string">"0"</span> <span class="attr">width</span>=<span class="string">"210"</span> <span class="attr">height</span>=<span class="string">"110"</span> <span class="attr">src</span>=<span class="string">"&#123;&#123; theme.background_music &#125;&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure><h3 id="4-添加音乐地址到主题"><a href="#4-添加音乐地址到主题" class="headerlink" title="4.添加音乐地址到主题"></a>4.添加音乐地址到主题</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">background_music</span> <span class="string">:</span> <span class="string">//music.163.com/outchain/player?type=2&amp;id=247172&amp;auto=1&amp;height=66</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;如何给hexo添加网易音乐&quot;&gt;&lt;a href=&quot;#如何给hexo添加网易音乐&quot; class=&quot;headerlink&quot; title=&quot;如何给hexo添加网易音乐&quot;&gt;&lt;/a&gt;如何给hexo添加网易音乐&lt;/h2&gt;&lt;h2 id=&quot;先看看效果&quot;&gt;&lt;a href=&quot;#先看看效果&quot; class=&quot;headerlink&quot; title=&quot;先看看效果&quot;&gt;&lt;/a&gt;先看看效果&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2019/09/06/3W96u4wDtHpeAa7.png&quot; alt=&quot;博客添加网易音乐.png&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;1-访问网易云首页，选择你喜欢的音乐，点击生成外链-我不希望音乐一直播放-如果来访的朋友想听-点击下播放就好。&quot;&gt;&lt;a href=&quot;#1-访问网易云首页，选择你喜欢的音乐，点击生成外链-我不希望音乐一直播放-如果来访的朋友想听-点击下播放就好。&quot; class=&quot;headerlink&quot; title=&quot;1.访问网易云首页，选择你喜欢的音乐，点击生成外链,我不希望音乐一直播放,如果来访的朋友想听,点击下播放就好。&quot;&gt;&lt;/a&gt;1.访问网易云首页，选择你喜欢的音乐，点击生成外链,我不希望音乐一直播放,如果来访的朋友想听,点击下播放就好。&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;这里我选择二十岁的某一天&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="搭建博客" scheme="https://pinghailinfeng.gitee.io/categories/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+      <category term="博客" scheme="https://pinghailinfeng.gitee.io/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="网易音乐" scheme="https://pinghailinfeng.gitee.io/tags/%E7%BD%91%E6%98%93%E9%9F%B3%E4%B9%90/"/>
+    
+  </entry>
   
   <entry>
     <title>how to Sort Python Dictionaries by Key or Value</title>
@@ -585,41 +612,6 @@
       <category term="registry" scheme="https://pinghailinfeng.gitee.io/tags/registry/"/>
     
       <category term="registry-ui" scheme="https://pinghailinfeng.gitee.io/tags/registry-ui/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>how git version rollback</title>
-    <link href="https://pinghailinfeng.gitee.io/2015/05/16/how-git-version-rollback/"/>
-    <id>https://pinghailinfeng.gitee.io/2015/05/16/how-git-version-rollback/</id>
-    <published>2015-05-16T13:58:30.000Z</published>
-    <updated>2016-08-19T15:08:13.441Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>如何进行远程版本回退……</p></blockquote><p>#引言</p><blockquote><p>一切都要从一个蛋疼的需求开始,老板说,能给远程仓库的版本回退吗？我说为毛？他说我就是试试看git好使不,我……</p></blockquote><p>#咋搞</p><ul><li>背景 </li></ul><p>gitcafe 国内知名的源码托管平台</p><ul><li>分析</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1、git checkout the_branch</span><br><span class="line"></span><br><span class="line">2、git pull</span><br><span class="line"></span><br><span class="line">3、git branch the_branch_backup //备份一下这个分支当前的情况</span><br><span class="line"></span><br><span class="line">4、git reset --hard the_commit_id //把the_branch本地回滚到the_commit_id</span><br><span class="line"></span><br><span class="line">5、git push origin :the_branch //删除远程 the_branch</span><br><span class="line"></span><br><span class="line">6、git push origin the_branch //用回滚后的本地分支重新建立远程分支</span><br><span class="line"></span><br><span class="line">7、git push origin :the_branch_backup //如果前面都成功了，删除这个备份分支</span><br></pre></td></tr></table></figure><ul><li>删除远程分支</li></ul><p>首先,任何一个git源码托管平台都会告诉你,别删除远程master分支,因为它是默认的分支……,请移步<a href="https://gitcafe.com/GitCafe/Help/wiki/%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4-Master-%E5%88%86%E6%94%AF" target="_blank" rel="noopener">这里</a> </p><ul><li>操作步骤 </li></ul><p>如果远程只有一个master分支,请你创建一个非master分支,然后推送到远程。<br>有人会问我为什么？打个比方,你见过上旱厕的时候,给自己脚下站着的板子抽走吗？</p><p>脚本类似下面这样</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git branch the_master_backup</span><br><span class="line"></span><br><span class="line">git push origin the_master_backup</span><br></pre></td></tr></table></figure><p>此时你查看远程分支应该有两个:master和the_master_backup</p><p>设置默认的分支为 the_master_backup</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git branch -D branch_name //删除本地master分支</span><br><span class="line"></span><br><span class="line">git push :master //推送一个空分支,相当于删除远程master分支</span><br></pre></td></tr></table></figure><p>然后你在the_master_backup分支上 回滚到你要回滚的commit_id,然后重建master分支并推送到远程,顺便删除the_master_backup分支(包括远程the_master_backup分支)。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git checkout the_master_backup</span><br><span class="line"></span><br><span class="line">git reset --hard commit_id</span><br><span class="line"></span><br><span class="line">git branch master //重新创建master分支</span><br><span class="line"></span><br><span class="line">git push origin master //重新推送master分支</span><br><span class="line"></span><br><span class="line">git branch -D the_master_backup //删除本地the_master_backup分支</span><br><span class="line"></span><br><span class="line">git push origin :the_master_backup//删除远程the_master_backup分支</span><br></pre></td></tr></table></figure><p>#遇到的问题</p><ol><li>忘记设置默认分支为非master分支</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">remote: error: By default, deleting the current branch is denied, because the ne</span><br><span class="line">xt</span><br><span class="line">remote: error: &apos;git clone&apos; won&apos;t result in any file checked out, causing confusi</span><br><span class="line">on.</span><br><span class="line">remote: error:</span><br><span class="line">remote: error: You can set &apos;receive.denyDeleteCurrent&apos; configuration variable to</span><br><span class="line"></span><br><span class="line">remote: error: &apos;warn&apos; or &apos;ignore&apos; in the remote repository to allow deleting the</span><br><span class="line"></span><br><span class="line">remote: error: current branch, with or without a warning message.</span><br><span class="line">remote: error:</span><br><span class="line">remote: error: To squelch this message, you can set it to &apos;refuse&apos;.</span><br><span class="line">...</span><br></pre></td></tr></table></figure><p>#总结</p><p>如果你遇到的是所有提交只有master分支,那么希望我这个博文能帮到你。当然git强大的分支功能你基本也用不到了。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;blockquote&gt;
-&lt;p&gt;如何进行远程版本回退……&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;#引言&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;一切都要从一个蛋疼的需求开始,老板说,能给远程仓库的版本回退吗？我说为毛？他说我就是试试看git好使不,我……&lt;/p&gt;
-&lt;/bloc
-      
-    
-    </summary>
-    
-      <category term="git" scheme="https://pinghailinfeng.gitee.io/categories/git/"/>
-    
-    
-      <category term="git" scheme="https://pinghailinfeng.gitee.io/tags/git/"/>
-    
-      <category term="gitcafe" scheme="https://pinghailinfeng.gitee.io/tags/gitcafe/"/>
-    
-      <category term="版本管理" scheme="https://pinghailinfeng.gitee.io/tags/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"/>
     
   </entry>
   

@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[how to add 163 music to hexo]]></title>
+    <url>%2F2019%2F09%2F06%2Fhow-to-add-163-music-to-hexo%2F</url>
+    <content type="text"><![CDATA[如何给hexo添加网易音乐先看看效果 1.访问网易云首页，选择你喜欢的音乐，点击生成外链,我不希望音乐一直播放,如果来访的朋友想听,点击下播放就好。 这里我选择二十岁的某一天 2. 复制iframe插件下的src里的地址 3. 修改themes/next/layout/sidebar.swig文件12345&#123;% if theme.background_music %&#125; &lt;div&gt; &lt;iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="&#123;&#123; theme.background_music &#125;&#125;"&gt;&lt;/iframe&gt; &lt;/div&gt;&#123;% endif %&#125; 4.添加音乐地址到主题1background_music : //music.163.com/outchain/player?type=2&amp;id=247172&amp;auto=1&amp;height=66]]></content>
+      <categories>
+        <category>搭建博客</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网易音乐</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[how to Sort Python Dictionaries by Key or Value]]></title>
     <url>%2F2019%2F07%2F28%2Fhow-to-Sort-Python-Dictionaries-by-Key-or-Value%2F</url>
     <content type="text"><![CDATA[众所周知,python中字典是无序的,那么该如何对字典排序呢？ 例如下面的字典： 1numbers = &#123;'second': 2,'first': 1, 'third': 3, 'Fourth': 4&#125; 我们可以通过list()函数打印value,12&gt;&gt;&gt;list(numbers)['second', 'first', 'third', 'Fourth'] 备注: python3.6.4 以上的版本,字典根据插入的顺序自动排序 如何根据key 对字典排序可以使用python的内置函数sorted 来对字典排序,如下面的代码 12&gt;&gt;&gt; sorted(numbers)['Fourth', 'first', 'second', 'third'] 结果有点差强人意,因为默认sorted函数是根据字母的顺序升序排列的,这里的字典中 key 恰好是字母，所以才会显示这个结果。 根据value对字典排序用同样的方法,我们可以根据value来排序 12&gt;&gt;&gt; sorted(numbers.values())[1, 2, 3, 4] 如何根据自定义的规则对字典排序sorted函数还有一个可选参数叫key,注意这里的key和字典的key没有关系,根据指定的key 来进行排序,实现的机制类似迭代器。来看这个例子： 12&gt;&gt;&gt; sorted(numbers,key=numbers.__getitem__)['first', 'second', 'third', 'Fourth'] 这里我们使用了字典类中内置函数__getitem__ 在遍历字典值的过程中,获取对应的值来对字典排序 关于__getitem__ 函数的详细说明，请参考官方文档。 当然我们也可以使用列表推导的方式来进行排序(实质上是转化成了列表来进行排序) 1234&gt;&gt;&gt; sorted(numbers,key=numbers.__getitem__,reverse=True)['Fourth', 'third', 'second', 'first']&gt;&gt;&gt; [value for (key,value) in sorted(numbers.items(),reverse=True)][3, 2, 1, 4] 字典的key是数字或者字母的情况下对字典排序12&gt;&gt;&gt; sorted(numbers,key=str.lower)['first', 'Fourth', 'second', 'third'] 我们定义一个新的字典 12345&gt;&gt;&gt; month = dict(one='January', two='February', three='March', four='April', five='May') 通过__getitem__方法比较 我们定义的字典month中对应的值 123&gt;&gt;&gt; numbermap = &#123;'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5&#125;&gt;&gt;&gt; sorted(month, key=numbermap.__getitem__)['one', 'two', 'three', 'four', 'five'] 同样的原理,可以使用列表推导来实现排序 12&gt;&gt;&gt; [month[i] for i in sorted(month,key=numbermap.__getitem__)]['January', 'February', 'March', 'April', 'May'] 定义一个方法来定义我们自己的排序规则1234567891011def repeats(string): # Lower the case in the string string = string.lower() # Get a set of the unique letters uniques = set(string) # Count the max occurrences of each unique letter counts = [string.count(letter) for letter in uniques] return max(counts) 根据字母小写排序 12&gt;&gt;&gt; sorted(month.values(), key=repeats, reverse=True)['February', 'January', 'March', 'April', 'May'] 使用lambda表达式排序使用lambda表达式 12&gt;&gt;&gt; sorted(month.items(),key=lambda x:x[1])[('four', 'April'), ('two', 'February'), ('one', 'January'), ('three', 'March'), ('five', 'May')] 12&gt;&gt;&gt; sorted(month.items(),key=lambda x:x[0])[('five', 'May'), ('four', 'April'), ('one', 'January'), ('three', 'March'), ('two', 'February')] 其中： lambda x:x[1] 表明根据值排序 lambda x:x[0] 表明根据键排序 以上就是python中对字典排序的一个总结,希望能帮到大家。]]></content>
