@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[javascript中Boolean_Object与Boolean_Primitives]]></title>
+    <url>%2F2019%2F09%2F20%2Fjavascript%E4%B8%ADBoolean-Object%E4%B8%8EBoolean-Primitives%2F</url>
+    <content type="text"><![CDATA[先看下面的脚本，预测下结果 123456var flag = true;console.log(typeof(flag));//booleanvar fa = Boolean(true);console.log(typeof(fa));//booleanvar ff = new Boolean(true);console.log(typeof(ff)); //Object 在 jslint中明确提示 new Boolean(true)；do not use Boolean as a constructor. (W053)jshint(W053) 接下来的例子 123456789if(flag)&#123; console.log("true is true");&#125;if(fa)&#123; console.log("Boolean is true");&#125;if(ff)&#123; console.log("Object Boolean is true");&#125; 结果如下 123true is trueBoolean is trueObject Boolean is true 修改脚本： 123456var flag = true;console.log(typeof(false));//booleanvar fa = Boolean(false);console.log(typeof(fa));//booleanvar ff = new Boolean(false);console.log(typeof(ff)); //Object 结果竟然显示： 1Object Boolean is true 后来查阅资料发现, JavaScript的其他数据类型都可以转换成Boolean类型，注意！！！只有这几种类型会转换为false 123456undefinednull0-0NaN"" (空字符串) 其他都转化为true,包括空对象{}，空数组[] ， 负数 ，false的对象包装等。 123456789101112if(-1)&#123; console.log('-1转换为true');&#125;if(&#123;&#125;)&#123; console.log('&#123;&#125;转换为true');&#125;if([])&#123; console.log('[]转换为true');&#125;if(new Boolean(false))&#123; console.log('new Boolean(false)转换为true');&#125; new Boolean(false)是布尔值的包装对象 typeof (new Boolean(false)) // ‘object’ ,所以 转换为boolean是true，而不是false。 从另一个层面也证明了为啥jslint 禁止在构造方法里使用Boolean类型的数据。 后记Boolean.valueOf() 可以返回Boolean对象对应的值类型 1234/**/if(ff.valueOf())&#123; console.log("Object Boolean is true"); &#125; 补充对于数字0 连续使用两次!! 仍旧返回false. 123var fa = Boolean(0);console.log(fa); //falseconsole.log(!!0);//false 参考文章 JavaScript Boolean( new Boolean(false) ) 其实是true The Difference Between Boolean Objects and Boolean Primitives in JavaScript]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>Boolean</tag>
+        <tag>坑</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[how to add 163 music to hexo]]></title>
     <url>%2F2019%2F09%2F06%2Fhow-to-add-163-music-to-hexo%2F</url>
     <content type="text"><![CDATA[如何给hexo添加网易音乐先看看效果 1.访问网易云首页，选择你喜欢的音乐，点击生成外链,我不希望音乐一直播放,如果来访的朋友想听,点击下播放就好。 这里我选择二十岁的某一天 2. 复制iframe插件下的src里的地址 3. 修改themes/next/layout/sidebar.swig文件12345&#123;% if theme.background_music %&#125; &lt;div&gt; &lt;iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="&#123;&#123; theme.background_music &#125;&#125;"&gt;&lt;/iframe&gt; &lt;/div&gt;&#123;% endif %&#125; 4.添加音乐地址到主题1background_music : //music.163.com/outchain/player?type=2&amp;id=247172&amp;auto=1&amp;height=66]]></content>
@@ -295,9 +308,9 @@
     <url>%2F2015%2F04%2F17%2Fmy-new-post%2F</url>
     <content type="text"><![CDATA[#我的新文章 这是我的第一篇在github上的博客。记录下我的工作和生活,慢慢给其他的文章都更新到这里。嬉笑怒骂也好,喜怒哀乐也罢,我就是一个俗人罢了。]]></content>
       <tags>
-        <tag>杂记</tag>
         <tag>博客</tag>
         <tag>文章</tag>
+        <tag>杂记</tag>
       </tags>
   </entry>
   <entry>

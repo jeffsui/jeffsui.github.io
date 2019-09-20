@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2019-09-06T05:44:36.261Z</updated>
+  <updated>2019-09-20T07:41:45.211Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>javascript中Boolean_Object与Boolean_Primitives</title>
+    <link href="https://pinghailinfeng.gitee.io/2019/09/20/javascript%E4%B8%ADBoolean-Object%E4%B8%8EBoolean-Primitives/"/>
+    <id>https://pinghailinfeng.gitee.io/2019/09/20/javascript中Boolean-Object与Boolean-Primitives/</id>
+    <published>2019-09-20T07:34:37.000Z</published>
+    <updated>2019-09-20T07:41:45.211Z</updated>
+    
+    <content type="html"><![CDATA[<p>先看下面的脚本，预测下结果</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> flag = <span class="literal">true</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(flag));<span class="comment">//boolean</span></span><br><span class="line"><span class="keyword">var</span> fa = <span class="built_in">Boolean</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(fa));<span class="comment">//boolean</span></span><br><span class="line"><span class="keyword">var</span> ff = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(ff)); <span class="comment">//Object</span></span><br></pre></td></tr></table></figure><p>在 jslint中明确提示 new Boolean(true)；<code>do not use Boolean as a constructor. (W053)jshint(W053)</code></p><p>接下来的例子</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(flag)&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"true is true"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(fa)&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"Boolean is  true"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(ff)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"Object Boolean is true"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>结果如下</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span> is <span class="literal">true</span></span><br><span class="line"><span class="built_in">Boolean</span> is  <span class="literal">true</span></span><br><span class="line"><span class="built_in">Object</span> <span class="built_in">Boolean</span> is <span class="literal">true</span></span><br></pre></td></tr></table></figure><p>修改脚本：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> flag = <span class="literal">true</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(<span class="literal">false</span>));<span class="comment">//boolean</span></span><br><span class="line"><span class="keyword">var</span> fa = <span class="built_in">Boolean</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(fa));<span class="comment">//boolean</span></span><br><span class="line"><span class="keyword">var</span> ff = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(ff)); <span class="comment">//Object</span></span><br></pre></td></tr></table></figure><p>结果竟然显示：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span> <span class="built_in">Boolean</span> is <span class="literal">true</span></span><br></pre></td></tr></table></figure><p>后来查阅资料发现,</p><p>JavaScript的其他数据类型都可以转换成Boolean类型，注意！！！<strong>只有这几种类型会转换为false</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">undefined</span></span><br><span class="line"><span class="literal">null</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">-0</span></span><br><span class="line"><span class="literal">NaN</span></span><br><span class="line"><span class="string">""</span>  (空字符串)</span><br></pre></td></tr></table></figure><p>其他都转化为true,包括空对象{}，空数组[] ， 负数 ，false的对象包装等。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="number">-1</span>)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'-1转换为true'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(&#123;&#125;)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'&#123;&#125;转换为true'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>([])&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'[]转换为true'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>))&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'new Boolean(false)转换为true'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>new Boolean(false)是布尔值的包装对象    <strong>typeof (new Boolean(false))  // ‘object’</strong>  ,所以 转换为boolean是true，而不是false。</p><p>从另一个层面也证明了为啥<code>jslint</code> 禁止在构造方法里使用Boolean类型的数据。</p><h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>Boolean.valueOf() 可以返回Boolean对象对应的值类型</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**/</span></span><br><span class="line"><span class="keyword">if</span>(ff.valueOf())&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">"Object Boolean is true"</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure><h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>对于数字<code>0</code> 连续使用两次!! 仍旧返回false.</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fa = <span class="built_in">Boolean</span>(<span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(fa); <span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(!!<span class="number">0</span>);<span class="comment">//false</span></span><br></pre></td></tr></table></figure><h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ol><li><p><a href="https://www.cnblogs.com/shapeY/p/7609593.html" target="_blank" rel="noopener"><a href="https://www.cnblogs.com/shapeY/p/7609593.html" target="_blank" rel="noopener">JavaScript Boolean( new Boolean(false) ) 其实是true</a></a></p></li><li><p><a href="http://adripofjavascript.com/blog/drips/the-difference-between-boolean-objects-and-boolean-primitives-in-javascript.html" target="_blank" rel="noopener">The Difference Between Boolean Objects and Boolean Primitives in JavaScript</a></p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;先看下面的脚本，预测下结果&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;lin
+      
+    
+    </summary>
+    
+      <category term="javascript" scheme="https://pinghailinfeng.gitee.io/categories/javascript/"/>
+    
+    
+      <category term="javascript" scheme="https://pinghailinfeng.gitee.io/tags/javascript/"/>
+    
+      <category term="Boolean" scheme="https://pinghailinfeng.gitee.io/tags/Boolean/"/>
+    
+      <category term="坑" scheme="https://pinghailinfeng.gitee.io/tags/%E5%9D%91/"/>
+    
+  </entry>
   
   <entry>
     <title>how to add 163 music to hexo</title>
@@ -580,38 +610,6 @@
     
     
       <category term="cygwin" scheme="https://pinghailinfeng.gitee.io/tags/cygwin/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>how to build a private docker registry</title>
-    <link href="https://pinghailinfeng.gitee.io/2015/07/21/how-to-build-a-private-docker-registry/"/>
-    <id>https://pinghailinfeng.gitee.io/2015/07/21/how-to-build-a-private-docker-registry/</id>
-    <published>2015-07-21T15:09:19.000Z</published>
-    <updated>2016-08-19T15:08:13.442Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="如何搭建docker私服"><a href="#如何搭建docker私服" class="headerlink" title="如何搭建docker私服"></a>如何搭建docker私服</h1><p>##环境准备</p><p>软件包：</p><ul><li><p>centos6.5_x86_64</p></li><li><p>docker-engine-1.7.0-1.el6.x86_64.rpm</p></li></ul><p>docker环境搭建,请参照官方说明，本文采用的是官方的rpm包</p><p>##何谓私服</p><p>官方的image镜像站位dockerhub,因为伟大的墙的缘故,所以下载镜像是很痛苦的一件事。当然你可以采用其他科学上网或者镜像加速的方法来获取image。<br>docker官方也提供了一个私服镜像,大家可以通过<code>docker search registry</code>来查找该镜像。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NAME                                     DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line">registry                                 Containerized docker registry                   320       [OK]       </span><br><span class="line">atcol/docker-registry-ui                 A web UI for easy private/local Docker Reg...   55                   [OK]</span><br><span class="line">konradkleine/docker-registry-frontend    Browse and modify your Docker registry in ...   40                   [OK]</span><br><span class="line">samalba/docker-registry                                                                  35</span><br></pre></td></tr></table></figure><p>##下载官方registry镜像</p><ul><li>下载镜像</li></ul><p>使用命令<code>docker pull registry</code>执行下载镜像。</p><ul><li>查看镜像</li></ul><p>下载完毕后,通过<code>docker images</code> 查看该镜像。</p><ul><li>给镜像打标签</li></ul><p>执行这个命令<br><code>docker tag registry:latest localhost:5000/registry:latest</code></p><p>##启动镜像 </p><p><code>docker run -d -e SETTINGS_FLAVOR=dev -e STORAGE_PATH=/tmp/registry -v /opt/data/registry:/tmp/registry  -p 5000:5000 registry</code></p><p>这里有几个参数说明下:</p><ul><li>1.<code>-e STORAGE_PATH=/tmp/registry</code> :强制使用存储路径</li><li>2.<code>-v /opt/data/registry:/tmp/registry</code> :绑定本地镜像存储路径</li><li>3.<code>-p 5000:5000</code>:映射容器5000端口到本地5000端口</li></ul><p>##查看镜像状态</p><p><code>docker ps</code></p><p>##查看私服状态</p><p><code>curl http://localhost:5000</code></p><p>显示如下信息,证明registry启动成功:</p><p><code>&quot;\&quot;docker-registry server\&quot;&quot;</code></p><p>##推送本地镜像库到registry私服</p><p>###1. 第一步 给本地镜像 打tag<br>例如给官方的nginx镜像打tag,执行下面的命令行<br><code>docker pull nginx</code><br><code>docker tag nginx:latest localhost:5000/nginx:latest</code><br>查看镜像库,发现<code>localhost:5000/nginx</code>的镜像已经有了。</p><p>###2. 第二步 推送tag到registry私服</p><p><code>docker push localhost:5000/nginx:latest</code></p><p>###3. 第三步 查看私服镜像列表</p><p><code>curl http://localhost：5000/V1/search</code></p><p>看到类似这样的信息</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;&quot;num_results&quot;: 5, &quot;query&quot;: &quot;&quot;, &quot;results&quot;: [&#123;&quot;description&quot;: null, &quot;name&quot;: &quot;correl/erlang&quot;&#125;, &#123;&quot;description&quot;: null, &quot;name&quot;: &quot;linfeng/cmd&quot;&#125;, &#123;&quot;description&quot;: null, &quot;name&quot;: &quot;library/my_nodejs_image&quot;&#125;, &#123;&quot;description&quot;: null, &quot;name&quot;: &quot;library/centos&quot;&#125;, &#123;&quot;description&quot;: &quot;&quot;, &quot;name&quot;: &quot;library/nginx&quot;&#125;]&#125;</span><br></pre></td></tr></table></figure><p>##拉取私服镜像</p><p><code>docker pull 192.168.20.85:5000/library/centos:7</code></p><p>##结论</p><p>这只是演示如何搭建一个简单的registry私服。因为只有通过命令行方式才能查看私服信息,所以不是很便于操作。下面的博文将演示如何给registry添加web界面。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;如何搭建docker私服&quot;&gt;&lt;a href=&quot;#如何搭建docker私服&quot; class=&quot;headerlink&quot; title=&quot;如何搭建docker私服&quot;&gt;&lt;/a&gt;如何搭建docker私服&lt;/h1&gt;&lt;p&gt;##环境准备&lt;/p&gt;
-&lt;p&gt;软件包：&lt;/p&gt;
-&lt;ul&gt;
-&lt;l
-      
-    
-    </summary>
-    
-      <category term="docker" scheme="https://pinghailinfeng.gitee.io/categories/docker/"/>
-    
-    
-      <category term="docker" scheme="https://pinghailinfeng.gitee.io/tags/docker/"/>
-    
-      <category term="registry" scheme="https://pinghailinfeng.gitee.io/tags/registry/"/>
-    
-      <category term="registry-ui" scheme="https://pinghailinfeng.gitee.io/tags/registry-ui/"/>
     
   </entry>
   
