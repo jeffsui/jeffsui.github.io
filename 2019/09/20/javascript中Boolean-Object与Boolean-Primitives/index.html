@@ -113,7 +113,7 @@
 <meta property="og:site_name" content="凭海临风的IT江湖">
 <meta property="og:description" content="先看下面的脚本，预测下结果 123456var flag = true;console.log(typeof(flag));//booleanvar fa = Boolean(true);console.log(typeof(fa));//booleanvar ff = new Boolean(true);console.log(typeof(ff)); //Object 在 jslint中明确提">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-20T07:41:45.211Z">
+<meta property="og:updated_time" content="2019-09-20T07:48:52.021Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript中Boolean_Object与Boolean_Primitives">
 <meta name="twitter:description" content="先看下面的脚本，预测下结果 123456var flag = true;console.log(typeof(flag));//booleanvar fa = Boolean(true);console.log(typeof(fa));//booleanvar ff = new Boolean(true);console.log(typeof(ff)); //Object 在 jslint中明确提">
@@ -475,7 +475,7 @@
                 
               
 
-              <time title="创建时间：2019-09-20 15:34:37 / 修改时间：15:41:45" itemprop="dateCreated datePublished" datetime="2019-09-20T15:34:37+08:00">2019-09-20</time>
+              <time title="创建时间：2019-09-20 15:34:37 / 修改时间：15:48:52" itemprop="dateCreated datePublished" datetime="2019-09-20T15:34:37+08:00">2019-09-20</time>
             
 
             
@@ -578,6 +578,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> flag = <span class="literal">true</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(<span class="literal">false</span>));<span class="comment">//boolean</span></span><br><span class="line"><span class="keyword">var</span> fa = <span class="built_in">Boolean</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(fa));<span class="comment">//boolean</span></span><br><span class="line"><span class="keyword">var</span> ff = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(ff)); <span class="comment">//Object</span></span><br></pre></td></tr></table></figure>
 <p>结果竟然显示：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span> <span class="built_in">Boolean</span> is <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>后来查阅资料发现,</p>
 <p>JavaScript的其他数据类型都可以转换成Boolean类型，注意！！！<strong>只有这几种类型会转换为false</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">undefined</span></span><br><span class="line"><span class="literal">null</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">-0</span></span><br><span class="line"><span class="literal">NaN</span></span><br><span class="line"><span class="string">""</span>  (空字符串)</span><br></pre></td></tr></table></figure>

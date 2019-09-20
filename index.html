@@ -474,7 +474,7 @@
                 
               
 
-              <time title="创建时间：2019-09-20 15:34:37 / 修改时间：15:41:45" itemprop="dateCreated datePublished" datetime="2019-09-20T15:34:37+08:00">2019-09-20</time>
+              <time title="创建时间：2019-09-20 15:34:37 / 修改时间：15:48:52" itemprop="dateCreated datePublished" datetime="2019-09-20T15:34:37+08:00">2019-09-20</time>
             
 
             
@@ -560,8 +560,7 @@
 
       
         
-          
-            <p>先看下面的脚本，预测下结果</p>
+          <p>先看下面的脚本，预测下结果</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> flag = <span class="literal">true</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(flag));<span class="comment">//boolean</span></span><br><span class="line"><span class="keyword">var</span> fa = <span class="built_in">Boolean</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(fa));<span class="comment">//boolean</span></span><br><span class="line"><span class="keyword">var</span> ff = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(ff)); <span class="comment">//Object</span></span><br></pre></td></tr></table></figure>
 <p>在 jslint中明确提示 new Boolean(true)；<code>do not use Boolean as a constructor. (W053)jshint(W053)</code></p>
 <p>接下来的例子</p>
@@ -572,25 +571,15 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> flag = <span class="literal">true</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(<span class="literal">false</span>));<span class="comment">//boolean</span></span><br><span class="line"><span class="keyword">var</span> fa = <span class="built_in">Boolean</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(fa));<span class="comment">//boolean</span></span><br><span class="line"><span class="keyword">var</span> ff = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(ff)); <span class="comment">//Object</span></span><br></pre></td></tr></table></figure>
 <p>结果竟然显示：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span> <span class="built_in">Boolean</span> is <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>后来查阅资料发现,</p>
-<p>JavaScript的其他数据类型都可以转换成Boolean类型，注意！！！<strong>只有这几种类型会转换为false</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">undefined</span></span><br><span class="line"><span class="literal">null</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">-0</span></span><br><span class="line"><span class="literal">NaN</span></span><br><span class="line"><span class="string">""</span>  (空字符串)</span><br></pre></td></tr></table></figure>
-<p>其他都转化为true,包括空对象{}，空数组[] ， 负数 ，false的对象包装等。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="number">-1</span>)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'-1转换为true'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(&#123;&#125;)&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'&#123;&#125;转换为true'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>([])&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'[]转换为true'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>))&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'new Boolean(false)转换为true'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>new Boolean(false)是布尔值的包装对象    <strong>typeof (new Boolean(false))  // ‘object’</strong>  ,所以 转换为boolean是true，而不是false。</p>
-<p>从另一个层面也证明了为啥<code>jslint</code> 禁止在构造方法里使用Boolean类型的数据。</p>
-<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>Boolean.valueOf() 可以返回Boolean对象对应的值类型</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**/</span></span><br><span class="line"><span class="keyword">if</span>(ff.valueOf())&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">"Object Boolean is true"</span>);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>对于数字<code>0</code> 连续使用两次!! 仍旧返回false.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fa = <span class="built_in">Boolean</span>(<span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(fa); <span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(!!<span class="number">0</span>);<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
-<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ol>
-<li><p><a href="https://www.cnblogs.com/shapeY/p/7609593.html" target="_blank" rel="noopener"><a href="https://www.cnblogs.com/shapeY/p/7609593.html" target="_blank" rel="noopener">JavaScript Boolean( new Boolean(false) ) 其实是true</a></a></p>
-</li>
-<li><p><a href="http://adripofjavascript.com/blog/drips/the-difference-between-boolean-objects-and-boolean-primitives-in-javascript.html" target="_blank" rel="noopener">The Difference Between Boolean Objects and Boolean Primitives in JavaScript</a></p>
-</li>
-</ol>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/20/javascript中Boolean-Object与Boolean-Primitives/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
