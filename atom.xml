@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2019-09-20T07:48:52.021Z</updated>
+  <updated>2019-09-28T06:44:03.336Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,83 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>javascript get checkbox checked value</title>
+    <link href="https://pinghailinfeng.gitee.io/2019/09/28/javascript-get-checkbox-checked-value/"/>
+    <id>https://pinghailinfeng.gitee.io/2019/09/28/javascript-get-checkbox-checked-value/</id>
+    <published>2019-09-28T05:53:50.000Z</published>
+    <updated>2019-09-28T06:44:03.336Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="javascript如何获取checkbox被选中的值"><a href="#javascript如何获取checkbox被选中的值" class="headerlink" title="javascript如何获取checkbox被选中的值"></a>javascript如何获取checkbox被选中的值</h1><h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><p>javascript dom 常用方法</p><table><thead><tr><th>方法名</th><th>描述</th><th>例子</th></tr></thead><tbody><tr><td>document.getElementById</td><td>返回给定id属性值的元素节点相对应的对象</td><td><input type="checkbox" name="hobbies" id="hobbies"></td></tr><tr><td>document.getElementsByTagName</td><td>返回给定name属性的元素节点对应的元素集合</td><td>var hobbies = document.getElementsByName(“hobbies”);</td></tr><tr><td>element.nextSibling</td><td>返回该元素紧跟的一个节点</td><td></td></tr><tr><td>nodeValue</td><td>获取节点中的文本值 ,例如：跑步</td><td><input type="checkbox" name="hobbies" id="hobbies" class="hobbies" value="2">跑步</td></tr></tbody></table><p>数组常用方法：</p><table><thead><tr><th>方法 或者 属性</th><th>说明</th><th>例子</th></tr></thead><tbody><tr><td>arrayObject.length</td><td>属性：数组长度</td><td></td></tr><tr><td>arrayObject.push()</td><td>向数组末尾添加一个或多个元素</td><td>var arr = new Array(3) <br>arr[0] = “George” <br>arr[1] = “John” <br>arr[2] = “Thomas”</td></tr></tbody></table><a id="more"></a><h2 id="页面如下："><a href="#页面如下：" class="headerlink" title="页面如下："></a>页面如下：</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>javascript获取复选框值方法<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"hobbies"</span> <span class="attr">id</span>=<span class="string">"hobbies"</span> <span class="attr">class</span>=<span class="string">"hobbies"</span> <span class="attr">value</span>=<span class="string">"1"</span>&gt;</span>游泳</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">name</span>=<span class="string">"hobbies"</span> <span class="attr">id</span>=<span class="string">"hobbies"</span> <span class="attr">class</span>=<span class="string">"hobbies"</span> <span class="attr">value</span>=<span class="string">"2"</span>&gt;</span>跑步</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn1"</span>&gt;</span>获取复选框值<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure><h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><blockquote><p>通过复选框的name属性,遍历后将被选中的复选框的值输出</p><p><strong>checkbox[index].nextSibling.nodeValue</strong>: 获取的是checkbox中标签包裹的文本值 </p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_checkbox_val</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">var</span> hobbies = <span class="built_in">document</span>.getElementsByName(<span class="string">"hobbies"</span>);</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">let</span> index = <span class="number">0</span>; index &lt; hobbies.length; index++) &#123;</span><br><span class="line">              <span class="keyword">if</span> (hobbies[index].checked) &#123;</span><br><span class="line">                  alert(hobbies[index].value + <span class="string">","</span> + hobbies[index].nextSibling.nodeValue);</span><br><span class="line">              &#125;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure><h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><blockquote><p>建立一个数组,使用<code>push</code>方法将被选中的元素保存到数组</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_checkbox_val_with_array</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">var</span> arr = [];</span><br><span class="line">          <span class="keyword">for</span> (<span class="keyword">let</span> index = <span class="number">0</span>; index &lt; hobbies.length; index++) &#123;</span><br><span class="line">              <span class="keyword">if</span> (hobbies[index].checked) &#123;</span><br><span class="line">                  arr.push(hobbies[index].value);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          alert(arr);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure><h3 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h3><blockquote><p>通过class选择器 获取被选中的复选框的值</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_checkbox_val_with_selector</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">         <span class="keyword">var</span> hobbies = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'hobbies'</span>);</span><br><span class="line">         <span class="keyword">for</span> (<span class="keyword">let</span> index = <span class="number">0</span>; index &lt; hobbies.length; index++) &#123;</span><br><span class="line">             <span class="keyword">if</span> (hobbies[index].checked) &#123;</span><br><span class="line">                 checkedValue = hobbies[index].value;</span><br><span class="line">                 alert(hobbies[index].value + <span class="string">","</span> + hobbies[index].nextSibling.nodeValue);</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure><h3 id="使用jquery"><a href="#使用jquery" class="headerlink" title="使用jquery"></a>使用jquery</h3><blockquote><p>需要引入jquery,这里我使用国内的cdn</p><p>jquery中通过each() 方法遍历所有被选中的复选框的值</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line">         $(<span class="string">'#btn1'</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            $(<span class="string">"input[name='hobbies']:checked"</span>).each(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">                alert($(<span class="keyword">this</span>).val());</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">     </span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure><p>==tips== :  </p><ul><li>$(“input[name=’xxxx’]:checked”) 被选中的复选框对象集合</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;javascript如何获取checkbox被选中的值&quot;&gt;&lt;a href=&quot;#javascript如何获取checkbox被选中的值&quot; class=&quot;headerlink&quot; title=&quot;javascript如何获取checkbox被选中的值&quot;&gt;&lt;/a&gt;javascript如何获取checkbox被选中的值&lt;/h1&gt;&lt;h2 id=&quot;预备知识&quot;&gt;&lt;a href=&quot;#预备知识&quot; class=&quot;headerlink&quot; title=&quot;预备知识&quot;&gt;&lt;/a&gt;预备知识&lt;/h2&gt;&lt;p&gt;javascript dom 常用方法&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;方法名&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;例子&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;document.getElementById&lt;/td&gt;
+&lt;td&gt;返回给定id属性值的元素节点相对应的对象&lt;/td&gt;
+&lt;td&gt;&lt;input type=&quot;checkbox&quot; name=&quot;hobbies&quot; id=&quot;hobbies&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;document.getElementsByTagName&lt;/td&gt;
+&lt;td&gt;返回给定name属性的元素节点对应的元素集合&lt;/td&gt;
+&lt;td&gt;var hobbies = document.getElementsByName(“hobbies”);&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;element.nextSibling&lt;/td&gt;
+&lt;td&gt;返回该元素紧跟的一个节点&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;nodeValue&lt;/td&gt;
+&lt;td&gt;获取节点中的文本值 ,例如：跑步&lt;/td&gt;
+&lt;td&gt;&lt;input type=&quot;checkbox&quot; name=&quot;hobbies&quot; id=&quot;hobbies&quot; class=&quot;hobbies&quot; value=&quot;2&quot;&gt;跑步&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;数组常用方法：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;方法 或者 属性&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;th&gt;例子&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;arrayObject.length&lt;/td&gt;
+&lt;td&gt;属性：数组长度&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;arrayObject.push()&lt;/td&gt;
+&lt;td&gt;向数组末尾添加一个或多个元素&lt;/td&gt;
+&lt;td&gt;var arr = new Array(3) &lt;br&gt;arr[0] = “George” &lt;br&gt;arr[1] = “John” &lt;br&gt;arr[2] = “Thomas”&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+    
+    </summary>
+    
+      <category term="javascript" scheme="https://pinghailinfeng.gitee.io/categories/javascript/"/>
+    
+    
+      <category term="javascript" scheme="https://pinghailinfeng.gitee.io/tags/javascript/"/>
+    
+      <category term="checkbox" scheme="https://pinghailinfeng.gitee.io/tags/checkbox/"/>
+    
+  </entry>
   
   <entry>
     <title>javascript中Boolean_Object与Boolean_Primitives</title>
@@ -194,9 +271,9 @@
       <category term="javaweb" scheme="https://pinghailinfeng.gitee.io/categories/javaweb/"/>
     
     
-      <category term="java" scheme="https://pinghailinfeng.gitee.io/tags/java/"/>
-    
       <category term="maven" scheme="https://pinghailinfeng.gitee.io/tags/maven/"/>
+    
+      <category term="java" scheme="https://pinghailinfeng.gitee.io/tags/java/"/>
     
       <category term="eclipse" scheme="https://pinghailinfeng.gitee.io/tags/eclipse/"/>
     
@@ -422,9 +499,9 @@
       <category term="java" scheme="https://pinghailinfeng.gitee.io/categories/java/"/>
     
     
-      <category term="java" scheme="https://pinghailinfeng.gitee.io/tags/java/"/>
-    
       <category term="maven" scheme="https://pinghailinfeng.gitee.io/tags/maven/"/>
+    
+      <category term="java" scheme="https://pinghailinfeng.gitee.io/tags/java/"/>
     
   </entry>
   
@@ -588,34 +665,6 @@
       <category term="jdk" scheme="https://pinghailinfeng.gitee.io/tags/jdk/"/>
     
       <category term="持续集成" scheme="https://pinghailinfeng.gitee.io/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>how make cygwin multi-color</title>
-    <link href="https://pinghailinfeng.gitee.io/2015/08/12/how-make-cygwin-multi-color/"/>
-    <id>https://pinghailinfeng.gitee.io/2015/08/12/how-make-cygwin-multi-color/</id>
-    <published>2015-08-11T22:16:59.000Z</published>
-    <updated>2016-08-19T15:08:13.441Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>打开.bashrc</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># Default to human readable figures</span><br><span class="line"># alias df=&apos;df -h&apos;</span><br><span class="line"># alias du=&apos;du -h&apos;</span><br><span class="line">#</span><br><span class="line"># Misc  </span><br><span class="line"># alias less=&apos;less -r&apos;                          # raw control characters</span><br><span class="line"># alias whence=&apos;type -a&apos;                        # where, of a sort</span><br><span class="line"># alias grep=&apos;grep --color&apos;                     # show differences in colour</span><br><span class="line"># alias egrep=&apos;egrep --color=auto&apos;              # show differences in colour</span><br><span class="line"># alias fgrep=&apos;fgrep --color=auto&apos;              # show differences in colour</span><br><span class="line">#</span><br><span class="line"># Some shortcuts for different directory listings</span><br><span class="line"># alias ls=&apos;ls -hF --color=tty&apos;                 # classify files in colour</span><br><span class="line"># alias dir=&apos;ls --color=auto --format=vertical&apos;</span><br><span class="line"># alias vdir=&apos;ls --color=auto --format=long&apos;</span><br><span class="line"># alias ll=&apos;ls -l&apos;                              # long list</span><br><span class="line"># alias la=&apos;ls -A&apos;                              # all but . and ..</span><br><span class="line"># alias l=&apos;ls -CF&apos;                              #</span><br></pre></td></tr></table></figure><ul><li>而我们要做的只是去掉#，启动即可：</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># Default to human readable figures</span><br><span class="line">alias df=&apos;df -h&apos;</span><br><span class="line">alias du=&apos;du -h&apos;</span><br><span class="line">#</span><br><span class="line"># Misc  </span><br><span class="line">alias less=&apos;less -r&apos;                          # raw control characters</span><br><span class="line">alias whence=&apos;type -a&apos;                        # where, of a sort</span><br><span class="line">alias grep=&apos;grep --color&apos;                     # show differences in colour</span><br><span class="line">alias egrep=&apos;egrep --color=auto&apos;              # show differences in colour</span><br><span class="line">alias fgrep=&apos;fgrep --color=auto&apos;              # show differences in colour</span><br><span class="line">#</span><br><span class="line"># Some shortcuts for different directory listings</span><br><span class="line">alias ls=&apos;ls -hF --color=tty&apos;                 # classify files in colour</span><br><span class="line">alias dir=&apos;ls --color=auto --format=vertical&apos;</span><br><span class="line">alias vdir=&apos;ls --color=auto --format=long&apos;</span><br><span class="line">alias ll=&apos;ls -l&apos;                              # long list</span><br><span class="line">alias la=&apos;ls -A&apos;                              # all but . and ..</span><br><span class="line">alias l=&apos;ls -CF&apos;                              #</span><br></pre></td></tr></table></figure><ul><li>然后保存一下，再重启cygwin<br>（或者直接用：<code>source ~/.bashrc</code></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;打开.bashrc&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=
-      
-    
-    </summary>
-    
-      <category term="linux" scheme="https://pinghailinfeng.gitee.io/categories/linux/"/>
-    
-    
-      <category term="cygwin" scheme="https://pinghailinfeng.gitee.io/tags/cygwin/"/>
     
   </entry>
   

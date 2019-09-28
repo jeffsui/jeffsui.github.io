@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[javascript get checkbox checked value]]></title>
+    <url>%2F2019%2F09%2F28%2Fjavascript-get-checkbox-checked-value%2F</url>
+    <content type="text"><![CDATA[javascript如何获取checkbox被选中的值预备知识javascript dom 常用方法 方法名 描述 例子 document.getElementById 返回给定id属性值的元素节点相对应的对象 document.getElementsByTagName 返回给定name属性的元素节点对应的元素集合 var hobbies = document.getElementsByName(“hobbies”); element.nextSibling 返回该元素紧跟的一个节点 nodeValue 获取节点中的文本值 ,例如：跑步 跑步 数组常用方法： 方法 或者 属性 说明 例子 arrayObject.length 属性：数组长度 arrayObject.push() 向数组末尾添加一个或多个元素 var arr = new Array(3) arr[0] = “George” arr[1] = “John” arr[2] = “Thomas” 页面如下：12345678910111213141516171819202122&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt; &lt;title&gt;javascript获取复选框值方法&lt;/title&gt;&lt;/head&gt;&lt;body&gt; &lt;p&gt; &lt;input type="checkbox" name="hobbies" id="hobbies" class="hobbies" value="1"&gt;游泳 &lt;input type="checkbox" name="hobbies" id="hobbies" class="hobbies" value="2"&gt;跑步 &lt;/p&gt; &lt;p&gt; &lt;button id="btn1"&gt;获取复选框值&lt;/button&gt; &lt;/p&gt; &lt;/body&gt;&lt;/html&gt; 方法一 通过复选框的name属性,遍历后将被选中的复选框的值输出 checkbox[index].nextSibling.nodeValue: 获取的是checkbox中标签包裹的文本值 123456789function get_checkbox_val() &#123; var hobbies = document.getElementsByName("hobbies"); for (let index = 0; index &lt; hobbies.length; index++) &#123; if (hobbies[index].checked) &#123; alert(hobbies[index].value + "," + hobbies[index].nextSibling.nodeValue); &#125; &#125; &#125; 方法二 建立一个数组,使用push方法将被选中的元素保存到数组 123456789function get_checkbox_val_with_array() &#123; var arr = []; for (let index = 0; index &lt; hobbies.length; index++) &#123; if (hobbies[index].checked) &#123; arr.push(hobbies[index].value); &#125; &#125; alert(arr); &#125; 方法三 通过class选择器 获取被选中的复选框的值 123456789function get_checkbox_val_with_selector() &#123; var hobbies = document.getElementsByClassName('hobbies'); for (let index = 0; index &lt; hobbies.length; index++) &#123; if (hobbies[index].checked) &#123; checkedValue = hobbies[index].value; alert(hobbies[index].value + "," + hobbies[index].nextSibling.nodeValue); &#125; &#125; &#125; 使用jquery 需要引入jquery,这里我使用国内的cdn jquery中通过each() 方法遍历所有被选中的复选框的值 12345678910&lt;script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"&gt;&lt;/script&gt;&lt;script&gt; $('#btn1').click(function () &#123; $("input[name='hobbies']:checked").each(function () &#123; alert($(this).val()); &#125;); &#125;); &lt;/script&gt; &lt;/script&gt; ==tips== : $(“input[name=’xxxx’]:checked”) 被选中的复选框对象集合]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>javascript</tag>
+        <tag>checkbox</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[javascript中Boolean_Object与Boolean_Primitives]]></title>
     <url>%2F2019%2F09%2F20%2Fjavascript%E4%B8%ADBoolean-Object%E4%B8%8EBoolean-Primitives%2F</url>
     <content type="text"><![CDATA[先看下面的脚本，预测下结果 123456var flag = true;console.log(typeof(flag));//booleanvar fa = Boolean(true);console.log(typeof(fa));//booleanvar ff = new Boolean(true);console.log(typeof(ff)); //Object 在 jslint中明确提示 new Boolean(true)；do not use Boolean as a constructor. (W053)jshint(W053) 接下来的例子 123456789if(flag)&#123; console.log("true is true");&#125;if(fa)&#123; console.log("Boolean is true");&#125;if(ff)&#123; console.log("Object Boolean is true");&#125; 结果如下 123true is trueBoolean is trueObject Boolean is true 修改脚本： 123456var flag = true;console.log(typeof(false));//booleanvar fa = Boolean(false);console.log(typeof(fa));//booleanvar ff = new Boolean(false);console.log(typeof(ff)); //Object 结果竟然显示： 1Object Boolean is true 后来查阅资料发现, JavaScript的其他数据类型都可以转换成Boolean类型，注意！！！只有这几种类型会转换为false 123456undefinednull0-0NaN"" (空字符串) 其他都转化为true,包括空对象{}，空数组[] ， 负数 ，false的对象包装等。 123456789101112if(-1)&#123; console.log('-1转换为true');&#125;if(&#123;&#125;)&#123; console.log('&#123;&#125;转换为true');&#125;if([])&#123; console.log('[]转换为true');&#125;if(new Boolean(false))&#123; console.log('new Boolean(false)转换为true');&#125; new Boolean(false)是布尔值的包装对象 typeof (new Boolean(false)) // ‘object’ ,所以 转换为boolean是true，而不是false。 从另一个层面也证明了为啥jslint 禁止在构造方法里使用Boolean类型的数据。 后记Boolean.valueOf() 可以返回Boolean对象对应的值类型 1234/**/if(ff.valueOf())&#123; console.log("Object Boolean is true"); &#125; 补充对于数字0 连续使用两次!! 仍旧返回false. 123var fa = Boolean(0);console.log(fa); //falseconsole.log(!!0);//false 参考文章 JavaScript Boolean( new Boolean(false) ) 其实是true The Difference Between Boolean Objects and Boolean Primitives in JavaScript]]></content>
@@ -70,8 +82,8 @@
         <category>javaweb</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>maven</tag>
+        <tag>java</tag>
         <tag>eclipse</tag>
       </tags>
   </entry>
@@ -147,8 +159,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>maven</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -308,8 +320,8 @@
     <url>%2F2015%2F04%2F17%2Fmy-new-post%2F</url>
     <content type="text"><![CDATA[#我的新文章 这是我的第一篇在github上的博客。记录下我的工作和生活,慢慢给其他的文章都更新到这里。嬉笑怒骂也好,喜怒哀乐也罢,我就是一个俗人罢了。]]></content>
       <tags>
-        <tag>杂记</tag>
         <tag>博客</tag>
+        <tag>杂记</tag>
         <tag>文章</tag>
       </tags>
   </entry>
