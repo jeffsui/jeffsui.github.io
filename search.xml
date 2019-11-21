@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[git diff usage]]></title>
+    <url>%2F2019%2F11%2F21%2Fgit-diff-usage%2F</url>
+    <content type="text"><![CDATA[Git 中 diff 命令使用整理总结工作中常用的git 命令, 今天是一个非常有用的命令 git diff 主要作用是用来比较差异，包括 commits之间,commit 和 工作区间 差异 命令格式如下： 12345git diff [&lt;options&gt;] [&lt;commit&gt;] [--] [&lt;path&gt;…​]git diff [&lt;options&gt;] --cached [&lt;commit&gt;] [--] [&lt;path&gt;…​]git diff [&lt;options&gt;] &lt;commit&gt; &lt;commit&gt; [--] [&lt;path&gt;…​]git diff [&lt;options&gt;] &lt;blob&gt; &lt;blob&gt;git diff [&lt;options&gt;] --no-index [--] &lt;path&gt; &lt;path&gt; 1. 比较工作区与暂存区1git diff 不加参数 2. 比较暂存区与 本地 最新版本 (最后一次commit)1git diff --cached 3. 比较工作区与最新本地版本库1git diff HEAD 4. 比较工作区与commit-id的差异1git diff commit-id 5. 比较暂存区与指定commit-id的差异1git diff --cached commit-id 6. 比较两个commit-id之间的差异1git diff commit-id commit-id 7. 比较不同本地分支的差异1git diff dev # 当前所处分支为master 8. 比较本地分支和远程分支之间的差异12git fetch origin mastergit diff master origin/master 9. 比较差异只显示文件名1git diff --name-only 10 . 比较差异 显示更改文件状态1git diff --name-status]]></content>
+      <categories>
+        <category>版本管理</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[javascript get checkbox checked value]]></title>
     <url>%2F2019%2F09%2F28%2Fjavascript-get-checkbox-checked-value%2F</url>
     <content type="text"><![CDATA[javascript如何获取checkbox被选中的值预备知识javascript dom 常用方法 方法名 描述 例子 document.getElementById 返回给定id属性值的元素节点相对应的对象 document.getElementsByTagName 返回给定name属性的元素节点对应的元素集合 var hobbies = document.getElementsByName(“hobbies”); element.nextSibling 返回该元素紧跟的一个节点 nodeValue 获取节点中的文本值 ,例如：跑步 跑步 数组常用方法： 方法 或者 属性 说明 例子 arrayObject.length 属性：数组长度 arrayObject.push() 向数组末尾添加一个或多个元素 var arr = new Array(3) arr[0] = “George” arr[1] = “John” arr[2] = “Thomas” 页面如下：12345678910111213141516171819202122&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt; &lt;title&gt;javascript获取复选框值方法&lt;/title&gt;&lt;/head&gt;&lt;body&gt; &lt;p&gt; &lt;input type="checkbox" name="hobbies" id="hobbies" class="hobbies" value="1"&gt;游泳 &lt;input type="checkbox" name="hobbies" id="hobbies" class="hobbies" value="2"&gt;跑步 &lt;/p&gt; &lt;p&gt; &lt;button id="btn1"&gt;获取复选框值&lt;/button&gt; &lt;/p&gt; &lt;/body&gt;&lt;/html&gt; 方法一 通过复选框的name属性,遍历后将被选中的复选框的值输出 checkbox[index].nextSibling.nodeValue: 获取的是checkbox中标签包裹的文本值 123456789function get_checkbox_val() &#123; var hobbies = document.getElementsByName("hobbies"); for (let index = 0; index &lt; hobbies.length; index++) &#123; if (hobbies[index].checked) &#123; alert(hobbies[index].value + "," + hobbies[index].nextSibling.nodeValue); &#125; &#125; &#125; 方法二 建立一个数组,使用push方法将被选中的元素保存到数组 123456789function get_checkbox_val_with_array() &#123; var arr = []; for (let index = 0; index &lt; hobbies.length; index++) &#123; if (hobbies[index].checked) &#123; arr.push(hobbies[index].value); &#125; &#125; alert(arr); &#125; 方法三 通过class选择器 获取被选中的复选框的值 123456789function get_checkbox_val_with_selector() &#123; var hobbies = document.getElementsByClassName('hobbies'); for (let index = 0; index &lt; hobbies.length; index++) &#123; if (hobbies[index].checked) &#123; checkedValue = hobbies[index].value; alert(hobbies[index].value + "," + hobbies[index].nextSibling.nodeValue); &#125; &#125; &#125; 使用jquery 需要引入jquery,这里我使用国内的cdn jquery中通过each() 方法遍历所有被选中的复选框的值 12345678910&lt;script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"&gt;&lt;/script&gt;&lt;script&gt; $('#btn1').click(function () &#123; $("input[name='hobbies']:checked").each(function () &#123; alert($(this).val()); &#125;); &#125;); &lt;/script&gt; &lt;/script&gt; ==tips== : $(“input[name=’xxxx’]:checked”) 被选中的复选框对象集合]]></content>
@@ -82,8 +93,8 @@
         <category>javaweb</category>
       </categories>
       <tags>
-        <tag>maven</tag>
         <tag>java</tag>
+        <tag>maven</tag>
         <tag>eclipse</tag>
       </tags>
   </entry>
@@ -159,8 +170,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>maven</tag>
         <tag>java</tag>
+        <tag>maven</tag>
       </tags>
   </entry>
   <entry>
@@ -320,8 +331,8 @@
     <url>%2F2015%2F04%2F17%2Fmy-new-post%2F</url>
     <content type="text"><![CDATA[#我的新文章 这是我的第一篇在github上的博客。记录下我的工作和生活,慢慢给其他的文章都更新到这里。嬉笑怒骂也好,喜怒哀乐也罢,我就是一个俗人罢了。]]></content>
       <tags>
-        <tag>博客</tag>
         <tag>杂记</tag>
+        <tag>博客</tag>
         <tag>文章</tag>
       </tags>
   </entry>
