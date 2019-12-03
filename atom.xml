@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2019-12-02T01:27:15.511Z</updated>
+  <updated>2019-12-03T01:55:47.566Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Install python3.8 on Centos6.5</title>
+    <link href="https://pinghailinfeng.gitee.io/2019/12/03/Install-python3-8-on-Centos6-5/"/>
+    <id>https://pinghailinfeng.gitee.io/2019/12/03/Install-python3-8-on-Centos6-5/</id>
+    <published>2019-12-03T01:48:12.000Z</published>
+    <updated>2019-12-03T01:55:47.566Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-安装必要的工具"><a href="#1-安装必要的工具" class="headerlink" title="1. 安装必要的工具"></a>1. 安装必要的工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install yum-utils</span><br></pre></td></tr></table></figure><h3 id="2-使用-yum-builddep-命令-设置-python-编译环境，下载缺少的依赖"><a href="#2-使用-yum-builddep-命令-设置-python-编译环境，下载缺少的依赖" class="headerlink" title="2. 使用 yum-builddep 命令 设置 python 编译环境，下载缺少的依赖"></a>2. 使用 yum-builddep 命令 设置 python 编译环境，下载缺少的依赖</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum-builddep python</span><br></pre></td></tr></table></figure><h3 id="3-下载-python3-的源代码"><a href="#3-下载-python3-的源代码" class="headerlink" title="3. 下载 python3 的源代码"></a>3. 下载 python3 的源代码</h3><p>源代码可以在 <a href="https://www.python.org/ftp/" target="_blank" rel="noopener">https://www.python.org/ftp/python/ </a> 下载</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://www.python.org/ftp/python/3.8.0/Python-3.8.0a1.tgz</span><br></pre></td></tr></table></figure><h3 id="4-对源代码进行解压并编译安装"><a href="#4-对源代码进行解压并编译安装" class="headerlink" title="4. 对源代码进行解压并编译安装"></a>4. 对源代码进行解压并编译安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar xf Python-3.8.0a1.tgz</span><br><span class="line">cd Python-3.8.0a1</span><br><span class="line">./configure</span><br><span class="line">sudo make &amp;&amp; make install</span><br></pre></td></tr></table></figure><a id="more"></a><h3 id="5-现在-python3-已经完成安装，使用-python3-version-查看版本号"><a href="#5-现在-python3-已经完成安装，使用-python3-version-查看版本号" class="headerlink" title="5. 现在 python3 已经完成安装，使用 python3 -version 查看版本号"></a>5. 现在 python3 已经完成安装，使用 python3 -version 查看版本号</h3><p>显示 Python 3.8.0a1 表示已经成功</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 --version</span><br></pre></td></tr></table></figure><h3 id="6-如果你想把-python3-作为默认python-解析器，可以进行如下设置"><a href="#6-如果你想把-python3-作为默认python-解析器，可以进行如下设置" class="headerlink" title="6. 如果你想把 python3 作为默认python 解析器，可以进行如下设置"></a>6. 如果你想把 python3 作为默认python 解析器，可以进行如下设置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias python='/usr/local/bin/python3.8'</span><br></pre></td></tr></table></figure><h3 id="7-配置阿里pip源"><a href="#7-配置阿里pip源" class="headerlink" title="7. 配置阿里pip源"></a>7. 配置阿里pip源</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[root@localhost ~]# cd </span><br><span class="line">[root@localhost ~]# mkdir .pip</span><br><span class="line">[root@localhost ~]# cd .pip</span><br><span class="line">[root@localhost .pip]# vim pip.conf</span><br><span class="line"><span class="meta">#</span><span class="bash">文件内容如下</span></span><br><span class="line">[global]</span><br><span class="line">index-url = http://mirrors.aliyun.com/pypi/simple </span><br><span class="line"></span><br><span class="line">[install]</span><br><span class="line">trusted-host=mirrors.aliyun.com</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;1-安装必要的工具&quot;&gt;&lt;a href=&quot;#1-安装必要的工具&quot; class=&quot;headerlink&quot; title=&quot;1. 安装必要的工具&quot;&gt;&lt;/a&gt;1. 安装必要的工具&lt;/h3&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sudo yum install yum-utils&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;2-使用-yum-builddep-命令-设置-python-编译环境，下载缺少的依赖&quot;&gt;&lt;a href=&quot;#2-使用-yum-builddep-命令-设置-python-编译环境，下载缺少的依赖&quot; class=&quot;headerlink&quot; title=&quot;2. 使用 yum-builddep 命令 设置 python 编译环境，下载缺少的依赖&quot;&gt;&lt;/a&gt;2. 使用 yum-builddep 命令 设置 python 编译环境，下载缺少的依赖&lt;/h3&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;sudo yum-builddep python&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;3-下载-python3-的源代码&quot;&gt;&lt;a href=&quot;#3-下载-python3-的源代码&quot; class=&quot;headerlink&quot; title=&quot;3. 下载 python3 的源代码&quot;&gt;&lt;/a&gt;3. 下载 python3 的源代码&lt;/h3&gt;&lt;p&gt;源代码可以在 &lt;a href=&quot;https://www.python.org/ftp/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://www.python.org/ftp/python/ &lt;/a&gt; 下载&lt;/p&gt;
+&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;curl -O https://www.python.org/ftp/python/3.8.0/Python-3.8.0a1.tgz&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;4-对源代码进行解压并编译安装&quot;&gt;&lt;a href=&quot;#4-对源代码进行解压并编译安装&quot; class=&quot;headerlink&quot; title=&quot;4. 对源代码进行解压并编译安装&quot;&gt;&lt;/a&gt;4. 对源代码进行解压并编译安装&lt;/h3&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;tar xf Python-3.8.0a1.tgz&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cd Python-3.8.0a1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;./configure&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;sudo make &amp;amp;&amp;amp; make install&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="https://pinghailinfeng.gitee.io/categories/linux/"/>
+    
+    
+      <category term="python3" scheme="https://pinghailinfeng.gitee.io/tags/python3/"/>
+    
+      <category term="centos" scheme="https://pinghailinfeng.gitee.io/tags/centos/"/>
+    
+  </entry>
   
   <entry>
     <title>ios devices list</title>
@@ -901,31 +929,6 @@
       <category term="git" scheme="https://pinghailinfeng.gitee.io/tags/git/"/>
     
       <category term="版本管理" scheme="https://pinghailinfeng.gitee.io/tags/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>my-angle</title>
-    <link href="https://pinghailinfeng.gitee.io/2016/02/15/my-angle/"/>
-    <id>https://pinghailinfeng.gitee.io/2016/02/15/my-angle/</id>
-    <published>2016-02-15T13:27:07.000Z</published>
-    <updated>2016-08-19T15:08:13.443Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li><img src="http://7xindo.com1.z0.glb.clouddn.com/photoIMG_20160210_132300.jpg" alt></li><li><img src="http://7xindo.com1.z0.glb.clouddn.com/photoIMG_20160210_132850.jpg" alt></li><li><img src="http://7xindo.com1.z0.glb.clouddn.com/photoIMG_20160210_132209.jpg" alt></li><li><img src="http://7xindo.com1.z0.glb.clouddn.com/photoIMG_20160210_132106.jpg" alt></li><li><img src="http://7xindo.com1.z0.glb.clouddn.com/photoIMG_20160210_131838.jpg" alt></li><li><img src="http://7xindo.com1.z0.glb.clouddn.com/photoIMG_20160210_131523.jpg" alt></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;&lt;img src=&quot;http://7xindo.com1.z0.glb.clouddn.com/photoIMG_20160210_132300.jpg&quot; alt&gt;&lt;/li&gt;
-&lt;li&gt;&lt;img src=&quot;http://7xindo.com1.z0.glb.clo
-      
-    
-    </summary>
-    
-    
-      <category term="photo" scheme="https://pinghailinfeng.gitee.io/tags/photo/"/>
     
   </entry>
   
