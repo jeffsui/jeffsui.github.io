@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2019-12-03T01:55:47.566Z</updated>
+  <updated>2019-12-12T06:45:34.495Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vscode Cannot edit in read-only editor</title>
+    <link href="https://pinghailinfeng.gitee.io/2019/12/12/vscode-Cannot-edit-in-read-only-editor/"/>
+    <id>https://pinghailinfeng.gitee.io/2019/12/12/vscode-Cannot-edit-in-read-only-editor/</id>
+    <published>2019-12-12T06:35:56.000Z</published>
+    <updated>2019-12-12T06:45:34.495Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="vscode-Cannot-edit-in-read-only-editor-错误解决"><a href="#vscode-Cannot-edit-in-read-only-editor-错误解决" class="headerlink" title="vscode Cannot edit in read-only editor 错误解决"></a>vscode Cannot edit in read-only editor 错误解决</h1><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><blockquote><p>使用了<code>Run Code</code>插件,output是只读的</p></blockquote><h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>将 run code设置为在Terminal中运行</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File -&gt; Preferences -&gt; Settings</span><br></pre></td></tr></table></figure><p>找到 <code>run code in terminal</code> 打上 √</p><p>或 在settings.json文件中,添加一行配置信息</p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"code-runner.runInTerminal": true</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;vscode-Cannot-edit-in-read-only-editor-错误解决&quot;&gt;&lt;a href=&quot;#vscode-Cannot-edit-in-read-only-editor-错误解决&quot; class=&quot;headerlink&quot; title=&quot;vscode
+      
+    
+    </summary>
+    
+      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+    
+      <category term="IDEs" scheme="https://pinghailinfeng.gitee.io/categories/python/IDEs/"/>
+    
+    
+      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+    
+      <category term="vscode" scheme="https://pinghailinfeng.gitee.io/tags/vscode/"/>
+    
+  </entry>
   
   <entry>
     <title>Install python3.8 on Centos6.5</title>
@@ -904,31 +933,6 @@
       <category term="git" scheme="https://pinghailinfeng.gitee.io/tags/git/"/>
     
       <category term="github" scheme="https://pinghailinfeng.gitee.io/tags/github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>how to understand git detached HEAD</title>
-    <link href="https://pinghailinfeng.gitee.io/2016/08/08/how-to-understand-git-detached-HEAD/"/>
-    <id>https://pinghailinfeng.gitee.io/2016/08/08/how-to-understand-git-detached-HEAD/</id>
-    <published>2016-08-08T05:30:53.000Z</published>
-    <updated>2016-08-19T15:08:13.442Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>远程有一个develop分支，我想获取到本地,但是clone该项目的时候这个远程分支还没有创建,于是执行 <code>git checkout commit_id(develop)</code> 提示如下</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout f7c774b</span><br><span class="line">Checking out files: 100% (357/357), done.</span><br><span class="line">Note: checking out &apos;f7c774b&apos;.</span><br><span class="line"></span><br><span class="line">You are in &apos;detached HEAD&apos; state. You can look around, make experimental</span><br><span class="line">changes and commit them, and you can discard any commits you make in this</span><br><span class="line">state without impacting any branches by performing another checkout.</span><br><span class="line"></span><br><span class="line">If you want to create a new branch to retain commits you create, you may</span><br><span class="line">do so (now or later) by using -b with the checkout command again. Example:</span><br><span class="line"></span><br><span class="line">  git checkout -b new_branch_name</span><br><span class="line"></span><br><span class="line">HEAD is now at f7c774b... update jeffsui.github.io</span><br></pre></td></tr></table></figure><h2 id="出现-detached-from"><a href="#出现-detached-from" class="headerlink" title="出现 detached from ..."></a>出现 <code>detached from ...</code></h2><p>此时用<code>git branch -av</code>察看分支<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -av</span><br><span class="line">* (detached from f7c774b) f7c774b update jeffsui.github.io</span><br><span class="line">  master                  6ce1857 Site updated: 2016-08-07 22:09:10</span><br><span class="line">  remotes/origin/HEAD     -&gt; origin/master</span><br><span class="line">  remotes/origin/develop  f7c774b update jeffsui.github.io</span><br><span class="line">  remotes/origin/gh-pages 1eee93f Site updated: 2016-02-13 21:03:46</span><br><span class="line">  remotes/origin/master   6ce1857 Site updated: 2016-08-07 22:09:10</span><br></pre></td></tr></table></figure></p><p>所谓的 <code>detached HEAD</code> 其实就是<code>HEAD</code>指向的是一个<code>commit</code>而不指向任何一个<code>branch</code>的临时分支,翻译过来就是<code>游离</code>.</p><p>众所周知,每一个分支都对应了一个commit,<code>git checkout</code>其实就是修改<code>HEAD</code>文件内容,让它指向不同的分支.</p><h2 id="如何让detached-HEAD所处分支指向远程分支"><a href="#如何让detached-HEAD所处分支指向远程分支" class="headerlink" title="如何让detached HEAD所处分支指向远程分支"></a>如何让<code>detached HEAD</code>所处分支指向远程分支</h2><p>此时的分支你可以执行<code>commit</code>操作,但是无法<code>push</code>到远程分支。<br>那么我们如何把游离状态的分支指向我们指定的远程分支呢。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git fetch origin develop:develop</span><br><span class="line">From https://github.com/jeffsui/jeffsui.github.io</span><br><span class="line"> * [new branch]      develop    -&gt; develop</span><br></pre></td></tr></table></figure></p><p>继续执行<code>git branch -av</code> 命令查看分支</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -av</span><br><span class="line">* (detached from f7c774b) f7c774b update jeffsui.github.io</span><br><span class="line">  develop                 f7c774b update jeffsui.github.io</span><br><span class="line">  master                  6ce1857 Site updated: 2016-08-07 22:09:10</span><br><span class="line">  remotes/origin/HEAD     -&gt; origin/master</span><br><span class="line">  remotes/origin/develop  f7c774b update jeffsui.github.io</span><br><span class="line">  remotes/origin/gh-pages 1eee93f Site updated: 2016-02-13 21:03:46</span><br><span class="line">  remotes/origin/master   6ce1857 Site updated: 2016-08-07 22:09:10</span><br></pre></td></tr></table></figure><p>此时我们发现多了一个<code>develop</code>分支指向了远程<code>develop</code> 分支，这样我们就可以通过命令<code>git push origin develop:develop</code>到远程分支了。</p><h2 id="更简洁的方法"><a href="#更简洁的方法" class="headerlink" title="更简洁的方法"></a>更简洁的方法</h2><p><code>git fetch origin develop:develop</code> </p><p>or </p><p><code>git checkount -b origin develop:develop</code> 这样可以直接获取远程分支并创建一个本地分支。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;场景&quot;&gt;&lt;a href=&quot;#场景&quot; class=&quot;headerlink&quot; title=&quot;场景&quot;&gt;&lt;/a&gt;场景&lt;/h1&gt;&lt;p&gt;远程有一个develop分支，我想获取到本地,但是clone该项目的时候这个远程分支还没有创建,于是执行 &lt;code&gt;git checkou
-      
-    
-    </summary>
-    
-    
-      <category term="git" scheme="https://pinghailinfeng.gitee.io/tags/git/"/>
-    
-      <category term="版本管理" scheme="https://pinghailinfeng.gitee.io/tags/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"/>
     
   </entry>
   

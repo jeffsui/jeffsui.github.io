@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[vscode Cannot edit in read-only editor]]></title>
+    <url>%2F2019%2F12%2F12%2Fvscode-Cannot-edit-in-read-only-editor%2F</url>
+    <content type="text"><![CDATA[vscode Cannot edit in read-only editor 错误解决原因 使用了Run Code插件,output是只读的 解决方法将 run code设置为在Terminal中运行 1File -&gt; Preferences -&gt; Settings 找到 run code in terminal 打上 √ 或 在settings.json文件中,添加一行配置信息 1"code-runner.runInTerminal": true]]></content>
+      <categories>
+        <category>python</category>
+        <category>IDEs</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>vscode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Install python3.8 on Centos6.5]]></title>
     <url>%2F2019%2F12%2F03%2FInstall-python3-8-on-Centos6-5%2F</url>
     <content type="text"><![CDATA[1. 安装必要的工具1sudo yum install yum-utils 2. 使用 yum-builddep 命令 设置 python 编译环境，下载缺少的依赖1sudo yum-builddep python 3. 下载 python3 的源代码源代码可以在 https://www.python.org/ftp/python/ 下载 1curl -O https://www.python.org/ftp/python/3.8.0/Python-3.8.0a1.tgz 4. 对源代码进行解压并编译安装1234tar xf Python-3.8.0a1.tgzcd Python-3.8.0a1./configuresudo make &amp;&amp; make install 5. 现在 python3 已经完成安装，使用 python3 -version 查看版本号显示 Python 3.8.0a1 表示已经成功 1python3 --version 6. 如果你想把 python3 作为默认python 解析器，可以进行如下设置1alias python='/usr/local/bin/python3.8' 7. 配置阿里pip源1234567891011[root@localhost ~]# cd [root@localhost ~]# mkdir .pip[root@localhost ~]# cd .pip[root@localhost .pip]# vim pip.conf#文件内容如下[global]index-url = http://mirrors.aliyun.com/pypi/simple [install]trusted-host=mirrors.aliyun.com]]></content>
