@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[python standard library textwrap]]></title>
+    <url>%2F2020%2F01%2F06%2Fpython-standard-library-textwrap%2F</url>
+    <content type="text"><![CDATA[Python 标准库 之 textwrap 今天给大家介绍 python标准库中的 textwrap参考文档 标准库 textwrap 是一个关于文本自动换行和填充的模块。 关于这个模块官网介绍如下: textwrap 模块提供了一些快捷函数，以及可以完成所有工作的类 TextWrapper。 如果你只是要对一两个文本字符串进行自动换行或填充，快捷函数应该就够用了； 否则的话，你应该使用 TextWrapper 的实例来提高效率。 函数 textwrap.wrap(*text*, *width=70*, kwargs) 对 text (字符串) 中的单独段落自动换行以使每行长度最多为 width 个字符。 返回由输出行组成的列表，行尾不带换行符。 textwrap.fill(text, width=70, kwargs) 对 text 中的单独段落自动换行，并返回一个包含被自动换行段落的单独字符串。 fill() 是以下语句的快捷方式 1"\n".join(wrap(text, ...)) textwrap.shorten(text, width, kwargs) 折叠并截短给定的 text 以符合给定的 width。 textwrap.dedent(text)` 移除 text 中每一行的任何相同前缀空白符。 1234567# end first line with \ to avoid the empty line!s = '''\hello world'''print(repr(s)) # prints ' hello\n world\n 'print(repr(dedent(s))) # prints 'hello\n world\n' textwrap.indent(text, prefix, predicate=None)` 将 prefix 添加到 text 中选定行的开头。 通过调用 text.splitlines(True) 来对行进行拆分。 默认情况下，prefix 会被添加到所有不是只由空白符（包括任何行结束符）组成的行。 例如: 123&gt;&gt;&gt; s = 'hello\n\n \nworld'&gt;&gt;&gt; indent(s, ' ')' hello\n\n \n world' 可选的 predicate 参数可用来控制哪些行要缩进。 例如，可以很容易地为空行或只有空白符的行添加 prefix: 12345&gt;&gt;&gt; print(indent(s, '+ ', lambda line: True))+ hello+++ world 实例属性 width (默认: 70) 自动换行的最大行长度。 只要输入文本中没有长于 width 的单个单词，TextWrapper 就能保证没有长于 width 个字符的输出行。 expand_tabs (默认: True) 如果为真值，则 text 中所有的制表符将使用 text 的 expandtabs() 方法扩展为空格符。 tabsize (默认: 8) 如果 expand_tabs 为真值，则 text 中所有的制表符将扩展为零个或多个空格，具体取决于当前列位置和给定的制表宽度。 replace_whitespace (default: True) 如果为真值，在制表符扩展之后、自动换行之前，wrap() 方法将把每个空白字符都替换为单个空格。 会被替换的空白字符如下：制表，换行，垂直制表，进纸和回车 (&#39;\t\n\v\f\r&#39;)。注解 如果 expand_tabs 为假值且 replace_whitespace 为真值，每个制表符将被替换为单个空格，这与制表符扩展是 不 一样的。注解 如果 replace_whitespace 为假值，在一行的中间有可能出现换行符并导致怪异的输出。 因此，文本应当（使用 str.splitlines() 或类似方法）拆分为段落并分别进行自动换行。 drop_whitespace (默认: True) 如果为真值，每一行开头和末尾的空白字符（在包装之后、缩进之前）会被丢弃。 但是段落开头的空白字符如果后面不带任何非空白字符则不会被丢弃。 如果被丢弃的空白字符占据了一个整行，则该整行将被丢弃。 initial_indent (默认: &#39;&#39;) 将被添加到被自动换行输出内容的第一行的字符串。 其长度会被计入第一行的长度。 空字符串不会被缩进。 subsequent_indent (default: &#39;&#39;) 将被添加到被自动换行输出内容除第一行外的所有行的字符串。 其长度会被计入除行一行外的所有行的长度。 fix_sentence_endings (默认: False) 如果为真值，TextWrapper 将尝试检测句子结尾并确保句子间总是以恰好两个空格符分隔。 对于使用等宽字体的文本来说通常都需要这样。 但是，句子检测算法并不完美：它假定句子结尾是一个小写字母加字符 &#39;.&#39;, &#39;!&#39; 或 &#39;?&#39; 中的一个，并可能带有字符 &#39;&quot;&#39; 或 &quot;&#39;&quot;，最后以一个空格结束。 此算法的问题之一是它无法区分以下文本中的 “Dr.”[...] Dr. Frankenstein&#39;s monster [...]和以下文本中的 “Spot.”[...] See Spot. See Spot run [...]fix_sentence_endings 默认为假值。由于句子检测算法依赖于 string.lowercase 来确定“小写字母”，以及约定在句点后使用两个空格来分隔处于同一行的句子，因此只适用于英语文本。 break_long_words (默认: True) 如果为真值，则长度超过 width 的单词将被分开以保证行的长度不会超过 width。 如果为假值，超长单词不会被分开，因而某些行的长度可能会超过 width。 （超长单词将被单独作为一行，以尽量减少超出 width 的情况。） break_on_hyphens (默认: True) 如果为真值，将根据英语的惯例首选在空白符和复合词的连字符之后自动换行。 如果为假值，则只有空白符会被视为合适的潜在断行位置，但如果你确实不希望出现分开的单词则你必须将 break_long_words 设为假值。 之前版本的默认行为总是允许分开带有连字符的单词。 max_lines (默认: None) 如果不为 None，则输出内容将最多包含 max_lines 行，并使 placeholder 出现在输出内容的末尾。 placeholder (默认: &#39; [...]&#39;) 该文本将在输出文本被截短时出现在文本末尾。 公有方法 wrap(text) 对 text (字符串) 中的单独段落自动换行以使每行长度最多为 width 个字符。 所有自动换行选项均获取自 TextWrapper 实例的实例属性。 返回由输出行组成的列表，行尾不带换行符。 如果自动换行输出结果没有任何内容，则返回空列表。 fill(text) 对 text 中的单独段落自动换行并返回包含被自动换行段落的单独字符串。 具体实例比如我想格式化一个文本,每一行要求输出的文字固定字符的长度30,就可以使用textwrap这个模块 1234567891011121314151617&gt;&gt;&gt; from textwrap import wrap&gt;&gt;&gt;&gt;&gt;&gt; string = 'This is python programming language. One of its kind, it is also one of the most popular language in the world.'&gt;&gt;&gt;&gt;&gt;&gt; s = wrap(text = string, width = 30)&gt;&gt;&gt; print s&gt;&gt;&gt; ['This is python programming', 'language. One of its kind, it', 'is also one of the most', 'popular language in the world.']&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; for i in s: print i This is python programminglanguage. One of its kind, itis also one of the mostpopular language in the world.&gt;&gt;&gt;]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>standard_library</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[python standard library http.server]]></title>
+    <url>%2F2020%2F01%2F05%2Fpython-standard-library-http-server%2F</url>
+    <content type="text"><![CDATA[python 标准库之 http.server 今天下午主要是陪我闺女,组装完成一个桌面足球,很开心的一下午。 孩子的童年只有一次,有时间多陪陪孩子吧。 python 标准库 http.server从python2时代开始 SimpleHttpServer就陪伴我走过那些快乐的时光。可以自己建立一个简单的文件服务器,让同事们通过浏览器就可以访问我电脑上的资源,而不需要http server或者 ftp软件。 到了python3时代,这个模块被合并进了http.server。 参考网址 这个模块定义了实现 HTTP 服务器（ Web 服务器）的类 。 HTTPServer 是 socketserver.TCPServer 的一个子类。它会创建和侦听 HTTP 套接字，并将请求调度给处理程序。用于创建和运行服务器的代码看起来像这样 1234def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler): server_address = ('', 8000) httpd = server_class(server_address, handler_class) httpd.serve_forever() 核心类class http.server.HTTPServer(server_address, RequestHandlerClass) 该类基于 TCPServer 类，并会将服务器地址存入名为 server_name 和 server_port 的实例变量中。服务器可被处理程序通过 server 实例变量访问。 class http.server.ThreadingHTTPServer(server_address, RequestHandlerClass) 根据官方说明,这是一个基于 ThreadingMixIn的类,主要功能是使用线程处理请求。 实例变量BaseHTTPRequestHandler has the following instance variables: client_address 包含指向客户地址的元组类型数据(host,port) server 包含Server实例 close_connection 返回一个Boolean类型数据,在handle_one_request() ,表明另一个请求开始,或者当前请求关闭。 requestline 包含http请求行，. 这个属性应该用 handle_one_request()设置. 如果一个不存在的请求被执行,应将其设置成空字符串。 command 包含Http请求类型,例如:’Get’ path 包含请求url路径 request_version 包含请求的版本,例如:’ HTTP/1.0 ‘ headers 包含通过MessageClass 类声明的变量。实例会转化为http请求。http.client 中parse_headers() 方法可以验证一个非法的请求头,参照 RFC 2822 中请求头说明。 rfile 一个io.BufferedIOBase 输入流对象，读取可能输入数据。 wfile 根据客户端请求,返回数据 实例属性 server_version 格式化输出服务器版本信息,例如&#39;BaseHTTP/0.2&#39;. sys_version 包含系统版本,使用version_string 方法和server_version 类变量,例如:&#39;Python/1.4&#39;. error_message_format 声明错误信息 error_content_type 声明错误上下文类型默认值是 &#39;text/html&#39;. protocol_version 声明HTTP协议版本,例如:&#39;HTTP/1.1&#39;, 服务器会保持连接。 MessageClass 声明email.message.Message](https://docs.python.org/zh-cn/3.8/library/email.compat32-message.html#email.message.Message)-like 类处理请求头。通常不用重写,默认指向http.client.HTTPMessage属性。. responses 回应 通常使用send_response_only() 和send_error() 方法实现。 实例方法 handle() 调用handle_one_request() 方法一次(如果保持连接,会调用多次) 来管理http请求。. 此方法不需要重写,除此以外,可以重写 do_*() 等方法实现处理请求。 handle_one_request() 此方法不需要重写,实现处理 do_*()等方法. handle_expect_100() 当 HTTP/1.1 请求时,服务器期望返回 100-continue 并返回 200响应码。如果想拒绝客户端连接,会抛出一个异常。 send_error(code, message=None, explain=None) send_response(code, message=None) send_header(keyword, value) send_response_only(code, message=None) end_headers() flush_headers() log_request(code=’-‘, size=’-‘) log_error(…) log_message(format, …) version_string() date_time_string(timestamp=None) log_date_time_string() address_string() 创建一个简易服务器例如下面的代码: 12345678910import http.serverimport socketserverPORT = 8000Handler = http.server.SimpleHTTPRequestHandlerwith socketserver.TCPServer(("", PORT), Handler) as httpd: print("serving at port", PORT) httpd.serve_forever() 当然也可以通过命令行方式创建,例如: 1python -m http.server 8000 默认绑定本机的ip地址。 当然你可以指定一个ip地址,加入--bind参数 1python -m http.server 8000 --bind 127.0.0.1 3.8 新增 支持绑定ipv6地址 3.7 新增支持绑定一个cgi程序,例如 1python -m http.server --cgi 8000 一个具体应用的实例12345678910111213141516171819202122232425262728293031323334#!/usr/bin/env python from http.server import BaseHTTPRequestHandler, HTTPServer # HTTPRequestHandler classclass testHTTPServer_RequestHandler(BaseHTTPRequestHandler): # GET def do_GET(self): # Send response status code self.send_response(200) # Send headers self.send_header('Content-type','text/html') self.end_headers() # Send message back to client message = "Hello world!" # Write content as utf-8 data self.wfile.write(bytes(message, "utf8")) return def run(): print('starting server...') # Server settings # Choose port 8080, for port 80, which is normally used for a http server, you need root access server_address = ('127.0.0.1', 8081) httpd = HTTPServer(server_address, testHTTPServer_RequestHandler) print('running server...') httpd.serve_forever() run() 备注: 此处wfile.write方法 需要转成 byte类型, 可以参考stackoverflow上的关于这个问题的讨论:: python-3-x-basehttpserver-or-http-server 小结看完http.server 深有感触,一个简单的服务器学习了这么多http协议实现,看来还得继续深入理解。]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>standard_library</tag>
+        <tag>http.server</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[windows jupyter notebook nbextension usage]]></title>
     <url>%2F2020%2F01%2F04%2Fwindows-jupyter-notebook-nbextension-usage%2F</url>
     <content type="text"><![CDATA[windows下jupyter 安装nbextension 插件填坑记 环境 软件和操作系统 版本号 操作系统 win7 64位 sp1 python版本 3.6.2 jupyter core 4.5.0 jupyter notebook 6.0.0 问题描述本来以为给jupyter安装个插件,分分钟搞定的事,结果三天了还是没解决。 我回家用win10的电脑,5分钟搞定。 尝试了各种方式,卸载重装,修改环境变量,换不同的python版本。后来我快要放放弃的时候，我终于搞定了。 问题定位我突然想到,是不是因为我安装了anaconda,于是增加了搜索关键字,终于发现了问题所在。 正确操作步骤 确定是已经安装好anaconda 要在anaconda prompt模式下(重要的事情说三遍,三遍,三遍，此处省略一万字,万马奔腾) pip install jupyter_contrib_nbextensions 配置：jupyter contrib nbextension install --user --skip-running-check 启动jupyter notebook，“Nbextensions”出现在导航栏中，在勾选目录。 查看 jupyter 版本123456789101112(base) C:\Users\Mr.Sui&gt;jupyter --versionjupyter core : 4.5.0jupyter-notebook : 6.0.0qtconsole : 4.5.1ipython : 7.6.1ipykernel : 5.1.1jupyter client : 5.3.1jupyter lab : 1.0.2nbconvert : 5.5.0ipywidgets : 7.5.0nbformat : 4.4.0traitlets : 4.3.2 有用的插件 代码导航功能 Table of Contents 变量检查器 Variable Inspector 显示单元格运行的时间和长度 Excute time 折叠/放下标题 Collapsible Headings 折叠代码 Codefolding 隐藏代码 hide input 隐藏选定代码 hide input all 隐藏所有代码 代码自动补全 Hinterland 通知 Notify Jupyter Notebook 首先你要勾选Notify扩展，其次再点击按钮正式启动。你选择的时间是Jupyter Notebook运行的最短时间，到点后它会向你发送通知 隐藏活动状态栏 zenmode tqdm_notebook 为循环代码显示执行进度条 12# 先安装 tqdm ：pip install tqdm# 使用时导入：from tqdm import tqdm_notebook 脚本自动保存 AutoSaveTime 参考文章官网教程 jupyter notebook的插件拓展—-jupyter_contrib_nbextensions 使用Jupyter Notebook编写技术文档]]></content>
@@ -8,10 +33,10 @@
         <category>python</category>
       </categories>
       <tags>
+        <tag>windows</tag>
         <tag>python</tag>
         <tag>juypter</tag>
         <tag>nbextension</tag>
-        <tag>windows</tag>
       </tags>
   </entry>
   <entry>
@@ -184,8 +209,8 @@
         <category>javascript</category>
       </categories>
       <tags>
-        <tag>javaweb</tag>
         <tag>javascript</tag>
+        <tag>javaweb</tag>
       </tags>
   </entry>
   <entry>
@@ -208,8 +233,8 @@
         <category>javaweb</category>
       </categories>
       <tags>
-        <tag>maven</tag>
         <tag>java</tag>
+        <tag>maven</tag>
         <tag>eclipse</tag>
       </tags>
   </entry>
@@ -285,8 +310,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>maven</tag>
         <tag>java</tag>
+        <tag>maven</tag>
       </tags>
   </entry>
   <entry>
@@ -297,8 +322,8 @@
         <category>nginx</category>
       </categories>
       <tags>
-        <tag>windows</tag>
         <tag>nginx</tag>
+        <tag>windows</tag>
       </tags>
   </entry>
   <entry>
