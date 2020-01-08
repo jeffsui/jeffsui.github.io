@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库之 http 山雨欲来风满楼,最近不是很太平,希望世界和平吧。 python 标准库学习 之  httphttp 是一个包，它收集了多个用于处理超文本传输协议的模块: 参考文档  http.client 是一个低层级的 HTTP 协议客户端；对于高层级的 URL 访问请使用 urllib.request http.server 包含基于 socketserver 的基本 HTT">
+<meta name="keywords" content="python,standard_library,http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library http">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/01/08/python-standard-library-http/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库之 http 山雨欲来风满楼,最近不是很太平,希望世界和平吧。 python 标准库学习 之  httphttp 是一个包，它收集了多个用于处理超文本传输协议的模块: 参考文档  http.client 是一个低层级的 HTTP 协议客户端；对于高层级的 URL 访问请使用 urllib.request http.server 包含基于 socketserver 的基本 HTT">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20191223_blog_2.jpg?raw=true">
+<meta property="og:updated_time" content="2020-01-08T03:49:24.667Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library http">
+<meta name="twitter:description" content="python 标准库之 http 山雨欲来风满楼,最近不是很太平,希望世界和平吧。 python 标准库学习 之  httphttp 是一个包，它收集了多个用于处理超文本传输协议的模块: 参考文档  http.client 是一个低层级的 HTTP 协议客户端；对于高层级的 URL 访问请使用 urllib.request http.server 包含基于 socketserver 的基本 HTT">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20191223_blog_2.jpg?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/01/08/python-standard-library-http/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library http | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>timeline</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/08/python-standard-library-http/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library http
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-08 10:57:24 / 修改时间：11:49:24" itemprop="dateCreated datePublished" datetime="2020-01-08T10:57:24+08:00">2020-01-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">13k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">12 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库之-http"><a href="#python-标准库之-http" class="headerlink" title="python 标准库之 http"></a>python 标准库之 http</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20191223_blog_2.jpg?raw=true" alt></p>
+<p>山雨欲来风满楼,最近不是很太平,希望世界和平吧。</p>
+<h2 id="python-标准库学习-之-http"><a href="#python-标准库学习-之-http" class="headerlink" title="python 标准库学习 之  http"></a>python 标准库学习 之  http</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/http.html#module-http" target="_blank" rel="noopener"><code>http</code></a> 是一个包，它收集了多个用于处理超文本传输协议的模块:</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.html" target="_blank" rel="noopener">参考文档</a></p>
+<ul>
+<li><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#module-http.client" target="_blank" rel="noopener"><code>http.client</code></a> 是一个低层级的 HTTP 协议客户端；对于高层级的 URL 访问请使用 <a href="https://docs.python.org/zh-cn/3.8/library/urllib.request.html#module-urllib.request" target="_blank" rel="noopener"><code>urllib.request</code></a></li>
+<li><a href="https://docs.python.org/zh-cn/3.8/library/http.server.html#module-http.server" target="_blank" rel="noopener"><code>http.server</code></a> 包含基于 <a href="https://docs.python.org/zh-cn/3.8/library/socketserver.html#module-socketserver" target="_blank" rel="noopener"><code>socketserver</code></a> 的基本 HTTP 服务类</li>
+<li><a href="https://docs.python.org/zh-cn/3.8/library/http.cookies.html#module-http.cookies" target="_blank" rel="noopener"><code>http.cookies</code></a> 包含一些有用来实现通过 cookies 进行状态管理的工具</li>
+<li><a href="https://docs.python.org/zh-cn/3.8/library/http.cookiejar.html#module-http.cookiejar" target="_blank" rel="noopener"><code>http.cookiejar</code></a> 提供了 cookies 的持久化</li>
+</ul>
+<p>本次只整理 http.client的内容,后面持续更新。</p>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p><code>class http.HTTPStatus</code></p>
+<p>使用方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> http <span class="keyword">import</span> HTTPStatus</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>HTTPStatus.OK</span><br><span class="line">&lt;HTTPStatus.OK: <span class="number">200</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>HTTPStatus.OK == <span class="number">200</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>HTTPStatus.OK.value</span><br><span class="line"><span class="number">200</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>HTTPStatus.OK.phrase</span><br><span class="line"><span class="string">'OK'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>HTTPStatus.OK.description</span><br><span class="line"><span class="string">'Request fulfilled, document follows'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(HTTPStatus)</span><br><span class="line">[&lt;HTTPStatus.CONTINUE: <span class="number">100</span>&gt;, &lt;HTTPStatus.SWITCHING_PROTOCOLS: <span class="number">101</span>&gt;, ...]</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h3><table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>映射名</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>100</code></td>
+<td><code>CONTINUE</code></td>
+<td>HTTP/1.1 <a href="https://tools.ietf.org/html/rfc7231.html" target="_blank" rel="noopener"><strong>RFC 7231</strong></a>, 6.2.1 节</td>
+</tr>
+<tr>
+<td><code>101</code></td>
+<td><code>SWITCHING_PROTOCOLS</code></td>
+<td>HTTP/1.1 RFC 7231, 6.2.2 节</td>
+</tr>
+<tr>
+<td><code>102</code></td>
+<td><code>PROCESSING</code></td>
+<td>WebDAV RFC 2518, 10.1 节</td>
+</tr>
+<tr>
+<td><code>200</code></td>
+<td><code>OK</code></td>
+<td>HTTP/1.1 RFC 7231, 6.3.1 节</td>
+</tr>
+<tr>
+<td><code>201</code></td>
+<td><code>CREATED</code></td>
+<td>HTTP/1.1 RFC 7231, 6.3.2 节</td>
+</tr>
+<tr>
+<td><code>202</code></td>
+<td><code>ACCEPTED</code></td>
+<td>HTTP/1.1 RFC 7231, 6.3.3 节</td>
+</tr>
+<tr>
+<td><code>203</code></td>
+<td><code>NON_AUTHORITATIVE_INFORMATION</code></td>
+<td>HTTP/1.1 RFC 7231, 6.3.4 节</td>
+</tr>
+<tr>
+<td><code>204</code></td>
+<td><code>NO_CONTENT</code></td>
+<td>HTTP/1.1 RFC 7231, 6.3.5 节</td>
+</tr>
+<tr>
+<td><code>205</code></td>
+<td><code>RESET_CONTENT</code></td>
+<td>HTTP/1.1 RFC 7231, 6.3.6 节</td>
+</tr>
+<tr>
+<td><code>206</code></td>
+<td><code>PARTIAL_CONTENT</code></td>
+<td>HTTP/1.1 RFC 7233, 4.1 节</td>
+</tr>
+<tr>
+<td><code>207</code></td>
+<td><code>MULTI_STATUS</code></td>
+<td>WebDAV RFC 4918, 11.1 节</td>
+</tr>
+<tr>
+<td><code>208</code></td>
+<td><code>ALREADY_REPORTED</code></td>
+<td>WebDAV Binding Extensions RFC 5842, 7.1 节（实验性）</td>
+</tr>
+<tr>
+<td><code>226</code></td>
+<td><code>IM_USED</code></td>
+<td>Delta Encoding in HTTP RFC 3229, 10.4.1 节</td>
+</tr>
+<tr>
+<td><code>300</code></td>
+<td><code>MULTIPLE_CHOICES</code>：有多种资源可选择</td>
+<td>HTTP/1.1 RFC 7231, 6.4.1 节</td>
+</tr>
+<tr>
+<td><code>301</code></td>
+<td><code>MOVED_PERMANENTLY</code>：永久移动</td>
+<td>HTTP/1.1 RFC 7231, 6.4.2 节</td>
+</tr>
+<tr>
+<td><code>302</code></td>
+<td><code>FOUND</code>：临时移动</td>
+<td>HTTP/1.1 RFC 7231, 6.4.3 节</td>
+</tr>
+<tr>
+<td><code>303</code></td>
+<td><code>SEE_OTHER</code>：已经移动</td>
+<td>HTTP/1.1 RFC 7231, 6.4.4 节</td>
+</tr>
+<tr>
+<td><code>304</code></td>
+<td><code>NOT_MODIFIED</code>：没有修改</td>
+<td>HTTP/1.1 RFC 7232, 4.1 节</td>
+</tr>
+<tr>
+<td><code>305</code></td>
+<td><code>USE_PROXY</code>：使用代理</td>
+<td>HTTP/1.1 RFC 7231, 6.4.5 节</td>
+</tr>
+<tr>
+<td><code>307</code></td>
+<td><code>TEMPORARY_REDIRECT</code>：临时重定向</td>
+<td>HTTP/1.1 <a href="https://tools.ietf.org/html/rfc7231.html" target="_blank" rel="noopener"><strong>RFC 7231</strong></a>, 6.4.7 节</td>
+</tr>
+<tr>
+<td><code>308</code></td>
+<td><code>PERMANENT_REDIRECT</code>：永久重定向</td>
+<td>Permanent Redirect <a href="https://tools.ietf.org/html/rfc7238.html" target="_blank" rel="noopener"><strong>RFC 7238</strong></a>, Section 3 (Experimental)</td>
+</tr>
+<tr>
+<td><code>400</code></td>
+<td><code>BAD_REQUEST</code>：错误请求</td>
+<td>HTTP/1.1 RFC 7231, 6.5.1 节</td>
+</tr>
+<tr>
+<td><code>401</code></td>
+<td><code>UNAUTHORIZED</code>：未授权</td>
+<td>HTTP/1.1 Authentication RFC 7235, 3.1 节</td>
+</tr>
+<tr>
+<td><code>402</code></td>
+<td><code>PAYMENT_REQUIRED</code>：保留，将来使用</td>
+<td>HTTP/1.1 RFC 7231, 6.5.2 节</td>
+</tr>
+<tr>
+<td><code>403</code></td>
+<td><code>FORBIDDEN</code>：禁止</td>
+<td>HTTP/1.1 RFC 7231, 6.5.3 节</td>
+</tr>
+<tr>
+<td><code>404</code></td>
+<td><code>NOT_FOUND</code>：没有找到</td>
+<td>HTTP/1.1 RFC 7231, 6.5.4 节</td>
+</tr>
+<tr>
+<td><code>405</code></td>
+<td><code>METHOD_NOT_ALLOWED</code>：该请求方法不允许</td>
+<td>HTTP/1.1 RFC 7231, 6.5.5 节</td>
+</tr>
+<tr>
+<td><code>406</code></td>
+<td><code>NOT_ACCEPTABLE</code>：不可接受</td>
+<td>HTTP/1.1 RFC 7231, 6.5.6 节</td>
+</tr>
+<tr>
+<td><code>407</code></td>
+<td><code>PROXY_AUTHENTICATION_REQUIRED</code>：要求使用代理验证身份</td>
+<td>HTTP/1.1 Authentication RFC 7235, 3.1 节</td>
+</tr>
+<tr>
+<td><code>408</code></td>
+<td><code>REQUEST_TIMEOUT</code>：请求超时</td>
+<td>HTTP/1.1 <a href="https://tools.ietf.org/html/rfc7231.html" target="_blank" rel="noopener"><strong>RFC 7231</strong></a>, 6.5.7 节</td>
+</tr>
+<tr>
+<td><code>409</code></td>
+<td><code>CONFLICT</code>：冲突</td>
+<td>HTTP/1.1 RFC 7231, 6.5.8 节</td>
+</tr>
+<tr>
+<td><code>410</code></td>
+<td><code>GONE</code>：已经不在了</td>
+<td>HTTP/1.1 RFC 7231, 6.5.9 节</td>
+</tr>
+<tr>
+<td><code>411</code></td>
+<td><code>LENGTH_REQUIRED</code>：长度要求</td>
+<td>HTTP/1.1 RFC 7231, 6.5.10 节</td>
+</tr>
+<tr>
+<td><code>412</code></td>
+<td><code>PRECONDITION_FAILED</code>：前提条件错误</td>
+<td>HTTP/1.1 RFC 7232, 4.2 节</td>
+</tr>
+<tr>
+<td><code>413</code></td>
+<td><code>REQUEST_ENTITY_TOO_LARGE</code>：请求体太大了</td>
+<td>HTTP/1.1 RFC 7231, 6.5.11 节</td>
+</tr>
+<tr>
+<td><code>414</code></td>
+<td><code>REQUEST_URI_TOO_LONG</code>：请求URI太长了</td>
+<td>HTTP/1.1 RFC 7231, 6.5.12 节</td>
+</tr>
+<tr>
+<td><code>415</code></td>
+<td><code>UNSUPPORTED_MEDIA_TYPE</code>：不支持的媒体格式</td>
+<td>HTTP/1.1 RFC 7231, 6.5.13 节</td>
+</tr>
+<tr>
+<td><code>416</code></td>
+<td><code>REQUESTED_RANGE_NOT_SATISFIABLE</code></td>
+<td>HTTP/1.1 Range Requests RFC 7233, 4.4 节</td>
+</tr>
+<tr>
+<td><code>417</code></td>
+<td><code>EXPECTATION_FAILED</code>：期望失败</td>
+<td>HTTP/1.1 RFC 7231, 6.5.14 节</td>
+</tr>
+<tr>
+<td><code>421</code></td>
+<td><code>MISDIRECTED_REQUEST</code></td>
+<td>HTTP/2 <a href="https://tools.ietf.org/html/rfc7540.html" target="_blank" rel="noopener"><strong>RFC 7540</strong></a>, 9.1.2 节</td>
+</tr>
+<tr>
+<td><code>422</code></td>
+<td><code>UNPROCESSABLE_ENTITY</code>：可加工实体</td>
+<td>WebDAV RFC 4918, 11.2 节</td>
+</tr>
+<tr>
+<td><code>423</code></td>
+<td><code>LOCKED</code>：锁着</td>
+<td>WebDAV RFC 4918, 11.3 节</td>
+</tr>
+<tr>
+<td><code>424</code></td>
+<td><code>FAILED_DEPENDENCY</code>：失败的依赖</td>
+<td>WebDAV RFC 4918, 11.4 节</td>
+</tr>
+<tr>
+<td><code>426</code></td>
+<td><code>UPGRADE_REQUIRED</code>：升级需要</td>
+<td>HTTP/1.1 RFC 7231, 6.5.15 节</td>
+</tr>
+<tr>
+<td><code>428</code></td>
+<td><code>PRECONDITION_REQUIRED</code>：先决条件要求</td>
+<td>Additional HTTP Status Codes RFC 6585</td>
+</tr>
+<tr>
+<td><code>429</code></td>
+<td><code>TOO_MANY_REQUESTS</code>：太多的请求</td>
+<td>Additional HTTP Status Codes RFC 6585</td>
+</tr>
+<tr>
+<td><code>431</code></td>
+<td><code>REQUEST_HEADER_FIELDS_TOO_LARGE</code>：请求头太大</td>
+<td>Additional HTTP Status Codes RFC 6585</td>
+</tr>
+<tr>
+<td><code>451</code></td>
+<td><code>UNAVAILABLE_FOR_LEGAL_REASONS</code></td>
+<td>HTTP 状态码用于报告法律障碍 <a href="https://tools.ietf.org/html/rfc7725.html" target="_blank" rel="noopener"><strong>RFC 7725</strong></a></td>
+</tr>
+<tr>
+<td><code>500</code></td>
+<td><code>INTERNAL_SERVER_ERROR</code>：内部服务错误</td>
+<td>HTTP/1.1 RFC 7231, 6.6.1 节</td>
+</tr>
+<tr>
+<td><code>501</code></td>
+<td><code>NOT_IMPLEMENTED</code>：不可执行</td>
+<td>HTTP/1.1 RFC 7231, 6.6.2 节</td>
+</tr>
+<tr>
+<td><code>502</code></td>
+<td><code>BAD_GATEWAY</code>：无效网关</td>
+<td>HTTP/1.1 RFC 7231, 6.6.3 节</td>
+</tr>
+<tr>
+<td><code>503</code></td>
+<td><code>SERVICE_UNAVAILABLE</code>：服务不可用</td>
+<td>HTTP/1.1 RFC 7231, 6.6.4 节</td>
+</tr>
+<tr>
+<td><code>504</code></td>
+<td><code>GATEWAY_TIMEOUT</code>：网关超时</td>
+<td>HTTP/1.1 RFC 7231, 6.6.5 节</td>
+</tr>
+<tr>
+<td><code>505</code></td>
+<td><code>HTTP_VERSION_NOT_SUPPORTED</code>：HTTP版本不支持</td>
+<td>HTTP/1.1 RFC 7231, 6.6.6 节</td>
+</tr>
+<tr>
+<td><code>506</code></td>
+<td><code>VARIANT_ALSO_NEGOTIATES</code>：服务器存在内部配置错误</td>
+<td>透明内容协商在： HTTP <a href="https://tools.ietf.org/html/rfc2295.html" target="_blank" rel="noopener"><strong>RFC 2295</strong></a>, 8.1 节（实验性）</td>
+</tr>
+<tr>
+<td><code>507</code></td>
+<td><code>INSUFFICIENT_STORAGE</code>：存储不足</td>
+<td>WebDAV RFC 4918, 11.5 节</td>
+</tr>
+<tr>
+<td><code>508</code></td>
+<td><code>LOOP_DETECTED</code>：循环检测</td>
+<td>WebDAV Binding Extensions RFC 5842, 7.2 节（实验性）</td>
+</tr>
+<tr>
+<td><code>510</code></td>
+<td><code>NOT_EXTENDED</code>：不扩展</td>
+<td>WebDAV Binding Extensions RFC 5842, 7.2 节（实验性）</td>
+</tr>
+<tr>
+<td><code>511</code></td>
+<td><code>NETWORK_AUTHENTICATION_REQUIRED</code>：要求网络身份验证</td>
+<td>Additional HTTP Status Codes <a href="https://tools.ietf.org/html/rfc6585.html" target="_blank" rel="noopener"><strong>RFC 6585</strong></a>, 6 节</td>
+</tr>
+</tbody>
+</table>
+<p>为了保持向后兼容性，枚举值也以常量形式出现在 <a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#module-http.client" target="_blank" rel="noopener"><code>http.client</code></a> 模块中，。 枚举名等于常量名 (例如 <code>http.HTTPStatus.OK</code> 也可以是 <code>http.client.OK</code>)。</p>
+<h2 id="http-client-对象"><a href="#http-client-对象" class="headerlink" title="http.client 对象"></a>http.client 对象</h2><p>这个模块定义了实现 HTTP 和 HTTPS 协议客户端的类。 它通常不直接使用 — 模块 <a href="https://docs.python.org/zh-cn/3.8/library/urllib.request.html#module-urllib.request" target="_blank" rel="noopener"><code>urllib.request</code></a> 用它来处理使用 HTTP 和 HTTPS 的 URL。</p>
+<p>参见 The <a href="https://requests.readthedocs.io/en/master/" target="_blank" rel="noopener">Requests</a> 是一个高级的实现http协议的http客户端接口库.</p>
+<p><strong>注意</strong>: HTTPS 支持仅在编译 Python 时启用了 SSL 支持的情况下（通过 <a href="https://docs.python.org/zh-cn/3.8/library/ssl.html#module-ssl" target="_blank" rel="noopener"><code>ssl</code></a> 模块）可用。</p>
+<p>强烈建议看源代码 <a href="https://github.com/python/cpython/tree/3.8/Lib/http/client.py" target="_blank" rel="noopener">Lib/http/client.py</a></p>
+<p>我摘取其中关于http请求状态的描述</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> (null)</span><br><span class="line">   |</span><br><span class="line">   | HTTPConnection()</span><br><span class="line">   v</span><br><span class="line"> Idle</span><br><span class="line">   |</span><br><span class="line">   | putrequest()</span><br><span class="line">   v</span><br><span class="line"> Request-started</span><br><span class="line">   |</span><br><span class="line">   | ( putheader() )*  endheaders()</span><br><span class="line">   v</span><br><span class="line"> Request-sent</span><br><span class="line">   |\_____________________________</span><br><span class="line">   |                              | getresponse() raises</span><br><span class="line">   | response = getresponse()     | ConnectionError</span><br><span class="line">   v                              v</span><br><span class="line"> Unread-response                Idle</span><br><span class="line"> [Response-headers-read]</span><br><span class="line">   |\____________________</span><br><span class="line">   |                     |</span><br><span class="line">   | response.read()     | putrequest()</span><br><span class="line">   v                     v</span><br><span class="line"> Idle                  Req-started-unread-response</span><br><span class="line">                  ______/|</span><br><span class="line">                /        |</span><br><span class="line">response.read() |        | ( putheader() )*  endheaders()</span><br><span class="line">                v        v</span><br><span class="line">    Request-started    Req-sent-unread-response</span><br><span class="line">                         |</span><br><span class="line">                         | response.read()</span><br><span class="line">                         v</span><br><span class="line">                       Request-sent</span><br></pre></td></tr></table></figure>
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><ul>
+<li><code>class http.client.HTTPConnection(*host*, *port=None*, [*timeout*, ]*source_address=None*, *blocksize=8192*)</code></li>
+</ul>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPConnection" target="_blank" rel="noopener"><code>HTTPConnection</code></a> 的实例代表与 HTTP 的一个连接事务。 它的实例化应当传入一个主机和可选的端口号。 如果没有传入端口号，如果主机字符串的形式为 <code>主机:端口</code> 则会从中提取端口，否则将使用默认的 HTTP 端口（80）。 如果给出了可选的 <em>timeout</em> 参数，则阻塞操作（例如连接尝试）将在指定的秒数之后超时（如果未给出，则使用全局默认超时设置）。 可选的 <em>source_address</em> 参数可以为一个 (主机, 端口) 元组，用作进行 HTTP 连接的源地址。 可选的 <em>blocksize</em> 参数可以字节为单位设置缓冲区的大小，用来发送文件类消息体。</p>
+<p>举个例子，以下调用都是创建连接到同一主机和端口的服务器的实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>h1 = http.client.HTTPConnection(<span class="string">'www.python.org'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>h2 = http.client.HTTPConnection(<span class="string">'www.python.org:80'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>h3 = http.client.HTTPConnection(<span class="string">'www.python.org'</span>, <span class="number">80</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>h4 = http.client.HTTPConnection(<span class="string">'www.python.org'</span>, <span class="number">80</span>, timeout=<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>`<em>class</em> http.client.HTTPSConnection(<em>host</em>, <em>port=None</em>, <em>key_file=None</em>, <em>cert_file=None</em>, [<em>timeout</em>, ]<em>source_address=None</em>, <em>**, </em>context=None<em>, </em>check_hostname=None<em>, </em>blocksize=8192*)<a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPSConnection" target="_blank" rel="noopener">¶</a></p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPConnection" target="_blank" rel="noopener"><code>HTTPConnection</code></a> 的子类，使用 SSL 与安全服务器进行通信。 默认端口为 <code>443</code>。 如果指定了 <em>context</em>，它必须为一个描述 SSL 各选项的 <a href="https://docs.python.org/zh-cn/3.8/library/ssl.html#ssl.SSLContext" target="_blank" rel="noopener"><code>ssl.SSLContext</code></a> 实例。</p>
+</li>
+<li><p><code>class http.client.`</code>HTTPResponse`(<em>sock</em>, <em>debuglevel=0</em>, <em>method=None</em>, <em>url=None</em>)</p>
+</li>
+</ul>
+<p>在成功连接后返回类的实例，而不是由用户直接实例化。</p>
+<h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><ul>
+<li><p><em>exception</em> <code>http.client.`</code>HTTPException`</p>
+<p>此模块中其他异常的基类。 它是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#Exception" target="_blank" rel="noopener"><code>Exception</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>http.client.`</code>NotConnected`</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPException" target="_blank" rel="noopener"><code>HTTPException</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>http.client.`</code>InvalidURL`</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPException" target="_blank" rel="noopener"><code>HTTPException</code></a> 的一个子类，如果给出了一个非数字或为空值的端口就会被引发。</p>
+</li>
+<li><p><em>exception</em> <code>http.client.`</code>UnknownProtocol`</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPException" target="_blank" rel="noopener"><code>HTTPException</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>http.client.`</code>UnknownTransferEncoding`</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPException" target="_blank" rel="noopener"><code>HTTPException</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>http.client.`</code>UnimplementedFileMode`</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPException" target="_blank" rel="noopener"><code>HTTPException</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>http.client.`</code>IncompleteRead`</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPException" target="_blank" rel="noopener"><code>HTTPException</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>http.client.`</code>ImproperConnectionState`</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPException" target="_blank" rel="noopener"><code>HTTPException</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>http.client.`</code>CannotSendRequest`</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.ImproperConnectionState" target="_blank" rel="noopener"><code>ImproperConnectionState</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>http.client.`</code>CannotSendHeader`</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.ImproperConnectionState" target="_blank" rel="noopener"><code>ImproperConnectionState</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>http.client.`</code>ResponseNotReady`</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.ImproperConnectionState" target="_blank" rel="noopener"><code>ImproperConnectionState</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>http.client.`</code>BadStatusLine`</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPException" target="_blank" rel="noopener"><code>HTTPException</code></a> 的一个子类。 如果服务器反馈了一个我们不理解的 HTTP 状态码就会被引发。</p>
+</li>
+<li><p><em>exception</em> <code>http.client.`</code>LineTooLong`</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPException" target="_blank" rel="noopener"><code>HTTPException</code></a> 的一个子类。 如果在 HTTP 协议中从服务器接收到过长的行就会被引发。</p>
+</li>
+<li><p><em>exception</em> <code>http.client.`</code>RemoteDisconnected`</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ConnectionResetError" target="_blank" rel="noopener"><code>ConnectionResetError</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.BadStatusLine" target="_blank" rel="noopener"><code>BadStatusLine</code></a> 的一个子类。 当尝试读取响应时的结果是未从连接读取到数据时由 <a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPConnection.getresponse" target="_blank" rel="noopener"><code>HTTPConnection.getresponse()</code></a> 引发，表明远端已关闭连接。</p>
+</li>
+</ul>
+<h3 id="常量-1"><a href="#常量-1" class="headerlink" title="常量"></a>常量</h3><ul>
+<li><p><code>http.client.`</code>HTTP_PORT`</p>
+<p>HTTP 协议默认的端口号 (总是 <code>80</code>)。</p>
+</li>
+<li><p><code>http.client.`</code>HTTPS_PORT`</p>
+<p>HTTPS 协议默认的端口号 (总是 <code>443</code>)。</p>
+</li>
+<li><p><code>http.client.`</code>responses`</p>
+<p>这个字典把 HTTP 1.1 状态码映射到 W3C 名称。例如：<code>http.client.responses[http.client.NOT_FOUND]</code> 是 <code>&#39;NOT FOUND</code> （未发现）。</p>
+</li>
+</ul>
+<h2 id="HTTPConnection-对象"><a href="#HTTPConnection-对象" class="headerlink" title="HTTPConnection 对象"></a>HTTPConnection 对象</h2><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
+<li><code>HTTPConnection.request</code>(<em>method</em>, <em>url</em>, <em>body=None</em>, <em>headers={}</em>, <em>, </em>encode_chunked=False*)</li>
+</ul>
+<p>这会使用 HTTP 请求方法 <em>method</em> 和选择器 <em>url</em> 向服务器发送请求。</p>
+<p>如果给定 <em>body</em>，那么给定的数据会在信息头完成之后发送。它可能是一个 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a> 、一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-bytes-like-object" target="_blank" rel="noopener">bytes-like object</a> 、一个打开的 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-file-object" target="_blank" rel="noopener">file object</a>，或者 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#bytes" target="_blank" rel="noopener"><code>bytes</code></a> 迭代器。如果 <em>body</em> 是字符串，它会按 HTTP 默认的 ISO-8859-1 编码；如果是一个字节类对象，它会按原样发送；如果是 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-file-object" target="_blank" rel="noopener">file object</a> ，文件的内容会被发送，这个文件对象应该支持 <code>read()</code> 方法。如果这个文件对象是一个 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#io.TextIOBase" target="_blank" rel="noopener"><code>io.TextIOBase</code></a> 实例， <code>read()</code> 方法返回的数据会按 ISO-8859-1 编码，否则 <code>read()</code> 方法返回的数据会按原样发送；如果 <em>body</em> 是一个迭代器，迭代器中的元素会被发送，直到迭代器耗尽。</p>
+<p><em>headers</em> 参数应是额外的随请求发送的 HTTP 信息头的字典。</p>
+<p>如果 <em>headers</em> 既不包含 Content-Length 也没有 Transfer-Encoding，但存在请求正文，那么这些头字段中的一个会自动设定。如果 <em>body</em> 是 <code>None</code>，那么对于要求正文的方法 (<code>PUT</code>，<code>POST</code>，和 <code>PATCH</code>)，Content-Length 头会被设为 <code>0</code>。如果 <em>body</em> 是字符串或者类似字节的对象，并且也不是 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-file-object" target="_blank" rel="noopener">文件</a>，Content-Length 头会设为正文的长度。任何其他类型的 <em>body</em> （一般是文件或迭代器）会按块编码，这时会自动设定 Transfer-Encoding 头以代替 Content-Length。</p>
+<p>在 <em>headers</em> 中指定 Transfer-Encoding 时， <em>encode_chunked</em> 是唯一相关的参数。如果 <em>encode_chunked</em> 为 <code>False</code>，HTTPConnection 对象会假定所有的编码都由调用代码处理。如果为 <code>True</code>，正文会按块编码。</p>
+<ul>
+<li><p><code>HTTPConnection.`</code>set_debuglevel`(<em>level</em>)</p>
+<p>设置调试等级。 默认的调试等级为 <code>0</code>，意味着不会打印调试输出。 任何大于 <code>0</code> 的值将使得所有当前定义的调试输出被打印到 stdout。 <code>debuglevel</code> 会被传给任何新创建的 <a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPResponse" target="_blank" rel="noopener"><code>HTTPResponse</code></a> 对象。</p>
+</li>
+<li><p><code>HTTPConnection.`</code>set_tunnel`(<em>host</em>, <em>port=None</em>, <em>headers=None</em>)</p>
+<p>为 HTTP 连接隧道设置主机和端口。 这将允许通过代理服务器运行连接。</p>
+<p>host 和 port 参数指明隧道连接的位置（即 CONNECT 请求所包含的地址，而 <em>不是</em> 代理服务器的地址）。</p>
+<p>headers 参数应为一个随 CONNECT 请求发送的额外 HTTP 标头的映射。</p>
+<p>例如，要通过一个运行于本机 8080 端口的 HTTPS 代理服务器隧道，我们应当向 <a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPSConnection" target="_blank" rel="noopener"><code>HTTPSConnection</code></a> 构造器传入代理的地址，并将我们最终想要访问的主机地址传给 <a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPConnection.set_tunnel" target="_blank" rel="noopener"><code>set_tunnel()</code></a> 方法:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> http.client</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>conn = http.client.HTTPSConnection(<span class="string">"localhost"</span>, <span class="number">8080</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>conn.set_tunnel(<span class="string">"www.python.org"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>conn.request(<span class="string">"HEAD"</span>,<span class="string">"/index.html"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HTTPConnection.connect()</p>
+<p>当对象被创建后连接到指定的服务器。 默认情况下，如果客户端还未建立连接，此函数会在发送请求时自动被调用。</p>
+</li>
+<li><p><code>HTTPConnection.close()</code></p>
+<p>关闭到服务器的连接。</p>
+</li>
+<li><p><code>HTTPConnection.blocksize</code></p>
+<p>用于发送文件类消息体的缓冲区大小。</p>
+</li>
+<li><p><code>HTTPConnection.send(data)</code></p>
+<p>发送数据到服务器 。这个方法直接使用将会在<a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPConnection.endheaders" target="_blank" rel="noopener">endheaders()</a>方法后和   <a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPConnection.getresponse" target="_blank" rel="noopener"><code>getresponse()</code></a> 方法调用之前被调用</p>
+</li>
+</ul>
+<h2 id="HTTPResponse-对象"><a href="#HTTPResponse-对象" class="headerlink" title="HTTPResponse 对象"></a>HTTPResponse 对象</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPResponse" target="_blank" rel="noopener"><code>HTTPResponse</code></a> 对象实例绑定从服务器返回的 Http response 内容。 response是一个可迭代对象,可以使用with上下文语句来管理。</p>
+<h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h3><ul>
+<li><p><code>HTTPResponse.read</code>([<em>amt</em>])</p>
+<p>读取并返回response body</p>
+</li>
+<li><p><code>HTTPResponse.`</code>readinto`(<em>b</em>)</p>
+<p>读取从 response body 的b长度的字节放到 buffer b中，并返回这个字节b。</p>
+</li>
+<li><p><code>HTTPResponse.getheader</code>(<em>name</em>, <em>default=None</em>)</p>
+<p>如果有匹配的header name,则返回 header name的值。如果不止一个header name的名字，则返回所有的值的字符串,通过逗号连接。</p>
+</li>
+<li><p><code>HTTPResponse.getheaders()</code></p>
+<p>返回一个包含header和value的元组元素的列表</p>
+</li>
+<li><p><code>HTTPResponse.fileno()</code></p>
+<p>Return the <code>fileno</code> of the underlying socket.</p>
+<p>返回底层套接字的fileno</p>
+</li>
+<li><p><code>HTTPResponse.msg</code></p>
+<p>一个<code>http.client.HTTPMessage</code> 消息的实例,包含response header。 <code>http.client.HTTPMessage</code> 是 <a href="https://docs.python.org/zh-cn/3.8/library/email.compat32-message.html#email.message.Message" target="_blank" rel="noopener"><code>email.message.Message</code></a>的子类</p>
+</li>
+<li><p><code>HTTPResponse.version</code></p>
+<p>Http response版本号,例如  HTTP/1.0, 11 for HTTP/1.1.</p>
+</li>
+<li><p><code>HTTPResponse.`</code>status`</p>
+<p>由服务器返回的状态码。</p>
+</li>
+<li><p><code>HTTPResponse.reason</code></p>
+<p>从服务器返回的状态码</p>
+</li>
+<li><p><code>HTTPResponse.debuglevel</code></p>
+<p>一个 debugging hook. 如果 <a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#http.client.HTTPResponse.debuglevel" target="_blank" rel="noopener"><code>debuglevel</code></a> 大于0, 消息将会被打印到控制台。</p>
+</li>
+<li><p><code>HTTPResponse.closed</code></p>
+<p>如果stream关闭,返回true</p>
+</li>
+</ul>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例:"></a>实例:</h3><p>一个使用get请求的实例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> http.client</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>conn = http.client.HTTPSConnection(<span class="string">"www.python.org"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>conn.request(<span class="string">"GET"</span>, <span class="string">"/"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r1 = conn.getresponse()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(r1.status, r1.reason)</span><br><span class="line"><span class="number">200</span> OK</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data1 = r1.read()  <span class="comment"># This will return entire content.</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># The following example demonstrates reading data in chunks.</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>conn.request(<span class="string">"GET"</span>, <span class="string">"/"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r1 = conn.getresponse()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">while</span> chunk := r1.read(<span class="number">200</span>):</span><br><span class="line"><span class="meta">... </span>    print(repr(chunk))</span><br><span class="line"><span class="string">b'&lt;!doctype html&gt;\n&lt;!--[if"...</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">&gt;&gt;&gt; # Example of an invalid request</span></span><br><span class="line"><span class="string">&gt;&gt;&gt; conn = http.client.HTTPSConnection("docs.python.org")</span></span><br><span class="line"><span class="string">&gt;&gt;&gt; conn.request("GET", "/parrot.spam")</span></span><br><span class="line"><span class="string">&gt;&gt;&gt; r2 = conn.getresponse()</span></span><br><span class="line"><span class="string">&gt;&gt;&gt; print(r2.status, r2.reason)</span></span><br><span class="line"><span class="string">404 Not Found</span></span><br><span class="line"><span class="string">&gt;&gt;&gt; data2 = r2.read()</span></span><br><span class="line"><span class="string">&gt;&gt;&gt; conn.close()</span></span><br></pre></td></tr></table></figure>
+<p>一个是用<code>head</code>方法的实例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> http.client</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>conn = http.client.HTTPSConnection(<span class="string">"www.python.org"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>conn.request(<span class="string">"HEAD"</span>, <span class="string">"/"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>res = conn.getresponse()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(res.status, res.reason)</span><br><span class="line"><span class="number">200</span> OK</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data = res.read()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(len(data))</span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data == <span class="string">b''</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>一个使用<code>post</code>提交请求的实例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> http.client, urllib.parse</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>params = urllib.parse.urlencode(&#123;<span class="string">'@number'</span>: <span class="number">12524</span>, <span class="string">'@type'</span>: <span class="string">'issue'</span>, <span class="string">'@action'</span>: <span class="string">'show'</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>headers = &#123;<span class="string">"Content-type"</span>: <span class="string">"application/x-www-form-urlencoded"</span>,</span><br><span class="line"><span class="meta">... </span>           <span class="string">"Accept"</span>: <span class="string">"text/plain"</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>conn = http.client.HTTPConnection(<span class="string">"bugs.python.org"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>conn.request(<span class="string">"POST"</span>, <span class="string">""</span>, params, headers)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>response = conn.getresponse()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(response.status, response.reason)</span><br><span class="line"><span class="number">302</span> Found</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data = response.read()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>data</span><br><span class="line"><span class="string">b'Redirecting to &lt;a href="http://bugs.python.org/issue12524"&gt;http://bugs.python.org/issue12524&lt;/a&gt;'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>conn.close()</span><br></pre></td></tr></table></figure>
+<p>一个使用<code>HTTP PUT</code>请求的实例 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># This creates an HTTP message</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># with the content of BODY as the enclosed representation</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># for the resource http://localhost:8080/file</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> http.client</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>BODY = <span class="string">"***filecontents***"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>conn = http.client.HTTPConnection(<span class="string">"localhost"</span>, <span class="number">8080</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>conn.request(<span class="string">"PUT"</span>, <span class="string">"/file"</span>, BODY)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>response = conn.getresponse()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(response.status, response.reason)</span><br><span class="line"><span class="number">200</span>, OK</span><br></pre></td></tr></table></figure>
+<h2 id="HTTPMessage-对象"><a href="#HTTPMessage-对象" class="headerlink" title="HTTPMessage 对象"></a>HTTPMessage 对象</h2><p>一个 <code>http.client.HTTPMessage</code>的实例包含了http response 请求头. 是 <a href="https://docs.python.org/zh-cn/3.8/library/email.compat32-message.html#email.message.Message" target="_blank" rel="noopener"><code>email.message.Message</code></a>类的具体实现.</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过阅读源码加深了对http协议的理解,看python实现的方式受益良多。继续加油!</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/http/" rel="tag"># http</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/07/python-standard-library-glob/" rel="next" title="python standard library glob">
+                <i class="fa fa-chevron-left"></i> python standard library glob
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库之-http"><span class="nav-number">1.</span> <span class="nav-text">python 标准库之 http</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python-标准库学习-之-http"><span class="nav-number">1.1.</span> <span class="nav-text">python 标准库学习 之  http</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常量"><span class="nav-number">1.2.</span> <span class="nav-text">常量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP状态码"><span class="nav-number">1.2.1.</span> <span class="nav-text">HTTP状态码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http-client-对象"><span class="nav-number">1.3.</span> <span class="nav-text">http.client 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类"><span class="nav-number">1.3.1.</span> <span class="nav-text">类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常"><span class="nav-number">1.3.2.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常量-1"><span class="nav-number">1.3.3.</span> <span class="nav-text">常量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPConnection-对象"><span class="nav-number">1.4.</span> <span class="nav-text">HTTPConnection 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">1.4.1.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPResponse-对象"><span class="nav-number">1.5.</span> <span class="nav-text">HTTPResponse 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-1"><span class="nav-number">1.5.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例"><span class="nav-number">1.5.2.</span> <span class="nav-text">实例:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPMessage-对象"><span class="nav-number">1.6.</span> <span class="nav-text">HTTPMessage 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=247172&auto=1&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">116k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:45</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
