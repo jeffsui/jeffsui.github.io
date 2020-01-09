@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2020-01-08T03:55:07.458Z</updated>
+  <updated>2020-01-09T06:08:43.377Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python standard library http.cookies</title>
+    <link href="https://pinghailinfeng.gitee.io/2020/01/09/python-standard-library-http-cookies/"/>
+    <id>https://pinghailinfeng.gitee.io/2020/01/09/python-standard-library-http-cookies/</id>
+    <published>2020-01-09T01:25:34.000Z</published>
+    <updated>2020-01-09T06:08:43.377Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="python-标准库-http-cookies"><a href="#python-标准库-http-cookies" class="headerlink" title="python 标准库 http.cookies"></a>python 标准库 http.cookies</h1><p>最近需要教孩子自然拼读,所以我想还是每天用一个关键词描述吧。</p><blockquote><p>traffic  .n UK /træf.ɪk/  US /ˈtræf.ɪk/  交通(拥堵)</p><p><em>There was heavy/a lot of traffic on the roads this morning.</em>今天早晨道路上车流量很大。</p><p><em>We got stuck in traffic for several hours.</em>我们碰上交通阻塞被堵了好几个小时。</p><p><em>New measures have been introduced to try and ease traffic congestion in the city.</em>这个城市已经采取了新措施，试图缓解交通拥堵。</p><p><em>Five people were injured in a traffic accident (= one involving vehicles).</em>有5人在交通事故中受伤。</p><p>US <em>I heard about the accident on the traffic report on the radio this morning.</em>我在今早电台的交通节目中听到了这起事故。</p><p><em>Air traffic has increased 30 percent in the last decade.</em>在过去的10年里，空中交通量增加了30%。</p></blockquote><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200109_traffic.jpg?raw=true" alt></p><h2 id="python-标准库学习-http-cookies"><a href="#python-标准库学习-http-cookies" class="headerlink" title="python 标准库学习   http.cookies"></a>python 标准库学习   http.cookies</h2><p>http.cookies 模块定义了类实现了http状态管理机制和cookies概念。不仅支持字符串格式化的cookie值,还支持任何序列化对象的cookie值。</p><p>模块的实现完全遵循 <a href="https://tools.ietf.org/html/rfc2109.html" target="_blank" rel="noopener"><strong>RFC 2109</strong></a> 和  <a href="https://tools.ietf.org/html/rfc2068.html" target="_blank" rel="noopener"><strong>RFC 2068</strong></a> 协议规范。但MSIE 3.0x不遵循那些规范中概述的字符规则，并且当涉及Cookie处理时，许多当今的浏览器和服务器已经放宽了解析规则。</p><p>Cookie名定义字符集中非法字符囊括在 <code>string.ascii_letters</code>,<code>string.digits</code> 和 <code>!#$%&amp;&#39;*+-.^_</code>|~:`中。    </p><h2 id="核心类"><a href="#核心类" class="headerlink" title="核心类"></a>核心类</h2><ul><li><p><em>exception</em> <code>http.cookies.CookieError</code></p><p>违反<a href="https://tools.ietf.org/html/rfc2109.html" target="_blank" rel="noopener"><strong>RFC 2109</strong></a> 规范中的错误,例如:不正确的属性或不正确的Set-Cookies header</p></li><li><p><em>class</em> <code>http.cookies.BaseCookie([*input*])</code></p><p>这个类是一个字典类型的对象,键是字符串,值是 <a href="https://docs.python.org/zh-cn/3.8/library/http.cookies.html#http.cookies.Morsel" target="_blank" rel="noopener"><code>Morsel</code></a> 的实例。</p><p>如果设置参数<code>input</code>,实际上是通过<a href="https://docs.python.org/zh-cn/3.8/library/http.cookies.html#http.cookies.BaseCookie.load" target="_blank" rel="noopener"><code>load()</code></a> 方法设置。</p></li><li><p><em>class</em> <code>http.cookies.SimpleCookie([*input*])</code></p><p>这个类是从<a href="https://docs.python.org/zh-cn/3.8/library/http.cookies.html#http.cookies.BaseCookie" target="_blank" rel="noopener"><code>BaseCookie</code></a> 继承过来并重写了   <code>value_decode()</code> and <code>value_encode()</code>方法。</p><p>SimpleCookies支持字符串格式的cookie values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       </p></li></ul><a id="more"></a><h3 id="Cookie对象"><a href="#Cookie对象" class="headerlink" title="Cookie对象"></a>Cookie对象</h3><ul><li><p><code>BaseCookie.value_decode(val)</code></p><p>以字符串形式返回 一个元组(real_value,coded_value)。其中<code>real_value</code>可以是任意类型。此方法在[<code>BaseCookie</code>]（<a href="https://docs.python.org/zh-cn/3.8/library/http.cookies.html#http.cookies.BaseCookie）中不进行解码,---因为已经存在被重写了。" target="_blank" rel="noopener">https://docs.python.org/zh-cn/3.8/library/http.cookies.html#http.cookies.BaseCookie）中不进行解码,---因为已经存在被重写了。</a></p></li><li><p><code>BaseCookie.value_encode</code>(<em>val</em>)</p><p>以字符串形式返回 一个元组(real_value,coded_value)。其中<code>val</code>可以是任意类型,<code>coded_value</code> 通常被转换为字符串类型。</p></li><li><p><code>BaseCookie.output(*attrs=None*, *header=&#39;Set-Cookie:&#39;*, *sep=&#39;\r\n&#39;*)</code></p><p>返回一个字符串表示的 用来适配 Http请求头,属性的相关方法。分隔符默认使用<code>\r\n</code>（CRLF）。</p></li><li><p><code>BaseCookie.js_output(*attrs=None*)</code></p><p>返回一个绑定Javascript脚本的对象,如果运行的浏览器支持Javascript脚本,作为输出和 out_put()的实现一样。</p></li><li><p><code>BaseCookie.load</code>(<em>rawdata</em>)`</p><p>如果参数rawdata 是字符串,转化为 HTTP_COOKIE对象,并添加值。</p><p>如果参数是字典类型,可以这样取值。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> k, v <span class="keyword">in</span> rawdata.items():     </span><br><span class="line">     cookie[k] = v</span><br></pre></td></tr></table></figure></li></ul><h3 id="Morsel-对象"><a href="#Morsel-对象" class="headerlink" title="Morsel 对象"></a>Morsel 对象</h3><p><em>class</em> <code>http.cookies.Morsel</code></p><p>部分实现了  <a href="https://tools.ietf.org/html/rfc2109.html" target="_blank" rel="noopener"><strong>RFC 2109</strong></a>  规范的键值对抽象类。</p><p>Morsels是一个字典类型的对象, 里面的键是一个常量,同<a href="https://tools.ietf.org/html/rfc2109.html" target="_blank" rel="noopener"><strong>RFC 2109</strong></a>  规范,如下面所示:</p><ul><li><code>expires</code></li><li><code>path</code></li><li><code>comment</code></li><li><code>domain</code></li><li><code>max-age</code></li><li><code>secure</code></li><li><code>version</code></li><li><code>httponly</code></li><li><code>samesite</code></li></ul><p><code>httponly</code> 属性声明了cookie只能通过HTTP 请求传输,并且包括Javascript脚本。这将会被合并到跨站脚本部分。</p><p><code>samesite</code> 声明了浏览器是否允许发送跨站请求的cookie。这将会避免CSRF 攻击。无效的值包括  “Strict” and “Lax”。</p><p>这些键是大小写敏感的.默认值是<code>&#39;&#39;</code>.</p><ul><li><p><code>Morsel.value</code></p><p>Cookie的值。</p></li><li><p><code>Morsel.coded_value</code><br>编码后的cookie值。</p></li><li><p><code>Morsel.key</code></p><p>cookie的名字</p></li><li><p><code>Morsel.set</code>(<em>key</em>, <em>value</em>, <em>coded_value</em>)</p><p>设置<code>key</code> ,<code>value</code>和 <code>coded_value* attributes</code> 属性。</p></li><li><p><code>Morsel.isReservedKey(*K*)</code></p><p>判断 键 知否是 <a href="https://docs.python.org/zh-cn/3.8/library/http.cookies.html#http.cookies.Morsel" target="_blank" rel="noopener"><code>Morsel</code></a>  里的键的成员。</p></li><li><p><code>Morsel.output(*attrs=None*, *header=&#39;Set-Cookie:&#39;*)</code></p><p>返回字符串格式的  <a href="https://docs.python.org/zh-cn/3.8/library/http.cookies.html#http.cookies.Morsel" target="_blank" rel="noopener"><code>Morsel</code></a> 。默认包括所有的属性,除非指定声明attrs 属性,<code>header</code> 参数默认值是<code>&quot;Set-Cookie:&quot;</code>.</p></li><li><p><code>Morsel.js_output(*attrs=None*)</code></p><p>返回一个绑定Javascript脚本的对象,如果运行的浏览器支持Javascript脚本,作为输出和 out_put()的实现一样。</p></li><li><p><code>Morsel.OutputString(*attrs=None*)</code></p><p>返回一个字符串格式的 Morsel,不包括Http或Javascript。</p></li><li><p><code>Morsel.update(*values*)</code></p><p>根据参数值更新Morsel 字典。如果参数不在字典中则引发异常。具体可以参考  <a href="https://tools.ietf.org/html/rfc2109.html" target="_blank" rel="noopener"><strong>RFC 2109</strong></a> </p></li><li><p><code>Morsel.copy(*value*)</code></p><p>返回一个 Morsel 对象的浅拷贝。</p></li><li><p><code>Morsel.setdefault(*key*, *value=None*)</code></p><p>Raise an error if key is not a valid <a href="https://tools.ietf.org/html/rfc2109.html" target="_blank" rel="noopener"><strong>RFC 2109</strong></a> attribute, otherwise behave the same as <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#dict.setdefault" target="_blank" rel="noopener"><code>dict.setdefault()</code></a>.</p></li></ul><h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> http <span class="keyword">import</span> cookies</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C = cookies.SimpleCookie()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C[<span class="string">"fig"</span>] = <span class="string">"newton"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C[<span class="string">"sugar"</span>] = <span class="string">"wafer"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(C) <span class="comment"># generate HTTP headers</span></span><br><span class="line">Set-Cookie: fig=newton</span><br><span class="line">Set-Cookie: sugar=wafer</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(C.output()) <span class="comment"># same thing</span></span><br><span class="line">Set-Cookie: fig=newton</span><br><span class="line">Set-Cookie: sugar=wafer</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C = cookies.SimpleCookie()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C[<span class="string">"rocky"</span>] = <span class="string">"road"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C[<span class="string">"rocky"</span>][<span class="string">"path"</span>] = <span class="string">"/cookie"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(C.output(header=<span class="string">"Cookie:"</span>))</span><br><span class="line">Cookie: rocky=road; Path=/cookie</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(C.output(attrs=[], header=<span class="string">"Cookie:"</span>))</span><br><span class="line">Cookie: rocky=road</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C = cookies.SimpleCookie()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C.load(<span class="string">"chips=ahoy; vienna=finger"</span>) <span class="comment"># load from a string (HTTP header)</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(C)</span><br><span class="line">Set-Cookie: chips=ahoy</span><br><span class="line">Set-Cookie: vienna=finger</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C = cookies.SimpleCookie()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C.load(<span class="string">'keebler="E=everybody; L=\\"Loves\\"; fudge=\\012;";'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(C)</span><br><span class="line">Set-Cookie: keebler=<span class="string">"E=everybody; L=\"Loves\"; fudge=\012;"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C = cookies.SimpleCookie()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C[<span class="string">"oreo"</span>] = <span class="string">"doublestuff"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C[<span class="string">"oreo"</span>][<span class="string">"path"</span>] = <span class="string">"/"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(C)</span><br><span class="line">Set-Cookie: oreo=doublestuff; Path=/</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C = cookies.SimpleCookie()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C[<span class="string">"twix"</span>] = <span class="string">"none for you"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C[<span class="string">"twix"</span>].value</span><br><span class="line"><span class="string">'none for you'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C = cookies.SimpleCookie()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C[<span class="string">"number"</span>] = <span class="number">7</span> <span class="comment"># equivalent to C["number"] = str(7)</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C[<span class="string">"string"</span>] = <span class="string">"seven"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C[<span class="string">"number"</span>].value</span><br><span class="line"><span class="string">'7'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C[<span class="string">"string"</span>].value</span><br><span class="line"><span class="string">'seven'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(C)</span><br><span class="line">Set-Cookie: number=<span class="number">7</span></span><br><span class="line">Set-Cookie: string=seven</span><br></pre></td></tr></table></figure><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>顺便了解了下http协议的相关内容,附链接。</p><p>RFC 2068 ：<a href="http://www.blogjava.net/sunchaojin/archive/2013/12/18/279164.html#407729" target="_blank" rel="noopener">http超文本传输协议1.0</a></p><p>RFC 2616 ：<a href="https://tools.ietf.org/html/rfc2616" target="_blank" rel="noopener">http超文本传输协议1.1</a></p><p>RFC 2109:  <a href="http://www.stupidbeauty.com/Blog/article/1134/RFC2109%E7%BF%BB%E8%AF%91%EF%BC%9AHTTP%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%EF%BC%9AHTTP%20State%20Management%20Mechanism" target="_blank" rel="noopener">http状态管理机制</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;python-标准库-http-cookies&quot;&gt;&lt;a href=&quot;#python-标准库-http-cookies&quot; class=&quot;headerlink&quot; title=&quot;python 标准库 http.cookies&quot;&gt;&lt;/a&gt;python 标准库 http.cookies&lt;/h1&gt;&lt;p&gt;最近需要教孩子自然拼读,所以我想还是每天用一个关键词描述吧。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;traffic  .n UK /træf.ɪk/  US /ˈtræf.ɪk/  交通(拥堵)&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;There was heavy/a lot of traffic on the roads this morning.&lt;/em&gt;今天早晨道路上车流量很大。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;We got stuck in traffic for several hours.&lt;/em&gt;我们碰上交通阻塞被堵了好几个小时。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;New measures have been introduced to try and ease traffic congestion in the city.&lt;/em&gt;这个城市已经采取了新措施，试图缓解交通拥堵。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Five people were injured in a traffic accident (= one involving vehicles).&lt;/em&gt;有5人在交通事故中受伤。&lt;/p&gt;
+&lt;p&gt;US &lt;em&gt;I heard about the accident on the traffic report on the radio this morning.&lt;/em&gt;我在今早电台的交通节目中听到了这起事故。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Air traffic has increased 30 percent in the last decade.&lt;/em&gt;在过去的10年里，空中交通量增加了30%。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;https://github.com/jeffsui/app_image_resource/blob/master/20200109_traffic.jpg?raw=true&quot; alt&gt;&lt;/p&gt;
+&lt;h2 id=&quot;python-标准库学习-http-cookies&quot;&gt;&lt;a href=&quot;#python-标准库学习-http-cookies&quot; class=&quot;headerlink&quot; title=&quot;python 标准库学习   http.cookies&quot;&gt;&lt;/a&gt;python 标准库学习   http.cookies&lt;/h2&gt;&lt;p&gt;http.cookies 模块定义了类实现了http状态管理机制和cookies概念。不仅支持字符串格式化的cookie值,还支持任何序列化对象的cookie值。&lt;/p&gt;
+&lt;p&gt;模块的实现完全遵循 &lt;a href=&quot;https://tools.ietf.org/html/rfc2109.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;strong&gt;RFC 2109&lt;/strong&gt;&lt;/a&gt; 和  &lt;a href=&quot;https://tools.ietf.org/html/rfc2068.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;strong&gt;RFC 2068&lt;/strong&gt;&lt;/a&gt; 协议规范。但MSIE 3.0x不遵循那些规范中概述的字符规则，并且当涉及Cookie处理时，许多当今的浏览器和服务器已经放宽了解析规则。&lt;/p&gt;
+&lt;p&gt;Cookie名定义字符集中非法字符囊括在 &lt;code&gt;string.ascii_letters&lt;/code&gt;,&lt;code&gt;string.digits&lt;/code&gt; 和 &lt;code&gt;!#$%&amp;amp;&amp;#39;*+-.^_&lt;/code&gt;|~:`中。    &lt;/p&gt;
+&lt;h2 id=&quot;核心类&quot;&gt;&lt;a href=&quot;#核心类&quot; class=&quot;headerlink&quot; title=&quot;核心类&quot;&gt;&lt;/a&gt;核心类&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;exception&lt;/em&gt; &lt;code&gt;http.cookies.CookieError&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;违反&lt;a href=&quot;https://tools.ietf.org/html/rfc2109.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;strong&gt;RFC 2109&lt;/strong&gt;&lt;/a&gt; 规范中的错误,例如:不正确的属性或不正确的Set-Cookies header&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;class&lt;/em&gt; &lt;code&gt;http.cookies.BaseCookie([*input*])&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这个类是一个字典类型的对象,键是字符串,值是 &lt;a href=&quot;https://docs.python.org/zh-cn/3.8/library/http.cookies.html#http.cookies.Morsel&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;code&gt;Morsel&lt;/code&gt;&lt;/a&gt; 的实例。&lt;/p&gt;
+&lt;p&gt;如果设置参数&lt;code&gt;input&lt;/code&gt;,实际上是通过&lt;a href=&quot;https://docs.python.org/zh-cn/3.8/library/http.cookies.html#http.cookies.BaseCookie.load&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;code&gt;load()&lt;/code&gt;&lt;/a&gt; 方法设置。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;em&gt;class&lt;/em&gt; &lt;code&gt;http.cookies.SimpleCookie([*input*])&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;这个类是从&lt;a href=&quot;https://docs.python.org/zh-cn/3.8/library/http.cookies.html#http.cookies.BaseCookie&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;code&gt;BaseCookie&lt;/code&gt;&lt;/a&gt; 继承过来并重写了   &lt;code&gt;value_decode()&lt;/code&gt; and &lt;code&gt;value_encode()&lt;/code&gt;方法。&lt;/p&gt;
+&lt;p&gt;SimpleCookies支持字符串格式的cookie values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+    
+    
+      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+    
+      <category term="standard_library" scheme="https://pinghailinfeng.gitee.io/tags/standard-library/"/>
+    
+      <category term="http" scheme="https://pinghailinfeng.gitee.io/tags/http/"/>
+    
+      <category term="cookies" scheme="https://pinghailinfeng.gitee.io/tags/cookies/"/>
+    
+  </entry>
   
   <entry>
     <title>python standard library http</title>
@@ -240,9 +294,9 @@
       <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
     
     
-      <category term="windows" scheme="https://pinghailinfeng.gitee.io/tags/windows/"/>
-    
       <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+    
+      <category term="windows" scheme="https://pinghailinfeng.gitee.io/tags/windows/"/>
     
       <category term="juypter" scheme="https://pinghailinfeng.gitee.io/tags/juypter/"/>
     
@@ -1003,34 +1057,6 @@
     
     
       <category term="javascript" scheme="https://pinghailinfeng.gitee.io/tags/javascript/"/>
-    
-      <category term="javaweb" scheme="https://pinghailinfeng.gitee.io/tags/javaweb/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Build path entry is missing /src/test/java missing问题解决</title>
-    <link href="https://pinghailinfeng.gitee.io/2019/06/03/Maven-webapp-buildpath-missing-test-folder/"/>
-    <id>https://pinghailinfeng.gitee.io/2019/06/03/Maven-webapp-buildpath-missing-test-folder/</id>
-    <published>2019-06-03T09:04:00.000Z</published>
-    <updated>2019-06-03T09:24:57.454Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="[问题描述]"></a>[问题描述]</h2><p>通过maven构建webapp,发现缺少java和test目录</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="[解决方案]"></a>[解决方案]</h2><blockquote><p>project –right click –build path– config build path – libraries – double click “JRE System Library”–choose “workspace default JRE”  OK</p></blockquote><p>如下图所示<br><img src="https://i.loli.net/2019/06/03/5cf4e41a0d68921253.png" alt></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;[问题描述]&quot;&gt;&lt;/a&gt;[问题描述]&lt;/h2&gt;&lt;p&gt;通过maven构建webapp,发现缺少java和test目录&lt;/p&gt;
-&lt;h2 id=&quot;解决方案&quot;&gt;&lt;a href=
-      
-    
-    </summary>
-    
-      <category term="javaweb" scheme="https://pinghailinfeng.gitee.io/categories/javaweb/"/>
-    
-    
-      <category term="maven" scheme="https://pinghailinfeng.gitee.io/tags/maven/"/>
     
       <category term="javaweb" scheme="https://pinghailinfeng.gitee.io/tags/javaweb/"/>
     
