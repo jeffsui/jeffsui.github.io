@@ -113,7 +113,7 @@
 <meta property="og:site_name" content="凭海临风的IT江湖">
 <meta property="og:description" content="博客文章阅读量排行榜">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-10T03:37:12.150Z">
+<meta property="og:updated_time" content="2020-01-10T04:03:19.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文章阅读量排行榜">
 <meta name="twitter:description" content="博客文章阅读量排行榜">
@@ -506,10 +506,31 @@
           <style>.post-description { display: none; }</style>
 
 <p><div id="top"></div></p>
-<p><script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script></p>
-<p><script>AV.initialize(“WInuvNRAMjci6dLXnUu6eEcx-gzGzoHsz”, “nejvrreXCpNRycR9DVpugSJJ”);</script></p>
-<p><script type="text/javascript"><br>  var time=0<br>  var title=””<br>  var url=””<br>  var query = new AV.Query(‘Counter’);<br>  query.notEqualTo(‘id’,0);<br>  query.descending(‘time’); //结果按阅读次数降序排序<br>  query.limit(10); //最终只返回10条结果<br>  query.find().then(function (todo) {<br>    for (var i=0;i&lt;1000;i++){<br>      var result=todo[i].attributes;<br>      time=result.time;<br>      title=result.title;<br>      url=result.url;<br>      var content=”<a href='"+"https://jeffsui.github.io"+url+"'>“+title+”</a>“+”<br />“+”<font color='#555'>“+”阅读次数：”+time+”</font>“+”<br /><br />“;<br>      document.getElementById(“top”).innerHTML+=content<br>    }<br>  }, function (error) {<br>    console.log(“error”);<br>  });</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></script></p>
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script>AV.initialize("WInuvNRAMjci6dLXnUu6eEcx-gzGzoHsz", "nejvrreXCpNRycR9DVpugSJJ");</script>
+<script type="text/javascript">
+  var time=0
+  var title=""
+  var url=""
+  var query = new AV.Query('Counter');
+  query.notEqualTo('id',0);
+  query.descending('time');
+  query.limit(1000);
+  query.find().then(function (todo) {
+    for (var i=0;i<1000;i++){
+      var result=todo[i].attributes;
+      time=result.time;
+      title=result.title;
+      url=result.url;
+      // var content="<a href='"+"https://hoxis.github.io"+url+"'>"+title+"</a>"+"<br>"+"<font color='#fff'>"+"阅读次数："+time+"</font>"+"<br><br>";
+      var content="<p>"+"<font color='#1C1C1C'>"+"【文章热度:"+time+"℃】"+"</font>"+"<a href='"+"https://hoxis.github.io"+url+"'>"+title+"</a>"+"</p>";
+      document.getElementById("top").innerHTML+=content
+    }
+  }, function (error) {
+    console.log("error");
+  });
+</script>
+
         
       </div>
       
