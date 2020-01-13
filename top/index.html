@@ -117,7 +117,7 @@
 <meta property="og:site_name" content="凭海临风的IT江湖">
 <meta property="og:description" content="博客文章阅读量排行榜">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-10T05:42:41.551Z">
+<meta property="og:updated_time" content="2020-01-13T06:58:16.600Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文章阅读量排行榜">
 <meta name="twitter:description" content="博客文章阅读量排行榜">
@@ -507,7 +507,30 @@
       <div class="post-body">
         
         
-          <style>.post-description { display: none; }</style>
+          <p><div id="top"></div></p>
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+<script>AV.initialize("WInuvNRAMjci6dLXnUu6eEcx-gzGzoHsz", "nejvrreXCpNRycR9DVpugSJJ");</script>
+<script type="text/javascript">
+  var time=0
+  var title=""
+  var url=""
+  var query = new AV.Query('Counter');
+  query.notEqualTo('id',0);
+  query.descending('time');
+  query.limit(1000);
+  query.find().then(function (todo) {
+    for (var i=0;i<1000;i++){
+      var result=todo[i].attributes;
+      time=result.time;
+      title=result.title;
+      url=result.url;
+      var content="<p>"+"<font color='#1C1C1C'>"+"【文章热度:"+time+"℃】"+"</font>"+"<a href='"+"https://tding.top"+url+"'>"+title+"</a>"+"</p>";
+      document.getElementById("top").innerHTML+=content
+    }
+  }, function (error) {
+    console.log("error");
+  });
+</script>
 
 <p><div id="top"></div></p>
 <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
