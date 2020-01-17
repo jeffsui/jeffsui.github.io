@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2020-01-14T03:44:09.986Z</updated>
+  <updated>2020-01-17T02:18:48.965Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,88 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python standard libary heapq</title>
+    <link href="https://pinghailinfeng.gitee.io/2020/01/17/python-standard-library-heapq/"/>
+    <id>https://pinghailinfeng.gitee.io/2020/01/17/python-standard-library-heapq/</id>
+    <published>2020-01-17T01:10:06.000Z</published>
+    <updated>2020-01-17T02:18:48.965Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="python-标准库-堆队列算法-heapq"><a href="#python-标准库-堆队列算法-heapq" class="headerlink" title="python 标准库  堆队列算法 heapq"></a>python 标准库  堆队列算法 heapq</h2><p>每日一词:</p><blockquote><p>Pollen </p><p>n 花粉</p><p>例句:</p><p>Good news for all you hay fever and asthma sufferers<br>对于花粉症和哮喘病患者是个好消息</p></blockquote><p>今天是小年,祝大家心想事成</p><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200117_happiness.jpg?raw=true" alt></p><h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><p><strong>源码：</strong><a href="https://github.com/python/cpython/tree/3.8/Lib/heapq.py" target="_blank" rel="noopener">Lib/heapq.py</a></p><p>主要模块和方法：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">__all__ = [<span class="string">'heappush'</span>, <span class="string">'heappop'</span>, <span class="string">'heapify'</span>, <span class="string">'heapreplace'</span>, <span class="string">'merge'</span>,</span><br><span class="line">           <span class="string">'nlargest'</span>, <span class="string">'nsmallest'</span>, <span class="string">'heappushpop'</span>]</span><br></pre></td></tr></table></figure><p>这个模块提供了堆队列算法的实现，也称为优先队列算法。</p><p>堆是一个二叉树，它的每个父节点的值都只会小于或大于所有孩子节点（的值）。它使用了数组来实现：从零开始计数，对于所有的 <em>k</em> ，都有 <code>heap[k] &lt;= heap[2*k+1]</code> 和 <code>heap[k] &lt;= heap[2*k+2]</code>。 为了便于比较，不存在的元素被认为是无限大。 堆最有趣的特性在于最小的元素总是在根结点：<code>heap[0]</code>。</p><a id="more"></a><p>这个API与教材的堆算法实现有所不同，具体区别有两方面：（a）我们使用了从零开始的索引。这使得节点和其孩子节点索引之间的关系不太直观但更加适合，因为 Python 使用从零开始的索引。 （b）我们的 pop 方法返回最小的项而不是最大的项（这在教材中称为“最小堆”；而“最大堆”在教材中更为常见，因为它更适用于原地排序）。</p><p>基于这两方面，把堆看作原生的Python list也没什么奇怪的： <code>heap[0]</code> 表示最小的元素，同时 <code>heap.sort()</code> 维护了堆的不变性！</p><p>要创建一个堆，可以使用list来初始化为 <code>[]</code> ，或者你可以通过一个函数 <a href="https://docs.python.org/zh-cn/3.8/library/heapq.html#heapq.heapify" target="_blank" rel="noopener"><code>heapify()</code></a> ，来把一个list转换成堆。</p><p>定义了以下函数：</p><ul><li><p><code>heapq.heappush</code>(<em>heap</em>, <em>item</em>)</p><p>将 <em>item</em> 的值加入 <em>heap</em> 中，保持堆的不变性。</p></li><li><p><code>heapq.heappop</code>(<em>heap</em>)</p><p>弹出并返回 <em>heap</em> 的最小的元素，保持堆的不变性。如果堆为空，抛出 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#IndexError" target="_blank" rel="noopener"><code>IndexError</code></a> 。使用 <code>heap[0]</code> ，可以只访问最小的元素而不弹出它。</p></li><li><p><code>heapq.heappushpop</code>(<em>heap</em>, <em>item</em>)</p><p>将 <em>item</em> 放入堆中，然后弹出并返回 <em>heap</em> 的最小元素。该组合操作比先调用  <a href="https://docs.python.org/zh-cn/3.8/library/heapq.html#heapq.heappush" target="_blank" rel="noopener"><code>heappush()</code></a> 再调用 <a href="https://docs.python.org/zh-cn/3.8/library/heapq.html#heapq.heappop" target="_blank" rel="noopener"><code>heappop()</code></a> 运行起来更有效率。</p></li><li><p><code>heapq.heapify</code>(<em>x</em>)</p><p>将list <em>x</em> 转换成堆，原地，线性时间内。</p></li><li><p><code>heapq.heapreplace</code>(<em>heap</em>, <em>item</em>)</p><p>弹出并返回 <em>heap</em> 中最小的一项，同时推入新的 <em>item</em>。 堆的大小不变。 如果堆为空则引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#IndexError" target="_blank" rel="noopener"><code>IndexError</code></a>。这个单步骤操作比 <a href="https://docs.python.org/zh-cn/3.8/library/heapq.html#heapq.heappop" target="_blank" rel="noopener"><code>heappop()</code></a> 加 <a href="https://docs.python.org/zh-cn/3.8/library/heapq.html#heapq.heappush" target="_blank" rel="noopener"><code>heappush()</code></a> 更高效，并且在使用固定大小的堆时更为适宜。 pop/push 组合总是会从堆中返回一个元素并将其替换为 <em>item</em>。返回的值可能会比添加的 <em>item</em> 更大。 如果不希望如此，可考虑改用 <a href="https://docs.python.org/zh-cn/3.8/library/heapq.html#heapq.heappushpop" target="_blank" rel="noopener"><code>heappushpop()</code></a>。 它的 push/pop 组合会返回两个值中较小的一个，将较大的值留在堆中。</p></li></ul><p>该模块还提供了三个基于堆的通用功能函数。</p><ul><li><p><code>heapq.merge</code>(*<em>iterables</em>, <em>key=None</em>, <em>reverse=False</em>)</p><p>将多个已排序的输入合并为一个已排序的输出（例如，合并来自多个日志文件的带时间戳的条目）。 返回已排序值的 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-iterator" target="_blank" rel="noopener">iterator</a>。类似于 <code>sorted(itertools.chain(*iterables))</code> 但返回一个可迭代对象，不会一次性地将数据全部放入内存，并假定每个输入流都是已排序的（从小到大）。具有两个可选参数，它们都必须指定为关键字参数。<em>key</em> 指定带有单个参数的 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-key-function" target="_blank" rel="noopener">key function</a>，用于从每个输入元素中提取比较键。 默认值为 <code>None</code> (直接比较元素)。<em>reverse</em> 为一个布尔值。 如果设为 <code>True</code>，则输入元素将按比较结果逆序进行合并。 要达成与 <code>sorted(itertools.chain(*iterables), reverse=True)</code> 类似的行为，所有可迭代对象必须是已从大到小排序的。<em>在 3.5 版更改:</em> 添加了可选的 <em>key</em> 和 <em>reverse</em> 形参。</p></li><li><p><code>heapq.nlargest</code>(<em>n</em>, <em>iterable</em>, <em>key=None</em>)</p><p>从 <em>iterable</em> 所定义的数据集中返回前 <em>n</em> 个最大元素组成的列表。 如果提供了 <em>key</em> 则其应指定一个单参数的函数，用于从 <em>iterable</em> 的每个元素中提取比较键 (例如 <code>key=str.lower</code>)。 等价于: <code>sorted(iterable, key=key, reverse=True)[:n]</code>。</p></li><li><p><code>heapq.nsmallest</code>(<em>n</em>, <em>iterable</em>, <em>key=None</em>)</p><p>从 <em>iterable</em> 所定义的数据集中返回前 <em>n</em> 个最小元素组成的列表。 如果提供了 <em>key</em> 则其应指定一个单参数的函数，用于从 <em>iterable</em> 的每个元素中提取比较键 (例如 <code>key=str.lower</code>)。 等价于: <code>sorted(iterable, key=key)[:n]</code>。</p></li></ul><p>后两个函数在 <em>n</em> 值较小时性能最好。 对于更大的值，使用 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#sorted" target="_blank" rel="noopener"><code>sorted()</code></a> 函数会更有效率。 此外，当 <code>n==1</code> 时，使用内置的 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#min" target="_blank" rel="noopener"><code>min()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#max" target="_blank" rel="noopener"><code>max()</code></a> 函数会更有效率。 如果需要重复使用这些函数，请考虑将可迭代对象转为真正的堆。</p><h3 id="基本实例"><a href="#基本实例" class="headerlink" title="基本实例"></a>基本实例</h3><p><a href="https://en.wikipedia.org/wiki/Heapsort" target="_blank" rel="noopener">堆排序</a> 可以通过将所有值推入堆中然后每次弹出一个最小值项来实现。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">heapsort</span><span class="params">(iterable)</span>:</span></span><br><span class="line"><span class="meta">... </span>    h = []</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">for</span> value <span class="keyword">in</span> iterable:</span><br><span class="line"><span class="meta">... </span>        heappush(h, value)</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> [heappop(h) <span class="keyword">for</span> i <span class="keyword">in</span> range(len(h))]</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>heapsort([<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">0</span>])</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br></pre></td></tr></table></figure><p>这类似于 <code>sorted(iterable)</code>，但与 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#sorted" target="_blank" rel="noopener"><code>sorted()</code></a> 不同的是这个实现是不稳定的。</p><p>堆元素可以为元组。</p><p> 这适用于将比较值（例如任务优先级）与跟踪的主记录进行赋值的场合:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>h = []</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>heappush(h, (<span class="number">5</span>, <span class="string">'write code'</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>heappush(h, (<span class="number">7</span>, <span class="string">'release product'</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>heappush(h, (<span class="number">1</span>, <span class="string">'write spec'</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>heappush(h, (<span class="number">3</span>, <span class="string">'create tests'</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>heappop(h)</span><br><span class="line">(<span class="number">1</span>, <span class="string">'write spec'</span>)</span><br></pre></td></tr></table></figure><h3 id="优先队列实现说明"><a href="#优先队列实现说明" class="headerlink" title="优先队列实现说明"></a>优先队列实现说明</h3><p><a href="https://en.wikipedia.org/wiki/Priority_queue" target="_blank" rel="noopener">优先队列</a> 是堆的常用场合，并且它的实现包含了多个挑战：</p><ul><li>排序稳定性：你该如何令相同优先级的两个任务按它们最初被加入时的顺序返回？</li><li>如果优先级相同且任务没有默认比较顺序，则 (priority, task) 对的元组比较将会中断。</li><li>如果任务优先级发生改变，你该如何将其移至堆中的新位置？</li><li>或者如果一个挂起的任务需要被删除，你该如何找到它并将其移出队列？</li></ul><p>针对前两项挑战的一种解决方案是将条目保存为包含优先级、条目计数和任务对象 3 个元素的列表。 条目计数可用来打破平局，这样具有相同优先级的任务将按它们的添加顺序返回。 并且由于没有哪两个条目计数是相同的，元组比较将永远不会直接比较两个任务。</p><p>不可比较任务问题的另一种解决方案是创建一个忽略任务条目并且只比较优先级字段的包装器类:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> dataclasses <span class="keyword">import</span> dataclass, field</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> Any</span><br><span class="line"></span><br><span class="line"><span class="meta">@dataclass(order=True)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PrioritizedItem</span>:</span></span><br><span class="line">    priority: int</span><br><span class="line">    item: Any=field(compare=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure><p>其余的挑战主要包括找到挂起的任务并修改其优先级或将其完全移除。 找到一个任务可使用一个指向队列中条目的字典来实现。</p><p>移除条目或改变其优先级的操作实现起来更为困难，因为它会破坏堆结构不变量。 因此，一种可能的解决方案是将条目标记为已移除，再添加一个改变了优先级的新条目:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">pq = []                         <span class="comment"># list of entries arranged in a heap</span></span><br><span class="line">entry_finder = &#123;&#125;               <span class="comment"># mapping of tasks to entries</span></span><br><span class="line">REMOVED = <span class="string">'&lt;removed-task&gt;'</span>      <span class="comment"># placeholder for a removed task</span></span><br><span class="line">counter = itertools.count()     <span class="comment"># unique sequence count</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add_task</span><span class="params">(task, priority=<span class="number">0</span>)</span>:</span></span><br><span class="line">    <span class="string">'Add a new task or update the priority of an existing task'</span></span><br><span class="line">    <span class="keyword">if</span> task <span class="keyword">in</span> entry_finder:</span><br><span class="line">        remove_task(task)</span><br><span class="line">    count = next(counter)</span><br><span class="line">    entry = [priority, count, task]</span><br><span class="line">    entry_finder[task] = entry</span><br><span class="line">    heappush(pq, entry)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">remove_task</span><span class="params">(task)</span>:</span></span><br><span class="line">    <span class="string">'Mark an existing task as REMOVED.  Raise KeyError if not found.'</span></span><br><span class="line">    entry = entry_finder.pop(task)</span><br><span class="line">    entry[<span class="number">-1</span>] = REMOVED</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">pop_task</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">'Remove and return the lowest priority task. Raise KeyError if empty.'</span></span><br><span class="line">    <span class="keyword">while</span> pq:</span><br><span class="line">        priority, count, task = heappop(pq)</span><br><span class="line">        <span class="keyword">if</span> task <span class="keyword">is</span> <span class="keyword">not</span> REMOVED:</span><br><span class="line">            <span class="keyword">del</span> entry_finder[task]</span><br><span class="line">            <span class="keyword">return</span> task</span><br><span class="line">    <span class="keyword">raise</span> KeyError(<span class="string">'pop from an empty priority queue'</span>)</span><br></pre></td></tr></table></figure><h3 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h3><p>堆是通过数组来实现的，其中的元素从 0 开始计数，对于所有的 <em>k</em> 都有 <code>a[k] &lt;= a[2*k+1]</code> 且 <code>a[k] &lt;= a[2*k+2]</code>。 为了便于比较，不存在的元素被视为无穷大。 堆最有趣的特性在于 <code>a[0]</code> 总是其中最小的元素。</p><p>上面的特殊不变量是用来作为一场锦标赛的高效内存表示。 下面的数字是 <em>k</em> 而不是 <code>a[k]</code>:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">                                 <span class="number">0</span></span><br><span class="line"></span><br><span class="line">              <span class="number">1</span>                               <span class="number">2</span></span><br><span class="line"></span><br><span class="line">      <span class="number">3</span>               <span class="number">4</span>                <span class="number">5</span>               <span class="number">6</span></span><br><span class="line"></span><br><span class="line">  <span class="number">7</span>       <span class="number">8</span>       <span class="number">9</span>       <span class="number">10</span>      <span class="number">11</span>      <span class="number">12</span>      <span class="number">13</span>      <span class="number">14</span></span><br><span class="line"></span><br><span class="line"><span class="number">15</span> <span class="number">16</span>   <span class="number">17</span> <span class="number">18</span>   <span class="number">19</span> <span class="number">20</span>   <span class="number">21</span> <span class="number">22</span>   <span class="number">23</span> <span class="number">24</span>   <span class="number">25</span> <span class="number">26</span>   <span class="number">27</span> <span class="number">28</span>   <span class="number">29</span> <span class="number">30</span></span><br></pre></td></tr></table></figure><p>在上面的树中，每个 <em>k</em> 单元都位于 <code>2*k+1</code> 和 <code>2*k+2</code> 之上。 体育运动中我们经常见到二元锦标赛模式，每个胜者单元都位于另两个单元之上，并且我们可以沿着树形图向下追溯胜者所遇到的所有对手。 但是，在许多采用这种锦标赛模式的计算机应用程序中，我们并不需要追溯胜者的历史。 为了获得更高的内存利用效率，当一个胜者晋级时，我们会用较低层级的另一条目来替代它，因此规则变为一个单元和它之下的两个单元包含三个不同条目，上方单元“胜过”了两个下方单元。</p><p>如果此堆的不变量始终受到保护，则序号 0 显然是最后的赢家。 删除它并找出“下一个”赢家的最简单算法方式是家某个输家（让我们假定是上图中的 30 号单元）移至 0 号位置，然后将这个新的 0 号沿树下行，不断进行值的交换，直到不变量重新建立。 这显然会是树中条目总数的对数。 通过迭代所有条目，你将得到一个 O(n log n) 复杂度的排序。</p><p>此排序有一个很好的特性就是你可以在排序进行期间高效地插入新条目，前提是插入的条目不比你最近取出的 0 号元素“更好”。 这在模拟上下文时特别有用，在这种情况下树保存的是所有传入事件，“胜出”条件是最小调度时间。 当一个事件将其他事件排入执行计划时，它们的调试时间向未来方向延长，这样它们可方便地入堆。 因此，堆结构很适宜用来实现调度器，我的 MIDI 音序器就是用的这个 :-)。</p><p>用于实现调度器的各种结构都得到了充分的研究，堆是非常适宜的一种，因为它们的速度相当快，并且几乎是恒定的，最坏的情况与平均情况没有太大差别。 虽然还存在其他总体而言更高效的实现方式，但其最坏的情况却可能非常糟糕。</p><p>堆在大磁盘排序中也非常有用。 你应该已经了解大规模排序会有多个“运行轮次”（即预排序的序列，其大小通常与 CPU 内存容量相关），随后这些轮次会进入合并通道，轮次合并的组织往往非常巧妙 <a href="https://docs.python.org/zh-cn/3.8/library/heapq.html#id2" target="_blank" rel="noopener">1</a>。 非常重要的一点是初始排序应产生尽可能长的运行轮次。 锦标赛模式是达成此目标的好办法。 如果你使用全部有用内存来进行锦标赛，替换和安排恰好适合当前运行轮次的条目，你将可以对于随机输入生成两倍于内存大小的运行轮次，对于模糊排序的输入还会有更好的效果。</p><p>另外，如果你输出磁盘上的第 0 个条目并获得一个可能不适合当前锦标赛的输入（因为其值要“胜过”上一个输出值），它无法被放入堆中，因此堆的尺寸将缩小。 被释放的内存可以被巧妙地立即重用以逐步构建第二个堆，其增长速度与第一个堆的缩减速度正好相同。 当第一个堆完全消失时，你可以切换新堆并启动新的运行轮次。 这样做既聪明又高效！</p><p>总之，堆是值得了解的有用内存结构。 我在一些应用中用到了它们，并且认为保留一个 ‘heap’ 模块是很有意义的。 :-)</p><h3 id="堆排序图例"><a href="#堆排序图例" class="headerlink" title="堆排序图例"></a>堆排序图例</h3><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200117_heapq.gif?raw=true" alt></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;python-标准库-堆队列算法-heapq&quot;&gt;&lt;a href=&quot;#python-标准库-堆队列算法-heapq&quot; class=&quot;headerlink&quot; title=&quot;python 标准库  堆队列算法 heapq&quot;&gt;&lt;/a&gt;python 标准库  堆队列算法 heapq&lt;/h2&gt;&lt;p&gt;每日一词:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Pollen &lt;/p&gt;
+&lt;p&gt;n 花粉&lt;/p&gt;
+&lt;p&gt;例句:&lt;/p&gt;
+&lt;p&gt;Good news for all you hay fever and asthma sufferers&lt;br&gt;对于花粉症和哮喘病患者是个好消息&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;今天是小年,祝大家心想事成&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://github.com/jeffsui/app_image_resource/blob/master/20200117_happiness.jpg?raw=true&quot; alt&gt;&lt;/p&gt;
+&lt;h3 id=&quot;源码&quot;&gt;&lt;a href=&quot;#源码&quot; class=&quot;headerlink&quot; title=&quot;源码&quot;&gt;&lt;/a&gt;源码&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;源码：&lt;/strong&gt;&lt;a href=&quot;https://github.com/python/cpython/tree/3.8/Lib/heapq.py&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Lib/heapq.py&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;主要模块和方法：&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;__all__ = [&lt;span class=&quot;string&quot;&gt;&#39;heappush&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;heappop&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;heapify&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;heapreplace&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;merge&#39;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;           &lt;span class=&quot;string&quot;&gt;&#39;nlargest&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;nsmallest&#39;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&#39;heappushpop&#39;&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;这个模块提供了堆队列算法的实现，也称为优先队列算法。&lt;/p&gt;
+&lt;p&gt;堆是一个二叉树，它的每个父节点的值都只会小于或大于所有孩子节点（的值）。它使用了数组来实现：从零开始计数，对于所有的 &lt;em&gt;k&lt;/em&gt; ，都有 &lt;code&gt;heap[k] &amp;lt;= heap[2*k+1]&lt;/code&gt; 和 &lt;code&gt;heap[k] &amp;lt;= heap[2*k+2]&lt;/code&gt;。 为了便于比较，不存在的元素被认为是无限大。 堆最有趣的特性在于最小的元素总是在根结点：&lt;code&gt;heap[0]&lt;/code&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+    
+    
+      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+    
+      <category term="standard_library" scheme="https://pinghailinfeng.gitee.io/tags/standard-library/"/>
+    
+      <category term="heapq" scheme="https://pinghailinfeng.gitee.io/tags/heapq/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python standard library iterator and generator</title>
+    <link href="https://pinghailinfeng.gitee.io/2020/01/15/python-standard-library-iterator-and-generator/"/>
+    <id>https://pinghailinfeng.gitee.io/2020/01/15/python-standard-library-iterator-and-generator/</id>
+    <published>2020-01-14T22:30:45.000Z</published>
+    <updated>2020-01-17T01:00:01.141Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="python-标准库-类型：-迭代器-和-生成器"><a href="#python-标准库-类型：-迭代器-和-生成器" class="headerlink" title="python 标准库 类型： 迭代器 和 生成器"></a>python 标准库 类型： 迭代器 和 生成器</h1><p>每日英语:</p><blockquote><p> miracle n </p><p> [英]   <strong>[</strong>ˈmɪrəkl<strong>]</strong>   [美] [ <strong>ˈmɪrəkəl</strong> ]</p><p> 奇迹，圣迹，神迹； 令人惊奇的人（或事） </p></blockquote><p>推荐一个老电影：</p><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200115_miracle.jpg?raw=true" alt></p><p>每个人终将都会踏上自己的绿色旅程,善恶就在一念之间。愿世界美好,温情以待。</p><p>先看一张图:</p><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200115_python_iterator_generator.jpg?raw=true" alt></p><blockquote><p>1，迭代器协议：对象需要提供next()方法，它要么返回迭代中的下一项，要么就引起一个StopIteration异常，以终止迭代。</p><p>2，可迭代对象：实现了迭代器协议对象。list、tuple、dict都是Iterable（可迭代对象），但不是Iterator（迭代器对象）。但可以使用内建函数iter()，把这些都变成Iterable（可迭代器对象）。</p><p>3，for item in Iterable 循环的本质就是先通过iter()函数获取可迭代对象Iterable的迭代器，然后对获取到的迭代器不断调用next()方法来获取下一个值并将其赋值给item，当遇到StopIteration的异常后循环结束</p></blockquote><a id="more"></a><h2 id="迭代器类型"><a href="#迭代器类型" class="headerlink" title="迭代器类型"></a>迭代器类型</h2><p>Python 支持在容器中进行迭代的概念。 这是通过使用两个单独方法来实现的；它们被用于允许用户自定义类对迭代的支持。 将在下文中详细描述的序列总是支持迭代方法。</p><p>容器对象要提供迭代支持，必须定义一个方法:</p><ul><li><p><code>container.__iter__</code>()</p><p>返回一个迭代器对象。 该对象需要支持下文所述的迭代器协议。 如果容器支持不同的迭代类型，则可以提供额外的方法来专门地请求不同迭代类型的迭代器。 （支持多种迭代形式的对象的例子有同时支持广度优先和深度优先遍历的树结构。） 此方法对应于 Python/C API 中 Python 对象类型结构体的 <a href="https://docs.python.org/zh-cn/3.8/c-api/typeobj.html#c.PyTypeObject.tp_iter" target="_blank" rel="noopener"><code>tp_iter</code></a> 槽位。</p></li></ul><p>迭代器对象自身需要支持以下两个方法，它们共同组成了 <em>迭代器协议</em>:</p><ul><li><p><code>iterator.__iter__</code>()</p><p>返回迭代器对象本身。 这是同时允许容器和迭代器配合 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#for" target="_blank" rel="noopener"><code>for</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/reference/expressions.html#in" target="_blank" rel="noopener"><code>in</code></a> 语句使用所必须的。 此方法对应于 Python/C API 中 Python 对象类型结构体的 <a href="https://docs.python.org/zh-cn/3.8/c-api/typeobj.html#c.PyTypeObject.tp_iter" target="_blank" rel="noopener"><code>tp_iter</code></a> 槽位。</p></li><li><p><code>iterator.__next__</code>()</p><p>从容器中返回下一项。 如果已经没有项可返回，则会引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#StopIteration" target="_blank" rel="noopener"><code>StopIteration</code></a> 异常。 此方法对应于 Python/C API 中 Python 对象类型结构体的 <a href="https://docs.python.org/zh-cn/3.8/c-api/typeobj.html#c.PyTypeObject.tp_iternext" target="_blank" rel="noopener"><code>tp_iternext</code></a> 槽位。</p></li></ul><p>Python 定义了几种迭代器对象以支持对一般和特定序列类型、字典和其他更特别的形式进行迭代。 除了迭代器协议的实现，特定类型的其他性质对迭代操作来说都不重要。</p><p>一旦迭代器的 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#iterator.__next__" target="_blank" rel="noopener"><code>__next__()</code></a> 方法引发了 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#StopIteration" target="_blank" rel="noopener"><code>StopIteration</code></a>，它必须一直对后续调用引发同样的异常。 不遵循此行为特性的实现将无法正常使用。</p><p>迭代器使用实例</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 随便定义一个list</span></span><br><span class="line">listArray=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="comment"># 使用iter()函数</span></span><br><span class="line">iterName=iter(listArray)</span><br><span class="line">print(iterName)</span><br><span class="line"><span class="comment"># 结果如下：是一个列表list的迭代器</span></span><br><span class="line"><span class="comment"># &lt;list_iterator object at 0x0000017B0D984278&gt;</span></span><br><span class="line"></span><br><span class="line">print(next(iterName))</span><br><span class="line">print(next(iterName))</span><br><span class="line">print(next(iterName))</span><br><span class="line">print(next(iterName))<span class="comment">#没有迭代到下一个元素，直接抛出异常</span></span><br><span class="line"><span class="comment"># 1</span></span><br><span class="line"><span class="comment"># 2</span></span><br><span class="line"><span class="comment"># 3</span></span><br><span class="line"><span class="comment"># Traceback (most recent call last):</span></span><br><span class="line"><span class="comment">#   File "python_iterator.py", line 32, in &lt;module&gt;</span></span><br><span class="line"><span class="comment"># StopIteration</span></span><br></pre></td></tr></table></figure><p>自定义迭代器实例</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fib</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, max)</span>:</span></span><br><span class="line">        super(Fib, self).__init__()</span><br><span class="line">        self.max = max</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.a = <span class="number">0</span></span><br><span class="line">        self.b = <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> self</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></span><br><span class="line">        fib = self.a</span><br><span class="line">        <span class="keyword">if</span> fib &gt; self.max:</span><br><span class="line">            <span class="keyword">raise</span> StopIteration</span><br><span class="line">        self.a, self.b = self.b, self.a + self.b</span><br><span class="line">        <span class="keyword">return</span> fib</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个main函数，循环遍历每一个菲波那切数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 20以内的数</span></span><br><span class="line">    fib = Fib(<span class="number">20</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> fib:</span><br><span class="line">        print(i)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure><h3 id="生成器类型"><a href="#生成器类型" class="headerlink" title="生成器类型"></a>生成器类型</h3><p>Python 的 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-generator" target="_blank" rel="noopener">generator</a> 提供了一种实现迭代器协议的便捷方式。 如果容器对象 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__iter__" target="_blank" rel="noopener"><code>__iter__()</code></a> 方法被实现为一个生成器，它将自动返回一个迭代器对象（从技术上说是一个生成器对象），该对象提供 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__iter__" target="_blank" rel="noopener"><code>__iter__()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/reference/expressions.html#generator.__next__" target="_blank" rel="noopener"><code>__next__()</code></a> 方法。 有关生成器的更多信息可以参阅 <a href="https://docs.python.org/zh-cn/3.8/reference/expressions.html#yieldexpr" target="_blank" rel="noopener">yield 表达式的文档</a>。</p><h4 id="生成器函数"><a href="#生成器函数" class="headerlink" title="生成器函数"></a>生成器函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 菲波那切数列</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Fib</span><span class="params">(max)</span>:</span></span><br><span class="line">    n, a, b = <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; max:</span><br><span class="line">        <span class="keyword">yield</span> b</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        n = n + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'亲！没有数据了...'</span></span><br><span class="line"><span class="comment"># 调用方法，生成出10个数来</span></span><br><span class="line">f=Fib(<span class="number">10</span>)</span><br><span class="line"><span class="comment"># 使用一个循环捕获最后return 返回的值，保存在异常StopIteration的value中</span></span><br><span class="line"><span class="keyword">while</span>  <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        x=next(f)</span><br><span class="line">        print(<span class="string">"f:"</span>,x)</span><br><span class="line">    <span class="keyword">except</span> StopIteration <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">"生成器最后的返回值是："</span>,e.value)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure><h4 id="生成器表达式"><a href="#生成器表达式" class="headerlink" title="生成器表达式"></a>生成器表达式</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一个列表</span></span><br><span class="line">xiaoke=[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="comment"># 生成器generator，类似于list，但是是把[]改为()</span></span><br><span class="line">gen=(a <span class="keyword">for</span> a  <span class="keyword">in</span> xiaoke)</span><br><span class="line"><span class="keyword">for</span>  i  <span class="keyword">in</span> gen:</span><br><span class="line">    print(i)</span><br><span class="line"><span class="comment">#结果是：</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 为什么要使用生成器？因为效率。</span></span><br><span class="line"><span class="comment"># 使用生成器表达式取代列表推导式可以同时节省 cpu 和 内存(RAM)。</span></span><br><span class="line"><span class="comment"># 如果你构造一个列表(list)的目的仅仅是传递给别的函数,</span></span><br><span class="line"><span class="comment"># 比如 传递给tuple()或者set(), 那就用生成器表达式替代吧!</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 本案例是直接把列表转化为元组</span></span><br><span class="line">kk=tuple(a <span class="keyword">for</span> a <span class="keyword">in</span> xiaoke)</span><br><span class="line">print(kk)</span><br><span class="line"><span class="comment">#结果是：</span></span><br><span class="line">(<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># python内置的一些函数，可以识别这是生成器表达式，外面有一对小括号，就是生成器</span></span><br><span class="line">result1=sum(a <span class="keyword">for</span> a <span class="keyword">in</span> range(<span class="number">3</span>))</span><br><span class="line">print(result1)</span><br><span class="line"><span class="comment"># 列表推导式</span></span><br><span class="line">result2=sum([a <span class="keyword">for</span> a <span class="keyword">in</span> range(<span class="number">3</span>)])</span><br><span class="line">print(result2)</span><br></pre></td></tr></table></figure><h4 id="yield关键字"><a href="#yield关键字" class="headerlink" title="yield关键字"></a>yield关键字</h4><p>使用yield关键字实现生成器函数</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(max)</span>:</span>  </span><br><span class="line">    a, b = <span class="number">1</span>, <span class="number">1</span>  </span><br><span class="line">    <span class="keyword">while</span> a &lt; max:  </span><br><span class="line">        <span class="keyword">yield</span> a <span class="comment">#这时a,b值分别为1,1，当然，程序也在执行到这时，返回  </span></span><br><span class="line">        a, b = b, a+b</span><br></pre></td></tr></table></figure><p>使用yield关键字实现自定义生成器</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fib</span>:</span>  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, max)</span>:</span>  </span><br><span class="line">        self.max = max  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span>  </span><br><span class="line">        self.a = <span class="number">0</span>  </span><br><span class="line">        self.b = <span class="number">1</span>  </span><br><span class="line">        <span class="keyword">return</span> self  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">next</span><span class="params">(self)</span>:</span>  </span><br><span class="line">        fib = self.a  </span><br><span class="line">        <span class="keyword">if</span> fib &gt; self.max:  </span><br><span class="line">            <span class="keyword">raise</span> StopIteration  </span><br><span class="line">        self.a, self.b = self.b, self.a + self.b  </span><br><span class="line">        <span class="keyword">return</span> fib  </span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> Fib(<span class="number">6</span>):</span><br><span class="line">        <span class="keyword">print</span> f</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;python-标准库-类型：-迭代器-和-生成器&quot;&gt;&lt;a href=&quot;#python-标准库-类型：-迭代器-和-生成器&quot; class=&quot;headerlink&quot; title=&quot;python 标准库 类型： 迭代器 和 生成器&quot;&gt;&lt;/a&gt;python 标准库 类型： 迭代器 和 生成器&lt;/h1&gt;&lt;p&gt;每日英语:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; miracle n &lt;/p&gt;
+&lt;p&gt; [英]   &lt;strong&gt;[&lt;/strong&gt;ˈmɪrəkl&lt;strong&gt;]&lt;/strong&gt;   [美] [ &lt;strong&gt;ˈmɪrəkəl&lt;/strong&gt; ]&lt;/p&gt;
+&lt;p&gt; 奇迹，圣迹，神迹； 令人惊奇的人（或事） &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;推荐一个老电影：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://github.com/jeffsui/app_image_resource/blob/master/20200115_miracle.jpg?raw=true&quot; alt&gt;&lt;/p&gt;
+&lt;p&gt;每个人终将都会踏上自己的绿色旅程,善恶就在一念之间。愿世界美好,温情以待。&lt;/p&gt;
+&lt;p&gt;先看一张图:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://github.com/jeffsui/app_image_resource/blob/master/20200115_python_iterator_generator.jpg?raw=true&quot; alt&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1，迭代器协议：对象需要提供next()方法，它要么返回迭代中的下一项，要么就引起一个StopIteration异常，以终止迭代。&lt;/p&gt;
+&lt;p&gt;2，可迭代对象：实现了迭代器协议对象。list、tuple、dict都是Iterable（可迭代对象），但不是Iterator（迭代器对象）。但可以使用内建函数iter()，把这些都变成Iterable（可迭代器对象）。&lt;/p&gt;
+&lt;p&gt;3，for item in Iterable 循环的本质就是先通过iter()函数获取可迭代对象Iterable的迭代器，然后对获取到的迭代器不断调用next()方法来获取下一个值并将其赋值给item，当遇到StopIteration的异常后循环结束&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+    
+    
+      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+    
+      <category term="standard_library" scheme="https://pinghailinfeng.gitee.io/tags/standard-library/"/>
+    
+      <category term="iterator" scheme="https://pinghailinfeng.gitee.io/tags/iterator/"/>
+    
+      <category term="generator" scheme="https://pinghailinfeng.gitee.io/tags/generator/"/>
+    
+  </entry>
   
   <entry>
     <title>python standard library pickle</title>
@@ -905,326 +987,6 @@
       <category term="python3" scheme="https://pinghailinfeng.gitee.io/tags/python3/"/>
     
       <category term="centos" scheme="https://pinghailinfeng.gitee.io/tags/centos/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ios devices list</title>
-    <link href="https://pinghailinfeng.gitee.io/2019/12/02/ios-devices-list/"/>
-    <id>https://pinghailinfeng.gitee.io/2019/12/02/ios-devices-list/</id>
-    <published>2019-12-02T01:18:48.000Z</published>
-    <updated>2019-12-02T01:27:15.511Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="ios-设备一览表"><a href="#ios-设备一览表" class="headerlink" title="ios 设备一览表"></a>ios 设备一览表</h1><h2 id="iPhone"><a href="#iPhone" class="headerlink" title="iPhone"></a>iPhone</h2><table><thead><tr><th>设备</th><th>时间</th><th>CPU</th><th>分辨率</th><th>大小</th><th>密度</th><th>@Nx</th><th>iOS系统</th></tr></thead><tbody><tr><td>iPhone</td><td>2007</td><td>armv6</td><td>320 x 480</td><td>3.5</td><td>165</td><td>@1x</td><td>1.0 - 3.1.3</td></tr><tr><td>iPhone 3G</td><td>2008</td><td>armv6</td><td>320 x 480</td><td>3.5</td><td>165</td><td>@1x</td><td>2.0 - 4.2.1</td></tr><tr><td>iPhone 3GS</td><td>2009</td><td>armv7</td><td>320 x 480</td><td>3.5</td><td>165</td><td>@1x</td><td>3.0 - 6.1.4</td></tr><tr><td>iPhone 4 (GSM)</td><td>2010</td><td>armv7</td><td>640 x 960</td><td>3.5</td><td>330</td><td>@2x</td><td>4.0 - 7.1.2</td></tr><tr><td>iPhone 4 (CDMA)</td><td>2011</td><td>armv7</td><td>640 x 960</td><td>3.5</td><td>330</td><td>@2x</td><td>4.2.4 - 7.1.2</td></tr><tr><td>iPhone 4S</td><td>2011</td><td>armv7</td><td>640 x 960</td><td>3.5</td><td>330</td><td>@2x</td><td>5.0 - 9.3.5</td></tr><tr><td>iPhone 5</td><td>2012</td><td>armv7s</td><td>640 x 1136</td><td>4</td><td>326</td><td>@2x</td><td>6.0 - 10.3.3</td></tr><tr><td>iPhone 5c</td><td>2013</td><td>armv7s</td><td>640 x 1136</td><td>4</td><td>326</td><td>@2x</td><td>7.0 - 10.3.3</td></tr><tr><td>iPhone 5s</td><td>2013</td><td>arm64</td><td>640 x 1136</td><td>4</td><td>326</td><td>@2x</td><td>7.0 -</td></tr><tr><td>iPhone 6</td><td>2014</td><td>arm64</td><td>750 x 1334</td><td>4.7</td><td>326</td><td>@2x</td><td>8.0 -</td></tr><tr><td>iPhone 6 Plus</td><td>2014</td><td>arm64</td><td>1242 x 2208</td><td>5.5</td><td>461</td><td>@3x</td><td>8.0 -</td></tr><tr><td>iPhone 6s</td><td>2015</td><td>arm64</td><td>750 x 1334</td><td>4.7</td><td>326</td><td>@2x</td><td>9.0 -</td></tr><tr><td>iPhone 6s Plus</td><td>2015</td><td>arm64</td><td>1242 x 2208</td><td>5.5</td><td>461</td><td>@3x</td><td>9.0 -</td></tr><tr><td>iPhone SE</td><td>2016</td><td>arm64</td><td>640 x 1136</td><td>4</td><td>326</td><td>@2x</td><td>9.3 -</td></tr><tr><td>iPhone 7</td><td>2016</td><td>arm64</td><td>750 x 1334</td><td>4.7</td><td>326</td><td>@2x</td><td>10.0 -</td></tr><tr><td>iPhone 7 Plus</td><td>2016</td><td>arm64</td><td>1242 x 2208</td><td>5.5</td><td>461</td><td>@3x</td><td>10.0 -</td></tr><tr><td>iPhone 8</td><td>2017</td><td>arm64</td><td>750 x 1334</td><td>4.7</td><td>326</td><td>@2x</td><td>11.0 -</td></tr><tr><td>iPhone 8 Plus</td><td>2017</td><td>arm64</td><td>1242 x 2208</td><td>5.5</td><td>461</td><td>@3x</td><td>11.0 -</td></tr><tr><td>iPhone X</td><td>2017</td><td>arm64</td><td>1125 x 2436</td><td>5.8</td><td>463</td><td>@3x</td><td>11.0 -</td></tr><tr><td>iPhone XS</td><td>2018</td><td>arm64</td><td>1125 x 2436</td><td>5.8</td><td>463</td><td>@3x</td><td>12.0 -</td></tr><tr><td>iPhone XS Max</td><td>2018</td><td>arm64</td><td>1242 x 2688</td><td>6.5</td><td>458</td><td>@3x</td><td>12.0 -</td></tr><tr><td>iPhone XR</td><td>2018</td><td>arm64</td><td>828 x 1792</td><td>6.1</td><td>326</td><td>@2x</td><td>12.0 -</td></tr><tr><td>iPhone 11</td><td>2019</td><td>arm64</td><td>828 x 1792</td><td>6.1</td><td>326</td><td>@2x</td><td>13.0 -</td></tr><tr><td>iPhone 11 Pro</td><td>2019</td><td>arm64</td><td>1125 x 2436</td><td>5.8</td><td>458</td><td>@3x</td><td>13.0 -</td></tr><tr><td>iPhone 11 Pro Max</td><td>2019</td><td>arm64</td><td>1242 x 2688</td><td>6.5</td><td>458</td><td>@3x</td><td>13.0 -</td></tr></tbody></table><p>注：屏幕分辨率单位为英寸(inch)，分辨率密度单位为ppi</p><a id="more"></a><h2 id="iPad"><a href="#iPad" class="headerlink" title="iPad"></a>iPad</h2><table><thead><tr><th>设备</th><th>发布年份</th><th>CPU架构</th><th>分辨率</th><th>@Nx</th><th>iOS系统</th></tr></thead><tbody><tr><td>iPad</td><td>2010</td><td>armv7</td><td>768 x 1024</td><td>@1x</td><td>3.2 - 5.1.1</td></tr><tr><td>iPad 2</td><td>2011</td><td>armv7</td><td>768 x 1024</td><td>@1x</td><td>4.3 - 9.3.5</td></tr><tr><td>iPad (3rd)</td><td>2012</td><td>armv7</td><td>1536 x 2048</td><td>@2x</td><td>5.1 - 9.3.5</td></tr><tr><td>iPad mini</td><td>2012</td><td>armv7s</td><td>768 x 1024</td><td>@1x</td><td>6.0 - 9.3.5</td></tr><tr><td>iPad (4rd)</td><td>2012</td><td>armv7s</td><td>1536 x 2048</td><td>@2x</td><td>6.0 -</td></tr><tr><td>iPad Air</td><td>2013</td><td>arm64</td><td>1536 x 2048</td><td>@2x</td><td>7.0 -</td></tr><tr><td>iPad mini Retina</td><td>2013</td><td>arm64</td><td>1536 x 2048</td><td>@2x</td><td>7.0 -</td></tr><tr><td>iPad Air 2</td><td>2014</td><td>arm64</td><td>1536 x 2048</td><td>@2x</td><td>8.1 -</td></tr><tr><td>iPad mini 3</td><td>2014</td><td>arm64</td><td>1536 x 2048</td><td>@2x</td><td>8.1 -</td></tr><tr><td>iPad mini 4</td><td>2015</td><td>arm64</td><td>1536 x 2048</td><td>@2x</td><td>9.0 -</td></tr><tr><td>iPad Pro (12.9)</td><td>2015</td><td>arm64</td><td>2048 x 2732</td><td>@2x</td><td>9.1 -</td></tr><tr><td>iPad Pro (9.7)</td><td>2016</td><td>arm64</td><td>1536 x 2048</td><td>@2x</td><td>9.3 -</td></tr><tr><td>iPad (5rd)</td><td>2017</td><td>arm64</td><td>1536 x 2048</td><td>@2x</td><td>10.2.1 -</td></tr><tr><td>iPad Pro (10.5)</td><td>2017</td><td>arm64</td><td>1668 x 2224</td><td>@2x</td><td>10.3.2 -</td></tr><tr><td>iPad Pro (12.9-2)</td><td>2017</td><td>arm64</td><td>2048 x 2732</td><td>@2x</td><td>10.3.2 -</td></tr><tr><td>iPad (10.2)</td><td>2019</td><td>arm64</td><td>1620 x 2160</td><td>@2x</td><td>iPadOS</td></tr></tbody></table><h2 id="iPod-touch"><a href="#iPod-touch" class="headerlink" title="iPod touch"></a>iPod touch</h2><table><thead><tr><th>设备</th><th>发布年份</th><th>CPU架构</th><th>分辨率</th><th>@Nx</th><th>iOS系统</th></tr></thead><tbody><tr><td>iPod touch</td><td>2007</td><td>armv6</td><td>320 x 480</td><td>@1x</td><td>1.1 - 3.1.3</td></tr><tr><td>iPod touch (2nd)</td><td>2008</td><td>armv6</td><td>320 x 480</td><td>@1x</td><td>2.1.1 - 4.2.1</td></tr><tr><td>iPod touch (3rd)</td><td>2009</td><td>armv7</td><td>320 x 480</td><td>@1x</td><td>3.1 - 5.1.1</td></tr><tr><td>iPod touch (4th)</td><td>2010</td><td>armv7</td><td>640 x 960</td><td>@2x</td><td>4.1 - 6.1.4</td></tr><tr><td>iPod touch (5th)</td><td>2012</td><td>armv7</td><td>640 x 1136</td><td>@2x</td><td>6.0 - 9.3.5</td></tr><tr><td>iPod touch (6th)</td><td>2015</td><td>arm64</td><td>640 x 1136</td><td>@2x</td><td>8.4 -</td></tr></tbody></table><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p><a href="https://www.jianshu.com/p/2671829b86ab" target="_blank" rel="noopener">iOS设备一览表</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;ios-设备一览表&quot;&gt;&lt;a href=&quot;#ios-设备一览表&quot; class=&quot;headerlink&quot; title=&quot;ios 设备一览表&quot;&gt;&lt;/a&gt;ios 设备一览表&lt;/h1&gt;&lt;h2 id=&quot;iPhone&quot;&gt;&lt;a href=&quot;#iPhone&quot; class=&quot;headerlink&quot; title=&quot;iPhone&quot;&gt;&lt;/a&gt;iPhone&lt;/h2&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;设备&lt;/th&gt;
-&lt;th&gt;时间&lt;/th&gt;
-&lt;th&gt;CPU&lt;/th&gt;
-&lt;th&gt;分辨率&lt;/th&gt;
-&lt;th&gt;大小&lt;/th&gt;
-&lt;th&gt;密度&lt;/th&gt;
-&lt;th&gt;@Nx&lt;/th&gt;
-&lt;th&gt;iOS系统&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone&lt;/td&gt;
-&lt;td&gt;2007&lt;/td&gt;
-&lt;td&gt;armv6&lt;/td&gt;
-&lt;td&gt;320 x 480&lt;/td&gt;
-&lt;td&gt;3.5&lt;/td&gt;
-&lt;td&gt;165&lt;/td&gt;
-&lt;td&gt;@1x&lt;/td&gt;
-&lt;td&gt;1.0 - 3.1.3&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 3G&lt;/td&gt;
-&lt;td&gt;2008&lt;/td&gt;
-&lt;td&gt;armv6&lt;/td&gt;
-&lt;td&gt;320 x 480&lt;/td&gt;
-&lt;td&gt;3.5&lt;/td&gt;
-&lt;td&gt;165&lt;/td&gt;
-&lt;td&gt;@1x&lt;/td&gt;
-&lt;td&gt;2.0 - 4.2.1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 3GS&lt;/td&gt;
-&lt;td&gt;2009&lt;/td&gt;
-&lt;td&gt;armv7&lt;/td&gt;
-&lt;td&gt;320 x 480&lt;/td&gt;
-&lt;td&gt;3.5&lt;/td&gt;
-&lt;td&gt;165&lt;/td&gt;
-&lt;td&gt;@1x&lt;/td&gt;
-&lt;td&gt;3.0 - 6.1.4&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 4 (GSM)&lt;/td&gt;
-&lt;td&gt;2010&lt;/td&gt;
-&lt;td&gt;armv7&lt;/td&gt;
-&lt;td&gt;640 x 960&lt;/td&gt;
-&lt;td&gt;3.5&lt;/td&gt;
-&lt;td&gt;330&lt;/td&gt;
-&lt;td&gt;@2x&lt;/td&gt;
-&lt;td&gt;4.0 - 7.1.2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 4 (CDMA)&lt;/td&gt;
-&lt;td&gt;2011&lt;/td&gt;
-&lt;td&gt;armv7&lt;/td&gt;
-&lt;td&gt;640 x 960&lt;/td&gt;
-&lt;td&gt;3.5&lt;/td&gt;
-&lt;td&gt;330&lt;/td&gt;
-&lt;td&gt;@2x&lt;/td&gt;
-&lt;td&gt;4.2.4 - 7.1.2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 4S&lt;/td&gt;
-&lt;td&gt;2011&lt;/td&gt;
-&lt;td&gt;armv7&lt;/td&gt;
-&lt;td&gt;640 x 960&lt;/td&gt;
-&lt;td&gt;3.5&lt;/td&gt;
-&lt;td&gt;330&lt;/td&gt;
-&lt;td&gt;@2x&lt;/td&gt;
-&lt;td&gt;5.0 - 9.3.5&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 5&lt;/td&gt;
-&lt;td&gt;2012&lt;/td&gt;
-&lt;td&gt;armv7s&lt;/td&gt;
-&lt;td&gt;640 x 1136&lt;/td&gt;
-&lt;td&gt;4&lt;/td&gt;
-&lt;td&gt;326&lt;/td&gt;
-&lt;td&gt;@2x&lt;/td&gt;
-&lt;td&gt;6.0 - 10.3.3&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 5c&lt;/td&gt;
-&lt;td&gt;2013&lt;/td&gt;
-&lt;td&gt;armv7s&lt;/td&gt;
-&lt;td&gt;640 x 1136&lt;/td&gt;
-&lt;td&gt;4&lt;/td&gt;
-&lt;td&gt;326&lt;/td&gt;
-&lt;td&gt;@2x&lt;/td&gt;
-&lt;td&gt;7.0 - 10.3.3&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 5s&lt;/td&gt;
-&lt;td&gt;2013&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;640 x 1136&lt;/td&gt;
-&lt;td&gt;4&lt;/td&gt;
-&lt;td&gt;326&lt;/td&gt;
-&lt;td&gt;@2x&lt;/td&gt;
-&lt;td&gt;7.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 6&lt;/td&gt;
-&lt;td&gt;2014&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;750 x 1334&lt;/td&gt;
-&lt;td&gt;4.7&lt;/td&gt;
-&lt;td&gt;326&lt;/td&gt;
-&lt;td&gt;@2x&lt;/td&gt;
-&lt;td&gt;8.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 6 Plus&lt;/td&gt;
-&lt;td&gt;2014&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;1242 x 2208&lt;/td&gt;
-&lt;td&gt;5.5&lt;/td&gt;
-&lt;td&gt;461&lt;/td&gt;
-&lt;td&gt;@3x&lt;/td&gt;
-&lt;td&gt;8.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 6s&lt;/td&gt;
-&lt;td&gt;2015&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;750 x 1334&lt;/td&gt;
-&lt;td&gt;4.7&lt;/td&gt;
-&lt;td&gt;326&lt;/td&gt;
-&lt;td&gt;@2x&lt;/td&gt;
-&lt;td&gt;9.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 6s Plus&lt;/td&gt;
-&lt;td&gt;2015&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;1242 x 2208&lt;/td&gt;
-&lt;td&gt;5.5&lt;/td&gt;
-&lt;td&gt;461&lt;/td&gt;
-&lt;td&gt;@3x&lt;/td&gt;
-&lt;td&gt;9.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone SE&lt;/td&gt;
-&lt;td&gt;2016&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;640 x 1136&lt;/td&gt;
-&lt;td&gt;4&lt;/td&gt;
-&lt;td&gt;326&lt;/td&gt;
-&lt;td&gt;@2x&lt;/td&gt;
-&lt;td&gt;9.3 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 7&lt;/td&gt;
-&lt;td&gt;2016&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;750 x 1334&lt;/td&gt;
-&lt;td&gt;4.7&lt;/td&gt;
-&lt;td&gt;326&lt;/td&gt;
-&lt;td&gt;@2x&lt;/td&gt;
-&lt;td&gt;10.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 7 Plus&lt;/td&gt;
-&lt;td&gt;2016&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;1242 x 2208&lt;/td&gt;
-&lt;td&gt;5.5&lt;/td&gt;
-&lt;td&gt;461&lt;/td&gt;
-&lt;td&gt;@3x&lt;/td&gt;
-&lt;td&gt;10.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 8&lt;/td&gt;
-&lt;td&gt;2017&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;750 x 1334&lt;/td&gt;
-&lt;td&gt;4.7&lt;/td&gt;
-&lt;td&gt;326&lt;/td&gt;
-&lt;td&gt;@2x&lt;/td&gt;
-&lt;td&gt;11.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 8 Plus&lt;/td&gt;
-&lt;td&gt;2017&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;1242 x 2208&lt;/td&gt;
-&lt;td&gt;5.5&lt;/td&gt;
-&lt;td&gt;461&lt;/td&gt;
-&lt;td&gt;@3x&lt;/td&gt;
-&lt;td&gt;11.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone X&lt;/td&gt;
-&lt;td&gt;2017&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;1125 x 2436&lt;/td&gt;
-&lt;td&gt;5.8&lt;/td&gt;
-&lt;td&gt;463&lt;/td&gt;
-&lt;td&gt;@3x&lt;/td&gt;
-&lt;td&gt;11.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone XS&lt;/td&gt;
-&lt;td&gt;2018&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;1125 x 2436&lt;/td&gt;
-&lt;td&gt;5.8&lt;/td&gt;
-&lt;td&gt;463&lt;/td&gt;
-&lt;td&gt;@3x&lt;/td&gt;
-&lt;td&gt;12.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone XS Max&lt;/td&gt;
-&lt;td&gt;2018&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;1242 x 2688&lt;/td&gt;
-&lt;td&gt;6.5&lt;/td&gt;
-&lt;td&gt;458&lt;/td&gt;
-&lt;td&gt;@3x&lt;/td&gt;
-&lt;td&gt;12.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone XR&lt;/td&gt;
-&lt;td&gt;2018&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;828 x 1792&lt;/td&gt;
-&lt;td&gt;6.1&lt;/td&gt;
-&lt;td&gt;326&lt;/td&gt;
-&lt;td&gt;@2x&lt;/td&gt;
-&lt;td&gt;12.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 11&lt;/td&gt;
-&lt;td&gt;2019&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;828 x 1792&lt;/td&gt;
-&lt;td&gt;6.1&lt;/td&gt;
-&lt;td&gt;326&lt;/td&gt;
-&lt;td&gt;@2x&lt;/td&gt;
-&lt;td&gt;13.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 11 Pro&lt;/td&gt;
-&lt;td&gt;2019&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;1125 x 2436&lt;/td&gt;
-&lt;td&gt;5.8&lt;/td&gt;
-&lt;td&gt;458&lt;/td&gt;
-&lt;td&gt;@3x&lt;/td&gt;
-&lt;td&gt;13.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;iPhone 11 Pro Max&lt;/td&gt;
-&lt;td&gt;2019&lt;/td&gt;
-&lt;td&gt;arm64&lt;/td&gt;
-&lt;td&gt;1242 x 2688&lt;/td&gt;
-&lt;td&gt;6.5&lt;/td&gt;
-&lt;td&gt;458&lt;/td&gt;
-&lt;td&gt;@3x&lt;/td&gt;
-&lt;td&gt;13.0 -&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;注：屏幕分辨率单位为英寸(inch)，分辨率密度单位为ppi&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="ios" scheme="https://pinghailinfeng.gitee.io/categories/ios/"/>
-    
-    
-      <category term="app" scheme="https://pinghailinfeng.gitee.io/tags/app/"/>
-    
-      <category term="ios" scheme="https://pinghailinfeng.gitee.io/tags/ios/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git diff usage</title>
-    <link href="https://pinghailinfeng.gitee.io/2019/11/21/git-diff-usage/"/>
-    <id>https://pinghailinfeng.gitee.io/2019/11/21/git-diff-usage/</id>
-    <published>2019-11-21T04:04:12.000Z</published>
-    <updated>2019-11-21T05:58:19.239Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Git-中-diff-命令使用"><a href="#Git-中-diff-命令使用" class="headerlink" title="Git 中 diff 命令使用"></a>Git 中 diff 命令使用</h1><p>整理总结工作中常用的<code>git</code> 命令, 今天是一个非常有用的命令 <code>git diff</code></p><p>主要作用是用来比较差异，包括 <code>commits</code>之间,<code>commit</code> 和 工作区间 差异 </p><p>命令格式如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git diff [&lt;options&gt;] [&lt;commit&gt;] [--] [&lt;path&gt;…​]</span><br><span class="line">git diff [&lt;options&gt;] --cached [&lt;commit&gt;] [--] [&lt;path&gt;…​]</span><br><span class="line">git diff [&lt;options&gt;] &lt;commit&gt; &lt;commit&gt; [--] [&lt;path&gt;…​]</span><br><span class="line">git diff [&lt;options&gt;] &lt;blob&gt; &lt;blob&gt;</span><br><span class="line">git diff [&lt;options&gt;] --no-index [--] &lt;path&gt; &lt;path&gt;</span><br></pre></td></tr></table></figure><h2 id="1-比较工作区与暂存区"><a href="#1-比较工作区与暂存区" class="headerlink" title="1. 比较工作区与暂存区"></a>1. 比较工作区与暂存区</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff 不加参数</span><br></pre></td></tr></table></figure><h2 id="2-比较暂存区与-本地-最新版本-最后一次commit"><a href="#2-比较暂存区与-本地-最新版本-最后一次commit" class="headerlink" title="2. 比较暂存区与 本地 最新版本 (最后一次commit)"></a>2. 比较暂存区与 本地 最新版本 (最后一次commit)</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached</span><br></pre></td></tr></table></figure><h2 id="3-比较工作区与最新本地版本库"><a href="#3-比较工作区与最新本地版本库" class="headerlink" title="3. 比较工作区与最新本地版本库"></a>3. 比较工作区与最新本地版本库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD</span><br></pre></td></tr></table></figure><h2 id="4-比较工作区与commit-id的差异"><a href="#4-比较工作区与commit-id的差异" class="headerlink" title="4. 比较工作区与commit-id的差异"></a>4. 比较工作区与commit-id的差异</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff commit-id</span><br></pre></td></tr></table></figure><h2 id="5-比较暂存区与指定commit-id的差异"><a href="#5-比较暂存区与指定commit-id的差异" class="headerlink" title="5. 比较暂存区与指定commit-id的差异"></a>5. <strong>比较暂存区与指定commit-id的差异</strong></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached commit-id</span><br></pre></td></tr></table></figure><a id="more"></a><h2 id="6-比较两个commit-id之间的差异"><a href="#6-比较两个commit-id之间的差异" class="headerlink" title="6. 比较两个commit-id之间的差异"></a>6. <strong>比较两个commit-id之间的差异</strong></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff commit-id commit-id</span><br></pre></td></tr></table></figure><h2 id="7-比较不同本地分支的差异"><a href="#7-比较不同本地分支的差异" class="headerlink" title="7.  比较不同本地分支的差异"></a>7.  比较不同本地分支的差异</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff dev # 当前所处分支为master</span><br></pre></td></tr></table></figure><h2 id="8-比较本地分支和远程分支之间的差异"><a href="#8-比较本地分支和远程分支之间的差异" class="headerlink" title="8. 比较本地分支和远程分支之间的差异"></a>8. 比较本地分支和远程分支之间的差异</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin master</span><br><span class="line">git diff master origin/master</span><br></pre></td></tr></table></figure><h2 id="9-比较差异只显示文件名"><a href="#9-比较差异只显示文件名" class="headerlink" title="9. 比较差异只显示文件名"></a>9. 比较差异只显示文件名</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --name-only</span><br></pre></td></tr></table></figure><h2 id="10-比较差异-显示更改文件状态"><a href="#10-比较差异-显示更改文件状态" class="headerlink" title="10 . 比较差异 显示更改文件状态"></a>10 . 比较差异 显示更改文件状态</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --name-status</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Git-中-diff-命令使用&quot;&gt;&lt;a href=&quot;#Git-中-diff-命令使用&quot; class=&quot;headerlink&quot; title=&quot;Git 中 diff 命令使用&quot;&gt;&lt;/a&gt;Git 中 diff 命令使用&lt;/h1&gt;&lt;p&gt;整理总结工作中常用的&lt;code&gt;git&lt;/code&gt; 命令, 今天是一个非常有用的命令 &lt;code&gt;git diff&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;主要作用是用来比较差异，包括 &lt;code&gt;commits&lt;/code&gt;之间,&lt;code&gt;commit&lt;/code&gt; 和 工作区间 差异 &lt;/p&gt;
-&lt;p&gt;命令格式如下：&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git diff [&amp;lt;options&amp;gt;] [&amp;lt;commit&amp;gt;] [--] [&amp;lt;path&amp;gt;…​]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;git diff [&amp;lt;options&amp;gt;] --cached [&amp;lt;commit&amp;gt;] [--] [&amp;lt;path&amp;gt;…​]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;git diff [&amp;lt;options&amp;gt;] &amp;lt;commit&amp;gt; &amp;lt;commit&amp;gt; [--] [&amp;lt;path&amp;gt;…​]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;git diff [&amp;lt;options&amp;gt;] &amp;lt;blob&amp;gt; &amp;lt;blob&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;git diff [&amp;lt;options&amp;gt;] --no-index [--] &amp;lt;path&amp;gt; &amp;lt;path&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;1-比较工作区与暂存区&quot;&gt;&lt;a href=&quot;#1-比较工作区与暂存区&quot; class=&quot;headerlink&quot; title=&quot;1. 比较工作区与暂存区&quot;&gt;&lt;/a&gt;1. 比较工作区与暂存区&lt;/h2&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git diff 不加参数&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;2-比较暂存区与-本地-最新版本-最后一次commit&quot;&gt;&lt;a href=&quot;#2-比较暂存区与-本地-最新版本-最后一次commit&quot; class=&quot;headerlink&quot; title=&quot;2. 比较暂存区与 本地 最新版本 (最后一次commit)&quot;&gt;&lt;/a&gt;2. 比较暂存区与 本地 最新版本 (最后一次commit)&lt;/h2&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git diff --cached&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;3-比较工作区与最新本地版本库&quot;&gt;&lt;a href=&quot;#3-比较工作区与最新本地版本库&quot; class=&quot;headerlink&quot; title=&quot;3. 比较工作区与最新本地版本库&quot;&gt;&lt;/a&gt;3. 比较工作区与最新本地版本库&lt;/h2&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git diff HEAD&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;4-比较工作区与commit-id的差异&quot;&gt;&lt;a href=&quot;#4-比较工作区与commit-id的差异&quot; class=&quot;headerlink&quot; title=&quot;4. 比较工作区与commit-id的差异&quot;&gt;&lt;/a&gt;4. 比较工作区与commit-id的差异&lt;/h2&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git diff commit-id&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h2 id=&quot;5-比较暂存区与指定commit-id的差异&quot;&gt;&lt;a href=&quot;#5-比较暂存区与指定commit-id的差异&quot; class=&quot;headerlink&quot; title=&quot;5. 比较暂存区与指定commit-id的差异&quot;&gt;&lt;/a&gt;5. &lt;strong&gt;比较暂存区与指定commit-id的差异&lt;/strong&gt;&lt;/h2&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;git diff --cached commit-id&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="版本管理" scheme="https://pinghailinfeng.gitee.io/categories/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86/"/>
-    
-    
-      <category term="git" scheme="https://pinghailinfeng.gitee.io/tags/git/"/>
     
   </entry>
   
