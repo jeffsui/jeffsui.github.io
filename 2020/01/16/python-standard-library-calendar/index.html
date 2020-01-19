@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 calendar每日一词:  calendar  英 [ˈkælɪndə(r)]    美 [ˈkælɪndər]   n. 日历；[天] 历法；日程表 vt. 将…列入表中；将…排入日程表  短语 chinese calendar 中国传统历法 ; 阴历 ; 中国农历 lunar calendar 阴历 ; 夏历 ; 来自日月星辰的力量 ; 太阴历 solar calend">
+<meta name="keywords" content="python,standard_library,calendar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library calendar">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/01/16/python-standard-library-calendar/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 calendar每日一词:  calendar  英 [ˈkælɪndə(r)]    美 [ˈkælɪndər]   n. 日历；[天] 历法；日程表 vt. 将…列入表中；将…排入日程表  短语 chinese calendar 中国传统历法 ; 阴历 ; 中国农历 lunar calendar 阴历 ; 夏历 ; 来自日月星辰的力量 ; 太阴历 solar calend">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200116_canlendar_3.png?raw=true">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200116_canlendar_4.png?raw=true">
+<meta property="og:updated_time" content="2020-01-19T00:52:18.619Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library calendar">
+<meta name="twitter:description" content="python 标准库 calendar每日一词:  calendar  英 [ˈkælɪndə(r)]    美 [ˈkælɪndər]   n. 日历；[天] 历法；日程表 vt. 将…列入表中；将…排入日程表  短语 chinese calendar 中国传统历法 ; 阴历 ; 中国农历 lunar calendar 阴历 ; 夏历 ; 来自日月星辰的力量 ; 太阴历 solar calend">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200116_canlendar_3.png?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/01/16/python-standard-library-calendar/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library calendar | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/16/python-standard-library-calendar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library calendar
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-16 08:50:37" itemprop="dateCreated datePublished" datetime="2020-01-16T08:50:37+08:00">2020-01-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-19 08:52:18" itemprop="dateModified" datetime="2020-01-19T08:52:18+08:00">2020-01-19</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">6.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-calendar"><a href="#python-标准库-calendar" class="headerlink" title="python 标准库 calendar"></a>python 标准库 calendar</h1><p>每日一词:</p>
+<blockquote>
+<p>calendar</p>
+<p> <strong>英</strong> [ˈkælɪndə(r)]    <strong>美</strong> [ˈkælɪndər] </p>
+<ul>
+<li>n. 日历；[天] 历法；日程表</li>
+<li>vt. 将…列入表中；将…排入日程表</li>
+</ul>
+<p>短语</p>
+<p><strong><a href="http://dict.youdao.com/w/eng/chinese_calendar/#keyfrom=dict.phrase.wordgroup" target="_blank" rel="noopener">chinese calendar</a></strong> 中国传统历法 ; 阴历 ; 中国农历</p>
+<p><strong><a href="http://dict.youdao.com/w/eng/lunar_calendar/#keyfrom=dict.phrase.wordgroup" target="_blank" rel="noopener">lunar calendar</a></strong> 阴历 ; 夏历 ; 来自日月星辰的力量 ; 太阴历</p>
+<p><strong><a href="http://dict.youdao.com/w/eng/solar_calendar/#keyfrom=dict.phrase.wordgroup" target="_blank" rel="noopener">solar calendar</a></strong> 太阳历 ; 公历 ; 阳历与阴历</p>
+</blockquote>
+<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200116_canlendar_3.png?raw=true" alt></p>
+<p>还有几天就过年了,2020年充满了期待,你呢？</p>
+<p>今天我们学习python 标准库 calendar 。</p>
+<blockquote>
+<p>输出像 Unix <strong>cal</strong> 那样的日历，它还提供了其它与日历相关的实用函数。 默认情况下，这些日历把星期一当作一周的第一天，星期天为一周的最后一天（按照欧洲惯例）。 可以使用 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.setfirstweekday" target="_blank" rel="noopener"><code>setfirstweekday()</code></a> 方法设置一周的第一天为星期天 (6) 或者其它任意一天。 使用整数作为指定日期的参数。 更多相关的函数，参见 <a href="https://docs.python.org/zh-cn/3.8/library/datetime.html#module-datetime" target="_blank" rel="noopener"><code>datetime</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/time.html#module-time" target="_blank" rel="noopener"><code>time</code></a> 模块。 </p>
+</blockquote>
+<p> 在这个模块中定义的函数和类都基于一个理想化的日历，现行公历向过去和未来两个方向无限扩展。这与 Dershowitz 和 Reingold 的书 “历法计算” 中所有计算的基本日历 – “proleptic Gregorian” 日历的定义相符合。 ISO 8601标准还规定了 0 和 负数年份。0年指公元前1年， -1年指公元前2年，依此类推 .</p>
+<a id="more"></a>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><p> <strong>源代码：</strong> <a href="https://github.com/python/cpython/tree/3.8/Lib/calendar.py" target="_blank" rel="noopener">Lib/calendar.py</a> </p>
+<p>主要类和方法,节选自源码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">__all__ = [<span class="string">"IllegalMonthError"</span>, <span class="string">"IllegalWeekdayError"</span>, <span class="string">"setfirstweekday"</span>,</span><br><span class="line">           <span class="string">"firstweekday"</span>, <span class="string">"isleap"</span>, <span class="string">"leapdays"</span>, <span class="string">"weekday"</span>, <span class="string">"monthrange"</span>,</span><br><span class="line">           <span class="string">"monthcalendar"</span>, <span class="string">"prmonth"</span>, <span class="string">"month"</span>, <span class="string">"prcal"</span>, <span class="string">"calendar"</span>,</span><br><span class="line">           <span class="string">"timegm"</span>, <span class="string">"month_name"</span>, <span class="string">"month_abbr"</span>, <span class="string">"day_name"</span>, <span class="string">"day_abbr"</span>,</span><br><span class="line">           <span class="string">"Calendar"</span>, <span class="string">"TextCalendar"</span>, <span class="string">"HTMLCalendar"</span>, <span class="string">"LocaleTextCalendar"</span>,</span><br><span class="line">           <span class="string">"LocaleHTMLCalendar"</span>, <span class="string">"weekheader"</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><h3 id="class-calendar-Calendar-firstweekday-0-¶"><a href="#class-calendar-Calendar-firstweekday-0-¶" class="headerlink" title="class calendar.Calendar(firstweekday=0)¶"></a><em>class</em> <code>calendar.Calendar</code>(<em>firstweekday=0</em>)<a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.Calendar" target="_blank" rel="noopener">¶</a></h3><p>创建一个 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.Calendar" target="_blank" rel="noopener"><code>Calendar</code></a> 对象。 <em>firstweekday</em> 是一个整数，用于指定一周的第一天。 <code>0</code> 是星期一（默认值），<code>6</code> 是星期天。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.Calendar" target="_blank" rel="noopener"><code>Calendar</code></a> 对象提供了一些可被用于准备日历数据格式化的方法。 这个类本身不执行任何格式化操作。 这部分任务应由子类来完成。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.Calendar" target="_blank" rel="noopener"><code>Calendar</code></a> 类的实例有下列方法：</p>
+<ul>
+<li><p><code>iterweekdays</code>()</p>
+<p>返回一个迭代器，迭代器的内容为一星期的数字。迭代器的第一个值与 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.firstweekday" target="_blank" rel="noopener"><code>firstweekday</code></a> 属性的值一至。</p>
+</li>
+<li><p><code>itermonthdates</code>(<em>year</em>, <em>month</em>)</p>
+<p>返回一个迭代器，迭代器的内容为 <em>year</em> 年 <em>month</em> 月(1-12)的日期。这个迭代器返回当月的所有日期 ( <a href="https://docs.python.org/zh-cn/3.8/library/datetime.html#datetime.date" target="_blank" rel="noopener"><code>datetime.date</code></a> 对象)，日期包含了本月头尾用于组成完整一周的日期。</p>
+</li>
+<li><p><code>itermonthdays</code>(<em>year</em>, <em>month</em>)</p>
+<p>返回一个迭代器，迭代器的内容与 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.Calendar.itermonthdates" target="_blank" rel="noopener"><code>itermonthdates()</code></a> 类似，为 <em>year</em> 年 <em>month</em> 月的日期，但不受 <a href="https://docs.python.org/zh-cn/3.8/library/datetime.html#datetime.date" target="_blank" rel="noopener"><code>datetime.date</code></a> 范围限制。返回的日期为当月每一天的日期对应的天数。对于不在当月的日期，显示为 <code>0</code>。</p>
+</li>
+<li><p><code>itermonthdays2</code>(<em>year</em>, <em>month</em>)</p>
+<p>返回一个迭代器，迭代器的内容与 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.Calendar.itermonthdates" target="_blank" rel="noopener"><code>itermonthdates()</code></a> 类似为 <em>year</em> 年 <em>month</em> 月的日期，但不受 <a href="https://docs.python.org/zh-cn/3.8/library/datetime.html#datetime.date" target="_blank" rel="noopener"><code>datetime.date</code></a> 范围的限制。迭代器中的元素为一个由日期和代表星期几的数字组成的的元组。</p>
+</li>
+<li><p><code>itermonthdays3</code>(<em>year</em>, <em>month</em>)</p>
+<p>返回一个迭代器，迭代器的内容与 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.Calendar.itermonthdates" target="_blank" rel="noopener"><code>itermonthdates()</code></a> 类似为 <em>year</em> 年 <em>month</em> 月的日期，但不受 <a href="https://docs.python.org/zh-cn/3.8/library/datetime.html#datetime.date" target="_blank" rel="noopener"><code>datetime.date</code></a> 范围的限制。迭代器的元素为一个由年，月，日组成的元组。<em>3.7 新版功能.</em></p>
+</li>
+<li><p><code>itermonthdays4</code>(<em>year</em>, <em>month</em>)</p>
+<p>返回一个迭代器，迭代器的内容与 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.Calendar.itermonthdates" target="_blank" rel="noopener"><code>itermonthdates()</code></a> 类似为 <em>year</em> 年 <em>month</em> 月的日期，但不受 <a href="https://docs.python.org/zh-cn/3.8/library/datetime.html#datetime.date" target="_blank" rel="noopener"><code>datetime.date</code></a> 范围的限制。迭代器的元素为一个由年，月，日和代表星期几的数字组成的元组。<em>3.7 新版功能.</em></p>
+</li>
+<li><p><code>monthdatescalendar</code>(<em>year</em>, <em>month</em>)</p>
+<p>返回一个表示指定年月的周列表。周列表由七个 <a href="https://docs.python.org/zh-cn/3.8/library/datetime.html#datetime.date" target="_blank" rel="noopener"><code>datetime.date</code></a> 对象组成。</p>
+</li>
+<li><p><code>monthdays2calendar</code>(<em>year</em>, <em>month</em>)</p>
+<p>返回一个表示指定年月的周列表。周列表由七个代表日期的数字和代表周几的数字组成的二元元组。</p>
+</li>
+<li><p><code>monthdayscalendar</code>(<em>year</em>, <em>month</em>)</p>
+<p>返回一个表示指定年月的周列表。周列表由七个代表日期的数字组成。</p>
+</li>
+<li><p><code>yeardatescalendar</code>(<em>year</em>, <em>width=3</em>)</p>
+<p>返回可以用来格式化的指定年月的数据。返回的值是一个列表，列表是月份组成的行。每一行包含了最多 <em>width</em> 个月(默认为3)。每个月包含了4到6周，每周包含1–7天。每一天使用 <a href="https://docs.python.org/zh-cn/3.8/library/datetime.html#datetime.date" target="_blank" rel="noopener"><code>datetime.date</code></a> 对象。</p>
+</li>
+<li><p><code>yeardays2calendar</code>(<em>year</em>, <em>width=3</em>)</p>
+<p>返回可以用来模式化的指定年月的数据(与 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.Calendar.yeardatescalendar" target="_blank" rel="noopener"><code>yeardatescalendar()</code></a> 类似)。周列表的元素是由表示日期的数字和表示星期几的数字组成的元组。不在这个月的日子为0。</p>
+</li>
+<li><p><code>yeardayscalendar</code>(<em>year</em>, <em>width=3</em>)</p>
+<p>返回可以用来模式化的指定年月的数据(与 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.Calendar.yeardatescalendar" target="_blank" rel="noopener"><code>yeardatescalendar()</code></a> 类似)。周列表的元素是表示日期的数字。不在这个月的日子为0。</p>
+</li>
+</ul>
+<h3 id="class-calendar-TextCalendar-firstweekday-0"><a href="#class-calendar-TextCalendar-firstweekday-0" class="headerlink" title="class calendar.TextCalendar(firstweekday=0)"></a><em>class</em> <code>calendar.TextCalendar</code>(<em>firstweekday=0</em>)</h3><p>可以使用这个类生成纯文本日历。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.TextCalendar" target="_blank" rel="noopener"><code>TextCalendar</code></a> 实例有以下方法：</p>
+<ul>
+<li><p><code>formatmonth</code>(<em>theyear</em>, <em>themonth</em>, <em>w=0</em>, <em>l=0</em>)</p>
+<p>返回一个多行字符串来表示指定年月的日历。<em>w</em> 为日期的宽度，但始终保持日期居中。<em>l</em> 指定了每星期占用的行数。以上这些还依赖于构造器或者 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.setfirstweekday" target="_blank" rel="noopener"><code>setfirstweekday()</code></a> 方法指定的周的第一天是哪一天。</p>
+</li>
+<li><p><code>prmonth</code>(<em>theyear</em>, <em>themonth</em>, <em>w=0</em>, <em>l=0</em>)</p>
+<p>与 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.TextCalendar.formatmonth" target="_blank" rel="noopener"><code>formatmonth()</code></a> 方法一样，返回一个月的日历。</p>
+</li>
+<li><p><code>formatyear</code>(<em>theyear</em>, <em>w=2</em>, <em>l=1</em>, <em>c=6</em>, <em>m=3</em>)</p>
+<p>返回一个多行字符串，这个字符串为一个 <em>m</em> 列日历。可选参数 <em>w</em>, <em>l</em>, 和 <em>c</em> 分别表示日期列数， 周的行数， 和月之间的间隔。同样，以上这些还依赖于构造器或者 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.setfirstweekday" target="_blank" rel="noopener"><code>setfirstweekday()</code></a> 指定哪一天为一周的第一天。日历的第一年由平台依赖于使用的平台。</p>
+</li>
+<li><p><code>pryear</code>(<em>theyear</em>, <em>w=2</em>, <em>l=1</em>, <em>c=6</em>, <em>m=3</em>)</p>
+<p>与 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.TextCalendar.formatyear" target="_blank" rel="noopener"><code>formatyear()</code></a> 方法一样，返回一整年的日历。</p>
+</li>
+</ul>
+<h3 id="class-calendar-HTMLCalendar-firstweekday-0"><a href="#class-calendar-HTMLCalendar-firstweekday-0" class="headerlink" title="class calendar.HTMLCalendar(firstweekday=0)"></a><em>class</em> <code>calendar.HTMLCalendar</code>(<em>firstweekday=0</em>)</h3><p>可以使用这个类生成 HTML 日历。<code>HTMLCalendar</code> 实例有以下方法：<code>formatmonth</code>(<em>theyear</em>, <em>themonth</em>, <em>withyear=True</em>)返回一个 HTML 表格作为指定年月的日历。 <em>withyear</em> 为真，则年份将会包含在表头，否则只显示月份。<code>formatyear</code>(<em>theyear</em>, <em>width=3</em>)返回一个 HTML 表格作为指定年份的日历。 <em>width</em> (默认为3) 用于规定每一行显示月份的数量。<code>formatyearpage</code>(<em>theyear</em>, <em>width=3</em>, <em>css=’calendar.css’</em>, <em>encoding=None</em>)返回一个完整的 HTML 页面作为指定年份的日历。 <em>width\</em>(默认为3) 用于规定每一行显示的月份数量。 *css<em> 为层叠样式表的名字。如果不使用任何层叠样式表，可以使用 <a href="https://docs.python.org/zh-cn/3.8/library/constants.html#None" target="_blank" rel="noopener"><code>None</code></a> 。 </em>encoding* 为输出页面的编码 (默认为系统的默认编码)。<code>HTMLCalendar</code> 有以下属性，你可以重载它们来自定义应用日历的样式。</p>
+<ul>
+<li><strong><code>cssclasses</code></strong>一个对应星期一到星期天的 CSS class 列表。默认列表为</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cssclasses = [<span class="string">"mon"</span>, <span class="string">"tue"</span>, <span class="string">"wed"</span>, <span class="string">"thu"</span>, <span class="string">"fri"</span>, <span class="string">"sat"</span>, <span class="string">"sun"</span>]</span><br></pre></td></tr></table></figure>
+<p> 可以向每天加入其它样式 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cssclasses = [<span class="string">"mon text-bold"</span>, <span class="string">"tue"</span>, <span class="string">"wed"</span>, <span class="string">"thu"</span>, <span class="string">"fri"</span>, <span class="string">"sat"</span>, <span class="string">"sun red"</span>]</span><br></pre></td></tr></table></figure>
+<p> 需要注意的是，列表的长度必须为7。 </p>
+<ul>
+<li><p><strong>cssclass_noday</strong> </p>
+<p>工作日的 CSS 类在上个月或下个月发生。 </p>
+</li>
+<li><p><code>cssclasses_weekday_head</code></p>
+<p>用于标题行中的工作日名称的 CSS 类 列表。默认值与 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.HTMLCalendar.cssclasses" target="_blank" rel="noopener"><code>cssclasses</code></a> 相同。<em>3.7 新版功能.</em></p>
+</li>
+<li><p><code>cssclass_month_head</code></p>
+<p>月份的头 CSS 类（由 <code>formatmonthname()</code> 使用）。默认值为 <code>&quot;month&quot;</code> 。<em>3.7 新版功能.</em></p>
+</li>
+<li><p><code>cssclass_month</code></p>
+<p>某个月的月历的 CSS 类（由 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.HTMLCalendar.formatmonth" target="_blank" rel="noopener"><code>formatmonth()</code></a> 使用）。默认值为 <code>&quot;month&quot;</code> 。<em>3.7 新版功能.</em></p>
+</li>
+<li><p><code>cssclass_year</code></p>
+<p>某年的年历的 CSS 类（由 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.HTMLCalendar.formatyear" target="_blank" rel="noopener"><code>formatyear()</code></a> 使用）。默认值为 <code>&quot;year&quot;</code> 。<em>3.7 新版功能.</em></p>
+</li>
+<li><p><code>cssclass_year_head</code></p>
+<p>年历的·表头 CSS 类（由 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.HTMLCalendar.formatyear" target="_blank" rel="noopener"><code>formatyear()</code></a> 使用）。默认值为 <code>&quot;year&quot;</code> 。<em>3.7 新版功能.</em></p>
+</li>
+</ul>
+<p>需要注意的是，尽管上面命名的样式类都是单独出现的(如： <code>cssclass_month</code> <code>cssclass_noday</code>), 但我们可以使用空格将样式类列表中的多个元素分隔开，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"text-bold text-red"</span></span><br></pre></td></tr></table></figure>
+<p> 下面是一个如何自定义 <code>HTMLCalendar</code> 的示例 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomHTMLCal</span><span class="params">(calendar.HTMLCalendar)</span>:</span></span><br><span class="line">    cssclasses = [style + <span class="string">" text-nowrap"</span> <span class="keyword">for</span> style <span class="keyword">in</span></span><br><span class="line">                  calendar.HTMLCalendar.cssclasses]</span><br><span class="line">    cssclass_month_head = <span class="string">"text-center month-head"</span></span><br><span class="line">    cssclass_month = <span class="string">"text-center month"</span></span><br><span class="line">    cssclass_year = <span class="string">"text-italic lead"</span></span><br></pre></td></tr></table></figure>
+<h3 id="class-calendar-LocaleTextCalendar-firstweekday-0-locale-None"><a href="#class-calendar-LocaleTextCalendar-firstweekday-0-locale-None" class="headerlink" title="class calendar.LocaleTextCalendar(firstweekday=0, locale=None)"></a><em>class</em> <code>calendar.LocaleTextCalendar</code>(<em>firstweekday=0</em>, <em>locale=None</em>)</h3><p>这个子类 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.TextCalendar" target="_blank" rel="noopener"><code>TextCalendar</code></a> 可以在构造函数中传递一个语言环境名称，并且返回月份和星期几的名称在特定语言环境中。如果此语言环境包含编码，则包含月份和工作日名称的所有字符串将作为 unicode 返回。</p>
+<h3 id="class-calendar-LocaleHTMLCalendar-firstweekday-0-locale-None"><a href="#class-calendar-LocaleHTMLCalendar-firstweekday-0-locale-None" class="headerlink" title="class calendar.LocaleHTMLCalendar(firstweekday=0, locale=None)"></a><em>class</em> <code>calendar.LocaleHTMLCalendar</code>(<em>firstweekday=0</em>, <em>locale=None</em>)</h3><ul>
+<li><p><code>calendar.setfirstweekday</code>(<em>weekday</em>)</p>
+<p>设置每一周的开始(<code>0</code> 表示星期一，<code>6</code> 表示星期天)。calendar还提供了 <code>MONDAY</code>, <code>TUESDAY</code>, <code>WEDNESDAY</code>, <code>THURSDAY</code>, <code>FRIDAY</code>, <code>SATURDAY</code> 和 <code>SUNDAY</code> 几个常量方便使用。例如，设置每周的第一天为星期天</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> calendar</span><br><span class="line">calendar.setfirstweekday(calendar.SUNDAY)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>calendar.firstweekday</code>()</p>
+<p>返回当前设置的每星期的第一天的数值。</p>
+</li>
+<li><p><code>calendar.isleap</code>(<em>year</em>)</p>
+<p>如果 <em>year</em> 是闰年则返回 <a href="https://docs.python.org/zh-cn/3.8/library/constants.html#True" target="_blank" rel="noopener"><code>True</code></a> ,否则返回 <a href="https://docs.python.org/zh-cn/3.8/library/constants.html#False" target="_blank" rel="noopener"><code>False</code></a>。</p>
+</li>
+<li><p><code>calendar.leapdays</code>(<em>y1</em>, <em>y2</em>)</p>
+<p>返回在范围 <em>y1</em> 至 <em>y2</em> （包含 y1 和 y2 ）之间的闰年的年数，其中 <em>y1</em> 和 <em>y2</em> 是年份。此函数适用于跨越一个世纪变化的范围。</p>
+</li>
+<li><p><code>calendar.weekday</code>(<em>year</em>, <em>month</em>, <em>day</em>)</p>
+<p>返回某年（ <code>1970</code> – …），某月（ <code>1</code> – <code>12</code> ），某日（ <code>1</code> – <code>31</code> ）是星期几（ <code>0</code> 是星期一）。</p>
+</li>
+<li><p><code>calendar.weekheader</code>(<em>n</em>)</p>
+<p>返回一个包含星期几的缩写名的头。 <em>n</em> 指定星期几缩写的字符宽度。</p>
+</li>
+<li><p><code>calendar.monthrange</code>(<em>year</em>, <em>month</em>)</p>
+<p>返回指定 <em>年份</em> 的指定 <em>月份</em> 的第一天是星期几和这个月的天数。</p>
+</li>
+<li><p><code>calendar.monthcalendar</code>(<em>year</em>, <em>month</em>)</p>
+<p>返回表示一个月的日历的矩阵。每一行代表一周；此月份外的日子由零表示。除非由 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.setfirstweekday" target="_blank" rel="noopener"><code>setfirstweekday()</code></a> 设置，否则每周以周一为始。</p>
+</li>
+<li><p><code>calendar.prmonth</code>(<em>theyear</em>, <em>themonth</em>, <em>w=0</em>, <em>l=0</em>)</p>
+<p>打印由 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.month" target="_blank" rel="noopener"><code>month()</code></a> 返回的一个月的日历。</p>
+</li>
+<li><p><code>calendar.month</code>(<em>theyear</em>, <em>themonth</em>, <em>w=0</em>, <em>l=0</em>)</p>
+<p>使用 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.TextCalendar" target="_blank" rel="noopener"><code>TextCalendar</code></a> 类的 <code>formatmonth()</code> 以多行字符串形式返回月份日历。</p>
+</li>
+<li><p><code>calendar.prcal</code>(<em>year</em>, <em>w=0</em>, <em>l=0</em>, <em>c=6</em>, <em>m=3</em>)</p>
+<p>打印由 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#module-calendar" target="_blank" rel="noopener"><code>calendar()</code></a> 返回的整年的日历。</p>
+</li>
+<li><p><code>calendar.calendar</code>(<em>year</em>, <em>w=2</em>, <em>l=1</em>, <em>c=6</em>, <em>m=3</em>)</p>
+<p>使用 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.TextCalendar" target="_blank" rel="noopener"><code>TextCalendar</code></a> 类的 <code>formatyear()</code> 返回整年的3列的日历以多行字符串的形式。</p>
+</li>
+<li><p><code>calendar.timegm</code>(<em>tuple</em>)</p>
+<p>一个不相关但很好用的函数，它接受一个时间元组例如 <a href="https://docs.python.org/zh-cn/3.8/library/time.html#module-time" target="_blank" rel="noopener"><code>time</code></a> 模块中的 <a href="https://docs.python.org/zh-cn/3.8/library/time.html#time.gmtime" target="_blank" rel="noopener"><code>gmtime()</code></a> 函数的返回并返回相应的 Unix 时间戳值，假定 1970 年开始计数， POSIX 编码。实际上， <a href="https://docs.python.org/zh-cn/3.8/library/time.html#time.gmtime" target="_blank" rel="noopener"><code>time.gmtime()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/calendar.html#calendar.timegm" target="_blank" rel="noopener"><code>timegm()</code></a> 是彼此相反的。</p>
+</li>
+</ul>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><ul>
+<li><p><code>calendar.day_name</code></p>
+<p>在当前语言环境下表示星期几的数组。</p>
+</li>
+<li><p><code>calendar.day_abbr</code></p>
+<p>在当前语言环境下表示星期几缩写的数组。</p>
+</li>
+<li><p><code>calendar.month_name</code></p>
+<p>在当前语言环境下表示一年中月份的数组。这遵循一月的月号为 1 的通常惯例，所以它的长度为 13 且 <code>month_name[0]</code> 是空字符串。</p>
+</li>
+<li><p><code>calendar.month_abbr</code></p>
+<p>在当前语言环境下表示月份简写的数组。这遵循一月的月号为 1 的通常惯例，所以它的长度为 13 且 <code>month_abbr[0]</code> 是空字符串。</p>
+</li>
+</ul>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200116_canlendar_4.png?raw=true" alt></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p> 默认情况下，这些日历将星期一作为一周的第一天，将星期日作为一周的最后一天(欧洲惯例)。不过，我们可以使用<code>setfirstweekday()</code>方法来设置一周的第一天为星期日或h者其他工作日，指定的日期以整数形式给出。 </p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/01/16/python-standard-library-calendar/" title="python standard library calendar">https://pinghailinfeng.gitee.io/2020/01/16/python-standard-library-calendar/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/calendar/" rel="tag"># calendar</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/15/python-standard-library-iterator-and-generator/" rel="next" title="python standard library iterator and generator">
+                <i class="fa fa-chevron-left"></i> python standard library iterator and generator
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/17/python-standard-library-heapq/" rel="prev" title="python standard libary heapq">
+                python standard libary heapq <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">71</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-calendar"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 calendar</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-number">1.1.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类"><span class="nav-number">1.2.</span> <span class="nav-text">类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#class-calendar-Calendar-firstweekday-0-¶"><span class="nav-number">1.2.1.</span> <span class="nav-text">class calendar.Calendar(firstweekday=0)¶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#class-calendar-TextCalendar-firstweekday-0"><span class="nav-number">1.2.2.</span> <span class="nav-text">class calendar.TextCalendar(firstweekday=0)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#class-calendar-HTMLCalendar-firstweekday-0"><span class="nav-number">1.2.3.</span> <span class="nav-text">class calendar.HTMLCalendar(firstweekday=0)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#class-calendar-LocaleTextCalendar-firstweekday-0-locale-None"><span class="nav-number">1.2.4.</span> <span class="nav-text">class calendar.LocaleTextCalendar(firstweekday=0, locale=None)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#class-calendar-LocaleHTMLCalendar-firstweekday-0-locale-None"><span class="nav-number">1.2.5.</span> <span class="nav-text">class calendar.LocaleHTMLCalendar(firstweekday=0, locale=None)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性"><span class="nav-number">1.3.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">1.4.</span> <span class="nav-text">例子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">1.5.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">190k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">2:53</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
