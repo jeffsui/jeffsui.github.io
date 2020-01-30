@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 enum 枚举类型支持">
+<meta name="keywords" content="python,standard_library,enum">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library enum">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/01/28/python-standard-library-enum/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 enum 枚举类型支持">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://cn.bing.com/th?id=OIP.MVQKeBgQJ2yG2rAwEJ5unQHaEK&pid=Api&rs=1">
+<meta property="og:updated_time" content="2020-01-30T08:43:58.069Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library enum">
+<meta name="twitter:description" content="python 标准库 enum 枚举类型支持">
+<meta name="twitter:image" content="https://cn.bing.com/th?id=OIP.MVQKeBgQJ2yG2rAwEJ5unQHaEK&pid=Api&rs=1">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/01/28/python-standard-library-enum/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library enum | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/28/python-standard-library-enum/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library enum
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-28 07:22:58" itemprop="dateCreated datePublished" datetime="2020-01-28T07:22:58+08:00">2020-01-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-30 16:43:58" itemprop="dateModified" datetime="2020-01-30T16:43:58+08:00">2020-01-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">19k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">18 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-enum-枚举类型支持"><a href="#python-标准库-enum-枚举类型支持" class="headerlink" title="python 标准库 enum 枚举类型支持"></a>python 标准库 enum 枚举类型支持</h1><p><img src="https://cn.bing.com/th?id=OIP.MVQKeBgQJ2yG2rAwEJ5unQHaEK&amp;pid=Api&amp;rs=1" alt></p>
+<a id="more"></a>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=643982&auto=0&height=66"></iframe>
+
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p><strong>源代码：</strong> <a href="https://github.com/python/cpython/tree/3.8/Lib/enum.py" target="_blank" rel="noopener">Lib/enum.py</a></p>
+<hr>
+<p>枚举是一组符号名称（枚举成员）的集合，枚举成员应该是唯一的、不可变的。在枚举中，可以对成员进行恒等比较，并且枚举本身是可迭代的。</p>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p>此模块定义了四个枚举类，它们可被用来定义名称和值的不重复集合: <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntEnum" target="_blank" rel="noopener"><code>IntEnum</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Flag" target="_blank" rel="noopener"><code>Flag</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a>。 此外还定义了一个装饰器 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.unique" target="_blank" rel="noopener"><code>unique()</code></a> 和一个辅助类 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.auto" target="_blank" rel="noopener"><code>auto</code></a>。</p>
+<ul>
+<li><p><em>class</em> <code>enum.Enum</code></p>
+<p>此基类用于创建枚举常量。 请参阅 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#functional-api" target="_blank" rel="noopener">Functional API</a> 小节了解另一种替代性的构建语法。</p>
+</li>
+<li><p><em>class</em> <code>enum.IntEnum</code></p>
+<p>此基类用于创建属于 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a> 的子类的枚举常量。</p>
+</li>
+<li><p><em>class</em> <code>enum.IntFlag</code></p>
+<p>此基类用于创建可使用按位运算符进行组合而不会丢失其 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 成员资格的枚举常量。 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 成员同样也是 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a> 的子类。</p>
+</li>
+<li><p><em>class</em> <code>enum.Flag</code></p>
+<p>此基类用于创建枚举常量 可使用按位运算符进行组合而不会丢失其 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Flag" target="_blank" rel="noopener"><code>Flag</code></a> 成员资格的枚举常量。</p>
+</li>
+<li><p><code>enum.unique</code>()</p>
+<p>此 Enum 类装饰器可确保只将一个名称绑定到任意一个值。</p>
+</li>
+<li><p><em>class</em> <code>enum.auto</code></p>
+<p>实例会被替换为一个可作为 Enum 成员的适当的值。 初始值从 1 开始。</p>
+</li>
+</ul>
+<h2 id="创建一个-Enum"><a href="#创建一个-Enum" class="headerlink" title="创建一个 Enum"></a>创建一个 Enum</h2><p> 枚举是使用 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#class" target="_blank" rel="noopener"><code>class</code></a> 语法来创建的，这使得它们易于读写。 另一种替代创建方法的描述见 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#functional-api" target="_blank" rel="noopener">Functional API</a>。 要定义一个枚举，可以对 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 进行如下的子类化: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> enum <span class="keyword">import</span> Enum</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Color</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    RED = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    GREEN = <span class="number">2</span></span><br><span class="line"><span class="meta">... </span>    BLUE = <span class="number">3</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 成员值可以为任意类型: <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a> 等等。 如果具体的值不重要，你可以使用 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.auto" target="_blank" rel="noopener"><code>auto</code></a> 实例，将为你选择适当的值。 但如果你混用 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.auto" target="_blank" rel="noopener"><code>auto</code></a> 与其他值则需要小心谨慎。 </p>
+<p> 虽然我们使用 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#class" target="_blank" rel="noopener"><code>class</code></a> 语法来创建 Enum，但 Enum 并不是普通的 Python 类。 更多细节请参阅 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#how-are-enums-different" target="_blank" rel="noopener">How are Enums different</a> </p>
+</blockquote>
+<h3 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h3><ul>
+<li>类 <code>Color</code> 是一个 <em>枚举</em> (或称 <em>enum</em>)</li>
+<li>属性 <code>Color.RED</code>, <code>Color.GREEN</code> 等等是 <em>枚举成员</em> (或称 <em>enum 成员</em>) 并且被用作常量。</li>
+<li><p>枚举成员具有 <em>名称</em> 和 <em>值</em> (<code>Color.RED</code> 的名称为 <code>RED</code>，<code>Color.BLUE</code> 的值为 <code>3</code> 等等。)</p>
+<p>枚举成员具有适合人类阅读的表示形式: </p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(Color.RED)</span><br><span class="line">Color.RED</span><br></pre></td></tr></table></figure>
+<p> .而它们的 <code>repr</code> 包含更多信息: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(repr(Color.RED))</span><br><span class="line">&lt;Color.RED: <span class="number">1</span>&gt;</span><br></pre></td></tr></table></figure>
+<p> 一个枚举成员的 <em>type</em> 就是它所从属的枚举: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>type(Color.RED)</span><br><span class="line">&lt;enum <span class="string">'Color'</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>isinstance(Color.GREEN, Color)</span><br><span class="line"><span class="literal">True</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p> Enum 的成员还有一个包含其条目名称的特征属性: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(Color.RED.name)</span><br><span class="line">RED</span><br></pre></td></tr></table></figure>
+<p>枚举支持按照定义顺序进行迭代:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Shake</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    VANILLA = <span class="number">7</span></span><br><span class="line"><span class="meta">... </span>    CHOCOLATE = <span class="number">4</span></span><br><span class="line"><span class="meta">... </span>    COOKIES = <span class="number">9</span></span><br><span class="line"><span class="meta">... </span>    MINT = <span class="number">3</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> shake <span class="keyword">in</span> Shake:</span><br><span class="line"><span class="meta">... </span>    print(shake)</span><br><span class="line">...</span><br><span class="line">Shake.VANILLA</span><br><span class="line">Shake.CHOCOLATE</span><br><span class="line">Shake.COOKIES</span><br><span class="line">Shake.MINT</span><br></pre></td></tr></table></figure>
+<p> 枚举成员是可哈希的，因此它们可在字典和集合中可用: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>apples = &#123;&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>apples[Color.RED] = <span class="string">'red delicious'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>apples[Color.GREEN] = <span class="string">'granny smith'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>apples == &#123;Color.RED: <span class="string">'red delicious'</span>, Color.GREEN: <span class="string">'granny smith'</span>&#125;</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<h2 id="对枚举成员及其属性的程序化访问"><a href="#对枚举成员及其属性的程序化访问" class="headerlink" title="对枚举成员及其属性的程序化访问"></a>对枚举成员及其属性的程序化访问</h2><p> 有时对枚举中的成员进行程序化访问是很有用的（例如在某些场合不能使用 <code>Color.RED</code> 因为在编程时并不知道要指定的确切颜色）。 <code>Enum</code> 允许这样的访问: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color(<span class="number">1</span>)</span><br><span class="line">&lt;Color.RED: <span class="number">1</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color(<span class="number">3</span>)</span><br><span class="line">&lt;Color.BLUE: <span class="number">3</span>&gt;</span><br></pre></td></tr></table></figure>
+<p> 如果你希望通过 <em>name</em> 来访问枚举成员，可使用条目访问: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color[<span class="string">'RED'</span>]</span><br><span class="line">&lt;Color.RED: <span class="number">1</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color[<span class="string">'GREEN'</span>]</span><br><span class="line">&lt;Color.GREEN: <span class="number">2</span>&gt;</span><br></pre></td></tr></table></figure>
+<p> 如果你有一个枚举成员并且需要它的 <code>name</code> 或 <code>value</code>: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>member = Color.RED</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>member.name</span><br><span class="line"><span class="string">'RED'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>member.value</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h2 id="复制枚举成员和值"><a href="#复制枚举成员和值" class="headerlink" title="复制枚举成员和值"></a>复制枚举成员和值</h2><p> 不允许有同名的枚举成员: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Shape</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    SQUARE = <span class="number">2</span></span><br><span class="line"><span class="meta">... </span>    SQUARE = <span class="number">3</span></span><br><span class="line">...</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">...</span><br><span class="line">TypeError: Attempted to reuse key: <span class="string">'SQUARE'</span></span><br></pre></td></tr></table></figure>
+<p> 但是，允许两个枚举成员有相同的值。 假定两个成员 A 和 B 有相同的值（且 A 先被定义），则 B 就是 A 的一个别名。 按值查找 A 和 B 的值将返回 A。 按名称查找 B 也将返回 A: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Shape</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    SQUARE = <span class="number">2</span></span><br><span class="line"><span class="meta">... </span>    DIAMOND = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    CIRCLE = <span class="number">3</span></span><br><span class="line"><span class="meta">... </span>    ALIAS_FOR_SQUARE = <span class="number">2</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Shape.SQUARE</span><br><span class="line">&lt;Shape.SQUARE: <span class="number">2</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Shape.ALIAS_FOR_SQUARE</span><br><span class="line">&lt;Shape.SQUARE: <span class="number">2</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Shape(<span class="number">2</span>)</span><br><span class="line">&lt;Shape.SQUARE: <span class="number">2</span>&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 试图创建具有与某个已定义的属性（另一个成员或方法等）相同名称的成员或者试图创建具有相同名称的属性也是不允许的 </p>
+</blockquote>
+<h2 id="确保唯一的枚举值"><a href="#确保唯一的枚举值" class="headerlink" title="确保唯一的枚举值"></a>确保唯一的枚举值</h2><p> 默认情况下，枚举允许有多个名称作为某个相同值的别名。 如果不想要这样的行为，可以使用以下装饰器来确保每个值在枚举中只被使用一次: </p>
+<p> <a href="mailto:`@enum.unique" target="_blank" rel="noopener">`@enum.unique</a>` </p>
+<p> 专用于枚举的 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#class" target="_blank" rel="noopener"><code>class</code></a> 装饰器。 它会搜索一个枚举的 <code>__members__</code> 并收集所找到的任何别名；只要找到任何别名就会引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a> 并附带相关细节信息: </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> enum <span class="keyword">import</span> Enum, unique</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>@unique</span><br><span class="line"><span class="meta">... </span><span class="class"><span class="keyword">class</span> <span class="title">Mistake</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    ONE = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    TWO = <span class="number">2</span></span><br><span class="line"><span class="meta">... </span>    THREE = <span class="number">3</span></span><br><span class="line"><span class="meta">... </span>    FOUR = <span class="number">3</span></span><br><span class="line">...</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">...</span><br><span class="line">ValueError: duplicate values found in &lt;enum 'Mistake'&gt;: FOUR -&gt; THREE</span><br></pre></td></tr></table></figure>
+<h2 id="使用自动设定的值"><a href="#使用自动设定的值" class="headerlink" title="使用自动设定的值"></a>使用自动设定的值</h2><p> 如果确切的值不重要，你可以使用 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.auto" target="_blank" rel="noopener"><code>auto</code></a>: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> enum <span class="keyword">import</span> Enum, auto</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Color</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    RED = auto()</span><br><span class="line"><span class="meta">... </span>    BLUE = auto()</span><br><span class="line"><span class="meta">... </span>    GREEN = auto()</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(Color)</span><br><span class="line">[&lt;Color.RED: <span class="number">1</span>&gt;, &lt;Color.BLUE: <span class="number">2</span>&gt;, &lt;Color.GREEN: <span class="number">3</span>&gt;]</span><br></pre></td></tr></table></figure>
+<p> 值将由 <code>_generate_next_value_()</code> 来选择，该函数可以被重载: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">AutoName</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">_generate_next_value_</span><span class="params">(name, start, count, last_values)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> name</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Ordinal</span><span class="params">(AutoName)</span>:</span></span><br><span class="line"><span class="meta">... </span>    NORTH = auto()</span><br><span class="line"><span class="meta">... </span>    SOUTH = auto()</span><br><span class="line"><span class="meta">... </span>    EAST = auto()</span><br><span class="line"><span class="meta">... </span>    WEST = auto()</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(Ordinal)</span><br><span class="line">[&lt;Ordinal.NORTH: <span class="string">'NORTH'</span>&gt;, &lt;Ordinal.SOUTH: <span class="string">'SOUTH'</span>&gt;, &lt;Ordinal.EAST: <span class="string">'EAST'</span>&gt;, &lt;Ordinal.WEST: <span class="string">'WEST'</span>&gt;]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 默认 <code>_generate_next_value_()</code> 方法的目标是提供所给出的最后一个 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a> 所在序列的下一个 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a>，但这种行为方式属于实现细节并且可能发生改变。</p>
+</blockquote>
+<h2 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h2><p> 对枚举成员的迭代不会给出别名: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(Shape)</span><br><span class="line">[&lt;Shape.SQUARE: <span class="number">2</span>&gt;, &lt;Shape.DIAMOND: <span class="number">1</span>&gt;, &lt;Shape.CIRCLE: <span class="number">3</span>&gt;]</span><br></pre></td></tr></table></figure>
+<p> 特殊属性 <code>__members__</code> 是一个从名称到成员的只读有序映射。 它包含枚举中定义的所有名称，包括别名: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> name, member <span class="keyword">in</span> Shape.__members__.items():</span><br><span class="line"><span class="meta">... </span>    name, member</span><br><span class="line">...</span><br><span class="line">(<span class="string">'SQUARE'</span>, &lt;Shape.SQUARE: <span class="number">2</span>&gt;)</span><br><span class="line">(<span class="string">'DIAMOND'</span>, &lt;Shape.DIAMOND: <span class="number">1</span>&gt;)</span><br><span class="line">(<span class="string">'CIRCLE'</span>, &lt;Shape.CIRCLE: <span class="number">3</span>&gt;)</span><br><span class="line">(<span class="string">'ALIAS_FOR_SQUARE'</span>, &lt;Shape.SQUARE: <span class="number">2</span>&gt;)</span><br></pre></td></tr></table></figure>
+<p> <code>__members__</code> 属性可被用于对枚举成员进行详细的程序化访问。 例如，找出所有别名: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[name <span class="keyword">for</span> name, member <span class="keyword">in</span> Shape.__members__.items() <span class="keyword">if</span> member.name != name]</span><br><span class="line">[<span class="string">'ALIAS_FOR_SQUARE'</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><p> 枚举成员是按标识号进行比较的: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.RED <span class="keyword">is</span> Color.RED</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.RED <span class="keyword">is</span> Color.BLUE</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.RED <span class="keyword">is</span> <span class="keyword">not</span> Color.BLUE</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p> 枚举值之间的排序比较 <em>不被</em> 支持。 Enum 成员不属于整数 (另请参阅下文的 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#intenum" target="_blank" rel="noopener">IntEnum</a>): </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.RED &lt; Color.BLUE</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: <span class="string">'&lt;'</span> <span class="keyword">not</span> supported between instances of <span class="string">'Color'</span> <span class="keyword">and</span> <span class="string">'Color'</span></span><br></pre></td></tr></table></figure>
+<p> 相等比较的定义如下: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.BLUE == Color.RED</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.BLUE != Color.RED</span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.BLUE == Color.BLUE</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p> 与非枚举值的比较将总是不相等（同样地，<a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntEnum" target="_blank" rel="noopener"><code>IntEnum</code></a> 被显式设计成不同的行为，参见下文）: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.BLUE == <span class="number">2</span></span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<h2 id="允许的枚举成员和属性"><a href="#允许的枚举成员和属性" class="headerlink" title="允许的枚举成员和属性"></a>允许的枚举成员和属性</h2><p>以上示例使用整数作为枚举值。 使用整数相当简洁方便（并由 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#functional-api" target="_blank" rel="noopener">Functional API</a> 默认提供），但并不强制要求使用。 在大部分用例中，开发者都关心枚举的实际值是什么。 但如果值 <em>确实</em> 重要，则枚举可以使用任意的值。</p>
+<p>枚举属于 Python 的类，并可具有普通方法和特殊方法。 如果我们有这样一个枚举:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Mood</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    FUNKY = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    HAPPY = <span class="number">3</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">describe</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="comment"># self is the member here</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> self.name, self.value</span><br><span class="line">...</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="string">'my custom str! &#123;0&#125;'</span>.format(self.value)</span><br><span class="line">...</span><br><span class="line"><span class="meta">... </span>    @classmethod</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">favorite_mood</span><span class="params">(cls)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="comment"># cls here is the enumeration</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> cls.HAPPY</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p> 那么: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Mood.favorite_mood()</span><br><span class="line">&lt;Mood.HAPPY: <span class="number">3</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Mood.HAPPY.describe()</span><br><span class="line">(<span class="string">'HAPPY'</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>str(Mood.FUNKY)</span><br><span class="line"><span class="string">'my custom str! 1'</span></span><br></pre></td></tr></table></figure>
+<p>对于允许内容的规则如下：以单下划线开头和结尾的名称是由枚举保留而不可使用；在枚举中定义的所有其他属性将成为该枚举的成员，例外项则包括特殊方法成员 (<a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__str__" target="_blank" rel="noopener"><code>__str__()</code></a>, <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__add__" target="_blank" rel="noopener"><code>__add__()</code></a> 等)，描述符 (方法也属于描述符) 以及在 <code>_ignore_</code> 中列出的变量名。</p>
+<p>注意：如果你的枚举定义了 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__new__" target="_blank" rel="noopener"><code>__new__()</code></a> 和/或 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__init__" target="_blank" rel="noopener"><code>__init__()</code></a> 那么指定给枚举成员的任何值都会被传入这些方法。 请参阅示例 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#planet" target="_blank" rel="noopener">Planet</a>。</p>
+<h2 id="受限的-Enum-子类化"><a href="#受限的-Enum-子类化" class="headerlink" title="受限的 Enum 子类化"></a>受限的 Enum 子类化</h2><p> 一个新的 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 类必须基于一个 Enum 类，至多一个实体数据类型以及出于实际需要的任意多个基于 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#object" target="_blank" rel="noopener"><code>object</code></a> 的 mixin 类。 这些基类的顺序为: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EnumName</span><span class="params">([mix-in, ...,] [data-type,] base-enum)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p> 另外，仅当一个枚举未定义任何成员时才允许子类化该枚举。 因此禁止这样的写法: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">MoreColor</span><span class="params">(Color)</span>:</span></span><br><span class="line"><span class="meta">... </span>    PINK = <span class="number">17</span></span><br><span class="line">...</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">...</span><br><span class="line">TypeError: Cannot extend enumerations</span><br></pre></td></tr></table></figure>
+<p> 但是允许这样的写法: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">some_behavior</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Bar</span><span class="params">(Foo)</span>:</span></span><br><span class="line"><span class="meta">... </span>    HAPPY = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    SAD = <span class="number">2</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p> 允许子类化定义了成员的枚举将会导致违反类型与实例的某些重要的不可变规则。 在另一方面，允许在一组枚举之间共享某些通用行为也是有意义的。 （请参阅示例 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#orderedenum" target="_blank" rel="noopener">OrderedEnum</a> 。） </p>
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p> 枚举可以被封装与解封:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> test.test_enum <span class="keyword">import</span> Fruit</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> pickle <span class="keyword">import</span> dumps, loads</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Fruit.TOMATO <span class="keyword">is</span> loads(dumps(Fruit.TOMATO))</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p> 封装的常规限制同样适用：可封存枚举必须在模块的最高层级中定义，因为解封操作要求它们可以从该模块导入。 </p>
+<blockquote>
+<p> 使用 pickle 协议版本 4 可以方便地封存嵌套在其他类中的枚举。 </p>
+</blockquote>
+<p> 通过在枚举类中定义 <a href="https://docs.python.org/zh-cn/3.8/library/pickle.html#object.__reduce_ex__" target="_blank" rel="noopener"><code>__reduce_ex__()</code></a> 可以对 Enum 成员的封存/解封方式进行修改。 </p>
+<h2 id="功能性-API"><a href="#功能性-API" class="headerlink" title="功能性 API"></a>功能性 API</h2><p> <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 类属于可调用对象，它提供了以下功能性 API: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Animal = Enum(<span class="string">'Animal'</span>, <span class="string">'ANT BEE CAT DOG'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Animal</span><br><span class="line">&lt;enum <span class="string">'Animal'</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Animal.ANT</span><br><span class="line">&lt;Animal.ANT: <span class="number">1</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Animal.ANT.value</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(Animal)</span><br><span class="line">[&lt;Animal.ANT: <span class="number">1</span>&gt;, &lt;Animal.BEE: <span class="number">2</span>&gt;, &lt;Animal.CAT: <span class="number">3</span>&gt;, &lt;Animal.DOG: <span class="number">4</span>&gt;]</span><br></pre></td></tr></table></figure>
+<p>该 API 的主义类似于 <a href="https://docs.python.org/zh-cn/3.8/library/collections.html#collections.namedtuple" target="_blank" rel="noopener"><code>namedtuple</code></a>。 调用 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 的第一个参数是枚举的名称。</p>
+<p>第二个参数是枚举成员名称的 <em>来源</em>。 它可以是一个用空格分隔的名称字符串、名称序列、键/值对 2 元组的序列，或者名称到值的映射（例如字典）。 最后两种选项使得可以为枚举任意赋值；其他选项会自动以从 1 开始递增的整数赋值（使用 <code>start</code> 形参可指定不同的起始值）。 返回值是一个派生自 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 的新类。 换句话说，以上对 <code>Animal</code> 的赋值就等价于:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Animal</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    ANT = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    BEE = <span class="number">2</span></span><br><span class="line"><span class="meta">... </span>    CAT = <span class="number">3</span></span><br><span class="line"><span class="meta">... </span>    DOG = <span class="number">4</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>默认以 <code>1</code> 而以 <code>0</code> 作为起始数值的原因在于 <code>0</code> 的布尔值为 <code>False</code>，但所有枚举成员都应被求值为 <code>True</code>。</p>
+<p>对使用功能性 API 创建的枚举执行封存可能会很麻烦，因为要使用帧堆栈的实现细节来尝试并找出枚举是在哪个模块中创建的（例如当你使用了另一个模块中的工具函数就可能失败，在 IronPython 或 Jython 上也可能无效）。 解决办法是显式地指定模块名称，如下所示:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Animal = Enum(<span class="string">'Animal'</span>, <span class="string">'ANT BEE CAT DOG'</span>, module=__name__)</span><br></pre></td></tr></table></figure>
+<p> 新的 pickle 协议版本 4 在某些情况下同样依赖于 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#definition.__qualname__" target="_blank" rel="noopener"><code>__qualname__</code></a> 被设为特定位置以便 pickle 能够找到相应的类。 例如，类是否存在于全局作用域的 SomeData 类中: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Animal = Enum(<span class="string">'Animal'</span>, <span class="string">'ANT BEE CAT DOG'</span>, qualname=<span class="string">'SomeData.Animal'</span>)</span><br></pre></td></tr></table></figure>
+<p> 完整的签名为: </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Enum(value='NewEnumName', names=&lt;...&gt;, *, module='...', qualname='...', type=&lt;mixed-in class&gt;, start=1)</span><br></pre></td></tr></table></figure>
+<h2 id="派生的枚举"><a href="#派生的枚举" class="headerlink" title="派生的枚举"></a>派生的枚举</h2><h3 id="IntEnum"><a href="#IntEnum" class="headerlink" title="IntEnum"></a>IntEnum</h3><p> 所提供的第一个变种 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 同时也是 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a> 的一个子类。 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntEnum" target="_blank" rel="noopener"><code>IntEnum</code></a> 的成员可与整数进行比较；通过扩展，不同类型的整数枚举也可以相互进行比较: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> enum <span class="keyword">import</span> IntEnum</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Shape</span><span class="params">(IntEnum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    CIRCLE = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    SQUARE = <span class="number">2</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Request</span><span class="params">(IntEnum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    POST = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    GET = <span class="number">2</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Shape == <span class="number">1</span></span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Shape.CIRCLE == <span class="number">1</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Shape.CIRCLE == Request.POST</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p> 不过，它们仍然不可与标准 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 枚举进行比较: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Shape</span><span class="params">(IntEnum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    CIRCLE = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    SQUARE = <span class="number">2</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Color</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    RED = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    GREEN = <span class="number">2</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Shape.CIRCLE == Color.RED</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<p> <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntEnum" target="_blank" rel="noopener"><code>IntEnum</code></a> 值在其他方面的行为都如你预期的一样类似于整数: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>int(Shape.CIRCLE)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>][Shape.CIRCLE]</span><br><span class="line"><span class="string">'b'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[i <span class="keyword">for</span> i <span class="keyword">in</span> range(Shape.SQUARE)]</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="IntFlag"><a href="#IntFlag" class="headerlink" title="IntFlag"></a>IntFlag</h3><p> 所提供的下一个 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 的变种 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 同样是基于 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a> 的，不同之处在于 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 成员可使用按位运算符 (&amp;, |, ^, ~) 进行组合且结果仍然为 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 成员。 如果，正如名称所表明的，<a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 成员同时也是 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a> 的子类，并能在任何使用 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a> 的场合被使用。 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 成员进行除按位运算以外的其他运算都将导致失去 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 成员资格。 </p>
+<p> 示例 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 类: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> enum <span class="keyword">import</span> IntFlag</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Perm</span><span class="params">(IntFlag)</span>:</span></span><br><span class="line"><span class="meta">... </span>    R = <span class="number">4</span></span><br><span class="line"><span class="meta">... </span>    W = <span class="number">2</span></span><br><span class="line"><span class="meta">... </span>    X = <span class="number">1</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Perm.R | Perm.W</span><br><span class="line">&lt;Perm.R|W: <span class="number">6</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Perm.R + Perm.W</span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>RW = Perm.R | Perm.W</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Perm.R <span class="keyword">in</span> RW</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p> 对于组合同样可以进行命名: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Perm</span><span class="params">(IntFlag)</span>:</span></span><br><span class="line"><span class="meta">... </span>    R = <span class="number">4</span></span><br><span class="line"><span class="meta">... </span>    W = <span class="number">2</span></span><br><span class="line"><span class="meta">... </span>    X = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    RWX = <span class="number">7</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Perm.RWX</span><br><span class="line">&lt;Perm.RWX: <span class="number">7</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>~Perm.RWX</span><br><span class="line">&lt;Perm.<span class="number">-8</span>: <span class="number">-8</span>&gt;</span><br></pre></td></tr></table></figure>
+<p> <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 的另一个重要区别在于如果没有设置任何旗标（值为 0），则其布尔值为 <a href="https://docs.python.org/zh-cn/3.8/library/constants.html#False" target="_blank" rel="noopener"><code>False</code></a>: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Perm.R &amp; Perm.X</span><br><span class="line">&lt;Perm<span class="number">.0</span>: <span class="number">0</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bool(Perm.R &amp; Perm.X)</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<p> 由于 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 成员同时也是 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a> 的子类，因此它们可以相互组合: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Perm.X | <span class="number">8</span></span><br><span class="line">&lt;Perm<span class="number">.8</span>|X: <span class="number">9</span>&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Flag"><a href="#Flag" class="headerlink" title="Flag"></a>Flag</h3><p> 最后一个变种是 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Flag" target="_blank" rel="noopener"><code>Flag</code></a>。 与 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 类似，<a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Flag" target="_blank" rel="noopener"><code>Flag</code></a> 成员可使用按位运算符 (&amp;, |, ^, ~) 进行组合，与 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 不同的是它们不可与任何其它 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Flag" target="_blank" rel="noopener"><code>Flag</code></a> 枚举或 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a> 进行组合或比较。 虽然可以直接指定值，但推荐使用 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.auto" target="_blank" rel="noopener"><code>auto</code></a> 作为值以便让 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Flag" target="_blank" rel="noopener"><code>Flag</code></a> 选择适当的值。 </p>
+<p> 与 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 类似，如果 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Flag" target="_blank" rel="noopener"><code>Flag</code></a> 成员的某种组合导致没有设置任何旗标，则其布尔值为 <a href="https://docs.python.org/zh-cn/3.8/library/constants.html#False" target="_blank" rel="noopener"><code>False</code></a>: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> enum <span class="keyword">import</span> Flag, auto</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Color</span><span class="params">(Flag)</span>:</span></span><br><span class="line"><span class="meta">... </span>    RED = auto()</span><br><span class="line"><span class="meta">... </span>    BLUE = auto()</span><br><span class="line"><span class="meta">... </span>    GREEN = auto()</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.RED &amp; Color.GREEN</span><br><span class="line">&lt;Color<span class="number">.0</span>: <span class="number">0</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bool(Color.RED &amp; Color.GREEN)</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<p> 单个旗标的值应当为二的乘方 (1, 2, 4, 8, …)，旗标的组合则无此限制: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Color</span><span class="params">(Flag)</span>:</span></span><br><span class="line"><span class="meta">... </span>    RED = auto()</span><br><span class="line"><span class="meta">... </span>    BLUE = auto()</span><br><span class="line"><span class="meta">... </span>    GREEN = auto()</span><br><span class="line"><span class="meta">... </span>    WHITE = RED | BLUE | GREEN</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.WHITE</span><br><span class="line">&lt;Color.WHITE: <span class="number">7</span>&gt;</span><br></pre></td></tr></table></figure>
+<p> 对 “no flags set” 条件指定一个名称并不会改变其布尔值: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Color</span><span class="params">(Flag)</span>:</span></span><br><span class="line"><span class="meta">... </span>    BLACK = <span class="number">0</span></span><br><span class="line"><span class="meta">... </span>    RED = auto()</span><br><span class="line"><span class="meta">... </span>    BLUE = auto()</span><br><span class="line"><span class="meta">... </span>    GREEN = auto()</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.BLACK</span><br><span class="line">&lt;Color.BLACK: <span class="number">0</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>bool(Color.BLACK)</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 对于大多数新代码，强烈推荐使用 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Flag" target="_blank" rel="noopener"><code>Flag</code></a>，因为 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntEnum" target="_blank" rel="noopener"><code>IntEnum</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 打破了枚举的某些语义约定（例如可以同整数进行比较，并因而导致此行为被传递给其他无关的枚举）。 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntEnum" target="_blank" rel="noopener"><code>IntEnum</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 的使用应当仅限于 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Flag" target="_blank" rel="noopener"><code>Flag</code></a> 无法使用的场合；例如，当使用枚举替代整数常量时，或是与其他系统进行交互操作时。 </p>
+</blockquote>
+<h3 id="其他事项"><a href="#其他事项" class="headerlink" title="其他事项"></a>其他事项</h3><p> 虽然 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntEnum" target="_blank" rel="noopener"><code>IntEnum</code></a> 是 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#module-enum" target="_blank" rel="noopener"><code>enum</code></a> 模块的一部分，但要独立实现也应该相当容易: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IntEnum</span><span class="params">(int, Enum)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>这里演示了如何定义类似的派生枚举；例如一个混合了 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a> 而不是 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a> 的 <code>StrEnum</code>。</p>
+<p>几条规则：</p>
+<ol>
+<li>当子类化 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 时，在基类序列中的混合类型必须出现于 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 本身之前，如以上 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntEnum" target="_blank" rel="noopener"><code>IntEnum</code></a> 的例子所示。</li>
+<li>虽然 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 可以拥有任意类型的成员，不过一旦你混合了附加类型，则所有成员必须为相应类型的值，如在上面的例子中即为 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a>。 此限制不适用于仅添加方法而未指定另一数据类型如 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a> 的混合类。</li>
+<li>当混合了另一数据类型时，<code>value</code> 属性会 <em>不同于</em> 枚举成员自身，但它们仍保持等价且比较结果也相等。</li>
+<li>%-style formatting: %s 和 %r 会分别调用 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 类的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__str__" target="_blank" rel="noopener"><code>__str__()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__repr__" target="_blank" rel="noopener"><code>__repr__()</code></a>；其他代码 (例如表示 IntEnum 的 %i 或 %h) 会将枚举成员视为对应的混合类型。</li>
+<li><a href="https://docs.python.org/zh-cn/3.8/reference/lexical_analysis.html#f-strings" target="_blank" rel="noopener">格式化字符串字面值</a>, <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str.format" target="_blank" rel="noopener"><code>str.format()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#format" target="_blank" rel="noopener"><code>format()</code></a> 将使用混合类型的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__format__" target="_blank" rel="noopener"><code>__format__()</code></a>。 如果需要 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 类的 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#repr" target="_blank" rel="noopener"><code>repr()</code></a>，请使用 !s 或 !r 格式代码。</li>
+</ol>
+<h2 id="何时使用-init-与-new"><a href="#何时使用-init-与-new" class="headerlink" title="何时使用 __init__与__new__"></a>何时使用 <code>__init__</code>与<code>__new__</code></h2><p>当你想要定制 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 成员的实际值时必须使用 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__new__" target="_blank" rel="noopener"><code>__new__()</code></a>。 任何其他修改可以用 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__new__" target="_blank" rel="noopener"><code>__new__()</code></a> 也可以用 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__init__" target="_blank" rel="noopener"><code>__init__()</code></a>，应优先使用 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__init__" target="_blank" rel="noopener"><code>__init__()</code></a>。</p>
+<p>举例来说，如果你要向构造器传入多个条目，但只希望将其中一个作为值:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Coordinate</span><span class="params">(bytes, Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="string">"""</span></span><br><span class="line"><span class="string"><span class="meta">... </span>    Coordinate with binary codes that can be indexed by the int code.</span></span><br><span class="line"><span class="string"><span class="meta">... </span>    """</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls, value, label, unit)</span>:</span></span><br><span class="line"><span class="meta">... </span>        obj = bytes.__new__(cls, [value])</span><br><span class="line"><span class="meta">... </span>        obj._value_ = value</span><br><span class="line"><span class="meta">... </span>        obj.label = label</span><br><span class="line"><span class="meta">... </span>        obj.unit = unit</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> obj</span><br><span class="line"><span class="meta">... </span>    PX = (<span class="number">0</span>, <span class="string">'P.X'</span>, <span class="string">'km'</span>)</span><br><span class="line"><span class="meta">... </span>    PY = (<span class="number">1</span>, <span class="string">'P.Y'</span>, <span class="string">'km'</span>)</span><br><span class="line"><span class="meta">... </span>    VX = (<span class="number">2</span>, <span class="string">'V.X'</span>, <span class="string">'km/s'</span>)</span><br><span class="line"><span class="meta">... </span>    VY = (<span class="number">3</span>, <span class="string">'V.Y'</span>, <span class="string">'km/s'</span>)</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(Coordinate[<span class="string">'PY'</span>])</span><br><span class="line">Coordinate.PY</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(Coordinate(<span class="number">3</span>))</span><br><span class="line">Coordinate.VY</span><br></pre></td></tr></table></figure>
+<h2 id="有趣的示例"><a href="#有趣的示例" class="headerlink" title="有趣的示例"></a>有趣的示例</h2><p> 虽然 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntEnum" target="_blank" rel="noopener"><code>IntEnum</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntFlag" target="_blank" rel="noopener"><code>IntFlag</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Flag" target="_blank" rel="noopener"><code>Flag</code></a> 预期可覆盖大多数应用场景，但它们无法覆盖全部。 这里有一些不同类型枚举的方案，它们可以被直接使用，或是作为自行创建的参考示例。 </p>
+<h3 id="省略值"><a href="#省略值" class="headerlink" title="省略值"></a>省略值</h3><p>在许多应用场景中人们都不关心枚举的实际值是什么。 有几个方式可以定义此种类型的简单枚举：</p>
+<ul>
+<li>使用 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.auto" target="_blank" rel="noopener"><code>auto</code></a> 的实例作为值</li>
+<li>使用 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#object" target="_blank" rel="noopener"><code>object</code></a> 的实例作为值</li>
+<li>使用描述性的字符串作为值</li>
+<li>使用元组作为值并用自定义的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__new__" target="_blank" rel="noopener"><code>__new__()</code></a> 以一个 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a> 值来替代该元组</li>
+</ul>
+<p>使用以上任何一种方法均可向用户指明值并不重要，并且使人能够添加、移除或重排序成员而不必改变其余成员的数值。</p>
+<p>无论你选择何种方法，你都应当提供一个 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#repr" target="_blank" rel="noopener"><code>repr()</code></a> 并且它也需要隐藏（不重要的）值:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">NoValue</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="string">'&lt;%s.%s&gt;'</span> % (self.__class__.__name__, self.name)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h4 id="使用auto"><a href="#使用auto" class="headerlink" title="使用auto"></a>使用<code>auto</code></h4><p>使用 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.auto" target="_blank" rel="noopener"><code>auto</code></a> 的形式如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Color</span><span class="params">(NoValue)</span>:</span></span><br><span class="line"><span class="meta">... </span>    RED = auto()</span><br><span class="line"><span class="meta">... </span>    BLUE = auto()</span><br><span class="line"><span class="meta">... </span>    GREEN = auto()</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.GREEN</span><br><span class="line">&lt;Color.GREEN&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="使用-object"><a href="#使用-object" class="headerlink" title="使用 object"></a>使用 <code>object</code></h4><p>使用 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#object" target="_blank" rel="noopener"><code>object</code></a> 的形式如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Color</span><span class="params">(NoValue)</span>:</span></span><br><span class="line"><span class="meta">... </span>    RED = object()</span><br><span class="line"><span class="meta">... </span>    GREEN = object()</span><br><span class="line"><span class="meta">... </span>    BLUE = object()</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.GREEN</span><br><span class="line">&lt;Color.GREEN&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="使用描述性字符串"><a href="#使用描述性字符串" class="headerlink" title="使用描述性字符串"></a>使用描述性字符串</h4><p>使用字符串作为值的形式如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Color</span><span class="params">(NoValue)</span>:</span></span><br><span class="line"><span class="meta">... </span>    RED = <span class="string">'stop'</span></span><br><span class="line"><span class="meta">... </span>    GREEN = <span class="string">'go'</span></span><br><span class="line"><span class="meta">... </span>    BLUE = <span class="string">'too fast!'</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.GREEN</span><br><span class="line">&lt;Color.GREEN&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.GREEN.value</span><br><span class="line"><span class="string">'go'</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用自定义的-new"><a href="#使用自定义的-new" class="headerlink" title="使用自定义的__new__"></a>使用自定义的<code>__new__</code></h4><p>使用自动编号 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__new__" target="_blank" rel="noopener"><code>__new__()</code></a> 的形式如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">AutoNumber</span><span class="params">(NoValue)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(cls)</span>:</span></span><br><span class="line"><span class="meta">... </span>        value = len(cls.__members__) + <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>        obj = object.__new__(cls)</span><br><span class="line"><span class="meta">... </span>        obj._value_ = value</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> obj</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Color</span><span class="params">(AutoNumber)</span>:</span></span><br><span class="line"><span class="meta">... </span>    RED = ()	</span><br><span class="line"><span class="meta">... </span>    GREEN = ()</span><br><span class="line"><span class="meta">... </span>    BLUE = ()</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.GREEN</span><br><span class="line">&lt;Color.GREEN&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color.GREEN.value</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 如果定义了 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__new__" target="_blank" rel="noopener"><code>__new__()</code></a> 则它会在创建 Enum 成员期间被使用；随后它将被 Enum 的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__new__" target="_blank" rel="noopener"><code>__new__()</code></a> 所替换，该方法会在类创建后被用来查找现有成员</p>
+</blockquote>
+<h3 id="OrderedEnum"><a href="#OrderedEnum" class="headerlink" title="OrderedEnum"></a>OrderedEnum</h3><p> 一个有序枚举，它不是基于 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.IntEnum" target="_blank" rel="noopener"><code>IntEnum</code></a>，因此保持了正常的 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 不变特性（例如不可与其他枚举进行比较）: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">OrderedEnum</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__ge__</span><span class="params">(self, other)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">if</span> self.__class__ <span class="keyword">is</span> other.__class__:</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">return</span> self.value &gt;= other.value</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="built_in">NotImplemented</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__gt__</span><span class="params">(self, other)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">if</span> self.__class__ <span class="keyword">is</span> other.__class__:</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">return</span> self.value &gt; other.value</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="built_in">NotImplemented</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__le__</span><span class="params">(self, other)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">if</span> self.__class__ <span class="keyword">is</span> other.__class__:</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">return</span> self.value &lt;= other.value</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="built_in">NotImplemented</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__lt__</span><span class="params">(self, other)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">if</span> self.__class__ <span class="keyword">is</span> other.__class__:</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">return</span> self.value &lt; other.value</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> <span class="built_in">NotImplemented</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Grade</span><span class="params">(OrderedEnum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    A = <span class="number">5</span></span><br><span class="line"><span class="meta">... </span>    B = <span class="number">4</span></span><br><span class="line"><span class="meta">... </span>    C = <span class="number">3</span></span><br><span class="line"><span class="meta">... </span>    D = <span class="number">2</span></span><br><span class="line"><span class="meta">... </span>    F = <span class="number">1</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Grade.C &lt; Grade.A</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<h3 id="DuplicateFreeEnum"><a href="#DuplicateFreeEnum" class="headerlink" title="DuplicateFreeEnum"></a>DuplicateFreeEnum</h3><p> 如果发现重复的成员名称则将引发错误而不是创建别名: </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">DuplicateFreeEnum</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, *args)</span>:</span></span><br><span class="line"><span class="meta">... </span>        cls = self.__class__</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">if</span> any(self.value == e.value <span class="keyword">for</span> e <span class="keyword">in</span> cls):</span><br><span class="line"><span class="meta">... </span>            a = self.name</span><br><span class="line"><span class="meta">... </span>            e = cls(self.value).name</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">raise</span> ValueError(</span><br><span class="line"><span class="meta">... </span>                <span class="string">"aliases not allowed in DuplicateFreeEnum:  %r --&gt; %r"</span></span><br><span class="line"><span class="meta">... </span>                % (a, e))</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Color</span><span class="params">(DuplicateFreeEnum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    RED = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    GREEN = <span class="number">2</span></span><br><span class="line"><span class="meta">... </span>    BLUE = <span class="number">3</span></span><br><span class="line"><span class="meta">... </span>    GRENE = <span class="number">2</span></span><br><span class="line">...</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">...</span><br><span class="line">ValueError: aliases not allowed in DuplicateFreeEnum:  'GRENE' --&gt; 'GREEN'</span><br></pre></td></tr></table></figure>
+<h3 id="Planet"><a href="#Planet" class="headerlink" title="Planet"></a>Planet</h3><p>如果定义了 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__new__" target="_blank" rel="noopener"><code>__new__()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__init__" target="_blank" rel="noopener"><code>__init__()</code></a> 则枚举成员的值将被传给这些方法:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Planet</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    MERCURY = (<span class="number">3.303e+23</span>, <span class="number">2.4397e6</span>)</span><br><span class="line"><span class="meta">... </span>    VENUS   = (<span class="number">4.869e+24</span>, <span class="number">6.0518e6</span>)</span><br><span class="line"><span class="meta">... </span>    EARTH   = (<span class="number">5.976e+24</span>, <span class="number">6.37814e6</span>)</span><br><span class="line"><span class="meta">... </span>    MARS    = (<span class="number">6.421e+23</span>, <span class="number">3.3972e6</span>)</span><br><span class="line"><span class="meta">... </span>    JUPITER = (<span class="number">1.9e+27</span>,   <span class="number">7.1492e7</span>)</span><br><span class="line"><span class="meta">... </span>    SATURN  = (<span class="number">5.688e+26</span>, <span class="number">6.0268e7</span>)</span><br><span class="line"><span class="meta">... </span>    URANUS  = (<span class="number">8.686e+25</span>, <span class="number">2.5559e7</span>)</span><br><span class="line"><span class="meta">... </span>    NEPTUNE = (<span class="number">1.024e+26</span>, <span class="number">2.4746e7</span>)</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, mass, radius)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self.mass = mass       <span class="comment"># in kilograms</span></span><br><span class="line"><span class="meta">... </span>        self.radius = radius   <span class="comment"># in meters</span></span><br><span class="line"><span class="meta">... </span>    @property</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">surface_gravity</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="comment"># universal gravitational constant  (m3 kg-1 s-2)</span></span><br><span class="line"><span class="meta">... </span>        G = <span class="number">6.67300E-11</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> G * self.mass / (self.radius * self.radius)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Planet.EARTH.value</span><br><span class="line">(<span class="number">5.976e+24</span>, <span class="number">6378140.0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Planet.EARTH.surface_gravity</span><br><span class="line"><span class="number">9.802652743337129</span></span><br></pre></td></tr></table></figure>
+<h3 id="TimePeriod"><a href="#TimePeriod" class="headerlink" title="TimePeriod"></a>TimePeriod</h3><p> 一个演示如何使用 <code>_ignore_</code> 属性的例子: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Period</span><span class="params">(timedelta, Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="string">"different lengths of time"</span></span><br><span class="line"><span class="meta">... </span>    _ignore_ = <span class="string">'Period i'</span></span><br><span class="line"><span class="meta">... </span>    Period = vars()</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">367</span>):</span><br><span class="line"><span class="meta">... </span>        Period[<span class="string">'day_%d'</span> % i] = i</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(Period)[:<span class="number">2</span>]</span><br><span class="line">[&lt;Period.day_0: datetime.timedelta(<span class="number">0</span>)&gt;, &lt;Period.day_1: datetime.timedelta(days=<span class="number">1</span>)&gt;]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(Period)[<span class="number">-2</span>:]</span><br><span class="line">[&lt;Period.day_365: datetime.timedelta(days=<span class="number">365</span>)&gt;, &lt;Period.day_366: datetime.timedelta(days=<span class="number">366</span>)&gt;]</span><br></pre></td></tr></table></figure>
+<h2 id="各种枚举有何区别？"><a href="#各种枚举有何区别？" class="headerlink" title="各种枚举有何区别？"></a>各种枚举有何区别？</h2><p> 枚举具有自定义的元类，它会影响所派生枚举类及其实例（成员）的各个方面。 </p>
+<h3 id="枚举类"><a href="#枚举类" class="headerlink" title="枚举类"></a>枚举类</h3><p> <code>EnumMeta</code> 元类负责提供 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__contains__" target="_blank" rel="noopener"><code>__contains__()</code></a>, <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__dir__" target="_blank" rel="noopener"><code>__dir__()</code></a>, <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__iter__" target="_blank" rel="noopener"><code>__iter__()</code></a> 及其他方法以允许用户通过 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 类来完成一般类做不到的事情，例如 list(Color) 或 some_enum_var in Color。 <code>EnumMeta</code> 会负责确保最终 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 类中的各种其他方法是正确的 (例如 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__new__" target="_blank" rel="noopener"><code>__new__()</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/pickle.html#object.__getnewargs__" target="_blank" rel="noopener"><code>__getnewargs__()</code></a>, <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__str__" target="_blank" rel="noopener"><code>__str__()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__repr__" target="_blank" rel="noopener"><code>__repr__()</code></a>)。 </p>
+<h3 id="枚举成员（即实例）"><a href="#枚举成员（即实例）" class="headerlink" title="枚举成员（即实例）"></a>枚举成员（即实例）</h3><p> 有关枚举成员最有趣的特点是它们都是单例对象。 <code>EnumMeta</code> 会在创建 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 类本身时将它们全部创建完成，然后准备好一个自定义的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__new__" target="_blank" rel="noopener"><code>__new__()</code></a>，通过只返回现有的成员实例来确保不会再实例化新的对象。 </p>
+<h3 id="细节要点"><a href="#细节要点" class="headerlink" title="细节要点"></a>细节要点</h3><h4 id="支持的-dunder-名称"><a href="#支持的-dunder-名称" class="headerlink" title="支持的 __dunder__ 名称"></a>支持的 <code>__dunder__</code> 名称</h4><p><code>__members__</code> 是一个 <code>member_name</code>:<code>member</code> 条目的只读有序映射。 它只在类上可用。</p>
+<p>如果指定了 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__new__" target="_blank" rel="noopener"><code>__new__()</code></a>，它必须创建并返回枚举成员；相应地设定成员的 <code>_value_</code> 也是一个很好的主意。 一旦所有成员都创建完成它就不会再被使用。</p>
+<h4 id="支持的-sunder-名称"><a href="#支持的-sunder-名称" class="headerlink" title="支持的 _sunder_ 名称"></a>支持的 <code>_sunder_</code> 名称</h4><ul>
+<li><code>_name_</code> – 成员的名称</li>
+<li><code>_value_</code> – 成员的值；可以在 <code>__new__</code> 中设置 / 修改</li>
+<li><code>_missing_</code> – 当未发现某个值时所使用的查找函数；可被重载</li>
+<li><code>_ignore_</code> – 一个名称列表，可以为 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#list" target="_blank" rel="noopener"><code>list()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str()</code></a>，它将不会被转化为成员，并会从最终类中被移除</li>
+<li><code>_order_</code> – 用于 Python 2/3 代码以确保成员顺序一致（类属性，在类创建期间会被移除）</li>
+<li><code>_generate_next_value_</code> – 用于 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#functional-api" target="_blank" rel="noopener">Functional API</a> 并通过 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.auto" target="_blank" rel="noopener"><code>auto</code></a> 为枚举成员获取适当的值；可被重载</li>
+</ul>
+<h3 id><a href="#" class="headerlink" title=" "></a> </h3><p> 用来帮助 Python 2 / Python 3 代码保持同步提供 <code>_order_</code> 属性。 它将与枚举的实际顺序进行对照检查，如果两者不匹配则会引发错误: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Color</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    _order_ = <span class="string">'RED GREEN BLUE'</span></span><br><span class="line"><span class="meta">... </span>    RED = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    BLUE = <span class="number">3</span></span><br><span class="line"><span class="meta">... </span>    GREEN = <span class="number">2</span></span><br><span class="line">...</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">...</span><br><span class="line">TypeError: member order does <span class="keyword">not</span> match _order_</span><br></pre></td></tr></table></figure>
+<h4 id="Enum-成员类型"><a href="#Enum-成员类型" class="headerlink" title="Enum 成员类型"></a><code>Enum</code> 成员类型</h4><p> <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 成员是其 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 类的实例，一般通过 <code>EnumClass.member</code> 的形式来访问。 在特定情况下它们也可通过 <code>EnumClass.member.member</code> 的形式来访问，但你绝对不应这样做，因为查找可能失败，或者更糟糕地返回你所查找的 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 成员以外的对象（这也是成员应使用全大写名称的另一个好理由）: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">FieldTypes</span><span class="params">(Enum)</span>:</span></span><br><span class="line"><span class="meta">... </span>    name = <span class="number">0</span></span><br><span class="line"><span class="meta">... </span>    value = <span class="number">1</span></span><br><span class="line"><span class="meta">... </span>    size = <span class="number">2</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>FieldTypes.value.size</span><br><span class="line">&lt;FieldTypes.size: <span class="number">2</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>FieldTypes.size.value</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h4 id="Enum-类和成员的布尔值"><a href="#Enum-类和成员的布尔值" class="headerlink" title="Enum 类和成员的布尔值"></a><code>Enum</code> 类和成员的布尔值</h4><p>混合了非 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 类型（例如 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a> 等）的 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 成员会按所混合类型的规则被求值；在其他情况下，所有成员都将被求值为 <a href="https://docs.python.org/zh-cn/3.8/library/constants.html#True" target="_blank" rel="noopener"><code>True</code></a>。 要使你的自定义 Enum 的布尔值取决于成员的值，请在你的类中添加以下代码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__bool__</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> bool(self.value)</span><br></pre></td></tr></table></figure>
+<p> <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 类总是会被求值为 <a href="https://docs.python.org/zh-cn/3.8/library/constants.html#True" target="_blank" rel="noopener"><code>True</code></a>。 </p>
+<h4 id="带有方法的-Enum-类"><a href="#带有方法的-Enum-类" class="headerlink" title="带有方法的 Enum 类"></a>带有方法的 <code>Enum</code> 类</h4><p>如果你为你的 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#enum.Enum" target="_blank" rel="noopener"><code>Enum</code></a> 子类添加了额外的方法，如同上述的 <a href="https://docs.python.org/zh-cn/3.8/library/enum.html#planet" target="_blank" rel="noopener">Planet</a> 类一样，这些方法将在对成员执行 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#dir" target="_blank" rel="noopener"><code>dir()</code></a> 时显示出来，但对类执行时则不会显示:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>dir(Planet)</span><br><span class="line">[<span class="string">'EARTH'</span>, <span class="string">'JUPITER'</span>, <span class="string">'MARS'</span>, <span class="string">'MERCURY'</span>, <span class="string">'NEPTUNE'</span>, <span class="string">'SATURN'</span>, <span class="string">'URANUS'</span>, <span class="string">'VENUS'</span>, <span class="string">'__class__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__members__'</span>, <span class="string">'__module__'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dir(Planet.EARTH)</span><br><span class="line">[<span class="string">'__class__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__module__'</span>, <span class="string">'name'</span>, <span class="string">'surface_gravity'</span>, <span class="string">'value'</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="组合-Flag-的成员"><a href="#组合-Flag-的成员" class="headerlink" title="组合 Flag 的成员"></a>组合 <code>Flag</code> 的成员</h4><p> 如果 Flag 成员的某种组合未被命名，则 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#repr" target="_blank" rel="noopener"><code>repr()</code></a> 将包含所有已命名的旗标和值中所有已命名的旗标组合: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Color</span><span class="params">(Flag)</span>:</span></span><br><span class="line"><span class="meta">... </span>    RED = auto()</span><br><span class="line"><span class="meta">... </span>    GREEN = auto()</span><br><span class="line"><span class="meta">... </span>    BLUE = auto()</span><br><span class="line"><span class="meta">... </span>    MAGENTA = RED | BLUE</span><br><span class="line"><span class="meta">... </span>    YELLOW = RED | GREEN</span><br><span class="line"><span class="meta">... </span>    CYAN = GREEN | BLUE</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color(<span class="number">3</span>)  <span class="comment"># named combination</span></span><br><span class="line">&lt;Color.YELLOW: <span class="number">3</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Color(<span class="number">7</span>)      <span class="comment"># not named combination</span></span><br><span class="line">&lt;Color.CYAN|MAGENTA|BLUE|YELLOW|GREEN|RED: <span class="number">7</span>&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/01/28/python-standard-library-enum/" title="python standard library enum">https://pinghailinfeng.gitee.io/2020/01/28/python-standard-library-enum/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/enum/" rel="tag"># enum</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/27/python-standard-library-pprint/" rel="next" title="python standard library pprint">
+                <i class="fa fa-chevron-left"></i> python standard library pprint
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/29/python-standard-library-html-parser/" rel="prev" title="python standard library html.parser">
+                python standard library html.parser <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-enum-枚举类型支持"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 enum 枚举类型支持</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">1.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类"><span class="nav-number">1.2.</span> <span class="nav-text">类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建一个-Enum"><span class="nav-number">1.3.</span> <span class="nav-text">创建一个 Enum</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命名"><span class="nav-number">1.3.1.</span> <span class="nav-text">命名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对枚举成员及其属性的程序化访问"><span class="nav-number">1.4.</span> <span class="nav-text">对枚举成员及其属性的程序化访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制枚举成员和值"><span class="nav-number">1.5.</span> <span class="nav-text">复制枚举成员和值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确保唯一的枚举值"><span class="nav-number">1.6.</span> <span class="nav-text">确保唯一的枚举值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用自动设定的值"><span class="nav-number">1.7.</span> <span class="nav-text">使用自动设定的值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迭代"><span class="nav-number">1.8.</span> <span class="nav-text">迭代</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较"><span class="nav-number">1.9.</span> <span class="nav-text">比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#允许的枚举成员和属性"><span class="nav-number">1.10.</span> <span class="nav-text">允许的枚举成员和属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#受限的-Enum-子类化"><span class="nav-number">1.11.</span> <span class="nav-text">受限的 Enum 子类化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封装"><span class="nav-number">1.12.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#功能性-API"><span class="nav-number">1.13.</span> <span class="nav-text">功能性 API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#派生的枚举"><span class="nav-number">1.14.</span> <span class="nav-text">派生的枚举</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IntEnum"><span class="nav-number">1.14.1.</span> <span class="nav-text">IntEnum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IntFlag"><span class="nav-number">1.14.2.</span> <span class="nav-text">IntFlag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Flag"><span class="nav-number">1.14.3.</span> <span class="nav-text">Flag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他事项"><span class="nav-number">1.14.4.</span> <span class="nav-text">其他事项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#何时使用-init-与-new"><span class="nav-number">1.15.</span> <span class="nav-text">何时使用 __init__与__new__</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有趣的示例"><span class="nav-number">1.16.</span> <span class="nav-text">有趣的示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#省略值"><span class="nav-number">1.16.1.</span> <span class="nav-text">省略值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用auto"><span class="nav-number">1.16.1.1.</span> <span class="nav-text">使用auto</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-object"><span class="nav-number">1.16.1.2.</span> <span class="nav-text">使用 object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用描述性字符串"><span class="nav-number">1.16.1.3.</span> <span class="nav-text">使用描述性字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用自定义的-new"><span class="nav-number">1.16.1.4.</span> <span class="nav-text">使用自定义的__new__</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OrderedEnum"><span class="nav-number">1.16.2.</span> <span class="nav-text">OrderedEnum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DuplicateFreeEnum"><span class="nav-number">1.16.3.</span> <span class="nav-text">DuplicateFreeEnum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Planet"><span class="nav-number">1.16.4.</span> <span class="nav-text">Planet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TimePeriod"><span class="nav-number">1.16.5.</span> <span class="nav-text">TimePeriod</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#各种枚举有何区别？"><span class="nav-number">1.17.</span> <span class="nav-text">各种枚举有何区别？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举类"><span class="nav-number">1.17.1.</span> <span class="nav-text">枚举类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#枚举成员（即实例）"><span class="nav-number">1.17.2.</span> <span class="nav-text">枚举成员（即实例）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#细节要点"><span class="nav-number">1.17.3.</span> <span class="nav-text">细节要点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#支持的-dunder-名称"><span class="nav-number">1.17.3.1.</span> <span class="nav-text">支持的 __dunder__ 名称</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#支持的-sunder-名称"><span class="nav-number">1.17.3.2.</span> <span class="nav-text">支持的 _sunder_ 名称</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">1.17.4.</span> <span class="nav-text"> </span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Enum-成员类型"><span class="nav-number">1.17.4.1.</span> <span class="nav-text">Enum 成员类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Enum-类和成员的布尔值"><span class="nav-number">1.17.4.2.</span> <span class="nav-text">Enum 类和成员的布尔值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#带有方法的-Enum-类"><span class="nav-number">1.17.4.3.</span> <span class="nav-text">带有方法的 Enum 类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组合-Flag-的成员"><span class="nav-number">1.17.4.4.</span> <span class="nav-text">组合 Flag 的成员</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">338k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">5:08</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

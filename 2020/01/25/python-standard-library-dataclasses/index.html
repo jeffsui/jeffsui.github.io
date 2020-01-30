@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 dataclasses">
+<meta name="keywords" content="python,standard_library,dataclasses">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library dataclasses">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/01/25/python-standard-library-dataclasses/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 dataclasses">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img.zcool.cn/community/01b9205e2af974a8012165188cc6ad.jpg@1280w_1l_2o_100sh.jpg">
+<meta property="og:updated_time" content="2020-01-30T08:43:58.056Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library dataclasses">
+<meta name="twitter:description" content="python 标准库 dataclasses">
+<meta name="twitter:image" content="https://img.zcool.cn/community/01b9205e2af974a8012165188cc6ad.jpg@1280w_1l_2o_100sh.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/01/25/python-standard-library-dataclasses/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library dataclasses | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/25/python-standard-library-dataclasses/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library dataclasses
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-25 01:28:38" itemprop="dateCreated datePublished" datetime="2020-01-25T01:28:38+08:00">2020-01-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-30 16:43:58" itemprop="dateModified" datetime="2020-01-30T16:43:58+08:00">2020-01-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">14k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">13 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-dataclasses"><a href="#python-标准库-dataclasses" class="headerlink" title="python 标准库 dataclasses"></a>python 标准库 dataclasses</h1><p><img src="https://img.zcool.cn/community/01b9205e2af974a8012165188cc6ad.jpg@1280w_1l_2o_100sh.jpg" alt></p>
+<a id="more"></a>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p> <strong>源码：</strong> <a href="https://github.com/python/cpython/tree/3.8/Lib/dataclasses.py" target="_blank" rel="noopener">Lib/dataclasses.py</a> </p>
+<p>主要类结构层次,节选自<a href="[Lib/dataclasses.py](https://github.com/python/cpython/tree/3.8/Lib/dataclasses.py">源码</a> )</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">__all__ = [<span class="string">'dataclass'</span>,</span><br><span class="line">           <span class="string">'field'</span>,</span><br><span class="line">           <span class="string">'Field'</span>,</span><br><span class="line">           <span class="string">'FrozenInstanceError'</span>,</span><br><span class="line">           <span class="string">'InitVar'</span>,</span><br><span class="line">           <span class="string">'MISSING'</span>,</span><br><span class="line"></span><br><span class="line">           <span class="comment"># Helper functions.</span></span><br><span class="line">           <span class="string">'fields'</span>,</span><br><span class="line">           <span class="string">'asdict'</span>,</span><br><span class="line">           <span class="string">'astuple'</span>,</span><br><span class="line">           <span class="string">'make_dataclass'</span>,</span><br><span class="line">           <span class="string">'replace'</span>,</span><br><span class="line">           <span class="string">'is_dataclass'</span>,</span><br><span class="line">           ]</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_DataclassParams</span>:</span></span><br><span class="line">    __slots__ = (<span class="string">'init'</span>,</span><br><span class="line">                 <span class="string">'repr'</span>,</span><br><span class="line">                 <span class="string">'eq'</span>,</span><br><span class="line">                 <span class="string">'order'</span>,</span><br><span class="line">                 <span class="string">'unsafe_hash'</span>,</span><br><span class="line">                 <span class="string">'frozen'</span>,</span><br><span class="line">                 )</span><br></pre></td></tr></table></figure>
+<p> 这个模块提供了一个装饰器和一些函数，用于自动添加生成的 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-special-method" target="_blank" rel="noopener">special method</a>s ，例如 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__init__" target="_blank" rel="noopener"><code>__init__()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__repr__" target="_blank" rel="noopener"><code>__repr__()</code></a> 到用户定义的类。 它最初描述于 <a href="https://www.python.org/dev/peps/pep-0557" target="_blank" rel="noopener"><strong>PEP 557</strong></a> 。 </p>
+<p> 在这些生成的方法中使用的成员变量使用 <a href="https://www.python.org/dev/peps/pep-0526" target="_blank" rel="noopener"><strong>PEP 526</strong></a> 类型注释定义。例如这段代码: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">InventoryItem</span>:</span></span><br><span class="line">    <span class="string">'''Class for keeping track of an item in inventory.'''</span></span><br><span class="line">    name: str</span><br><span class="line">    unit_price: float</span><br><span class="line">    quantity_on_hand: int = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">total_cost</span><span class="params">(self)</span> -&gt; float:</span></span><br><span class="line">        <span class="keyword">return</span> self.unit_price * self.quantity_on_hand</span><br></pre></td></tr></table></figure>
+<p> 除其他事情外，将添加 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__init__" target="_blank" rel="noopener"><code>__init__()</code></a> ，其看起来像: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name: str, unit_price: float, quantity_on_hand: int=<span class="number">0</span>)</span>:</span></span><br><span class="line">    self.name = name</span><br><span class="line">    self.unit_price = unit_price</span><br><span class="line">    self.quantity_on_hand = quantity_on_hand</span><br></pre></td></tr></table></figure>
+<p> 请注意，此方法会自动添加到类中：它不会在上面显示的 <code>InventoryItem</code> 定义中直接指定。 </p>
+<h2 id="模块级装饰器、类和函数"><a href="#模块级装饰器、类和函数" class="headerlink" title="模块级装饰器、类和函数"></a>模块级装饰器、类和函数</h2><ul>
+<li><p><a href="mailto:`@dataclasses.dataclass" target="_blank" rel="noopener">`@dataclasses.dataclass</a>`(<em>**, </em>init=True<em>, </em>repr=True<em>, </em>eq=True<em>, </em>order=False<em>, </em>unsafe_hash=False<em>, </em>frozen=False*) </p>
+<p>这个函数是 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-decorator" target="_blank" rel="noopener">decorator</a> ，用于将生成的 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-special-method" target="_blank" rel="noopener">special method</a> 添加到类中，如下所述。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 装饰器检查类以找到 <code>field</code>。 <code>field</code> 被定义为具有 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-variable-annotation" target="_blank" rel="noopener">类型标注</a> 的类变量。除了下面描述的两个例外，在 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 中没有任何内容检查变量标注中指定的类型。</p>
+<p>所有生成的方法中的字段顺序是它们在类定义中出现的顺序。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 装饰器将向类中添加各种“dunder”方法，如下所述。如果类中已存在任何添加的方法，则行为取决于参数，如下所述。装饰器返回被调用的同一个类；没有创建新类。</p>
+<p>如果 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 仅用作没有参数的简单装饰器，它就像它具有此签名中记录的默认值一样。也就是说，这三种 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 用法是等价的:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="meta">@dataclass()</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="meta">@dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line">   ...</span><br></pre></td></tr></table></figure>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 的参数有： </p>
+<ul>
+<li><p><code>init</code>: 如果为真值（默认），将生成一个 <code>__ init__()</code> 方法。 </p>
+<p>如果类已定义 <code>__ init__()</code> ，则忽略此参数。 </p>
+</li>
+<li><p><code>repr</code> ：如果为真值（默认），将生成一个 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__repr__" target="_blank" rel="noopener"><code>__repr__()</code></a> 方法。 生成的 repr 字符串将具有类名以及每个字段的名称和 repr ，按照它们在类中定义的顺序。不包括标记为从 repr 中排除的字段。 例如：<code>InventoryItem(name=&#39;widget&#39;, unit_price=3.0, quantity_on_hand=10)</code>。 </p>
+<p>如果类已定义 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__repr__" target="_blank" rel="noopener"><code>__repr__()</code></a> ，则忽略此参数。 </p>
+</li>
+<li><p><code>eq</code> ：如果为true（默认值），将生成 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__eq__" target="_blank" rel="noopener"><code>__eq__()</code></a> 方法。此方法将类作为其字段的元组按顺序比较。比较中的两个实例必须是相同的类型。 </p>
+<p>如果类已定义 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__eq__" target="_blank" rel="noopener"><code>__eq__()</code></a> ，则忽略此参数。 </p>
+</li>
+<li><p><code>order</code> ：如果为真值（默认为 <code>False</code> ），则 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__lt__" target="_blank" rel="noopener"><code>__lt__()</code></a> 、 <code>__ le__()</code> 、 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__gt__" target="_blank" rel="noopener"><code>__gt__()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__ge__" target="_blank" rel="noopener"><code>__ge__()</code></a> 方法将生成。 这将类作为其字段的元组按顺序比较。比较中的两个实例必须是相同的类型。如果 <code>order</code> 为真值并且 <code>eq</code> 为假值 ，则引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a> 。</p>
+<p>如果类已经定义了 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__lt__" target="_blank" rel="noopener"><code>__lt__()</code></a> 、 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__le__" target="_blank" rel="noopener"><code>__le__()</code></a> 、 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__gt__" target="_blank" rel="noopener"><code>__gt__()</code></a> 或者 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__ge__" target="_blank" rel="noopener"><code>__ge__()</code></a> 中的任意一个，将引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a> 。 </p>
+</li>
+<li><p><code>unsafe_hash</code> ：如果为 <code>False</code> （默认值），则根据 <code>eq</code> 和 <code>frozen</code> 的设置方式生成 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 方法。 </p>
+<p><a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 由内置的 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#hash" target="_blank" rel="noopener"><code>hash()</code></a> 使用，当对象被添加到散列集合（如字典和集合）时。有一个 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 意味着类的实例是不可变的。可变性是一个复杂的属性，取决于程序员的意图， <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__eq__" target="_blank" rel="noopener"><code>__eq__()</code></a> 的存在性和行为，以及 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 装饰器中 <code>eq</code> 和 <code>frozen</code> 标志的值。</p>
+<p>默认情况下， <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 不会隐式添加 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 方法，除非这样做是安全的。 它也不会添加或更改现有的明确定义的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 方法。 设置类属性 <code>__hash__ = None</code> 对 Python 具有特定含义，如 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 文档中所述。</p>
+<p>如果 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 没有显式定义，或者它被设置为 <code>None</code> ，那么 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> <em>可以</em> 添加一个隐式 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 方法。虽然不推荐，但你可以强制 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 用 <code>unsafe_hash=True</code> 创建一个 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 方法。 如果你的类在逻辑上是不可变的但实际仍然可变，则可能就是这种情况。这是一个特殊的用例，应该仔细考虑。</p>
+<p>以下是隐式创建 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 方法的规则。请注意，你不能在数据类中都使用显式的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 方法并设置 <code>unsafe_hash=True</code> ；这将导致 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a> 。</p>
+<p>如果 <code>eq</code> 和 <code>frozen</code> 都是 true，默认情况下 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 将为你生成一个 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 方法。如果 <code>eq</code> 为 true 且 <code>frozen</code> 为 false ，则 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 将被设置为 <code>None</code> ，标记它不可用（因为它是可变的）。如果 <code>eq</code> 为 false ，则 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 将保持不变，这意味着将使用超类的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 方法（如果超类是 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#object" target="_blank" rel="noopener"><code>object</code></a> ，这意味着它将回到基于id的hash）。</p>
+</li>
+<li><p><code>frozen</code>: 如为真值 (默认值为 <code>False</code>)，则对字段赋值将会产生异常。 这模拟了只读的冻结实例。 如果在类中定义了 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__setattr__" target="_blank" rel="noopener"><code>__setattr__()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__delattr__" target="_blank" rel="noopener"><code>__delattr__()</code></a> 则将会引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a>。 参见下文的讨论。 </p>
+</li>
+</ul>
+<p><code>field</code>s 可以选择使用普通的 Python 语法指定默认值: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line">    a: int       <span class="comment"># 'a' has no default value</span></span><br><span class="line">    b: int = <span class="number">0</span>   <span class="comment"># assign a default value for 'b'</span></span><br></pre></td></tr></table></figure>
+<p>在这个例子中， <code>a</code> 和 <code>b</code> 都将包含在添加的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__init__" target="_blank" rel="noopener"><code>__init__()</code></a> 方法中，它们将被定义为: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, a: int, b: int = <span class="number">0</span>)</span>:</span></span><br></pre></td></tr></table></figure>
+<p>如果没有默认值的字段跟在具有默认值的字段后，将引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a> 。当这发生在单个类中时，或者作为类继承的结果时，都是如此。 </p>
+</li>
+<li><p><code>dataclasses.field</code>(<em>**, </em>default=MISSING<em>, </em>default_factory=MISSING<em>, </em>repr=True<em>, </em>hash=None<em>, </em>init=True<em>, </em>compare=True<em>, </em>metadata=None*) </p>
+<p>对于常见和简单的用例，不需要其他功能。但是，有些数据类功能需要额外的每字段信息。为了满足这种对附加信息的需求，你可以通过调用提供的 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.field" target="_blank" rel="noopener"><code>field()</code></a> 函数来替换默认字段值。例如: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line">    mylist: List[int] = field(default_factory=list)</span><br><span class="line"></span><br><span class="line">c = C()</span><br><span class="line">c.mylist += [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<p>如上所示， <code>MISSING</code> 值是一个 sentinel 对象，用于检测是否提供了 <code>default</code> 和 <code>default_factory</code> 参数。 使用此 sentinel 是因为 <code>None</code> 是 <code>default</code> 的有效值。没有代码应该直接使用 <code>MISSING</code> 值。 </p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.field" target="_blank" rel="noopener"><code>field()</code></a> 参数有： </p>
+<ul>
+<li><p><code>default</code> ：如果提供，这将是该字段的默认值。这是必需的，因为 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.field" target="_blank" rel="noopener"><code>field()</code></a> 调用本身会替换一般的默认值。 </p>
+</li>
+<li><p><code>default_factory</code> ：如果提供，它必须是一个零参数可调用对象，当该字段需要一个默认值时，它将被调用。除了其他目的之外，这可以用于指定具有可变默认值的字段，如下所述。 同时指定 <code>default</code> 和 <code>default_factory</code> 将产生错误。</p>
+</li>
+<li><p><code>init</code> ：如果为true（默认值），则该字段作为参数包含在生成的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__init__" target="_blank" rel="noopener"><code>__init__()</code></a> 方法中。</p>
+</li>
+<li><p><code>repr</code> ：如果为true（默认值），则该字段包含在生成的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__repr__" target="_blank" rel="noopener"><code>__repr__()</code></a> 方法返回的字符串中。</p>
+</li>
+<li><p><code>compare</code> ：如果为true（默认值），则该字段包含在生成的相等性和比较方法中（ <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__eq__" target="_blank" rel="noopener"><code>__eq__()</code></a> ， <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__gt__" target="_blank" rel="noopener"><code>__gt__()</code></a> 等等）。</p>
+</li>
+<li><p><code>hash</code> ：这可以是布尔值或 <code>None</code> 。如果为true，则此字段包含在生成的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__hash__" target="_blank" rel="noopener"><code>__hash__()</code></a> 方法中。如果为 <code>None</code> （默认值），请使用 <code>compare</code> 的值，这通常是预期的行为。如果字段用于比较，则应在 hash 中考虑该字段。不鼓励将此值设置为 <code>None</code> 以外的任何值。</p>
+<p>设置 <code>hash=False</code> 但 <code>compare=True</code> 的一个可能原因是，如果一个计算 hash 的代价很高的字段是检验等价性需要的，但还有其他字段可以计算类型的 hash 。 即使从 hash 中排除某个字段，它仍将用于比较。</p>
+</li>
+<li><p><code>metadata</code> ：这可以是映射或 None 。 None 被视为一个空的字典。这个值包含在 <code>MappingProxyType()</code> 中，使其成为只读，并暴露在 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.Field" target="_blank" rel="noopener"><code>Field</code></a> 对象上。数据类根本不使用它，它是作为第三方扩展机制提供的。多个第三方可以各自拥有自己的键值，以用作元数据中的命名空间。</p>
+</li>
+</ul>
+<p>如果通过调用 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.field" target="_blank" rel="noopener"><code>field()</code></a> 指定字段的默认值，则该字段的类属性将替换为指定的 <code>default</code> 值。如果没有提供 <code>default</code> ，那么将删除类属性。目的是在 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 装饰器运行之后，类属性将包含字段的默认值，就像指定了默认值一样。例如，之后: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line">    x: int</span><br><span class="line">    y: int = field(repr=<span class="literal">False</span>)</span><br><span class="line">    z: int = field(repr=<span class="literal">False</span>, default=<span class="number">10</span>)</span><br><span class="line">    t: int = <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<p>类属性 <code>C.z</code> 将是 <code>10</code> ，类属性 <code>C.t</code> 将是 <code>20</code>，类属性 <code>C.x</code> 和 <code>C.y</code> 将不设置。 </p>
+</li>
+<li><p><em>class</em> <code>dataclasses.Field</code> </p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.Field" target="_blank" rel="noopener"><code>Field</code></a> 对象描述每个定义的字段。这些对象在内部创建，并由 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.fields" target="_blank" rel="noopener"><code>fields()</code></a> 模块级方法返回（见下文）。用户永远不应该直接实例化 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.Field" target="_blank" rel="noopener"><code>Field</code></a> 对象。 其有文档的属性是： </p>
+<ul>
+<li><code>name</code> ：字段的名字。</li>
+<li><code>type</code> ：字段的类型。</li>
+<li><code>default</code> 、 <code>default_factory</code> 、 <code>init</code> 、 <code>repr</code> 、 <code>hash</code> 、 <code>compare</code> 以及 <code>metadata</code> 与具有和 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.field" target="_blank" rel="noopener"><code>field()</code></a> 声明中相同的意义和值。</li>
+</ul>
+<p>可能存在其他属性，但它们是私有的，不能被审查或依赖。 </p>
+</li>
+<li><p><code>dataclasses.fields</code>(<em>class_or_instance</em>) </p>
+<p>返回 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.Field" target="_blank" rel="noopener"><code>Field</code></a> 对象的元组，用于定义此数据类的字段。 接受数据类或数据类的实例。如果没有传递一个数据类或实例将引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a> 。 不返回 <code>ClassVar</code> 或 <code>InitVar</code> 的伪字段。 </p>
+</li>
+<li><p><code>dataclasses.asdict</code>(<em>instance</em>, <em>**, </em>dict_factory=dict*) </p>
+<p>将数据类 <code>instance</code> 转换为字典（使用工厂函数 <code>dict_factory</code> ）。每个数据类都转换为其字段的字典，如 <code>name: value</code> 对。数据类、字典、列表和元组被递归。例如: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>:</span></span><br><span class="line">     x: int</span><br><span class="line">     y: int</span><br><span class="line"></span><br><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line">     mylist: List[Point]</span><br><span class="line"></span><br><span class="line">p = Point(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line"><span class="keyword">assert</span> asdict(p) == &#123;<span class="string">'x'</span>: <span class="number">10</span>, <span class="string">'y'</span>: <span class="number">20</span>&#125;</span><br><span class="line"></span><br><span class="line">c = C([Point(<span class="number">0</span>, <span class="number">0</span>), Point(<span class="number">10</span>, <span class="number">4</span>)])</span><br><span class="line"><span class="keyword">assert</span> asdict(c) == &#123;<span class="string">'mylist'</span>: [&#123;<span class="string">'x'</span>: <span class="number">0</span>, <span class="string">'y'</span>: <span class="number">0</span>&#125;, &#123;<span class="string">'x'</span>: <span class="number">10</span>, <span class="string">'y'</span>: <span class="number">4</span>&#125;]&#125;</span><br></pre></td></tr></table></figure>
+<p>引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a> 如果 <code>instance</code> 不是数据类实例。 </p>
+</li>
+<li><p><code>dataclasses.astuple</code>(<em>instance</em>, <em>**, </em>tuple_factory=tuple*) </p>
+<p>将数据类 <code>instance</code> 转换为元组（通过使用工厂函数 <code>tuple_factory</code> ）。每个数据类都转换为其字段值的元组。数据类、字典、列表和元组被递归。</p>
+<p>继续前一个例子:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span> astuple(p) == (<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line"><span class="keyword">assert</span> astuple(c) == ([(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">10</span>, <span class="number">4</span>)],)</span><br></pre></td></tr></table></figure>
+<p>引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a> 如果 <code>instance</code> 不是数据类实例。 </p>
+</li>
+<li><p><code>dataclasses.make_dataclass</code>(<em>cls_name</em>, <em>fields</em>, <em>**, </em>bases=()<em>, </em>namespace=None<em>, </em>init=True<em>, </em>repr=True<em>, </em>eq=True<em>, </em>order=False<em>, </em>unsafe_hash=False<em>, </em>frozen=False*) </p>
+<p>创建一个名为 <code>cls_name</code> 的新数据类，字段为 <code>fields</code> 中定义的字段，基类为 <code>bases</code> 中给出的基类，并使用 <code>namespace</code> 中给出的命名空间进行初始化。 <code>fields</code> 是一个可迭代的元素，每个元素都是 <code>name</code> 、 <code>(name, type)</code> 或 <code>(name, type, Field)</code> 。 如果只提供name ， <code>type</code> 为 <code>typing.Any</code> 。 <code>init</code> 、 <code>repr</code> 、 <code>eq</code> 、 <code>order</code> 、 <code>unsafe_hash</code> 和 <code>frozen</code> 的值与它们在 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 中的含义相同。</p>
+<p>此函数不是严格要求的，因为用于任何创建带有 <code>__annotations__</code> 的新类的 Python 机制都可以应用 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 函数将该类转换为数据类。提供此功能是为了方便。例如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C = make_dataclass(<span class="string">'C'</span>,</span><br><span class="line">                   [(<span class="string">'x'</span>, int),</span><br><span class="line">                     <span class="string">'y'</span>,</span><br><span class="line">                    (<span class="string">'z'</span>, int, field(default=<span class="number">5</span>))],</span><br><span class="line">                   namespace=&#123;<span class="string">'add_one'</span>: <span class="keyword">lambda</span> self: self.x + <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+<p>等价于 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line">    x: int</span><br><span class="line">    y: <span class="string">'typing.Any'</span></span><br><span class="line">    z: int = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_one</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.x + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p><code>dataclasses.replace</code>(<em>instance</em>, <em>**changes</em>) </p>
+<p>创建一个 <code>instance</code> 相同类型的新对象，用 <code>changes</code> 中的值替换字段。如果 <code>instance</code> 不是数据类，则引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a> 。如果 <code>changes</code> 中的值没有指定字段，则引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a> 。</p>
+<p>新返回的对象通过调用数据类的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__init__" target="_blank" rel="noopener"><code>__init__()</code></a> 方法创建。这确保了如果存在 <code>__post_init__()</code> ，其也被调用。</p>
+<p>如果存在没有默认值的仅初始化变量，必须在调用 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.replace" target="_blank" rel="noopener"><code>replace()</code></a> 时指定，以便它们可以传递给 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__init__" target="_blank" rel="noopener"><code>__init__()</code></a> 和 <code>__post_init__()</code> 。</p>
+<p><code>changes</code> 包含任何定义为 <code>init=False</code> 的字段是错误的。在这种情况下会引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a> 。</p>
+<p>提前提醒 <code>init=False</code> 字段在调用 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.replace" target="_blank" rel="noopener"><code>replace()</code></a> 时的工作方式。如果它们完全被初始化的话，它们不是从源对象复制的，而是在 <code>__post_init__()</code> 中初始化。估计 <code>init=False</code> 字段很少能被正确地使用。如果使用它们，那么使用备用类构造函数或者可能是处理实例复制的自定义 <code>replace()</code> （或类似命名的）方法可能是明智的。</p>
+</li>
+<li><p><code>dataclasses.is_dataclass</code>(<em>class_or_instance</em>) </p>
+<p>如果其形参为 dataclass 或其实例则返回 <code>True</code>，否则返回 <code>False</code>。</p>
+<p>如果你需要知道一个类是否是一个数据类的实例（而不是一个数据类本身），那么再添加一个 <code>not isinstance(obj, type)</code> 检查:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_dataclass_instance</span><span class="params">(obj)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> is_dataclass(obj) <span class="keyword">and</span> <span class="keyword">not</span> isinstance(obj, type)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="初始化后处理"><a href="#初始化后处理" class="headerlink" title="初始化后处理"></a>初始化后处理</h2><p>生成的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__init__" target="_blank" rel="noopener"><code>__init__()</code></a> 代码将调用一个名为 <code>__post_init__()</code> 的方法，如果在类上已经定义了 <code>__post_init__()</code> 。它通常被称为 <code>self.__post_init__()</code> 。但是，如果定义了任何 <code>InitVar</code> 字段，它们也将按照它们在类中定义的顺序传递给 <code>__post_init__()</code> 。 如果没有 <code>__ init__()</code> 方法生成，那么 <code>__post_init__()</code> 将不会被自动调用。</p>
+<p>在其他用途中，这允许初始化依赖于一个或多个其他字段的字段值。例如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line">    a: float</span><br><span class="line">    b: float</span><br><span class="line">    c: float = field(init=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__post_init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.c = self.a + self.b</span><br></pre></td></tr></table></figure>
+<p> 有关将参数传递给 <code>__post_init__()</code> 的方法，请参阅下面有关仅初始化变量的段落。另请参阅关于 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.replace" target="_blank" rel="noopener"><code>replace()</code></a> 处理 <code>init=False</code> 字段的警告。 </p>
+<h2 id="类变量"><a href="#类变量" class="headerlink" title="类变量"></a>类变量</h2><p> 两个地方 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 实际检查字段类型的之一是确定字段是否是如 <a href="https://www.python.org/dev/peps/pep-0526" target="_blank" rel="noopener"><strong>PEP 526</strong></a> 所定义的类变量。它通过检查字段的类型是否为 <code>typing.ClassVar</code> 来完成此操作。如果一个字段是一个 <code>ClassVar</code> ，它将被排除在考虑范围之外，并被数据类机制忽略。这样的 <code>ClassVar</code> 伪字段不会由模块级的 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.fields" target="_blank" rel="noopener"><code>fields()</code></a> 函数返回。 </p>
+<h2 id="仅初始化变量"><a href="#仅初始化变量" class="headerlink" title="仅初始化变量"></a>仅初始化变量</h2><p>另一个 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 检查类型注解地方是为了确定一个字段是否是一个仅初始化变量。它通过查看字段的类型是否为 <code>dataclasses.InitVar</code> 类型来实现。如果一个字段是一个 <code>InitVar</code> ，它被认为是一个称为仅初始化字段的伪字段。因为它不是一个真正的字段，所以它不会被模块级的 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.fields" target="_blank" rel="noopener"><code>fields()</code></a> 函数返回。仅初始化字段作为参数添加到生成的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__init__" target="_blank" rel="noopener"><code>__init__()</code></a> 方法中，并传递给可选的 <code>__post_init__()</code> 方法。数据类不会使用它们。</p>
+<p>例如，假设一个字段将从数据库初始化，如果在创建类时未提供其值:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line">    i: int</span><br><span class="line">    j: int = <span class="literal">None</span></span><br><span class="line">    database: InitVar[DatabaseType] = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__post_init__</span><span class="params">(self, database)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.j <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">and</span> database <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            self.j = database.lookup(<span class="string">'j'</span>)</span><br><span class="line"></span><br><span class="line">c = C(<span class="number">10</span>, database=my_database)</span><br></pre></td></tr></table></figure>
+<p> 在这种情况下， <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.fields" target="_blank" rel="noopener"><code>fields()</code></a> 将返回 <code>i</code> 和 <code>j</code> 的 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.Field" target="_blank" rel="noopener"><code>Field</code></a> 对象，但不包括 <code>database</code>  。</p>
+<h2 id="冻结的实例"><a href="#冻结的实例" class="headerlink" title="冻结的实例"></a>冻结的实例</h2><p>无法创建真正不可变的 Python 对象。但是，通过将 <code>frozen=True</code> 传递给 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 装饰器，你可以模拟不变性。在这种情况下，数据类将向类添加 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__setattr__" target="_blank" rel="noopener"><code>__setattr__()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__delattr__" target="_blank" rel="noopener"><code>__delattr__()</code></a> 方法。 些方法在调用时会引发 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.FrozenInstanceError" target="_blank" rel="noopener"><code>FrozenInstanceError</code></a> 。</p>
+<p>使用 <code>frozen=True</code> 时会有很小的性能损失： <code>__ init__()</code> 不能使用简单的赋值来初始化字段，并必须使用 <code>object.__ setattr__()</code> 。</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p> 当数组由 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.dataclass" target="_blank" rel="noopener"><code>dataclass()</code></a> 装饰器创建时，它会查看反向 MRO 中的所有类的基类（即从 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#object" target="_blank" rel="noopener"><code>object</code></a> 开始 ），并且对于它找到的每个数据类， 将该基类中的字段添加到字段的有序映射中。添加完所有基类字段后，它会将自己的字段添加到有序映射中。所有生成的方法都将使用这种组合的，计算的有序字段映射。由于字段是按插入顺序排列的，因此派生类会重载基类。一个例子: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@dataclass</span><br><span class="line">class Base:</span><br><span class="line">    x: Any = 15.0</span><br><span class="line">    y: int = 0</span><br><span class="line"></span><br><span class="line">@dataclass</span><br><span class="line">class C(Base):</span><br><span class="line">    z: int = 10</span><br><span class="line">    x: int = 15</span><br></pre></td></tr></table></figure>
+<p>最后的字段列表依次是 <code>x</code> 、 <code>y</code> 、 <code>z</code> 。 <code>x</code> 的最终类型是 <code>int</code> ，如类 <code>C</code> 中所指定的那样。</p>
+<p>为 <code>C</code> 生成的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__init__" target="_blank" rel="noopener"><code>__init__()</code></a> 方法看起来像:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x: int = <span class="number">15</span>, y: int = <span class="number">0</span>, z: int = <span class="number">10</span>)</span>:</span></span><br></pre></td></tr></table></figure>
+<h2 id="默认工厂函数"><a href="#默认工厂函数" class="headerlink" title="默认工厂函数"></a>默认工厂函数</h2><p> 如果一个 <a href="https://docs.python.org/zh-cn/3.8/library/dataclasses.html#dataclasses.field" target="_blank" rel="noopener"><code>field()</code></a> 指定了一个 <code>default_factory</code> ，当需要该字段的默认值时，将使用零参数调用它。例如，要创建列表的新实例，请使用: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mylist: list = field(default_factory=list)</span><br></pre></td></tr></table></figure>
+<p> 如果一个字段被排除在 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__init__" target="_blank" rel="noopener"><code>__init__()</code></a> 之外（使用 <code>init=False</code> ）并且字段也指定 <code>default_factory</code> ，则默认的工厂函数将始终从生成的 <code>__ init__()</code> 函数调用。发生这种情况是因为没有其他方法可以为字段提供初始值。 </p>
+<h2 id="可变的默认值"><a href="#可变的默认值" class="headerlink" title="可变的默认值"></a>可变的默认值</h2><p> Python 在类属性中存储默认成员变量值。思考这个例子，不使用数据类: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line">    x = []</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self, element)</span>:</span></span><br><span class="line">        self.x.append(element)</span><br><span class="line"></span><br><span class="line">o1 = C()</span><br><span class="line">o2 = C()</span><br><span class="line">o1.add(<span class="number">1</span>)</span><br><span class="line">o2.add(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">assert</span> o1.x == [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="keyword">assert</span> o1.x <span class="keyword">is</span> o2.x</span><br></pre></td></tr></table></figure>
+<p>请注意，类 <code>C</code> 的两个实例共享相同的类变量 <code>x</code> ，如预期的那样。</p>
+<p>使用数据类， <em>如果</em> 此代码有效:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span></span><br><span class="line">    x: List = []</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self, element)</span>:</span></span><br><span class="line">        self.x += element</span><br></pre></td></tr></table></figure>
+<p> 它生成的代码类似于: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span></span><br><span class="line">    x = []</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x=x)</span>:</span></span><br><span class="line">        self.x = x</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self, element)</span>:</span></span><br><span class="line">        self.x += element</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> D().x <span class="keyword">is</span> D().x</span><br></pre></td></tr></table></figure>
+<p>这与使用类 <code>C</code> 的原始示例具有相同的问题。也就是说，在创建类实例时没有为 <code>x</code> 指定值的类 <code>D</code> 的两个实例将共享相同的 <code>x</code> 副本。由于数据类只使用普通的 Python 类创建，因此它们也会共享此行为。数据类没有通用的方法来检测这种情况。相反，如果数据类检测到类型为 <code>list</code> 、 <code>dict</code> 或 <code>set</code> 的默认参数，则会引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a> 。这是一个部分解决方案，但它可以防止许多常见错误。</p>
+<p>使用默认工厂函数是一种创建可变类型新实例的方法，并将其作为字段的默认值:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@dataclass</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>:</span></span><br><span class="line">    x: list = field(default_factory=list)</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> D().x <span class="keyword">is</span> <span class="keyword">not</span> D().x</span><br></pre></td></tr></table></figure>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><ul>
+<li><p><em>exception</em> <code>dataclasses.FrozenInstanceError</code> </p>
+<p>在使用 <code>frozen=True</code> 定义的数据类上调用隐式定义的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__setattr__" target="_blank" rel="noopener"><code>__setattr__()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__delattr__" target="_blank" rel="noopener"><code>__delattr__()</code></a> 时引发。 </p>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我们经常会遇到这样的情况:</p>
+<p>比如我们设计一个商品类:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, id=None, author_id=None, category_id=None, brand_id=None, spu_id=None, </span></span></span><br><span class="line"><span class="function"><span class="params">                 title=None, item_id=None, n_comments=None, creation_time=None, update_time=None, </span></span></span><br><span class="line"><span class="function"><span class="params">                 source=<span class="string">''</span>, parent_id=<span class="number">0</span>, ancestor_id=<span class="number">0</span>)</span>:</span> </span><br><span class="line">        self.id = id</span><br><span class="line">        self.author_id = author_id</span><br><span class="line">        self.category_id = category_id</span><br><span class="line">        self.brand_id = brand_id</span><br><span class="line">        self.spu_id = spu_id</span><br><span class="line">        self.title = title</span><br><span class="line">        self.item_id = item_id</span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+<p><code>__init__</code>方法包含了众多参数,</p>
+<h3 id="应用一"><a href="#应用一" class="headerlink" title="应用一"></a>应用一</h3><p><strong>我们在打印的时候不希望打印所有的参数</strong></p>
+<p>通常的做法是,重写<code>__repr__</code>方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'&#123;&#125;(id=&#123;&#125;, author_id=&#123;&#125;, category_id=&#123;&#125;, brand_id=&#123;&#125;)'</span>.format(</span><br><span class="line">        self.__class__.__name__, self.id, self.author_id, self.category_id, </span><br><span class="line">        self.brand_id)</span><br><span class="line"><span class="comment">#对象打印</span></span><br><span class="line">p = Product()</span><br><span class="line">print(p)   </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Product(id=<span class="number">1</span>, author_id=<span class="number">100001</span>, category_id=<span class="number">2003</span>, brand_id=<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<p>问题来了,我需要在每个类里重写这个方法,那该怎么处理？</p>
+<h3 id="应用二"><a href="#应用二" class="headerlink" title="应用二"></a>应用二</h3><p> <strong>对象比较</strong>，有时候需要判断2个对象是否相等甚至大小（例如用于展示顺序） </p>
+<p>通常的做法是 重写对应的<code>__eq__</code>,<code>__lt__</code>方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__eq__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> isinstance(other, self.__class__):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">NotImplemented</span></span><br><span class="line">    <span class="keyword">return</span> (self.id, self.author_id, self.category_id, self.brand_id) == (</span><br><span class="line">        other.id, other.author_id, other.category_id, other.brand_id)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__lt__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> isinstance(other, self.__class__):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">NotImplemented</span></span><br><span class="line">    <span class="keyword">return</span> (self.id, self.author_id, self.category_id, self.brand_id) &lt; (</span><br><span class="line">        other.id, other.author_id, other.category_id, other.brand_id)</span><br></pre></td></tr></table></figure>
+<h3 id="应用三"><a href="#应用三" class="headerlink" title="应用三"></a>应用三</h3><p><strong>对象去重</strong>,重写<code>__hash__</code>方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__hash__</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> hash((self.id, self.author_id, self.category_id, self.brand_id))</span><br></pre></td></tr></table></figure>
+<h3 id="应用四"><a href="#应用四" class="headerlink" title="应用四"></a>应用四</h3><p><strong>导出字典格式</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">to_dict</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="string">'id'</span>: self.id,</span><br><span class="line">        <span class="string">'author_id'</span>: self.author_id,</span><br><span class="line">        <span class="string">'category_id'</span>: self.category_id,</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>但是我并不想打印所有的属性,于是有下面的做法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">to_dict</span><span class="params">(self)</span>:</span></span><br><span class="line">    self._a = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> vars(self)</span><br></pre></td></tr></table></figure>
+<p>等等,python难道没有解决方案。</p>
+<p>答案是肯定的,当然有,那就是<code>dataclasses</code></p>
+<h3 id="用dataclasses解决上面的问题"><a href="#用dataclasses解决上面的问题" class="headerlink" title="用dataclasses解决上面的问题"></a>用<code>dataclasses</code>解决上面的问题</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> dataclasses <span class="keyword">import</span> dataclass, field</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@dataclass(unsafe_hash=True, order=True)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span><span class="params">(object)</span>:</span></span><br><span class="line">    id: int</span><br><span class="line">    author_id: int</span><br><span class="line">    brand_id: int</span><br><span class="line">    spu_id: int</span><br><span class="line">    title: str = field(hash=<span class="literal">False</span>, repr=<span class="literal">False</span>, compare=<span class="literal">False</span>)</span><br><span class="line">    item_id: int = field(hash=<span class="literal">False</span>, repr=<span class="literal">False</span>, compare=<span class="literal">False</span>)</span><br><span class="line">    n_comments: int = field(hash=<span class="literal">False</span>, repr=<span class="literal">False</span>, compare=<span class="literal">False</span>)</span><br><span class="line">    creation_time: datetime = field(default=<span class="literal">None</span>, repr=<span class="literal">False</span>, compare=<span class="literal">False</span>,hash=<span class="literal">False</span>)</span><br><span class="line">    update_time: datetime = field(default=<span class="literal">None</span>, repr=<span class="literal">False</span>, compare=<span class="literal">False</span>, hash=<span class="literal">False</span>)</span><br><span class="line">    source: str = field(default=<span class="string">''</span>, repr=<span class="literal">False</span>, compare=<span class="literal">False</span>, hash=<span class="literal">False</span>)</span><br><span class="line">    parent_id: int = field(default=<span class="number">0</span>, repr=<span class="literal">False</span>, compare=<span class="literal">False</span>, hash=<span class="literal">False</span>)</span><br><span class="line">    ancestor_id: int = field(default=<span class="number">0</span>, repr=<span class="literal">False</span>, compare=<span class="literal">False</span>, hash=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p1 = Product(<span class="number">1</span>, <span class="number">100001</span>, <span class="number">2003</span>, <span class="number">20</span>, <span class="number">1002393002</span>, <span class="string">'这是一个测试商品1'</span>, <span class="number">2000001</span>, <span class="number">100</span>, <span class="literal">None</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">p2 = Product(<span class="number">1</span>, <span class="number">100001</span>, <span class="number">2003</span>, <span class="number">20</span>, <span class="number">1002393002</span>, <span class="string">'这是一个测试商品2'</span>, <span class="number">2000001</span>, <span class="number">100</span>, <span class="literal">None</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">p3 = Product(<span class="number">3</span>, <span class="number">100001</span>, <span class="number">2003</span>, <span class="number">20</span>, <span class="number">1002393002</span>, <span class="string">'这是一个测试商品3'</span>, <span class="number">2000001</span>, <span class="number">100</span>, <span class="literal">None</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">print(p1)</span><br><span class="line"></span><br><span class="line">print(p1 == p2)</span><br><span class="line"></span><br><span class="line">print(p1 &gt; p2)</span><br><span class="line"></span><br><span class="line">print(&#123;p1, p2, p3&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> dataclasses <span class="keyword">import</span> asdict</span><br><span class="line">asdict(p1)</span><br></pre></td></tr></table></figure>
+<p>想了解更多的使用方法,强烈建议阅读源码。</p>
+<p>最后,希望武汉的兄弟们能保护好自己,健康才是最重要的。加油!!!</p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/01/25/python-standard-library-dataclasses/" title="python standard library dataclasses">https://pinghailinfeng.gitee.io/2020/01/25/python-standard-library-dataclasses/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/dataclasses/" rel="tag"># dataclasses</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/24/python-standard-library-bisect/" rel="next" title="python standard library bisect">
+                <i class="fa fa-chevron-left"></i> python standard library bisect
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/26/python-standard-library-reprlib/" rel="prev" title="python standard library reprlib">
+                python standard library reprlib <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-dataclasses"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 dataclasses</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">1.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块级装饰器、类和函数"><span class="nav-number">1.2.</span> <span class="nav-text">模块级装饰器、类和函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化后处理"><span class="nav-number">1.3.</span> <span class="nav-text">初始化后处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类变量"><span class="nav-number">1.4.</span> <span class="nav-text">类变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#仅初始化变量"><span class="nav-number">1.5.</span> <span class="nav-text">仅初始化变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#冻结的实例"><span class="nav-number">1.6.</span> <span class="nav-text">冻结的实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承"><span class="nav-number">1.7.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#默认工厂函数"><span class="nav-number">1.8.</span> <span class="nav-text">默认工厂函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可变的默认值"><span class="nav-number">1.9.</span> <span class="nav-text">可变的默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常"><span class="nav-number">1.10.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.11.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一"><span class="nav-number">1.11.1.</span> <span class="nav-text">应用一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二"><span class="nav-number">1.11.2.</span> <span class="nav-text">应用二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用三"><span class="nav-number">1.11.3.</span> <span class="nav-text">应用三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用四"><span class="nav-number">1.11.4.</span> <span class="nav-text">应用四</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用dataclasses解决上面的问题"><span class="nav-number">1.11.5.</span> <span class="nav-text">用dataclasses解决上面的问题</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">338k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">5:08</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

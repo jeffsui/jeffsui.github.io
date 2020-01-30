@@ -1,0 +1,1852 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python  标准库 concurrent">
+<meta name="keywords" content="python,standard_library,concurrent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library concurrent">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/01/30/python-standard-library-concurrent/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python  标准库 concurrent">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img3.doubanio.com/view/group_topic/l/public/p27474097.webp">
+<meta property="og:updated_time" content="2020-01-30T12:22:19.714Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library concurrent">
+<meta name="twitter:description" content="python  标准库 concurrent">
+<meta name="twitter:image" content="https://img3.doubanio.com/view/group_topic/l/public/p27474097.webp">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/01/30/python-standard-library-concurrent/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library concurrent | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/30/python-standard-library-concurrent/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library concurrent
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-30 19:09:40 / 修改时间：20:22:19" itemprop="dateCreated datePublished" datetime="2020-01-30T19:09:40+08:00">2020-01-30</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">18k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">16 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-concurrent"><a href="#python-标准库-concurrent" class="headerlink" title="python  标准库 concurrent"></a>python  标准库 concurrent</h1><p><img src="https://img3.doubanio.com/view/group_topic/l/public/p27474097.webp" alt></p>
+<a id="more"></a>
+<blockquote>
+<p>what is love？ 也许一千个人有一千个人的说法。也许当你知道什么是爱的时候,我们已经忘记了曾经也爱过。一生都没弄明白什么是爱。学会爱别人,也学着如何去爱一个人,是一辈子的事。</p>
+<p>​                                                                                                                                                     — 临风语录</p>
+</blockquote>
+<p>送给大家一首歌 How Long Will I Love You.在这个寒冷的季节里,唯有爱才是唯一可以温暖人们的东西吧。</p>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=29596326&auto=1&height=66"></iframe>
+
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p><strong>源码:</strong> <a href="https://github.com/python/cpython/tree/3.8/Lib/concurrent/futures/thread.py" target="_blank" rel="noopener">Lib/concurrent/futures/thread.py</a> 和 <a href="https://github.com/python/cpython/tree/3.8/Lib/concurrent/futures/process.py" target="_blank" rel="noopener">Lib/concurrent/futures/process.py</a></p>
+<p>concurrent模块层次结构如下:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">concurrent</span><br><span class="line">    |-- futures/</span><br><span class="line">    |-----|--__init__.py</span><br><span class="line">    |-----|--_base.py</span><br><span class="line">    |-----|--process.py</span><br><span class="line">    |-----|--thread.py</span><br><span class="line">    |-- __init__.py</span><br></pre></td></tr></table></figure>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#module-concurrent.futures" target="_blank" rel="noopener"><code>concurrent.futures</code></a> 模块提供异步执行回调高层接口。</p>
+<p>异步执行可以由 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.ThreadPoolExecutor" target="_blank" rel="noopener"><code>ThreadPoolExecutor</code></a> 使用线程或由 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor" target="_blank" rel="noopener"><code>ProcessPoolExecutor</code></a> 使用单独的进程来实现。 两者都是实现抽像类 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor" target="_blank" rel="noopener"><code>Executor</code></a> 定义的接口。</p>
+<h2 id="Executor对象"><a href="#Executor对象" class="headerlink" title="Executor对象"></a>Executor对象</h2><p><em>class</em> <code>concurrent.futures.Executor</code></p>
+<p>抽象类提供异步执行调用方法。要通过它的子类调用，而不是直接调用。</p>
+<ul>
+<li><p><code>submit</code>(<em>fn</em>, <strong>args<em>, </em></strong>kwargs*)</p>
+<p>调度可调用对象 <em>fn</em>，以 <code>fn(*args **kwargs)</code> 方式执行并返回 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 对像代表可调用对象的执行。:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> ThreadPoolExecutor(max_workers=<span class="number">1</span>) <span class="keyword">as</span> executor:</span><br><span class="line">    future = executor.submit(pow, <span class="number">323</span>, <span class="number">1235</span>)</span><br><span class="line">    print(future.result())</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>map</code>(<em>func</em>, *<em>iterables</em>, <em>timeout=None</em>, <em>chunksize=1</em>)</p>
+<p>类似于 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#map" target="_blank" rel="noopener"><code>map(func, *iterables)</code></a> 除去：</p>
+<ul>
+<li>应立即收集 <em>iterables</em> 不要延迟再收集;</li>
+<li><em>func</em> 是异步执行的且对 <em>func</em> 的调用可以并发执行。</li>
+</ul>
+<p>如果 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#iterator.__next__" target="_blank" rel="noopener"><code>__next__()</code></a> 已被调用且返回的结果在对 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor.map" target="_blank" rel="noopener"><code>Executor.map()</code></a> 的原始调用经过 <em>timeout</em> 秒后还不可用，则已返回的迭代器将引发 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.TimeoutError" target="_blank" rel="noopener"><code>concurrent.futures.TimeoutError</code></a>。 <em>timeout</em> 可以为 int 或 float 类型。 如果 <em>timeout</em> 未指定或为 <code>None</code>，则不限制等待时间。</p>
+<p>如果 <em>func</em> 调用引发一个异常，当从迭代器中取回它的值时这个异常将被引发。</p>
+<p>使用 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor" target="_blank" rel="noopener"><code>ProcessPoolExecutor</code></a> 时，这个方法会将 <em>iterables</em> 分割任务块并作为独立的任务并提交到执行池中。这些块的大概数量可以由 <em>chunksize</em> 指定正整数设置。 对很长的迭代器来说，使用大的 <em>chunksize</em> 值比默认值 1 能显著地提高性能。 <em>chunksize</em> 对 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.ThreadPoolExecutor" target="_blank" rel="noopener"><code>ThreadPoolExecutor</code></a> 没有效果。</p>
+<p><em>在 3.5 版更改:</em> 加入 <em>chunksize</em> 参数。</p>
+</li>
+<li><p><code>shutdown</code>(<em>wait=True</em>)</p>
+<p>当待执行的期程完成执行后向执行者发送信号，它就会释放正在使用的任何资源。调用 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor.submit" target="_blank" rel="noopener"><code>Executor.submit()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor.submit" target="_blank" rel="noopener"><code>Executor.submit()</code></a> 会在关闭后触发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#RuntimeError" target="_blank" rel="noopener"><code>RuntimeError</code></a>。</p>
+<p>如果 <em>wait</em> 为 <code>True</code> 则此方法只有在所有待执行的期程完成执行且释放已分配的资源后才会返回。 如果 <em>wait</em> 为 <code>False</code>，方法立即返回，所有待执行的期程完成执行后会释放已分配的资源。 不管 <em>wait</em> 的值是什么，整个 Python 程序将等到所有待执行的期程完成执行后才退出。</p>
+<p>如果使用 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#with" target="_blank" rel="noopener"><code>with</code></a> 语句，你就可以避免显式调用这个方法，它将会停止 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor" target="_blank" rel="noopener"><code>Executor</code></a> (就好像 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor.shutdown" target="_blank" rel="noopener"><code>Executor.shutdown()</code></a> 调用时 <em>wait</em> 设为 <code>True</code> 一样等待):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="keyword">with</span> ThreadPoolExecutor(max_workers=<span class="number">4</span>) <span class="keyword">as</span> e:</span><br><span class="line">    e.submit(shutil.copy, <span class="string">'src1.txt'</span>, <span class="string">'dest1.txt'</span>)</span><br><span class="line">    e.submit(shutil.copy, <span class="string">'src2.txt'</span>, <span class="string">'dest2.txt'</span>)</span><br><span class="line">    e.submit(shutil.copy, <span class="string">'src3.txt'</span>, <span class="string">'dest3.txt'</span>)</span><br><span class="line">    e.submit(shutil.copy, <span class="string">'src4.txt'</span>, <span class="string">'dest4.txt'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="ThreadPoolExecutor"><a href="#ThreadPoolExecutor" class="headerlink" title="ThreadPoolExecutor"></a>ThreadPoolExecutor</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.ThreadPoolExecutor" target="_blank" rel="noopener"><code>ThreadPoolExecutor</code></a> 是 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor" target="_blank" rel="noopener"><code>Executor</code></a> 的子类，它使用线程池来异步执行调用。</p>
+<p>当回调已关联了一个 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 然后再等待另一个 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 的结果时就会发生死锁情况。 例如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wait_on_b</span><span class="params">()</span>:</span></span><br><span class="line">    time.sleep(<span class="number">5</span>)</span><br><span class="line">    print(b.result())  <span class="comment"># b will never complete because it is waiting on a.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wait_on_a</span><span class="params">()</span>:</span></span><br><span class="line">    time.sleep(<span class="number">5</span>)</span><br><span class="line">    print(a.result())  <span class="comment"># a will never complete because it is waiting on b.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">6</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">executor = ThreadPoolExecutor(max_workers=<span class="number">2</span>)</span><br><span class="line">a = executor.submit(wait_on_b)</span><br><span class="line">b = executor.submit(wait_on_a)</span><br></pre></td></tr></table></figure>
+<p>和下面的情况:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wait_on_future</span><span class="params">()</span>:</span></span><br><span class="line">    f = executor.submit(pow, <span class="number">5</span>, <span class="number">2</span>)</span><br><span class="line">    <span class="comment"># This will never complete because there is only one worker thread and</span></span><br><span class="line">    <span class="comment"># it is executing this function.</span></span><br><span class="line">    print(f.result())</span><br><span class="line"></span><br><span class="line">executor = ThreadPoolExecutor(max_workers=<span class="number">1</span>)</span><br><span class="line">executor.submit(wait_on_future)</span><br></pre></td></tr></table></figure>
+<p><em>class</em> <code>concurrent.futures.ThreadPoolExecutor</code>(<em>max_workers=None</em>, <em>thread_name_prefix=’’</em>, <em>initializer=None</em>, <em>initargs=()</em>)</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor" target="_blank" rel="noopener"><code>Executor</code></a> 的一个子类，使用最多 <em>max_workers</em> 个线程的线程池来异步执行调用。</p>
+<p><em>initializer</em> 是在每个工作者线程开始处调用的一个可选可调用对象。 <em>initargs</em> 是传递给初始化器的元组参数。任何向池提交更多工作的尝试， <em>initializer</em> 都将引发一个异常，当前所有等待的工作都会引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.thread.BrokenThreadPool" target="_blank" rel="noopener"><code>BrokenThreadPool</code></a>。</p>
+<p><em>在 3.5 版更改:</em> 如果 <em>max_workers</em> 为 <code>None</code> 或没有指定，将默认为机器处理器的个数，假如 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.ThreadPoolExecutor" target="_blank" rel="noopener"><code>ThreadPoolExecutor</code></a> 则重于 I/O 操作而不是 CPU 运算，那么可以乘以 <code>5</code>，同时工作线程的数量可以比 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor" target="_blank" rel="noopener"><code>ProcessPoolExecutor</code></a> 的数量高。</p>
+<p><em>3.6 新版功能:</em> 添加 <em>thread_name_prefix</em> 参数允许用户控制由线程池创建的 <a href="https://docs.python.org/zh-cn/3.8/library/threading.html#threading.Thread" target="_blank" rel="noopener"><code>threading.Thread</code></a> 工作线程名称以方便调试。</p>
+<p><em>在 3.7 版更改:</em> 加入 <em>initializer</em> 和<em>initargs</em> 参数。</p>
+<p><em>在 3.8 版更改:</em> <em>max_workers</em> 的默认值已改为 <code>min(32, os.cpu_count() + 4)</code>。 这个默认值会保留至少 5 个工作线程用于 I/O 密集型任务。 它会使用至多 32 个 CPU 核心用于 CPU 密集型任务并将释放 GIL。 它还会避免在多核机器上隐式地使用非常大量的资源。</p>
+<p>现在 ThreadPoolExecutor 在启动 <em>max_workers</em> 个工作线程之前也会重用空闲的工作线程。</p>
+<h3 id="ThreadPoolExecutor-例子"><a href="#ThreadPoolExecutor-例子" class="headerlink" title="ThreadPoolExecutor 例子"></a>ThreadPoolExecutor 例子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> concurrent.futures</span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"></span><br><span class="line">URLS = [<span class="string">'http://www.foxnews.com/'</span>,</span><br><span class="line">        <span class="string">'http://www.cnn.com/'</span>,</span><br><span class="line">        <span class="string">'http://europe.wsj.com/'</span>,</span><br><span class="line">        <span class="string">'http://www.bbc.co.uk/'</span>,</span><br><span class="line">        <span class="string">'http://some-made-up-domain.com/'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Retrieve a single page and report the URL and contents</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_url</span><span class="params">(url, timeout)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> urllib.request.urlopen(url, timeout=timeout) <span class="keyword">as</span> conn:</span><br><span class="line">        <span class="keyword">return</span> conn.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># We can use a with statement to ensure threads are cleaned up promptly</span></span><br><span class="line"><span class="keyword">with</span> concurrent.futures.ThreadPoolExecutor(max_workers=<span class="number">5</span>) <span class="keyword">as</span> executor:</span><br><span class="line">    <span class="comment"># Start the load operations and mark each future with its URL</span></span><br><span class="line">    future_to_url = &#123;executor.submit(load_url, url, <span class="number">60</span>): url <span class="keyword">for</span> url <span class="keyword">in</span> URLS&#125;</span><br><span class="line">    <span class="keyword">for</span> future <span class="keyword">in</span> concurrent.futures.as_completed(future_to_url):</span><br><span class="line">        url = future_to_url[future]</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            data = future.result()</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> exc:</span><br><span class="line">            print(<span class="string">'%r generated an exception: %s'</span> % (url, exc))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'%r page is %d bytes'</span> % (url, len(data)))</span><br></pre></td></tr></table></figure>
+<h2 id="ProcessPoolExecutor"><a href="#ProcessPoolExecutor" class="headerlink" title="ProcessPoolExecutor"></a>ProcessPoolExecutor</h2><p><a href="https://github.com/python/cpython/blob/3.8/Lib/concurrent/futures/process.py" target="_blank" rel="noopener">源码</a>中的图示:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""Implements ProcessPoolExecutor.</span></span><br><span class="line"><span class="string">The following diagram and text describe the data-flow through the system:</span></span><br><span class="line"><span class="string">|======================= In-process =====================|== Out-of-process ==|</span></span><br><span class="line"><span class="string">+----------+     +----------+       +--------+     +-----------+    +---------+</span></span><br><span class="line"><span class="string">|          |  =&gt; | Work Ids |       |        |     | Call Q    |    | Process |</span></span><br><span class="line"><span class="string">|          |     +----------+       |        |     +-----------+    |  Pool   |</span></span><br><span class="line"><span class="string">|          |     | ...      |       |        |     | ...       |    +---------+</span></span><br><span class="line"><span class="string">|          |     | 6        |    =&gt; |        |  =&gt; | 5, call() | =&gt; |         |</span></span><br><span class="line"><span class="string">|          |     | 7        |       |        |     | ...       |    |         |</span></span><br><span class="line"><span class="string">| Process  |     | ...      |       | Local  |     +-----------+    | Process |</span></span><br><span class="line"><span class="string">|  Pool    |     +----------+       | Worker |                      |  #1..n  |</span></span><br><span class="line"><span class="string">| Executor |                        | Thread |                      |         |</span></span><br><span class="line"><span class="string">|          |     +----------- +     |        |     +-----------+    |         |</span></span><br><span class="line"><span class="string">|          | &lt;=&gt; | Work Items | &lt;=&gt; |        | &lt;=  | Result Q  | &lt;= |         |</span></span><br><span class="line"><span class="string">|          |     +------------+     |        |     +-----------+    |         |</span></span><br><span class="line"><span class="string">|          |     | 6: call()  |     |        |     | ...       |    |         |</span></span><br><span class="line"><span class="string">|          |     |    future  |     |        |     | 4, result |    |         |</span></span><br><span class="line"><span class="string">|          |     | ...        |     |        |     | 3, except |    |         |</span></span><br><span class="line"><span class="string">+----------+     +------------+     +--------+     +-----------+    +---------+</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor" target="_blank" rel="noopener"><code>ProcessPoolExecutor</code></a> 是 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor" target="_blank" rel="noopener"><code>Executor</code></a> 的子类，它使用进程池来实现异步执行调用。 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor" target="_blank" rel="noopener"><code>ProcessPoolExecutor</code></a> 使用 <a href="https://docs.python.org/zh-cn/3.8/library/multiprocessing.html#module-multiprocessing" target="_blank" rel="noopener"><code>multiprocessing</code></a> 回避 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-global-interpreter-lock" target="_blank" rel="noopener">Global Interpreter Lock</a> 但也意味着只可以处理和返回可序列化的对象。</p>
+<p><code>__main__</code> 模块必须可以被工作者子进程导入。这意味着 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor" target="_blank" rel="noopener"><code>ProcessPoolExecutor</code></a> 不可以工作在交互式解释器中。</p>
+<p>从提交给 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.ProcessPoolExecutor" target="_blank" rel="noopener"><code>ProcessPoolExecutor</code></a> 的回调中调用 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor" target="_blank" rel="noopener"><code>Executor</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 方法会导致死锁。</p>
+<ul>
+<li><p><em>class</em> <code>concurrent.futures.ProcessPoolExecutor</code>(<em>max_workers=None</em>, <em>mp_context=None</em>, <em>initializer=None</em>, <em>initargs=()</em>)</p>
+<p>异步执行调用的 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor" target="_blank" rel="noopener"><code>Executor</code></a> 子类使用一个最多有 <em>max_workers</em> 个进程的进程池。 如果 <em>max_workers</em> 为 <code>None</code> 或未给出，它将默认为机器的处理器个数。 如果 <em>max_workers</em> 小于等于 <code>0</code>，则将引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a>。 在 Windows 上，<em>max_workers</em> 必须小于等于 <code>61</code>，否则将引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a>。 如果 <em>max_workers</em> 为 <code>None</code>，则所选择的默认最多为 <code>61</code>，即使存在更多处理器。 <em>mp_context</em> 可以是一个多进程上下文或是 None。 它将被用来启动工作者。 如果 <em>mp_context</em> 为 <code>None</code> 或未给出，将使用默认的多进程上下文。</p>
+<p><em>initializer</em> 是在每个工作者进程开始处调用的一个可选可调用对象。 <em>initargs</em> 是传递给初始化器的元组参数。任何向池提交更多工作的尝试， <em>initializer</em> 都将引发一个异常，当前所有等待的工作都会引发一个 <code>BrokenProcessPool</code>。</p>
+<p><em>在 3.3 版更改:</em> 如果其中一个工作进程被突然终止，<code>BrokenProcessPool</code> 就会马上触发。可预计的行为没有定义，但执行器上的操作或它的期程会被冻结或死锁。</p>
+<p><em>在 3.7 版更改:</em> 添加 <em>mp_context</em> 参数允许用户控制由进程池创建给工作者进程的开始方法 。</p>
+<p>加入 <em>initializer</em> 和<em>initargs</em> 参数。</p>
+</li>
+</ul>
+<h3 id="ProcessPoolExecutor-例子"><a href="#ProcessPoolExecutor-例子" class="headerlink" title="ProcessPoolExecutor 例子"></a>ProcessPoolExecutor 例子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> concurrent.futures</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line">PRIMES = [</span><br><span class="line">    <span class="number">112272535095293</span>,</span><br><span class="line">    <span class="number">112582705942171</span>,</span><br><span class="line">    <span class="number">112272535095293</span>,</span><br><span class="line">    <span class="number">115280095190773</span>,</span><br><span class="line">    <span class="number">115797848077099</span>,</span><br><span class="line">    <span class="number">1099726899285419</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_prime</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">if</span> n % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    sqrt_n = int(math.floor(math.sqrt(n)))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>, sqrt_n + <span class="number">1</span>, <span class="number">2</span>):</span><br><span class="line">        <span class="keyword">if</span> n % i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">with</span> concurrent.futures.ProcessPoolExecutor() <span class="keyword">as</span> executor:</span><br><span class="line">        <span class="keyword">for</span> number, prime <span class="keyword">in</span> zip(PRIMES, executor.map(is_prime, PRIMES)):</span><br><span class="line">            print(<span class="string">'%d is prime: %s'</span> % (number, prime))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2 id="Future对象"><a href="#Future对象" class="headerlink" title="Future对象"></a>Future对象</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 类将可调用对象封装为异步执行。<a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 实例由 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor.submit" target="_blank" rel="noopener"><code>Executor.submit()</code></a> 创建。</p>
+<p><em>class</em> <code>concurrent.futures.Future</code></p>
+<p>将可调用对象封装为异步执行。<a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 实例由 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor.submit" target="_blank" rel="noopener"><code>Executor.submit()</code></a> 创建，除非测试，不应直接创建。</p>
+<blockquote>
+<ul>
+<li><p><code>cancel</code>()</p>
+<p>尝试取消调用。 如果调用正在执行或已结束运行不能被取消则该方法将返回 <code>False</code>，否则调用会被取消并且该方法将返回 <code>True</code>。</p>
+</li>
+<li><p><code>cancelled</code>()</p>
+<p>如果调用成功取消返回 <code>True</code>。</p>
+</li>
+<li><p><code>running</code>()</p>
+<p>如果调用正在执行而且不能被取消那么返回True。</p>
+</li>
+<li><p><code>done</code>()</p>
+<p>如果调用已被取消或正常结束那么返回 <code>True</code>。</p>
+</li>
+<li><p><code>result</code>(<em>timeout=None</em>)</p>
+<p>返回调用返回的值。如果调用还没完成那么这个方法将等待 <em>timeout</em> 秒。如果在 <em>timeout</em> 秒内没有执行完成，<a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.TimeoutError" target="_blank" rel="noopener"><code>concurrent.futures.TimeoutError</code></a> 将会被触发。<em>timeout</em> 可以是整数或浮点数。如果 <em>timeout</em> 没有指定或为 <code>None</code>，那么等待时间就没有限制。如果 futrue 在完成前被取消则 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.CancelledError" target="_blank" rel="noopener"><code>CancelledError</code></a> 将被触发。如果调用引发了一个异常，这个方法也会引发同样的异常。</p>
+</li>
+<li><p><code>exception</code>(<em>timeout=None</em>)</p>
+<p>返回由调用引发的异常。如果调用还没完成那么这个方法将等待 <em>timeout</em> 秒。如果在 <em>timeout</em> 秒内没有执行完成，<a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.TimeoutError" target="_blank" rel="noopener"><code>concurrent.futures.TimeoutError</code></a> 将会被触发。<em>timeout</em> 可以是整数或浮点数。如果 <em>timeout</em> 没有指定或为 <code>None</code>，那么等待时间就没有限制。如果 futrue 在完成前被取消则 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.CancelledError" target="_blank" rel="noopener"><code>CancelledError</code></a> 将被触发。如果调用正常完成那么返回 <code>None</code>。</p>
+</li>
+<li><p><code>add_done_callback</code>(<em>fn</em>)</p>
+<p>附加可调用 <em>fn</em> 到期程。当期程被取消或完成运行时，将会调用 <em>fn</em>，而这个期程将作为它唯一的参数。加入的可调用对象总被属于添加它们的进程中的线程按加入的顺序调用。如果可调用对象引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#Exception" target="_blank" rel="noopener"><code>Exception</code></a> 子类，它会被记录下来并被忽略掉。如果可调用对象引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#BaseException" target="_blank" rel="noopener"><code>BaseException</code></a> 子类，这个行为没有定义。如果期程已经完成或已取消，<em>fn</em> 会被立即调用。</p>
+</li>
+</ul>
+</blockquote>
+<p>下面这些 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 方法用于单元测试和 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor" target="_blank" rel="noopener"><code>Executor</code></a> 实现。</p>
+<blockquote>
+<ul>
+<li><p><code>set_running_or_notify_cancel</code>()</p>
+<p>这个方法只可以在执行关联 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 工作之前由 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor" target="_blank" rel="noopener"><code>Executor</code></a> 实现调用或由单测试调用。如果这个方法返回 <code>False</code> 那么 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 已被取消，即 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future.cancel" target="_blank" rel="noopener"><code>Future.cancel()</code></a> 已被调用并返回 <code>True</code> 。等待 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 完成 (即通过 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.as_completed" target="_blank" rel="noopener"><code>as_completed()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.wait" target="_blank" rel="noopener"><code>wait()</code></a>) 的线程将被唤醒。如果这个方法返回 <code>True</code> 那么 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 不会被取消并已将它变为正在运行状态，也就是说调用 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future.running" target="_blank" rel="noopener"><code>Future.running()</code></a> 时将返回 True。这个方法只可以被调用一次并且不能在调用 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future.set_result" target="_blank" rel="noopener"><code>Future.set_result()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future.set_exception" target="_blank" rel="noopener"><code>Future.set_exception()</code></a> 之后再调用。</p>
+</li>
+<li><p><code>set_result</code>(<em>result</em>)</p>
+<p>设置将 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 关联工作的结果给 <em>result</em> 。这个方法只可以由 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor" target="_blank" rel="noopener"><code>Executor</code></a> 实现和单元测试使用。<em>在 3.8 版更改:</em> 如果 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 已经完成则此方法会引发 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.InvalidStateError" target="_blank" rel="noopener"><code>concurrent.futures.InvalidStateError</code></a>。</p>
+</li>
+<li><p><code>set_exception</code>(<em>exception</em>)</p>
+<p>设置 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 关联工作的结果给 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#Exception" target="_blank" rel="noopener"><code>Exception</code></a> <em>exception</em> 。这个方法只可以由 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor" target="_blank" rel="noopener"><code>Executor</code></a> 实现和单元测试使用。<em>在 3.8 版更改:</em> 如果 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 已经完成则此方法会引发 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.InvalidStateError" target="_blank" rel="noopener"><code>concurrent.futures.InvalidStateError</code></a>。</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="模块函数"><a href="#模块函数" class="headerlink" title="模块函数"></a>模块函数</h2><p><code>concurrent.futures.wait</code>(<em>fs</em>, <em>timeout=None</em>, <em>return_when=ALL_COMPLETED</em>)</p>
+<p>等待 <em>fs</em> 指定的 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 实例（可能由不同的 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor" target="_blank" rel="noopener"><code>Executor</code></a> 实例创建）完成。 返回一个由集合构成的具名 2 元组。 第一个集合名称为 <code>done</code>，包含在等待完成之前已完成的期程（包括正常结束或被取消的期程）。 第二个集合名称为 <code>not_done</code>，包含未完成的期程（包括挂起的或正在运行的期程）。</p>
+<p><em>timeout</em> 可以用来控制返回前最大的等待秒数。 <em>timeout</em> 可以为 int 或 float 类型。 如果 <em>timeout</em> 未指定或为 <code>None</code> ，则不限制等待时间。</p>
+<p><em>return_when</em> 指定此函数应在何时返回。它必须为以下常数之一:</p>
+<table>
+<thead>
+<tr>
+<th>常数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FIRST_COMPLETED</code></td>
+<td>函数将在任意可等待对象结束或取消时返回。</td>
+</tr>
+<tr>
+<td><code>FIRST_EXCEPTION</code></td>
+<td>函数将在任意可等待对象因引发异常而结束时返回。当没有引发任何异常时它就相当于 <code>ALL_COMPLETED</code>。</td>
+</tr>
+<tr>
+<td><code>ALL_COMPLETED</code></td>
+<td>函数将在所有可等待对象结束或取消时返回。</td>
+</tr>
+</tbody>
+</table>
+<p><code>concurrent.futures.as_completed</code>(<em>fs</em>, <em>timeout=None</em>)</p>
+<p>返回一个包含 <em>fs</em> 所指定的 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>Future</code></a> 实例（可能由不同的 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Executor" target="_blank" rel="noopener"><code>Executor</code></a> 实例创建）的迭代器，这些实例会在完成时生成期程（包括正常结束或被取消的期程）。 任何由 <em>fs</em> 所指定的重复期程将只被返回一次。 任何在 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.as_completed" target="_blank" rel="noopener"><code>as_completed()</code></a> 被调用之前完成的期程将优先被生成。 如果 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#iterator.__next__" target="_blank" rel="noopener"><code>__next__()</code></a> 被调用并且在对 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.as_completed" target="_blank" rel="noopener"><code>as_completed()</code></a> 的原始调用 <em>timeout</em> 秒之后结果仍不可用，则返回的迭代器将引发 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.TimeoutError" target="_blank" rel="noopener"><code>concurrent.futures.TimeoutError</code></a>。 <em>timeout</em> 可以为整数或浮点数。 如果 <em>timeout</em> 未指定或为 <code>None</code>，则不限制等待时间。</p>
+<blockquote>
+<p><a href="https://www.python.org/dev/peps/pep-3148" target="_blank" rel="noopener"><strong>PEP 3148</strong></a> – futures - 异步执行指令。</p>
+<p>该提案描述了Python标准库中包含的这个特性。</p>
+</blockquote>
+<h2 id="Exception类"><a href="#Exception类" class="headerlink" title="Exception类"></a>Exception类</h2><ul>
+<li><p><em>exception</em> <code>concurrent.futures.CancelledError</code></p>
+<p>future被取消时会触发。</p>
+</li>
+<li><p><em>exception</em> <code>concurrent.futures.TimeoutError</code></p>
+<p>future运算超出给定的超时数值时触发。</p>
+</li>
+<li><p><em>exception</em> <code>concurrent.futures.BrokenExecutor</code></p>
+<p>当执行器被某些原因中断而且不能用来提交或执行新任务时就会被引发派生于 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#RuntimeError" target="_blank" rel="noopener"><code>RuntimeError</code></a> 的异常类。<em>3.7 新版功能.</em></p>
+</li>
+<li><p><em>exception</em> <code>concurrent.futures.InvalidStateError</code></p>
+<p>当某个操作在一个当前状态所不允许的 future 上执行时将被引发。<em>3.8 新版功能.</em></p>
+</li>
+<li><p><em>exception</em> <code>concurrent.futures.thread.BrokenThreadPool</code></p>
+<p>当 <code>ThreadPoolExecutor</code> 中的其中一个工作者初始化失败时会引发派生于 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.BrokenExecutor" target="_blank" rel="noopener"><code>BrokenExecutor</code></a> 的异常类。<em>3.7 新版功能.</em></p>
+</li>
+<li><p><em>exception</em> <code>concurrent.futures.process.BrokenProcessPool</code></p>
+<p>当 <code>ThreadPoolExecutor</code> 中的其中一个工作者不完整终止时(比如，被外部杀死)会引发派生于 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.BrokenExecutor" target="_blank" rel="noopener"><code>BrokenExecutor</code></a> ( 原名 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#RuntimeError" target="_blank" rel="noopener"><code>RuntimeError</code></a> ) 的异常类。</p>
+</li>
+</ul>
+<h2 id="补充例子"><a href="#补充例子" class="headerlink" title="补充例子"></a>补充例子</h2><h3 id="submit例子"><a href="#submit例子" class="headerlink" title="submit例子"></a><code>submit</code>例子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#线程执行的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(n1,n2)</span>:</span></span><br><span class="line">    v = n1 + n2</span><br><span class="line">    print(<span class="string">'add :'</span>, v , <span class="string">', tid:'</span>,threading.currentThread().ident)</span><br><span class="line">    time.sleep(n1)</span><br><span class="line">    <span class="keyword">return</span> v</span><br><span class="line"><span class="comment">#通过submit把需要执行的函数扔进线程池中.</span></span><br><span class="line"><span class="comment">#submit 直接返回一个future对象</span></span><br><span class="line">ex = ThreadPoolExecutor(max_workers=<span class="number">3</span>)      <span class="comment">#制定最多运行N个线程</span></span><br><span class="line">f1 = ex.submit(add,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">f2 = ex.submit(add,<span class="number">2</span>,<span class="number">2</span>)</span><br><span class="line">print(<span class="string">'main thread running'</span>)</span><br><span class="line">print(f1.done())                            <span class="comment">#done 看看任务结束了没</span></span><br><span class="line">print(f1.result())                          <span class="comment">#获取结果 ,阻塞方法</span></span><br></pre></td></tr></table></figure>
+<h3 id="返回-map-例子"><a href="#返回-map-例子" class="headerlink" title="返回 map 例子"></a>返回 <code>map</code> 例子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#下面是map 方法的简单使用.  注意:map 返回是一个生成器 ,并且是*有序的*</span></span><br><span class="line">URLS = [<span class="string">'http://www.baidu.com'</span>, <span class="string">'http://www.qq.com'</span>, <span class="string">'http://www.sina.com.cn'</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_html</span><span class="params">(url)</span>:</span></span><br><span class="line">    print(<span class="string">'thread id:'</span>,threading.currentThread().ident,<span class="string">' 访问了:'</span>,url)</span><br><span class="line">    <span class="keyword">return</span> requests.get(url)            <span class="comment">#这里使用了requests 模块</span></span><br><span class="line">ex = ThreadPoolExecutor(max_workers=<span class="number">3</span>)</span><br><span class="line">res_iter = ex.map(get_html,URLS)        <span class="comment">#内部迭代中, 每个url 开启一个线程</span></span><br><span class="line"><span class="keyword">for</span> res <span class="keyword">in</span> res_iter:                    <span class="comment">#此时将阻塞 , 直到线程完成或异常</span></span><br><span class="line">    print(<span class="string">'url:%s ,len: %d'</span>%(res.url,len(res.text)))</span><br></pre></td></tr></table></figure>
+<h3 id="as-complated-例子"><a href="#as-complated-例子" class="headerlink" title="as_complated 例子"></a><code>as_complated</code> 例子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">URLS = [<span class="string">'http://www.baidu.com'</span>, <span class="string">'http://www.qq.com'</span>, <span class="string">'http://www.sina.com.cn'</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_html</span><span class="params">(url)</span>:</span></span><br><span class="line">    time.sleep(<span class="number">3</span>)</span><br><span class="line">    print(<span class="string">'thread id:'</span>,threading.currentThread().ident,<span class="string">' 访问了:'</span>,url)</span><br><span class="line">    <span class="keyword">return</span> requests.get(url)            <span class="comment">#这里使用了requests 模块</span></span><br><span class="line">ex = ThreadPoolExecutor(max_workers=<span class="number">3</span>)</span><br><span class="line">f = ex.submit(get_html,URLS[<span class="number">0</span>])          <span class="comment">#提交一个任务,放入线程池中,准备执行</span></span><br><span class="line">print(<span class="string">'main thread running'</span>)</span><br><span class="line"><span class="keyword">for</span> future <span class="keyword">in</span> as_completed([f]):        <span class="comment">#as_completed()接受一个可迭代的Future序列,返回一个生成器,在完成或异常时返回这个Future对象</span></span><br><span class="line">    print(<span class="string">'一个任务完成.'</span>)</span><br><span class="line">    print(future.result())</span><br></pre></td></tr></table></figure>
+<h3 id="as-complated-详细例子"><a href="#as-complated-详细例子" class="headerlink" title="as_complated 详细例子"></a><code>as_complated</code> 详细例子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#as_completed 完整的例子</span></span><br><span class="line"><span class="comment">#as_completed 返回一个生成器，用于迭代， 一旦一个线程完成(或失败) 就返回</span></span><br><span class="line">URLS = [<span class="string">'http://www.baidu.com'</span>, <span class="string">'http://www.qq.com'</span>, <span class="string">'http://www.sina.com.cn'</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_html</span><span class="params">(url)</span>:</span></span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    print(<span class="string">'thread id:'</span>,threading.currentThread().ident,<span class="string">' 访问了:'</span>,url)</span><br><span class="line">    <span class="keyword">return</span> requests.get(url)            <span class="comment">#这里使用了requests 模块</span></span><br><span class="line">ex = ThreadPoolExecutor(max_workers=<span class="number">3</span>)   <span class="comment">#最多3个线程</span></span><br><span class="line">future_tasks = [ex.submit(get_html,url) <span class="keyword">for</span> url <span class="keyword">in</span> URLS]    <span class="comment">#创建3个future对象</span></span><br><span class="line"><span class="keyword">for</span> future <span class="keyword">in</span> as_completed(future_tasks):       <span class="comment">#迭代生成器</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        resp = future.result()</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">'%s'</span>%e)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">'%s has %d bytes!'</span>%(resp.url, len(resp.text)))</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">thread id: 5160  访问了: http://www.baidu.com</span></span><br><span class="line"><span class="string">thread id: 7752  访问了: http://www.sina.com.cn</span></span><br><span class="line"><span class="string">thread id: 5928  访问了: http://www.qq.com</span></span><br><span class="line"><span class="string">http://www.qq.com/ has 240668 bytes!</span></span><br><span class="line"><span class="string">http://www.baidu.com/ has 2381 bytes!</span></span><br><span class="line"><span class="string">https://www.sina.com.cn/ has 577244 bytes!</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>as_complated</code> 返回的是迭代器,在迭代过程中会阻塞</li>
+<li>直到线程完成或者异常时,返回一个被 <code>set_result</code>的<code>Future</code>对象</li>
+<li>map方法返回的是有序的,<code>as_complated</code> 是哪个线程先完成/失败时就返回</li>
+</ul>
+<h3 id="wait例子（阻塞"><a href="#wait例子（阻塞" class="headerlink" title="wait例子（阻塞)"></a>wait例子（阻塞)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">wait 例子</span></span><br><span class="line"><span class="string">参数:</span></span><br><span class="line"><span class="string">    FIRST_COMPLETED    当任何未来完成或被取消时，该函数将返回。</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    FIRST_EXCEPTION    当任何未来通过提出异常完成时，函数将返回。如果没有未来引发异常，那么它等同于 ALL_COMPLETED。</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    ALL_COMPLETED(默认)      当所有future完成或被取消时，函数将返回。</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">URLS = [<span class="string">'http://www.baidu.com'</span>, <span class="string">'http://www.qq.com'</span>, <span class="string">'http://www.sina.com.cn'</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_html</span><span class="params">(url)</span>:</span></span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    print(<span class="string">'thread id:'</span>,threading.currentThread().ident,<span class="string">' 访问了:'</span>,url)</span><br><span class="line">    <span class="keyword">return</span> requests.get(url)            <span class="comment">#这里使用了requests 模块</span></span><br><span class="line">ex = ThreadPoolExecutor(max_workers=<span class="number">3</span>)   <span class="comment">#最多3个线程</span></span><br><span class="line">future_tasks = [ex.submit(get_html,url) <span class="keyword">for</span> url <span class="keyword">in</span> URLS]    <span class="comment">#创建3个future对象</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    result = wait(future_tasks,return_when = fu.FIRST_COMPLETED)</span><br><span class="line">    done_set = result[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> future <span class="keyword">in</span> done_set:</span><br><span class="line">        resp = future.result()</span><br><span class="line">        print(<span class="string">'第一个网页任务完成 url:%s , len:%d bytes! '</span> % (resp.url, len(resp.text)))</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    print(<span class="string">'exception :'</span> , e)</span><br></pre></td></tr></table></figure>
+<h3 id="add-done-callback-fn-例子"><a href="#add-done-callback-fn-例子" class="headerlink" title="add_done__callback(fn)例子"></a><code>add_done__callback(fn)</code>例子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> os,sys,time,requests,threading</span><br><span class="line"><span class="keyword">from</span> concurrent <span class="keyword">import</span> futures</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">URLS = [</span><br><span class="line">        <span class="string">'http://baidu.com'</span>,</span><br><span class="line">        <span class="string">'http://www.qq.com'</span>,</span><br><span class="line">        <span class="string">'http://www.sina.com.cn'</span></span><br><span class="line">        ]</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_url</span><span class="params">(url)</span>:</span></span><br><span class="line">    print(<span class="string">'tid:'</span>,threading.currentThread().ident,<span class="string">',url:'</span>,url)</span><br><span class="line">    <span class="keyword">with</span> requests.get(url) <span class="keyword">as</span> resp:</span><br><span class="line">        <span class="keyword">return</span> resp.content</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">call_back</span><span class="params">(obj)</span>:</span></span><br><span class="line">    print(<span class="string">'-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;call_back , tid:'</span>,threading.currentThread().ident, <span class="string">',obj:'</span>,obj)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">with</span> futures.ThreadPoolExecutor(max_workers=<span class="number">3</span>) <span class="keyword">as</span> ex:</span><br><span class="line">    <span class="comment"># mp = &#123;ex.submit(load_url,url) : url for url in URLS&#125;</span></span><br><span class="line">    mp = dict()</span><br><span class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> URLS:</span><br><span class="line">        f = ex.submit(load_url,url)</span><br><span class="line">        mp[f] = url</span><br><span class="line">        f.add_done_callback(call_back)</span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> futures.as_completed(mp):</span><br><span class="line">        url = mp[f]</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            data = f.result()</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> exc:</span><br><span class="line">            print(exc, <span class="string">',url:'</span>,url)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'url:'</span>, url, <span class="string">',len:'</span>,len(data),<span class="string">',data[:20]:'</span>,data[:<span class="number">20</span>])</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">tid: 7128 ,url: http://baidu.com</span></span><br><span class="line"><span class="string">tid: 7892 ,url: http://www.qq.com</span></span><br><span class="line"><span class="string">tid: 3712 ,url: http://www.sina.com.cn</span></span><br><span class="line"><span class="string">-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;call_back , tid: 7892 ,obj: &lt;Future at 0x2dd64b0 state=finished returned bytes&gt;</span></span><br><span class="line"><span class="string">url: http://www.qq.com ,len: 251215 ,data[:20]: b'&lt;!DOCTYPE html&gt;\n&lt;htm'</span></span><br><span class="line"><span class="string">-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;call_back , tid: 3712 ,obj: &lt;Future at 0x2de07b0 state=finished returned bytes&gt;</span></span><br><span class="line"><span class="string">url: http://www.sina.com.cn ,len: 577333 ,data[:20]: b'&lt;!DOCTYPE html&gt;\n&lt;!--'</span></span><br><span class="line"><span class="string">-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;call_back , tid: 7128 ,obj: &lt;Future at 0x2d533d0 state=finished returned bytes&gt;</span></span><br><span class="line"><span class="string">url: http://baidu.com ,len: 81 ,data[:20]: b'&lt;html&gt;\n&lt;meta http-eq'</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
+<h3 id="futures例子"><a href="#futures例子" class="headerlink" title="futures例子"></a>futures例子</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> os,sys,time,requests,threading</span><br><span class="line"><span class="keyword">from</span> concurrent <span class="keyword">import</span> futures</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">URLS = [</span><br><span class="line">        <span class="string">'http://baidu.com'</span>,</span><br><span class="line">        <span class="string">'http://www.qq.com'</span>,</span><br><span class="line">        <span class="string">'http://www.sina.com.cn'</span></span><br><span class="line">        ]</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_url</span><span class="params">(url)</span>:</span></span><br><span class="line">    print(<span class="string">'tid:'</span>,threading.currentThread().ident,<span class="string">',url:'</span>,url)</span><br><span class="line">    <span class="keyword">with</span> requests.get(url) <span class="keyword">as</span> resp:</span><br><span class="line">        <span class="keyword">return</span> resp.content</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">call_back</span><span class="params">(obj)</span>:</span></span><br><span class="line">    print(<span class="string">'-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;call_back , tid:'</span>,threading.currentThread().ident, <span class="string">',obj:'</span>,obj)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">with</span> futures.ThreadPoolExecutor(max_workers=<span class="number">3</span>) <span class="keyword">as</span> ex:</span><br><span class="line">    <span class="comment"># mp = &#123;ex.submit(load_url,url) : url for url in URLS&#125;</span></span><br><span class="line">    mp = dict()</span><br><span class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> URLS:</span><br><span class="line">        f = ex.submit(load_url,url)</span><br><span class="line">        mp[f] = url</span><br><span class="line">        f.add_done_callback(call_back)</span><br><span class="line">    <span class="keyword">for</span> f <span class="keyword">in</span> futures.as_completed(mp):</span><br><span class="line">        url = mp[f]</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            data = f.result()</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> exc:</span><br><span class="line">            print(exc, <span class="string">',url:'</span>,url)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'url:'</span>, url, <span class="string">',len:'</span>,len(data),<span class="string">',data[:20]:'</span>,data[:<span class="number">20</span>])</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">tid: 7128 ,url: http://baidu.com</span></span><br><span class="line"><span class="string">tid: 7892 ,url: http://www.qq.com</span></span><br><span class="line"><span class="string">tid: 3712 ,url: http://www.sina.com.cn</span></span><br><span class="line"><span class="string">-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;call_back , tid: 7892 ,obj: &lt;Future at 0x2dd64b0 state=finished returned bytes&gt;</span></span><br><span class="line"><span class="string">url: http://www.qq.com ,len: 251215 ,data[:20]: b'&lt;!DOCTYPE html&gt;\n&lt;htm'</span></span><br><span class="line"><span class="string">-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;call_back , tid: 3712 ,obj: &lt;Future at 0x2de07b0 state=finished returned bytes&gt;</span></span><br><span class="line"><span class="string">url: http://www.sina.com.cn ,len: 577333 ,data[:20]: b'&lt;!DOCTYPE html&gt;\n&lt;!--'</span></span><br><span class="line"><span class="string">-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;call_back , tid: 7128 ,obj: &lt;Future at 0x2d533d0 state=finished returned bytes&gt;</span></span><br><span class="line"><span class="string">url: http://baidu.com ,len: 81 ,data[:20]: b'&lt;html&gt;\n&lt;meta http-eq'</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ol>
+<li>切记一定要使用with，而不要使用for，如果你一定要用for，那么一定要手动进行executor.shutdown，而你使用了with方法的话，再with方法内部已经实现了wait(),在使用完毕之后可以自行关闭线程池，减少资源浪费。</li>
+<li><code>ProcessPoolExecutor</code>类会利用multiprocessing模块所提供的底层机制，multiprocessing是基于进程的并行。</li>
+</ol>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/01/30/python-standard-library-concurrent/" title="python standard library concurrent">https://pinghailinfeng.gitee.io/2020/01/30/python-standard-library-concurrent/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/concurrent/" rel="tag"># concurrent</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/29/python-standard-library-html-parser/" rel="next" title="python standard library html.parser">
+                <i class="fa fa-chevron-left"></i> python standard library html.parser
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">83</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-concurrent"><span class="nav-number">1.</span> <span class="nav-text">python  标准库 concurrent</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">1.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Executor对象"><span class="nav-number">1.2.</span> <span class="nav-text">Executor对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ThreadPoolExecutor"><span class="nav-number">1.3.</span> <span class="nav-text">ThreadPoolExecutor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadPoolExecutor-例子"><span class="nav-number">1.3.1.</span> <span class="nav-text">ThreadPoolExecutor 例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ProcessPoolExecutor"><span class="nav-number">1.4.</span> <span class="nav-text">ProcessPoolExecutor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ProcessPoolExecutor-例子"><span class="nav-number">1.4.1.</span> <span class="nav-text">ProcessPoolExecutor 例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Future对象"><span class="nav-number">1.5.</span> <span class="nav-text">Future对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块函数"><span class="nav-number">1.6.</span> <span class="nav-text">模块函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exception类"><span class="nav-number">1.7.</span> <span class="nav-text">Exception类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充例子"><span class="nav-number">1.8.</span> <span class="nav-text">补充例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#submit例子"><span class="nav-number">1.8.1.</span> <span class="nav-text">submit例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回-map-例子"><span class="nav-number">1.8.2.</span> <span class="nav-text">返回 map 例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#as-complated-例子"><span class="nav-number">1.8.3.</span> <span class="nav-text">as_complated 例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#as-complated-详细例子"><span class="nav-number">1.8.4.</span> <span class="nav-text">as_complated 详细例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wait例子（阻塞"><span class="nav-number">1.8.5.</span> <span class="nav-text">wait例子（阻塞)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#add-done-callback-fn-例子"><span class="nav-number">1.8.6.</span> <span class="nav-text">add_done__callback(fn)例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#futures例子"><span class="nav-number">1.8.7.</span> <span class="nav-text">futures例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">1.9.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">338k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">5:08</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
