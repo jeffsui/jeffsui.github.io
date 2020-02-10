@@ -457,7 +457,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/06/11/javascript-undefined-description/">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/26/using-python-venv-to-create-virtual-environment/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeff Sui">
@@ -477,7 +477,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/06/11/javascript-undefined-description/" class="post-title-link" itemprop="url">javascript-undefined-description</a>
+                <a href="/2019/12/26/using-python-venv-to-create-virtual-environment/" class="post-title-link" itemprop="url">using python venv to create virtual environment</a>
               
             
           </h1>
@@ -502,603 +502,7 @@
                 
               
 
-              <time title="创建时间：2019-06-11 15:45:18 / 修改时间：17:28:03" itemprop="dateCreated datePublished" datetime="2019-06-11T15:45:18+08:00">2019-06-11</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">849</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Javascript-基础拾遗之undefined"><a href="#Javascript-基础拾遗之undefined" class="headerlink" title="Javascript 基础拾遗之undefined"></a>Javascript 基础拾遗之undefined</h2><p>先看一个例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="built_in">console</span>.log(a);<span class="comment">//undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(a)); <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
-<p>javascript中的数据类型包括<code>undefined</code>，<code>null</code>,<code>boolean</code>,<code>number</code>,<code>string</code>,<code>boolean</code>六种类型(ECMAScript 2015)</p>
-<h3 id="undefined-小结"><a href="#undefined-小结" class="headerlink" title="undefined 小结"></a>undefined 小结</h3><p>undefined 类型的意思是当前对象未定义,适用于下面几种情况</p>
-<ol>
-<li>变量声明,但未赋值</li>
-<li>对象没有赋值的属性,该属性的值为undefined</li>
-<li>调用函数参数,但是未提供参数，该参数的值为undefined</li>
-<li>函数没有返回值时,默认返回undefined</li>
-</ol>
-<p>再看下面的例子</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.</span></span><br><span class="line"><span class="keyword">var</span> i;</span><br><span class="line"><span class="built_in">console</span>.log(i);</span><br><span class="line"><span class="comment">//2.</span></span><br><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="built_in">console</span>.log(o.p);</span><br><span class="line"><span class="comment">//3.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> a);    <span class="comment">// undefined</span></span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line">test();</span><br><span class="line"><span class="comment">//4.</span></span><br><span class="line">myfunc()</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myfunc</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//console.log("my function.");</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(myfunc());</span><br></pre></td></tr></table></figure>
-<p>需要区别下面这个情况,不同浏览器提示信息可能会不同(Chrome和IE测试)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(b);</span><br><span class="line"><span class="comment">// Uncaught ReferenceError: b is not defined</span></span><br></pre></td></tr></table></figure>
-<h3 id="如何判断为空"><a href="#如何判断为空" class="headerlink" title="如何判断为空"></a>如何判断为空</h3><p>下面三种判断方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式1</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> age === <span class="string">'undefined'</span>)</span><br><span class="line"><span class="comment">// 方式2</span></span><br><span class="line"><span class="keyword">if</span>(age === <span class="literal">undefined</span>)</span><br><span class="line"><span class="comment">// 方式3</span></span><br><span class="line"><span class="keyword">if</span>(varName) <span class="comment">//万能判断,包括boolean</span></span><br></pre></td></tr></table></figure>
-<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined" target="_blank" rel="noopener">火狐JavaScript教程</a></p>
-<p><a href="https://stackoverflow.com/questions/2559318/how-to-check-for-an-undefined-or-null-variable-in-javascript" target="_blank" rel="noopener">stackoverflow如何检查undefined</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/06/03/Maven-webapp-buildpath-missing-test-folder/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/03/Maven-webapp-buildpath-missing-test-folder/" class="post-title-link" itemprop="url">Build path entry is missing /src/test/java missing问题解决</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-03 17:04:00 / 修改时间：17:24:57" itemprop="dateCreated datePublished" datetime="2019-06-03T17:04:00+08:00">2019-06-03</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javaweb/" itemprop="url" rel="index"><span itemprop="name">javaweb</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">187</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="[问题描述]"></a>[问题描述]</h2><p>通过maven构建webapp,发现缺少java和test目录</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="[解决方案]"></a>[解决方案]</h2><blockquote>
-<p>project –right click –build path– config build path – libraries – double click “JRE System Library”–choose “workspace default JRE”  OK</p>
-</blockquote>
-<p>如下图所示<br><img src="https://i.loli.net/2019/06/03/5cf4e41a0d68921253.png" alt></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/06/03/how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/03/how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse/" class="post-title-link" itemprop="url">how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-03 09:47:24 / 修改时间：15:16:42" itemprop="dateCreated datePublished" datetime="2019-06-03T09:47:24+08:00">2019-06-03</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javaweb/" itemprop="url" rel="index"><span itemprop="name">javaweb</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">960</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1.问题描述"></a>1.问题描述</h2><p><img src="https://cdn.crunchify.com/wp-content/uploads/2015/06/Cannot-change-version-of-project-facet-Dynamic-Web-Module-to-3.0.png" alt></p>
-<p>试图转换Dynamic Web Module 发生如下错误:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cannot change version of project facet Dynamic Web Module to 3.0 </span><br><span class="line">One or more constraints have not been satisfied</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/06/03/how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/05/31/hexo建站搭建流程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/31/hexo建站搭建流程/" class="post-title-link" itemprop="url">hexo建站搭建流程</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-31 13:49:12" itemprop="dateCreated datePublished" datetime="2019-05-31T13:49:12+08:00">2019-05-31</time>
+              <time title="创建时间：2019-12-26 11:17:57" itemprop="dateCreated datePublished" datetime="2019-12-26T11:17:57+08:00">2019-12-26</time>
             
 
             
@@ -1115,234 +519,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-03 15:57:59" itemprop="dateModified" datetime="2019-06-03T15:57:59+08:00">2019-06-03</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/搭建博客/" itemprop="url" rel="index"><span itemprop="name">搭建博客</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">3k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <ol>
-<li><p>下载并安装 Visual Studio Code, <a href="https://www.visualstudio.com/" target="_blank" rel="noopener">官方下载</a></p>
-</li>
-<li><p>下载并安装 Nodejs, <a href="http://nodejs.cn/download/" target="_blank" rel="noopener">官方下载</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-<p>npm 镜像源修改为 淘宝NPM镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下载并安装 Git, <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">官方下载</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#配置名字和邮箱</span><br><span class="line">git config --global user.name &quot;test&quot;</span><br><span class="line">git config --global user.email &quot;test@.com&quot;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol start="4">
-<li><p>安装 Hexo, <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">官方文档</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g hexo-cli</span><br><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
-<p>初始化博客目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd D</span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">cnpm install</span><br></pre></td></tr></table></figure>
-<p>启动服务器,本地预览</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/05/31/hexo建站搭建流程/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/05/28/python创建字典的几种方法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/05/28/python创建字典的几种方法/" class="post-title-link" itemprop="url">python创建字典的几种方法</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-05-28 17:29:10" itemprop="dateCreated datePublished" datetime="2019-05-28T17:29:10+08:00">2019-05-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-06-03 15:57:50" itemprop="dateModified" datetime="2019-06-03T15:57:50+08:00">2019-06-03</time>
+                <time title="修改时间：2020-02-10 10:35:57" itemprop="dateModified" datetime="2020-02-10T10:35:57+08:00">2020-02-10</time>
               
             
           </span>
@@ -1388,7 +565,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.4k</span>
+                <span title="本文字数">14k</span>
               
 
               
@@ -1402,7 +579,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">13 分钟</span>
               
             </div>
           
@@ -1423,14 +600,21 @@
 
       
         
-          <h1 id="python创建字典的几种方法"><a href="#python创建字典的几种方法" class="headerlink" title="python创建字典的几种方法"></a>python创建字典的几种方法</h1><h2 id="1-创建空字典"><a href="#1-创建空字典" class="headerlink" title="1. 创建空字典"></a>1. 创建空字典</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = &#123;&#125;</span><br><span class="line">&gt;&gt;&gt; type(dic)</span><br><span class="line">&lt;type &apos;dict&apos;&gt;</span><br></pre></td></tr></table></figure>
-<p>另一种形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp = dict()</span><br><span class="line">temp[&apos;name&apos;] = &apos;xiaoming&apos;</span><br></pre></td></tr></table></figure></p>
-<h2 id="2-直接赋值创建"><a href="#2-直接赋值创建" class="headerlink" title="2. 直接赋值创建"></a>2. 直接赋值创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = &#123;&apos;spam&apos;:1, &apos;egg&apos;:2, &apos;bar&apos;:3&#125;</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;&apos;bar&apos;: 3, &apos;egg&apos;: 2, &apos;spam&apos;: 1&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="3-通过关键字dict和关键字参数创建"><a href="#3-通过关键字dict和关键字参数创建" class="headerlink" title="3. 通过关键字dict和关键字参数创建"></a>3. 通过关键字dict和关键字参数创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = dict(spam = 1, egg = 2, bar =3)</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;&apos;bar&apos;: 3, &apos;egg&apos;: 2, &apos;spam&apos;: 1&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="python-env-创建虚拟环境"><a href="#python-env-创建虚拟环境" class="headerlink" title="python env 创建虚拟环境"></a>python env 创建虚拟环境</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>又断更了,长此以往,我可能无法完成100天打卡任务了。</p>
+<p>红包是刺激自己前进的动力。</p>
+<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20191223_blog_3.jpg?raw=true" alt></p>
+<h2 id="python-标准库03之虚拟环境创建"><a href="#python-标准库03之虚拟环境创建" class="headerlink" title="python 标准库03之虚拟环境创建"></a>python 标准库03之虚拟环境创建</h2><p><a href="https://docs.python.org/zh-cn/3/library/venv.html" target="_blank" rel="noopener">参考文档</a></p>
+<p>python目前官方推荐的工具是<code>venv</code></p>
+<p>顺便介绍下目前常用的python虚拟环境工具</p>
+<ul>
+<li>virsualenv</li>
+<li>pyvenv (3.3,3.4中推荐的虚拟环境创建工具,3.6中被弃用)</li>
+<li>venv(3.6以后推荐的虚拟环境创建工具)</li>
+</ul>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/05/28/python创建字典的几种方法/#more" rel="contents">
+              <a class="btn" href="/2019/12/26/using-python-venv-to-create-virtual-environment/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1490,7 +674,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/05/28/python操作sqlite3/">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/23/2019-23-python-standard-library-2-dictionary/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeff Sui">
@@ -1510,7 +694,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/28/python操作sqlite3/" class="post-title-link" itemprop="url">python操作sqlite3</a>
+                <a href="/2019/12/23/2019-23-python-standard-library-2-dictionary/" class="post-title-link" itemprop="url">python standard library -2 dictionary</a>
               
             
           </h1>
@@ -1535,7 +719,7 @@
                 
               
 
-              <time title="创建时间：2019-05-28 17:24:42" itemprop="dateCreated datePublished" datetime="2019-05-28T17:24:42+08:00">2019-05-28</time>
+              <time title="创建时间：2019-12-23 14:09:14" itemprop="dateCreated datePublished" datetime="2019-12-23T14:09:14+08:00">2019-12-23</time>
             
 
             
@@ -1552,7 +736,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-31 15:06:23" itemprop="dateModified" datetime="2019-05-31T15:06:23+08:00">2019-05-31</time>
+                <time title="修改时间：2020-01-02 16:35:10" itemprop="dateModified" datetime="2020-01-02T16:35:10+08:00">2020-01-02</time>
               
             
           </span>
@@ -1598,7 +782,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">7.1k</span>
+                <span title="本文字数">7.7k</span>
               
 
               
@@ -1612,7 +796,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">6 分钟</span>
+                <span title="阅读时长">7 分钟</span>
               
             </div>
           
@@ -1633,11 +817,458 @@
 
       
         
-          <h2 id="sqlite3-简介"><a href="#sqlite3-简介" class="headerlink" title="sqlite3 简介"></a>sqlite3 简介</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">SQLite数据库是一款非常小巧的嵌入式开源数据库软件，也就是说</span><br><span class="line">没有独立的维护进程，所有的维护都来自于程序本身。</span><br><span class="line">在python中，使用sqlite3创建数据库的连接，当我们指定的数据库文件不存在的时候</span><br><span class="line">连接对象会自动创建数据库文件；如果数据库文件已经存在，则连接对象不会再创建</span><br><span class="line">数据库文件，而是直接打开该数据库文件。</span><br><span class="line">    连接对象可以是硬盘上面的数据库文件，也可以是建立在内存中的，在内存中的数据库</span><br><span class="line">    执行完任何操作后，都不需要提交事务的(commit)</span><br><span class="line"></span><br><span class="line">    创建在硬盘上面： conn = sqlite3.connect(&apos;c:\\test\\test.db&apos;)</span><br><span class="line">    创建在内存上面： conn = sqlite3.connect(&apos;&quot;memory:&apos;)</span><br><span class="line"></span><br><span class="line">    下面我们一硬盘上面创建数据库文件为例来具体说明：</span><br><span class="line">    conn = sqlite3.connect(&apos;c:\\test\\hongten.db&apos;)</span><br><span class="line">    其中conn对象是数据库链接对象，而对于数据库链接对象来说，具有以下操作：</span><br><span class="line"></span><br><span class="line">        commit()            --事务提交</span><br><span class="line">        rollback()          --事务回滚</span><br><span class="line">        close()             --关闭一个数据库链接</span><br><span class="line">        cursor()            --创建一个游标</span><br><span class="line"></span><br><span class="line">    cu = conn.cursor()</span><br><span class="line">    这样我们就创建了一个游标对象：cu</span><br><span class="line">    在sqlite3中，所有sql语句的执行都要在游标对象的参与下完成</span><br><span class="line">    对于游标对象cu，具有以下具体操作：</span><br><span class="line"></span><br><span class="line">        execute()           --执行一条sql语句</span><br><span class="line">        executemany()       --执行多条sql语句</span><br><span class="line">        close()             --游标关闭</span><br><span class="line">        fetchone()          --从结果中取出一条记录</span><br><span class="line">        fetchmany()         --从结果中取出多条记录</span><br><span class="line">        fetchall()          --从结果中取出所有记录</span><br><span class="line">        scroll()            --游标滚动</span><br></pre></td></tr></table></figure>
+          <h1 id="python-标准库学习笔记-–-dictionary"><a href="#python-标准库学习笔记-–-dictionary" class="headerlink" title="python 标准库学习笔记 – dictionary"></a>python 标准库学习笔记 – dictionary</h1><h2 id="0-0-前言"><a href="#0-0-前言" class="headerlink" title="0.0 前言"></a>0.0 前言</h2><p>家里孩子发烧了,延迟更新标准库学习笔记</p>
+<p>折腾了三个晚上,一家三口都累倒了。</p>
+<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20191223_rear-view-of-man-in-knit-hat.jpg?raw=true" alt></p>
+<p>人生就好比一个蹒跚学步的孩童,很容易被外界环境影响。</p>
+<h2 id="1-0-标准库-内置函数"><a href="#1-0-标准库-内置函数" class="headerlink" title="1.0 标准库- 内置函数"></a>1.0 标准库- 内置函数</h2><p>参考文档:  <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#mapping-types-dict" target="_blank" rel="noopener">内置类型-字典</a></p>
+<p>python中主要内置类型包括<code>numbers</code>,<code>sequences</code>,<code>mappings</code>,<code>classes</code>,<code>instance</code>和<code>exception</code>。</p>
+<h3 id="1-1-逻辑值检测"><a href="#1-1-逻辑值检测" class="headerlink" title="1.1 逻辑值检测"></a>1.1 逻辑值检测</h3><p>任何对象都可以进行逻辑值检测,以便在<code>if</code> 或<code>while</code>作为条件或是作为上下文所指返回值是布尔类型的表达式来使用。所以就有下面的用法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">L = []</span><br><span class="line"><span class="keyword">if</span>(L):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">while</span>(L):</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>一个对象在默认情况下被认为是<code>True</code>,除非该对象定义了<code>__boolean__()</code> 方法且返回<code>False</code> 或者定义<code>__len__()</code>方法且返回零。下面三种情况的内置对象都会被认为是逻辑假值。</p>
+<ul>
+<li><p>None 或 False</p>
+</li>
+<li><p>任何数值类型的零</p>
+</li>
+<li><p>空的序列和多项集 包括 空字符串、空列表、空集合、空字典、空元组以及空数列(reange(0))</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/05/28/python操作sqlite3/#more" rel="contents">
+              <a class="btn" href="/2019/12/23/2019-23-python-standard-library-2-dictionary/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </li></ul></div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/23/python-standard-library-2-dictionary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/12/23/python-standard-library-2-dictionary/" class="post-title-link" itemprop="url">python standard library -2 dictionary</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-23 14:09:14" itemprop="dateCreated datePublished" datetime="2019-12-23T14:09:14+08:00">2019-12-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-10 10:35:57" itemprop="dateModified" datetime="2020-02-10T10:35:57+08:00">2020-02-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">7.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">7 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="python-标准库学习笔记-–-dictionary"><a href="#python-标准库学习笔记-–-dictionary" class="headerlink" title="python 标准库学习笔记 – dictionary"></a>python 标准库学习笔记 – dictionary</h1><h2 id="0-0-前言"><a href="#0-0-前言" class="headerlink" title="0.0 前言"></a>0.0 前言</h2><p>家里孩子发烧了,延迟更新标准库学习笔记</p>
+<p>折腾了三个晚上,一家三口都累倒了。</p>
+<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20191223_rear-view-of-man-in-knit-hat.jpg?raw=true" alt></p>
+<p>人生就好比一个蹒跚学步的孩童,很容易被外界环境影响。</p>
+<h2 id="1-0-标准库-内置函数"><a href="#1-0-标准库-内置函数" class="headerlink" title="1.0 标准库- 内置函数"></a>1.0 标准库- 内置函数</h2><p>参考文档:  <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#mapping-types-dict" target="_blank" rel="noopener">内置类型-字典</a></p>
+<p>python中主要内置类型包括<code>numbers</code>,<code>sequences</code>,<code>mappings</code>,<code>classes</code>,<code>instance</code>和<code>exception</code>。</p>
+<h3 id="1-1-逻辑值检测"><a href="#1-1-逻辑值检测" class="headerlink" title="1.1 逻辑值检测"></a>1.1 逻辑值检测</h3><p>任何对象都可以进行逻辑值检测,以便在<code>if</code> 或<code>while</code>作为条件或是作为上下文所指返回值是布尔类型的表达式来使用。所以就有下面的用法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">L = []</span><br><span class="line"><span class="keyword">if</span>(L):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">while</span>(L):</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>一个对象在默认情况下被认为是<code>True</code>,除非该对象定义了<code>__boolean__()</code> 方法且返回<code>False</code> 或者定义<code>__len__()</code>方法且返回零。下面三种情况的内置对象都会被认为是逻辑假值。</p>
+<ul>
+<li><p>None 或 False</p>
+</li>
+<li><p>任何数值类型的零</p>
+</li>
+<li><p>空的序列和多项集 包括 空字符串、空列表、空集合、空字典、空元组以及空数列(reange(0))</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/12/23/python-standard-library-2-dictionary/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </li></ul></div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/20/2019-20-python-standard-library-1-string/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/12/20/2019-20-python-standard-library-1-string/" class="post-title-link" itemprop="url">python_standard_library_1_string</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-20 09:20:15" itemprop="dateCreated datePublished" datetime="2019-12-20T09:20:15+08:00">2019-12-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-02 16:34:45" itemprop="dateModified" datetime="2020-01-02T16:34:45+08:00">2020-01-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">8.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="python-标准库学习笔记-–-string"><a href="#python-标准库学习笔记-–-string" class="headerlink" title="python 标准库学习笔记 – string"></a>python 标准库学习笔记 – string</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天是2019年12月20日,刚刚晴朗的天</p>
+<p><a href="https://postimg.cc/mcq3BC7F" target="_blank" rel="noopener"><img src="https://i.postimg.cc/xCj6GPCg/20191220.jpg" alt="20191220.jpg"></a></p>
+<p>入冬以来的第二场雪就悄然而至</p>
+<p><a href="https://postimg.cc/9rHxR2ZD" target="_blank" rel="noopener"><img src="https://i.postimg.cc/ZKCXQKqx/20191220-1.jpg" alt="20191220-1.jpg"></a></p>
+<p>从今天开始,坚持更新博文100天,也算是对python学习的总结。那么从哪里开始呢？</p>
+<p>那就从<a href="&quot;https://docs.python.org/zh-cn/3.8/library&quot;">python标准库</a>开始撸吧。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/12/20/2019-20-python-standard-library-1-string/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1697,7 +1328,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/05/28/selenium元素操作封装/">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/20/python-standard-libary-1-string/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeff Sui">
@@ -1717,7 +1348,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/28/selenium元素操作封装/" class="post-title-link" itemprop="url">selenium元素操作封装</a>
+                <a href="/2019/12/20/python-standard-libary-1-string/" class="post-title-link" itemprop="url">python_standard_libary_1_string</a>
               
             
           </h1>
@@ -1742,24 +1373,12 @@
                 
               
 
-              <time title="创建时间：2019-05-28 17:14:18" itemprop="dateCreated datePublished" datetime="2019-05-28T17:14:18+08:00">2019-05-28</time>
+              <time title="创建时间：2019-12-20 09:20:15 / 修改时间：14:47:06" itemprop="dateCreated datePublished" datetime="2019-12-20T09:20:15+08:00">2019-12-20</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-06-03 15:57:15" itemprop="dateModified" datetime="2019-06-03T15:57:15+08:00">2019-06-03</time>
               
             
           </span>
@@ -1776,7 +1395,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/自动化测试/" itemprop="url" rel="index"><span itemprop="name">自动化测试</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
 
                 
                 
@@ -1805,7 +1424,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2k</span>
+                <span title="本文字数">8.8k</span>
               
 
               
@@ -1819,7 +1438,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">8 分钟</span>
               
             </div>
           
@@ -1840,38 +1459,16 @@
 
       
         
-          <h1 id="selenium-常用的元素定位操作"><a href="#selenium-常用的元素定位操作" class="headerlink" title="selenium 常用的元素定位操作"></a>selenium 常用的元素定位操作</h1><h2 id="Selenium提供了8种定位方式。"><a href="#Selenium提供了8种定位方式。" class="headerlink" title="Selenium提供了8种定位方式。"></a>Selenium提供了8种定位方式。</h2><ul>
-<li>id</li>
-<li>name</li>
-<li>class name</li>
-<li>tag name</li>
-<li>link text</li>
-<li>partial link text</li>
-<li>xpath</li>
-<li>css selector</li>
-</ul>
-<h2 id="这8种定位方式在Python-selenium中所对应的方法为："><a href="#这8种定位方式在Python-selenium中所对应的方法为：" class="headerlink" title="这8种定位方式在Python selenium中所对应的方法为："></a>这8种定位方式在Python selenium中所对应的方法为：</h2><ul>
-<li><p>find_element_by_id()</p>
-</li>
-<li><p>find_element_by_name()</p>
-</li>
-<li><p>find_element_by_class_name()</p>
-</li>
-<li><p>find_element_by_tag_name()</p>
-</li>
-<li><p>find_element_by_link_text()</p>
-</li>
-<li><p>find_element_by_partial_link_text()</p>
-</li>
-<li><p>find_element_by_xpath()</p>
-</li>
-<li><p>find_element_by_css_selector()</p>
-</li>
-</ul>
+          <h1 id="python-标准库学习笔记-–-string"><a href="#python-标准库学习笔记-–-string" class="headerlink" title="python 标准库学习笔记 – string"></a>python 标准库学习笔记 – string</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天是2019年12月20日,刚刚晴朗的天</p>
+<p><a href="https://postimg.cc/mcq3BC7F" target="_blank" rel="noopener"><img src="https://i.postimg.cc/xCj6GPCg/20191220.jpg" alt="20191220.jpg"></a></p>
+<p>入冬以来的第二场雪就悄然而至</p>
+<p><a href="https://postimg.cc/9rHxR2ZD" target="_blank" rel="noopener"><img src="https://i.postimg.cc/ZKCXQKqx/20191220-1.jpg" alt="20191220-1.jpg"></a></p>
+<p>从今天开始,坚持更新博文100天,也算是对python学习的总结。那么从哪里开始呢？</p>
+<p>那就从<a href="&quot;https://docs.python.org/zh-cn/3.8/library&quot;">python标准库</a>开始撸吧。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/05/28/selenium元素操作封装/#more" rel="contents">
+              <a class="btn" href="/2019/12/20/python-standard-libary-1-string/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1931,7 +1528,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/05/28/using-selenium-visit-iqiyi-website/">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/20/python-standard-library-1-string/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeff Sui">
@@ -1951,7 +1548,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/28/using-selenium-visit-iqiyi-website/" class="post-title-link" itemprop="url">使用selenium访问爱奇艺网站</a>
+                <a href="/2019/12/20/python-standard-library-1-string/" class="post-title-link" itemprop="url">python_standard_library_1_string</a>
               
             
           </h1>
@@ -1976,7 +1573,7 @@
                 
               
 
-              <time title="创建时间：2019-05-28 15:23:36" itemprop="dateCreated datePublished" datetime="2019-05-28T15:23:36+08:00">2019-05-28</time>
+              <time title="创建时间：2019-12-20 09:20:15" itemprop="dateCreated datePublished" datetime="2019-12-20T09:20:15+08:00">2019-12-20</time>
             
 
             
@@ -1993,7 +1590,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-03 15:57:33" itemprop="dateModified" datetime="2019-06-03T15:57:33+08:00">2019-06-03</time>
+                <time title="修改时间：2020-02-10 10:35:57" itemprop="dateModified" datetime="2020-02-10T10:35:57+08:00">2020-02-10</time>
               
             
           </span>
@@ -2010,7 +1607,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/自动化测试/" itemprop="url" rel="index"><span itemprop="name">自动化测试</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
 
                 
                 
@@ -2039,7 +1636,214 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.3k</span>
+                <span title="本文字数">8.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="python-标准库学习笔记-–-string"><a href="#python-标准库学习笔记-–-string" class="headerlink" title="python 标准库学习笔记 – string"></a>python 标准库学习笔记 – string</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天是2019年12月20日,刚刚晴朗的天</p>
+<p><a href="https://postimg.cc/mcq3BC7F" target="_blank" rel="noopener"><img src="https://i.postimg.cc/xCj6GPCg/20191220.jpg" alt="20191220.jpg"></a></p>
+<p>入冬以来的第二场雪就悄然而至</p>
+<p><a href="https://postimg.cc/9rHxR2ZD" target="_blank" rel="noopener"><img src="https://i.postimg.cc/ZKCXQKqx/20191220-1.jpg" alt="20191220-1.jpg"></a></p>
+<p>从今天开始,坚持更新博文100天,也算是对python学习的总结。那么从哪里开始呢？</p>
+<p>那就从<a href="&quot;https://docs.python.org/zh-cn/3.8/library&quot;">python标准库</a>开始撸吧。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/12/20/python-standard-library-1-string/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/12/vscode-Cannot-edit-in-read-only-editor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/12/12/vscode-Cannot-edit-in-read-only-editor/" class="post-title-link" itemprop="url">vscode Cannot edit in read-only editor</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-12 14:35:56 / 修改时间：14:45:34" itemprop="dateCreated datePublished" datetime="2019-12-12T14:35:56+08:00">2019-12-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/IDEs/" itemprop="url" rel="index"><span itemprop="name">IDEs</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">232</span>
               
 
               
@@ -2074,21 +1878,211 @@
 
       
         
-          <h1 id="使用selenium访问爱奇艺网站"><a href="#使用selenium访问爱奇艺网站" class="headerlink" title="使用selenium访问爱奇艺网站"></a>使用<code>selenium</code>访问爱奇艺网站</h1><blockquote>
-<p>selenium 是一种常用的自动化测试工具。它支持各种浏览器，包括 Chrome，Safari，Firefox 等主流界面式浏览器，如果你在这些浏览器里面安装一个 Selenium 的插件，还可以通过录制，快速生成脚本。</p>
-<p>selenium 支持多种主流的开发语言，比如<code>Ruby</code>，<code>java</code>，<code>python</code>，<code>javascript</code>。</p>
+          
+            <h1 id="vscode-Cannot-edit-in-read-only-editor-错误解决"><a href="#vscode-Cannot-edit-in-read-only-editor-错误解决" class="headerlink" title="vscode Cannot edit in read-only editor 错误解决"></a>vscode Cannot edit in read-only editor 错误解决</h1><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><blockquote>
+<p>使用了<code>Run Code</code>插件,output是只读的</p>
 </blockquote>
-<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>python3.7.3</p>
-<p>运行 <code>pip install selenium</code> 就可以直接下载最新的selenium版本</p>
-<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>浏览器:chrome 70.0.3538.77 </p>
-<p>操作系统：win7</p>
-<p>selenium版本: 3.14.1</p>
-<p>chromedriver: <a href="https://npm.taobao.org/mirrors/chromedriver/70.0.3538.97/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/chromedriver/70.0.3538.97/</a></p>
-<h2 id="使用selenium-打开和关闭浏览器"><a href="#使用selenium-打开和关闭浏览器" class="headerlink" title="使用selenium 打开和关闭浏览器"></a>使用selenium 打开和关闭浏览器</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(<span class="string">"http://www.iqiyi.com/"</span>)</span><br><span class="line">driver.quit()</span><br></pre></td></tr></table></figure>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>将 run code设置为在Terminal中运行</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File -&gt; Preferences -&gt; Settings</span><br></pre></td></tr></table></figure>
+<p>找到 <code>run code in terminal</code> 打上 √</p>
+<p>或 在settings.json文件中,添加一行配置信息</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"code-runner.runInTerminal": true</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/03/Install-python3-8-on-Centos6-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/12/03/Install-python3-8-on-Centos6-5/" class="post-title-link" itemprop="url">Install python3.8 on Centos6.5</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-03 09:48:12 / 修改时间：09:55:47" itemprop="dateCreated datePublished" datetime="2019-12-03T09:48:12+08:00">2019-12-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">742</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="1-安装必要的工具"><a href="#1-安装必要的工具" class="headerlink" title="1. 安装必要的工具"></a>1. 安装必要的工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install yum-utils</span><br></pre></td></tr></table></figure>
+<h3 id="2-使用-yum-builddep-命令-设置-python-编译环境，下载缺少的依赖"><a href="#2-使用-yum-builddep-命令-设置-python-编译环境，下载缺少的依赖" class="headerlink" title="2. 使用 yum-builddep 命令 设置 python 编译环境，下载缺少的依赖"></a>2. 使用 yum-builddep 命令 设置 python 编译环境，下载缺少的依赖</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum-builddep python</span><br></pre></td></tr></table></figure>
+<h3 id="3-下载-python3-的源代码"><a href="#3-下载-python3-的源代码" class="headerlink" title="3. 下载 python3 的源代码"></a>3. 下载 python3 的源代码</h3><p>源代码可以在 <a href="https://www.python.org/ftp/" target="_blank" rel="noopener">https://www.python.org/ftp/python/ </a> 下载</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://www.python.org/ftp/python/3.8.0/Python-3.8.0a1.tgz</span><br></pre></td></tr></table></figure>
+<h3 id="4-对源代码进行解压并编译安装"><a href="#4-对源代码进行解压并编译安装" class="headerlink" title="4. 对源代码进行解压并编译安装"></a>4. 对源代码进行解压并编译安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar xf Python-3.8.0a1.tgz</span><br><span class="line">cd Python-3.8.0a1</span><br><span class="line">./configure</span><br><span class="line">sudo make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/05/28/using-selenium-visit-iqiyi-website/#more" rel="contents">
+              <a class="btn" href="/2019/12/03/Install-python3-8-on-Centos6-5/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2148,7 +2142,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/05/28/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/02/ios-devices-list/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeff Sui">
@@ -2168,7 +2162,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/28/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+                <a href="/2019/12/02/ios-devices-list/" class="post-title-link" itemprop="url">ios devices list</a>
               
             
           </h1>
@@ -2193,7 +2187,7 @@
                 
               
 
-              <time title="创建时间：2019-05-28 00:00:00 / 修改时间：08:26:01" itemprop="dateCreated datePublished" datetime="2019-05-28T00:00:00+08:00">2019-05-28</time>
+              <time title="创建时间：2019-12-02 09:18:48 / 修改时间：09:27:15" itemprop="dateCreated datePublished" datetime="2019-12-02T09:18:48+08:00">2019-12-02</time>
             
 
             
@@ -2203,6 +2197,24 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ios/" itemprop="url" rel="index"><span itemprop="name">ios</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -2226,7 +2238,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">426</span>
+                <span title="本文字数">2.7k</span>
               
 
               
@@ -2240,7 +2252,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -2261,18 +2273,282 @@
 
       
         
+          <h1 id="ios-设备一览表"><a href="#ios-设备一览表" class="headerlink" title="ios 设备一览表"></a>ios 设备一览表</h1><h2 id="iPhone"><a href="#iPhone" class="headerlink" title="iPhone"></a>iPhone</h2><table>
+<thead>
+<tr>
+<th>设备</th>
+<th>时间</th>
+<th>CPU</th>
+<th>分辨率</th>
+<th>大小</th>
+<th>密度</th>
+<th>@Nx</th>
+<th>iOS系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iPhone</td>
+<td>2007</td>
+<td>armv6</td>
+<td>320 x 480</td>
+<td>3.5</td>
+<td>165</td>
+<td>@1x</td>
+<td>1.0 - 3.1.3</td>
+</tr>
+<tr>
+<td>iPhone 3G</td>
+<td>2008</td>
+<td>armv6</td>
+<td>320 x 480</td>
+<td>3.5</td>
+<td>165</td>
+<td>@1x</td>
+<td>2.0 - 4.2.1</td>
+</tr>
+<tr>
+<td>iPhone 3GS</td>
+<td>2009</td>
+<td>armv7</td>
+<td>320 x 480</td>
+<td>3.5</td>
+<td>165</td>
+<td>@1x</td>
+<td>3.0 - 6.1.4</td>
+</tr>
+<tr>
+<td>iPhone 4 (GSM)</td>
+<td>2010</td>
+<td>armv7</td>
+<td>640 x 960</td>
+<td>3.5</td>
+<td>330</td>
+<td>@2x</td>
+<td>4.0 - 7.1.2</td>
+</tr>
+<tr>
+<td>iPhone 4 (CDMA)</td>
+<td>2011</td>
+<td>armv7</td>
+<td>640 x 960</td>
+<td>3.5</td>
+<td>330</td>
+<td>@2x</td>
+<td>4.2.4 - 7.1.2</td>
+</tr>
+<tr>
+<td>iPhone 4S</td>
+<td>2011</td>
+<td>armv7</td>
+<td>640 x 960</td>
+<td>3.5</td>
+<td>330</td>
+<td>@2x</td>
+<td>5.0 - 9.3.5</td>
+</tr>
+<tr>
+<td>iPhone 5</td>
+<td>2012</td>
+<td>armv7s</td>
+<td>640 x 1136</td>
+<td>4</td>
+<td>326</td>
+<td>@2x</td>
+<td>6.0 - 10.3.3</td>
+</tr>
+<tr>
+<td>iPhone 5c</td>
+<td>2013</td>
+<td>armv7s</td>
+<td>640 x 1136</td>
+<td>4</td>
+<td>326</td>
+<td>@2x</td>
+<td>7.0 - 10.3.3</td>
+</tr>
+<tr>
+<td>iPhone 5s</td>
+<td>2013</td>
+<td>arm64</td>
+<td>640 x 1136</td>
+<td>4</td>
+<td>326</td>
+<td>@2x</td>
+<td>7.0 -</td>
+</tr>
+<tr>
+<td>iPhone 6</td>
+<td>2014</td>
+<td>arm64</td>
+<td>750 x 1334</td>
+<td>4.7</td>
+<td>326</td>
+<td>@2x</td>
+<td>8.0 -</td>
+</tr>
+<tr>
+<td>iPhone 6 Plus</td>
+<td>2014</td>
+<td>arm64</td>
+<td>1242 x 2208</td>
+<td>5.5</td>
+<td>461</td>
+<td>@3x</td>
+<td>8.0 -</td>
+</tr>
+<tr>
+<td>iPhone 6s</td>
+<td>2015</td>
+<td>arm64</td>
+<td>750 x 1334</td>
+<td>4.7</td>
+<td>326</td>
+<td>@2x</td>
+<td>9.0 -</td>
+</tr>
+<tr>
+<td>iPhone 6s Plus</td>
+<td>2015</td>
+<td>arm64</td>
+<td>1242 x 2208</td>
+<td>5.5</td>
+<td>461</td>
+<td>@3x</td>
+<td>9.0 -</td>
+</tr>
+<tr>
+<td>iPhone SE</td>
+<td>2016</td>
+<td>arm64</td>
+<td>640 x 1136</td>
+<td>4</td>
+<td>326</td>
+<td>@2x</td>
+<td>9.3 -</td>
+</tr>
+<tr>
+<td>iPhone 7</td>
+<td>2016</td>
+<td>arm64</td>
+<td>750 x 1334</td>
+<td>4.7</td>
+<td>326</td>
+<td>@2x</td>
+<td>10.0 -</td>
+</tr>
+<tr>
+<td>iPhone 7 Plus</td>
+<td>2016</td>
+<td>arm64</td>
+<td>1242 x 2208</td>
+<td>5.5</td>
+<td>461</td>
+<td>@3x</td>
+<td>10.0 -</td>
+</tr>
+<tr>
+<td>iPhone 8</td>
+<td>2017</td>
+<td>arm64</td>
+<td>750 x 1334</td>
+<td>4.7</td>
+<td>326</td>
+<td>@2x</td>
+<td>11.0 -</td>
+</tr>
+<tr>
+<td>iPhone 8 Plus</td>
+<td>2017</td>
+<td>arm64</td>
+<td>1242 x 2208</td>
+<td>5.5</td>
+<td>461</td>
+<td>@3x</td>
+<td>11.0 -</td>
+</tr>
+<tr>
+<td>iPhone X</td>
+<td>2017</td>
+<td>arm64</td>
+<td>1125 x 2436</td>
+<td>5.8</td>
+<td>463</td>
+<td>@3x</td>
+<td>11.0 -</td>
+</tr>
+<tr>
+<td>iPhone XS</td>
+<td>2018</td>
+<td>arm64</td>
+<td>1125 x 2436</td>
+<td>5.8</td>
+<td>463</td>
+<td>@3x</td>
+<td>12.0 -</td>
+</tr>
+<tr>
+<td>iPhone XS Max</td>
+<td>2018</td>
+<td>arm64</td>
+<td>1242 x 2688</td>
+<td>6.5</td>
+<td>458</td>
+<td>@3x</td>
+<td>12.0 -</td>
+</tr>
+<tr>
+<td>iPhone XR</td>
+<td>2018</td>
+<td>arm64</td>
+<td>828 x 1792</td>
+<td>6.1</td>
+<td>326</td>
+<td>@2x</td>
+<td>12.0 -</td>
+</tr>
+<tr>
+<td>iPhone 11</td>
+<td>2019</td>
+<td>arm64</td>
+<td>828 x 1792</td>
+<td>6.1</td>
+<td>326</td>
+<td>@2x</td>
+<td>13.0 -</td>
+</tr>
+<tr>
+<td>iPhone 11 Pro</td>
+<td>2019</td>
+<td>arm64</td>
+<td>1125 x 2436</td>
+<td>5.8</td>
+<td>458</td>
+<td>@3x</td>
+<td>13.0 -</td>
+</tr>
+<tr>
+<td>iPhone 11 Pro Max</td>
+<td>2019</td>
+<td>arm64</td>
+<td>1242 x 2688</td>
+<td>6.5</td>
+<td>458</td>
+<td>@3x</td>
+<td>13.0 -</td>
+</tr>
+</tbody>
+</table>
+<p>注：屏幕分辨率单位为英寸(inch)，分辨率密度单位为ppi</p>
+          <!--noindex-->
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/12/02/ios-devices-list/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
@@ -2327,7 +2603,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2016/09/30/copy-maven-dependencies-to-a-folder/">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/11/21/git-diff-usage/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeff Sui">
@@ -2347,7 +2623,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2016/09/30/copy-maven-dependencies-to-a-folder/" class="post-title-link" itemprop="url">copy maven dependencies to a folder</a>
+                <a href="/2019/11/21/git-diff-usage/" class="post-title-link" itemprop="url">git diff usage</a>
               
             
           </h1>
@@ -2372,24 +2648,12 @@
                 
               
 
-              <time title="创建时间：2016-09-30 13:02:27" itemprop="dateCreated datePublished" datetime="2016-09-30T13:02:27+08:00">2016-09-30</time>
+              <time title="创建时间：2019-11-21 12:04:12 / 修改时间：13:58:19" itemprop="dateCreated datePublished" datetime="2019-11-21T12:04:12+08:00">2019-11-21</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-31 13:04:36" itemprop="dateModified" datetime="2019-05-31T13:04:36+08:00">2019-05-31</time>
               
             
           </span>
@@ -2406,7 +2670,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/版本管理/" itemprop="url" rel="index"><span itemprop="name">版本管理</span></a></span>
 
                 
                 
@@ -2435,7 +2699,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.3k</span>
+                <span title="本文字数">881</span>
               
 
               
@@ -2449,7 +2713,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">2 分钟</span>
+                <span title="阅读时长">1 分钟</span>
               
             </div>
           
@@ -2470,13 +2734,24 @@
 
       
         
+          <h1 id="Git-中-diff-命令使用"><a href="#Git-中-diff-命令使用" class="headerlink" title="Git 中 diff 命令使用"></a>Git 中 diff 命令使用</h1><p>整理总结工作中常用的<code>git</code> 命令, 今天是一个非常有用的命令 <code>git diff</code></p>
+<p>主要作用是用来比较差异，包括 <code>commits</code>之间,<code>commit</code> 和 工作区间 差异 </p>
+<p>命令格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git diff [&lt;options&gt;] [&lt;commit&gt;] [--] [&lt;path&gt;…​]</span><br><span class="line">git diff [&lt;options&gt;] --cached [&lt;commit&gt;] [--] [&lt;path&gt;…​]</span><br><span class="line">git diff [&lt;options&gt;] &lt;commit&gt; &lt;commit&gt; [--] [&lt;path&gt;…​]</span><br><span class="line">git diff [&lt;options&gt;] &lt;blob&gt; &lt;blob&gt;</span><br><span class="line">git diff [&lt;options&gt;] --no-index [--] &lt;path&gt; &lt;path&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="1-比较工作区与暂存区"><a href="#1-比较工作区与暂存区" class="headerlink" title="1. 比较工作区与暂存区"></a>1. 比较工作区与暂存区</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff 不加参数</span><br></pre></td></tr></table></figure>
+<h2 id="2-比较暂存区与-本地-最新版本-最后一次commit"><a href="#2-比较暂存区与-本地-最新版本-最后一次commit" class="headerlink" title="2. 比较暂存区与 本地 最新版本 (最后一次commit)"></a>2. 比较暂存区与 本地 最新版本 (最后一次commit)</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached</span><br></pre></td></tr></table></figure>
+<h2 id="3-比较工作区与最新本地版本库"><a href="#3-比较工作区与最新本地版本库" class="headerlink" title="3. 比较工作区与最新本地版本库"></a>3. 比较工作区与最新本地版本库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD</span><br></pre></td></tr></table></figure>
+<h2 id="4-比较工作区与commit-id的差异"><a href="#4-比较工作区与commit-id的差异" class="headerlink" title="4. 比较工作区与commit-id的差异"></a>4. 比较工作区与commit-id的差异</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff commit-id</span><br></pre></td></tr></table></figure>
+<h2 id="5-比较暂存区与指定commit-id的差异"><a href="#5-比较暂存区与指定commit-id的差异" class="headerlink" title="5. 比较暂存区与指定commit-id的差异"></a>5. <strong>比较暂存区与指定commit-id的差异</strong></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached commit-id</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
           
-            <h1 id="copy-maven-dependencies-to-a-folder"><a href="#copy-maven-dependencies-to-a-folder" class="headerlink" title="copy maven dependencies to a folder"></a>copy maven dependencies to a folder</h1><h2 id="background"><a href="#background" class="headerlink" title="background"></a>background</h2><p>一个简单的需求,当你的同事需要调试代码的时候,他并不想建立maven环境,这时候依赖的jar包 该如何导出呢?</p>
-<h2 id="no-code-say-nothing"><a href="#no-code-say-nothing" class="headerlink" title="no code say nothing"></a>no code say nothing</h2><p>这时候你需要的是<a href="http://maven.apache.org/plugins/maven-dependency-plugin/" target="_blank" rel="noopener">maven-dependency-plugin</a>。</p>
-<h3 id="添加依赖配置"><a href="#添加依赖配置" class="headerlink" title="添加依赖配置"></a>添加依赖配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.eclipse.m2e&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;lifecycle-mapping&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;1.0.0&lt;/version&gt;</span><br><span class="line">                &lt;configuration&gt;</span><br><span class="line">                    &lt;lifecycleMappingMetadata&gt;</span><br><span class="line">                        &lt;pluginExecutions&gt;</span><br><span class="line">                            &lt;!-- copy-dependency plugin --&gt;</span><br><span class="line">                            &lt;pluginExecution&gt;</span><br><span class="line">                                &lt;pluginExecutionFilter&gt;</span><br><span class="line">                                    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">                                    &lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;</span><br><span class="line">                                    &lt;versionRange&gt;[1.0.0,)&lt;/versionRange&gt;</span><br><span class="line">                                    &lt;goals&gt;</span><br><span class="line">                                        &lt;goal&gt;copy-dependencies&lt;/goal&gt;</span><br><span class="line">                                    &lt;/goals&gt;</span><br><span class="line">                                    &lt;configuration&gt;</span><br><span class="line">                                        &lt;outputDirectory&gt;$&#123;project.build.directory&#125;/alternateLocation&lt;/outputDirectory&gt;</span><br><span class="line">                                        &lt;overWriteReleases&gt;false&lt;/overWriteReleases&gt;</span><br><span class="line">                                        &lt;overWriteSnapshots&gt;false&lt;/overWriteSnapshots&gt;</span><br><span class="line">                                        &lt;overWriteIfNewer&gt;true&lt;/overWriteIfNewer&gt;</span><br><span class="line">                                    &lt;/configuration&gt;</span><br><span class="line">                                &lt;/pluginExecutionFilter&gt;</span><br><span class="line">                                &lt;action&gt;</span><br><span class="line">                                    &lt;ignore /&gt;</span><br><span class="line">                                &lt;/action&gt;</span><br><span class="line">                            &lt;/pluginExecution&gt;</span><br><span class="line">                        &lt;/pluginExecutions&gt;</span><br><span class="line">                    &lt;/lifecycleMappingMetadata&gt;</span><br><span class="line">                &lt;/configuration&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br></pre></td></tr></table></figure>
-<p>此处的<code>&lt;outputDirectory&gt;</code> 指定了你导出jar包的路径.</p>
-<h3 id="执行命令-mvn-dependency-copy-dependencies"><a href="#执行命令-mvn-dependency-copy-dependencies" class="headerlink" title="执行命令 mvn dependency:copy-dependencies"></a>执行命令 <code>mvn dependency:copy-dependencies</code></h3><h3 id="查看项目多了一个-alternateLocation目录-并且依赖的jar包都下载到这个目录下了。"><a href="#查看项目多了一个-alternateLocation目录-并且依赖的jar包都下载到这个目录下了。" class="headerlink" title="查看项目多了一个/alternateLocation目录,并且依赖的jar包都下载到这个目录下了。"></a>查看项目多了一个<code>/alternateLocation</code>目录,并且依赖的jar包都下载到这个目录下了。</h3>
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/11/21/git-diff-usage/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
     </div>
@@ -2520,7 +2795,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2564,7 +2839,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-count">82</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2619,7 +2894,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">19</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2802,7 +3081,29 @@
                     
                       
                     
-                    <span class="site-state-item-count">83</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">94</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2879,7 +3180,7 @@
 <div class="widget-wrap">
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">50</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-libary/">standard_libary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">44</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
@@ -2915,7 +3216,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">338k</span>
+    <span title="站点总字数">478k</span>
   
 
   
@@ -2924,7 +3225,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">5:08</span>
+    <span title="站点阅读时长">7:15</span>
   
 </div>
 
@@ -3434,5 +3735,5 @@
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
 </html>

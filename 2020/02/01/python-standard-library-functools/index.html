@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 functools 高阶函数工具">
+<meta name="keywords" content="python,standard_library,functools">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library functools">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/02/01/python-standard-library-functools/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 functools 高阶函数工具">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://s3-eu-west-1.amazonaws.com/sup46/wp-content/uploads/2016/06/15100010/Attach-sup46.png">
+<meta property="og:updated_time" content="2020-02-03T10:23:40.098Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library functools">
+<meta name="twitter:description" content="python 标准库 functools 高阶函数工具">
+<meta name="twitter:image" content="http://s3-eu-west-1.amazonaws.com/sup46/wp-content/uploads/2016/06/15100010/Attach-sup46.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/02/01/python-standard-library-functools/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library functools | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/02/01/python-standard-library-functools/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library functools
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-01 06:57:22" itemprop="dateCreated datePublished" datetime="2020-02-01T06:57:22+08:00">2020-02-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-03 18:23:40" itemprop="dateModified" datetime="2020-02-03T18:23:40+08:00">2020-02-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">13k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">12 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-functools-高阶函数工具"><a href="#python-标准库-functools-高阶函数工具" class="headerlink" title="python 标准库 functools 高阶函数工具"></a>python 标准库 functools 高阶函数工具</h1><p><img src="http://s3-eu-west-1.amazonaws.com/sup46/wp-content/uploads/2016/06/15100010/Attach-sup46.png" alt></p>
+<a id="more"></a>
+<p><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=539420&auto=0&height=66"></iframe><br>每日一词:</p>
+<p>这里我们换种记忆方法 ,词根 <code>tach</code>代表 固定</p>
+<blockquote>
+<p>attach </p>
+<p>英 [əˈtætʃ]  美 [əˈtætʃ]  </p>
+<p>vt.&amp; vi. 贴上，系； 附上；</p>
+<p>vt.（有时不受欢迎或未受邀请而）参加； 把…固定； 把…归因于； （使）与…有联系</p>
+<p>vi. 从属； 附着； 伴随而来； 联在一起(to, upon)</p>
+<p>attachment  n 邮件的附件</p>
+<p>de 是反义前缀</p>
+<p>detach v 分离</p>
+<p>detached  adj  冷漠的,离群的</p>
+<p>detachment  n 公平 </p>
+</blockquote>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/functools.html#module-functools" target="_blank" rel="noopener"><code>functools</code></a> 模块应用于高阶函数，即参数或（和）返回值为其他函数的函数。 通常来说，此模块的功能适用于所有可调用对象。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/functools.html#module-functools" target="_blank" rel="noopener"><code>functools</code></a> 模块定义了以下函数:</p>
+<ul>
+<li><p><a href="mailto:`@functools.cache" target="_blank" rel="noopener">`@functools.cache</a>d_property`(<em>func</em>)</p>
+<p>将一个类方法转换为特征属性，一次性计算该特征属性的值，然后将其缓存为实例生命周期内的普通属性。 类似于 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#property" target="_blank" rel="noopener"><code>property()</code></a> 但增加了缓存功能。 对于在其他情况下实际不可变的高计算资源消耗的实例特征属性来说该函数非常有用。</p>
+<p>示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DataSet</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, sequence_of_numbers)</span>:</span></span><br><span class="line">        self._data = sequence_of_numbers</span><br><span class="line"></span><br><span class="line"><span class="meta">    @cached_property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">stdev</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> statistics.stdev(self._data)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @cached_property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">variance</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> statistics.variance(self._data)</span><br></pre></td></tr></table></figure>
+<p><em>3.8 新版功能.</em></p>
+<blockquote>
+<p>此装饰器要求每个实例上的 <code>__dict__</code> 属性是可变的映射。 这意味着它将不适用于某些类型，例如元类（因为类型实例上的 <code>__dict__</code> 属性是类命名空间的只读代理），以及那些指定了 <code>__slots__</code> 但未包含 <code>__dict__</code> 作为所定义的空位之一的类（因为这样的类根本没有提供 <code>__dict__</code> 属性）。</p>
+</blockquote>
+</li>
+<li><p><code>functools.cmp_to_key</code>(<em>func</em>)</p>
+<p>将(旧式的)比较函数转换为新式的 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-key-function" target="_blank" rel="noopener">key function</a> . 在类似于 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#sorted" target="_blank" rel="noopener"><code>sorted()</code></a> ， <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#min" target="_blank" rel="noopener"><code>min()</code></a> ， <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#max" target="_blank" rel="noopener"><code>max()</code></a> ， <a href="https://docs.python.org/zh-cn/3.8/library/heapq.html#heapq.nlargest" target="_blank" rel="noopener"><code>heapq.nlargest()</code></a> ， <a href="https://docs.python.org/zh-cn/3.8/library/heapq.html#heapq.nsmallest" target="_blank" rel="noopener"><code>heapq.nsmallest()</code></a> ， <a href="https://docs.python.org/zh-cn/3.8/library/itertools.html#itertools.groupby" target="_blank" rel="noopener"><code>itertools.groupby()</code></a> 等函数的 key 参数中使用。此函数主要用作将 Python 2 程序转换至新版的转换工具，以保持对比较函数的兼容。比较函数意为一个可调用对象，该对象接受两个参数并比较它们，结果为小于则返回一个负数，相等则返回零，大于则返回一个正数。key function则是一个接受一个参数，并返回另一个用以排序的值的可调用对象。</p>
+<p>示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sorted(iterable, key=cmp_to_key(locale.strcoll))  <span class="comment"># locale-aware sort order</span></span><br></pre></td></tr></table></figure>
+<p>有关排序示例和简要排序教程，请参阅 <a href="https://docs.python.org/zh-cn/3.8/howto/sorting.html#sortinghowto" target="_blank" rel="noopener">排序指南</a> 。<em>3.2 新版功能.</em></p>
+</li>
+<li><p><a href="mailto:`@functools.lr" target="_blank" rel="noopener">`@functools.lr</a>u_cache`(<em>user_function</em>)</p>
+</li>
+<li><p><a href="mailto:`@functools.lr" target="_blank" rel="noopener">`@functools.lr</a>u_cache`(<em>maxsize=128</em>, <em>typed=False</em>)</p>
+<p>一个为函数提供缓存功能的装饰器，缓存 <em>maxsize</em> 组传入参数，在下次以相同参数调用时直接返回上一次的结果。用以节约高开销或I/O函数的调用时间。</p>
+<p>由于使用了字典存储缓存，所以该函数的固定参数和关键字参数必须是可哈希的。</p>
+<p>不同模式的参数可能被视为不同从而产生多个缓存项，例如, f(a=1, b=2) 和 f(b=2, a=1) 因其参数顺序不同，可能会被缓存两次。</p>
+<p>如果指定了 <em>user_function</em>，它必须是一个可调用对象。 这允许 <em>lru_cache</em> 装饰器被直接应用于一个用户自定义函数，让 <em>maxsize</em> 保持其默认值 128:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@lru_cache</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">count_vowels</span><span class="params">(sentence)</span>:</span></span><br><span class="line">    sentence = sentence.casefold()</span><br><span class="line">    <span class="keyword">return</span> sum(sentence.count(vowel) <span class="keyword">for</span> vowel <span class="keyword">in</span> <span class="string">'aeiou'</span>)</span><br></pre></td></tr></table></figure>
+<p>如果 <em>maxsize</em> 设置为 <code>None</code> ，LRU功能将被禁用且缓存数量无上限。 <em>maxsize</em> 设置为2的幂时可获得最佳性能。</p>
+<p>如果 <em>typed</em> 设置为true，不同类型的函数参数将被分别缓存。例如， <code>f(3)</code> 和 <code>f(3.0)</code> 将被视为不同而分别缓存。</p>
+<p>为了衡量缓存的有效性以便调整 <em>maxsize</em> 形参，被装饰的函数带有一个 <code>cache_info()</code> 函数。当调用 <code>cache_info()</code> 函数时，返回一个具名元组，包含命中次数 <em>hits</em>，未命中次数 <em>misses</em> ，最大缓存数量 <em>maxsize</em> 和 当前缓存大小 <em>currsize</em>。在多线程环境中，命中数与未命中数是不完全准确的。</p>
+<p>该装饰器也提供了一个用于清理/使缓存失效的函数 <code>cache_clear()</code> 。</p>
+<p>原始的未经装饰的函数可以通过 <code>__wrapped__</code> 属性访问。它可以用于检查、绕过缓存，或使用不同的缓存再次装饰原始函数。</p>
+<p><a href="https://en.wikipedia.org/wiki/Cache_algorithms#Examples" target="_blank" rel="noopener">“最久未使用算法”（LRU）缓存</a> 在“最近的调用是即将到来的调用的最佳预测因子”时性能最好（比如，新闻服务器上最受欢迎的文章倾向于每天更改）。 “缓存大小限制”参数保证缓存不会在长时间运行的进程比如说网站服务器上无限制的增加自身的大小。</p>
+<p>一般来说，LRU缓存只在当你想要重用之前计算的结果时使用。因此，用它缓存具有副作用的函数、需要在每次调用时创建不同、易变的对象的函数或者诸如time（）或random（）之类的不纯函数是没有意义的。</p>
+<p>静态 Web 内容的 LRU 缓存示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@lru_cache(maxsize=32)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_pep</span><span class="params">(num)</span>:</span></span><br><span class="line">    <span class="string">'Retrieve text of a Python Enhancement Proposal'</span></span><br><span class="line">    resource = <span class="string">'http://www.python.org/dev/peps/pep-%04d/'</span> % num</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> urllib.request.urlopen(resource) <span class="keyword">as</span> s:</span><br><span class="line">            <span class="keyword">return</span> s.read()</span><br><span class="line">    <span class="keyword">except</span> urllib.error.HTTPError:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Not Found'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> n <span class="keyword">in</span> <span class="number">8</span>, <span class="number">290</span>, <span class="number">308</span>, <span class="number">320</span>, <span class="number">8</span>, <span class="number">218</span>, <span class="number">320</span>, <span class="number">279</span>, <span class="number">289</span>, <span class="number">320</span>, <span class="number">9991</span>:</span><br><span class="line"><span class="meta">... </span>    pep = get_pep(n)</span><br><span class="line"><span class="meta">... </span>    print(n, len(pep))</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>get_pep.cache_info()</span><br><span class="line">CacheInfo(hits=<span class="number">3</span>, misses=<span class="number">8</span>, maxsize=<span class="number">32</span>, currsize=<span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+<p>以下是使用缓存通过 <a href="https://zh.wikipedia.org/wiki/动态规划" target="_blank" rel="noopener">动态规划</a> 计算 <a href="https://zh.wikipedia.org/wiki/斐波那契数列" target="_blank" rel="noopener">斐波那契数列</a> 的例子。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@lru_cache(maxsize=None)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">2</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    <span class="keyword">return</span> fib(n<span class="number">-1</span>) + fib(n<span class="number">-2</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[fib(n) <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">16</span>)]</span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">13</span>, <span class="number">21</span>, <span class="number">34</span>, <span class="number">55</span>, <span class="number">89</span>, <span class="number">144</span>, <span class="number">233</span>, <span class="number">377</span>, <span class="number">610</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fib.cache_info()</span><br><span class="line">CacheInfo(hits=<span class="number">28</span>, misses=<span class="number">16</span>, maxsize=<span class="literal">None</span>, currsize=<span class="number">16</span>)</span><br></pre></td></tr></table></figure>
+<p><em>在 3.3 版更改:</em> 添加 <em>typed</em> 选项。</p>
+<p><em>在 3.8 版更改:</em> 添加了 <em>user_function</em> 选项。</p>
+</li>
+<li><p><a href="mailto:`@functools.tota" target="_blank" rel="noopener">`@functools.tota</a>l_ordering`</p>
+<p>给定一个声明一个或多个全比较排序方法的类，这个类装饰器实现剩余的方法。这减轻了指定所有可能的全比较操作的工作。</p>
+<p>此类必须包含以下方法之一：<a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__lt__" target="_blank" rel="noopener"><code>__lt__()</code></a> 、<a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__le__" target="_blank" rel="noopener"><code>__le__()</code></a>、<a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__gt__" target="_blank" rel="noopener"><code>__gt__()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__ge__" target="_blank" rel="noopener"><code>__ge__()</code></a>。另外，此类必须支持 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__eq__" target="_blank" rel="noopener"><code>__eq__()</code></a> 方法。</p>
+<p>例如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@total_ordering</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_is_valid_operand</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> (hasattr(other, <span class="string">"lastname"</span>) <span class="keyword">and</span></span><br><span class="line">                hasattr(other, <span class="string">"firstname"</span>))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__eq__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self._is_valid_operand(other):</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">NotImplemented</span></span><br><span class="line">        <span class="keyword">return</span> ((self.lastname.lower(), self.firstname.lower()) ==</span><br><span class="line">                (other.lastname.lower(), other.firstname.lower()))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__lt__</span><span class="params">(self, other)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self._is_valid_operand(other):</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">NotImplemented</span></span><br><span class="line">        <span class="keyword">return</span> ((self.lastname.lower(), self.firstname.lower()) &lt;</span><br><span class="line">                (other.lastname.lower(), other.firstname.lower()))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>虽然此装饰器使得创建具有良好行为的完全有序类型变得非常容易，但它 <em>确实</em> 是以执行速度更缓慢和派生比较方法的堆栈回溯更复杂为代价的。 如果性能基准测试表明这是特定应用的瓶颈所在，则改为实现全部六个富比较方法应该会轻松提升速度。 </p>
+</blockquote>
+<p> <em>在 3.4 版更改:</em> 现在已支持从未识别类型的下层比较函数返回 NotImplemented 异常。 </p>
+</li>
+<li><p><code>functools.partial</code>(<em>func</em>, <em>/</em>, <strong>args<em>, </em></strong>keywords*)</p>
+<p> 返回一个新的 <a href="https://docs.python.org/zh-cn/3.8/library/functools.html#partial-objects" target="_blank" rel="noopener">部分对象</a>，当被调用时其行为类似于 <em>func</em> 附带位置参数 <em>args</em> 和关键字参数 <em>keywords</em> 被调用。 如果为调用提供了更多的参数，它们会被附加到 <em>args</em>。 如果提供了额外的关键字参数，它们会扩展并重载 <em>keywords</em>。 大致等价于: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">partial</span><span class="params">(func, /, *args, **keywords)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">newfunc</span><span class="params">(*fargs, **fkeywords)</span>:</span></span><br><span class="line">        newkeywords = &#123;**keywords, **fkeywords&#125;</span><br><span class="line">        <span class="keyword">return</span> func(*args, *fargs, **newkeywords)</span><br><span class="line">    newfunc.func = func</span><br><span class="line">    newfunc.args = args</span><br><span class="line">    newfunc.keywords = keywords</span><br><span class="line">    <span class="keyword">return</span> newfunc</span><br></pre></td></tr></table></figure>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.partial" target="_blank" rel="noopener"><code>partial()</code></a> 会被“冻结了”一部分函数参数和/或关键字的部分函数应用所使用，从而得到一个具有简化签名的新对象。 例如，<a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.partial" target="_blank" rel="noopener"><code>partial()</code></a> 可用来创建一个行为类似于 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int()</code></a> 函数的可调用对象，其中 <em>base</em> 参数默认为二：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> functools <span class="keyword">import</span> partial</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>basetwo = partial(int, base=<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>basetwo.__doc__ = <span class="string">'Convert base 2 string to an int.'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>basetwo(<span class="string">'10010'</span>)</span><br><span class="line"><span class="number">18</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><em>class</em> <code>functools.partialmethod</code>(<em>func</em>, <em>/</em>, <strong>args<em>, </em></strong>keywords*)</p>
+<p>返回一个新的 <a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.partialmethod" target="_blank" rel="noopener"><code>partialmethod</code></a> 描述器，其行为类似 <a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.partial" target="_blank" rel="noopener"><code>partial</code></a> 但它被设计用作方法定义而非直接用作可调用对象。</p>
+<p><em>func</em> 必须是一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-descriptor" target="_blank" rel="noopener">descriptor</a> 或可调用对象（同属两者的对象例如普通函数会被当作描述器来处理）。</p>
+<p>当 <em>func</em> 是一个描述器（例如普通 Python 函数, <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#classmethod" target="_blank" rel="noopener"><code>classmethod()</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#staticmethod" target="_blank" rel="noopener"><code>staticmethod()</code></a>, <code>abstractmethod()</code> 或其他 <a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.partialmethod" target="_blank" rel="noopener"><code>partialmethod</code></a> 的实例）时, 对 <code>__get__</code> 的调用会被委托给底层的描述器，并会返回一个适当的 <a href="https://docs.python.org/zh-cn/3.8/library/functools.html#partial-objects" target="_blank" rel="noopener">部分对象</a> 作为结果。</p>
+<p>当 <em>func</em> 是一个非描述器类可调用对象时，则会动态创建一个适当的绑定方法。 当用作方法时其行为类似普通 Python 函数：将会插入 <em>self</em> 参数作为第一个位置参数，其位置甚至会处于提供给 <a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.partialmethod" target="_blank" rel="noopener"><code>partialmethod</code></a> 构造器的 <em>args</em> 和 <em>keywords</em> 之前。</p>
+<p>示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">Cell</span><span class="params">(object)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self._alive = <span class="literal">False</span></span><br><span class="line"><span class="meta">... </span>    @property</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">alive</span><span class="params">(self)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> self._alive</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">set_state</span><span class="params">(self, state)</span>:</span></span><br><span class="line"><span class="meta">... </span>        self._alive = bool(state)</span><br><span class="line"><span class="meta">... </span>    set_alive = partialmethod(set_state, <span class="literal">True</span>)</span><br><span class="line"><span class="meta">... </span>    set_dead = partialmethod(set_state, <span class="literal">False</span>)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = Cell()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.alive</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.set_alive()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.alive</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>functools.reduce</code>(<em>function</em>, <em>iterable</em>[, <em>initializer</em>])</p>
+<p>将两个参数的 <em>function</em> 从左至右积累地应用到 <em>iterable</em> 的条目，以便将该可迭代对象缩减为单一的值。 例如，<code>reduce(lambda x, y: x+y, [1, 2, 3, 4, 5])</code> 是计算 <code>((((1+2)+3)+4)+5)</code> 的值。 左边的参数 <em>x</em> 是积累值而右边的参数 <em>y</em> 则是来自 <em>iterable</em> 的更新值。 如果存在可选项 <em>initializer</em>，它会被放在参与计算的可迭代对象的条目之前，并在可迭代对象为空时作为默认值。 如果没有给出 <em>initializer</em> 并且 <em>iterable</em> 仅包含一个条目，则将返回第一项。</p>
+<p>大致相当于：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">reduce</span><span class="params">(function, iterable, initializer=None)</span>:</span></span><br><span class="line">    it = iter(iterable)</span><br><span class="line">    <span class="keyword">if</span> initializer <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        value = next(it)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        value = initializer</span><br><span class="line">    <span class="keyword">for</span> element <span class="keyword">in</span> it:</span><br><span class="line">        value = function(value, element)</span><br><span class="line">    <span class="keyword">return</span> value</span><br></pre></td></tr></table></figure>
+<p>请参阅 <a href="https://docs.python.org/zh-cn/3.8/library/itertools.html#itertools.accumulate" target="_blank" rel="noopener"><code>itertools.accumulate()</code></a> 了解有关可产生所有中间值的迭代器。</p>
+</li>
+<li><p><a href="mailto:`@functools.singledispatch" target="_blank" rel="noopener">`@functools.singledispatch</a>`</p>
+<p>将一个函数转换为 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-single-dispatch" target="_blank" rel="noopener">单分派</a> <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-generic-function" target="_blank" rel="noopener">generic function</a>。</p>
+<p>要定义一个泛型函数，应使用 <code>@singledispatch</code> 装饰器进行装饰。 请注意分派是作用于第一个参数的类型，要相应地创建你的函数:</p>
+<p>>&gt;&gt;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> functools <span class="keyword">import</span> singledispatch</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>@singledispatch</span><br><span class="line"><span class="meta">... </span><span class="function"><span class="keyword">def</span> <span class="title">fun</span><span class="params">(arg, verbose=False)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">if</span> verbose:</span><br><span class="line"><span class="meta">... </span>        print(<span class="string">"Let me just say,"</span>, end=<span class="string">" "</span>)</span><br><span class="line"><span class="meta">... </span>    print(arg)</span><br></pre></td></tr></table></figure>
+<p>要将重载的实现添加到函数中，请使用泛型函数的 <code>register()</code> 属性。 它是一个装饰器。 对于带有类型标注的函数，该装饰器将自动推断第一个参数的类型:</p>
+<p>>&gt;&gt;</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>@fun.register</span><br><span class="line"><span class="meta">... </span><span class="function"><span class="keyword">def</span> <span class="title">_</span><span class="params">(arg: int, verbose=False)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">if</span> verbose:</span><br><span class="line"><span class="meta">... </span>        print(<span class="string">"Strength in numbers, eh?"</span>, end=<span class="string">" "</span>)</span><br><span class="line"><span class="meta">... </span>    print(arg)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>@fun.register</span><br><span class="line"><span class="meta">... </span><span class="function"><span class="keyword">def</span> <span class="title">_</span><span class="params">(arg: list, verbose=False)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">if</span> verbose:</span><br><span class="line"><span class="meta">... </span>        print(<span class="string">"Enumerate this:"</span>)</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">for</span> i, elem <span class="keyword">in</span> enumerate(arg):</span><br><span class="line"><span class="meta">... </span>        print(i, elem)</span><br></pre></td></tr></table></figure>
+<p>对于不使用类型标注的代码，可以将适当的类型参数显式地传给装饰器本身:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>@fun.register(complex)</span><br><span class="line"><span class="meta">... </span><span class="function"><span class="keyword">def</span> <span class="title">_</span><span class="params">(arg, verbose=False)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">if</span> verbose:</span><br><span class="line"><span class="meta">... </span>        print(<span class="string">"Better than complicated."</span>, end=<span class="string">" "</span>)</span><br><span class="line"><span class="meta">... </span>    print(arg.real, arg.imag)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>要启用注册 lambda 和现有函数，可以使用函数形式的 <code>register()</code> 属性:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">nothing</span><span class="params">(arg, verbose=False)</span>:</span></span><br><span class="line"><span class="meta">... </span>    print(<span class="string">"Nothing."</span>)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fun.register(type(<span class="literal">None</span>), nothing)</span><br></pre></td></tr></table></figure>
+<p><code>register()</code> 属性将返回启用了装饰器堆栈、封存的未装饰函数，并会为每个变量单独创建单元测试:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>@fun.register(float)</span><br><span class="line"><span class="meta">... </span>@fun.register(Decimal)</span><br><span class="line"><span class="meta">... </span><span class="function"><span class="keyword">def</span> <span class="title">fun_num</span><span class="params">(arg, verbose=False)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">if</span> verbose:</span><br><span class="line"><span class="meta">... </span>        print(<span class="string">"Half of your number:"</span>, end=<span class="string">" "</span>)</span><br><span class="line"><span class="meta">... </span>    print(arg / <span class="number">2</span>)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fun_num <span class="keyword">is</span> fun</span><br><span class="line"><span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<p>在调用时，泛型函数会根据第一个参数的类型进行分派:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>fun(<span class="string">"Hello, world."</span>)</span><br><span class="line">Hello, world.</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fun(<span class="string">"test."</span>, verbose=<span class="literal">True</span>)</span><br><span class="line">Let me just say, test.</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fun(<span class="number">42</span>, verbose=<span class="literal">True</span>)</span><br><span class="line">Strength in numbers, eh? 42</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fun([<span class="string">'spam'</span>, <span class="string">'spam'</span>, <span class="string">'eggs'</span>, <span class="string">'spam'</span>], verbose=<span class="literal">True</span>)</span><br><span class="line">Enumerate this:</span><br><span class="line"><span class="number">0</span> spam</span><br><span class="line"><span class="number">1</span> spam</span><br><span class="line"><span class="number">2</span> eggs</span><br><span class="line"><span class="number">3</span> spam</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fun(<span class="literal">None</span>)</span><br><span class="line">Nothing.</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fun(<span class="number">1.23</span>)</span><br><span class="line"><span class="number">0.615</span></span><br></pre></td></tr></table></figure>
+<p>在没有用于特定类型的已注册实现的情况下，则会使用其方法解析顺序来查找更通用的实现。 以 <code>@singledispatch</code> 装饰的原始函数将为最基本的 <code>object</code> 类型进行注册，这意味着它将在找不到更好的实现时被使用。</p>
+<p>要检查泛型函数将为给定类型选择哪个实现，请使用 <code>dispatch()</code> 属性:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>fun.dispatch(float)</span><br><span class="line">&lt;function fun_num at <span class="number">0x1035a2840</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fun.dispatch(dict)    <span class="comment"># note: default implementation</span></span><br><span class="line">&lt;function fun at <span class="number">0x103fe0000</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>要访问所有忆注册实现，请使用只读的 <code>registry</code> 属性:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>fun.registry.keys()</span><br><span class="line">dict_keys([&lt;class 'NoneType'&gt;, &lt;class 'int'&gt;, &lt;class 'object'&gt;,</span><br><span class="line">          &lt;class 'decimal.Decimal'&gt;, &lt;class 'list'&gt;,</span><br><span class="line">          &lt;<span class="class"><span class="keyword">class</span> '<span class="title">float</span>'&gt;])</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">fun</span>.<span class="title">registry</span>[<span class="title">float</span>]</span></span><br><span class="line"><span class="class">&lt;<span class="title">function</span> <span class="title">fun_num</span> <span class="title">at</span> 0<span class="title">x1035a2840</span>&gt;</span></span><br><span class="line"><span class="class">&gt;&gt;&gt; <span class="title">fun</span>.<span class="title">registry</span>[<span class="title">object</span>]</span></span><br><span class="line"><span class="class">&lt;<span class="title">function</span> <span class="title">fun</span> <span class="title">at</span> 0<span class="title">x103fe0000</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p> <em>在 3.7 版更改:</em> <code>register()</code> 属性支持使用类型标注。 </p>
+</li>
+<li><p><em>class</em> <code>functools.singledispatchmethod</code>(<em>func</em>)</p>
+<p>将一个方法转换为 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-single-dispatch" target="_blank" rel="noopener">单分派</a> <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-generic-function" target="_blank" rel="noopener">generic function</a>。</p>
+<p>要定义一个泛型方法，应使用 <code>@singledispatchmethod</code> 装饰器进行装饰。 请注意分派是作用于第一个非 self 或非 cls 参数的类型，要相应地创建你的函数:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Negator</span>:</span></span><br><span class="line"><span class="meta">    @singledispatchmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">neg</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError(<span class="string">"Cannot negate a"</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @neg.register</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_</span><span class="params">(self, arg: int)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> -arg</span><br><span class="line"></span><br><span class="line"><span class="meta">    @neg.register</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_</span><span class="params">(self, arg: bool)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">not</span> arg</span><br></pre></td></tr></table></figure>
+<p><code>@singledispatchmethod</code> 支持与其他装饰器如 <code>@classmethod</code> 相嵌套。 请注意如果要允许 <code>dispatcher.register</code>，则 <code>singledispatchmethod</code> 必须是 <em>最外层</em> 的装饰器。 下面的示例定义了 <code>Negator</code> 类，其中包含绑定到类的 <code>neg</code> 方法:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Negator</span>:</span></span><br><span class="line"><span class="meta">    @singledispatchmethod</span></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">neg</span><span class="params">(cls, arg)</span>:</span></span><br><span class="line">        <span class="keyword">raise</span> NotImplementedError(<span class="string">"Cannot negate a"</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @neg.register</span></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_</span><span class="params">(cls, arg: int)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> -arg</span><br><span class="line"></span><br><span class="line"><span class="meta">    @neg.register</span></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_</span><span class="params">(cls, arg: bool)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">not</span> arg</span><br></pre></td></tr></table></figure>
+<p>同样的模式也被用于其他类似的装饰器: <code>staticmethod</code>, <code>abstractmethod</code> 等等。</p>
+<p> <em>3.8 新版功能.</em> </p>
+</li>
+<li><p><code>functools.update_wrapper</code>(<em>wrapper</em>, <em>wrapped</em>, <em>assigned=WRAPPER_ASSIGNMENTS</em>, <em>updated=WRAPPER_UPDATES</em>)</p>
+<p>更新一个 <em>wrapper</em> 函数以使其类似于 <em>wrapped</em> 函数。 可选参数为指明原函数的哪些属性要直接被赋值给 wrapper 函数的匹配属性的元组，并且这些 wrapper 函数的属性将使用原函数的对应属性来更新。 这些参数的默认值是模块级常量 <code>WRAPPER_ASSIGNMENTS</code> (它将被赋值给 wrapper 函数的 <code>__module__</code>, <code>__name__</code>, <code>__qualname__</code>, <code>__annotations__</code> 和 <code>__doc__</code> 即文档字符串) 以及 <code>WRAPPER_UPDATES</code> (它将更新 wrapper 函数的 <code>__dict__</code> 即实例字典)。</p>
+<p>为了允许出于内省和其他目的访问原始函数（例如绕过 <a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.lru_cache" target="_blank" rel="noopener"><code>lru_cache()</code></a> 之类的缓存装饰器），此函数会自动为 wrapper 添加一个指向被包装函数的 <code>__wrapped__</code> 属性。</p>
+<p>此函数的主要目的是在 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-decorator" target="_blank" rel="noopener">decorator</a> 函数中用来包装被装饰的函数并返回包装器。 如果包装器函数未被更新，则被返回函数的元数据将反映包装器定义而不是原始函数定义，这通常没有什么用处。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.update_wrapper" target="_blank" rel="noopener"><code>update_wrapper()</code></a> 可以与函数之外的可调用对象一同使用。 在 <em>assigned</em> 或 <em>updated</em> 中命名的任何属性如果不存在于被包装对象则会被忽略（即该函数将不会尝试在包装器函数上设置它们）。 如果包装器函数自身缺少在 <em>updated</em> 中命名的任何属性则仍将引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#AttributeError" target="_blank" rel="noopener"><code>AttributeError</code></a>。</p>
+<p><em>3.2 新版功能:</em> 自动添加 <code>__wrapped__</code> 属性。</p>
+<p><em>3.2 新版功能:</em> 默认拷贝 <code>__annotations__</code> 属性。</p>
+<p><em>在 3.2 版更改:</em> 不存在的属性将不再触发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#AttributeError" target="_blank" rel="noopener"><code>AttributeError</code></a>。</p>
+<p><em>在 3.4 版更改:</em> <code>__wrapped__</code> 属性现在总是指向被包装的函数，即使该函数定义了 <code>__wrapped__</code> 属性。 (参见 <a href="https://bugs.python.org/issue17482" target="_blank" rel="noopener">bpo-17482</a>)</p>
+<blockquote>
+<p><strong>wrapped是被装饰的原函数</strong></p>
+<p><strong>wrapper是被装饰器装饰后的新函数。</strong></p>
+</blockquote>
+<h3 id="补充例子："><a href="#补充例子：" class="headerlink" title="补充例子："></a>补充例子：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">(func)</span>:</span></span><br><span class="line"><span class="meta">    @functools.wraps(func)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">(*args, **kwargs)</span>:</span></span><br><span class="line">        print(<span class="string">f"before..."</span>)</span><br><span class="line">        func(*args, **kwargs)</span><br><span class="line">        print(<span class="string">"after..."</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"><span class="meta">@outer</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(a, b)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    求和运算</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    print(a + b)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>1、原函数为add。</p>
+<p>2、@outer会去执行outer装饰器，传入add函数，返回一个inner函数。</p>
+<p>3、执行outer函数时，加载inner函数，此时会直接执行functools.wraps(func)返回一个可调用对象，即partial对象。</p>
+<p>4、此时inner的装饰器实际上是@partial，partial会被调用，传入inner函数，执行partial内部的update_wrapper函数，将func的相应属性拷贝给inner函数，最后返回inner函数。这一步并没有生成新的函数，仅仅是改变了inner函数的属性。</p>
+<p>5、把add指向inner函数。</p>
+<p>6、调用add实际调用的是inner函数，inner函数内部持有原add函数的引用即func。</p>
+<p><strong>update_wrapper函数参数对应：</strong></p>
+<p><strong>wrapper指的是inner函数</strong></p>
+<p><strong>wrapped指的是func即原始的add函数</strong></p>
+</blockquote>
+</li>
+<li><p><a href="mailto:`@functools.wraps" target="_blank" rel="noopener">`@functools.wraps</a>`(<em>wrapped</em>, <em>assigned=WRAPPER_ASSIGNMENTS</em>, <em>updated=WRAPPER_UPDATES</em>)</p>
+<p>这是一个便捷函数，用于在定义包装器函数时发起调用 <a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.update_wrapper" target="_blank" rel="noopener"><code>update_wrapper()</code></a> 作为函数装饰器。 它等价于 <code>partial(update_wrapper, wrapped=wrapped, assigned=assigned, updated=updated)</code>。 例如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> functools <span class="keyword">import</span> wraps</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">my_decorator</span><span class="params">(f)</span>:</span></span><br><span class="line"><span class="meta">... </span>    @wraps(f)</span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">wrapper</span><span class="params">(*args, **kwds)</span>:</span></span><br><span class="line"><span class="meta">... </span>        print(<span class="string">'Calling decorated function'</span>)</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> f(*args, **kwds)</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> wrapper</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>@my_decorator</span><br><span class="line"><span class="meta">... </span><span class="function"><span class="keyword">def</span> <span class="title">example</span><span class="params">()</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="string">"""Docstring"""</span></span><br><span class="line"><span class="meta">... </span>    print(<span class="string">'Called example function'</span>)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>example()</span><br><span class="line">Calling decorated function</span><br><span class="line">Called example function</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>example.__name__</span><br><span class="line"><span class="string">'example'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>example.__doc__</span><br><span class="line"><span class="string">'Docstring'</span></span><br></pre></td></tr></table></figure>
+<p>如果不使用这个装饰器工厂函数，则 example 函数的名称将变为 <code>&#39;wrapper&#39;</code>，并且 <code>example()</code> 原本的文档字符串将会丢失。 </p>
+</li>
+</ul>
+<h2 id="partial-对象"><a href="#partial-对象" class="headerlink" title="partial 对象"></a><a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.partial" target="_blank" rel="noopener"><code>partial</code></a> 对象</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.partial" target="_blank" rel="noopener"><code>partial</code></a> 对象是由 <a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.partial" target="_blank" rel="noopener"><code>partial()</code></a> 创建的可调用对象。 它们具有三个只读属性：</p>
+<ul>
+<li><p><code>partial.func</code></p>
+<p>一个可调用对象或函数。 对 <a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.partial" target="_blank" rel="noopener"><code>partial</code></a> 对象的调用将被转发给 <a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.partial.func" target="_blank" rel="noopener"><code>func</code></a> 并附带新的参数和关键字。</p>
+</li>
+<li><p><code>partial.args</code></p>
+<p>最左边的位置参数将放置在提供给 <a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.partial" target="_blank" rel="noopener"><code>partial</code></a> 对象调用的位置参数之前。</p>
+</li>
+<li><p><code>partial.keywords</code></p>
+<p>当调用 <a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.partial" target="_blank" rel="noopener"><code>partial</code></a> 对象时将要提供的关键字参数。</p>
+</li>
+</ul>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.partial" target="_blank" rel="noopener"><code>partial</code></a> 对象与 <code>function</code> 对象的类似之处在于它们都是可调用、可弱引用的对象并可拥有属性。 但两者也存在一些重要的区别。 例如前者不会自动创建 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#definition.__name__" target="_blank" rel="noopener"><code>__name__</code></a> 和 <code>__doc__</code> 属性。 而且，在类中定义的 <a href="https://docs.python.org/zh-cn/3.8/library/functools.html#functools.partial" target="_blank" rel="noopener"><code>partial</code></a> 对象的行为类似于静态方法，并且不会在实例属性查找期间转换为绑定方法。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ol>
+<li><code>functools.wraps</code>目的消除装饰器对原函数造成的影响,    通过对原函数相关属性拷贝,已达到装饰器不修改原函数的目的。</li>
+<li><p><strong>wraps内部通过partial对象和update_wrapper函数实现</strong> </p>
+</li>
+<li><p><strong>partial是一个类，通过实现了双下方法new，自定义实例化对象过程，使得对象内部保留原函数和固定参数，通过实现双下方法call，使得对象可以像函数一样被调用，再通过内部保留的原函数和固定参数以及传入的其它参数进行原函数调用。</strong> </p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/02/01/python-standard-library-functools/" title="python standard library functools">https://pinghailinfeng.gitee.io/2020/02/01/python-standard-library-functools/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/functools/" rel="tag"># functools</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/31/python-standard-library-queue/" rel="next" title="python standard library queue">
+                <i class="fa fa-chevron-left"></i> python standard library queue
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/02/python-standard-library-copy/" rel="prev" title="python standard library copy">
+                python standard library copy <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">82</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">94</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-functools-高阶函数工具"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 functools 高阶函数工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">1.1.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#补充例子："><span class="nav-number">1.1.1.</span> <span class="nav-text">补充例子：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#partial-对象"><span class="nav-number">1.2.</span> <span class="nav-text">partial 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">1.3.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">50</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-libary/">standard_libary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">44</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">478k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">7:15</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

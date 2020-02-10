@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库学习笔记 – string前言今天是2019年12月20日,刚刚晴朗的天  入冬以来的第二场雪就悄然而至  从今天开始,坚持更新博文100天,也算是对python学习的总结。那么从哪里开始呢？ 那就从python标准库开始撸吧。">
+<meta name="keywords" content="python,standard_library,string">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python_standard_library_1_string">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2019/12/20/2019-20-python-standard-library-1-string/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库学习笔记 – string前言今天是2019年12月20日,刚刚晴朗的天  入冬以来的第二场雪就悄然而至  从今天开始,坚持更新博文100天,也算是对python学习的总结。那么从哪里开始呢？ 那就从python标准库开始撸吧。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.postimg.cc/xCj6GPCg/20191220.jpg">
+<meta property="og:image" content="https://i.postimg.cc/ZKCXQKqx/20191220-1.jpg">
+<meta property="og:updated_time" content="2020-01-02T08:34:45.020Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python_standard_library_1_string">
+<meta name="twitter:description" content="python 标准库学习笔记 – string前言今天是2019年12月20日,刚刚晴朗的天  入冬以来的第二场雪就悄然而至  从今天开始,坚持更新博文100天,也算是对python学习的总结。那么从哪里开始呢？ 那就从python标准库开始撸吧。">
+<meta name="twitter:image" content="https://i.postimg.cc/xCj6GPCg/20191220.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2019/12/20/2019-20-python-standard-library-1-string/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python_standard_library_1_string | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/20/2019-20-python-standard-library-1-string/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python_standard_library_1_string
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-20 09:20:15" itemprop="dateCreated datePublished" datetime="2019-12-20T09:20:15+08:00">2019-12-20</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-02 16:34:45" itemprop="dateModified" datetime="2020-01-02T16:34:45+08:00">2020-01-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">8.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库学习笔记-–-string"><a href="#python-标准库学习笔记-–-string" class="headerlink" title="python 标准库学习笔记 – string"></a>python 标准库学习笔记 – string</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天是2019年12月20日,刚刚晴朗的天</p>
+<p><a href="https://postimg.cc/mcq3BC7F" target="_blank" rel="noopener"><img src="https://i.postimg.cc/xCj6GPCg/20191220.jpg" alt="20191220.jpg"></a></p>
+<p>入冬以来的第二场雪就悄然而至</p>
+<p><a href="https://postimg.cc/9rHxR2ZD" target="_blank" rel="noopener"><img src="https://i.postimg.cc/ZKCXQKqx/20191220-1.jpg" alt="20191220-1.jpg"></a></p>
+<p>从今天开始,坚持更新博文100天,也算是对python学习的总结。那么从哪里开始呢？</p>
+<p>那就从<a href="&quot;https://docs.python.org/zh-cn/3.8/library&quot;">python标准库</a>开始撸吧。</p>
+<a id="more"></a>
+<table>
+<thead>
+<tr>
+<th>操作系统</th>
+<th>win7 sp1 64位 标准版</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>python版本</td>
+<td>3.8</td>
+</tr>
+<tr>
+<td>工具</td>
+<td>vscode</td>
+</tr>
+</tbody>
+</table>
+<h2 id="标准库基础"><a href="#标准库基础" class="headerlink" title="标准库基础"></a>标准库基础</h2><p>在不同操作系统,标准库的路径有所不同,以windows平台为例,我的python安装在<code>C:\Python38</code></p>
+<p>标准库文件就在<code>C:\Python38\Lib</code> 文件夹下</p>
+<p>标准库分为几个部分,参考<a href="https://docs.python.org/zh-cn/3.8/library/index.html" target="_blank" rel="noopener">标准库介绍</a></p>
+<ul>
+<li><p>内置函数:不需要<code>import</code>就可以使用的函数,例如 <code>print</code></p>
+</li>
+<li><p>内置异常</p>
+</li>
+<li><p>内置模块</p>
+<ul>
+<li><p>文本</p>
+</li>
+<li><p>二进制数据</p>
+</li>
+<li><p>数据类型</p>
+</li>
+<li><p>数学</p>
+</li>
+<li><p>函数式编程模块</p>
+</li>
+<li><p>文件和目录访问</p>
+</li>
+<li><p>数据持久化</p>
+</li>
+<li><p>文件格式</p>
+</li>
+<li><p>加密服务</p>
+</li>
+<li><p>并发执行</p>
+</li>
+<li><p>网络和进程间通信</p>
+</li>
+<li><p>互联网数据处理</p>
+</li>
+<li><p>互联网协议和支持</p>
+</li>
+<li><p>多媒体服务</p>
+</li>
+<li><p>国际化</p>
+</li>
+<li><p>程序框架</p>
+</li>
+<li><p>Tk图形用户界面</p>
+</li>
+<li><p>开发工具</p>
+</li>
+<li><p>调试和分析</p>
+</li>
+<li><p>软件打包和分发</p>
+</li>
+<li><p>python运行时服务</p>
+</li>
+<li><p>自定义python解释器</p>
+</li>
+<li><p>导入模块</p>
+</li>
+<li><p>Python语言服务</p>
+</li>
+<li><p>杂项服务</p>
+</li>
+<li><p>Windows系统相关模块</p>
+</li>
+<li><p>Unix专有服务</p>
+</li>
+<li><p>被取代的模块</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="day1-标准库-string"><a href="#day1-标准库-string" class="headerlink" title="day1  标准库 string"></a>day1  标准库 string</h2><p>参考：<a href="https://docs.python.org/zh-cn/3.8/library/string.html#helper-functions" target="_blank" rel="noopener">文本处理服务 string常见字符串操作</a> </p>
+<h2 id="字符串常量"><a href="#字符串常量" class="headerlink" title="字符串常量"></a>字符串常量</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__all__ = [<span class="string">"ascii_letters"</span>, <span class="string">"ascii_lowercase"</span>, <span class="string">"ascii_uppercase"</span>, <span class="string">"capwords"</span>,</span><br><span class="line">           <span class="string">"digits"</span>, <span class="string">"hexdigits"</span>, <span class="string">"octdigits"</span>, <span class="string">"printable"</span>, <span class="string">"punctuation"</span>,</span><br><span class="line">           <span class="string">"whitespace"</span>, <span class="string">"Formatter"</span>, <span class="string">"Template"</span>]</span><br></pre></td></tr></table></figure>
+<p>测试如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line">print(string.__all__)</span><br><span class="line"></span><br><span class="line">print(string.ascii_letters) <span class="comment">#abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</span></span><br><span class="line">print(string.ascii_lowercase) <span class="comment">#abcdefghijklmnopqrstuvwxyz</span></span><br><span class="line">print(string.ascii_uppercase) <span class="comment">#ABCDEFGHIJKLMNOPQRSTUVWXYZ</span></span><br><span class="line">print(string.digits)<span class="comment"># 十进制数字常数 0123456789</span></span><br><span class="line">print(string.hexdigits)<span class="comment">#十六进制数字常数 0123456789abcdefABCDEF</span></span><br><span class="line">print(string.octdigits)<span class="comment">#八进制数字常数 01234567</span></span><br><span class="line">print(string.punctuation)</span><br><span class="line">print(string.printable)</span><br><span class="line">print(string.whitespace)</span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li>string.whitespace ：由被视为空白符号的 ASCII 字符组成的字符串。 其中包括空格、制表、换行、回车、进纸和纵向制表符。</li>
+</ul>
+<h2 id="自定义字符串格式化"><a href="#自定义字符串格式化" class="headerlink" title="自定义字符串格式化"></a>自定义字符串格式化</h2><table>
+<thead>
+<tr>
+<th>主要函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>format(format_string, *args, **kwargs)</td>
+<td>它采用格式字符串和一组任意位置和关键字参数。它只是一个调用vformat（）的包装器。</td>
+</tr>
+<tr>
+<td>vformat(format_string, args, kwargs)</td>
+<td>执行格式化的实际工作</td>
+</tr>
+<tr>
+<td>parse(format_string)</td>
+<td>循环遍历format_string并返回一个可迭代的元组（literal_text，field_name，format_spec，conversion）。</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">data = (<span class="string">"Pi = "</span>,<span class="number">3.1415926</span>)</span><br><span class="line">strtmp = <span class="string">"This is a test:&#123;&#125;&#123;:.4f&#125;"</span></span><br><span class="line">formatter = string.Formatter()</span><br><span class="line">strtmp = formatter.vformat(strtmp,data,&#123;&#125;)</span><br><span class="line">print(strtmp) <span class="comment">#This is a test:&#123;&#125;&#123;:.4f&#125;</span></span><br><span class="line"></span><br><span class="line">data =&#123;<span class="string">"key1"</span>:<span class="number">3.1415926</span>,<span class="string">"key2"</span>:<span class="string">"Pi: ="</span>&#125;</span><br><span class="line">strtmp = <span class="string">"This is a test:&#123;key2&#125;&#123;key1&#125;"</span></span><br><span class="line">formatter = string.Formatter()</span><br><span class="line">strtmp = formatter.vformat(strtmp,(),data)</span><br><span class="line">print(strtmp)</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line">data = (<span class="string">"Pi="</span>,<span class="number">3.1415926</span>)</span><br><span class="line">strtmp = <span class="string">"This is a test:&#123;&#125;&#123;:.4f&#125;"</span></span><br><span class="line">formatter = string.Formatter()</span><br><span class="line">formatter.vformat(strtmp,data,&#123;&#125;)</span><br><span class="line">print(strtmp) <span class="comment">#This is a test:&#123;&#125;&#123;:.4f&#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">data =&#123;<span class="string">"key1"</span>:<span class="number">3.1415926</span>,<span class="string">"key2"</span>:<span class="string">"Pi: ="</span>&#125;</span><br><span class="line">strtmp = <span class="string">"This is a test:&#123;key2&#125;&#123;key1&#125;"</span></span><br><span class="line">formatter = string.Formatter()</span><br><span class="line">strtmp = formatter.vformat(strtmp,(),data)</span><br><span class="line">print(strtmp)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line">strtmp = <span class="string">"This is a test:&#123;&#125;&#123;:.4f&#125;"</span></span><br><span class="line">formatter  = string.Formatter()</span><br><span class="line">strtuple = formatter.parse(strtmp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, v <span class="keyword">in</span> enumerate(strtuple):</span><br><span class="line">    print(i, v)</span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    0 ('This is a test:', '', '', None)</span></span><br><span class="line"><span class="string">    1 ('', '', '.4f', None)</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">strtmp = <span class="string">"This is a test:&#123;Key2&#125;&#123;Key1&#125;"</span></span><br><span class="line">formatter  = string.Formatter()</span><br><span class="line">strtuple = formatter.parse(strtmp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i, v <span class="keyword">in</span> enumerate(strtuple):</span><br><span class="line">    print(i, v)</span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    0 ('This is a test:', 'Key2', '', None)</span></span><br><span class="line"><span class="string">    1 ('', 'Key1', '', None)</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line"><span class="comment"># string.Formatter.parse(format_string) End</span></span><br></pre></td></tr></table></figure>
+<h2 id="格式化字符串范例"><a href="#格式化字符串范例" class="headerlink" title="格式化字符串范例"></a>格式化字符串范例</h2><h3 id="按位置访问参数"><a href="#按位置访问参数" class="headerlink" title="按位置访问参数"></a>按位置访问参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tupdata = (<span class="string">"This"</span>,<span class="string">"is"</span>,<span class="string">"a"</span>,<span class="string">"test"</span>) <span class="comment"># 元组</span></span><br><span class="line">formatstr = <span class="string">'&#123;0&#125; &#123;1&#125; &#123;2&#125; &#123;3&#125;'</span>.format(<span class="string">"This"</span>,<span class="string">"is"</span>,<span class="string">"a"</span>,<span class="string">"test"</span>) </span><br><span class="line">print(formatstr)    <span class="comment"># This is a test</span></span><br><span class="line">formatstr = <span class="string">'&#123;&#125; &#123;&#125; &#123;&#125; &#123;&#125;'</span>.format(*tupdata) <span class="comment"># *data 解包参数序列</span></span><br><span class="line">print(formatstr)    <span class="comment"># This is a test</span></span><br><span class="line">formatstr = <span class="string">'&#123;3&#125; &#123;2&#125; &#123;1&#125; &#123;0&#125;'</span>.format(*tupdata) <span class="comment"># *data 解包参数序列</span></span><br><span class="line">print(formatstr)    <span class="comment"># test a is This</span></span><br><span class="line">formatstr = <span class="string">'&#123;2&#125; &#123;3&#125; &#123;1&#125; &#123;2&#125; &#123;3&#125;'</span>.format(*tupdata)  <span class="comment"># 参数可以重复</span></span><br><span class="line">print(formatstr)    <span class="comment"># a test is a test</span></span><br></pre></td></tr></table></figure>
+<h3 id="按关键字访问参数"><a href="#按关键字访问参数" class="headerlink" title="按关键字访问参数"></a>按关键字访问参数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dicdata = &#123;<span class="string">'Author'</span>:<span class="string">'leacoder'</span>,<span class="string">'Time'</span>:<span class="string">'2019/04/17'</span>&#125;</span><br><span class="line">formatstr = <span class="string">'The author is &#123;Author&#125;，The time is &#123;Time&#125;'</span>.format(Author=<span class="string">'leacoder'</span>,Time=<span class="string">'2019/04/17'</span>)</span><br><span class="line">print(formatstr)    <span class="comment"># The author is leacoder，The time is 2019/04/17</span></span><br><span class="line">formatstr = <span class="string">'The author is &#123;Author&#125;，The time is &#123;Time&#125;'</span>.format(**dicdata)</span><br><span class="line">print(formatstr)    <span class="comment"># The author is leacoder，The time is 2019/04/17</span></span><br></pre></td></tr></table></figure>
+<h3 id="访问参数的属性"><a href="#访问参数的属性" class="headerlink" title="访问参数的属性"></a>访问参数的属性</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,x,y)</span>:</span></span><br><span class="line">        self.x ,self.y = x, y</span><br><span class="line">point = Point(<span class="number">4</span>,<span class="number">2</span>)</span><br><span class="line">formatstr = <span class="string">'Thie point is (&#123;key.x&#125;,&#123;key.y&#125;)'</span>.format(key = point) <span class="comment"># key 可为其他 </span></span><br><span class="line">print(formatstr)  <span class="comment"># Thie point is (4,2)</span></span><br><span class="line">formatstr = <span class="string">'Thie point is (&#123;point.x&#125;,&#123;point.y&#125;)'</span>.format(point = point) <span class="comment"># point 可为其他 </span></span><br><span class="line">print(formatstr)  <span class="comment"># Thie point is (4,2)</span></span><br></pre></td></tr></table></figure>
+<h2 id="访问参数的各项"><a href="#访问参数的各项" class="headerlink" title="访问参数的各项"></a>访问参数的各项</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tupdata = (<span class="string">"leacoder"</span>,<span class="string">"2019/04/17"</span>) <span class="comment"># 元组</span></span><br><span class="line">formatstr = <span class="string">'The author is &#123;0[0]&#125;,The time is &#123;0[1]&#125;'</span>.format(tupdata)</span><br><span class="line">print(formatstr)    <span class="comment"># The author is leacoder,The time is 2019/04/17</span></span><br><span class="line">formatstr = <span class="string">'The author is &#123;0[0]&#125;,The time is &#123;0[1]&#125;'</span>.format(*tupdata)  <span class="comment"># 注意区别</span></span><br><span class="line">print(formatstr)    <span class="comment"># The author is l,The time is e</span></span><br></pre></td></tr></table></figure>
+<h3 id="对齐文本并指定宽度"><a href="#对齐文本并指定宽度" class="headerlink" title="对齐文本并指定宽度"></a>对齐文本并指定宽度</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">formatstr = <span class="string">'&#123;:&lt;30&#125;'</span>.format(<span class="string">'left aligned'</span>) <span class="comment"># 左对齐 30位</span></span><br><span class="line">print(formatstr)    <span class="comment"># ‘left aligned                  ’  为了体现位数加了‘’</span></span><br><span class="line">formatstr = <span class="string">'&#123;:&gt;30&#125;'</span>.format(<span class="string">'right aligned'</span>)    <span class="comment"># 右对齐 30位</span></span><br><span class="line">print(formatstr)    <span class="comment"># ‘                 right aligned’</span></span><br><span class="line">formatstr = <span class="string">'&#123;:^30&#125;'</span>.format(<span class="string">'centered'</span>)  <span class="comment"># 中间对齐 30位</span></span><br><span class="line">print(formatstr)    <span class="comment"># ‘           centered           ’</span></span><br><span class="line">formatstr =  <span class="string">'&#123;:*^30&#125;'</span>.format(<span class="string">'centered'</span>)  <span class="comment"># 使用* 作为填充字符</span></span><br><span class="line">print(formatstr)    <span class="comment"># ‘***********centered***********’</span></span><br></pre></td></tr></table></figure>
+<h3 id="Replacing-f-f-and-f-and-specifying-a-sign-替换％-f，％-f和％f并指定符号"><a href="#Replacing-f-f-and-f-and-specifying-a-sign-替换％-f，％-f和％f并指定符号" class="headerlink" title="Replacing %+f, %-f, and % f and specifying a sign: 替换％+ f，％ - f和％f并指定符号:"></a>Replacing %+f, %-f, and % f and specifying a sign: 替换％+ f，％ - f和％f并指定符号:</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">formatstr = <span class="string">'&#123;:+f&#125;; &#123;:+f&#125;'</span>.format(<span class="number">3.14</span>, <span class="number">-3.14</span>)  <span class="comment"># 总是显示它符号</span></span><br><span class="line">print(formatstr)    <span class="comment"># ‘+3.140000; -3.140000’</span></span><br><span class="line">formatstr = <span class="string">'&#123;: f&#125;; &#123;: f&#125;'</span>.format(<span class="number">3.14</span>, <span class="number">-3.14</span>)  <span class="comment"># 正数前显示空格</span></span><br><span class="line">print(formatstr)    <span class="comment"># ‘ 3.140000; -3.140000’</span></span><br><span class="line">formatstr = <span class="string">'&#123;:-f&#125;; &#123;:-f&#125;'</span>.format(<span class="number">3.14</span>, <span class="number">-3.14</span>)  <span class="comment"># 只显示负号 同 '&#123;:f&#125;; &#123;:f&#125;'</span></span><br><span class="line">print(formatstr)    <span class="comment"># ‘3.140000; -3.140000’</span></span><br></pre></td></tr></table></figure>
+<h3 id="Replacing-x-and-o-and-converting-the-value-to-different-bases-替换％x和％o并将值转换为不同的进制"><a href="#Replacing-x-and-o-and-converting-the-value-to-different-bases-替换％x和％o并将值转换为不同的进制" class="headerlink" title="Replacing %x and %o and converting the value to different bases: 替换％x和％o并将值转换为不同的进制"></a>Replacing %x and %o and converting the value to different bases: 替换％x和％o并将值转换为不同的进制</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">formatstr = <span class="string">"int: &#123;0:d&#125;;  hex: &#123;0:x&#125;;  oct: &#123;0:o&#125;;  bin: &#123;0:b&#125;"</span>.format(<span class="number">64</span>)</span><br><span class="line">print(formatstr)  <span class="comment"># int: 64;  hex: 40;  oct: 100;  bin: 1000000</span></span><br><span class="line">formatstr = <span class="string">"int: &#123;0:d&#125;;  hex: &#123;0:#x&#125;;  oct: &#123;0:#o&#125;;  bin: &#123;0:#b&#125;"</span>.format(<span class="number">64</span>)</span><br><span class="line">print(formatstr)  <span class="comment"># int: 64;  hex: 0x40;  oct: 0o100;  bin: 0b1000000</span></span><br><span class="line">formatstr = <span class="string">"int: &#123;0:d&#125;;  hex: &#123;0:#x&#125;;  oct: &#123;0:#o&#125;;  bin: &#123;0:#b&#125;"</span>.format(<span class="number">0b1000001</span>) <span class="comment"># 也支持其他进制</span></span><br><span class="line">print(formatstr)  <span class="comment"># int: 65;  hex: 0x41;  oct: 0o101;  bin: 0b100000</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用逗号作为千位分隔符"><a href="#使用逗号作为千位分隔符" class="headerlink" title="使用逗号作为千位分隔符"></a>使用逗号作为千位分隔符</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">points = <span class="number">1</span></span><br><span class="line">total = <span class="number">3</span></span><br><span class="line">formatstr = <span class="string">'points / total = &#123;:.2%&#125;'</span>.format(points/total)</span><br><span class="line">print(formatstr)    <span class="comment"># points / total = 33.33%</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用特定类型的格式"><a href="#使用特定类型的格式" class="headerlink" title="使用特定类型的格式"></a>使用特定类型的格式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line">d = datetime.datetime(<span class="number">2019</span>, <span class="number">4</span>, <span class="number">17</span>, <span class="number">22</span>, <span class="number">49</span>, <span class="number">2</span>) <span class="comment"># 2019/04/17 22:49:02</span></span><br><span class="line">formatstr = <span class="string">'&#123;:%Y-%m-%d %H:%M:%S&#125;'</span>.format(d)</span><br><span class="line">print(formatstr)    <span class="comment"># 2019-04-17 22:49:02</span></span><br></pre></td></tr></table></figure>
+<h2 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h2><h3 id="模板字符串规则"><a href="#模板字符串规则" class="headerlink" title="模板字符串规则"></a>模板字符串规则</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">模板字符串提供更简单的字符串替换，如PEP 292中所述 https://www.python.org/dev/peps/pep-0292/</span></span><br><span class="line"><span class="string">模板字符串支持基于$的替换，使用以下规则：</span></span><br><span class="line"><span class="string">    1、$$是转义; 它被替换为单个$。</span></span><br><span class="line"><span class="string">    2、$identifier 一个替换占位符，用于匹配映射关键字“identifier”默认情况下，</span></span><br><span class="line"><span class="string">    “标识符”仅限于以下划线或ASCII字母开头的任何不区分大小写的ASCII字母数字字符串（包括下划线）。$字符后面的第一个非标识符字符结束此占位符。</span></span><br><span class="line"><span class="string">    3、$ &#123;identifier&#125;相当于$ identifier。当有效标识符字符跟随占位符但不是占位符的一部分时，例如“$ &#123;noun&#125; ification”，则需要它。</span></span><br><span class="line"><span class="string">    4、字符串中$的任何其他形式都将导致引发ValueError。</span></span><br><span class="line"><span class="string">字符串模块提供实现这些规则的Template类。class string.Template(template)</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+<h2 id="class-string-Template-template"><a href="#class-string-Template-template" class="headerlink" title="class string.`Template`(template)"></a><em>class</em> <code>string.`</code>Template`(<em>template</em>)</h2><h3 id="substitute-mapping-kwargs"><a href="#substitute-mapping-kwargs" class="headerlink" title="substitute(mapping,**kwargs)"></a>substitute(mapping,**kwargs)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">执行模板替换，返回一个新字符串。 mapping 为任意字典类对象，其中的键将匹配模板中的占位符。 或者你也可以提供一组关键字参数，其中的关键字即对应占位符。 当同时给出 mapping 和 kwds 并且存在重复时，则以 kwds 中的占位符为优先</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">s = Template(<span class="string">'The Author is $Author, The Time is $Time'</span>)    <span class="comment"># 使用Template类构造函数</span></span><br><span class="line">kewds = &#123;<span class="string">'Author'</span>:<span class="string">'leacoder'</span>, <span class="string">'Time'</span>:<span class="string">'2019/04/18 00:01:38'</span>&#125;</span><br><span class="line">templatestr = s.substitute(Author=<span class="string">'leacoder'</span>, Time=<span class="string">'2019/04/18 00:01:38'</span>)  <span class="comment"># **kewds</span></span><br><span class="line">print(templatestr)  <span class="comment"># The Author is leacoder, The Time is 2019/04/18 00:01:38</span></span><br><span class="line">templatestr = s.substitute(**kewds)  <span class="comment"># **kewds</span></span><br><span class="line">print(templatestr)  <span class="comment"># The Author is leacoder, The Time is 2019/04/18 00:01:38</span></span><br><span class="line">templatestr = s.substitute(kewds)  <span class="comment"># mapping</span></span><br><span class="line">print(templatestr)  <span class="comment"># The Author is leacoder, The Time is 2019/04/18 00:01:38</span></span><br><span class="line">templatestr = s.substitute(kewds,Author=<span class="string">'250'</span>,Time = <span class="string">'No Time'</span>)  <span class="comment"># mapping  **kewds</span></span><br><span class="line">print(templatestr)  <span class="comment"># The Author is 250, The Time is No Time</span></span><br><span class="line"></span><br><span class="line">kewds1 = &#123;<span class="string">'Author'</span>:<span class="string">'leacoder'</span>&#125;</span><br><span class="line">templatestr = s.substitute(kewds1)</span><br><span class="line">print(templatestr)  <span class="comment"># KeyError: 'Time'</span></span><br><span class="line"><span class="comment"># substitute(mapping, **kwds) End</span></span><br></pre></td></tr></table></figure>
+<h3 id="safe-substitute-mapping-kwds"><a href="#safe-substitute-mapping-kwds" class="headerlink" title="safe_substitute(mapping, **kwds)"></a>safe_substitute(mapping, **kwds)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">类似于 substitute()，不同之处是如果有占位符未在 mapping 和 kwds 中找到，不是引发 KeyError 异常，而是将原始占位符不加修改地显示在结果字符串中。 另一个与 substitute() 的差异是任何在其他情况下出现的 $ 将简单地返回 $ 而不是引发 ValueError。</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="comment"># safe_substitute(mapping, **kwds)</span></span><br><span class="line">kewds1 = &#123;<span class="string">'Author'</span>:<span class="string">'leacoder'</span>&#125;</span><br><span class="line">templatestr = s.safe_substitute(kewds1)</span><br><span class="line">print(templatestr)  <span class="comment"># The Author is leacoder, The Time is $Time</span></span><br><span class="line"><span class="comment"># safe_substitute(mapping, **kwds) End</span></span><br></pre></td></tr></table></figure>
+<h2 id="辅助函数"><a href="#辅助函数" class="headerlink" title="辅助函数"></a>辅助函数</h2><h3 id="string-capwords-s-sep-None）"><a href="#string-capwords-s-sep-None）" class="headerlink" title="string.`capwords`(s, sep=None）"></a><code>string.`</code>capwords`(<em>s</em>, <em>sep=None</em>）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">使用 str.split() 将参数拆分为单词，使用 str.capitalize() 将单词转为大写形式，使用 str.join() 将大写的单词进行拼接。 如果可选的第二个参数 sep 被省略或为 None，则连续的空白字符会被替换为单个空格符并且开头和末尾的空白字符会被移除，否则 sep 会被用来拆分和拼接单词</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2019/12/20/2019-20-python-standard-library-1-string/" title="python_standard_library_1_string">https://pinghailinfeng.gitee.io/2019/12/20/2019-20-python-standard-library-1-string/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/string/" rel="tag"># string</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/20/python-standard-libary-1-string/" rel="next" title="python_standard_libary_1_string">
+                <i class="fa fa-chevron-left"></i> python_standard_libary_1_string
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/23/python-standard-library-2-dictionary/" rel="prev" title="python standard library -2 dictionary">
+                python standard library -2 dictionary <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">82</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">94</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库学习笔记-–-string"><span class="nav-number">1.</span> <span class="nav-text">python 标准库学习笔记 – string</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准库基础"><span class="nav-number">1.2.</span> <span class="nav-text">标准库基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#day1-标准库-string"><span class="nav-number">1.3.</span> <span class="nav-text">day1  标准库 string</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串常量"><span class="nav-number">1.4.</span> <span class="nav-text">字符串常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义字符串格式化"><span class="nav-number">1.5.</span> <span class="nav-text">自定义字符串格式化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化字符串范例"><span class="nav-number">1.6.</span> <span class="nav-text">格式化字符串范例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#按位置访问参数"><span class="nav-number">1.6.1.</span> <span class="nav-text">按位置访问参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按关键字访问参数"><span class="nav-number">1.6.2.</span> <span class="nav-text">按关键字访问参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问参数的属性"><span class="nav-number">1.6.3.</span> <span class="nav-text">访问参数的属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问参数的各项"><span class="nav-number">1.7.</span> <span class="nav-text">访问参数的各项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对齐文本并指定宽度"><span class="nav-number">1.7.1.</span> <span class="nav-text">对齐文本并指定宽度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Replacing-f-f-and-f-and-specifying-a-sign-替换％-f，％-f和％f并指定符号"><span class="nav-number">1.7.2.</span> <span class="nav-text">Replacing %+f, %-f, and % f and specifying a sign: 替换％+ f，％ - f和％f并指定符号:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Replacing-x-and-o-and-converting-the-value-to-different-bases-替换％x和％o并将值转换为不同的进制"><span class="nav-number">1.7.3.</span> <span class="nav-text">Replacing %x and %o and converting the value to different bases: 替换％x和％o并将值转换为不同的进制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用逗号作为千位分隔符"><span class="nav-number">1.7.4.</span> <span class="nav-text">使用逗号作为千位分隔符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用特定类型的格式"><span class="nav-number">1.7.5.</span> <span class="nav-text">使用特定类型的格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板字符串"><span class="nav-number">1.8.</span> <span class="nav-text">模板字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模板字符串规则"><span class="nav-number">1.8.1.</span> <span class="nav-text">模板字符串规则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#class-string-Template-template"><span class="nav-number">1.9.</span> <span class="nav-text">class string.`Template`(template)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#substitute-mapping-kwargs"><span class="nav-number">1.9.1.</span> <span class="nav-text">substitute(mapping,**kwargs)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#safe-substitute-mapping-kwds"><span class="nav-number">1.9.2.</span> <span class="nav-text">safe_substitute(mapping, **kwds)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#辅助函数"><span class="nav-number">1.10.</span> <span class="nav-text">辅助函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#string-capwords-s-sep-None）"><span class="nav-number">1.10.1.</span> <span class="nav-text">string.`capwords`(s, sep=None）</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">50</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-libary/">standard_libary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">44</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">478k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">7:15</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

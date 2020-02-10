@@ -457,7 +457,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2016/09/27/how-to-use-nginx-on-windows/">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/09/28/javascript-get-checkbox-checked-value/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeff Sui">
@@ -477,7 +477,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2016/09/27/how-to-use-nginx-on-windows/" class="post-title-link" itemprop="url">how to use nginx on windows</a>
+                <a href="/2019/09/28/javascript-get-checkbox-checked-value/" class="post-title-link" itemprop="url">javascript get checkbox checked value</a>
               
             
           </h1>
@@ -502,2013 +502,12 @@
                 
               
 
-              <time title="创建时间：2016-09-27 10:27:56" itemprop="dateCreated datePublished" datetime="2016-09-27T10:27:56+08:00">2016-09-27</time>
+              <time title="创建时间：2019-09-28 13:53:50 / 修改时间：14:44:03" itemprop="dateCreated datePublished" datetime="2019-09-28T13:53:50+08:00">2019-09-28</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-31 13:04:36" itemprop="dateModified" datetime="2019-05-31T13:04:36+08:00">2019-05-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/nginx/" itemprop="url" rel="index"><span itemprop="name">nginx</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">1.3k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="how-to-use-nginx-on-windows"><a href="#how-to-use-nginx-on-windows" class="headerlink" title="how to use nginx on windows"></a>how to use nginx on windows</h1><h2 id="1-Download-nginx-lastest-release-from-here"><a href="#1-Download-nginx-lastest-release-from-here" class="headerlink" title="1. Download nginx lastest release from here."></a>1. Download nginx lastest release from <a href="http://nginx.org/en/download.html" target="_blank" rel="noopener">here</a>.</h2><h2 id="2-unzip-to-your-local-driver-eg-c-apps-nginx"><a href="#2-unzip-to-your-local-driver-eg-c-apps-nginx" class="headerlink" title="2. unzip to your local driver. eg: c:/apps/nginx"></a>2. unzip to your local driver. eg: <code>c:/apps/nginx</code></h2><h2 id="3-start-nginx"><a href="#3-start-nginx" class="headerlink" title="3. start nginx"></a>3. start nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd c:/apps/nginx</span><br><span class="line">start nginx</span><br></pre></td></tr></table></figure>
-<h2 id="4-monitoring-nginx-process"><a href="#4-monitoring-nginx-process" class="headerlink" title="4. monitoring nginx process"></a>4. monitoring nginx process</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tasklist /fi &quot;imagename eq nginx.exe&quot;</span><br><span class="line">Image Name                     PID Session Name        Session#    Mem Usage</span><br><span class="line">========================= ======== ================ =========== ============</span><br><span class="line">nginx.exe                    11700 Console                    1     10,696 K</span><br><span class="line">nginx.exe                     1160 Console                    1     11,180 K</span><br></pre></td></tr></table></figure>
-<p><strong>notice</strong><br>一个是主进程(main process),另一个是工作进程(work process).如果启动失败,请查看错误日志<code>logs\error.log</code></p>
-<h2 id="5-visit-http-localhost-8080"><a href="#5-visit-http-localhost-8080" class="headerlink" title="5. visit http://localhost:8080"></a>5. visit <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a></h2><h2 id="6-configuration-file-nginx-conf"><a href="#6-configuration-file-nginx-conf" class="headerlink" title="6. configuration file nginx.conf"></a>6. configuration file <code>nginx.conf</code></h2><p><em>reference config</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">error_log  logs/error.log;</span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    server &#123;</span><br><span class="line">                listen       8080;</span><br><span class="line">                server_name  localhost;</span><br><span class="line">                location / &#123;</span><br><span class="line">                    root   html;</span><br><span class="line">                    index  index.html index.htm;</span><br><span class="line">                &#125;</span><br><span class="line">                error_page   500 502 503 504  /50x.html;</span><br><span class="line">                location = /50x.html &#123;</span><br><span class="line">                    root   html;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="7-the-command-list-of-nginx："><a href="#7-the-command-list-of-nginx：" class="headerlink" title="7. the command list of nginx："></a>7. the command list of nginx：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop   快速退出</span><br><span class="line">nginx -s quit   优雅退出</span><br><span class="line">nginx -s reload 更换配置，启动新的工作进程，优雅的关闭以往的工作进程</span><br><span class="line">nginx -s reopen 重新打开日志文件</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2016/09/22/how-git-changing-author-info/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/09/22/how-git-changing-author-info/" class="post-title-link" itemprop="url">how git changing author info</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2016-09-22 16:39:05" itemprop="dateCreated datePublished" datetime="2016-09-22T16:39:05+08:00">2016-09-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-31 13:04:36" itemprop="dateModified" datetime="2019-05-31T13:04:36+08:00">2019-05-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">1.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="how-git-changing-author-info"><a href="#how-git-changing-author-info" class="headerlink" title="how git changing author info"></a>how git changing author info</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ol>
-<li><code>gitlab</code>中的统计视图是根据用户的信息统计工作量 </li>
-<li>迁移git repo中经常会遇到用户和邮箱不一致的情况</li>
-</ol>
-<h2 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h2><p>那么如何修改已经推送到远程的author信息呢?</p>
-<p> <code>github</code> 官方提供的建议<a href="https://help.github.com/articles/changing-author-info/" target="_blank" rel="noopener">如何变更用户信息</a></p>
-<p>同时也有类似的项托管在<code>github</code>上，<a href="https://github.com/jayphelps/git-blame-someone-else" target="_blank" rel="noopener">git-tips-blame-someone-else</a></p>
-<p>思路基本一致,就是替换提交记录、分支、标签里的author信息。</p>
-<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><h3 id="1-打开终端或命令行-git-bash"><a href="#1-打开终端或命令行-git-bash" class="headerlink" title="1.打开终端或命令行(git bash)"></a>1.打开终端或命令行(<code>git bash</code>)</h3><h3 id="2-创建一个你项目的全新裸库"><a href="#2-创建一个你项目的全新裸库" class="headerlink" title="2.创建一个你项目的全新裸库"></a>2.创建一个你项目的全新裸库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone --bare https://github.com/user/repo.git</span><br><span class="line">cd repo.git</span><br></pre></td></tr></table></figure>
-<h3 id="3-复制粘贴脚本-并根据你的信息修改下面的变量"><a href="#3-复制粘贴脚本-并根据你的信息修改下面的变量" class="headerlink" title="3.复制粘贴脚本,并根据你的信息修改下面的变量:"></a>3.复制粘贴脚本,并根据你的信息修改下面的变量:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OLD_EMAIL</span><br><span class="line">CORRECT_NAME</span><br><span class="line">CORRECT_EMAIL</span><br></pre></td></tr></table></figure>
-<p>脚本<code>replace.sh</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">git filter-branch --env-filter &apos;</span><br><span class="line"></span><br><span class="line">OLD_EMAIL=&quot;your-old-email@example.com&quot;</span><br><span class="line">CORRECT_NAME=&quot;Your Correct Name&quot;</span><br><span class="line">CORRECT_EMAIL=&quot;your-correct-email@example.com&quot;</span><br><span class="line"></span><br><span class="line">if [ &quot;$GIT_COMMITTER_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span><br><span class="line">then</span><br><span class="line">    export GIT_COMMITTER_NAME=&quot;$CORRECT_NAME&quot;</span><br><span class="line">    export GIT_COMMITTER_EMAIL=&quot;$CORRECT_EMAIL&quot;</span><br><span class="line">fi</span><br><span class="line">if [ &quot;$GIT_AUTHOR_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span><br><span class="line">then</span><br><span class="line">    export GIT_AUTHOR_NAME=&quot;$CORRECT_NAME&quot;</span><br><span class="line">    export GIT_AUTHOR_EMAIL=&quot;$CORRECT_EMAIL&quot;</span><br><span class="line">fi</span><br><span class="line">&apos; --tag-name-filter cat -- --branches --tags</span><br></pre></td></tr></table></figure></p>
-<h3 id="4-执行这个脚本"><a href="#4-执行这个脚本" class="headerlink" title="4.执行这个脚本"></a>4.执行这个脚本</h3><p><code>sh replace.sh</code></p>
-<h3 id="5-察看Git历史有没有错误"><a href="#5-察看Git历史有没有错误" class="headerlink" title="5.察看Git历史有没有错误"></a>5.察看Git历史有没有错误</h3><p><code>git log</code></p>
-<h3 id="6-强制推送到远程"><a href="#6-强制推送到远程" class="headerlink" title="6.强制推送到远程"></a>6.强制推送到远程</h3><p><code>git push --force --tags origin &#39;refs/heads/*&#39;</code></p>
-<h3 id="7-清除repo-git仓库"><a href="#7-清除repo-git仓库" class="headerlink" title="7.清除repo.git仓库"></a>7.清除repo.git仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br><span class="line">rm -rf repo.git</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2016/08/08/how-to-understand-git-detached-HEAD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/08/08/how-to-understand-git-detached-HEAD/" class="post-title-link" itemprop="url">how to understand git detached HEAD</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2016-08-08 13:30:53" itemprop="dateCreated datePublished" datetime="2016-08-08T13:30:53+08:00">2016-08-08</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2016-08-19 23:08:13" itemprop="dateModified" datetime="2016-08-19T23:08:13+08:00">2016-08-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">2.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>远程有一个develop分支，我想获取到本地,但是clone该项目的时候这个远程分支还没有创建,于是执行 <code>git checkout commit_id(develop)</code> 提示如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout f7c774b</span><br><span class="line">Checking out files: 100% (357/357), done.</span><br><span class="line">Note: checking out &apos;f7c774b&apos;.</span><br><span class="line"></span><br><span class="line">You are in &apos;detached HEAD&apos; state. You can look around, make experimental</span><br><span class="line">changes and commit them, and you can discard any commits you make in this</span><br><span class="line">state without impacting any branches by performing another checkout.</span><br><span class="line"></span><br><span class="line">If you want to create a new branch to retain commits you create, you may</span><br><span class="line">do so (now or later) by using -b with the checkout command again. Example:</span><br><span class="line"></span><br><span class="line">  git checkout -b new_branch_name</span><br><span class="line"></span><br><span class="line">HEAD is now at f7c774b... update jeffsui.github.io</span><br></pre></td></tr></table></figure>
-<h2 id="出现-detached-from"><a href="#出现-detached-from" class="headerlink" title="出现 detached from ..."></a>出现 <code>detached from ...</code></h2><p>此时用<code>git branch -av</code>察看分支<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -av</span><br><span class="line">* (detached from f7c774b) f7c774b update jeffsui.github.io</span><br><span class="line">  master                  6ce1857 Site updated: 2016-08-07 22:09:10</span><br><span class="line">  remotes/origin/HEAD     -&gt; origin/master</span><br><span class="line">  remotes/origin/develop  f7c774b update jeffsui.github.io</span><br><span class="line">  remotes/origin/gh-pages 1eee93f Site updated: 2016-02-13 21:03:46</span><br><span class="line">  remotes/origin/master   6ce1857 Site updated: 2016-08-07 22:09:10</span><br></pre></td></tr></table></figure></p>
-<p>所谓的 <code>detached HEAD</code> 其实就是<code>HEAD</code>指向的是一个<code>commit</code>而不指向任何一个<code>branch</code>的临时分支,翻译过来就是<code>游离</code>.</p>
-<p>众所周知,每一个分支都对应了一个commit,<code>git checkout</code>其实就是修改<code>HEAD</code>文件内容,让它指向不同的分支.</p>
-<h2 id="如何让detached-HEAD所处分支指向远程分支"><a href="#如何让detached-HEAD所处分支指向远程分支" class="headerlink" title="如何让detached HEAD所处分支指向远程分支"></a>如何让<code>detached HEAD</code>所处分支指向远程分支</h2><p>此时的分支你可以执行<code>commit</code>操作,但是无法<code>push</code>到远程分支。<br>那么我们如何把游离状态的分支指向我们指定的远程分支呢。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git fetch origin develop:develop</span><br><span class="line">From https://github.com/jeffsui/jeffsui.github.io</span><br><span class="line"> * [new branch]      develop    -&gt; develop</span><br></pre></td></tr></table></figure></p>
-<p>继续执行<code>git branch -av</code> 命令查看分支</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -av</span><br><span class="line">* (detached from f7c774b) f7c774b update jeffsui.github.io</span><br><span class="line">  develop                 f7c774b update jeffsui.github.io</span><br><span class="line">  master                  6ce1857 Site updated: 2016-08-07 22:09:10</span><br><span class="line">  remotes/origin/HEAD     -&gt; origin/master</span><br><span class="line">  remotes/origin/develop  f7c774b update jeffsui.github.io</span><br><span class="line">  remotes/origin/gh-pages 1eee93f Site updated: 2016-02-13 21:03:46</span><br><span class="line">  remotes/origin/master   6ce1857 Site updated: 2016-08-07 22:09:10</span><br></pre></td></tr></table></figure>
-<p>此时我们发现多了一个<code>develop</code>分支指向了远程<code>develop</code> 分支，这样我们就可以通过命令<code>git push origin develop:develop</code>到远程分支了。</p>
-<h2 id="更简洁的方法"><a href="#更简洁的方法" class="headerlink" title="更简洁的方法"></a>更简洁的方法</h2><p><code>git fetch origin develop:develop</code> </p>
-<p>or </p>
-<p><code>git checkount -b origin develop:develop</code> 这样可以直接获取远程分支并创建一个本地分支。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2016/02/15/my-angle/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/02/15/my-angle/" class="post-title-link" itemprop="url">my-angle</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2016-02-15 21:27:07" itemprop="dateCreated datePublished" datetime="2016-02-15T21:27:07+08:00">2016-02-15</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2016-08-19 23:08:13" itemprop="dateModified" datetime="2016-08-19T23:08:13+08:00">2016-08-19</time>
-              
-            
-          </span>
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">8</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><img src="http://7xindo.com1.z0.glb.clouddn.com/photoIMG_20160210_132300.jpg" alt></li>
-<li><img src="http://7xindo.com1.z0.glb.clouddn.com/photoIMG_20160210_132850.jpg" alt></li>
-<li><img src="http://7xindo.com1.z0.glb.clouddn.com/photoIMG_20160210_132209.jpg" alt></li>
-<li><img src="http://7xindo.com1.z0.glb.clouddn.com/photoIMG_20160210_132106.jpg" alt></li>
-<li><img src="http://7xindo.com1.z0.glb.clouddn.com/photoIMG_20160210_131838.jpg" alt></li>
-<li><img src="http://7xindo.com1.z0.glb.clouddn.com/photoIMG_20160210_131523.jpg" alt></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2016/02/13/windows-mongodb-install/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/02/13/windows-mongodb-install/" class="post-title-link" itemprop="url">windows-mongodb-install</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2016-02-13 19:27:09" itemprop="dateCreated datePublished" datetime="2016-02-13T19:27:09+08:00">2016-02-13</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2016-08-19 23:08:13" itemprop="dateModified" datetime="2016-08-19T23:08:13+08:00">2016-08-19</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/db/" itemprop="url" rel="index"><span itemprop="name">db</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">1.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#windows下mongodb安装</p>
-<p>##下载mongodb</p>
-<p><a href="http://www.mongodb.org/downloads" target="_blank" rel="noopener">http://www.mongodb.org/downloads</a></p>
-<p>##选择自定义安装</p>
-<p>本机路径为:<code>d:\tools\mongodb</code></p>
-<p>##建立如下文件目录<br>数据库路径:<code>d:\tools\mongodb\db</code><br>日志路径:<code>d:\tools\mongodb\log</code><br>配置文件目录<code>d:\tools\mongodb\etc</code><br>建立配置文件<code>d:\tools\mongodb\etc\mongodb.conf</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dbpath=d:\tools\mongodb\db #数据库路径</span><br><span class="line">logpath=d:\tools\mongodb\log\mongodb.log #日志输出文件路径</span><br><span class="line">logappend=true #错误日志采用追加模式，配置这个选项后mongodb的日志会追加到现有的日志文件，而不是从新创建一个新文件</span><br><span class="line">journal=true #启用日志文件，默认启用</span><br><span class="line">quiet=true #这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false</span><br><span class="line">port=27017 #端口号 默认为27017</span><br></pre></td></tr></table></figure>
-<p>##启动服务</p>
-<p>切换到<code>d:\tools\mongodb\bin</code> 目录下:</p>
-<ul>
-<li>普通启动</li>
-</ul>
-<p><code>mongod --config d:\tools\mongodb\etc\mongodb.conf</code></p>
-<ul>
-<li>注册为windows服务</li>
-</ul>
-<p><code>mongod --config d:\tools\mongodb\etc\mongodb.conf --install</code></p>
-<p><strong>补充</strong> </p>
-<ul>
-<li>windows服务卸载</li>
-</ul>
-<p><code>mongod --remove --serviceName &quot;MongoDB&quot;</code></p>
-<ul>
-<li>启动服务<br><code>net start mongodb</code></li>
-</ul>
-<p>启动成功后,通过浏览器访问 <code>http://localhost:27017</code> ,看到下面的文字,证明启动服务成功！</p>
-<blockquote>
-<p>It looks like you are trying to access MongoDB over HTTP on the native driver port.</p>
-</blockquote>
-<ul>
-<li>关闭服务<br><code>net stop mongodb</code> </li>
-</ul>
-<p>#图形化工具</p>
-<p>官方提供的很全:<a href="https://docs.mongodb.org/ecosystem/tools/administration-interfaces/" target="_blank" rel="noopener">https://docs.mongodb.org/ecosystem/tools/administration-interfaces/</a></p>
-<ul>
-<li><p><a href="http://www.npmjs.org/package/mongo-express" target="_blank" rel="noopener">mongo express </a> –Nodejs</p>
-</li>
-<li><p><a href="http://mongobooster.com" target="_blank" rel="noopener">MongoBooster </a></p>
-</li>
-<li><p><a href="http://edgytech.com/umongo/" target="_blank" rel="noopener">UMongo </a></p>
-</li>
-<li><p><a href="https://github.com/fotonauts/MongoHub-Mac" target="_blank" rel="noopener">MongoHub </a></p>
-</li>
-<li><p><a href="http://blog.mongovue.com/" target="_blank" rel="noopener">MongoVUE</a> –.NET </p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2016/02/13/maven3-jdk1-7-problem-fixed/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/02/13/maven3-jdk1-7-problem-fixed/" class="post-title-link" itemprop="url">maven3-jdk1.7-problem-fixed</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2016-02-13 16:24:25" itemprop="dateCreated datePublished" datetime="2016-02-13T16:24:25+08:00">2016-02-13</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2016-08-19 23:08:13" itemprop="dateModified" datetime="2016-08-19T23:08:13+08:00">2016-08-19</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ci/" itemprop="url" rel="index"><span itemprop="name">ci</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">3.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>#maven3下jdk1.7编译错误解决</p>
-<p>#环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Apache Maven 3.3.3 (7994120775791599e205a5524ec3e0dfe41d4a06; 2015-04-22T19:57:3</span><br><span class="line">7+08:00)</span><br><span class="line">Maven home: d:\tools\apache-maven-3.3.3</span><br><span class="line">Java version: 1.7.0_45, vendor: Oracle Corporation</span><br><span class="line">Java home: c:\Program Files\Java\jdk1.7.0_45\jre</span><br><span class="line">Default locale: zh_CN, platform encoding: GBK</span><br><span class="line">OS name: &quot;windows 7&quot;, version: &quot;6.1&quot;, arch: &quot;amd64&quot;, family: &quot;windows&quot;</span><br></pre></td></tr></table></figure></p>
-<p>#使用<code>maven</code>命令行创建java项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate -DgroupId=org.linfeng -DartifactId=mavendemo -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>创建成功</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd mavendemo &amp;&amp; ls</span><br><span class="line">pom.xml  src</span><br></pre></td></tr></table></figure>
-<ul>
-<li>pom.xml</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">  xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;</span><br><span class="line">  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">  &lt;groupId&gt;org.linfeng&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;mavendemo&lt;/artifactId&gt;</span><br><span class="line">  &lt;packaging&gt;jar&lt;/packaging&gt;</span><br><span class="line">  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">  &lt;name&gt;mavendemo&lt;/name&gt;</span><br><span class="line">  &lt;url&gt;http://maven.apache.org&lt;/url&gt;</span><br><span class="line">  &lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line">      &lt;version&gt;3.8.1&lt;/version&gt;</span><br><span class="line">      &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">  &lt;/dependencies&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>执行maven命令</li>
-</ul>
-<p><code>mvn test</code></p>
-<ul>
-<li>错误信息</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project mavendemo: Compilation failure</span><br><span class="line">[ERROR] No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?</span><br></pre></td></tr></table></figure>
-<p>#解决方案</p>
-<ul>
-<li>修改<code>settings.xml</code>,添加jdk1.7相关内容</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;profile&gt;</span><br><span class="line">    &lt;id&gt;jdk-1.7&lt;/id&gt;</span><br><span class="line">    &lt;activation&gt;</span><br><span class="line">        &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;</span><br><span class="line">        &lt;jdk&gt;1.7&lt;/jdk&gt;</span><br><span class="line">    &lt;/activation&gt;</span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;maven.compiler.source&gt;1.7&lt;/maven.compiler.source&gt;</span><br><span class="line">        &lt;maven.compiler.target&gt;1.7&lt;/maven.compiler.target&gt;</span><br><span class="line">        &lt;maven.compiler.compilerVersion&gt;1.7&lt;/maven.compiler.compilerVersion&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line">&lt;/profile&gt;</span><br></pre></td></tr></table></figure>
-<p><em>缺点</em>:修改所有项目的jre环境</p>
-<ul>
-<li>修改当前项目的<code>pom.xml</code></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">      &lt;plugin&gt;</span><br><span class="line">        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;3.1&lt;/version&gt;</span><br><span class="line">        &lt;configuration&gt;</span><br><span class="line">          &lt;source&gt;1.7&lt;/source&gt;</span><br><span class="line">          &lt;target&gt;1.7&lt;/target&gt;</span><br><span class="line">        &lt;/configuration&gt;</span><br><span class="line">      &lt;/plugin&gt;</span><br><span class="line">    &lt;/plugins&gt;</span><br><span class="line">&lt;/build&gt;</span><br></pre></td></tr></table></figure>
-<p>重新执行<code>mvn build</code> 成功！</p>
-<p>#问题分析<br>Maven官方文档有如下描述：</p>
-<blockquote>
-<p>编译器插件用来编译项目的源文件.从3.0版本开始, 用来编译Java源文件的默认编译器是javax.tools.JavaCompiler (如果你是用的是java 1.6) . 如果你想强制性的让插件使用javac,你必须配置插件选项 forceJavacCompilerUse.<br>同时需要注意的是目前source选项和target 选项的默认设置都是1.5, 与运行Maven时的JDK版本无关.如果你想要改变这些默认设置, 可以参考 Setting the -source and -target of the Java Compiler中的描述来设置 source 和target 选项.</p>
-</blockquote>
-<p>#参考资料</p>
-<ul>
-<li><a href="http://stackoverflow.com/questions/15220392/maven-package-compilation-error" target="_blank" rel="noopener">http://stackoverflow.com/questions/15220392/maven-package-compilation-error</a></li>
-<li><a href="http://www.cnblogs.com/leo100w/p/4017647.html" target="_blank" rel="noopener">http://www.cnblogs.com/leo100w/p/4017647.html</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2015/08/12/how-make-cygwin-multi-color/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2015/08/12/how-make-cygwin-multi-color/" class="post-title-link" itemprop="url">how make cygwin multi-color</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2015-08-12 06:16:59" itemprop="dateCreated datePublished" datetime="2015-08-12T06:16:59+08:00">2015-08-12</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2016-08-19 23:08:13" itemprop="dateModified" datetime="2016-08-19T23:08:13+08:00">2016-08-19</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li>打开.bashrc</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># Default to human readable figures</span><br><span class="line"># alias df=&apos;df -h&apos;</span><br><span class="line"># alias du=&apos;du -h&apos;</span><br><span class="line">#</span><br><span class="line"># Misc  </span><br><span class="line"># alias less=&apos;less -r&apos;                          # raw control characters</span><br><span class="line"># alias whence=&apos;type -a&apos;                        # where, of a sort</span><br><span class="line"># alias grep=&apos;grep --color&apos;                     # show differences in colour</span><br><span class="line"># alias egrep=&apos;egrep --color=auto&apos;              # show differences in colour</span><br><span class="line"># alias fgrep=&apos;fgrep --color=auto&apos;              # show differences in colour</span><br><span class="line">#</span><br><span class="line"># Some shortcuts for different directory listings</span><br><span class="line"># alias ls=&apos;ls -hF --color=tty&apos;                 # classify files in colour</span><br><span class="line"># alias dir=&apos;ls --color=auto --format=vertical&apos;</span><br><span class="line"># alias vdir=&apos;ls --color=auto --format=long&apos;</span><br><span class="line"># alias ll=&apos;ls -l&apos;                              # long list</span><br><span class="line"># alias la=&apos;ls -A&apos;                              # all but . and ..</span><br><span class="line"># alias l=&apos;ls -CF&apos;                              #</span><br></pre></td></tr></table></figure>
-<ul>
-<li>而我们要做的只是去掉#，启动即可：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># Default to human readable figures</span><br><span class="line">alias df=&apos;df -h&apos;</span><br><span class="line">alias du=&apos;du -h&apos;</span><br><span class="line">#</span><br><span class="line"># Misc  </span><br><span class="line">alias less=&apos;less -r&apos;                          # raw control characters</span><br><span class="line">alias whence=&apos;type -a&apos;                        # where, of a sort</span><br><span class="line">alias grep=&apos;grep --color&apos;                     # show differences in colour</span><br><span class="line">alias egrep=&apos;egrep --color=auto&apos;              # show differences in colour</span><br><span class="line">alias fgrep=&apos;fgrep --color=auto&apos;              # show differences in colour</span><br><span class="line">#</span><br><span class="line"># Some shortcuts for different directory listings</span><br><span class="line">alias ls=&apos;ls -hF --color=tty&apos;                 # classify files in colour</span><br><span class="line">alias dir=&apos;ls --color=auto --format=vertical&apos;</span><br><span class="line">alias vdir=&apos;ls --color=auto --format=long&apos;</span><br><span class="line">alias ll=&apos;ls -l&apos;                              # long list</span><br><span class="line">alias la=&apos;ls -A&apos;                              # all but . and ..</span><br><span class="line">alias l=&apos;ls -CF&apos;                              #</span><br></pre></td></tr></table></figure>
-<ul>
-<li>然后保存一下，再重启cygwin<br>（或者直接用：<code>source ~/.bashrc</code></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2015/07/21/how-to-build-a-private-docker-registry/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2015/07/21/how-to-build-a-private-docker-registry/" class="post-title-link" itemprop="url">how to build a private docker registry</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2015-07-21 23:09:19" itemprop="dateCreated datePublished" datetime="2015-07-21T23:09:19+08:00">2015-07-21</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2016-08-19 23:08:13" itemprop="dateModified" datetime="2016-08-19T23:08:13+08:00">2016-08-19</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">2.4k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="如何搭建docker私服"><a href="#如何搭建docker私服" class="headerlink" title="如何搭建docker私服"></a>如何搭建docker私服</h1><p>##环境准备</p>
-<p>软件包：</p>
-<ul>
-<li><p>centos6.5_x86_64</p>
-</li>
-<li><p>docker-engine-1.7.0-1.el6.x86_64.rpm</p>
-</li>
-</ul>
-<p>docker环境搭建,请参照官方说明，本文采用的是官方的rpm包</p>
-<p>##何谓私服</p>
-<p>官方的image镜像站位dockerhub,因为伟大的墙的缘故,所以下载镜像是很痛苦的一件事。当然你可以采用其他科学上网或者镜像加速的方法来获取image。<br>docker官方也提供了一个私服镜像,大家可以通过<code>docker search registry</code>来查找该镜像。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NAME                                     DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line">registry                                 Containerized docker registry                   320       [OK]       </span><br><span class="line">atcol/docker-registry-ui                 A web UI for easy private/local Docker Reg...   55                   [OK]</span><br><span class="line">konradkleine/docker-registry-frontend    Browse and modify your Docker registry in ...   40                   [OK]</span><br><span class="line">samalba/docker-registry                                                                  35</span><br></pre></td></tr></table></figure>
-<p>##下载官方registry镜像</p>
-<ul>
-<li>下载镜像</li>
-</ul>
-<p>使用命令<code>docker pull registry</code>执行下载镜像。</p>
-<ul>
-<li>查看镜像</li>
-</ul>
-<p>下载完毕后,通过<code>docker images</code> 查看该镜像。</p>
-<ul>
-<li>给镜像打标签</li>
-</ul>
-<p>执行这个命令<br><code>docker tag registry:latest localhost:5000/registry:latest</code></p>
-<p>##启动镜像 </p>
-<p><code>docker run -d -e SETTINGS_FLAVOR=dev -e STORAGE_PATH=/tmp/registry -v /opt/data/registry:/tmp/registry  -p 5000:5000 registry</code></p>
-<p>这里有几个参数说明下:</p>
-<ul>
-<li>1.<code>-e STORAGE_PATH=/tmp/registry</code> :强制使用存储路径</li>
-<li>2.<code>-v /opt/data/registry:/tmp/registry</code> :绑定本地镜像存储路径</li>
-<li>3.<code>-p 5000:5000</code>:映射容器5000端口到本地5000端口</li>
-</ul>
-<p>##查看镜像状态</p>
-<p><code>docker ps</code></p>
-<p>##查看私服状态</p>
-<p><code>curl http://localhost:5000</code></p>
-<p>显示如下信息,证明registry启动成功:</p>
-<p><code>&quot;\&quot;docker-registry server\&quot;&quot;</code></p>
-<p>##推送本地镜像库到registry私服</p>
-<p>###1. 第一步 给本地镜像 打tag<br>例如给官方的nginx镜像打tag,执行下面的命令行<br><code>docker pull nginx</code><br><code>docker tag nginx:latest localhost:5000/nginx:latest</code><br>查看镜像库,发现<code>localhost:5000/nginx</code>的镜像已经有了。</p>
-<p>###2. 第二步 推送tag到registry私服</p>
-<p><code>docker push localhost:5000/nginx:latest</code></p>
-<p>###3. 第三步 查看私服镜像列表</p>
-<p><code>curl http://localhost：5000/V1/search</code></p>
-<p>看到类似这样的信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;&quot;num_results&quot;: 5, &quot;query&quot;: &quot;&quot;, &quot;results&quot;: [&#123;&quot;description&quot;: null, &quot;name&quot;: &quot;correl/erlang&quot;&#125;, &#123;&quot;description&quot;: null, &quot;name&quot;: &quot;linfeng/cmd&quot;&#125;, &#123;&quot;description&quot;: null, &quot;name&quot;: &quot;library/my_nodejs_image&quot;&#125;, &#123;&quot;description&quot;: null, &quot;name&quot;: &quot;library/centos&quot;&#125;, &#123;&quot;description&quot;: &quot;&quot;, &quot;name&quot;: &quot;library/nginx&quot;&#125;]&#125;</span><br></pre></td></tr></table></figure>
-<p>##拉取私服镜像</p>
-<p><code>docker pull 192.168.20.85:5000/library/centos:7</code></p>
-<p>##结论</p>
-<p>这只是演示如何搭建一个简单的registry私服。因为只有通过命令行方式才能查看私服信息,所以不是很便于操作。下面的博文将演示如何给registry添加web界面。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2015/05/16/how-git-version-rollback/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2015/05/16/how-git-version-rollback/" class="post-title-link" itemprop="url">how git version rollback</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2015-05-16 21:58:30" itemprop="dateCreated datePublished" datetime="2015-05-16T21:58:30+08:00">2015-05-16</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2016-08-19 23:08:13" itemprop="dateModified" datetime="2016-08-19T23:08:13+08:00">2016-08-19</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/git/" itemprop="url" rel="index"><span itemprop="name">git</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">1.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>如何进行远程版本回退……</p>
-</blockquote>
-<p>#引言</p>
-<blockquote>
-<p>一切都要从一个蛋疼的需求开始,老板说,能给远程仓库的版本回退吗？我说为毛？他说我就是试试看git好使不,我……</p>
-</blockquote>
-<p>#咋搞</p>
-<ul>
-<li>背景 </li>
-</ul>
-<p>gitcafe 国内知名的源码托管平台</p>
-<ul>
-<li>分析</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1、git checkout the_branch</span><br><span class="line"></span><br><span class="line">2、git pull</span><br><span class="line"></span><br><span class="line">3、git branch the_branch_backup //备份一下这个分支当前的情况</span><br><span class="line"></span><br><span class="line">4、git reset --hard the_commit_id //把the_branch本地回滚到the_commit_id</span><br><span class="line"></span><br><span class="line">5、git push origin :the_branch //删除远程 the_branch</span><br><span class="line"></span><br><span class="line">6、git push origin the_branch //用回滚后的本地分支重新建立远程分支</span><br><span class="line"></span><br><span class="line">7、git push origin :the_branch_backup //如果前面都成功了，删除这个备份分支</span><br></pre></td></tr></table></figure>
-<ul>
-<li>删除远程分支</li>
-</ul>
-<p>首先,任何一个git源码托管平台都会告诉你,别删除远程master分支,因为它是默认的分支……,请移步<a href="https://gitcafe.com/GitCafe/Help/wiki/%E5%A6%82%E4%BD%95%E5%88%A0%E9%99%A4-Master-%E5%88%86%E6%94%AF" target="_blank" rel="noopener">这里</a> </p>
-<ul>
-<li>操作步骤 </li>
-</ul>
-<p>如果远程只有一个master分支,请你创建一个非master分支,然后推送到远程。<br>有人会问我为什么？打个比方,你见过上旱厕的时候,给自己脚下站着的板子抽走吗？</p>
-<p>脚本类似下面这样</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git branch the_master_backup</span><br><span class="line"></span><br><span class="line">git push origin the_master_backup</span><br></pre></td></tr></table></figure>
-<p>此时你查看远程分支应该有两个:master和the_master_backup</p>
-<p>设置默认的分支为 the_master_backup</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git branch -D branch_name //删除本地master分支</span><br><span class="line"></span><br><span class="line">git push :master //推送一个空分支,相当于删除远程master分支</span><br></pre></td></tr></table></figure>
-<p>然后你在the_master_backup分支上 回滚到你要回滚的commit_id,然后重建master分支并推送到远程,顺便删除the_master_backup分支(包括远程the_master_backup分支)。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git checkout the_master_backup</span><br><span class="line"></span><br><span class="line">git reset --hard commit_id</span><br><span class="line"></span><br><span class="line">git branch master //重新创建master分支</span><br><span class="line"></span><br><span class="line">git push origin master //重新推送master分支</span><br><span class="line"></span><br><span class="line">git branch -D the_master_backup //删除本地the_master_backup分支</span><br><span class="line"></span><br><span class="line">git push origin :the_master_backup//删除远程the_master_backup分支</span><br></pre></td></tr></table></figure>
-<p>#遇到的问题</p>
-<ol>
-<li>忘记设置默认分支为非master分支</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">remote: error: By default, deleting the current branch is denied, because the ne</span><br><span class="line">xt</span><br><span class="line">remote: error: &apos;git clone&apos; won&apos;t result in any file checked out, causing confusi</span><br><span class="line">on.</span><br><span class="line">remote: error:</span><br><span class="line">remote: error: You can set &apos;receive.denyDeleteCurrent&apos; configuration variable to</span><br><span class="line"></span><br><span class="line">remote: error: &apos;warn&apos; or &apos;ignore&apos; in the remote repository to allow deleting the</span><br><span class="line"></span><br><span class="line">remote: error: current branch, with or without a warning message.</span><br><span class="line">remote: error:</span><br><span class="line">remote: error: To squelch this message, you can set it to &apos;refuse&apos;.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>#总结</p>
-<p>如果你遇到的是所有提交只有master分支,那么希望我这个博文能帮到你。当然git强大的分支功能你基本也用不到了。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2015/04/23/javascript-oop-15-min-programming/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2015/04/23/javascript-oop-15-min-programming/" class="post-title-link" itemprop="url">javascript oop 15 min programming</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2015-04-23 13:13:30" itemprop="dateCreated datePublished" datetime="2015-04-23T13:13:30+08:00">2015-04-23</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2016-08-19 23:08:13" itemprop="dateModified" datetime="2016-08-19T23:08:13+08:00">2016-08-19</time>
               
             
           </span>
@@ -2554,7 +553,658 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.7k</span>
+                <span title="本文字数">2.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="javascript如何获取checkbox被选中的值"><a href="#javascript如何获取checkbox被选中的值" class="headerlink" title="javascript如何获取checkbox被选中的值"></a>javascript如何获取checkbox被选中的值</h1><h2 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h2><p>javascript dom 常用方法</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>document.getElementById</td>
+<td>返回给定id属性值的元素节点相对应的对象</td>
+<td><input type="checkbox" name="hobbies" id="hobbies"></td>
+</tr>
+<tr>
+<td>document.getElementsByTagName</td>
+<td>返回给定name属性的元素节点对应的元素集合</td>
+<td>var hobbies = document.getElementsByName(“hobbies”);</td>
+</tr>
+<tr>
+<td>element.nextSibling</td>
+<td>返回该元素紧跟的一个节点</td>
+<td></td>
+</tr>
+<tr>
+<td>nodeValue</td>
+<td>获取节点中的文本值 ,例如：跑步</td>
+<td><input type="checkbox" name="hobbies" id="hobbies" class="hobbies" value="2">跑步</td>
+</tr>
+</tbody>
+</table>
+<p>数组常用方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法 或者 属性</th>
+<th>说明</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>arrayObject.length</td>
+<td>属性：数组长度</td>
+<td></td>
+</tr>
+<tr>
+<td>arrayObject.push()</td>
+<td>向数组末尾添加一个或多个元素</td>
+<td>var arr = new Array(3) <br>arr[0] = “George” <br>arr[1] = “John” <br>arr[2] = “Thomas”</td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/28/javascript-get-checkbox-checked-value/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/09/20/javascript中Boolean-Object与Boolean-Primitives/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/20/javascript中Boolean-Object与Boolean-Primitives/" class="post-title-link" itemprop="url">javascript中Boolean_Object与Boolean_Primitives</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-20 15:34:37 / 修改时间：15:48:52" itemprop="dateCreated datePublished" datetime="2019-09-20T15:34:37+08:00">2019-09-20</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>先看下面的脚本，预测下结果</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> flag = <span class="literal">true</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(flag));<span class="comment">//boolean</span></span><br><span class="line"><span class="keyword">var</span> fa = <span class="built_in">Boolean</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(fa));<span class="comment">//boolean</span></span><br><span class="line"><span class="keyword">var</span> ff = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(ff)); <span class="comment">//Object</span></span><br></pre></td></tr></table></figure>
+<p>在 jslint中明确提示 new Boolean(true)；<code>do not use Boolean as a constructor. (W053)jshint(W053)</code></p>
+<p>接下来的例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(flag)&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"true is true"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(fa)&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">"Boolean is  true"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(ff)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"Object Boolean is true"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span> is <span class="literal">true</span></span><br><span class="line"><span class="built_in">Boolean</span> is  <span class="literal">true</span></span><br><span class="line"><span class="built_in">Object</span> <span class="built_in">Boolean</span> is <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>修改脚本：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> flag = <span class="literal">true</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(<span class="literal">false</span>));<span class="comment">//boolean</span></span><br><span class="line"><span class="keyword">var</span> fa = <span class="built_in">Boolean</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(fa));<span class="comment">//boolean</span></span><br><span class="line"><span class="keyword">var</span> ff = <span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(ff)); <span class="comment">//Object</span></span><br></pre></td></tr></table></figure>
+<p>结果竟然显示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span> <span class="built_in">Boolean</span> is <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/20/javascript中Boolean-Object与Boolean-Primitives/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/09/06/how-to-add-163-music-to-hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/09/06/how-to-add-163-music-to-hexo/" class="post-title-link" itemprop="url">how to add 163 music to hexo</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-06 13:25:19 / 修改时间：13:44:36" itemprop="dateCreated datePublished" datetime="2019-09-06T13:25:19+08:00">2019-09-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/搭建博客/" itemprop="url" rel="index"><span itemprop="name">搭建博客</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">551</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="如何给hexo添加网易音乐"><a href="#如何给hexo添加网易音乐" class="headerlink" title="如何给hexo添加网易音乐"></a>如何给hexo添加网易音乐</h2><h2 id="先看看效果"><a href="#先看看效果" class="headerlink" title="先看看效果"></a>先看看效果</h2><p><img src="https://i.loli.net/2019/09/06/3W96u4wDtHpeAa7.png" alt="博客添加网易音乐.png"></p>
+<h3 id="1-访问网易云首页，选择你喜欢的音乐，点击生成外链-我不希望音乐一直播放-如果来访的朋友想听-点击下播放就好。"><a href="#1-访问网易云首页，选择你喜欢的音乐，点击生成外链-我不希望音乐一直播放-如果来访的朋友想听-点击下播放就好。" class="headerlink" title="1.访问网易云首页，选择你喜欢的音乐，点击生成外链,我不希望音乐一直播放,如果来访的朋友想听,点击下播放就好。"></a>1.访问网易云首页，选择你喜欢的音乐，点击生成外链,我不希望音乐一直播放,如果来访的朋友想听,点击下播放就好。</h3><blockquote>
+<p>这里我选择二十岁的某一天</p>
+</blockquote>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/09/06/how-to-add-163-music-to-hexo/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/07/28/how-to-Sort-Python-Dictionaries-by-Key-or-Value/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/28/how-to-Sort-Python-Dictionaries-by-Key-or-Value/" class="post-title-link" itemprop="url">how to Sort Python Dictionaries by Key or Value</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-28 11:17:04 / 修改时间：11:21:54" itemprop="dateCreated datePublished" datetime="2019-07-28T11:17:04+08:00">2019-07-28</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">2.5k</span>
               
 
               
@@ -2589,41 +1239,1270 @@
 
       
         
+          <blockquote>
+<p>众所周知,python中字典是无序的,那么该如何对字典排序呢？</p>
+</blockquote>
+<p>例如下面的字典：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">numbers = &#123;<span class="string">'second'</span>: <span class="number">2</span>,<span class="string">'first'</span>: <span class="number">1</span>,  <span class="string">'third'</span>: <span class="number">3</span>, <span class="string">'Fourth'</span>: <span class="number">4</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以通过list()函数打印value,<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;list(numbers)</span><br><span class="line">[<span class="string">'second'</span>, <span class="string">'first'</span>, <span class="string">'third'</span>, <span class="string">'Fourth'</span>]</span><br></pre></td></tr></table></figure></p>
+<p><strong>备注</strong>: </p>
+<blockquote>
+<p>python3.6.4 以上的版本,字典根据插入的顺序自动排序</p>
+</blockquote>
+<h3 id="如何根据key-对字典排序"><a href="#如何根据key-对字典排序" class="headerlink" title="如何根据key 对字典排序"></a>如何根据key 对字典排序</h3><p>可以使用python的内置函数<code>sorted</code> 来对字典排序,如下面的代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted(numbers)</span><br><span class="line">[<span class="string">'Fourth'</span>, <span class="string">'first'</span>, <span class="string">'second'</span>, <span class="string">'third'</span>]</span><br></pre></td></tr></table></figure>
+<p>结果有点差强人意,因为默认<code>sorted</code>函数是根据字母的顺序升序排列的,这里的字典中 key 恰好是字母，所以才会显示这个结果。</p>
+<h3 id="根据value对字典排序"><a href="#根据value对字典排序" class="headerlink" title="根据value对字典排序"></a>根据value对字典排序</h3><p>用同样的方法,我们可以根据value来排序</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted(numbers.values())</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
           
-            <p>#javascript的面向对象15分钟教程</p>
-<h2 id="第一种面向对象的写法"><a href="#第一种面向对象的写法" class="headerlink" title="第一种面向对象的写法"></a>第一种面向对象的写法</h2><p>##创建空对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var bill =&#123;&#125;;//创建一个空对象</span><br></pre></td></tr></table></figure>
-<p>##给对象添加属性和方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">bill.name = &quot;Bill Goat&quot;;</span><br><span class="line">bill.work = function ()&#123;</span><br><span class="line">    console.log(&quot;programming....&quot;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>##一步完成上面的两件事</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var bill =&#123;</span><br><span class="line">    name : &quot;Bill Goat&quot;;</span><br><span class="line">    work : function()&#123;</span><br><span class="line">    console.log(&quot;programming....&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>##访问对象和属性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">console.log(bill.name);</span><br><span class="line">bill.work();</span><br></pre></td></tr></table></figure>
-<p>##方法重写</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">bill.name = &quot;Bill Goat&quot;;</span><br><span class="line">bill.work =function(who)&#123;</span><br><span class="line">     console.log(&quot;programming for &quot;+who);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>##通过this关键字访问内部属性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">bill.say = function ()&#123;</span><br><span class="line">    console.log(&quot;bill&apos;s name  is&quot;+this.name);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>##对象引用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var silly = bill;</span><br><span class="line">console.log(silly.name);</span><br><span class="line">sally.name = &quot;Silly&quot;;</span><br><span class="line">console.log(silly.name);</span><br><span class="line">console.log(bill.name);</span><br></pre></td></tr></table></figure></p>
-<p>##另一个方式引用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">bill.name = &quot;Bill Goat&quot;;</span><br><span class="line">bill.say();</span><br><span class="line"></span><br><span class="line">var sayName = bill.say();</span><br><span class="line">sayName;</span><br><span class="line">sayName();</span><br></pre></td></tr></table></figure></p>
-<p>##有意思的地方 ：全局属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var name = &quot;Global&quot;;</span><br><span class="line">bill.say();</span><br></pre></td></tr></table></figure></p>
-<p>发现此时输出的是<br><code>bill&#39;s name is Global</code></p>
-<h2 id="另一种面向对象的写法"><a href="#另一种面向对象的写法" class="headerlink" title="另一种面向对象的写法"></a>另一种面向对象的写法</h2><p>##定义对象及属性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function Game()&#123;&#125;;</span><br></pre></td></tr></table></figure>
-<p>##创建对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var DF = new Game();</span><br></pre></td></tr></table></figure>
-<p>##对象属性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DF.title = &quot;星际争霸2&quot;;</span><br></pre></td></tr></table></figure>
-<p>##构造方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function Game (title)&#123;</span><br><span class="line">	this.title = typeof title !== &apos;undifined&apos; ? title :&quot;&quot;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var d3 = new Game(&quot;d3&quot;);</span><br><span class="line">d3.title;</span><br><span class="line">d3.title =&quot;starcraft2&quot;;</span><br></pre></td></tr></table></figure>
-<p><code>this.title = typeof title !== &#39;undifined&#39; ? title :&quot;&quot;;</code>相当于</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">if(typeof title !== &quot;undifined&quot;）&#123;</span><br><span class="line">	this.title = title;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	this.title = &quot;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>##创建一个方法来访问这个属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">d3.loveTitle = function ()&#123;</span><br><span class="line">	console.log(&quot;I love &quot;+this.title);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>##更好的写法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Game.prototype.heartIt = function ()&#123;</span><br><span class="line">	console.log(&quot;I love &quot;+this.title);</span><br><span class="line">&#125;</span><br><span class="line">d3.heartIt();</span><br></pre></td></tr></table></figure>
-<p>下次详解javascript的原生对象模型</p>
-<p>to be continued~~~~</p>
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/07/28/how-to-Sort-Python-Dictionaries-by-Key-or-Value/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/06/11/javascript-undefined-description/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/11/javascript-undefined-description/" class="post-title-link" itemprop="url">javascript-undefined-description</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-11 15:45:18 / 修改时间：17:28:03" itemprop="dateCreated datePublished" datetime="2019-06-11T15:45:18+08:00">2019-06-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javascript/" itemprop="url" rel="index"><span itemprop="name">javascript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">849</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Javascript-基础拾遗之undefined"><a href="#Javascript-基础拾遗之undefined" class="headerlink" title="Javascript 基础拾遗之undefined"></a>Javascript 基础拾遗之undefined</h2><p>先看一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"><span class="built_in">console</span>.log(a);<span class="comment">//undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(a)); <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+<p>javascript中的数据类型包括<code>undefined</code>，<code>null</code>,<code>boolean</code>,<code>number</code>,<code>string</code>,<code>boolean</code>六种类型(ECMAScript 2015)</p>
+<h3 id="undefined-小结"><a href="#undefined-小结" class="headerlink" title="undefined 小结"></a>undefined 小结</h3><p>undefined 类型的意思是当前对象未定义,适用于下面几种情况</p>
+<ol>
+<li>变量声明,但未赋值</li>
+<li>对象没有赋值的属性,该属性的值为undefined</li>
+<li>调用函数参数,但是未提供参数，该参数的值为undefined</li>
+<li>函数没有返回值时,默认返回undefined</li>
+</ol>
+<p>再看下面的例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.</span></span><br><span class="line"><span class="keyword">var</span> i;</span><br><span class="line"><span class="built_in">console</span>.log(i);</span><br><span class="line"><span class="comment">//2.</span></span><br><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="built_in">console</span>.log(o.p);</span><br><span class="line"><span class="comment">//3.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">typeof</span> a);    <span class="comment">// undefined</span></span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br><span class="line">test();</span><br><span class="line"><span class="comment">//4.</span></span><br><span class="line">myfunc()</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myfunc</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//console.log("my function.");</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(myfunc());</span><br></pre></td></tr></table></figure>
+<p>需要区别下面这个情况,不同浏览器提示信息可能会不同(Chrome和IE测试)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(b);</span><br><span class="line"><span class="comment">// Uncaught ReferenceError: b is not defined</span></span><br></pre></td></tr></table></figure>
+<h3 id="如何判断为空"><a href="#如何判断为空" class="headerlink" title="如何判断为空"></a>如何判断为空</h3><p>下面三种判断方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式1</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">typeof</span> age === <span class="string">'undefined'</span>)</span><br><span class="line"><span class="comment">// 方式2</span></span><br><span class="line"><span class="keyword">if</span>(age === <span class="literal">undefined</span>)</span><br><span class="line"><span class="comment">// 方式3</span></span><br><span class="line"><span class="keyword">if</span>(varName) <span class="comment">//万能判断,包括boolean</span></span><br></pre></td></tr></table></figure>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined" target="_blank" rel="noopener">火狐JavaScript教程</a></p>
+<p><a href="https://stackoverflow.com/questions/2559318/how-to-check-for-an-undefined-or-null-variable-in-javascript" target="_blank" rel="noopener">stackoverflow如何检查undefined</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/06/03/Maven-webapp-buildpath-missing-test-folder/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/03/Maven-webapp-buildpath-missing-test-folder/" class="post-title-link" itemprop="url">Build path entry is missing /src/test/java missing问题解决</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-03 17:04:00 / 修改时间：17:24:57" itemprop="dateCreated datePublished" datetime="2019-06-03T17:04:00+08:00">2019-06-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javaweb/" itemprop="url" rel="index"><span itemprop="name">javaweb</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">187</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="[问题描述]"></a>[问题描述]</h2><p>通过maven构建webapp,发现缺少java和test目录</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="[解决方案]"></a>[解决方案]</h2><blockquote>
+<p>project –right click –build path– config build path – libraries – double click “JRE System Library”–choose “workspace default JRE”  OK</p>
+</blockquote>
+<p>如下图所示<br><img src="https://i.loli.net/2019/06/03/5cf4e41a0d68921253.png" alt></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/06/03/how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/03/how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse/" class="post-title-link" itemprop="url">how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-03 09:47:24 / 修改时间：15:16:42" itemprop="dateCreated datePublished" datetime="2019-06-03T09:47:24+08:00">2019-06-03</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/javaweb/" itemprop="url" rel="index"><span itemprop="name">javaweb</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">960</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1.问题描述"></a>1.问题描述</h2><p><img src="https://cdn.crunchify.com/wp-content/uploads/2015/06/Cannot-change-version-of-project-facet-Dynamic-Web-Module-to-3.0.png" alt></p>
+<p>试图转换Dynamic Web Module 发生如下错误:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Cannot change version of project facet Dynamic Web Module to 3.0 </span><br><span class="line">One or more constraints have not been satisfied</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/03/how-to-fix-cannot-change-version-of-project-dynamic-web-module-to-3.1-in-Eclipse/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/05/31/hexo建站搭建流程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/31/hexo建站搭建流程/" class="post-title-link" itemprop="url">hexo建站搭建流程</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-31 13:49:12" itemprop="dateCreated datePublished" datetime="2019-05-31T13:49:12+08:00">2019-05-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-03 15:57:59" itemprop="dateModified" datetime="2019-06-03T15:57:59+08:00">2019-06-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/搭建博客/" itemprop="url" rel="index"><span itemprop="name">搭建博客</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <ol>
+<li><p>下载并安装 Visual Studio Code, <a href="https://www.visualstudio.com/" target="_blank" rel="noopener">官方下载</a></p>
+</li>
+<li><p>下载并安装 Nodejs, <a href="http://nodejs.cn/download/" target="_blank" rel="noopener">官方下载</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+<p>npm 镜像源修改为 淘宝NPM镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载并安装 Git, <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">官方下载</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#配置名字和邮箱</span><br><span class="line">git config --global user.name &quot;test&quot;</span><br><span class="line">git config --global user.email &quot;test@.com&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="4">
+<li><p>安装 Hexo, <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">官方文档</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g hexo-cli</span><br><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+<p>初始化博客目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd D</span><br><span class="line">hexo init blog</span><br><span class="line">cd blog</span><br><span class="line">cnpm install</span><br></pre></td></tr></table></figure>
+<p>启动服务器,本地预览</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/05/31/hexo建站搭建流程/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/05/28/python创建字典的几种方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/28/python创建字典的几种方法/" class="post-title-link" itemprop="url">python创建字典的几种方法</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-28 17:29:10" itemprop="dateCreated datePublished" datetime="2019-05-28T17:29:10+08:00">2019-05-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-03 15:57:50" itemprop="dateModified" datetime="2019-06-03T15:57:50+08:00">2019-06-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="python创建字典的几种方法"><a href="#python创建字典的几种方法" class="headerlink" title="python创建字典的几种方法"></a>python创建字典的几种方法</h1><h2 id="1-创建空字典"><a href="#1-创建空字典" class="headerlink" title="1. 创建空字典"></a>1. 创建空字典</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = &#123;&#125;</span><br><span class="line">&gt;&gt;&gt; type(dic)</span><br><span class="line">&lt;type &apos;dict&apos;&gt;</span><br></pre></td></tr></table></figure>
+<p>另一种形式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp = dict()</span><br><span class="line">temp[&apos;name&apos;] = &apos;xiaoming&apos;</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-直接赋值创建"><a href="#2-直接赋值创建" class="headerlink" title="2. 直接赋值创建"></a>2. 直接赋值创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = &#123;&apos;spam&apos;:1, &apos;egg&apos;:2, &apos;bar&apos;:3&#125;</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;&apos;bar&apos;: 3, &apos;egg&apos;: 2, &apos;spam&apos;: 1&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-通过关键字dict和关键字参数创建"><a href="#3-通过关键字dict和关键字参数创建" class="headerlink" title="3. 通过关键字dict和关键字参数创建"></a>3. 通过关键字dict和关键字参数创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; dic = dict(spam = 1, egg = 2, bar =3)</span><br><span class="line">&gt;&gt;&gt; dic</span><br><span class="line">&#123;&apos;bar&apos;: 3, &apos;egg&apos;: 2, &apos;spam&apos;: 1&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/05/28/python创建字典的几种方法/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/05/28/python操作sqlite3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/28/python操作sqlite3/" class="post-title-link" itemprop="url">python操作sqlite3</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-28 17:24:42" itemprop="dateCreated datePublished" datetime="2019-05-28T17:24:42+08:00">2019-05-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-10 10:35:57" itemprop="dateModified" datetime="2020-02-10T10:35:57+08:00">2020-02-10</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">7.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="sqlite3-简介"><a href="#sqlite3-简介" class="headerlink" title="sqlite3 简介"></a>sqlite3 简介</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">SQLite数据库是一款非常小巧的嵌入式开源数据库软件，也就是说</span><br><span class="line">没有独立的维护进程，所有的维护都来自于程序本身。</span><br><span class="line">在python中，使用sqlite3创建数据库的连接，当我们指定的数据库文件不存在的时候</span><br><span class="line">连接对象会自动创建数据库文件；如果数据库文件已经存在，则连接对象不会再创建</span><br><span class="line">数据库文件，而是直接打开该数据库文件。</span><br><span class="line">    连接对象可以是硬盘上面的数据库文件，也可以是建立在内存中的，在内存中的数据库</span><br><span class="line">    执行完任何操作后，都不需要提交事务的(commit)</span><br><span class="line"></span><br><span class="line">    创建在硬盘上面： conn = sqlite3.connect(&apos;c:\\test\\test.db&apos;)</span><br><span class="line">    创建在内存上面： conn = sqlite3.connect(&apos;&quot;memory:&apos;)</span><br><span class="line"></span><br><span class="line">    下面我们一硬盘上面创建数据库文件为例来具体说明：</span><br><span class="line">    conn = sqlite3.connect(&apos;c:\\test\\hongten.db&apos;)</span><br><span class="line">    其中conn对象是数据库链接对象，而对于数据库链接对象来说，具有以下操作：</span><br><span class="line"></span><br><span class="line">        commit()            --事务提交</span><br><span class="line">        rollback()          --事务回滚</span><br><span class="line">        close()             --关闭一个数据库链接</span><br><span class="line">        cursor()            --创建一个游标</span><br><span class="line"></span><br><span class="line">    cu = conn.cursor()</span><br><span class="line">    这样我们就创建了一个游标对象：cu</span><br><span class="line">    在sqlite3中，所有sql语句的执行都要在游标对象的参与下完成</span><br><span class="line">    对于游标对象cu，具有以下具体操作：</span><br><span class="line"></span><br><span class="line">        execute()           --执行一条sql语句</span><br><span class="line">        executemany()       --执行多条sql语句</span><br><span class="line">        close()             --游标关闭</span><br><span class="line">        fetchone()          --从结果中取出一条记录</span><br><span class="line">        fetchmany()         --从结果中取出多条记录</span><br><span class="line">        fetchall()          --从结果中取出所有记录</span><br><span class="line">        scroll()            --游标滚动</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/05/28/python操作sqlite3/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -2667,7 +2546,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2711,7 +2590,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">67</span>
+                    <span class="site-state-item-count">82</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2766,7 +2645,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">19</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2949,7 +2832,29 @@
                     
                       
                     
-                    <span class="site-state-item-count">83</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">94</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -3026,7 +2931,7 @@
 <div class="widget-wrap">
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">36</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">50</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-libary/">standard_libary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">44</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
@@ -3062,7 +2967,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">338k</span>
+    <span title="站点总字数">478k</span>
   
 
   
@@ -3071,7 +2976,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">5:08</span>
+    <span title="站点阅读时长">7:15</span>
   
 </div>
 
@@ -3581,5 +3486,5 @@
 
   
 
-</body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
 </html>
