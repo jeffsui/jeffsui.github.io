@@ -1,0 +1,2010 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 内置异常">
+<meta name="keywords" content="python,standard_library,Exception">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library Built-in Exception">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/02/22/python-standard-library-Built-in-Exception/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 内置异常">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200221-happy-birthday.jpg?raw=true">
+<meta property="og:updated_time" content="2020-02-22T15:22:54.243Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library Built-in Exception">
+<meta name="twitter:description" content="python 标准库 内置异常">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200221-happy-birthday.jpg?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/02/22/python-standard-library-Built-in-Exception/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library Built-in Exception | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/02/22/python-standard-library-Built-in-Exception/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library Built-in Exception
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-22 22:47:29 / 修改时间：23:22:54" itemprop="dateCreated datePublished" datetime="2020-02-22T22:47:29+08:00">2020-02-22</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">12k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">11 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-内置异常"><a href="#python-标准库-内置异常" class="headerlink" title="python 标准库 内置异常"></a>python 标准库 内置异常</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200221-happy-birthday.jpg?raw=true" alt></p>
+<a id="more"></a>
+<blockquote>
+<p>每日一词:</p>
+<h1 id="worth"><a href="#worth" class="headerlink" title="worth"></a><strong>worth</strong></h1><p>n <strong>价值；意义；价值（十元、40 英镑等）的东西</strong></p>
+<p>adj <strong>有…价值；值…钱；（指行动）值得；值得（费周折）</strong></p>
+<p>web <strong>值得的；有……的价值；值…的</strong></p>
+<p>短语:</p>
+<p><strong>for all sb/it is worth</strong> 竭尽全力；拼命</p>
+<p>for what its worth  非正式   （所说的只是个人意见）无论管不管用，不论好坏</p>
+<p><strong>(the game is) not worth the candle</strong>  得不偿失<br>  <strong>not worth the paper its written/printed on</strong>  尤指 (法律上 )毫无价值</p>
+<p>worth your/its salt   称职；胜任</p>
+<p>worth sbs while    对…有好处（或用处）</p>
+</blockquote>
+<p>在 Python 中，所有异常必须为一个派生自 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#BaseException" target="_blank" rel="noopener"><code>BaseException</code></a> 的类的实例。 在带有提及一个特定类的 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#except" target="_blank" rel="noopener"><code>except</code></a> 子句的 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#try" target="_blank" rel="noopener"><code>try</code></a> 语句中，该子句也会处理任何派生自该类的异常类（但不处理 <em>它</em> 所派生出的异常类）。 通过子类化创建的两个不相关异常类永远是不等效的，既使它们具有相同的名称。</p>
+<p>下面列出的内置异常可通过解释器或内置函数来生成。除非另有说明，它们都会具有一个提示导致错误详细原因的“关联值”。 这可以是一个字符串或由多个信息项（例如一个错误码和一个解释错误的字符串）组成的元组。 关联值通常会作为参数被传递给异常类的构造器。</p>
+<p>用户代码可以引发内置异常。 这可被用于测试异常处理程序或报告错误条件，“就像” 在解释器引发了相同异常的情况时一样；但是请注意，没有任何机制能防止用户代码引发不适当的错误。</p>
+<p>内置异常类可以被子类化以定义新的异常；鼓励程序员从 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#Exception" target="_blank" rel="noopener"><code>Exception</code></a> 类或它的某个子类而不是从 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#BaseException" target="_blank" rel="noopener"><code>BaseException</code></a> 来派生新的异常。 关于定义异常的更多信息可以在 Python 教程的 <a href="https://docs.python.org/zh-cn/3.8/tutorial/errors.html#tut-userexceptions" target="_blank" rel="noopener">用户自定义异常</a> 部分查看。</p>
+<p>当在 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#except" target="_blank" rel="noopener"><code>except</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#finally" target="_blank" rel="noopener"><code>finally</code></a> 子句中引发（或重新引发）异常时，<code>__context__</code> 会被自动设为所捕获的最后一个异常；如果新的异常未被处理，则最终显示的回溯信息将包括原始的异常和最后的异常。</p>
+<p>当引发一个新的异常（而不是简单地使用 <code>raise</code> 来重新引发当前在处理的异常）时，隐式的异常上下文可以通过使用带有 <a href="https://docs.python.org/zh-cn/3.8/reference/simple_stmts.html#raise" target="_blank" rel="noopener"><code>raise</code></a> 的 <a href="https://docs.python.org/zh-cn/3.8/reference/simple_stmts.html#from" target="_blank" rel="noopener"><code>from</code></a> 来补充一个显式的原因:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">raise</span> new_exc <span class="keyword">from</span> original_exc</span><br></pre></td></tr></table></figure>
+<p>跟在 <a href="https://docs.python.org/zh-cn/3.8/reference/simple_stmts.html#from" target="_blank" rel="noopener"><code>from</code></a> 之后的表达式必须为一个异常或 <code>None</code>。 它将在所引发的异常上被设置为 <code>__cause__</code>。 设置 <code>__cause__</code> 还会隐式地将 <code>__suppress_context__</code> 属性设为 <code>True</code>，这样使用 <code>raise new_exc from None</code> 可以有效地将旧异常替换为新异常来显示其目的 (例如将 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#KeyError" target="_blank" rel="noopener"><code>KeyError</code></a> 转换为 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#AttributeError" target="_blank" rel="noopener"><code>AttributeError</code></a>)，同时让旧异常在 <code>__context__</code> 中保持可用状态以便在调试时进行内省。</p>
+<p>除了异常本身的回溯以外，默认的回溯还会显示这些串连的异常。 <code>__cause__</code> 中的显式串连异常如果存在将总是显示。 <code>__context__</code> 中的隐式串连异常仅在 <code>__cause__</code> 为 <a href="https://docs.python.org/zh-cn/3.8/library/constants.html#None" target="_blank" rel="noopener"><code>None</code></a> 并且 <code>__suppress_context__</code> 为假值时显示。</p>
+<p>不论在哪种情况下，异常本身总会在任何串连异常之后显示，以便回溯的最后一行总是显示所引发的最后一个异常。</p>
+<h2 id="基类"><a href="#基类" class="headerlink" title="基类"></a>基类</h2><p>下列异常主要被用作其他异常的基类。</p>
+<ul>
+<li><p><em>exception</em> <code>BaseException</code></p>
+<p>所有内置异常的基类。 它不应该被用户自定义类直接继承 (这种情况请使用 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#Exception" target="_blank" rel="noopener"><code>Exception</code></a>)。 如果在此类的实例上调用 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str()</code></a>，则会返回实例的参数表示，或者当没有参数时返回空字符串。</p>
+<ul>
+<li><p><code>args</code></p>
+<p>传给异常构造器的参数元组。 某些内置异常 (例如 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a>) 接受特定数量的参数并赋予此元组中的元素特殊的含义，而其他异常通常只接受一个给出错误信息的单独字符串。</p>
+</li>
+<li><p><code>with_traceback</code>(<em>tb</em>)</p>
+<p>此方法将 <em>tb</em> 设为异常的新回溯信息并返回该异常对象。 它通常以如下的形式在异常处理程序中使用:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">except</span> SomeException:</span><br><span class="line">    tb = sys.exc_info()[<span class="number">2</span>]</span><br><span class="line">    <span class="keyword">raise</span> OtherException(...).with_traceback(tb)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><em>exception</em> <code>Exception</code></p>
+<p>所有内置的非系统退出类异常都派生自此类。 所有用户自定义异常也应当派生自此类。</p>
+</li>
+<li><p><em>exception</em> <code>ArithmeticError</code></p>
+<p>此基类用于派生针对各种算术类错误而引发的内置异常: <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OverflowError" target="_blank" rel="noopener"><code>OverflowError</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ZeroDivisionError" target="_blank" rel="noopener"><code>ZeroDivisionError</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#FloatingPointError" target="_blank" rel="noopener"><code>FloatingPointError</code></a>。</p>
+</li>
+<li><p><em>exception</em> <code>BufferError</code></p>
+<p>当与 <a href="https://docs.python.org/zh-cn/3.8/c-api/buffer.html#bufferobjects" target="_blank" rel="noopener">缓冲区</a> 相关的操作无法执行时将被引发。</p>
+</li>
+<li><p><em>exception</em> <code>LookupError</code></p>
+<p>此基类用于派生当映射或序列所使用的键或索引无效时引发的异常: <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#IndexError" target="_blank" rel="noopener"><code>IndexError</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#KeyError" target="_blank" rel="noopener"><code>KeyError</code></a>。 这可以通过 <a href="https://docs.python.org/zh-cn/3.8/library/codecs.html#codecs.lookup" target="_blank" rel="noopener"><code>codecs.lookup()</code></a> 来直接引发。</p>
+</li>
+</ul>
+<h2 id="具体异常"><a href="#具体异常" class="headerlink" title="具体异常"></a>具体异常</h2><p>以下异常属于经常被引发的异常。</p>
+<ul>
+<li><p><em>exception</em> <code>AssertionError</code></p>
+<p>当 <a href="https://docs.python.org/zh-cn/3.8/reference/simple_stmts.html#assert" target="_blank" rel="noopener"><code>assert</code></a> 语句失败时将被引发。</p>
+</li>
+<li><p><em>exception</em> <code>AttributeError</code></p>
+<p>当属性引用 (参见 <a href="https://docs.python.org/zh-cn/3.8/reference/expressions.html#attribute-references" target="_blank" rel="noopener">属性引用</a>) 或赋值失败时将被引发。 （当一个对象根本不支持属性引用或属性赋值时则将引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a>。）</p>
+</li>
+<li><p><em>exception</em> <code>EOFError</code></p>
+<p>当 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#input" target="_blank" rel="noopener"><code>input()</code></a> 函数未读取任何数据即达到文件结束条件 (EOF) 时将被引发。 （另外，<code>io.IOBase.read()</code> 和 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#io.IOBase.readline" target="_blank" rel="noopener"><code>io.IOBase.readline()</code></a> 方法在遇到 EOF 则将返回一个空字符串。）</p>
+</li>
+<li><p><em>exception</em> <code>FloatingPointError</code></p>
+<p>目前未被使用。</p>
+</li>
+<li><p><em>exception</em> <code>GeneratorExit</code></p>
+<p>当一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-generator" target="_blank" rel="noopener">generator</a> 或 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-coroutine" target="_blank" rel="noopener">coroutine</a> 被关闭时将被引发；参见 <a href="https://docs.python.org/zh-cn/3.8/reference/expressions.html#generator.close" target="_blank" rel="noopener"><code>generator.close()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#coroutine.close" target="_blank" rel="noopener"><code>coroutine.close()</code></a>。 它直接继承自 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#BaseException" target="_blank" rel="noopener"><code>BaseException</code></a> 而不是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#Exception" target="_blank" rel="noopener"><code>Exception</code></a>，因为从技术上来说它并不是一个错误。</p>
+</li>
+<li><p><em>exception</em> <code>ImportError</code></p>
+<p>当 <a href="https://docs.python.org/zh-cn/3.8/reference/simple_stmts.html#import" target="_blank" rel="noopener"><code>import</code></a> 语句尝试加载模块遇到麻烦时将被引发。 并且当 <code>from ... import</code> 中的 “from list” 存在无法找到的名称时也会被引发。<code>name</code> 与 <code>path</code> 属性可通过对构造器使用仅关键字参数来设定。 设定后它们将分别表示被尝试导入的模块名称与触发异常的任意文件所在路径。<em>在 3.3 版更改:</em> 添加了 <code>name</code> 与 <code>path</code> 属性。</p>
+</li>
+<li><p><em>exception</em> <code>ModuleNotFoundError</code></p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ImportError" target="_blank" rel="noopener"><code>ImportError</code></a> 的子类，当一个模块无法被定位时将由 <a href="https://docs.python.org/zh-cn/3.8/reference/simple_stmts.html#import" target="_blank" rel="noopener"><code>import</code></a> 引发。 当在 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#sys.modules" target="_blank" rel="noopener"><code>sys.modules</code></a> 中找到 <code>None</code> 时也会被引发。</p>
+<p><em>3.6 新版功能.</em></p>
+</li>
+<li><p><em>exception</em> <code>IndexError</code></p>
+<p>当序列抽取超出范围时将被引发。 （切片索引会被静默截短到允许的范围；如果指定索引不是整数则 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a> 会被引发。）</p>
+</li>
+<li><p><em>exception</em> <code>KeyError</code></p>
+<p>当在现有键集合中找不到指定的映射（字典）键时将被引发。</p>
+</li>
+<li><p><em>exception</em> <code>KeyboardInterrupt</code></p>
+<p>当用户按下中断键 (通常为 Control-C 或 Delete) 时将被引发。 在执行期间，会定期检测中断信号。 该异常继承自 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#BaseException" target="_blank" rel="noopener"><code>BaseException</code></a> 以确保不会被处理 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#Exception" target="_blank" rel="noopener"><code>Exception</code></a> 的代码意外捕获，这样可以避免退出解释器。</p>
+</li>
+<li><p><em>exception</em> <code>MemoryError</code></p>
+<p>当一个操作耗尽内存但情况仍可（通过删除一些对象）进行挽救时将被引发。 关联的值是一个字符串，指明是哪种（内部）操作耗尽了内存。 请注意由于底层的内存管理架构（C 的 <code>malloc()</code> 函数），解释器也许并不总是能够从这种情况下完全恢复；但它毕竟可以引发一个异常，这样就能打印出栈回溯信息，以便找出导致问题的失控程序。</p>
+</li>
+<li><p><em>exception</em> <code>NameError</code></p>
+<p>当某个局部或全局名称未找到时将被引发。 此异常仅用于非限定名称。 关联的值是一条错误信息，其中包含未找到的名称。</p>
+</li>
+<li><p><em>exception</em> <code>NotImplementedError</code></p>
+<p>此异常派生自 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#RuntimeError" target="_blank" rel="noopener"><code>RuntimeError</code></a>。 在用户自定义的基类中，抽象方法应当在其要求所派生类重载该方法，或是在其要求所开发的类提示具体实现尚待添加时引发此异常。</p>
+<blockquote>
+<p>它不应当用来表示一个运算符或方法根本不能被支持 – 在此情况下应当让特定运算符 / 方法保持未定义，或者在子类中将其设为 <a href="https://docs.python.org/zh-cn/3.8/library/constants.html#None" target="_blank" rel="noopener"><code>None</code></a>。</p>
+<p><code>NotImplementedError</code> 和 <code>NotImplemented</code> 不可互换，即使它们有相似的名称和用途。 请参阅 <a href="https://docs.python.org/zh-cn/3.8/library/constants.html#NotImplemented" target="_blank" rel="noopener"><code>NotImplemented</code></a> 了解有关何时使用它们的详细说明。</p>
+</blockquote>
+</li>
+<li><p><em>exception</em> <code>OSError</code>([<em>arg</em>])</p>
+<p><em>exception</em> <code>OSError</code>(<em>errno</em>, <em>strerror</em>[, <em>filename</em>[, <em>winerror</em>[, <em>filename2</em>]]])</p>
+<p>此异常在一个系统函数返回系统相关的错误时将被引发，此类错误包括 I/O 操作失败例如 “文件未找到” 或 “磁盘已满” 等（不包括非法参数类型或其他偶然性错误）。</p>
+<p>构造器的第二种形式可设置如下所述的相应属性。 如果未指定这些属性则默认为 <a href="https://docs.python.org/zh-cn/3.8/library/constants.html#None" target="_blank" rel="noopener"><code>None</code></a>。 为了能向下兼容，如果传入了三个参数，则 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#BaseException.args" target="_blank" rel="noopener"><code>args</code></a> 属性将仅包含由前两个构造器参数组成的 2 元组。</p>
+<p>构造器实际返回的往往是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a> 的某个子类，如下文 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#os-exceptions" target="_blank" rel="noopener">OS exceptions</a> 中所描述的。 具体的子类取决于最终的 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError.errno" target="_blank" rel="noopener"><code>errno</code></a> 值。 此行为仅在直接或通过别名来构造 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a> 时发生，并且在子类化时不会被继承。</p>
+<ul>
+<li><p><code>errno</code></p>
+<p>来自于 C 变量 <code>errno</code> 的数字错误码。</p>
+</li>
+<li><p><code>winerror</code></p>
+<p>在 Windows 下，此参数将给出原生的 Windows 错误码。 而 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError.errno" target="_blank" rel="noopener"><code>errno</code></a> 属性将是该原生错误码在 POSIX 平台下的近似转换形式。在 Windows 下，如果 <em>winerror</em> 构造器参数是一个整数，则 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError.errno" target="_blank" rel="noopener"><code>errno</code></a> 属性会根据 Windows 错误码来确定，而 <em>errno</em> 参数会被忽略。 在其他平台上，<em>winerror</em> 参数会被忽略，并且 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError.winerror" target="_blank" rel="noopener"><code>winerror</code></a> 属性将不存在。</p>
+</li>
+<li><p><code>strerror</code></p>
+<p>操作系统所提供的相应错误信息。 它在 POSIX 平台中由 C 函数 <code>perror()</code> 来格式化，在 Windows 中则是由 <code>FormatMessage()</code>。</p>
+</li>
+<li><p><code>filename</code></p>
+</li>
+<li><p><code>filename2</code></p>
+<p>对于与文件系统路径有关 (例如 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#open" target="_blank" rel="noopener"><code>open()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.unlink" target="_blank" rel="noopener"><code>os.unlink()</code></a>) 的异常，<a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError.filename" target="_blank" rel="noopener"><code>filename</code></a> 是传给函数的文件名。 对于涉及两个文件系统路径的函数 (例如 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.rename" target="_blank" rel="noopener"><code>os.rename()</code></a>)，<a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError.filename2" target="_blank" rel="noopener"><code>filename2</code></a> 将是传给函数的第二个文件名。</p>
+</li>
+</ul>
+<p><em>在 3.3 版更改:</em> <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#EnvironmentError" target="_blank" rel="noopener"><code>EnvironmentError</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#IOError" target="_blank" rel="noopener"><code>IOError</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#WindowsError" target="_blank" rel="noopener"><code>WindowsError</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/socket.html#socket.error" target="_blank" rel="noopener"><code>socket.error</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/select.html#select.error" target="_blank" rel="noopener"><code>select.error</code></a> 与 <code>mmap.error</code> 已被合并到 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a>，构造器可能返回其中一个子类。</p>
+<p><em>在 3.4 版更改:</em> <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError.filename" target="_blank" rel="noopener"><code>filename</code></a> 属性现在将是传给函数的原始文件名，而不是经过编码或基于文件系统编码进行解码之后的名称。 此外还添加了 <em>filename2</em> 构造器参数和属性。</p>
+</li>
+<li><p><em>exception</em> <code>OverflowError</code></p>
+<p>当算术运算的结果大到无法表示时将被引发。 这对整数来说不可能发生（宁可引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#MemoryError" target="_blank" rel="noopener"><code>MemoryError</code></a> 也不会放弃尝试）。 但是出于历史原因，有时也会在整数超出要求范围的情况下引发 OverflowError。 因为在 C 中缺少对浮点异常处理的标准化，大多数浮点运算都不会做检查。</p>
+</li>
+<li><p><em>exception</em> <code>RecursionError</code></p>
+<p>此异常派生自 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#RuntimeError" target="_blank" rel="noopener"><code>RuntimeError</code></a>。 它会在解释器检测发现超过最大递归深度 (参见 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#sys.getrecursionlimit" target="_blank" rel="noopener"><code>sys.getrecursionlimit()</code></a>) 时被引发。<em>3.5 新版功能:</em> 在此之前将只引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#RuntimeError" target="_blank" rel="noopener"><code>RuntimeError</code></a>。</p>
+</li>
+<li><p><em>exception</em> <code>ReferenceError</code></p>
+<p>此异常将在使用 <a href="https://docs.python.org/zh-cn/3.8/library/weakref.html#weakref.proxy" target="_blank" rel="noopener"><code>weakref.proxy()</code></a> 函数所创建的弱引用来访问该引用的某个已被作为垃圾回收的属性时被引发。 有关弱引用的更多信息请参阅 <a href="https://docs.python.org/zh-cn/3.8/library/weakref.html#module-weakref" target="_blank" rel="noopener"><code>weakref</code></a> 模块。</p>
+</li>
+<li><p><em>exception</em> <code>RuntimeError</code></p>
+<p>当检测到一个不归属于任何其他类别的错误时将被引发。 关联的值是一个指明究竟发生了什么问题的字符串。</p>
+</li>
+<li><p><em>exception</em> <code>StopIteration</code></p>
+<p>由内置函数 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#next" target="_blank" rel="noopener"><code>next()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-iterator" target="_blank" rel="noopener">iterator</a> 的 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#iterator.__next__" target="_blank" rel="noopener"><code>__next__()</code></a> 方法所引发，用来表示该迭代器不能产生下一项。该异常对象只有一个属性 <code>value</code>，它在构造该异常时作为参数给出，默认值为 <a href="https://docs.python.org/zh-cn/3.8/library/constants.html#None" target="_blank" rel="noopener"><code>None</code></a>。当一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-generator" target="_blank" rel="noopener">generator</a> 或 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-coroutine" target="_blank" rel="noopener">coroutine</a> 函数返回时，将引发一个新的 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#StopIteration" target="_blank" rel="noopener"><code>StopIteration</code></a> 实例，函数返回的值将被用作异常构造器的 <code>value</code> 形参。如果某个生成器代码直接或间接地引发了 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#StopIteration" target="_blank" rel="noopener"><code>StopIteration</code></a>，它会被转换为 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#RuntimeError" target="_blank" rel="noopener"><code>RuntimeError</code></a> (并将 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#StopIteration" target="_blank" rel="noopener"><code>StopIteration</code></a> 保留为导致新异常的原因)。<em>在 3.3 版更改:</em> 添加了 <code>value</code> 属性及其被生成器函数用作返回值的功能。<em>在 3.5 版更改:</em> 引入了通过 <code>from __future__ import generator_stop</code> 来实现 RuntimeError 转换，参见 <a href="https://www.python.org/dev/peps/pep-0479" target="_blank" rel="noopener"><strong>PEP 479</strong></a>。<em>在 3.7 版更改:</em> 默认对所有代码启用 <a href="https://www.python.org/dev/peps/pep-0479" target="_blank" rel="noopener"><strong>PEP 479</strong></a>: 在生成器中引发的 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#StopIteration" target="_blank" rel="noopener"><code>StopIteration</code></a> 错误将被转换为 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#RuntimeError" target="_blank" rel="noopener"><code>RuntimeError</code></a>。</p>
+</li>
+<li><p><em>exception</em> <code>StopAsyncIteration</code></p>
+<p>必须由一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-asynchronous-iterator" target="_blank" rel="noopener">asynchronous iterator</a> 对象的 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__anext__" target="_blank" rel="noopener"><code>__anext__()</code></a> 方法来引发以停止迭代操作。<em>3.5 新版功能.</em></p>
+</li>
+<li><p><em>exception</em> <code>SyntaxError</code></p>
+<p>当解析器遇到语法错误时将被引发。 这可以发生在 <a href="https://docs.python.org/zh-cn/3.8/reference/simple_stmts.html#import" target="_blank" rel="noopener"><code>import</code></a> 语句，对内置函数 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#exec" target="_blank" rel="noopener"><code>exec()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#eval" target="_blank" rel="noopener"><code>eval()</code></a> 的调用，或者读取原始脚本或标准输入（也包括交互模式）的时候。该类的实例包含有属性 <code>filename</code>, <code>lineno</code>, <code>offset</code> 和 <code>text</code> 用于方便地访问相应的详细信息。 异常实例的 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str()</code></a> 仅返回消息文本。</p>
+</li>
+<li><p><em>exception</em> <code>IndentationError</code></p>
+<p>与不正确的缩进相关的语法错误的基类。 这是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#SyntaxError" target="_blank" rel="noopener"><code>SyntaxError</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>TabError</code></p>
+<p>当缩进包含对制表符和空格符不一致的使用时将被引发。 这是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#IndentationError" target="_blank" rel="noopener"><code>IndentationError</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>SystemError</code></p>
+<p>当解释器发现内部错误，但情况看起来尚未严重到要放弃所有希望时将被引发。 关联的值是一个指明发生了什么问题的字符串（表示为低层级的符号）。你应当将此问题报告给你所用 Python 解释器的作者或维护人员。 请确认报告 Python 解释器的版本号 (<code>sys.version</code>; 它也会在交互式 Python 会话开始时被打印出来)，具体的错误消息（异常所关联的值）以及可能触发该错误的程序源码。</p>
+</li>
+<li><p><em>exception</em> <code>SystemExit</code></p>
+<p>此异常由 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#sys.exit" target="_blank" rel="noopener"><code>sys.exit()</code></a> 函数引发。 它继承自 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#BaseException" target="_blank" rel="noopener"><code>BaseException</code></a> 而不是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#Exception" target="_blank" rel="noopener"><code>Exception</code></a> 以确保不会被处理 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#Exception" target="_blank" rel="noopener"><code>Exception</code></a> 的代码意外捕获。 这允许此异常正确地向上传播并导致解释器退出。 如果它未被处理，则 Python 解释器就将退出；不会打印任何栈回溯信息。 构造器接受的可选参数与传递给 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#sys.exit" target="_blank" rel="noopener"><code>sys.exit()</code></a> 的相同。 如果该值为一个整数，则它指明系统退出状态码（会传递给 C 的 <code>exit()</code> 函数）；如果该值为 <code>None</code>，则退出状态码为零；如果该值为其他类型（例如字符串），则会打印对象的值并将退出状态码设为一。对 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#sys.exit" target="_blank" rel="noopener"><code>sys.exit()</code></a> 的调用会被转换为一个异常以便能执行清理处理程序 (<a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#try" target="_blank" rel="noopener"><code>try</code></a> 语句的 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#finally" target="_blank" rel="noopener"><code>finally</code></a> 子句)，并且使得调试器可以执行一段脚本而不必冒失去控制的风险。 如果绝对确实地需要立即退出（例如在调用 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.fork" target="_blank" rel="noopener"><code>os.fork()</code></a> 之后的子进程中）则可使用 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os._exit" target="_blank" rel="noopener"><code>os._exit()</code></a>.<code>code</code>传给构造器的退出状态码或错误信息（默认为 <code>None</code>。）</p>
+</li>
+<li><p><em>exception</em> <code>TypeError</code></p>
+<p>当一个操作或函数被应用于类型不适当的对象时将被引发。 关联的值是一个字符串，给出有关类型不匹配的详情。此异常可以由用户代码引发，以表明尝试对某个对象进行的操作不受支持也不应当受支持。 如果某个对象应当支持给定的操作但尚未提供相应的实现，所要引发的适当异常应为 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#NotImplementedError" target="_blank" rel="noopener"><code>NotImplementedError</code></a>。传入参数的类型错误 (例如在要求 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a> 时却传入了 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#list" target="_blank" rel="noopener"><code>list</code></a>) 应当导致 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a>，但传入参数的值错误 (例如传入要求范围之外的数值) 则应当导致 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a>。</p>
+</li>
+<li><p><em>exception</em> <code>UnboundLocalError</code></p>
+<p>当在函数或方法中对某个局部变量进行引用，但该变量并未绑定任何值时将被引发。 此异常是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#NameError" target="_blank" rel="noopener"><code>NameError</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>UnicodeError</code></p>
+<p>当发生与 Unicode 相关的编码或解码错误时将被引发。 此异常是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a> 的一个子类。<a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#UnicodeError" target="_blank" rel="noopener"><code>UnicodeError</code></a> 具有一些描述编码或解码错误的属性。 例如 <code>err.object[err.start:err.end]</code> 会给出导致编解码器失败的特定无效输入。<code>encoding</code>引发错误的编码名称。<code>reason</code>描述特定编解码器错误的字符串。<code>object</code>编解码器试图要编码或解码的对象。<code>start</code><a href="https://docs.python.org/zh-cn/3.8/library/functions.html#object" target="_blank" rel="noopener"><code>object</code></a> 中无效数据的开始位置索引。<code>end</code><a href="https://docs.python.org/zh-cn/3.8/library/functions.html#object" target="_blank" rel="noopener"><code>object</code></a> 中无效数据的末尾位置索引（不含）。</p>
+</li>
+<li><p><em>exception</em> <code>UnicodeEncodeError</code></p>
+<p>当在编码过程中发生与 Unicode 相关的错误时将被引发。 此异常是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#UnicodeError" target="_blank" rel="noopener"><code>UnicodeError</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>UnicodeDecodeError</code></p>
+<p>当在解码过程中发生与 Unicode 相关的错误时将被引发。 此异常是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#UnicodeError" target="_blank" rel="noopener"><code>UnicodeError</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>UnicodeTranslateError</code></p>
+<p>在转写过程中发生与 Unicode 相关的错误时将被引发。 此异常是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#UnicodeError" target="_blank" rel="noopener"><code>UnicodeError</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>ValueError</code></p>
+<p>当操作或函数接收到具有正确类型但值不适合的参数，并且情况不能用更精确的异常例如 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#IndexError" target="_blank" rel="noopener"><code>IndexError</code></a> 来描述时将被引发。</p>
+</li>
+<li><p><em>exception</em> <code>ZeroDivisionError</code></p>
+<p>当除法或取余运算的第二个参数为零时将被引发。 关联的值是一个字符串，指明操作数和运算的类型。</p>
+</li>
+</ul>
+<p>下列异常被保留以与之前的版本相兼容；从 Python 3.3 开始，它们都是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a> 的别名。</p>
+<ul>
+<li><em>exception</em> <code>EnvironmentError</code></li>
+</ul>
+<ul>
+<li><em>exception</em> <code>IOError</code></li>
+</ul>
+<ul>
+<li><p><em>exception</em> <code>WindowsError</code></p>
+<p>限在 Windows 中可用。</p>
+</li>
+</ul>
+<h3 id="OS-异常"><a href="#OS-异常" class="headerlink" title="OS 异常"></a>OS 异常</h3><p>下列异常均为 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a> 的子类，它们将根据系统错误代码被引发。</p>
+<ul>
+<li><p><em>exception</em> <code>BlockingIOError</code></p>
+<p>当一个操作会被某个设置为非阻塞操作的对象（例如套接字）所阻塞时将被引发。 对应于 <code>errno</code> <code>EAGAIN</code>, <code>EALREADY</code>, <code>EWOULDBLOCK</code> 和 <code>EINPROGRESS</code>。除了 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a> 已有的属性，<a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#BlockingIOError" target="_blank" rel="noopener"><code>BlockingIOError</code></a> 还有一个额外属性：<code>characters_written</code>一个整数，表示在被阻塞前已写入到流的字符数。 当使用来自 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#module-io" target="_blank" rel="noopener"><code>io</code></a> 模块的带缓冲 I/O 类时此属性可用。</p>
+</li>
+<li><p><em>exception</em> <code>ChildProcessError</code></p>
+<p>当一个子进程上的操作失败时将被引发。 对应于 <code>errno</code> <code>ECHILD</code>。</p>
+</li>
+<li><p><em>exception</em> <code>ConnectionError</code></p>
+<p>与连接相关问题的基类。其子类有 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#BrokenPipeError" target="_blank" rel="noopener"><code>BrokenPipeError</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ConnectionAbortedError" target="_blank" rel="noopener"><code>ConnectionAbortedError</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ConnectionRefusedError" target="_blank" rel="noopener"><code>ConnectionRefusedError</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ConnectionResetError" target="_blank" rel="noopener"><code>ConnectionResetError</code></a>。</p>
+</li>
+<li><p><em>exception</em> <code>BrokenPipeError</code></p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ConnectionError" target="_blank" rel="noopener"><code>ConnectionError</code></a> 的子类，当试图写入另一端已被关闭的管道，或是试图写入已关闭写入的套接字时将被引发。 对应于 <code>errno</code> <code>EPIPE</code> 和 <code>ESHUTDOWN</code>。</p>
+</li>
+<li><p><em>exception</em> <code>ConnectionAbortedError</code></p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ConnectionError" target="_blank" rel="noopener"><code>ConnectionError</code></a> 的子类，当连接尝试被对端中止时将被引发。 对应于 <code>errno</code> <code>ECONNABORTED</code>。</p>
+</li>
+<li><p><em>exception</em> <code>ConnectionRefusedError</code></p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ConnectionError" target="_blank" rel="noopener"><code>ConnectionError</code></a> 的子类，当连接尝试被对端拒绝时将被引发。 对应于 <code>errno</code> <code>ECONNREFUSED</code>。</p>
+</li>
+<li><p><em>exception</em> <code>ConnectionResetError</code></p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ConnectionError" target="_blank" rel="noopener"><code>ConnectionError</code></a> 的子类，当连接被对端重置时将被引发。 对应于 <code>errno</code> <code>ECONNRESET</code>。</p>
+</li>
+<li><p><em>exception</em> <code>FileExistsError</code></p>
+<p>当试图创建一个已存在的文件或目录时将被引发。 对应于 <code>errno</code> <code>EEXIST</code>。</p>
+</li>
+<li><p><em>exception</em> <code>FileNotFoundError</code></p>
+<p>当所请求的文件或目录不存在时将被引发。 对应于 <code>errno</code> <code>ENOENT</code>。</p>
+</li>
+<li><p><em>exception</em> <code>InterruptedError</code></p>
+<p>当系统调用被输入信号中断时将被引发。 对应于 <code>errno</code> <a href="https://docs.python.org/zh-cn/3.8/library/errno.html#errno.EINTR" target="_blank" rel="noopener"><code>EINTR</code></a>。<em>在 3.5 版更改:</em> 当系统调用被某个信号中断时，Python 现在会重试系统调用，除非该信号的处理程序引发了其它异常 (原理参见 <a href="https://www.python.org/dev/peps/pep-0475" target="_blank" rel="noopener"><strong>PEP 475</strong></a>) 而不是引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#InterruptedError" target="_blank" rel="noopener"><code>InterruptedError</code></a>。</p>
+</li>
+<li><p><em>exception</em> <code>IsADirectoryError</code></p>
+<p>当请求对一个目录执行文件操作 (例如 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.remove" target="_blank" rel="noopener"><code>os.remove()</code></a>) 将被引发。 对应于 <code>errno</code> <code>EISDIR</code>。</p>
+</li>
+<li><p><em>exception</em> <code>NotADirectoryError</code></p>
+<p>当请求对一个非目录对象执行目录操作 (例如 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.listdir" target="_blank" rel="noopener"><code>os.listdir()</code></a>) 时将被引发。 对应于 <code>errno</code> <code>ENOTDIR</code>。</p>
+</li>
+<li><p><em>exception</em> <code>PermissionError</code></p>
+<p>当在没有足够操作权限的情况下试图执行某个操作时将被引发 —— 例如缺少文件系统权限。 对应于 <code>errno</code> <code>EACCES</code> 和 <code>EPERM</code>。</p>
+</li>
+<li><p><em>exception</em> <code>ProcessLookupError</code></p>
+<p>当给定的进程不存在时将被引发。 对应于 <code>errno</code> <code>ESRCH</code>。</p>
+</li>
+<li><p><em>exception</em> <code>TimeoutError</code></p>
+<p>当一个系统函数发生系统级超时的情况下将被引发。 对应于 <code>errno</code> <code>ETIMEDOUT</code>。</p>
+</li>
+</ul>
+<p><em>3.3 新版功能:</em> 添加了以上所有 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a> 的子类。</p>
+<blockquote>
+<p>参见：<a href="https://www.python.org/dev/peps/pep-3151" target="_blank" rel="noopener"><strong>PEP 3151</strong></a> - 重写 OS 和 IO 异常的层次结构</p>
+</blockquote>
+<h2 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h2><p>下列异常被用作警告类别；请参阅 <a href="https://docs.python.org/zh-cn/3.8/library/warnings.html#warning-categories" target="_blank" rel="noopener">警告类别</a> 文档了解详情。</p>
+<ul>
+<li><p><em>exception</em> <code>Warning</code></p>
+<p>警告类别的基类。</p>
+</li>
+<li><p><em>exception</em> <code>UserWarning</code></p>
+<p>用户代码所产生警告的基类。</p>
+</li>
+<li><p><em>exception</em> <code>DeprecationWarning</code></p>
+<p>如果所发出的警告是针对其他 Python 开发者的，则以此作为与已弃用特性相关警告的基类。</p>
+</li>
+<li><p><em>exception</em> <code>PendingDeprecationWarning</code></p>
+<p>对于已过时并预计在未来弃用，但目前尚未弃用的特性相关警告的基类。这个类很少被使用，因为针对未来可能的弃用发出警告的做法并不常见，而针对当前已有的弃用则推荐使用 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#DeprecationWarning" target="_blank" rel="noopener"><code>DeprecationWarning</code></a>。</p>
+</li>
+<li><p><em>exception</em> <code>SyntaxWarning</code></p>
+<p>与模糊的语法相关的警告的基类。</p>
+</li>
+<li><p><em>exception</em> <code>RuntimeWarning</code></p>
+<p>与模糊的运行时行为相关的警告的基类。</p>
+</li>
+<li><p><em>exception</em> <code>FutureWarning</code></p>
+<p>如果所发出的警告是针对以 Python 所编写应用的最终用户的，则以此作为与已弃用特性相关警告的基类。</p>
+</li>
+<li><p><em>exception</em> <code>ImportWarning</code></p>
+<p>与在模块导入中可能的错误相关的警告的基类。</p>
+</li>
+<li><p><em>exception</em> <code>UnicodeWarning</code></p>
+<p>与 Unicode 相关的警告的基类。</p>
+</li>
+<li><p><em>exception</em> <code>BytesWarning</code></p>
+<p>与 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#bytes" target="_blank" rel="noopener"><code>bytes</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#bytearray" target="_blank" rel="noopener"><code>bytearray</code></a> 相关的警告的基类。</p>
+</li>
+<li><p><em>exception</em> <code>ResourceWarning</code></p>
+<p>与资源使用相关的警告的基类。 会被默认的警告过滤器忽略。<em>3.2 新版功能.</em></p>
+</li>
+</ul>
+<h2 id="异常层次结构"><a href="#异常层次结构" class="headerlink" title="异常层次结构"></a>异常层次结构</h2><p>内置异常的类层级结构如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">BaseException</span><br><span class="line"> +-- SystemExit</span><br><span class="line"> +-- KeyboardInterrupt</span><br><span class="line"> +-- GeneratorExit</span><br><span class="line"> +-- Exception</span><br><span class="line">      +-- StopIteration</span><br><span class="line">      +-- StopAsyncIteration</span><br><span class="line">      +-- ArithmeticError</span><br><span class="line">      |    +-- FloatingPointError</span><br><span class="line">      |    +-- OverflowError</span><br><span class="line">      |    +-- ZeroDivisionError</span><br><span class="line">      +-- AssertionError</span><br><span class="line">      +-- AttributeError</span><br><span class="line">      +-- BufferError</span><br><span class="line">      +-- EOFError</span><br><span class="line">      +-- ImportError</span><br><span class="line">      |    +-- ModuleNotFoundError</span><br><span class="line">      +-- LookupError</span><br><span class="line">      |    +-- IndexError</span><br><span class="line">      |    +-- KeyError</span><br><span class="line">      +-- MemoryError</span><br><span class="line">      +-- NameError</span><br><span class="line">      |    +-- UnboundLocalError</span><br><span class="line">      +-- OSError</span><br><span class="line">      |    +-- BlockingIOError</span><br><span class="line">      |    +-- ChildProcessError</span><br><span class="line">      |    +-- ConnectionError</span><br><span class="line">      |    |    +-- BrokenPipeError</span><br><span class="line">      |    |    +-- ConnectionAbortedError</span><br><span class="line">      |    |    +-- ConnectionRefusedError</span><br><span class="line">      |    |    +-- ConnectionResetError</span><br><span class="line">      |    +-- FileExistsError</span><br><span class="line">      |    +-- FileNotFoundError</span><br><span class="line">      |    +-- InterruptedError</span><br><span class="line">      |    +-- IsADirectoryError</span><br><span class="line">      |    +-- NotADirectoryError</span><br><span class="line">      |    +-- PermissionError</span><br><span class="line">      |    +-- ProcessLookupError</span><br><span class="line">      |    +-- TimeoutError</span><br><span class="line">      +-- ReferenceError</span><br><span class="line">      +-- RuntimeError</span><br><span class="line">      |    +-- NotImplementedError</span><br><span class="line">      |    +-- RecursionError</span><br><span class="line">      +-- SyntaxError</span><br><span class="line">      |    +-- IndentationError</span><br><span class="line">      |         +-- TabError</span><br><span class="line">      +-- SystemError</span><br><span class="line">      +-- TypeError</span><br><span class="line">      +-- ValueError</span><br><span class="line">      |    +-- UnicodeError</span><br><span class="line">      |         +-- UnicodeDecodeError</span><br><span class="line">      |         +-- UnicodeEncodeError</span><br><span class="line">      |         +-- UnicodeTranslateError</span><br><span class="line">      +-- Warning</span><br><span class="line">           +-- DeprecationWarning</span><br><span class="line">           +-- PendingDeprecationWarning</span><br><span class="line">           +-- RuntimeWarning</span><br><span class="line">           +-- SyntaxWarning</span><br><span class="line">           +-- UserWarning</span><br><span class="line">           +-- FutureWarning</span><br><span class="line">           +-- ImportWarning</span><br><span class="line">           +-- UnicodeWarning</span><br><span class="line">           +-- BytesWarning</span><br><span class="line">           +-- ResourceWarning</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/02/22/python-standard-library-Built-in-Exception/" title="python standard library Built-in Exception">https://pinghailinfeng.gitee.io/2020/02/22/python-standard-library-Built-in-Exception/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/Exception/" rel="tag"># Exception</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/21/python-standard-library-cmd/" rel="next" title="python standard library cmd">
+                <i class="fa fa-chevron-left"></i> python standard library cmd
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">95</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">107</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-内置异常"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 内置异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#worth"><span class="nav-number">2.</span> <span class="nav-text">worth</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基类"><span class="nav-number">2.1.</span> <span class="nav-text">基类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体异常"><span class="nav-number">2.2.</span> <span class="nav-text">具体异常</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OS-异常"><span class="nav-number">2.2.1.</span> <span class="nav-text">OS 异常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#警告"><span class="nav-number">2.3.</span> <span class="nav-text">警告</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常层次结构"><span class="nav-number">2.4.</span> <span class="nav-text">异常层次结构</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">61</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-libary/">standard_libary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">55</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">635k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">9:37</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

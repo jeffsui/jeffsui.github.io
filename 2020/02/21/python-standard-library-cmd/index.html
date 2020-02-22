@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 cmd模块">
+<meta name="keywords" content="python,standard_library,cmd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library cmd">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/02/21/python-standard-library-cmd/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 cmd模块">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200221_zhuakuang.jpg?raw=true">
+<meta property="og:updated_time" content="2020-02-22T15:14:11.246Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library cmd">
+<meta name="twitter:description" content="python 标准库 cmd模块">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200221_zhuakuang.jpg?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/02/21/python-standard-library-cmd/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library cmd | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/02/21/python-standard-library-cmd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library cmd
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-21 22:20:08" itemprop="dateCreated datePublished" datetime="2020-02-21T22:20:08+08:00">2020-02-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-22 23:14:11" itemprop="dateModified" datetime="2020-02-22T23:14:11+08:00">2020-02-22</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">7.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">7 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-cmd模块"><a href="#python-标准库-cmd模块" class="headerlink" title="python 标准库 cmd模块"></a>python 标准库 cmd模块</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200221_zhuakuang.jpg?raw=true" alt></p>
+<a id="more"></a>
+<blockquote>
+<p>每日一词:</p>
+<p> collapse </p>
+<p>近义词:</p>
+<p>crash<br>breakdown<br>crumble<br>fall apart </p>
+<p>例句:</p>
+<p> 我曾经神经崩溃过。那是一次痛苦的经历。<br>I suffered a nervous breakdown. It was a traumatic experience </p>
+<p> 他能明显地看出我快要精神崩溃了。<br>It was plain to him that I was having a nervous breakdown </p>
+</blockquote>
+<p><strong>源代码:</strong> <a href="https://github.com/python/cpython/tree/3.8/Lib/cmd.py" target="_blank" rel="noopener">Lib/cmd.py</a></p>
+<hr>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd" target="_blank" rel="noopener"><code>Cmd</code></a> 类提供简单框架用于编写面向行的命令解释器。 这些通常对测试工具，管理工具和原型有用，这些工具随后将被包含在更复杂的接口中。</p>
+<ul>
+<li><p><em>class</em> <code>cmd.Cmd</code>(<em>completekey=’tab’</em>, <em>stdin=None</em>, <em>stdout=None</em>)</p>
+<p>一个 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd" target="_blank" rel="noopener"><code>Cmd</code></a> 实例或子类实例是面向行的解释器框架结构。 实例化 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd" target="_blank" rel="noopener"><code>Cmd</code></a> 本身是没有充分理由的， 它作为自定义解释器类的超类是非常有用的为了继承 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd" target="_blank" rel="noopener"><code>Cmd</code></a> 的方法并且封装动作方法。可选参数 <em>completekey</em> 是完成键的 <a href="https://docs.python.org/zh-cn/3.8/library/readline.html#module-readline" target="_blank" rel="noopener"><code>readline</code></a> 名称；默认是 Tab 。如果 <em>completekey</em> 不是 <a href="https://docs.python.org/zh-cn/3.8/library/constants.html#None" target="_blank" rel="noopener"><code>None</code></a> 并且 <a href="https://docs.python.org/zh-cn/3.8/library/readline.html#module-readline" target="_blank" rel="noopener"><code>readline</code></a> 是可用的， 命令完成会自动完成。可选参数 <em>stdin</em> 和 <em>stdout</em> 指定了Cmd实例或子类实例将用于输入和输出的输入和输出文件对象。如果没有指定，他们将默认为 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#sys.stdin" target="_blank" rel="noopener"><code>sys.stdin</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#sys.stdout" target="_blank" rel="noopener"><code>sys.stdout</code></a> 。如果你想要使用一个给定的 <em>stdin</em> ，确保将实例的 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.use_rawinput" target="_blank" rel="noopener"><code>use_rawinput</code></a> 属性设置为 <code>False</code> ，否则 <em>stdin</em> 将被忽略</p>
+</li>
+</ul>
+<h2 id="Cmd-对象"><a href="#Cmd-对象" class="headerlink" title="Cmd 对象"></a>Cmd 对象</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd" target="_blank" rel="noopener"><code>Cmd</code></a> 实例有下列方法：</p>
+<ul>
+<li><p><code>Cmd.cmdloop</code>(<em>intro=None</em>)</p>
+<p>反复发出提示，接受输入，从收到的输入中解析出一个初始前缀，并分派给操作方法，将其余的行作为参数传递给它们。可选参数是在第一个提示之前发布的横幅或介绍字符串（这将覆盖 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.intro" target="_blank" rel="noopener"><code>intro</code></a> 类属性）。如果 <a href="https://docs.python.org/zh-cn/3.8/library/readline.html#module-readline" target="_blank" rel="noopener"><code>readline</code></a> 继承模块被加载，输入将自动继承类似 <strong>bash</strong>的历史列表编辑（例如， Control-P 滚动回到最后一个命令， Control-N 转到下一个命令，以 Control-F 非破坏性的方式向右 Control-B 移动光标，破坏性地等）。输入的文件结束符被作为字符串传回 <code>&#39;EOF&#39;</code> 。解释器实例将会识别命令名称 <code>foo</code> 当且仅当它有方法 <code>do_foo()</code> 。有一个特殊情况，分派始于字符 <code>&#39;?&#39;</code> 的行到方法 <code>do_help()</code> 。另一种特殊情况，分派始于字符 <code>&#39;!&#39;</code> 的行到方法 <code>do_shell()</code> （如果定义了这个方法）这个方法将返回当 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.postcmd" target="_blank" rel="noopener"><code>postcmd()</code></a> 方法返回一个真值 。参数 <em>stop</em> 到 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.postcmd" target="_blank" rel="noopener"><code>postcmd()</code></a> 是命令对应的返回值 <code>do_*()</code> 的方法。如果激活了完成，全部命令将会自动完成，并且通过调用 <code>complete_foo()</code> 参数 <em>text</em> , <em>line</em>, <em>begidx</em> ,和 <em>endidx</em> 完成全部命令参数。 <em>text</em> 是我们试图匹配的字符串前缀，所有返回的匹配项必须以它为开头。 <em>line</em> 是删除了前导空格的当前的输入行， <em>begidx</em> 和 <em>endidx</em> 是前缀文本的开始和结束索引。，可以用于根据参数位置提供不同的完成。所有 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd" target="_blank" rel="noopener"><code>Cmd</code></a> 的子类继承一个预定义 <code>do_help()</code> 。 这个方法使用参数 <code>&#39;bar&#39;</code> 调用， 调用对应的方法 <code>help_bar()</code> ，如果不存在，打印 <code>do_bar()</code> 的文档字符串，如果可用。没有参数的情况下， <code>do_help()</code> 方法会列出所有可用的帮助主题 （即所有具有相应的 <code>help_*()</code> 方法或命令的 文档字符串），也会列举所有未被记录的命令。</p>
+</li>
+<li><p><code>Cmd.onecmd</code>(<em>str</em>)</p>
+<p>解释该参数，就好像它是为响应提示而键入的一样。 这可能会被覆盖，但通常不应该被覆盖; 请参阅： <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.precmd" target="_blank" rel="noopener"><code>precmd()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.postcmd" target="_blank" rel="noopener"><code>postcmd()</code></a> 方法，用于执行有用的挂钩。 返回值是一个标志，指示解释器对命令的解释是否应该停止。 如果命令 <em>str</em> 有一个 <code>do_*()</code> 方法，则返回该方法的返回值，否则返回 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.default" target="_blank" rel="noopener"><code>default()</code></a> 方法的返回值。</p>
+</li>
+<li><p><code>Cmd.emptyline</code>()</p>
+<p>在响应提示输入空行时调用的方法。如果此方法未被覆盖，则重复输入的最后一个非空命令。</p>
+</li>
+<li><p><code>Cmd.default</code>(<em>line</em>)</p>
+<p>当命令前缀不能被识别的时候在输入行调用的方法。如果此方法未被覆盖，它将输出一个错误信息并返回。</p>
+</li>
+<li><p><code>Cmd.completedefault</code>(<em>text</em>, <em>line</em>, <em>begidx</em>, <em>endidx</em>)</p>
+<p>当没有特定于命令的 <code>complete_*()</code> 方法可用时，调用此方法完成输入行。默认情况下，它返回一个空列表。</p>
+</li>
+<li><p><code>Cmd.precmd</code>(<em>line</em>)</p>
+<p>钩方法在命令行 <em>line</em> 被解释之前执行，但是在输入提示被生成和发出后。这个方法是一个在 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd" target="_blank" rel="noopener"><code>Cmd</code></a> 中的存根；它的存在是为了被子类覆盖。返回值被用作 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.onecmd" target="_blank" rel="noopener"><code>onecmd()</code></a> 方法执行的命令； <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.precmd" target="_blank" rel="noopener"><code>precmd()</code></a> 的实现或许会重写命令或者简单的返回 <em>line</em> 不变。</p>
+</li>
+<li><p><code>Cmd.postcmd</code>(<em>stop</em>, <em>line</em>)</p>
+<p>钩方法只在命令调度完成后执行。这个方法是一个在 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd" target="_blank" rel="noopener"><code>Cmd</code></a> 中的存根；它的存在是为了子类被覆盖。 <em>line</em> 是被执行的命令行， <em>stop</em> 是一个表示在调用 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.postcmd" target="_blank" rel="noopener"><code>postcmd()</code></a> 之后是否终止执行的标志；这将作为 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.onecmd" target="_blank" rel="noopener"><code>onecmd()</code></a> 方法的返回值。这个方法的返回值被用作与 <em>stop</em> 相关联的内部标志的新值；返回 false 将导致解释继续。</p>
+</li>
+<li><p><code>Cmd.preloop</code>()</p>
+<p>钩方法当 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.cmdloop" target="_blank" rel="noopener"><code>cmdloop()</code></a> 被调用时执行一次。方法是一个在 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd" target="_blank" rel="noopener"><code>Cmd</code></a> 中的存根；它的存在是为了被子类覆盖。</p>
+</li>
+<li><p><code>Cmd.postloop</code>()</p>
+<p>钩方法在 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.cmdloop" target="_blank" rel="noopener"><code>cmdloop()</code></a> 即将返回时执行一次。这个方法是一个在 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd" target="_blank" rel="noopener"><code>Cmd</code></a> 中的存根；塔顶存在是为了被子类覆盖。</p>
+</li>
+</ul>
+<p>Instances of <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd" target="_blank" rel="noopener"><code>Cmd</code></a> subclasses have some public instance variables:</p>
+<ul>
+<li><p><code>Cmd.prompt</code></p>
+<p>发出提示以请求输入。</p>
+</li>
+<li><p><code>Cmd.identchars</code></p>
+<p>接受命令前缀的字符串。</p>
+</li>
+<li><p><code>Cmd.lastcmd</code></p>
+<p>看到最后一个非空命令前缀。</p>
+</li>
+<li><p><code>Cmd.cmdqueue</code></p>
+<p>排队的输入行列表。当需要新的输入时，在 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.cmdloop" target="_blank" rel="noopener"><code>cmdloop()</code></a> 中检查 cmdqueue 列表；如果它不是空的，它的元素将被按顺序处理，就像在提示符处输入一样。</p>
+</li>
+<li><p><code>Cmd.intro</code></p>
+<p>要作为简介或横幅发出的字符串。 可以通过给 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.cmdloop" target="_blank" rel="noopener"><code>cmdloop()</code></a> 方法一个参数来覆盖它。</p>
+</li>
+<li><p><code>Cmd.doc_header</code></p>
+<p>如果帮助输出具有记录命令的段落，则发出头文件。</p>
+</li>
+<li><p><code>Cmd.misc_header</code></p>
+<p>如果帮助输出其他帮助主题的部分（即与 <code>do_*()</code> 方法没有关联的 <code>help_*()</code> 方法），则发出头文件。</p>
+</li>
+<li><p><code>Cmd.undoc_header</code></p>
+<p>如果帮助输出未被记录命令的部分（即与 <code>help_*()</code> 方法没有关联的 <code>do_*()</code> 方法），则发出头文件。</p>
+</li>
+<li><p><code>Cmd.ruler</code></p>
+<p>用于在帮助信息标题的下方绘制分隔符的字符，如果为空，则不绘制标尺线。 这个字符默认是 <code>&#39;=&#39;</code> 。</p>
+</li>
+<li><p><code>Cmd.use_rawinput</code></p>
+<p>这是一个标志，默认为 true 。如果为 true ，, <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.cmdloop" target="_blank" rel="noopener"><code>cmdloop()</code></a> 使用 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#input" target="_blank" rel="noopener"><code>input()</code></a> 先是提示并且阅读下一个命令；如果为 false ， <code>sys.stdout.write()</code> 和 <code>sys.stdin.readline()</code> 被使用。（这意味着解释器将会自动支持类似于 <strong>Emacs</strong>的行编辑和命令历史记录按键操作，通过导入 <a href="https://docs.python.org/zh-cn/3.8/library/readline.html#module-readline" target="_blank" rel="noopener"><code>readline</code></a> 在支持它的系统上。）</p>
+</li>
+</ul>
+<h2 id="Cmd-例子"><a href="#Cmd-例子" class="headerlink" title="Cmd 例子"></a>Cmd 例子</h2><p>这部分提供了一个简单的例子来介绍如何使用一部分在 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#module-turtle" target="_blank" rel="noopener"><code>turtle</code></a> 模块中的命令构建一个 shell 。</p>
+<p>基础的 turtle 命令比如 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.forward" target="_blank" rel="noopener"><code>forward()</code></a> 被添加进一个 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd" target="_blank" rel="noopener"><code>Cmd</code></a> 子类，方法名为 <code>do_forward()</code> 。参数被转换成数字并且分发至 turtle 模组中。 docstring 是 shell 提供的帮助实用程序。</p>
+<p>例子也包含使用 <a href="https://docs.python.org/zh-cn/3.8/library/cmd.html#cmd.Cmd.precmd" target="_blank" rel="noopener"><code>precmd()</code></a> 方法实现基础的记录和回放的功能，这个方法负责将输入转换为小写并且将命令写入文件。 <code>do_playback()</code> 方法读取文件并添加记录命令至 <code>cmdqueue</code> 用于即时回放:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cmd, sys</span><br><span class="line"><span class="keyword">from</span> turtle <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TurtleShell</span><span class="params">(cmd.Cmd)</span>:</span></span><br><span class="line">    intro = <span class="string">'Welcome to the turtle shell.   Type help or ? to list commands.\n'</span></span><br><span class="line">    prompt = <span class="string">'(turtle) '</span></span><br><span class="line">    file = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># ----- basic turtle commands -----</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_forward</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        <span class="string">'Move the turtle forward by the specified distance:  FORWARD 10'</span></span><br><span class="line">        forward(*parse(arg))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_right</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        <span class="string">'Turn turtle right by given number of degrees:  RIGHT 20'</span></span><br><span class="line">        right(*parse(arg))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_left</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        <span class="string">'Turn turtle left by given number of degrees:  LEFT 90'</span></span><br><span class="line">        left(*parse(arg))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_goto</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        <span class="string">'Move turtle to an absolute position with changing orientation.  GOTO 100 200'</span></span><br><span class="line">        goto(*parse(arg))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_home</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        <span class="string">'Return turtle to the home position:  HOME'</span></span><br><span class="line">        home()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_circle</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        <span class="string">'Draw circle with given radius an options extent and steps:  CIRCLE 50'</span></span><br><span class="line">        circle(*parse(arg))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_position</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        <span class="string">'Print the current turtle position:  POSITION'</span></span><br><span class="line">        print(<span class="string">'Current position is %d %d\n'</span> % position())</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_heading</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        <span class="string">'Print the current turtle heading in degrees:  HEADING'</span></span><br><span class="line">        print(<span class="string">'Current heading is %d\n'</span> % (heading(),))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_color</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        <span class="string">'Set the color:  COLOR BLUE'</span></span><br><span class="line">        color(arg.lower())</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_undo</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        <span class="string">'Undo (repeatedly) the last turtle action(s):  UNDO'</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_reset</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        <span class="string">'Clear the screen and return turtle to center:  RESET'</span></span><br><span class="line">        reset()</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_bye</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        <span class="string">'Stop recording, close the turtle window, and exit:  BYE'</span></span><br><span class="line">        print(<span class="string">'Thank you for using Turtle'</span>)</span><br><span class="line">        self.close()</span><br><span class="line">        bye()</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># ----- record and playback -----</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_record</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        <span class="string">'Save future commands to filename:  RECORD rose.cmd'</span></span><br><span class="line">        self.file = open(arg, <span class="string">'w'</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">do_playback</span><span class="params">(self, arg)</span>:</span></span><br><span class="line">        <span class="string">'Playback commands from a file:  PLAYBACK rose.cmd'</span></span><br><span class="line">        self.close()</span><br><span class="line">        <span class="keyword">with</span> open(arg) <span class="keyword">as</span> f:</span><br><span class="line">            self.cmdqueue.extend(f.read().splitlines())</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">precmd</span><span class="params">(self, line)</span>:</span></span><br><span class="line">        line = line.lower()</span><br><span class="line">        <span class="keyword">if</span> self.file <span class="keyword">and</span> <span class="string">'playback'</span> <span class="keyword">not</span> <span class="keyword">in</span> line:</span><br><span class="line">            print(line, file=self.file)</span><br><span class="line">        <span class="keyword">return</span> line</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">close</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.file:</span><br><span class="line">            self.file.close()</span><br><span class="line">            self.file = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(arg)</span>:</span></span><br><span class="line">    <span class="string">'Convert a series of zero or more numbers to an argument tuple'</span></span><br><span class="line">    <span class="keyword">return</span> tuple(map(int, arg.split()))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    TurtleShell().cmdloop()</span><br></pre></td></tr></table></figure>
+<p>这是一个示例会话，其中 turtle shell 显示帮助功能，使用空行重复命令，以及简单的记录和回放功能：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">Welcome to the turtle shell.   Type help or ? to list commands.</span><br><span class="line"></span><br><span class="line">(turtle) ?</span><br><span class="line"></span><br><span class="line">Documented commands (type help &lt;topic&gt;):</span><br><span class="line">========================================</span><br><span class="line">bye     color    goto     home  playback  record  right</span><br><span class="line">circle  forward  heading  left  position  reset   undo</span><br><span class="line"></span><br><span class="line">(turtle) help forward</span><br><span class="line">Move the turtle forward by the specified distance:  FORWARD <span class="number">10</span></span><br><span class="line">(turtle) record spiral.cmd</span><br><span class="line">(turtle) position</span><br><span class="line">Current position <span class="keyword">is</span> <span class="number">0</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">(turtle) heading</span><br><span class="line">Current heading <span class="keyword">is</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">(turtle) reset</span><br><span class="line">(turtle) circle <span class="number">20</span></span><br><span class="line">(turtle) right <span class="number">30</span></span><br><span class="line">(turtle) circle <span class="number">40</span></span><br><span class="line">(turtle) right <span class="number">30</span></span><br><span class="line">(turtle) circle <span class="number">60</span></span><br><span class="line">(turtle) right <span class="number">30</span></span><br><span class="line">(turtle) circle <span class="number">80</span></span><br><span class="line">(turtle) right <span class="number">30</span></span><br><span class="line">(turtle) circle <span class="number">100</span></span><br><span class="line">(turtle) right <span class="number">30</span></span><br><span class="line">(turtle) circle <span class="number">120</span></span><br><span class="line">(turtle) right <span class="number">30</span></span><br><span class="line">(turtle) circle <span class="number">120</span></span><br><span class="line">(turtle) heading</span><br><span class="line">Current heading <span class="keyword">is</span> <span class="number">180</span></span><br><span class="line"></span><br><span class="line">(turtle) forward <span class="number">100</span></span><br><span class="line">(turtle)</span><br><span class="line">(turtle) right <span class="number">90</span></span><br><span class="line">(turtle) forward <span class="number">100</span></span><br><span class="line">(turtle)</span><br><span class="line">(turtle) right <span class="number">90</span></span><br><span class="line">(turtle) forward <span class="number">400</span></span><br><span class="line">(turtle) right <span class="number">90</span></span><br><span class="line">(turtle) forward <span class="number">500</span></span><br><span class="line">(turtle) right <span class="number">90</span></span><br><span class="line">(turtle) forward <span class="number">400</span></span><br><span class="line">(turtle) right <span class="number">90</span></span><br><span class="line">(turtle) forward <span class="number">300</span></span><br><span class="line">(turtle) playback spiral.cmd</span><br><span class="line">Current position <span class="keyword">is</span> <span class="number">0</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">Current heading <span class="keyword">is</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">Current heading <span class="keyword">is</span> <span class="number">180</span></span><br><span class="line"></span><br><span class="line">(turtle) bye</span><br><span class="line">Thank you <span class="keyword">for</span> using Turtle</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/02/21/python-standard-library-cmd/" title="python standard library cmd">https://pinghailinfeng.gitee.io/2020/02/21/python-standard-library-cmd/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/cmd/" rel="tag"># cmd</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/20/python-standard-library-os/" rel="next" title="python standard library os">
+                <i class="fa fa-chevron-left"></i> python standard library os
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/22/python-standard-library-Built-in-Exception/" rel="prev" title="python standard library Built-in Exception">
+                python standard library Built-in Exception <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">95</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">107</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-cmd模块"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 cmd模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cmd-对象"><span class="nav-number">1.1.</span> <span class="nav-text">Cmd 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cmd-例子"><span class="nav-number">1.2.</span> <span class="nav-text">Cmd 例子</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">61</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-libary/">standard_libary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">55</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">635k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">9:37</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
