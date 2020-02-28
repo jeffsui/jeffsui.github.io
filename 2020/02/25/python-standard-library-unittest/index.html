@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 unittest">
+<meta name="keywords" content="python,standard_library,unittest">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library unittest">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/02/25/python-standard-library-unittest/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 unittest">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200225unit-test.png?raw=true">
+<meta property="og:updated_time" content="2020-02-27T02:06:49.824Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library unittest">
+<meta name="twitter:description" content="python 标准库 unittest">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200225unit-test.png?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/02/25/python-standard-library-unittest/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library unittest | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/02/25/python-standard-library-unittest/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library unittest
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-25 22:00:35" itemprop="dateCreated datePublished" datetime="2020-02-25T22:00:35+08:00">2020-02-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-27 10:06:49" itemprop="dateModified" datetime="2020-02-27T10:06:49+08:00">2020-02-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">12k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">11 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-unittest"><a href="#python-标准库-unittest" class="headerlink" title="python 标准库 unittest"></a>python 标准库 unittest</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200225unit-test.png?raw=true" alt></p>
+<a id="more"></a>
+<blockquote>
+<p>今天又学到一种单词记忆方法</p>
+<p><a href="https://www.wikihow.com/Memorize-Words-Quickly" target="_blank" rel="noopener">https://www.wikihow.com/Memorize-Words-Quickly</a> </p>
+<p>基本原则我梳理了一下:</p>
+<ol>
+<li><p>Using Word Association and Mnemonic Devices</p>
+</li>
+<li><p>Visualizing Words </p>
+</li>
+<li><p>Using Sound and Music</p>
+</li>
+</ol>
+</blockquote>
+<p><strong>源代码：</strong> <a href="https://github.com/python/cpython/tree/3.8/Lib/unittest/__init__.py" target="_blank" rel="noopener">Lib/unittest/<strong>init</strong>.py</a></p>
+<hr>
+<p>（如果你已经对测试的概念比较熟悉了，你可能想直接跳转到这一部分 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#assert-methods" target="_blank" rel="noopener">断言方法</a>。）</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#module-unittest" target="_blank" rel="noopener"><code>unittest</code></a> 单元测试框架是受到 JUnit 的启发，与其他语言中的主流单元测试框架有着相似的风格。其支持测试自动化，配置共享和关机代码测试。支持将测试样例聚合到测试集中，并将测试与报告框架独立。</p>
+<p>为了实现这些，<a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#module-unittest" target="_blank" rel="noopener"><code>unittest</code></a> 通过面向对象的方式支持了一些重要的概念。</p>
+<ul>
+<li><p>测试脚手架</p>
+<p><em>test fixture</em> 表示为了开展一项或多项测试所需要进行的准备工作，以及所有相关的清理操作。举个例子，这可能包含创建临时或代理的数据库、目录，再或者启动一个服务器进程。</p>
+</li>
+<li><p>测试用例</p>
+<p>一个测试用例是一个独立的测试单元。它检查输入特定的数据时的响应。 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#module-unittest" target="_blank" rel="noopener"><code>unittest</code></a> 提供一个基类： <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase" target="_blank" rel="noopener"><code>TestCase</code></a> ，用于新建测试用例。</p>
+</li>
+<li><p>测试套件</p>
+<p><em>test suite</em> 是一系列的测试用例，或测试套件，或两者皆有。它用于归档需要一起执行的测试。</p>
+</li>
+<li><p>测试运行器（test runner）</p>
+<p><em>test runner</em> 是一个用于执行和输出测试结果的组件。这个运行器可能使用图形接口、文本接口，或返回一个特定的值表示运行测试的结果。</p>
+</li>
+</ul>
+<p>参见</p>
+<ul>
+<li><p><a href="https://docs.python.org/zh-cn/3.8/library/doctest.html#module-doctest" target="_blank" rel="noopener"><code>doctest</code></a> — 文档测试模块</p>
+<p>另一个风格完全不同的测试模块。</p>
+</li>
+<li><p><a href="https://web.archive.org/web/20150315073817/http://www.xprogramming.com/testfram.htm" target="_blank" rel="noopener">Simple Smalltalk Testing: With Patterns</a></p>
+<p>Kent Beck 的原始论文阐述了关于使用共享模式的单元测试框架。</p>
+</li>
+<li><p><a href="https://docs.pytest.org/" target="_blank" rel="noopener">pytest</a></p>
+<p>第三方单元测试框架拥有轻量级易编写用例的语法.例如 <code>assert func(10) == 42</code>.</p>
+</li>
+<li><p><a href="https://wiki.python.org/moin/PythonTestingToolsTaxonomy" target="_blank" rel="noopener">The Python Testing Tools Taxonomy</a></p>
+<p>这是一个关于测试工具的清单,包括功能测试和模拟mock对象库。</p>
+</li>
+<li><p><a href="http://lists.idyll.org/listinfo/testing-in-python" target="_blank" rel="noopener">Testing in Python Mailing List</a></p>
+<p>用于讨论Python中测试和测试工具的讨论组</p>
+</li>
+</ul>
+<p><code>Tools/unittestgui/unittestgui.py</code>脚本是用来做探索测试和执行的GUI工具。这主要是为了更加方便那些新的单元测试用例。对于生产环境而言,建议还是使用例如 <a href="https://buildbot.net/" target="_blank" rel="noopener">Buildbot</a>, <a href="https://jenkins.io/" target="_blank" rel="noopener">Jenkins</a> or <a href="http://hudson-ci.org/" target="_blank" rel="noopener">Hudson</a> 这样的持续集成工具来执行测试。</p>
+<h2 id="基本实例"><a href="#基本实例" class="headerlink" title="基本实例"></a>基本实例</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#module-unittest" target="_blank" rel="noopener"><code>unittest</code></a> 模块提供了一系列创建和运行测试的工具。这一段落演示了这些工具的一小部分，但也足以满足大部分用户的需求。</p>
+<p>这是一段简短的代码，来测试三种字符串方法:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestStringMethods</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_upper</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.assertEqual(<span class="string">'foo'</span>.upper(), <span class="string">'FOO'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_isupper</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.assertTrue(<span class="string">'FOO'</span>.isupper())</span><br><span class="line">        self.assertFalse(<span class="string">'Foo'</span>.isupper())</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_split</span><span class="params">(self)</span>:</span></span><br><span class="line">        s = <span class="string">'hello world'</span></span><br><span class="line">        self.assertEqual(s.split(), [<span class="string">'hello'</span>, <span class="string">'world'</span>])</span><br><span class="line">        <span class="comment"># check that s.split fails when the separator is not a string</span></span><br><span class="line">        <span class="keyword">with</span> self.assertRaises(TypeError):</span><br><span class="line">            s.split(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    unittest.main()</span><br></pre></td></tr></table></figure>
+<p>继承 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase" target="_blank" rel="noopener"><code>unittest.TestCase</code></a> 就创建了一个测试样例。上述三个独立的测试是三个类的方法，这些方法的命名都以 <code>test</code> 开头。 这个命名约定告诉测试运行者类的哪些方法表示测试。</p>
+<p>每个测试的关键是：调用 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.assertEqual" target="_blank" rel="noopener"><code>assertEqual()</code></a> 来检查预期的输出； 调用 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.assertTrue" target="_blank" rel="noopener"><code>assertTrue()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.assertFalse" target="_blank" rel="noopener"><code>assertFalse()</code></a> 来验证一个条件；调用 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.assertRaises" target="_blank" rel="noopener"><code>assertRaises()</code></a> 来验证抛出了一个特定的异常。使用这些方法而不是 <a href="https://docs.python.org/zh-cn/3.8/reference/simple_stmts.html#assert" target="_blank" rel="noopener"><code>assert</code></a> 语句是为了让测试运行者能聚合所有的测试结果并产生结果报告。</p>
+<p>通过 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.setUp" target="_blank" rel="noopener"><code>setUp()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.tearDown" target="_blank" rel="noopener"><code>tearDown()</code></a> 方法，可以设置测试开始前与完成后需要执行的指令。 在 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#organizing-tests" target="_blank" rel="noopener">组织你的测试代码</a> 中，对此有更为详细的描述。</p>
+<p>最后的代码块中，演示了运行测试的一个简单的方法。 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.main" target="_blank" rel="noopener"><code>unittest.main()</code></a> 提供了一个测试脚本的命令行接口。当在命令行运行该测试脚本，上文的脚本生成如以下格式的输出:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Ran <span class="number">3</span> tests <span class="keyword">in</span> <span class="number">0.000</span>s</span><br><span class="line"></span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+<p>在调用测试脚本时添加 <code>-v</code> 参数使 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.main" target="_blank" rel="noopener"><code>unittest.main()</code></a> 显示更为详细的信息，生成如以下形式的输出:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">test_isupper (__main__.TestStringMethods) ... ok</span><br><span class="line">test_split (__main__.TestStringMethods) ... ok</span><br><span class="line">test_upper (__main__.TestStringMethods) ... ok</span><br><span class="line"></span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Ran <span class="number">3</span> tests <span class="keyword">in</span> <span class="number">0.001</span>s</span><br><span class="line"></span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+<p> 以上例子演示了 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#module-unittest" target="_blank" rel="noopener"><code>unittest</code></a> 中最常用的、足够满足许多日常测试需求的特性。文档的剩余部分详述该框架的完整特性。 </p>
+<h2 id="命令行界面"><a href="#命令行界面" class="headerlink" title="命令行界面"></a>命令行界面</h2><p>unittest 模块可以通过命令行运行模块、类和独立测试方法的测试:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python -m unittest test_module1 test_module2</span><br><span class="line">python -m unittest test_module.TestClass</span><br><span class="line">python -m unittest test_module.TestClass.test_method</span><br></pre></td></tr></table></figure>
+<p>你可以传入模块名、类或方法名或他们的任意组合。</p>
+<p>同样的，测试模块可以通过文件路径指定:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m unittest tests/test_something.py</span><br></pre></td></tr></table></figure>
+<p>这样就可以使用 shell 的文件名补全指定测试模块。所指定的文件仍需要可以被作为模块导入。路径通过去除 ‘.py’ 、把分隔符转换为 ‘.’ 转换为模块名。若你需要执行不能被作为模块导入的测试文件，你需要直接执行该测试文件。</p>
+<p>在运行测试时，你可以通过添加 -v 参数获取更详细（更多的冗余）的信息。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m unittest -v test_module</span><br></pre></td></tr></table></figure>
+<p>当运行时不包含参数，开始 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest-test-discovery" target="_blank" rel="noopener">探索性测试</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m unittest</span><br></pre></td></tr></table></figure>
+<p>用于获取命令行选项列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m unittest -h</span><br></pre></td></tr></table></figure>
+<p> <em>在 3.2 版更改:</em> 在早期版本中，只支持运行独立的测试方法，而不支持模块和类。 </p>
+<h3 id="命令行选项"><a href="#命令行选项" class="headerlink" title="命令行选项"></a>命令行选项</h3><p><strong>unittest</strong> 支持下面的命令行选项:</p>
+<ul>
+<li><p><code>-b, --buffer</code></p>
+<p>在测试运行时，标准输出流与标准错误流会被放入缓冲区。成功的测试的运行时输出会被丢弃；测试不通过时，测试运行中的输出会正常显示，错误会被加入到测试失败信息。</p>
+</li>
+<li><p><code>-c, --catch</code></p>
+<p>当测试正在运行时， Control-C 会等待当前测试完成，并在完成后报告已执行的测试的结果。当再次按下 Control-C 时，引发平常的 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#KeyboardInterrupt" target="_blank" rel="noopener"><code>KeyboardInterrupt</code></a> 异常。See <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#signal-handling" target="_blank" rel="noopener">Signal Handling</a> for the functions that provide this functionality.</p>
+</li>
+<li><p><code>-f, --failfast</code></p>
+<p>当出现第一个错误或者失败时，停止运行测试。</p>
+</li>
+<li><p><code>-k</code></p>
+<p>只运行匹配模式或子串的测试方法和类。可以多次使用这个选项，以便包含匹配子串的所有测试用例。包含通配符（*）的模式使用 <a href="https://docs.python.org/zh-cn/3.8/library/fnmatch.html#fnmatch.fnmatchcase" target="_blank" rel="noopener"><code>fnmatch.fnmatchcase()</code></a> 对测试名称进行匹配。另外，该匹配是大小写敏感的。模式对测试加载器导入的测试方法全名进行匹配。例如，<code>-k foo</code> 可以匹配到 <code>foo_tests.SomeTest.test_something</code> 和 <code>bar_tests.SomeTest.test_foo</code> ，但是不能匹配到 <code>bar_tests.FooTest.test_something</code> 。</p>
+</li>
+<li><p><code>--locals</code></p>
+<p>在回溯中显示局部变量。</p>
+</li>
+</ul>
+<p><em>3.2 新版功能:</em> 添加命令行选项 <code>-b</code>, <code>-c</code> 和 <code>-f</code> 。</p>
+<p><em>3.5 新版功能:</em> 命令行选项 <code>--locals</code> 。</p>
+<p><em>3.7 新版功能:</em> 命令行选项 <code>-k</code> 。</p>
+<p>命令行亦可用于探索性测试，以运行一个项目的所有测试或其子集。</p>
+<h2 id="探索性测试"><a href="#探索性测试" class="headerlink" title="探索性测试"></a>探索性测试</h2><p><em>3.2 新版功能.</em></p>
+<p>Unittest支持简单的测试搜索。若需要使用探索性测试，所有的测试文件必须是 <a href="https://docs.python.org/zh-cn/3.8/tutorial/modules.html#tut-modules" target="_blank" rel="noopener">modules</a> 或 <a href="https://docs.python.org/zh-cn/3.8/tutorial/modules.html#tut-packages" target="_blank" rel="noopener">packages</a> （包括 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-namespace-package" target="_blank" rel="noopener">namespace packages</a> )并可从项目根目录导入（即它们的文件名必须是有效的 <a href="https://docs.python.org/zh-cn/3.8/reference/lexical_analysis.html#identifiers" target="_blank" rel="noopener">identifiers</a> ）。</p>
+<p>探索性测试在 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestLoader.discover" target="_blank" rel="noopener"><code>TestLoader.discover()</code></a> 中实现，但也可以通过命令行使用。它在命令行中的基本用法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd project_directory</span><br><span class="line">python -m unittest discover</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>方便起见， <code>python -m unittest</code> 与 <code>python -m unittest discover</code> 等价。如果你需要向探索性测试传入参数，必须显式地使用 <code>discover</code> 子命令。</p>
+</blockquote>
+<p><code>discover</code> 有以下选项：</p>
+<ul>
+<li><p><code>-v, --verbose</code></p>
+<p>更详细地输出结果。</p>
+</li>
+<li><p><code>-s, --start-directory directory</code></p>
+<p>开始进行搜索的目录(默认值为当前目录 <code>.</code> )。</p>
+</li>
+<li><p><code>-p, --pattern pattern</code></p>
+<p>用于匹配测试文件的模式（默认为 <code>test*.py</code> ）。</p>
+</li>
+<li><p><code>-t, --top-level-directory directory</code></p>
+<p>指定项目的最上层目录（通常为开始时所在目录）。</p>
+</li>
+</ul>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#cmdoption-unittest-discover-s" target="_blank" rel="noopener"><code>-s</code></a> ，<a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#cmdoption-unittest-discover-p" target="_blank" rel="noopener"><code>-p</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#cmdoption-unittest-discover-t" target="_blank" rel="noopener"><code>-t</code></a> 选项可以按顺序作为位置参数传入。以下两条命令是等价的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python -m unittest discover -s project_directory -p <span class="string">"*_test.py"</span></span><br><span class="line">python -m unittest discover project_directory <span class="string">"*_test.py"</span></span><br></pre></td></tr></table></figure>
+<p>正如可以传入路径那样，传入一个包名作为起始目录也是可行的，如 <code>myproject.subpackage.test</code> 。你提供的包名会被导入，它在文件系统中的位置会被作为起始目录。</p>
+<blockquote>
+<p>探索性测试通过导入测试对测试进行加载。在找到所有你指定的开始目录下的所有测试文件后，它把路径转换为包名并进行导入。如 <code>foo/bar/baz.py</code> 会被导入为 <code>foo.bar.baz</code> 。</p>
+</blockquote>
+<p>如果你有一个全局安装的包，并尝试对这个包的副本进行探索性测试，可能会从错误的地方开始导入。如果出现这种情况，测试会输出警告并退出。</p>
+<p>如果你使用包名而不是路径作为开始目录，搜索时会假定它导入的是你想要的目录，所以你不会收到警告。</p>
+<p>测试模块和包可以通过 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#load-tests-protocol" target="_blank" rel="noopener">load_tests protocol</a> 自定义测试的加载和搜索。</p>
+<p><em>在 3.4 版更改:</em> 探索性测试支持命名空间包（ <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-namespace-package" target="_blank" rel="noopener">namespace packages</a> ）。</p>
+<h2 id="组织你的测试代码"><a href="#组织你的测试代码" class="headerlink" title="组织你的测试代码"></a>组织你的测试代码</h2><p>单元测试的构建单位是 <em>test cases</em> ：独立的、包含执行条件与正确性检查的方案。在 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#module-unittest" target="_blank" rel="noopener"><code>unittest</code></a> 中，测试用例表示为 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase" target="_blank" rel="noopener"><code>unittest.TestCase</code></a> 的实例。通过编写 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase" target="_blank" rel="noopener"><code>TestCase</code></a> 的子类或使用 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.FunctionTestCase" target="_blank" rel="noopener"><code>FunctionTestCase</code></a> 编写你自己的测试用例。</p>
+<p>一个 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase" target="_blank" rel="noopener"><code>TestCase</code></a> 实例的测试代码必须是完全自含的，因此它可以独立运行，或与其它任意组合任意数量的测试用例一起运行。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase" target="_blank" rel="noopener"><code>TestCase</code></a> 的最简单的子类需要实现一个测试方法（例如一个命名以 <code>test</code> 开头的方法）以执行特定的测试代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DefaultWidgetSizeTestCase</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_default_widget_size</span><span class="params">(self)</span>:</span></span><br><span class="line">        widget = Widget(<span class="string">'The widget'</span>)</span><br><span class="line">        self.assertEqual(widget.size(), (<span class="number">50</span>, <span class="number">50</span>))</span><br></pre></td></tr></table></figure>
+<p>可以看到，为了进行测试，我们使用了基类 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase" target="_blank" rel="noopener"><code>TestCase</code></a> 提供的其中一个 <code>assert*()</code> 方法。若测试不通过，将会引发一个带有说明信息的异常，并且 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#module-unittest" target="_blank" rel="noopener"><code>unittest</code></a> 会将这个测试用例标记为测试不通过。任何其它类型的异常将会被当做错误处理。</p>
+<p>可能同时存在多个前置操作相同的测试，我们可以把测试的前置操作从测试代码中拆解出来，并实现测试前置方法 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.setUp" target="_blank" rel="noopener"><code>setUp()</code></a> 。在运行测试时，测试框架会自动地为每个单独测试调用前置方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WidgetTestCase</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUp</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.widget = Widget(<span class="string">'The widget'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_default_widget_size</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.assertEqual(self.widget.size(), (<span class="number">50</span>,<span class="number">50</span>),</span><br><span class="line">                         <span class="string">'incorrect default size'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_widget_resize</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.widget.resize(<span class="number">100</span>,<span class="number">150</span>)</span><br><span class="line">        self.assertEqual(self.widget.size(), (<span class="number">100</span>,<span class="number">150</span>),</span><br><span class="line">                         <span class="string">'wrong size after resize'</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 多个测试运行的顺序由内置字符串排序方法对测试名进行排序的结果决定。 </p>
+</blockquote>
+<p>在测试运行时，若 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.setUp" target="_blank" rel="noopener"><code>setUp()</code></a> 方法引发异常，测试框架会认为测试发生了错误，因此测试方法不会被运行。</p>
+<p>相似的，我们提供了一个 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.tearDown" target="_blank" rel="noopener"><code>tearDown()</code></a> 方法在测试方法运行后进行清理工作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WidgetTestCase</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setUp</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.widget = Widget(<span class="string">'The widget'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">tearDown</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.widget.dispose()</span><br></pre></td></tr></table></figure>
+<p>若 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.setUp" target="_blank" rel="noopener"><code>setUp()</code></a> 成功运行，无论测试方法是否成功，都会运行 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.tearDown" target="_blank" rel="noopener"><code>tearDown()</code></a> 。</p>
+<p>这样的一个测试代码运行的环境被称为 <em>test fixture</em> 。一个新的 TestCase 实例作为一个测试脚手架，用于运行各个独立的测试方法。在运行每个测试时，<a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.setUp" target="_blank" rel="noopener"><code>setUp()</code></a> 、<a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.tearDown" target="_blank" rel="noopener"><code>tearDown()</code></a> 和 <code>__init__()</code> 会被调用一次。</p>
+<p>建议使用TestCase来实现根据测试实现的功能将测试组合在一起。·单元测试通机制,在一个测试集中的测试套件中组织的方式。</p>
+<p>通常情况,调用<a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.main" target="_blank" rel="noopener"><code>unittest.main()</code></a>来执行测试。</p>
+<p>然而，如果你需要自定义你的测试套件的话，你可以参考以下方法组织你的测试：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">suite</span><span class="params">()</span>:</span></span><br><span class="line">    suite = unittest.TestSuite()</span><br><span class="line">    suite.addTest(WidgetTestCase(<span class="string">'test_default_widget_size'</span>))</span><br><span class="line">    suite.addTest(WidgetTestCase(<span class="string">'test_widget_resize'</span>))</span><br><span class="line">    <span class="keyword">return</span> suite</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    runner = unittest.TextTestRunner()</span><br><span class="line">    runner.run(suite())</span><br></pre></td></tr></table></figure>
+<p>您可以将测试用例和测试套件的定义与它们要测试的代码放在相同的模块中（例如“ widget.py”），但是将测试代码放置在独立的模块中有很多优点，例如“ test_widget.py`：</p>
+<p>你可以遵循以下原则：</p>
+<ul>
+<li>测试模块可以通过命令行方式单独运行</li>
+<li>测试脚本可以很容易被隔离</li>
+<li>在没有充分理由的情况下,尽量不要为了适配代码而修改测试代码。</li>
+<li>测试代码的修改频率应低于其测试的代码。</li>
+<li>测试的代码可以更容易地重构。</li>
+<li>无论如何用c编写的模块都必须在一个模块中隔离,为什么必须要一致呢？</li>
+<li>如果测试策略更改了,没必要去修改测试代码</li>
+</ul>
+<h2 id="复用已有的测试代码"><a href="#复用已有的测试代码" class="headerlink" title="复用已有的测试代码"></a>复用已有的测试代码</h2><p>一些用户希望直接使用 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#module-unittest" target="_blank" rel="noopener"><code>unittest</code></a> 运行已有的测试代码，而不需要把已有的每个测试函数转化为一个 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase" target="_blank" rel="noopener"><code>TestCase</code></a> 的子类。</p>
+<p>因此， <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#module-unittest" target="_blank" rel="noopener"><code>unittest</code></a> 提供 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.FunctionTestCase" target="_blank" rel="noopener"><code>FunctionTestCase</code></a> 类。这个 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase" target="_blank" rel="noopener"><code>TestCase</code></a> 的子类可用于打包已有的测试函数，并支持设置前置与后置函数。</p>
+<p>假定有一个测试函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">testSomething</span><span class="params">()</span>:</span></span><br><span class="line">    something = makeSomething()</span><br><span class="line">    <span class="keyword">assert</span> something.name <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span></span><br><span class="line">    <span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+<p>可以创建等价的测试用例如下，其中前置和后置方法是可选的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">testcase = unittest.FunctionTestCase(testSomething,</span><br><span class="line">                                     setUp=makeSomethingDB,</span><br><span class="line">                                     tearDown=deleteSomethingDB)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 尽管 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.FunctionTestCase" target="_blank" rel="noopener"><code>FunctionTestCase</code></a> 可以快速将一个已经存在的测试转换为基于<a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#module-unittest" target="_blank" rel="noopener"><code>unittest</code></a>的系统,但是不推荐这么做。好好设计<a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase" target="_blank" rel="noopener"><code>TestCase</code></a>子类将会在未来重构代码变得更容易。</p>
+</blockquote>
+<p>在特定情况下,现有的测试可以使用 <a href="https://docs.python.org/zh-cn/3.8/library/doctest.html#module-doctest" target="_blank" rel="noopener"><code>doctest</code></a>  模块。如果是那样,  会绑定<code>DocTestSuite</code> 类从已经存在的  <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestSuite" target="_blank" rel="noopener"><code>unittest.TestSuite</code></a> 自动构建 基于<a href="https://docs.python.org/zh-cn/3.8/library/doctest.html#module-doctest" target="_blank" rel="noopener"><code>doctest</code></a>  实例。</p>
+<h2 id="忽略测试与预计的失败"><a href="#忽略测试与预计的失败" class="headerlink" title="忽略测试与预计的失败"></a>忽略测试与预计的失败</h2><p><em>3.1 新版功能.</em></p>
+<p><code>Unittest</code> 支持忽略测试方法或者忽略整个测试。除此以外,还支持标注某个测试”强制失败”,但是在<a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestResult" target="_blank" rel="noopener"><code>TestResult</code></a> 中不会体现这类测试为失败。</p>
+<p>忽略测试可以使用 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.skip" target="_blank" rel="noopener"><code>skip()</code></a> <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-decorator" target="_blank" rel="noopener">decorator</a> 装饰器,或者其中一些条件变量,直接添加<a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.SkipTest" target="_blank" rel="noopener"><code>SkipTest</code></a> 注解</p>
+<p>忽略测试的基本用法如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTestCase</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @unittest.skip("demonstrating skipping")</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_nothing</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.fail(<span class="string">"shouldn't happen"</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @unittest.skipIf(mylib.__version__ &lt; (1, 3),</span></span><br><span class="line">                     <span class="string">"not supported in this library version"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_format</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># Tests that work for only a certain version of the library.</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @unittest.skipUnless(sys.platform.startswith("win"), "requires Windows")</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_windows_support</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># windows specific testing code</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_maybe_skipped</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> external_resource_available():</span><br><span class="line">            self.skipTest(<span class="string">"external resource not available"</span>)</span><br><span class="line">        <span class="comment"># test code that depends on the external resource</span></span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p>在详细测试模式下运行以上测试例子时，程序输出如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">test_format (__main__.MyTestCase) ... skipped <span class="string">'not supported in this library version'</span></span><br><span class="line">test_nothing (__main__.MyTestCase) ... skipped <span class="string">'demonstrating skipping'</span></span><br><span class="line">test_maybe_skipped (__main__.MyTestCase) ... skipped <span class="string">'external resource not available'</span></span><br><span class="line">test_windows_support (__main__.MyTestCase) ... skipped <span class="string">'requires Windows'</span></span><br><span class="line"></span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Ran <span class="number">4</span> tests <span class="keyword">in</span> <span class="number">0.005</span>s</span><br><span class="line"></span><br><span class="line">OK (skipped=<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p>忽略测试类的写法跟忽略测试方法的写法相似:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@unittest.skip("showing class skipping")</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySkippedTestCase</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_not_run</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.setUp" target="_blank" rel="noopener"><code>TestCase.setUp()</code></a> 也可以忽略测试。可以用于所需资源不可用的情况下忽略接下来的测试。</p>
+<p>使用 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.expectedFailure" target="_blank" rel="noopener"><code>expectedFailure()</code></a> 装饰器表明这个测试预计失败。:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExpectedFailureTestCase</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line"><span class="meta">    @unittest.expectedFailure</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_fail</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.assertEqual(<span class="number">1</span>, <span class="number">0</span>, <span class="string">"broken"</span>)</span><br></pre></td></tr></table></figure>
+<p>通过测试方法中调用 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.skip" target="_blank" rel="noopener"><code>skip()</code></a>装饰器，可以轻松忽略那些希望被忽略的测试。除非传递的对象具有某个属性，否则此装饰器将起作用,如下面的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">skipUnlessHasattr</span><span class="params">(obj, attr)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> hasattr(obj, attr):</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">lambda</span> func: func</span><br><span class="line">    <span class="keyword">return</span> unittest.skip(<span class="string">"&#123;!r&#125; doesn't have &#123;!r&#125;"</span>.format(obj, attr))</span><br></pre></td></tr></table></figure>
+<p>下面的装饰器和异常处理可以直接忽略期望失败的测试:</p>
+<ul>
+<li><p><a href="mailto:`@unittest.skip" target="_blank" rel="noopener">`@unittest.skip</a>`(<em>reason</em>)</p>
+<p>忽略被此装饰器装饰的测试。 <em>reason</em> 为测试被忽略的原因。</p>
+</li>
+<li><p><a href="mailto:`@unittest.skipIf" target="_blank" rel="noopener">`@unittest.skipIf</a>`(<em>condition</em>, <em>reason</em>)</p>
+<p>当 <em>condition</em> 为真时，忽略被装饰的测试。</p>
+</li>
+<li><p><a href="mailto:`@unittest.skipUnless" target="_blank" rel="noopener">`@unittest.skipUnless</a>`(<em>condition</em>, <em>reason</em>)</p>
+<p>忽略被装饰的测试，除非 <em>condition</em> 为真。</p>
+</li>
+<li><p><a href="mailto:`@unittest.expectedFailure" target="_blank" rel="noopener">`@unittest.expectedFailure</a>`</p>
+<p>把测试标记为预计失败。如果测试不通过，会被认为测试成功；如果测试通过了，则被认为是测试失败。</p>
+</li>
+<li><p><em>exception</em> <code>unittest.SkipTest</code>(<em>reason</em>)</p>
+<p>引发此异常以忽略一个测试。通常来说，你可以使用 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.skipTest" target="_blank" rel="noopener"><code>TestCase.skipTest()</code></a> 或其中一个忽略测试的装饰器实现忽略测试的功能，而不是直接引发此异常。</p>
+</li>
+</ul>
+<p>被忽略的测试的 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.setUp" target="_blank" rel="noopener"><code>setUp()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.tearDown" target="_blank" rel="noopener"><code>tearDown()</code></a> 不会被运行。被忽略的类的 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.setUpClass" target="_blank" rel="noopener"><code>setUpClass()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.tearDownClass" target="_blank" rel="noopener"><code>tearDownClass()</code></a> 不会被运行。被忽略的模组的 <code>setUpModule()</code> 和 <code>tearDownModule()</code> 不会被运行。</p>
+<h2 id="使用-subtest-执行Distinguishing-test迭代"><a href="#使用-subtest-执行Distinguishing-test迭代" class="headerlink" title="使用 subtest 执行Distinguishing test迭代"></a>使用 subtest 执行Distinguishing test迭代</h2><p><em>3.4 新版功能.</em></p>
+<p>如果测试之间的差异很小，例如某些参数，则unittest允许您使用<a href="https://docs.python.org/zh-cn/3.8/library/unittest.html#unittest.TestCase.subTest" target="_blank" rel="noopener"><code>subTest()</code></a> 的上下文装饰器</p>
+<p>例如，以下测试:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NumbersTest</span><span class="params">(unittest.TestCase)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">test_even</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Test that numbers between 0 and 5 are all even.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">6</span>):</span><br><span class="line">            <span class="keyword">with</span> self.subTest(i=i):</span><br><span class="line">                self.assertEqual(i % <span class="number">2</span>, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>可以得到以下输出:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">======================================================================</span><br><span class="line">FAIL: test_even (__main__.NumbersTest) (i=<span class="number">1</span>)</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"subtests.py"</span>, line <span class="number">32</span>, <span class="keyword">in</span> test_even</span><br><span class="line">    self.assertEqual(i % <span class="number">2</span>, <span class="number">0</span>)</span><br><span class="line">AssertionError: <span class="number">1</span> != <span class="number">0</span></span><br><span class="line"></span><br><span class="line">======================================================================</span><br><span class="line">FAIL: test_even (__main__.NumbersTest) (i=<span class="number">3</span>)</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"subtests.py"</span>, line <span class="number">32</span>, <span class="keyword">in</span> test_even</span><br><span class="line">    self.assertEqual(i % <span class="number">2</span>, <span class="number">0</span>)</span><br><span class="line">AssertionError: <span class="number">1</span> != <span class="number">0</span></span><br><span class="line"></span><br><span class="line">======================================================================</span><br><span class="line">FAIL: test_even (__main__.NumbersTest) (i=<span class="number">5</span>)</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"subtests.py"</span>, line <span class="number">32</span>, <span class="keyword">in</span> test_even</span><br><span class="line">    self.assertEqual(i % <span class="number">2</span>, <span class="number">0</span>)</span><br><span class="line">AssertionError: <span class="number">1</span> != <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>如果不使用子测试，则在第一次失败后执行将停止，并且错误将不那么容易诊断，因为不会显示<code>i</code>的值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">======================================================================</span><br><span class="line">FAIL: test_even (__main__.NumbersTest)</span><br><span class="line">----------------------------------------------------------------------</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"subtests.py"</span>, line <span class="number">32</span>, <span class="keyword">in</span> test_even</span><br><span class="line">    self.assertEqual(i % <span class="number">2</span>, <span class="number">0</span>)</span><br><span class="line">AssertionError: <span class="number">1</span> != <span class="number">0</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/02/25/python-standard-library-unittest/" title="python standard library unittest">https://pinghailinfeng.gitee.io/2020/02/25/python-standard-library-unittest/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/unittest/" rel="tag"># unittest</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/24/python-standard-library-binascii/" rel="next" title="python standard library binascii">
+                <i class="fa fa-chevron-left"></i> python standard library binascii
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/26/python-standard-library-2to3/" rel="prev" title="python standard library 2to3">
+                python standard library 2to3 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">101</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">111</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-unittest"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 unittest</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本实例"><span class="nav-number">1.1.</span> <span class="nav-text">基本实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行界面"><span class="nav-number">1.2.</span> <span class="nav-text">命令行界面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令行选项"><span class="nav-number">1.2.1.</span> <span class="nav-text">命令行选项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#探索性测试"><span class="nav-number">1.3.</span> <span class="nav-text">探索性测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组织你的测试代码"><span class="nav-number">1.4.</span> <span class="nav-text">组织你的测试代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复用已有的测试代码"><span class="nav-number">1.5.</span> <span class="nav-text">复用已有的测试代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#忽略测试与预计的失败"><span class="nav-number">1.6.</span> <span class="nav-text">忽略测试与预计的失败</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-subtest-执行Distinguishing-test迭代"><span class="nav-number">1.7.</span> <span class="nav-text">使用 subtest 执行Distinguishing test迭代</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2to3/">2to3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">66</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-libary/">standard_libary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">60</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/">turtle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unittest/">unittest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">700k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">10:36</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

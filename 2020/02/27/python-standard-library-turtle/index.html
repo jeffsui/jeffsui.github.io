@@ -1,0 +1,2320 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 turtle 海龟制图">
+<meta name="keywords" content="python,standard_library,turtle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library turtle">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/02/27/python-standard-library-turtle/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 turtle 海龟制图">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200227turtle.jpg?raw=true">
+<meta property="og:updated_time" content="2020-02-28T11:30:50.357Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library turtle">
+<meta name="twitter:description" content="python 标准库 turtle 海龟制图">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200227turtle.jpg?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/02/27/python-standard-library-turtle/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library turtle | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/02/27/python-standard-library-turtle/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library turtle
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-27 19:55:25" itemprop="dateCreated datePublished" datetime="2020-02-27T19:55:25+08:00">2020-02-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-28 19:30:50" itemprop="dateModified" datetime="2020-02-28T19:30:50+08:00">2020-02-28</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">19k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">17 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-turtle-海龟制图"><a href="#python-标准库-turtle-海龟制图" class="headerlink" title="python 标准库 turtle 海龟制图"></a>python 标准库 turtle 海龟制图</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200227turtle.jpg?raw=true" alt></p>
+<a id="more"></a>
+<blockquote>
+<p>turtle n  海龟</p>
+<p>vi. 捕海龟，捕鳖； （船等）翻没，倾覆；</p>
+</blockquote>
+<p><strong>源码：</strong> <a href="https://github.com/python/cpython/tree/3.8/Lib/turtle.py" target="_blank" rel="noopener">Lib/turtle.py</a></p>
+<hr>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>海龟绘图很适合用来引导孩子学习编程。 最初来自于 Wally Feurzeig, Seymour Papert 和 Cynthia Solomon 于 1967 年所创造的 Logo 编程语言。</p>
+<p>请想象绘图区有一只机器海龟，起始位置在 x-y 平面的 (0, 0) 点。先执行 <code>import turtle</code>，再执行 <code>turtle.forward(15)</code>，它将(在屏幕上)朝所面对的 x 轴正方向前进 15 像素，随着它的移动画出一条线段。再执行 <code>turtle.right(25)</code>，它将原地右转 25 度。</p>
+<p>通过组合使用此类命令，可以轻松地绘制出精美的形状和图案。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#module-turtle" target="_blank" rel="noopener"><code>turtle</code></a> 模块是基于 Python 标准发行版 2.5 以来的同名模块重新编写并进行了功能扩展。</p>
+<p>新模块尽量保持了原模块的特点，并且(几乎)100%与其兼容。这就意味着初学编程者能够以交互方式使用模块的所有命令、类和方法——运行 IDLE 时注意加 <code>-n</code> 参数。</p>
+<p>turtle 模块提供面向对象和面向过程两种形式的海龟绘图基本组件。由于它使用 <a href="https://docs.python.org/zh-cn/3.8/library/tkinter.html#module-tkinter" target="_blank" rel="noopener"><code>tkinter</code></a> 实现基本图形界面，因此需要安装了 Tk 支持的 Python 版本。</p>
+<p>面向对象的接口主要使用“2+2”个类：</p>
+<ol>
+<li><p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.TurtleScreen" target="_blank" rel="noopener"><code>TurtleScreen</code></a> 类定义图形窗口作为绘图海龟的运动场。它的构造器需要一个 <code>tkinter.Canvas</code> 或 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.ScrolledCanvas" target="_blank" rel="noopener"><code>ScrolledCanvas</code></a> 作为参数。应在 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#module-turtle" target="_blank" rel="noopener"><code>turtle</code></a> 作为某个程序的一部分的时候使用。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.Screen" target="_blank" rel="noopener"><code>Screen()</code></a> 函数返回一个 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.TurtleScreen" target="_blank" rel="noopener"><code>TurtleScreen</code></a> 子类的单例对象。此函数应在 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#module-turtle" target="_blank" rel="noopener"><code>turtle</code></a> 作为独立绘图工具时使用。作为一个单例对象，其所属的类是不可被继承的。</p>
+<p>TurtleScreen/Screen 的所有方法还存在对应的函数，即作为面向过程的接口组成部分。</p>
+</li>
+<li><p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.RawTurtle" target="_blank" rel="noopener"><code>RawTurtle</code></a> (别名: <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.RawPen" target="_blank" rel="noopener"><code>RawPen</code></a>) 类定义海龟对象在 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.TurtleScreen" target="_blank" rel="noopener"><code>TurtleScreen</code></a> 上绘图。它的构造器需要一个 Canvas, ScrolledCanvas 或 TurtleScreen 作为参数，以指定 RawTurtle 对象在哪里绘图。</p>
+<p>从 RawTurtle 派生出子类 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.Turtle" target="_blank" rel="noopener"><code>Turtle</code></a> (别名: <code>Pen</code>)，该类对象在 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.Screen" target="_blank" rel="noopener"><code>Screen</code></a> 实例上绘图，如果实例不存在则会自动创建。</p>
+<p>RawTurtle/Turtle 的所有方法也存在对应的函数，即作为面向过程的接口组成部分。</p>
+</li>
+</ol>
+<p>过程式接口提供与 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.Screen" target="_blank" rel="noopener"><code>Screen</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.Turtle" target="_blank" rel="noopener"><code>Turtle</code></a> 类的方法相对应的函数。函数名与对应的方法名相同。当 Screen 类的方法对应函数被调用时会自动创建一个 Screen 对象。当 Turtle 类的方法对应函数被调用时会自动创建一个 (匿名的) Turtle 对象。</p>
+<p>如果屏幕上需要有多个海龟，就必须使用面向对象的接口。</p>
+<h2 id="可用的-Turtle-和-Screen-方法概览"><a href="#可用的-Turtle-和-Screen-方法概览" class="headerlink" title="可用的 Turtle 和 Screen 方法概览"></a>可用的 Turtle 和 Screen 方法概览</h2><h3 id="Turtle-方法"><a href="#Turtle-方法" class="headerlink" title="Turtle 方法"></a>Turtle 方法</h3><p>海龟动作</p>
+<ul>
+<li><p>移动和绘制</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.forward" target="_blank" rel="noopener"><code>forward()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.fd" target="_blank" rel="noopener"><code>fd()</code></a> 前进</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.backward" target="_blank" rel="noopener"><code>backward()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.bk" target="_blank" rel="noopener"><code>bk()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.back" target="_blank" rel="noopener"><code>back()</code></a> 后退</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.right" target="_blank" rel="noopener"><code>right()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.rt" target="_blank" rel="noopener"><code>rt()</code></a> 右转</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.left" target="_blank" rel="noopener"><code>left()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.lt" target="_blank" rel="noopener"><code>lt()</code></a> 左转</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.goto" target="_blank" rel="noopener"><code>goto()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.setpos" target="_blank" rel="noopener"><code>setpos()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.setposition" target="_blank" rel="noopener"><code>setposition()</code></a> 前往/定位</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.setx" target="_blank" rel="noopener"><code>setx()</code></a> 设置x坐标</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.sety" target="_blank" rel="noopener"><code>sety()</code></a> 设置y坐标</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.setheading" target="_blank" rel="noopener"><code>setheading()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.seth" target="_blank" rel="noopener"><code>seth()</code></a> 设置朝向</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.home" target="_blank" rel="noopener"><code>home()</code></a> 返回原点</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.circle" target="_blank" rel="noopener"><code>circle()</code></a> 画圆</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.dot" target="_blank" rel="noopener"><code>dot()</code></a> 画点</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.stamp" target="_blank" rel="noopener"><code>stamp()</code></a> 印章</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.clearstamp" target="_blank" rel="noopener"><code>clearstamp()</code></a> 清除印章</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.clearstamps" target="_blank" rel="noopener"><code>clearstamps()</code></a> 清除多个印章</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.undo" target="_blank" rel="noopener"><code>undo()</code></a> 撤消</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.speed" target="_blank" rel="noopener"><code>speed()</code></a> 速度</p>
+</li>
+<li><p>获取海龟的状态</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.position" target="_blank" rel="noopener"><code>position()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.pos" target="_blank" rel="noopener"><code>pos()</code></a> 位置</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.towards" target="_blank" rel="noopener"><code>towards()</code></a> 目标方向</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.xcor" target="_blank" rel="noopener"><code>xcor()</code></a> x坐标</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.ycor" target="_blank" rel="noopener"><code>ycor()</code></a> y坐标</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.heading" target="_blank" rel="noopener"><code>heading()</code></a> 朝向</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.distance" target="_blank" rel="noopener"><code>distance()</code></a> 距离</p>
+</li>
+<li><p>设置与度量单位</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.degrees" target="_blank" rel="noopener"><code>degrees()</code></a> 角度</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.radians" target="_blank" rel="noopener"><code>radians()</code></a> 弧度</p>
+</li>
+</ul>
+<p>画笔控制</p>
+<ul>
+<li><p>绘图状态</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.pendown" target="_blank" rel="noopener"><code>pendown()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.pd" target="_blank" rel="noopener"><code>pd()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.down" target="_blank" rel="noopener"><code>down()</code></a> 画笔落下</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.penup" target="_blank" rel="noopener"><code>penup()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.pu" target="_blank" rel="noopener"><code>pu()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.up" target="_blank" rel="noopener"><code>up()</code></a> 画笔抬起</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.pensize" target="_blank" rel="noopener"><code>pensize()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.width" target="_blank" rel="noopener"><code>width()</code></a> 画笔粗细</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.pen" target="_blank" rel="noopener"><code>pen()</code></a> 画笔</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.isdown" target="_blank" rel="noopener"><code>isdown()</code></a> 画笔是否落下</p>
+</li>
+<li><p>颜色控制</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.color" target="_blank" rel="noopener"><code>color()</code></a> 颜色</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.pencolor" target="_blank" rel="noopener"><code>pencolor()</code></a> 画笔颜色</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.fillcolor" target="_blank" rel="noopener"><code>fillcolor()</code></a> 填充颜色</p>
+</li>
+<li><p>填充</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.filling" target="_blank" rel="noopener"><code>filling()</code></a> 是否填充</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.begin_fill" target="_blank" rel="noopener"><code>begin_fill()</code></a> 开始填充</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.end_fill" target="_blank" rel="noopener"><code>end_fill()</code></a> 结束填充</p>
+</li>
+<li><p>更多绘图控制</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.reset" target="_blank" rel="noopener"><code>reset()</code></a> 重置</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.clear" target="_blank" rel="noopener"><code>clear()</code></a> 清空</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.write" target="_blank" rel="noopener"><code>write()</code></a> 书写</p>
+</li>
+</ul>
+<p>海龟状态</p>
+<ul>
+<li><p>可见性</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.showturtle" target="_blank" rel="noopener"><code>showturtle()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.st" target="_blank" rel="noopener"><code>st()</code></a> 显示海龟</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.hideturtle" target="_blank" rel="noopener"><code>hideturtle()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.ht" target="_blank" rel="noopener"><code>ht()</code></a> 隐藏海龟</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.isvisible" target="_blank" rel="noopener"><code>isvisible()</code></a> 是否可见</p>
+</li>
+<li><p>外观</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.shape" target="_blank" rel="noopener"><code>shape()</code></a> 形状</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.resizemode" target="_blank" rel="noopener"><code>resizemode()</code></a> 大小调整模式</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.shapesize" target="_blank" rel="noopener"><code>shapesize()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.turtlesize" target="_blank" rel="noopener"><code>turtlesize()</code></a> 形状大小</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.shearfactor" target="_blank" rel="noopener"><code>shearfactor()</code></a> 剪切因子</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.settiltangle" target="_blank" rel="noopener"><code>settiltangle()</code></a> 设置倾角</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.tiltangle" target="_blank" rel="noopener"><code>tiltangle()</code></a> 倾角</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.tilt" target="_blank" rel="noopener"><code>tilt()</code></a> 倾斜</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.shapetransform" target="_blank" rel="noopener"><code>shapetransform()</code></a> 变形</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.get_shapepoly" target="_blank" rel="noopener"><code>get_shapepoly()</code></a> 获取形状多边形</p>
+</li>
+</ul>
+<p>使用事件</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.onclick" target="_blank" rel="noopener"><code>onclick()</code></a> 当鼠标点击</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.onrelease" target="_blank" rel="noopener"><code>onrelease()</code></a> 当鼠标释放</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.ondrag" target="_blank" rel="noopener"><code>ondrag()</code></a> 当鼠标拖动</p>
+<p>特殊海龟方法</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.begin_poly" target="_blank" rel="noopener"><code>begin_poly()</code></a> 开始记录多边形</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.end_poly" target="_blank" rel="noopener"><code>end_poly()</code></a> 结束记录多边形</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.get_poly" target="_blank" rel="noopener"><code>get_poly()</code></a> 获取多边形</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.clone" target="_blank" rel="noopener"><code>clone()</code></a> 克隆</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.getturtle" target="_blank" rel="noopener"><code>getturtle()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.getpen" target="_blank" rel="noopener"><code>getpen()</code></a> 获取海龟画笔</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.getscreen" target="_blank" rel="noopener"><code>getscreen()</code></a> 获取屏幕</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.setundobuffer" target="_blank" rel="noopener"><code>setundobuffer()</code></a> 设置撤消缓冲区</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.undobufferentries" target="_blank" rel="noopener"><code>undobufferentries()</code></a> 撤消缓冲区条目数</p>
+<h3 id="TurtleScreen-Screen-方法"><a href="#TurtleScreen-Screen-方法" class="headerlink" title="TurtleScreen/Screen 方法"></a>TurtleScreen/Screen 方法</h3><ul>
+<li><p>窗口控制</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.bgcolor" target="_blank" rel="noopener"><code>bgcolor()</code></a> 背景颜色</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.bgpic" target="_blank" rel="noopener"><code>bgpic()</code></a> 背景图片</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.clear" target="_blank" rel="noopener"><code>clear()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.clearscreen" target="_blank" rel="noopener"><code>clearscreen()</code></a> 清屏</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.reset" target="_blank" rel="noopener"><code>reset()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.resetscreen" target="_blank" rel="noopener"><code>resetscreen()</code></a> 重置</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.screensize" target="_blank" rel="noopener"><code>screensize()</code></a> 屏幕大小</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.setworldcoordinates" target="_blank" rel="noopener"><code>setworldcoordinates()</code></a> 设置世界坐标系</p>
+</li>
+<li><p>动画控制</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.delay" target="_blank" rel="noopener"><code>delay()</code></a> 延迟</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.tracer" target="_blank" rel="noopener"><code>tracer()</code></a> 追踪</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.update" target="_blank" rel="noopener"><code>update()</code></a> 更新</p>
+<p>使用屏幕事件</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.listen" target="_blank" rel="noopener"><code>listen()</code></a> 监听</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.onkey" target="_blank" rel="noopener"><code>onkey()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.onkeyrelease" target="_blank" rel="noopener"><code>onkeyrelease()</code></a> 当键盘按下并释放</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.onkeypress" target="_blank" rel="noopener"><code>onkeypress()</code></a> 当键盘按下</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.onclick" target="_blank" rel="noopener"><code>onclick()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.onscreenclick" target="_blank" rel="noopener"><code>onscreenclick()</code></a> 当点击屏幕</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.ontimer" target="_blank" rel="noopener"><code>ontimer()</code></a> 当达到定时</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.mainloop" target="_blank" rel="noopener"><code>mainloop()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.done" target="_blank" rel="noopener"><code>done()</code></a> 主循环</p>
+</li>
+<li><p>设置与特殊方法</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.mode" target="_blank" rel="noopener"><code>mode()</code></a> 模式</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.colormode" target="_blank" rel="noopener"><code>colormode()</code></a> 颜色模式</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.getcanvas" target="_blank" rel="noopener"><code>getcanvas()</code></a> 获取画布</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.getshapes" target="_blank" rel="noopener"><code>getshapes()</code></a> 获取形状</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.register_shape" target="_blank" rel="noopener"><code>register_shape()</code></a> | <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.addshape" target="_blank" rel="noopener"><code>addshape()</code></a> 添加形状</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.turtles" target="_blank" rel="noopener"><code>turtles()</code></a> 所有海龟</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.window_height" target="_blank" rel="noopener"><code>window_height()</code></a> 窗口高度</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.window_width" target="_blank" rel="noopener"><code>window_width()</code></a> 窗口宽度</p>
+</li>
+<li><p>输入方法</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.textinput" target="_blank" rel="noopener"><code>textinput()</code></a> 文本输入</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.numinput" target="_blank" rel="noopener"><code>numinput()</code></a> 数字输入</p>
+</li>
+<li><p>Screen 专有方法</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.bye" target="_blank" rel="noopener"><code>bye()</code></a> 退出</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.exitonclick" target="_blank" rel="noopener"><code>exitonclick()</code></a> 当点击时退出</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.setup" target="_blank" rel="noopener"><code>setup()</code></a> 设置</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.title" target="_blank" rel="noopener"><code>title()</code></a> 标题</p>
+</li>
+</ul>
+<h2 id="RawTurtle-Turtle-方法和对应函数"><a href="#RawTurtle-Turtle-方法和对应函数" class="headerlink" title="RawTurtle/Turtle 方法和对应函数"></a>RawTurtle/Turtle 方法和对应函数</h2><p>本节中的大部分示例都使用 Turtle 类的一个实例，命名为 <code>turtle</code>。</p>
+<h3 id="海龟动作"><a href="#海龟动作" class="headerlink" title="海龟动作"></a>海龟动作</h3><ul>
+<li><p><code>turtle.forward</code>(<em>distance</em>)</p>
+</li>
+<li><p><code>turtle.fd</code>(<em>distance</em>)</p>
+<p>参数<strong>distance</strong> – 一个数值 (整型或浮点型)海龟前进 <em>distance</em> 指定的距离，方向为海龟的朝向。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">0.00</span>,<span class="number">0.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.forward(<span class="number">25</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">25.00</span>,<span class="number">0.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.forward(<span class="number">-75</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">-50.00</span>,<span class="number">0.00</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>turtle.back</code>(<em>distance</em>)</p>
+<p><code>turtle.bk</code>(<em>distance</em>)</p>
+<p><code>turtle.backward</code>(<em>distance</em>)</p>
+<ul>
+<li>参数  :<strong>distance</strong> – 一个数值</li>
+</ul>
+<p>海龟后退 <em>distance</em> 指定的距离，方向与海龟的朝向相反。不改变海龟的朝向。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">0.00</span>,<span class="number">0.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.backward(<span class="number">30</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">-30.00</span>,<span class="number">0.00</span>)</span><br></pre></td></tr></table></figure>
+<p><code>turtle.right</code>(<em>angle</em>)</p>
+<p><code>turtle.rt</code>(<em>angle</em>)</p>
+<ul>
+<li>参数：<strong>angle</strong> – 一个数值 (整型或浮点型)</li>
+</ul>
+<p>海龟右转 <em>angle</em> 个单位。(单位默认为角度，但可通过 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.degrees" target="_blank" rel="noopener"><code>degrees()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.radians" target="_blank" rel="noopener"><code>radians()</code></a> 函数改变设置。) 角度的正负由海龟模式确定，参见 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.mode" target="_blank" rel="noopener"><code>mode()</code></a>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">22.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.right(<span class="number">45</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">337.0</span></span><br></pre></td></tr></table></figure>
+<p><code>turtle.left</code>(<em>angle</em>)</p>
+<p><code>turtle.lt</code>(<em>angle</em>)</p>
+<ul>
+<li>参数:<strong>angle</strong> – 一个数值 (整型或浮点型)</li>
+</ul>
+<p>海龟左转 <em>angle</em> 个单位。(单位默认为角度，但可通过 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.degrees" target="_blank" rel="noopener"><code>degrees()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.radians" target="_blank" rel="noopener"><code>radians()</code></a> 函数改变设置。) 角度的正负由海龟模式确定，参见 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.mode" target="_blank" rel="noopener"><code>mode()</code></a>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">22.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.left(<span class="number">45</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">67.0</span></span><br></pre></td></tr></table></figure>
+<p><code>turtle.goto</code>(<em>x</em>, <em>y=None</em>)</p>
+<p><code>turtle.setpos</code>(<em>x</em>, <em>y=None</em>)</p>
+<p><code>turtle.setposition</code>(<em>x</em>, <em>y=None</em>)</p>
+<ul>
+<li>参数：<strong>x</strong> – 一个数值或数值对/向量<strong>y</strong> – 一个数值或 <code>None</code></li>
+</ul>
+<p>如果 <em>y</em> 为 <code>None</code>，<em>x</em> 应为一个表示坐标的数值对或 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.Vec2D" target="_blank" rel="noopener"><code>Vec2D</code></a> 类对象 (例如 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.pos" target="_blank" rel="noopener"><code>pos()</code></a> 返回的对象).</p>
+<p>海龟移动到一个绝对坐标。如果画笔已落下将会画线。不改变海龟的朝向。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>tp = turtle.pos()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>tp</span><br><span class="line">(<span class="number">0.00</span>,<span class="number">0.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.setpos(<span class="number">60</span>,<span class="number">30</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pos()</span><br><span class="line">(<span class="number">60.00</span>,<span class="number">30.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.setpos((<span class="number">20</span>,<span class="number">80</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pos()</span><br><span class="line">(<span class="number">20.00</span>,<span class="number">80.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.setpos(tp)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pos()</span><br><span class="line">(<span class="number">0.00</span>,<span class="number">0.00</span>)</span><br></pre></td></tr></table></figure>
+<p><code>turtle.setx</code>(<em>x</em>)</p>
+<ul>
+<li>参数:<strong>x</strong> – 一个数值 (整型或浮点型)</li>
+</ul>
+<p>设置海龟的横坐标为 <em>x</em>，纵坐标保持不变。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">0.00</span>,<span class="number">240.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.setx(<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">10.00</span>,<span class="number">240.00</span>)</span><br></pre></td></tr></table></figure>
+<p><code>turtle.sety</code>(<em>y</em>)</p>
+<ul>
+<li>参数:<strong>y</strong> – 一个数值 (整型或浮点型)</li>
+</ul>
+<p>设置海龟的纵坐标为 <em>y</em>，横坐标保持不变。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">0.00</span>,<span class="number">40.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.sety(<span class="number">-10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">0.00</span>,<span class="number">-10.00</span>)</span><br></pre></td></tr></table></figure>
+<p><code>turtle.setheading</code>(<em>to_angle</em>)</p>
+<p><code>turtle.seth</code>(<em>to_angle</em>)</p>
+<ul>
+<li>参数:<strong>to_angle</strong> – 一个数值 (整型或浮点型)</li>
+</ul>
+<p>设置海龟的朝向为 <em>to_angle</em>。以下是以角度表示的几个常用方向：</p>
+<table>
+<thead>
+<tr>
+<th>标准模式</th>
+<th>logo 模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 东</td>
+<td>0 - 北</td>
+</tr>
+<tr>
+<td>90 - 北</td>
+<td>90 - 东</td>
+</tr>
+<tr>
+<td>180 - 西</td>
+<td>180 - 南</td>
+</tr>
+<tr>
+<td>270 - 南</td>
+<td>270 - 西</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.setheading(<span class="number">90</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">90.0</span></span><br></pre></td></tr></table></figure>
+<p><code>turtle.home</code>()</p>
+<p>海龟移至初始坐标 (0,0)，并设置朝向为初始方向 (由海龟模式确定，参见 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.mode" target="_blank" rel="noopener"><code>mode()</code></a>)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">90.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">0.00</span>,<span class="number">-10.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.home()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">0.00</span>,<span class="number">0.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">0.0</span></span><br></pre></td></tr></table></figure>
+<p><code>turtle.circle</code>(<em>radius</em>, <em>extent=None</em>, <em>steps=None</em>)</p>
+<p>三个参数:</p>
+<ul>
+<li><strong>radius</strong> – 一个数值</li>
+<li><strong>extent</strong> – 一个数值 (或 <code>None</code>)</li>
+<li><strong>steps</strong> – 一个整型数 (或 <code>None</code>)</li>
+</ul>
+<p>绘制一个 <em>radius</em> 指定半径的圆。圆心在海龟左边 <em>radius</em> 个单位；<em>extent</em> 为一个夹角，用来决定绘制圆的一部分。如未指定 <em>extent\</em>则绘制整个圆。如果 *extent<em> 不是完整圆周，则以当前画笔位置为一个端点绘制圆弧。如果 </em>radius<em> 为正值则朝逆时针方向绘制圆弧，否则朝顺时针方向。最终海龟的朝向会依据 </em>extent* 的值而改变。</p>
+<p>圆实际是以其内切正多边形来近似表示的，其边的数量由 <em>steps</em> 指定。如果未指定边数则会自动确定。此方法也可用来绘制正多边形。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.home()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">0.00</span>,<span class="number">0.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">0.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.circle(<span class="number">50</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">-0.00</span>,<span class="number">0.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">0.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.circle(<span class="number">120</span>, <span class="number">180</span>)  <span class="comment"># draw a semicircle</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">0.00</span>,<span class="number">240.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">180.0</span></span><br></pre></td></tr></table></figure>
+<p><code>turtle.dot</code>(<em>size=None</em>, *<em>color</em>)</p>
+<ul>
+<li><p>参数</p>
+<p><strong>size</strong> – 一个整型数 &gt;= 1 (如果指定)<strong>color</strong> – 一个颜色字符串或颜色数值元组</p>
+</li>
+</ul>
+<p>绘制一个直径为 <em>size</em>，颜色为 <em>color</em> 的圆点。如果 <em>size</em> 未指定，则直径取 pensize+4 和 2*pensize 中的较大值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.home()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.dot()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.fd(<span class="number">50</span>); turtle.dot(<span class="number">20</span>, <span class="string">"blue"</span>); turtle.fd(<span class="number">50</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">100.00</span>,<span class="number">-0.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">0.0</span></span><br></pre></td></tr></table></figure>
+<p><code>turtle.stamp</code>()</p>
+<p>在海龟当前位置印制一个海龟形状。返回该印章的 stamp_id，印章可以通过调用 <code>clearstamp(stamp_id)</code> 来删除。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.color(<span class="string">"blue"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.stamp()</span><br><span class="line"><span class="number">11</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.fd(<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+<p><code>turtle.clearstamp</code>(<em>stampid</em>)</p>
+<ul>
+<li><p>参数</p>
+<p><strong>stampid</strong> – 一个整型数，必须是之前 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.stamp" target="_blank" rel="noopener"><code>stamp()</code></a> 调用的返回值</p>
+</li>
+</ul>
+<p>删除 <em>stampid</em> 指定的印章。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">150.00</span>,<span class="number">-0.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.color(<span class="string">"blue"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>astamp = turtle.stamp()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.fd(<span class="number">50</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">200.00</span>,<span class="number">-0.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.clearstamp(astamp)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">200.00</span>,<span class="number">-0.00</span>)</span><br></pre></td></tr></table></figure>
+<p><code>turtle.clearstamps</code>(<em>n=None</em>)</p>
+<ul>
+<li><p>参数</p>
+<p><strong>n</strong> – 一个整型数 (或 <code>None</code>)</p>
+</li>
+</ul>
+<p>删除全部或前/后 <em>n</em> 个海龟印章。如果 <em>n</em> 为 <code>None</code> 则删除全部印章，如果 <em>n</em> &gt; 0 则删除前 <em>n</em> 个印章，否则如果 <em>n</em> &lt; 0 则删除后 <em>n</em> 个印章。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line"><span class="meta">... </span>    turtle.stamp(); turtle.fd(<span class="number">30</span>)</span><br><span class="line"><span class="number">13</span></span><br><span class="line"><span class="number">14</span></span><br><span class="line"><span class="number">15</span></span><br><span class="line"><span class="number">16</span></span><br><span class="line"><span class="number">17</span></span><br><span class="line"><span class="number">18</span></span><br><span class="line"><span class="number">19</span></span><br><span class="line"><span class="number">20</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.clearstamps(<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.clearstamps(<span class="number">-2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.clearstamps()</span><br></pre></td></tr></table></figure>
+<p><code>turtle.undo</code>()</p>
+<p>撤消 (或连续撤消) 最近的一个 (或多个) 海龟动作。可撤消的次数由撤消缓冲区的大小决定。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">4</span>):</span><br><span class="line"><span class="meta">... </span>    turtle.fd(<span class="number">50</span>); turtle.lt(<span class="number">80</span>)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">8</span>):</span><br><span class="line"><span class="meta">... </span>    turtle.undo()</span><br></pre></td></tr></table></figure>
+<p><code>turtle.speed</code>(<em>speed=None</em>)</p>
+<ul>
+<li><p>参数</p>
+<p><strong>speed</strong> – 一个 0..10 范围内的整型数或速度字符串 (见下)</p>
+</li>
+</ul>
+<p>设置海龟移动的速度为 0..10 表示的整型数值。如未指定参数则返回当前速度。</p>
+<p>如果输入数值大于 10 或小于 0.5 则速度设为 0。速度字符串与速度值的对应关系如下:</p>
+<ul>
+<li>“fastest”: 0 最快</li>
+<li>“fast”: 10 快</li>
+<li>“normal”: 6 正常</li>
+<li>“slow”: 3 慢</li>
+<li>“slowest”: 1 最慢</li>
+</ul>
+<p>速度值从 1 到 10，画线和海龟转向的动画效果逐级加快。</p>
+<p>注意: <em>speed</em> = 0 表示 <em>没有</em> 动画效果。forward/back 将使海龟向前/向后跳跃，同样的 left/right 将使海龟立即改变朝向。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.speed()</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.speed(<span class="string">'normal'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.speed()</span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.speed(<span class="number">9</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.speed()</span><br><span class="line"><span class="number">9</span></span><br></pre></td></tr></table></figure>
+<h3 id="获取海龟的状态"><a href="#获取海龟的状态" class="headerlink" title="获取海龟的状态"></a>获取海龟的状态</h3><p><code>turtle.position</code>()</p>
+<p><code>turtle.pos</code>()</p>
+<p>返回海龟当前的坐标 (x,y) (为 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.Vec2D" target="_blank" rel="noopener"><code>Vec2D</code></a> 矢量类对象)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pos()</span><br><span class="line">(<span class="number">440.00</span>,<span class="number">-0.00</span>)</span><br></pre></td></tr></table></figure>
+<p><code>urtle.towards</code>(<em>x</em>, <em>y=None</em>)</p>
+<ul>
+<li><p>参数</p>
+<p><strong>x</strong> – 一个数值或数值对/矢量，或一个海龟实例<strong>y</strong> – 一个数值——如果 <em>x</em> 是一个数值，否则为 <code>None</code></p>
+</li>
+</ul>
+<p>从海龟位置到由 (x,y)，矢量或另一海龟对应位置的连线的夹角。此数值依赖于海龟初始朝向 - 由 “standard”/“world” 或 “logo” 模式设置所决定)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.goto(<span class="number">10</span>, <span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.towards(<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line"><span class="number">225.0</span></span><br></pre></td></tr></table></figure>
+<p><code>turtle.xcor</code>()</p>
+<p>返回海龟的 x 坐标。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.home()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.left(<span class="number">50</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.forward(<span class="number">100</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pos()</span><br><span class="line">(<span class="number">64.28</span>,<span class="number">76.60</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(round(turtle.xcor(), <span class="number">5</span>))</span><br><span class="line"><span class="number">64.27876</span></span><br></pre></td></tr></table></figure>
+<p><code>turtle.ycor</code>()</p>
+<p>返回海龟的 y 坐标。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.home()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.left(<span class="number">60</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.forward(<span class="number">100</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(turtle.pos())</span><br><span class="line">(<span class="number">50.00</span>,<span class="number">86.60</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(round(turtle.ycor(), <span class="number">5</span>))</span><br><span class="line"><span class="number">86.60254</span></span><br></pre></td></tr></table></figure>
+<p><code>turtle.heading</code>()</p>
+<p>返回海龟当前的朝向 (数值依赖于海龟模式参见 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.mode" target="_blank" rel="noopener"><code>mode()</code></a>)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.home()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.left(<span class="number">67</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">67.0</span></span><br></pre></td></tr></table></figure>
+<p><code>turtle.distance</code>(<em>x</em>, <em>y=None</em>)</p>
+<ul>
+<li><p>参数</p>
+<p><strong>x</strong> – 一个数值或数值对/矢量，或一个海龟实例<strong>y</strong> – 一个数值——如果 <em>x</em> 是一个数值，否则为 <code>None</code></p>
+</li>
+</ul>
+<p>返回从海龟位置到由 (x,y)，适量或另一海龟对应位置的单位距离。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.home()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.distance(<span class="number">30</span>,<span class="number">40</span>)</span><br><span class="line"><span class="number">50.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.distance((<span class="number">30</span>,<span class="number">40</span>))</span><br><span class="line"><span class="number">50.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>joe = Turtle()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>joe.forward(<span class="number">77</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.distance(joe)</span><br><span class="line"><span class="number">77.0</span></span><br></pre></td></tr></table></figure>
+<h3 id="度量单位设置"><a href="#度量单位设置" class="headerlink" title="度量单位设置"></a>度量单位设置</h3><p><code>turtle.degrees</code>(<em>fullcircle=360.0</em>)</p>
+<ul>
+<li><p>参数</p>
+<p><strong>fullcircle</strong> – 一个数值</p>
+</li>
+</ul>
+<p>设置角度的度量单位，即设置一个圆周为多少 “度”。默认值为 360 度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.home()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.left(<span class="number">90</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">90.0</span></span><br><span class="line"></span><br><span class="line">Change angle measurement unit to grad (also known <span class="keyword">as</span> gon,</span><br><span class="line">grade, <span class="keyword">or</span> gradian <span class="keyword">and</span> equals <span class="number">1</span>/<span class="number">100</span>-th of the right angle.)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.degrees(<span class="number">400.0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">100.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.degrees(<span class="number">360</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">90.0</span></span><br></pre></td></tr></table></figure>
+<p><code>turtle.radians</code>()</p>
+<p>设置角度的度量单位为弧度。其值等于 <code>degrees(2*math.pi)</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.home()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.left(<span class="number">90</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">90.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.radians()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">1.5707963267948966</span></span><br></pre></td></tr></table></figure>
+<h3 id="画笔控制"><a href="#画笔控制" class="headerlink" title="画笔控制"></a>画笔控制</h3><h4 id="绘图状态"><a href="#绘图状态" class="headerlink" title="绘图状态"></a>绘图状态</h4><ul>
+<li><p><code>turtle.pendown</code>()</p>
+</li>
+<li><p><code>turtle.pd</code>()</p>
+</li>
+<li><p><code>turtle.down</code>()</p>
+<p>画笔落下 – 移动时将画线。</p>
+</li>
+<li><p><code>turtle.penup</code>()</p>
+</li>
+<li><p><code>turtle.pu</code>()</p>
+</li>
+<li><p><code>turtle.up</code>()</p>
+<p>画笔抬起 – 移动时不画线。</p>
+</li>
+<li><p><code>turtle.pensize</code>(<em>width=None</em>)</p>
+</li>
+<li><p><code>turtle.width</code>(<em>width=None</em>)<a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.width" target="_blank" rel="noopener">¶</a></p>
+</li>
+<li><p>参数</p>
+<p><strong>width</strong> – 一个正数值</p>
+</li>
+</ul>
+<p>设置线条的粗细为 <em>width</em> 或返回该值。如果 resizemode 设为 “auto” 并且 turtleshape 为多边形，该多边形也以同样组细的线条绘制。如未指定参数，则返回当前的 pensize。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pensize()</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pensize(<span class="number">10</span>)   <span class="comment"># from here on lines of width 10 are drawn</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>turtle.pen</code>(<em>pen=None</em>, <em>**pendict</em>)</p>
+<p><strong>pen</strong> – 一个包含部分或全部下列键的字典</p>
+<p><strong>pendict</strong> – 一个或多个以下列键为关键字的关键字参数</p>
+<p>返回或设置画笔的属性，以一个包含以下键值对的 “画笔字典” 表示:</p>
+<ul>
+<li>“shown”: True/False</li>
+<li>“pendown”: True/False</li>
+<li>“pencolor”: 颜色字符串或颜色元组</li>
+<li>“fillcolor”: 颜色字符串或颜色元组</li>
+<li>“pensize”: 正数值</li>
+<li>“speed”: 0..10 范围内的数值</li>
+<li>“resizemode”: “auto” 或 “user” 或 “noresize”</li>
+<li>“stretchfactor”: (正数值, 正数值)</li>
+<li>“outline”: 正数值</li>
+<li>“tilt”: 数值</li>
+</ul>
+</li>
+</ul>
+<p>此字典可作为后续调用 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.pen" target="_blank" rel="noopener"><code>pen()</code></a> 时的参数，以恢复之前的画笔状态。另外还可将这些属性作为关键词参数提交。使用此方式可以用一条语句设置画笔的多个属性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pen(fillcolor=<span class="string">"black"</span>, pencolor=<span class="string">"red"</span>, pensize=<span class="number">10</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted(turtle.pen().items())</span><br><span class="line">[(<span class="string">'fillcolor'</span>, <span class="string">'black'</span>), (<span class="string">'outline'</span>, <span class="number">1</span>), (<span class="string">'pencolor'</span>, <span class="string">'red'</span>),</span><br><span class="line"> (<span class="string">'pendown'</span>, <span class="literal">True</span>), (<span class="string">'pensize'</span>, <span class="number">10</span>), (<span class="string">'resizemode'</span>, <span class="string">'noresize'</span>),</span><br><span class="line"> (<span class="string">'shearfactor'</span>, <span class="number">0.0</span>), (<span class="string">'shown'</span>, <span class="literal">True</span>), (<span class="string">'speed'</span>, <span class="number">9</span>),</span><br><span class="line"> (<span class="string">'stretchfactor'</span>, (<span class="number">1.0</span>, <span class="number">1.0</span>)), (<span class="string">'tilt'</span>, <span class="number">0.0</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>penstate=turtle.pen()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.color(<span class="string">"yellow"</span>, <span class="string">""</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.penup()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted(turtle.pen().items())[:<span class="number">3</span>]</span><br><span class="line">[(<span class="string">'fillcolor'</span>, <span class="string">''</span>), (<span class="string">'outline'</span>, <span class="number">1</span>), (<span class="string">'pencolor'</span>, <span class="string">'yellow'</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pen(penstate, fillcolor=<span class="string">"green"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sorted(turtle.pen().items())[:<span class="number">3</span>]</span><br><span class="line">[(<span class="string">'fillcolor'</span>, <span class="string">'green'</span>), (<span class="string">'outline'</span>, <span class="number">1</span>), (<span class="string">'pencolor'</span>, <span class="string">'red'</span>)]</span><br></pre></td></tr></table></figure>
+<p><code>turtle.isdown</code>()</p>
+<p>如果画笔落下返回 <code>True</code>，如果画笔抬起返回 <code>False</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.penup()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.isdown()</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pendown()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.isdown()</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<h4 id="颜色控制"><a href="#颜色控制" class="headerlink" title="颜色控制"></a>颜色控制</h4><p><code>turtle.pencolor</code>(*<em>args</em>)</p>
+<p>返回或设置画笔颜色。</p>
+<p>允许以下四种输入格式:</p>
+<ul>
+<li><p><code>pencolor()</code></p>
+<p>返回以颜色描述字符串或元组 (见示例) 表示的当前画笔颜色。可用作其他 color/pencolor/fillcolor 调用的输入。</p>
+</li>
+<li><p><code>pencolor(colorstring)</code></p>
+<p>设置画笔颜色为 <em>colorstring</em> 指定的 Tk 颜色描述字符串，例如 <code>&quot;red&quot;</code>、<code>&quot;yellow&quot;</code> 或 <code>&quot;#33cc8c&quot;</code>。</p>
+</li>
+<li><p><code>pencolor((r, g, b))</code></p>
+<p>设置画笔颜色为以 <em>r</em>, <em>g</em>, <em>b</em> 元组表示的 RGB 颜色。<em>r</em>, <em>g</em>, <em>b</em> 的取值范围应为 0..colormode，colormode 的值为 1.0 或 255 (参见 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.colormode" target="_blank" rel="noopener"><code>colormode()</code></a>)。</p>
+</li>
+<li><p><code>pencolor(r, g, b)</code></p>
+<p>设置画笔颜色为以 <em>r</em>, <em>g</em>, <em>b</em> 表示的 RGB 颜色。<em>r</em>, <em>g</em>, <em>b</em> 的取值范围应为 0..colormode。如果 turtleshape 为多边形，该多边形轮廓也以新设置的画笔颜色绘制。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>colormode()</span><br><span class="line"><span class="number">1.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pencolor()</span><br><span class="line"><span class="string">'red'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pencolor(<span class="string">"brown"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pencolor()</span><br><span class="line"><span class="string">'brown'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>tup = (<span class="number">0.2</span>, <span class="number">0.8</span>, <span class="number">0.55</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pencolor(tup)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pencolor()</span><br><span class="line">(<span class="number">0.2</span>, <span class="number">0.8</span>, <span class="number">0.5490196078431373</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>colormode(<span class="number">255</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pencolor()</span><br><span class="line">(<span class="number">51.0</span>, <span class="number">204.0</span>, <span class="number">140.0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pencolor(<span class="string">'#32c18f'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pencolor()</span><br><span class="line">(<span class="number">50.0</span>, <span class="number">193.0</span>, <span class="number">143.0</span>)</span><br></pre></td></tr></table></figure>
+<p><code>turtle.fillcolor</code>(*<em>args</em>)</p>
+<p>返回或设置填充颜色。</p>
+<p>允许以下四种输入格式:</p>
+<ul>
+<li><p><code>fillcolor()</code></p>
+<p>返回以颜色描述字符串或元组 (见示例) 表示的当前填充颜色。可用作其他 color/pencolor/fillcolor 调用的输入。</p>
+</li>
+<li><p><code>fillcolor(colorstring)</code></p>
+<p>设置填充颜色为 <em>colorstring</em> 指定的 Tk 颜色描述字符串，例如 <code>&quot;red&quot;</code>、<code>&quot;yellow&quot;</code> 或 <code>&quot;#33cc8c&quot;</code>。</p>
+</li>
+<li><p><code>fillcolor((r, g, b))</code></p>
+<p>设置填充颜色为以 <em>r</em>, <em>g</em>, <em>b</em> 元组表示的 RGB 颜色。<em>r</em>, <em>g</em>, <em>b</em> 的取值范围应为 0..colormode，colormode 的值为 1.0 或 255 (参见 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.colormode" target="_blank" rel="noopener"><code>colormode()</code></a>)。</p>
+</li>
+<li><p><code>fillcolor(r, g, b)</code></p>
+<p>设置填充颜色为 <em>r</em>, <em>g</em>, <em>b</em> 表示的 RGB 颜色。<em>r</em>, <em>g</em>, <em>b</em> 的取值范围应为 0..colormode。如果 turtleshape 为多边形，该多边形内部也以新设置的填充颜色填充。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.fillcolor(<span class="string">"violet"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.fillcolor()</span><br><span class="line"><span class="string">'violet'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.pencolor()</span><br><span class="line">(<span class="number">50.0</span>, <span class="number">193.0</span>, <span class="number">143.0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.fillcolor((<span class="number">50</span>, <span class="number">193</span>, <span class="number">143</span>))  <span class="comment"># Integers, not floats</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.fillcolor()</span><br><span class="line">(<span class="number">50.0</span>, <span class="number">193.0</span>, <span class="number">143.0</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.fillcolor(<span class="string">'#ffffff'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.fillcolor()</span><br><span class="line">(<span class="number">255.0</span>, <span class="number">255.0</span>, <span class="number">255.0</span>)</span><br></pre></td></tr></table></figure>
+<p><code>turtle.color</code>(*<em>args</em>)</p>
+<p>返回或设置画笔颜色和填充颜色。</p>
+<p>允许多种输入格式。使用如下 0 至 3 个参数:</p>
+<ul>
+<li><p><code>color()</code></p>
+<p>返回以一对颜色描述字符串或元组表示的当前画笔颜色和填充颜色，两者可分别由 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.pencolor" target="_blank" rel="noopener"><code>pencolor()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.fillcolor" target="_blank" rel="noopener"><code>fillcolor()</code></a> 返回。</p>
+</li>
+<li><p><code>color(colorstring)</code>, <code>color((r,g,b))</code>, <code>color(r,g,b)</code></p>
+<p>输入格式与 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.pencolor" target="_blank" rel="noopener"><code>pencolor()</code></a> 相同，同时设置填充颜色和画笔颜色为指定的值。</p>
+</li>
+<li><p><code>color(colorstring1, colorstring2)</code>, <code>color((r1,g1,b1), (r2,g2,b2))</code></p>
+<p>相当于 <code>pencolor(colorstring1)</code> 加 <code>fillcolor(colorstring2)</code>，使用其他输入格式的方法也与之类似。如果 turtleshape 为多边形，该多边形轮廓与填充也使用新设置的颜色。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.color(<span class="string">"red"</span>, <span class="string">"green"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.color()</span><br><span class="line">(<span class="string">'red'</span>, <span class="string">'green'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>color(<span class="string">"#285078"</span>, <span class="string">"#a0c8f0"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>color()</span><br><span class="line">((<span class="number">40.0</span>, <span class="number">80.0</span>, <span class="number">120.0</span>), (<span class="number">160.0</span>, <span class="number">200.0</span>, <span class="number">240.0</span>))</span><br></pre></td></tr></table></figure>
+<p>另参见: Screen 方法 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.colormode" target="_blank" rel="noopener"><code>colormode()</code></a>。</p>
+<h4 id="填充"><a href="#填充" class="headerlink" title="填充"></a>填充</h4><p><code>turtle.filling</code>()</p>
+<p>返回填充状态 (填充为 <code>True</code>，否则为 <code>False</code>)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.begin_fill()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">if</span> turtle.filling():</span><br><span class="line"><span class="meta">... </span>   turtle.pensize(<span class="number">5</span>)</span><br><span class="line"><span class="meta">... </span><span class="keyword">else</span>:</span><br><span class="line"><span class="meta">... </span>   turtle.pensize(<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>turtle.begin_fill</code>()<a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.begin_fill" target="_blank" rel="noopener">¶</a></p>
+<p>在绘制要填充的形状之前调用。</p>
+</li>
+<li><p><code>turtle.end_fill</code>()</p>
+<p>填充上次调用 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.begin_fill" target="_blank" rel="noopener"><code>begin_fill()</code></a> 之后绘制的形状。自相交多边形或多个形状间的重叠区域是否填充取决于操作系统的图形引擎、重叠的类型以及重叠的层数。 例如上面的 Turtle 多芒星可能会全部填充为黄色，也可能会有一些白色区域。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.color(<span class="string">"black"</span>, <span class="string">"red"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.begin_fill()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.circle(<span class="number">80</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.end_fill()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="更多绘图控制"><a href="#更多绘图控制" class="headerlink" title="更多绘图控制"></a>更多绘图控制</h4><ul>
+<li><p><code>turtle.reset</code>()</p>
+<p>从屏幕中删除海龟的绘图，海龟回到原点并设置所有变量为默认值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.goto(<span class="number">0</span>,<span class="number">-22</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.left(<span class="number">100</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">0.00</span>,<span class="number">-22.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">100.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.reset()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.position()</span><br><span class="line">(<span class="number">0.00</span>,<span class="number">0.00</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.heading()</span><br><span class="line"><span class="number">0.0</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>turtle.clear</code>()</p>
+<p>从屏幕中删除指定海龟的绘图。不移动海龟。海龟的状态和位置以及其他海龟的绘图不受影响。</p>
+</li>
+<li><p><code>turtle.clear</code>()</p>
+<p>从屏幕中删除指定海龟的绘图。不移动海龟。海龟的状态和位置以及其他海龟的绘图不受影响。</p>
+</li>
+<li><p><code>turtle.write</code>(<em>arg</em>, <em>move=False</em>, <em>align=”left”</em>, <em>font=(“Arial”</em>, <em>8</em>, <em>“normal”)</em>)</p>
+<p>参数<strong>arg</strong> – 要书写到 TurtleScreen 的对象<strong>move</strong> – True/False<strong>align</strong> – 字符串 “left”, “center” 或 “right”<strong>font</strong> – 一个三元组 (fontname, fontsize, fonttype)书写文本 - <em>arg</em> 指定的字符串 - 到当前海龟位置，<em>align</em> 指定对齐方式 (“left”, “center” 或 right”)，font 指定字体。如果 <em>move</em> 为 True，画笔会移动到文本的右下角。默认 <em>move</em> 为 <code>False</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">turtle.write(<span class="string">"Home = "</span>, <span class="literal">True</span>, align=<span class="string">"center"</span>)</span><br><span class="line">turtle.write((<span class="number">0</span>,<span class="number">0</span>), <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="海龟状态"><a href="#海龟状态" class="headerlink" title="海龟状态"></a>海龟状态</h3><p>  可见性</p>
+<ul>
+<li><p><code>turtle.hideturtle</code>()</p>
+</li>
+<li><p><code>turtle.ht</code>()</p>
+<p>使海龟不可见。当你绘制复杂图形时这是个好主意，因为隐藏海龟可显著加快绘制速度。<code>&gt;&gt;&gt; turtle.hideturtle()</code></p>
+</li>
+<li><p><code>turtle.showturtle</code>()</p>
+<p><code>turtle.st</code>()</p>
+<p>使海龟可见。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.showturtle()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>turtle.isvisible</code>()</p>
+<p>如果海龟显示返回 <code>True</code>，如果海龟隐藏返回 <code>False</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.hideturtle()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.isvisible()</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.showturtle()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.isvisible()</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="外观"><a href="#外观" class="headerlink" title="外观"></a>外观</h4><ul>
+<li><p><code>turtle.shape</code>(<em>name=None</em>)</p>
+<ul>
+<li><strong>name</strong> – 一个有效的形状名字符串</li>
+</ul>
+<p>设置海龟形状为 <em>name</em> 指定的形状名，如未指定形状名则返回当前的形状名。<em>name</em> 指定的形状名应存在于 TurtleScreen 的 shape 字典中。多边形的形状初始时有以下几种: “arrow”, “turtle”, “circle”, “square”, “triangle”, “classic”。要了解如何处理形状请参看 Screen 方法 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.register_shape" target="_blank" rel="noopener"><code>register_shape()</code></a>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shape()</span><br><span class="line"><span class="string">'classic'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shape(<span class="string">"turtle"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shape()</span><br><span class="line"><span class="string">'turtle'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>turtle.resizemode</code>(<em>rmode=None</em>)<a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.resizemode" target="_blank" rel="noopener">¶</a></p>
+<ul>
+<li><p>参数</p>
+<p><strong>rmode</strong> – 字符串 “auto”, “user”, “noresize” 其中之一</p>
+</li>
+</ul>
+<p>设置大小调整模式为以下值之一: “auto”, “user”, “noresize”。如未指定 <em>rmode</em> 则返回当前的大小调整模式。不同的大小调整模式的效果如下:</p>
+<ul>
+<li>“auto”: 根据画笔粗细值调整海龟的外观。</li>
+<li>“user”: 根据拉伸因子和轮廓宽度 (outline) 值调整海龟的外观，两者是由 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.shapesize" target="_blank" rel="noopener"><code>shapesize()</code></a> 设置的。</li>
+<li>“noresize”: 不调整海龟的外观大小。</li>
+</ul>
+<p>大小调整模式 (“user”) 会在 <a href="https://docs.python.org/zh-cn/3.8/library/turtle.html#turtle.shapesize" target="_blank" rel="noopener"><code>shapesize()</code></a> 带参数调用时生效。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.resizemode()</span><br><span class="line"><span class="string">'noresize'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.resizemode(<span class="string">"auto"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.resizemode()</span><br><span class="line"><span class="string">'auto'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>turtle.shapesize</code>(<em>stretch_wid=None</em>, <em>stretch_len=None</em>, <em>outline=None</em>)</p>
+<p><code>turtle.turtlesize</code>(<em>stretch_wid=None</em>, <em>stretch_len=None</em>, <em>outline=None</em>)</p>
+<ul>
+<li><p>参数</p>
+<p><strong>stretch_wid</strong> – 正数值<strong>stretch_len</strong> – 正数值<strong>outline</strong> – 正数值</p>
+</li>
+</ul>
+<p>返回或设置画笔的属性 x/y-拉伸因子和/或轮廓。设置大小调整模式为 “user”。当且仅当大小调整模式设为 “user” 时海龟会基于其拉伸因子调整外观: <em>stretch_wid</em> 为垂直于其朝向的宽度拉伸因子，<em>stretch_len</em> 为平等于其朝向的长度拉伸因子，决定形状轮廓线的粗细。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shapesize()</span><br><span class="line">(<span class="number">1.0</span>, <span class="number">1.0</span>, <span class="number">1</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.resizemode(<span class="string">"user"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shapesize(<span class="number">5</span>, <span class="number">5</span>, <span class="number">12</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shapesize()</span><br><span class="line">(<span class="number">5</span>, <span class="number">5</span>, <span class="number">12</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shapesize(outline=<span class="number">8</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shapesize()</span><br><span class="line">(<span class="number">5</span>, <span class="number">5</span>, <span class="number">8</span>)</span><br></pre></td></tr></table></figure>
+<p><code>turtle.shearfactor</code>(<em>shear=None</em>)</p>
+<ul>
+<li><p>参数</p>
+<p><strong>shear</strong> – 数值 (可选)</p>
+</li>
+</ul>
+<p>设置或返回当前的剪切因子。根据 share 指定的剪切因子即剪切角度的切线来剪切海龟形状。<em>不</em> 改变海龟的朝向 (移动方向)。如未指定 shear 参数: 返回当前的剪切因子即剪切角度的切线，与海龟朝向平行的线条将被剪切。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shape(<span class="string">"circle"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shapesize(<span class="number">5</span>,<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shearfactor(<span class="number">0.5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shearfactor()</span><br><span class="line"><span class="number">0.5</span></span><br></pre></td></tr></table></figure>
+<p><code>turtle.tilt</code>(<em>angle</em>)</p>
+<ul>
+<li><p>参数</p>
+<p><strong>angle</strong> – 一个数值</p>
+</li>
+</ul>
+<p>海龟形状自其当前的倾角转动 <em>angle</em> 指定的角度，但 <em>不</em> 改变海龟的朝向 (移动方向)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.reset()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shape(<span class="string">"circle"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shapesize(<span class="number">5</span>,<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.tilt(<span class="number">30</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.fd(<span class="number">50</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.tilt(<span class="number">30</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.fd(<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+<p><code>turtle.settiltangle</code>(<em>angle</em>)</p>
+<ul>
+<li><p>参数</p>
+<p><strong>angle</strong> – 一个数值</p>
+</li>
+</ul>
+<p>旋转海龟形状使其指向 <em>angle</em> 指定的方向，忽略其当前的倾角，<em>不</em> 改变海龟的朝向 (移动方向)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.reset()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shape(<span class="string">"circle"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shapesize(<span class="number">5</span>,<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.settiltangle(<span class="number">45</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.fd(<span class="number">50</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.settiltangle(<span class="number">-45</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.fd(<span class="number">50</span>)</span><br></pre></td></tr></table></figure>
+<p><em>3.1 版后已移除.</em></p>
+<p><code>turtle.tiltangle</code>(<em>angle=None</em>)</p>
+<ul>
+<li><p>参数</p>
+<p><strong>angle</strong> – 一个数值 (可选)</p>
+</li>
+</ul>
+<p>设置或返回当前的倾角。如果指定 angle 则旋转海龟形状使其指向 angle 指定的方向，忽略其当前的倾角。<em>不</em> 改变海龟的朝向 (移动方向)。如果未指定 angle: 返回当前的倾角，即海龟形状的方向和海龟朝向 (移动方向) 之间的夹角。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.reset()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shape(<span class="string">"circle"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shapesize(<span class="number">5</span>,<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.tilt(<span class="number">45</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.tiltangle()</span><br><span class="line"><span class="number">45.0</span></span><br></pre></td></tr></table></figure>
+<p><code>turtle.shapetransform</code>(<em>t11=None</em>, <em>t12=None</em>, <em>t21=None</em>, <em>t22=None</em>)</p>
+<ul>
+<li><p>参数</p>
+<p><strong>t11</strong> – 一个数值 (可选)<strong>t12</strong> – 一个数值 (可选)<strong>t21</strong> – 一个数值 (可选)<strong>t12</strong> – 一个数值 (可选)</p>
+</li>
+</ul>
+<p>设置或返回海龟形状的当前变形矩阵。</p>
+<p>如不指定任何矩阵元素，则返回以4元素元组表示的变形矩阵。否则使用指定元素设置变形矩阵改变海龟形状，矩阵第一排的值为 t11, t12，第二排的值为 t21, t22。行列式 t11 <em> t22 - t12 </em> t21 的值不能为零，否则会出错。根据指定的矩阵修改拉伸因子，剪切因子和倾角。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle = Turtle()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shape(<span class="string">"square"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shapesize(<span class="number">4</span>,<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shearfactor(<span class="number">-0.5</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shapetransform()</span><br><span class="line">(<span class="number">4.0</span>, <span class="number">-1.0</span>, <span class="number">-0.0</span>, <span class="number">2.0</span>)</span><br></pre></td></tr></table></figure>
+<p><code>turtle.get_shapepoly</code>()</p>
+<p>返回以坐标值对元组表示的当前形状多边形。这可以用于定义一个新形状或一个复合形状的多个组成部分。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shape(<span class="string">"square"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.shapetransform(<span class="number">4</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>turtle.get_shapepoly()</span><br><span class="line">((<span class="number">50</span>, <span class="number">-20</span>), (<span class="number">30</span>, <span class="number">20</span>), (<span class="number">-50</span>, <span class="number">20</span>), (<span class="number">-30</span>, <span class="number">-20</span>))</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/02/27/python-standard-library-turtle/" title="python standard library turtle">https://pinghailinfeng.gitee.io/2020/02/27/python-standard-library-turtle/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/turtle/" rel="tag"># turtle</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/26/python-standard-library-2to3/" rel="next" title="python standard library 2to3">
+                <i class="fa fa-chevron-left"></i> python standard library 2to3
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/28/python-standard-library-turtle-2/" rel="prev" title="python standard library turtle-2">
+                python standard library turtle-2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">101</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">111</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-turtle-海龟制图"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 turtle 海龟制图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可用的-Turtle-和-Screen-方法概览"><span class="nav-number">1.2.</span> <span class="nav-text">可用的 Turtle 和 Screen 方法概览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Turtle-方法"><span class="nav-number">1.2.1.</span> <span class="nav-text">Turtle 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TurtleScreen-Screen-方法"><span class="nav-number">1.2.2.</span> <span class="nav-text">TurtleScreen/Screen 方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RawTurtle-Turtle-方法和对应函数"><span class="nav-number">1.3.</span> <span class="nav-text">RawTurtle/Turtle 方法和对应函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#海龟动作"><span class="nav-number">1.3.1.</span> <span class="nav-text">海龟动作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取海龟的状态"><span class="nav-number">1.3.2.</span> <span class="nav-text">获取海龟的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#度量单位设置"><span class="nav-number">1.3.3.</span> <span class="nav-text">度量单位设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#画笔控制"><span class="nav-number">1.3.4.</span> <span class="nav-text">画笔控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#绘图状态"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">绘图状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#颜色控制"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">颜色控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#填充"><span class="nav-number">1.3.4.3.</span> <span class="nav-text">填充</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更多绘图控制"><span class="nav-number">1.3.4.4.</span> <span class="nav-text">更多绘图控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#海龟状态"><span class="nav-number">1.3.5.</span> <span class="nav-text">海龟状态</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#外观"><span class="nav-number">1.3.5.1.</span> <span class="nav-text">外观</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2to3/">2to3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">66</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-libary/">standard_libary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">60</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/">turtle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unittest/">unittest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">700k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">10:36</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
