@@ -1,0 +1,2147 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 select  等待 I/O 完成">
+<meta name="keywords" content="python,standard_library,select">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard_library select">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/03/01/python-standard-library-select/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 select  等待 I/O 完成">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200301_ncc_1701.webp?raw=true">
+<meta property="og:updated_time" content="2020-03-01T14:47:50.670Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard_library select">
+<meta name="twitter:description" content="python 标准库 select  等待 I/O 完成">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200301_ncc_1701.webp?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/03/01/python-standard-library-select/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard_library select | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/03/01/python-standard-library-select/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard_library select
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-01 22:32:30 / 修改时间：22:47:50" itemprop="dateCreated datePublished" datetime="2020-03-01T22:32:30+08:00">2020-03-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-select-等待-I-O-完成"><a href="#python-标准库-select-等待-I-O-完成" class="headerlink" title="python 标准库 select  等待 I/O 完成"></a>python 标准库 select  等待 I/O 完成</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200301_ncc_1701.webp?raw=true" alt></p>
+<a id="more"></a>
+<blockquote>
+<p>star trek n 星际迷航</p>
+<p>trek n 长途跋涉</p>
+<p>​      vi 旅行</p>
+<p>例句：</p>
+<ol>
+<li>It took us a week to trek to the foot of the mountain.<br>我们花了一星期才跋涉到山脚。</li>
+<li><p>I hate having to trek up that hill with all the groceries.<br>我很不愿意得带着这么多吃用杂物爬上那个山头。</p>
+</li>
+<li><p>The trek is especially difficult for us.<br>我们走起来更加艰难。</p>
+</li>
+<li>My boots were punished by our long trek in the mountains.<br>我的靴子因为我们在山中漫长的徒步而受损。</li>
+</ol>
+</blockquote>
+<p>该模块提供了对 <code>select()</code> 和 <code>poll()</code> 函数的访问，这些函数在大多数操作系统中是可用的。在 Solaris 及其衍生版本上可用 <code>devpoll()</code>，在 Linux 2.5+ 上可用 <code>epoll()</code>，在大多数 BSD 上可用 <code>kqueue()</code>。注意，在 Windows 上，本模块仅适用于套接字；在其他操作系统上，本模块也适用于其他文件类型（特别地，在 Unix 上也适用于管道）。本模块不能用于常规文件，不能检测出（自上次读取文件后）文件是否有新数据写入。</p>
+<blockquote>
+<p> <a href="https://docs.python.org/zh-cn/3.8/library/selectors.html#module-selectors" target="_blank" rel="noopener"><code>selectors</code></a> 模块是在 <a href="https://docs.python.org/zh-cn/3.8/library/select.html#module-select" target="_blank" rel="noopener"><code>select</code></a> 模块原型的基础上进行高级且高效的 I/O 复用。推荐用户改用 <a href="https://docs.python.org/zh-cn/3.8/library/selectors.html#module-selectors" target="_blank" rel="noopener"><code>selectors</code></a> 模块，除非用户希望对 OS 级的函数原型进行精确控制。</p>
+</blockquote>
+<p>该模块定义以下内容：</p>
+<ul>
+<li><p><em>exception</em> <code>select.error</code></p>
+<p>一个被弃用的 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a> 的别名。<em>在 3.3 版更改:</em> 根据 <a href="https://www.python.org/dev/peps/pep-3151" target="_blank" rel="noopener"><strong>PEP 3151</strong></a>，这个类是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a> 的别名。</p>
+</li>
+<li><p><code>select.devpoll</code>()</p>
+<p>（仅支持 Solaris 及其衍生版本）返回一个 <code>/dev/poll</code> 轮询对象，请参阅下方 <a href="https://docs.python.org/zh-cn/3.8/library/select.html#devpoll-objects" target="_blank" rel="noopener">/dev/poll 轮询对象</a> 获取 devpoll 对象所支持的方法。<code>devpoll()</code> 对象与实例化时允许的文件描述符数量有关，如果在程序中降低了此数值，<code>devpoll()</code> 调用将失败。如果程序提高了此数值，<code>devpoll()</code> 可能会返回一个不完整的活动文件描述符列表。新的文件描述符是 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#fd-inheritance" target="_blank" rel="noopener">不可继承的</a>。<em>3.3 新版功能.**在 3.4 版更改:</em> 新的文件描述符现在是不可继承的。</p>
+</li>
+<li><p><code>select.epoll</code>(<em>sizehint=-1</em>, <em>flags=0</em>)</p>
+<p>（仅支持 Linux 2.5.44 或更高版本）返回一个 edge poll 对象，该对象可作为 I/O 事件的边缘触发或水平触发接口。<em>sizehint</em> 指示 epoll 预计需要注册的事件数。它必须为正数，或为 -1 以使用默认值。它仅在 <code>epoll_create1()</code> 不可用的旧系统上会被用到，其他情况下它没有任何作用（尽管仍会检查其值）。<em>flags</em> 已经弃用且完全被忽略。但是，如果提供该值，则它必须是 <code>0</code> 或 <code>select.EPOLL_CLOEXEC</code>，否则会抛出 <code>OSError</code> 异常。请参阅下方 <a href="https://docs.python.org/zh-cn/3.8/library/select.html#epoll-objects" target="_blank" rel="noopener">边缘触发和水平触发的轮询 (epoll) 对象</a> 获取 epoll 对象所支持的方法。<code>epoll</code> 对象支持上下文管理器：当在 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#with" target="_blank" rel="noopener"><code>with</code></a> 语句中使用时，新建的文件描述符会在运行至语句块结束时自动关闭。新的文件描述符是 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#fd-inheritance" target="_blank" rel="noopener">不可继承的</a>。<em>在 3.3 版更改:</em> 增加了 <em>flags</em> 参数。<em>在 3.4 版更改:</em> 增加了对 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#with" target="_blank" rel="noopener"><code>with</code></a> 语句的支持。新的文件描述符现在是不可继承的。<em>3.4 版后已移除:</em> <em>flags</em> 参数。现在默认采用 <code>select.EPOLL_CLOEXEC</code> 标志。使用 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.set_inheritable" target="_blank" rel="noopener"><code>os.set_inheritable()</code></a> 来让文件描述符可继承。</p>
+</li>
+<li><p><code>select.poll</code>()</p>
+<p>（部分操作系统不支持）返回一个 poll 对象，该对象支持注册和注销文件描述符，支持对描述符进行轮询以获取 I/O 事件。请参阅下方 <a href="https://docs.python.org/zh-cn/3.8/library/select.html#poll-objects" target="_blank" rel="noopener">Poll 对象</a> 获取 poll 对象所支持的方法。</p>
+</li>
+<li><p><code>select.kqueue</code>()</p>
+<p>（仅支持 BSD）返回一个内核队列对象，请参阅下方 <a href="https://docs.python.org/zh-cn/3.8/library/select.html#kqueue-objects" target="_blank" rel="noopener">Kqueue 对象</a> 获取 kqueue 对象所支持的方法。新的文件描述符是 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#fd-inheritance" target="_blank" rel="noopener">不可继承的</a>。<em>在 3.4 版更改:</em> 新的文件描述符现在是不可继承的。</p>
+</li>
+<li><p><code>select.kevent</code>(<em>ident</em>, <em>filter=KQ_FILTER_READ</em>, <em>flags=KQ_EV_ADD</em>, <em>fflags=0</em>, <em>data=0</em>, <em>udata=0</em>)</p>
+<p>（仅支持 BSD）返回一个内核事件对象，请参阅下方 <a href="https://docs.python.org/zh-cn/3.8/library/select.html#kevent-objects" target="_blank" rel="noopener">Kevent 对象</a> 获取 kevent 对象所支持的方法。</p>
+</li>
+<li><p><code>select.select</code>(<em>rlist</em>, <em>wlist</em>, <em>xlist</em>[, <em>timeout</em>])</p>
+<p>这是 Unix <code>select()</code> 系统调用的直接接口。前三个参数是由“等待对象”组成的序列，“等待对象”可以是表示文件描述符的整数，也可以是带有 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#io.IOBase.fileno" target="_blank" rel="noopener"><code>fileno()</code></a> 方法的对象（该方法没有参数，返回一个整数）：<em>rlist</em>：等待，直到可以开始读取<em>wlist</em>：等待，直到可以开始写入<em>xlist</em>：等待“异常情况”（请参阅当前系统的手册，以获取哪些情况称为异常情况）允许使用空序列，但是否接受三个空序列取决于平台。（目前已知在 Unix 上可以但 Windows 上不行。）可选的 <em>timeout</em> 参数指定超时时长，为浮点数，以秒为单位。如果省略了 <em>timeout</em> 参数，则该函数将阻塞，直到至少一个文件描述符准备就绪。超时值为零表示轮询且永不阻塞。返回值是三个列表，包含已就绪对象，返回的三个列表是前三个参数的子集。当超时时间已到且没有文件描述符就绪时，返回三个空列表。序列中可接受的对象类型包括 Python <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-file-object" target="_blank" rel="noopener">文件对象</a> (例如 <code>sys.stdin</code>、<a href="https://docs.python.org/zh-cn/3.8/library/functions.html#open" target="_blank" rel="noopener"><code>open()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.popen" target="_blank" rel="noopener"><code>os.popen()</code></a> 返回的对象)，<a href="https://docs.python.org/zh-cn/3.8/library/socket.html#socket.socket" target="_blank" rel="noopener"><code>socket.socket()</code></a> 返回的套接字对象。 你也可以自定义 <em>wrapper</em> 类，只要它具有合适的 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#io.IOBase.fileno" target="_blank" rel="noopener"><code>fileno()</code></a> 方法（该方法应返回实际的文件描述符，而不仅仅返回一个随机整数）。</p>
+<blockquote>
+<p>Windows 上不接受文件对象，但接受套接字。在 Windows 上，底层的 <code>select()</code> 函数由 WinSock 库提供，且不处理不是源自 WinSock 的文件描述符。</p>
+</blockquote>
+<p> <em>3.5 版更改:</em> 现在，当本函数被信号中断时，重试超时将从头开始计时，不会抛出 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#InterruptedError" target="_blank" rel="noopener"><code>InterruptedError</code></a> 异常。除非信号处理程序抛出异常（相关原理请参阅 <a href="https://www.python.org/dev/peps/pep-0475" target="_blank" rel="noopener"><strong>PEP 475</strong></a>）。</p>
+</li>
+<li><p>select.PIPE_BUF</p>
+<p>当一个管道已经被 <a href="https://docs.python.org/zh-cn/3.8/library/select.html#select.select" target="_blank" rel="noopener"><code>select()</code></a>、<a href="https://docs.python.org/zh-cn/3.8/library/select.html#select.poll" target="_blank" rel="noopener"><code>poll()</code></a> 或本模块中的某个接口报告为可写入时，可以在不阻塞该管道的情况下写入的最小字节数。它不适用于套接字等其他类型的文件类对象。</p>
+<p>POSIX 上须保证该值不小于 512。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/intro.html#availability" target="_blank" rel="noopener">可用性</a>: Unix</p>
+</li>
+</ul>
+<h2 id="dev-poll-轮询对象"><a href="#dev-poll-轮询对象" class="headerlink" title="/dev/poll 轮询对象"></a><code>/dev/poll</code> 轮询对象</h2><p>Solaris 及其衍生版本具备 <code>/dev/poll</code>。<code>select()</code> 复杂度为 O（最高文件描述符），<code>poll()</code> 为 O（文件描述符数量），而 <code>/dev/poll</code> 为 O（活动的文件描述符）。</p>
+<p><code>/dev/poll</code> 的行为与标准 <code>poll()</code> 对象十分类似。</p>
+<ul>
+<li><p><code>devpoll.close</code>()</p>
+<p>关闭轮询对象的文件描述符。<em>3.4 新版功能.</em></p>
+</li>
+<li><p><code>devpoll.closed</code></p>
+<p>如果轮询对象已关闭，则返回 <code>True</code>。<em>3.4 新版功能.</em></p>
+</li>
+<li><p><code>devpoll.fileno</code>()</p>
+<p>返回轮询对象的文件描述符对应的数字。<em>3.4 新版功能.</em></p>
+</li>
+<li><p><code>devpoll.register</code>(<em>fd</em>[, <em>eventmask</em>])</p>
+<p>在轮询对象中注册文件描述符。这样，将来调用 <a href="https://docs.python.org/zh-cn/3.8/library/select.html#select.poll" target="_blank" rel="noopener"><code>poll()</code></a> 方法时将检查文件描述符是否有未处理的 I/O 事件。<em>fd</em> 可以是整数，也可以是带有 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#io.IOBase.fileno" target="_blank" rel="noopener"><code>fileno()</code></a> 方法的对象（该方法返回一个整数）。文件对象已经实现了 <code>fileno()</code>，因此它们也可以用作参数。<em>eventmask</em> 是可选的位掩码，用于指定要检查的事件类型。这些常量与 <code>poll()</code> 对象所用的相同。本参数的默认值是常量 <code>POLLIN</code>、<code>POLLPRI</code> 和 <code>POLLOUT</code> 的组合。</p>
+</li>
+<li><p><code>devpoll.modify</code>(<em>fd</em>[, <em>eventmask</em>])</p>
+<p>此方法先执行 <a href="https://docs.python.org/zh-cn/3.8/library/select.html#select.devpoll.unregister" target="_blank" rel="noopener"><code>unregister()</code></a> 后执行 <a href="https://docs.python.org/zh-cn/3.8/library/select.html#select.devpoll.register" target="_blank" rel="noopener"><code>register()</code></a>。直接执行此操作效率（稍微）高一些。</p>
+</li>
+<li><p><code>devpoll.unregister</code>(<em>fd</em>)</p>
+<p>删除轮询对象正在跟踪的某个文件描述符。与 <a href="https://docs.python.org/zh-cn/3.8/library/select.html#select.devpoll.register" target="_blank" rel="noopener"><code>register()</code></a> 方法类似，<em>fd</em> 可以是整数，也可以是带有 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#io.IOBase.fileno" target="_blank" rel="noopener"><code>fileno()</code></a> 方法的对象（该方法返回一个整数）。尝试删除从未注册过的文件描述符将被安全地忽略。</p>
+</li>
+<li><p><code>devpoll.poll</code>([<em>timeout</em>])</p>
+<p>轮询已注册的文件描述符的集合，并返回一个列表，列表可能为空，也可能有多个 <code>(fd, event)</code> 二元组，其中包含了要报告事件或错误的描述符。<em>fd</em> 是文件描述符，<em>event</em> 是一个位掩码，表示该描述符所报告的事件 — <code>POLLIN</code> 表示可以读取，<code>POLLOUT</code> 表示该描述符可以写入，依此类推。空列表表示调用超时，没有任何文件描述符报告事件。如果指定了 <em>timeout</em>，它将指定系统等待事件时，等待多长时间后返回（以毫秒为单位）。如果 <em>timeout</em> 为空，-1 或 <a href="https://docs.python.org/zh-cn/3.8/library/constants.html#None" target="_blank" rel="noopener"><code>None</code></a>，则本调用将阻塞，直到轮询对象发生事件为止。<em>在 3.5 版更改:</em> 现在，当本函数被信号中断时，重试超时将从头开始计时，不会抛出 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#InterruptedError" target="_blank" rel="noopener"><code>InterruptedError</code></a> 异常。除非信号处理程序抛出异常（相关原理请参阅 <a href="https://www.python.org/dev/peps/pep-0475" target="_blank" rel="noopener"><strong>PEP 475</strong></a>）。</p>
+</li>
+</ul>
+<h2 id="边缘触发和水平触发的轮询-epoll-对象"><a href="#边缘触发和水平触发的轮询-epoll-对象" class="headerlink" title="边缘触发和水平触发的轮询 (epoll) 对象"></a>边缘触发和水平触发的轮询 (epoll) 对象</h2><p><a href="https://linux.die.net/man/4/epoll" target="_blank" rel="noopener">https://linux.die.net/man/4/epoll</a></p>
+<p><em>eventmask</em></p>
+<table>
+<thead>
+<tr>
+<th>常数</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EPOLLIN</code></td>
+<td>可读</td>
+</tr>
+<tr>
+<td><code>EPOLLOUT</code></td>
+<td>可写</td>
+</tr>
+<tr>
+<td><code>EPOLLPRI</code></td>
+<td>紧急数据读取</td>
+</tr>
+<tr>
+<td><code>EPOLLERR</code></td>
+<td>在关联的文件描述符上有错误情况发生</td>
+</tr>
+<tr>
+<td><code>EPOLLHUP</code></td>
+<td>关联的文件描述符已挂起</td>
+</tr>
+<tr>
+<td><code>EPOLLET</code></td>
+<td>设置触发方式为边缘触发，默认为水平触发</td>
+</tr>
+<tr>
+<td><code>EPOLLONESHOT</code></td>
+<td>设置 one-shot 模式。触发一次事件后，该描述符会在轮询对象内部被禁用。</td>
+</tr>
+<tr>
+<td><code>EPOLLEXCLUSIVE</code></td>
+<td>当已关联的描述符发生事件时，仅唤醒一个 epoll 对象。默认（如果未设置此标志）是唤醒所有轮询该描述符的 epoll 对象。</td>
+</tr>
+<tr>
+<td><code>EPOLLRDHUP</code></td>
+<td>流套接字的对侧关闭了连接或关闭了写入到一半的连接。</td>
+</tr>
+<tr>
+<td><code>EPOLLRDNORM</code></td>
+<td>等同于 <code>EPOLLIN</code></td>
+</tr>
+<tr>
+<td><code>EPOLLRDBAND</code></td>
+<td>可以读取优先数据带。</td>
+</tr>
+<tr>
+<td><code>EPOLLWRNORM</code></td>
+<td>等同于 <code>EPOLLOUT</code></td>
+</tr>
+<tr>
+<td><code>EPOLLWRBAND</code></td>
+<td>可以写入优先级数据。</td>
+</tr>
+<tr>
+<td><code>EPOLLMSG</code></td>
+<td>忽略</td>
+</tr>
+</tbody>
+</table>
+<p><em>3.6 新版功能:</em> 增加了 <code>EPOLLEXCLUSIVE</code>。仅支持 Linux Kernel 4.5 或更高版本。</p>
+<ul>
+<li><p><code>epoll.close</code>()</p>
+<p>关闭用于控制 epoll 对象的文件描述符。</p>
+</li>
+<li><p><code>epoll.closed</code></p>
+<p>如果 epoll 对象已关闭，则返回 <code>True</code>。</p>
+</li>
+<li><p><code>epoll.fileno</code>()</p>
+<p>返回文件描述符对应的数字，该描述符用于控制 epoll 对象。</p>
+</li>
+<li><p><code>epoll.fromfd</code>(<em>fd</em>)</p>
+<p>根据给定的文件描述符创建 epoll 对象。</p>
+</li>
+<li><p><code>epoll.register</code>(<em>fd</em>[, <em>eventmask</em>])</p>
+<p>在 epoll 对象中注册一个文件描述符。</p>
+</li>
+<li><p><code>epoll.modify</code>(<em>fd</em>, <em>eventmask</em>)</p>
+<p>修改一个已注册的文件描述符。</p>
+</li>
+<li><p><code>epoll.unregister</code>(<em>fd</em>)</p>
+<p>从 epoll 对象中删除一个已注册的文件描述符。</p>
+</li>
+<li><p><code>epoll.poll</code>(<em>timeout=None</em>, <em>maxevents=-1</em>)</p>
+<p>等待事件发生，timeout 是浮点数，单位为秒。<em>在 3.5 版更改:</em> 现在，当本函数被信号中断时，重试超时将从头开始计时，不会抛出 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#InterruptedError" target="_blank" rel="noopener"><code>InterruptedError</code></a> 异常。除非信号处理程序抛出异常（相关原理请参阅 <a href="https://www.python.org/dev/peps/pep-0475" target="_blank" rel="noopener"><strong>PEP 475</strong></a>）。</p>
+</li>
+</ul>
+<h2 id="Poll-对象"><a href="#Poll-对象" class="headerlink" title="Poll 对象"></a>Poll 对象</h2><p>大多数 Unix 系统支持 <code>poll()</code> 系统调用，为服务器提供了更好的可伸缩性，使服务器可以同时服务于大量客户端。<code>poll()</code> 的伸缩性更好，因为该调用内部仅列出所关注的文件描述符，而 <code>select()</code> 会构造一个 bitmap，在其中将所关注的描述符所对应的 bit 打开，然后重新遍历整个 bitmap。因此 <code>select()</code> 复杂度是 O（最高文件描述符），而 <code>poll()</code> 是 O（文件描述符数量）。</p>
+<ul>
+<li><p><code>poll.register</code>(<em>fd</em>[, <em>eventmask</em>])</p>
+<p>在轮询对象中注册文件描述符。这样，将来调用 <a href="https://docs.python.org/zh-cn/3.8/library/select.html#select.poll" target="_blank" rel="noopener"><code>poll()</code></a> 方法时将检查文件描述符是否有未处理的 I/O 事件。<em>fd</em> 可以是整数，也可以是带有 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#io.IOBase.fileno" target="_blank" rel="noopener"><code>fileno()</code></a> 方法的对象（该方法返回一个整数）。文件对象已经实现了 <code>fileno()</code>，因此它们也可以用作参数。<em>eventmask</em> 是可选的位掩码，用于指定要检查的事件类型，它可以是常量 <code>POLLIN</code>、<code>POLLPRI</code> 和 <code>POLLOUT</code> 的组合，如下表所述。如果未指定本参数，默认将会检查所有 3 种类型的事件。</p>
+<p>| 常数        | 意义                                               |<br>| ———– | ————————————————– |<br>| <code>POLLIN</code>    | 有要读取的数据                                     |<br>| <code>POLLPRI</code>   | 有紧急数据需要读取                                 |<br>| <code>POLLOUT</code>   | 准备输出：写不会阻塞                               |<br>| <code>POLLERR</code>   | 某种错误条件                                       |<br>| <code>POLLHUP</code>   | 挂起                                               |<br>| <code>POLLRDHUP</code> | 流套接字的对侧关闭了连接，或关闭了写入到一半的连接 |<br>| <code>POLLNVAL</code>  | 无效的请求：描述符未打开                           |</p>
+<p>注册已注册过的文件描述符不会报错，且等同于只注册一次该描述符。</p>
+</li>
+<li><p><code>poll.modify</code>(<em>fd</em>, <em>eventmask</em>)</p>
+<p>修改一个已注册的文件描述符，等同于 <code>register(fd, eventmask)</code>。尝试修改未注册的文件描述符会抛出 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a> 异常，错误码为 <code>ENOENT</code>。</p>
+</li>
+<li><p><code>poll.unregister</code>(<em>fd</em>)</p>
+<p>删除轮询对象正在跟踪的某个文件描述符。与 <a href="https://docs.python.org/zh-cn/3.8/library/select.html#select.poll.register" target="_blank" rel="noopener"><code>register()</code></a> 方法类似，<em>fd</em> 可以是整数，也可以是带有 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#io.IOBase.fileno" target="_blank" rel="noopener"><code>fileno()</code></a> 方法的对象（该方法返回一个整数）。尝试删除从未注册过的文件描述符会抛出 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#KeyError" target="_blank" rel="noopener"><code>KeyError</code></a> 异常。</p>
+</li>
+<li><p><code>poll.poll</code>([<em>timeout</em>])</p>
+<p>轮询已注册的文件描述符的集合，并返回一个列表，列表可能为空，也可能有多个 <code>(fd, event)</code> 二元组，其中包含了要报告事件或错误的描述符。<em>fd</em> 是文件描述符，<em>event</em> 是一个位掩码，表示该描述符所报告的事件 — <code>POLLIN</code> 表示可以读取，<code>POLLOUT</code> 表示该描述符可以写入，依此类推。空列表表示调用超时，没有任何文件描述符报告事件。如果指定了 <em>timeout</em>，它将指定系统等待事件时，等待多长时间后返回（以毫秒为单位）。如果 <em>timeout</em> 为空、负数 或 <a href="https://docs.python.org/zh-cn/3.8/library/constants.html#None" target="_blank" rel="noopener"><code>None</code></a>，则本调用将阻塞，直到轮询对象发生事件为止。<em>在 3.5 版更改:</em> 现在，当本函数被信号中断时，重试超时将从头开始计时，不会抛出 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#InterruptedError" target="_blank" rel="noopener"><code>InterruptedError</code></a> 异常。除非信号处理程序抛出异常（相关原理请参阅 <a href="https://www.python.org/dev/peps/pep-0475" target="_blank" rel="noopener"><strong>PEP 475</strong></a>）。</p>
+</li>
+</ul>
+<h2 id="Kqueue-对象"><a href="#Kqueue-对象" class="headerlink" title="Kqueue 对象"></a>Kqueue 对象</h2><ul>
+<li><p><code>kqueue.close</code>()</p>
+<p>关闭用于控制 kqueue 对象的文件描述符。</p>
+</li>
+<li><p><code>kqueue.closed</code></p>
+<p>如果 kqueue 对象已关闭，则返回 <code>True</code>。</p>
+</li>
+<li><p><code>kqueue.fileno</code>()</p>
+<p>返回文件描述符对应的数字，该描述符用于控制 epoll 对象。</p>
+</li>
+<li><p><code>kqueue.fromfd</code>(<em>fd</em>)</p>
+<p>根据给定的文件描述符创建 kqueue 对象。</p>
+</li>
+<li><p><code>kqueue.control</code>(<em>changelist</em>, <em>max_events</em>[, <em>timeout</em>]) → eventlist</p>
+<p>Kevent 的低级接口changelist 必须是一个可迭代对象，迭代出 kevent 对象，否则置为 <code>None</code>。max_events 必须是 0 或一个正整数。timeout 单位为秒（一般为浮点数），默认为 <code>None</code>，即永不超时。<em>在 3.5 版更改:</em> 现在，当本函数被信号中断时，重试超时将从头开始计时，不会抛出 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#InterruptedError" target="_blank" rel="noopener"><code>InterruptedError</code></a> 异常。除非信号处理程序抛出异常（相关原理请参阅 <a href="https://www.python.org/dev/peps/pep-0475" target="_blank" rel="noopener"><strong>PEP 475</strong></a>）。</p>
+</li>
+</ul>
+<h2 id="Kevent-对象"><a href="#Kevent-对象" class="headerlink" title="Kevent 对象"></a>Kevent 对象</h2><p><a href="https://www.freebsd.org/cgi/man.cgi?query=kqueue&amp;sektion=2" target="_blank" rel="noopener">https://www.freebsd.org/cgi/man.cgi?query=kqueue&amp;sektion=2</a></p>
+<p><a href="https://www.freebsd.org/cgi/man.cgi?query=kqueue&amp;sektion=2" target="_blank" rel="noopener">https://www.freebsd.org/cgi/man.cgi?query=kqueue&amp;sektion=2</a></p>
+<ul>
+<li><p><code>kevent.ident</code></p>
+<p>用于区分事件的标识值。其解释取决于筛选器，但该值通常是文件描述符。在构造函数中，该标识值可以是整数或带有 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#io.IOBase.fileno" target="_blank" rel="noopener"><code>fileno()</code></a> 方法的对象。kevent 在内部存储整数。</p>
+</li>
+<li><p><code>kevent.filter</code></p>
+<p>内核筛选器的名称。</p>
+<p>| 常数               | 意义                                              |<br>| —————— | ————————————————- |<br>| <code>KQ_FILTER_READ</code>   | 获取描述符，并在有数据可读时返回                  |<br>| <code>KQ_FILTER_WRITE</code>  | 获取描述符，并在有数据可写时返回                  |<br>| <code>KQ_FILTER_AIO</code>    | AIO 请求                                          |<br>| <code>KQ_FILTER_VNODE</code>  | 当在 <em>fflag</em> 中监视的一个或多个请求事件发生时返回 |<br>| <code>KQ_FILTER_PROC</code>   | 监视进程ID上的事件                                |<br>| <code>KQ_FILTER_NETDEV</code> | 观察网络设备上的事件[在Mac OS X上不可用]          |<br>| <code>KQ_FILTER_SIGNAL</code> | 每当监视的信号传递到进程时返回                    |<br>| <code>KQ_FILTER_TIMER</code>  | 建立一个任意的计时器                              |</p>
+</li>
+</ul>
+<ul>
+<li><p>kevent.flags</p>
+<p>筛选器操作。</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>常数</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KQ_EV_ADD</code></td>
+<td>添加或修改事件</td>
+</tr>
+<tr>
+<td><code>KQ_EV_DELETE</code></td>
+<td>从队列中删除事件</td>
+</tr>
+<tr>
+<td><code>KQ_EV_ENABLE</code></td>
+<td>Permitscontrol() 返回事件</td>
+</tr>
+<tr>
+<td><code>KQ_EV_DISABLE</code></td>
+<td>禁用事件</td>
+</tr>
+<tr>
+<td><code>KQ_EV_ONESHOT</code></td>
+<td>在第一次发生后删除事件</td>
+</tr>
+<tr>
+<td><code>KQ_EV_CLEAR</code></td>
+<td>检索事件后重置状态</td>
+</tr>
+<tr>
+<td><code>KQ_EV_SYSFLAGS</code></td>
+<td>内部事件</td>
+</tr>
+<tr>
+<td><code>KQ_EV_FLAG1</code></td>
+<td>内部事件</td>
+</tr>
+<tr>
+<td><code>KQ_EV_EOF</code></td>
+<td>筛选特定EOF条件</td>
+</tr>
+<tr>
+<td><code>KQ_EV_ERROR</code></td>
+<td>请参阅返回值</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>kevent.fflags</li>
+</ul>
+<p>筛选特定标志。</p>
+<p><code>KQ_FILTER_READ</code> 和 <code>KQ_FILTER_WRITE</code> 筛选标志：</p>
+<table>
+<thead>
+<tr>
+<th>常数</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KQ_NOTE_LOWAT</code></td>
+<td>套接字缓冲区的低水线</td>
+</tr>
+</tbody>
+</table>
+<p><code>KQ_FILTER_VNODE</code> 筛选标志：</p>
+<table>
+<thead>
+<tr>
+<th>常数</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KQ_NOTE_DELETE</code></td>
+<td>已调用 <em>unlink()</em></td>
+</tr>
+<tr>
+<td><code>KQ_NOTE_WRITE</code></td>
+<td>发生写入</td>
+</tr>
+<tr>
+<td><code>KQ_NOTE_EXTEND</code></td>
+<td>文件已扩展</td>
+</tr>
+<tr>
+<td><code>KQ_NOTE_ATTRIB</code></td>
+<td>属性已更改</td>
+</tr>
+<tr>
+<td><code>KQ_NOTE_LINK</code></td>
+<td>链接计数已更改</td>
+</tr>
+<tr>
+<td><code>KQ_NOTE_RENAME</code></td>
+<td>文件已重命名</td>
+</tr>
+<tr>
+<td><code>KQ_NOTE_REVOKE</code></td>
+<td>对文件的访问权限已被撤销</td>
+</tr>
+</tbody>
+</table>
+<p><code>KQ_FILTER_PROC</code> filter flags:</p>
+<table>
+<thead>
+<tr>
+<th>常数</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KQ_NOTE_EXIT</code></td>
+<td>进程已退出</td>
+</tr>
+<tr>
+<td><code>KQ_NOTE_FORK</code></td>
+<td>该进程调用了 <em>fork()</em></td>
+</tr>
+<tr>
+<td><code>KQ_NOTE_EXEC</code></td>
+<td>进程已执行新进程</td>
+</tr>
+<tr>
+<td><code>KQ_NOTE_PCTRLMASK</code></td>
+<td>内部筛选器标志</td>
+</tr>
+<tr>
+<td><code>KQ_NOTE_PDATAMASK</code></td>
+<td>内部筛选器标志</td>
+</tr>
+<tr>
+<td><code>KQ_NOTE_TRACK</code></td>
+<td>跨 <em>fork()</em> 执行进程</td>
+</tr>
+<tr>
+<td><code>KQ_NOTE_CHILD</code></td>
+<td>在 <em>NOTE_TRACK</em> 的子进程上返回</td>
+</tr>
+<tr>
+<td><code>KQ_NOTE_TRACKERR</code></td>
+<td>无法附加到子对象</td>
+</tr>
+</tbody>
+</table>
+<p><code>KQ_FILTER_NETDEV</code> 筛选器标志（在 Mac OS X 上不可用）：</p>
+<table>
+<thead>
+<tr>
+<th>常数</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KQ_NOTE_LINKUP</code></td>
+<td>链接已建立</td>
+</tr>
+<tr>
+<td><code>KQ_NOTE_LINKDOWN</code></td>
+<td>链接已断开</td>
+</tr>
+<tr>
+<td><code>KQ_NOTE_LINKINV</code></td>
+<td>链接状态无效</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p><code>kevent.data</code><a href="https://docs.python.org/zh-cn/3.8/library/select.html#select.kevent.data" target="_blank" rel="noopener">¶</a></p>
+<p>筛选特定数据。</p>
+</li>
+<li><p><code>kevent.udata</code></p>
+<p>用户自定义值。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/03/01/python-standard-library-select/" title="python standard_library select">https://pinghailinfeng.gitee.io/2020/03/01/python-standard-library-select/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/select/" rel="tag"># select</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/29/python-standard-library-selectors/" rel="next" title="python standard library selectors">
+                <i class="fa fa-chevron-left"></i> python standard library selectors
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">114</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-select-等待-I-O-完成"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 select  等待 I/O 完成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dev-poll-轮询对象"><span class="nav-number">1.1.</span> <span class="nav-text">/dev/poll 轮询对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#边缘触发和水平触发的轮询-epoll-对象"><span class="nav-number">1.2.</span> <span class="nav-text">边缘触发和水平触发的轮询 (epoll) 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Poll-对象"><span class="nav-number">1.3.</span> <span class="nav-text">Poll 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kqueue-对象"><span class="nav-number">1.4.</span> <span class="nav-text">Kqueue 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kevent-对象"><span class="nav-number">1.5.</span> <span class="nav-text">Kevent 对象</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2to3/">2to3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">68</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/select/">select</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selectors/">selectors</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-libary/">standard_libary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">62</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/">turtle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unittest/">unittest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">716k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">10:51</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
