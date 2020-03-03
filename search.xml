@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[python standard library atexit]]></title>
+    <url>%2F2020%2F03%2F03%2Fpython-standard-library-atexit%2F</url>
+    <content type="text"><![CDATA[python 标准库 atexit Prometheus 普罗米修斯(盗火者) 在希腊神话中，是最具智慧的神明之一，最早的泰坦巨神后代，名字有“先见之明”（Forethought）的意思。泰坦十二神伊阿佩托斯与克吕墨涅的儿子。普罗米修斯不仅创造了人类，给人类带来了火，还教会了他们许多知识和技能。 例句: Zeus saw through the trick and felt displeased at the Titan’s favour towards men. 宙斯识破了这套把戏,普罗米修斯对人类的偏爱让他很不高兴. 扩展: 电影&lt;普罗米修斯&gt; 讲述的是 21世纪末，人类的科技水平已高度发达，克隆人技术和宇宙航行早已实现，不再是梦想。与此同时，许多科学家仍孜孜不倦追索着人类起源的秘密与真相。人类可能是来自一个遥远星系的外星人创造的,经典中的经典。 atexit 模块定义了清理函数的注册和反注册函数. 被注册的函数会在解释器正常终止时执行. atexit 会按照注册顺序的逆序执行; 如果你注册了 A, B 和 C, 那么在解释器终止时会依序执行 C, B, A. 注意: 通过该模块注册的函数, 在程序被未被 Python 捕获的信号杀死时并不会执行, 在检测到 Python 内部致命错误以及调用了 os._exit() 时也不会执行. 在 3.7 版更改: 当配合 C-API 子解释器使用时，已注册函数是它们所注册解释器中的局部对象。 atexit.register(func, args, kwargs*) 将 func 注册为终止时执行的函数. 任何传给 func 的可选的参数都应当作为参数传给 register(). 可以多次注册同样的函数及参数.在正常的程序终止时 (举例来说, 当调用了 sys.exit() 或是主模块的执行完成时), 所有注册过的函数都会以后进先出的顺序执行. 这样做是假定更底层的模块通常会比高层模块更早引入, 因此需要更晚清理.如果在 exit 处理程序执行期间引发了异常，将会打印回溯信息 (除非引发的是 SystemExit) 并且异常信息会被保存。 在所有 exit 处理程序获得运行机会之后，所引发的最后一个异常会被重新引发。这个函数返回 func 对象，可以把它当作装饰器使用。 atexit.unregister(func) 从解释器关闭前要运行的函数列表中移除 func。 在调用 unregister() 之后，当解释器关闭时会确保 func 不会被调用，即使它被多次注册。 如果 func 之前没有被注册，unregister() 会静默地不做任何操作。 参见 模块 readline 使用 atexit 读写 readline 历史文件的有用的例子。 atexit 示例以下简单例子演示了一个模块在被导入时如何从文件初始化一个计数器，并在程序终结时自动保存计数器的更新值，此操作不依赖于应用在终结时对此模块进行显式调用。: 12345678910111213141516try: with open(&quot;counterfile&quot;) as infile: _count = int(infile.read())except FileNotFoundError: _count = 0def incrcounter(n): global _count _count = _count + ndef savecounter(): with open(&quot;counterfile&quot;, &quot;w&quot;) as outfile: outfile.write(&quot;%d&quot; % _count)import atexitatexit.register(savecounter) 位置和关键字参数也可传入 register() 以便传递给被调用的已注册函数: 12345678def goodbye(name, adjective): print(&apos;Goodbye, %s, it was %s to meet you.&apos; % (name, adjective))import atexitatexit.register(goodbye, &apos;Donny&apos;, &apos;nice&apos;)# or:atexit.register(goodbye, adjective=&apos;nice&apos;, name=&apos;Donny&apos;) 作为 decorator: 使用: 12345import atexit@atexit.registerdef goodbye(): print(&quot;You are now leaving the Python sector.&quot;) 只有在函数不需要任何参数调用时才能工作.]]></content>
+      <categories>
+        <category>python</category>
+        <category>standard_library</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>standard_library</tag>
+        <tag>atexit</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[python standard library keyword]]></title>
     <url>%2F2020%2F03%2F02%2Fpython-standard-library-keyword%2F</url>
     <content type="text"><![CDATA[python 标准库 keyword 闺女语录: 我和同事聊天说起,养个孩子容易吗! 我闺女说,“养什么容易啊。” 同事咂舌,这个小孩不简单。 每日一词: candaign [kæm’peɪn] n.战役；运动（为社会、商业或政治目的而进行的一系列有计划的活动） v.领导运动（如为实现政治变革或赢得竞选） 网络战役模式；竞选运动；广告活动 这估计是标准库中最简单的模块了 源代码比较少,这就直接贴出来了 源码： Lib/keyword.py 123456789101112131415161718192021222324252627282930313233343536373839kwlist = [ 'False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']iskeyword = frozenset(kwlist).__contains__ 此模块允许 Python 程序确定字符串是否为关键字。 keyword.iskeyword(s) 如果 s 是一个 Python 保留关键字则返回 True,否则返回False。 keyword.kwlist 序列包含为解释器定义的所有关键字。 如果任何被定义的关键字为仅在 __future__ 语句生效是特定时间处于活动状态，则也将包含这些关键字。 其实就是获得所有关键字构成的列表。 源码分析这里主要涉及两个知识点: 冻结集合: frozenset 通过这个函数,创建一个由参数构成的不可变集合。 魔术方法 __contains__ ： 定义当使用成员测试运算符（in 或 not in）时的行为]]></content>
@@ -1003,8 +1017,8 @@
         <category>javaweb</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>maven</tag>
+        <tag>java</tag>
         <tag>eclipse</tag>
       </tags>
   </entry>
@@ -1080,8 +1094,8 @@
         <category>java</category>
       </categories>
       <tags>
-        <tag>java</tag>
         <tag>maven</tag>
+        <tag>java</tag>
       </tags>
   </entry>
   <entry>
@@ -1145,8 +1159,8 @@
         <category>ci</category>
       </categories>
       <tags>
-        <tag>maven</tag>
         <tag>jdk</tag>
+        <tag>maven</tag>
         <tag>持续集成</tag>
       </tags>
   </entry>
@@ -1255,9 +1269,9 @@
     <url>%2F2015%2F04%2F17%2Fmy-new-post%2F</url>
     <content type="text"><![CDATA[#我的新文章 这是我的第一篇在github上的博客。记录下我的工作和生活,慢慢给其他的文章都更新到这里。嬉笑怒骂也好,喜怒哀乐也罢,我就是一个俗人罢了。]]></content>
       <tags>
+        <tag>杂记</tag>
         <tag>博客</tag>
         <tag>文章</tag>
-        <tag>杂记</tag>
       </tags>
   </entry>
   <entry>
