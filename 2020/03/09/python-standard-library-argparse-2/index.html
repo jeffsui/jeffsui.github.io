@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 argparse 续">
+<meta name="keywords" content="python,standard_library,argparse">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard_library argparse 2">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/03/09/python-standard-library-argparse-2/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 argparse 续">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200310_angrybirds.jpg?raw=true">
+<meta property="og:updated_time" content="2020-03-12T13:31:50.762Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard_library argparse 2">
+<meta name="twitter:description" content="python 标准库 argparse 续">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200310_angrybirds.jpg?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/03/09/python-standard-library-argparse-2/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard_library argparse 2 | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/03/09/python-standard-library-argparse-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard_library argparse 2
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-09 23:00:05" itemprop="dateCreated datePublished" datetime="2020-03-09T23:00:05+08:00">2020-03-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-12 21:31:50" itemprop="dateModified" datetime="2020-03-12T21:31:50+08:00">2020-03-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">10k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">9 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-argparse-续"><a href="#python-标准库-argparse-续" class="headerlink" title="python 标准库 argparse 续"></a>python 标准库 argparse 续</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200310_angrybirds.jpg?raw=true" alt></p>
+<a id="more"></a>
+<p>继续学习 argparse模块</p>
+<h2 id="add-arguments-方法"><a href="#add-arguments-方法" class="headerlink" title="add_arguments 方法"></a>add_arguments 方法</h2><h3 id="help"><a href="#help" class="headerlink" title="help"></a>help</h3><p><code>help</code>参数主要用于参数的提示信息。 当使用 <code>-h</code> 或者 <code>--help</code> 命令行参数时将会显示下面参数的提示信息.例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; parser = argparse.ArgumentParser(prog=&apos;frobble&apos;)</span><br><span class="line">&gt;&gt;&gt; parser.add_argument(&apos;--foo&apos;, action=&apos;store_true&apos;,</span><br><span class="line">...                     help=&apos;foo the bars before frobbling&apos;)</span><br><span class="line">&gt;&gt;&gt; parser.add_argument(&apos;bar&apos;, nargs=&apos;+&apos;,</span><br><span class="line">...                     help=&apos;one of the bars to be frobbled&apos;)</span><br><span class="line">&gt;&gt;&gt; parser.parse_args([&apos;-h&apos;])</span><br><span class="line">usage: frobble [-h] [--foo] bar [bar ...]</span><br><span class="line"></span><br><span class="line">positional arguments:</span><br><span class="line"> bar     one of the bars to be frobbled</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line"> -h, --help  show this help message and exit</span><br><span class="line"> --foo   foo the bars before frobbling</span><br></pre></td></tr></table></figure>
+<p>帮助信息字符串可以包含多种类型格式化声明,避免和默认参数相混淆。这里包括 <code>%(prog)s</code> 或<a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.add_argument" target="_blank" rel="noopener"><code>add_argument()</code></a> 参数的众多关键字参数,例如 <code>%(default)s</code>, <code>%(type)s</code>,请看下面的例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; parser = argparse.ArgumentParser(prog=&apos;frobble&apos;)</span><br><span class="line">&gt;&gt;&gt; parser.add_argument(&apos;bar&apos;, nargs=&apos;?&apos;, type=int, default=42,</span><br><span class="line">...                     help=&apos;the bar to %(prog)s (default: %(default)s)&apos;)</span><br><span class="line">&gt;&gt;&gt; parser.print_help()</span><br><span class="line">usage: frobble [-h] [bar]</span><br><span class="line"></span><br><span class="line">positional arguments:</span><br><span class="line"> bar     the bar to frobble (default: 42)</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line"> -h, --help  show this help message and exit</span><br></pre></td></tr></table></figure>
+<p>help 字符串支持 %格式化方式,如果你不希望在帮助字符串附近出现%,最好避免使用%%逃逸字符。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#module-argparse" target="_blank" rel="noopener"><code>argparse</code></a> 支持help入口参数切片,通过设置<code>argparse.SUPPRESS</code>参数就可以支持。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; parser = argparse.ArgumentParser(prog=&apos;frobble&apos;)</span><br><span class="line">&gt;&gt;&gt; parser.add_argument(&apos;--foo&apos;, help=argparse.SUPPRESS)</span><br><span class="line">&gt;&gt;&gt; parser.print_help()</span><br><span class="line">usage: frobble [-h]</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line">  -h, --help  show this help message and exit</span><br></pre></td></tr></table></figure>
+<h3 id="metavar"><a href="#metavar" class="headerlink" title="metavar"></a>metavar</h3><p>当 <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser" target="_blank" rel="noopener"><code>ArgumentParser</code></a> 生成帮助消息时，它需要一些方法来引用每个预期的参数。默认情况下，参数分析器对象使用<a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#dest" target="_blank" rel="noopener">dest</a> 值作为每个对象的”名称”值。默认情况下，对于位置参数操作，直接使用<a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#dest" target="_blank" rel="noopener">dest</a> 值，对于可选参数操作，<a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#dest" target="_blank" rel="noopener">dest</a> 值是大写字母。因此，带有<code>dest_bar&#39;bar</code>的单一位置参数将称为”bar”。单个可选参数”-foo”，后面应跟一个命令行参数，将称为”FOO”。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'--foo'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'bar'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">'X --foo Y'</span>.split())</span><br><span class="line">Namespace(bar=<span class="string">'X'</span>, foo=<span class="string">'Y'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.print_help()</span><br><span class="line">usage:  [-h] [--foo FOO] bar</span><br><span class="line"></span><br><span class="line">positional arguments:</span><br><span class="line"> bar</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line"> -h, --help  show this help message <span class="keyword">and</span> exit</span><br><span class="line"> --foo FOO</span><br></pre></td></tr></table></figure>
+<p>可以使用元变量指定替代名称：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'--foo'</span>, metavar=<span class="string">'YYY'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'bar'</span>, metavar=<span class="string">'XXX'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">'X --foo Y'</span>.split())</span><br><span class="line">Namespace(bar=<span class="string">'X'</span>, foo=<span class="string">'Y'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.print_help()</span><br><span class="line">usage:  [-h] [--foo YYY] XXX</span><br><span class="line"></span><br><span class="line">positional arguments:</span><br><span class="line"> XXX</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line"> -h, --help  show this help message <span class="keyword">and</span> exit</span><br><span class="line"> --foo YYY</span><br></pre></td></tr></table></figure>
+<p><code>metavar</code> 仅更改显示的名称 - parse_args() 对象上属性的名称仍由  <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#dest" target="_blank" rel="noopener">dest</a> 确定</p>
+<p>nargs 的不同值可能会导致多次使用 <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#dest" target="_blank" rel="noopener">dest</a> 。提供 <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#dest" target="_blank" rel="noopener">dest</a> 的元组为每个参数指定不同的显示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">'PROG'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'-x'</span>, nargs=<span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'--foo'</span>, nargs=<span class="number">2</span>, metavar=(<span class="string">'bar'</span>, <span class="string">'baz'</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.print_help()</span><br><span class="line">usage: PROG [-h] [-x X X] [--foo bar baz]</span><br><span class="line"></span><br><span class="line">optional arguments:</span><br><span class="line"> -h, --help     show this help message <span class="keyword">and</span> exit</span><br><span class="line"> -x X X</span><br><span class="line"> --foo bar baz</span><br></pre></td></tr></table></figure>
+<h3 id="dest"><a href="#dest" class="headerlink" title="dest"></a>dest</h3><p>大多数  <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser" target="_blank" rel="noopener"><code>ArgumentParser</code></a> 操作添加一些值作为由 <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.parse_args" target="_blank" rel="noopener"><code>parse_args()</code></a> 返回的对象的属性。此属性的名称由  <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.add_argument" target="_blank" rel="noopener"><code>add_argument()</code></a> 的<a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.add_argument" target="_blank" rel="noopener"><code>add_argument()</code></a>关键字参数确定。对于位置参数操作，<code>dest</code>通常作为第一个参数提供给  <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.add_argument" target="_blank" rel="noopener"><code>add_argument()</code></a>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'bar'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'XXX'</span>])</span><br><span class="line">Namespace(bar=<span class="string">'XXX'</span>)</span><br></pre></td></tr></table></figure>
+<p>对于可选的参数操作，通常从选项字符串中推断出dest的值。 <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser" target="_blank" rel="noopener">ArgumentParser</a>生成<code>dest</code>的值，方法是提取第一个长选项字符串并去除 初始<code>--</code>字符串。 如果没有提供长选项字符串，则通过剥离开头的“-”字符，从第一个短选项字符串派生“ dest”。 任何内部的-字符都将转换为_字符，以确保该字符串是有效的属性名称。 下面的示例说明了此行为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'-f'</span>, <span class="string">'--foo-bar'</span>, <span class="string">'--foo'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'-x'</span>, <span class="string">'-y'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">'-f 1 -x 2'</span>.split())</span><br><span class="line">Namespace(foo_bar=<span class="string">'1'</span>, x=<span class="string">'2'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">'--foo 1 -y 2'</span>.split())</span><br><span class="line">Namespace(foo_bar=<span class="string">'1'</span>, x=<span class="string">'2'</span>)</span><br></pre></td></tr></table></figure>
+<p><code>dest</code> 允许自定义可选属性的名字</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'--foo'</span>, dest=<span class="string">'bar'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">'--foo XXX'</span>.split())</span><br><span class="line">Namespace(bar=<span class="string">'XXX'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Action-classes"><a href="#Action-classes" class="headerlink" title="Action classes"></a>Action classes</h3><p>这是一个实现了可调用API的函数，该函数返回一个可调用的函数，该可处理函数从命令行处理参数。 遵循此API的任何对象都可以作为操作参数传递给add_argument（）。</p>
+<ul>
+<li><em>class</em> <code>argparse.Action</code>(<em>option_strings</em>, <em>dest</em>, <em>nargs=None</em>, <em>const=None</em>, <em>default=None</em>, <em>type=None</em>, <em>choices=None</em>, <em>required=False</em>, <em>help=None</em>, <em>metavar=None</em>)</li>
+</ul>
+<p>ArgumentParser对象使用动作对象表示从命令行的一个或多个字符串解析单个参数所需的信息。 Action类必须接受两个位置参数以及传递给<a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser的任何关键字参数" target="_blank" rel="noopener"><code>ArgumentParser</code>和<code>argument()</code></a>.add_argument()，但<code>action</code>本身除外。</p>
+<p>Action实例（或可调用<code>action</code>参数的任何返回值）应具有定义的属性<code>dest</code>，<code>option_strings</code>，<code>default</code>，<code>type”，“ required</code>，<code>help</code>等。 确保定义这些属性的最简单方法是调用<code>Action .__ init__</code>。</p>
+<p>Action 实例是可调用的，因此子类必须重写<strong>call</strong>方法，该方法应接受四个参数：</p>
+<ul>
+<li><code>parser</code> -  ArgumentParser对象 包含的动作</li>
+<li><code>namespace</code> -  <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.Namespace" target="_blank" rel="noopener"><code>Namespace</code></a> 对象通过 <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.parse_args" target="_blank" rel="noopener"><code>parse_args()</code></a>方法返回. 大部分actions 通过 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#setattr" target="_blank" rel="noopener"><code>setattr()</code></a>方法添加属性</li>
+<li><code>values</code> - 关联命令行参数,已应用任何类型转换，通过 <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.add_argument" target="_blank" rel="noopener"><code>add_argument()</code></a>中的 <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#type" target="_blank" rel="noopener">type</a> 关键字参数声明类型转换</li>
+<li><code>option_string</code> - 用于调用此操作的选项字符串。 option_string参数是可选的，如果该动作与位置参数相关联，则将不起作用。</li>
+</ul>
+<h2 id="parse-args-方法"><a href="#parse-args-方法" class="headerlink" title="parse_args() 方法"></a>parse_args() 方法</h2><ul>
+<li><p><code>ArgumentParser.`</code>parse_args`(<em>args=None</em>, <em>namespace=None</em>)</p>
+<p>将参数字符串转换为对象，并将其分配为名称空间的属性。 返回填充的名称空间。先前对<a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.add_argument" target="_blank" rel="noopener"><code>add_argument（）</code></a>的调用确定创建了哪些对象 以及它们的分配方式。 有关详细信息，请参见  <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.add_argument" target="_blank" rel="noopener"><code>add_argument()</code></a> 。</p>
+<ul>
+<li>要解析的字符串列表。 默认值来自<a href="https://docs.python.org/zh-cn/3.8/library/sys.html#sys.argv" target="_blank" rel="noopener"><code>sys.argv</code></a>。</li>
+<li><a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#namespace" target="_blank" rel="noopener">namespace</a>）-带有属性的对象。 默认为一个新的空的 <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.Namespace" target="_blank" rel="noopener"><code>Namespace</code></a> 对象。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Option-value-syntax"><a href="#Option-value-syntax" class="headerlink" title="Option value syntax"></a>Option value syntax</h3><p> <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.parse_args" target="_blank" rel="noopener"><code>parse_args()</code></a>方法支持多种方法来指定选项的值（如果 需要一个）。 在最简单的情况下，选项及其值作为两个单独的参数传递：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">'PROG'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'-x'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'--foo'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'-x'</span>, <span class="string">'X'</span>])</span><br><span class="line">Namespace(foo=<span class="literal">None</span>, x=<span class="string">'X'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'--foo'</span>, <span class="string">'FOO'</span>])</span><br><span class="line">Namespace(foo=<span class="string">'FOO'</span>, x=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+<p>对于长选项（名称长于单个字符的选项），选项和值也可以作为单个命令行参数传递，使用<code>=</code>分隔它们：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'--foo=FOO'</span>])</span><br><span class="line">Namespace(foo=<span class="string">'FOO'</span>, x=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+<p>对于短选项（选项仅一个字符长），可以将选项及其值连接在一起：    </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'-xX'</span>])</span><br><span class="line">Namespace(foo=<span class="literal">None</span>, x=<span class="string">'X'</span>)</span><br></pre></td></tr></table></figure>
+<p>只要仅最后一个选项（或其中一个都不要求）需要一个值，几个短选项可以仅使用一个前缀-组合在一起。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">'PROG'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'-x'</span>, action=<span class="string">'store_true'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'-y'</span>, action=<span class="string">'store_true'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'-z'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'-xyzZ'</span>])</span><br><span class="line">Namespace(x=<span class="literal">True</span>, y=<span class="literal">True</span>, z=<span class="string">'Z'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="无效的参数"><a href="#无效的参数" class="headerlink" title="无效的参数"></a>无效的参数</h3><p>  <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.parse_args" target="_blank" rel="noopener"><code>parse_args()</code></a> 检查各种错误，包括 模棱两可的选项，无效的类型，无效的选项，错误的位置参数数量等。遇到此类错误时，它将退出并打印错误以及用法消息：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">'PROG'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'--foo'</span>, type=int)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'bar'</span>, nargs=<span class="string">'?'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># invalid type</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'--foo'</span>, <span class="string">'spam'</span>])</span><br><span class="line">usage: PROG [-h] [--foo FOO] [bar]</span><br><span class="line">PROG: error: argument --foo: invalid int value: <span class="string">'spam'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># invalid option</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'--bar'</span>])</span><br><span class="line">usage: PROG [-h] [--foo FOO] [bar]</span><br><span class="line">PROG: error: no such option: --bar</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># wrong number of arguments</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'spam'</span>, <span class="string">'badger'</span>])</span><br><span class="line">usage: PROG [-h] [--foo FOO] [bar]</span><br><span class="line">PROG: error: extra arguments found: badger</span><br></pre></td></tr></table></figure>
+<h3 id="包含-的参数"><a href="#包含-的参数" class="headerlink" title="包含 - 的参数"></a>包含 <code>-</code> 的参数</h3><p><a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.parse_args" target="_blank" rel="noopener"><code>parse_args()</code></a>方法尝试在用户明显犯错时给出错误 ，但某些情况本质上是模棱两可的。 例如，命令行参数-1可以是尝试指定选项，也可以是提供位置参数。 <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.parse_args" target="_blank" rel="noopener"><code>parse_args()</code></a> 方法在这里非常谨慎：位置参数只能以<code>-</code>如果它们看起来像负数，并且解析器中没有选项看起来像负数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">'PROG'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'-x'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'foo'</span>, nargs=<span class="string">'?'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># no negative number options, so -1 is a positional argument</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'-x'</span>, <span class="string">'-1'</span>])</span><br><span class="line">Namespace(foo=<span class="literal">None</span>, x=<span class="string">'-1'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># no negative number options, so -1 and -5 are positional arguments</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'-x'</span>, <span class="string">'-1'</span>, <span class="string">'-5'</span>])</span><br><span class="line">Namespace(foo=<span class="string">'-5'</span>, x=<span class="string">'-1'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">'PROG'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'-1'</span>, dest=<span class="string">'one'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'foo'</span>, nargs=<span class="string">'?'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># negative number options present, so -1 is an option</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'-1'</span>, <span class="string">'X'</span>])</span><br><span class="line">Namespace(foo=<span class="literal">None</span>, one=<span class="string">'X'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># negative number options present, so -2 is an option</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'-2'</span>])</span><br><span class="line">usage: PROG [-h] [<span class="number">-1</span> ONE] [foo]</span><br><span class="line">PROG: error: no such option: <span class="number">-2</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># negative number options present, so both -1s are options</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'-1'</span>, <span class="string">'-1'</span>])</span><br><span class="line">usage: PROG [-h] [<span class="number">-1</span> ONE] [foo]</span><br><span class="line">PROG: error: argument <span class="number">-1</span>: expected one argument</span><br></pre></td></tr></table></figure>
+<p>如果您的位置参数必须以<code>-</code>开头并且看起来不像负数，则可以插入伪参数<code>&#39;-&#39;</code>来告诉<a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.parse_args" target="_blank" rel="noopener"><code>parse_args()</code></a>  之后的所有内容都是位置参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'--'</span>, <span class="string">'-f'</span>])</span><br><span class="line">Namespace(foo=<span class="string">'-f'</span>, one=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="参数缩写（前缀匹配）"><a href="#参数缩写（前缀匹配）" class="headerlink" title="参数缩写（前缀匹配）"></a>参数缩写（前缀匹配）</h3><p>The <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.parse_args" target="_blank" rel="noopener"><code>parse_args()</code></a> method <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#allow-abbrev" target="_blank" rel="noopener">by default</a> allows long options to be abbreviated to a prefix, if the abbreviation is unambiguous (the prefix matches a unique option):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser(prog=<span class="string">'PROG'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'-bacon'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'-badger'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">'-bac MMM'</span>.split())</span><br><span class="line">Namespace(bacon=<span class="string">'MMM'</span>, badger=<span class="literal">None</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">'-bad WOOD'</span>.split())</span><br><span class="line">Namespace(bacon=<span class="literal">None</span>, badger=<span class="string">'WOOD'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(<span class="string">'-ba BA'</span>.split())</span><br><span class="line">usage: PROG [-h] [-bacon BACON] [-badger BADGER]</span><br><span class="line">PROG: error: ambiguous option: -ba could match -badger, -bacon</span><br></pre></td></tr></table></figure>
+<p>对于可能产生多个选项的参数会产生错误。 可以通过将 <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#allow-abbrev" target="_blank" rel="noopener">allow_abbrev</a>设置为False来禁用此功能。</p>
+<h3 id="Beyond-sys-argv¶"><a href="#Beyond-sys-argv¶" class="headerlink" title="Beyond sys.argv¶"></a>Beyond <code>sys.argv</code><a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#beyond-sys-argv" target="_blank" rel="noopener">¶</a></h3><p>有时让ArgumentParser解析除之外的参数可能会很有用。 这可以通过将字符串列表传递给<a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.parse_args" target="_blank" rel="noopener"><code>parse_args()</code></a>来完成。 这对于在交互式提示符下进行测试很有用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(</span><br><span class="line"><span class="meta">... </span>    <span class="string">'integers'</span>, metavar=<span class="string">'int'</span>, type=int, choices=range(<span class="number">10</span>),</span><br><span class="line"><span class="meta">... </span>    nargs=<span class="string">'+'</span>, help=<span class="string">'an integer in the range 0..9'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(</span><br><span class="line"><span class="meta">... </span>    <span class="string">'--sum'</span>, dest=<span class="string">'accumulate'</span>, action=<span class="string">'store_const'</span>, const=sum,</span><br><span class="line"><span class="meta">... </span>    default=max, help=<span class="string">'sum the integers (default: find the max)'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>])</span><br><span class="line">Namespace(accumulate=&lt;built-<span class="keyword">in</span> function max&gt;, integers=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args([<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'--sum'</span>])</span><br><span class="line">Namespace(accumulate=&lt;built-<span class="keyword">in</span> function sum&gt;, integers=[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br></pre></td></tr></table></figure>
+<h3 id="命名空间对象"><a href="#命名空间对象" class="headerlink" title="命名空间对象"></a>命名空间对象</h3><ul>
+<li><p><em>class</em> <code>argparse.`</code>Namespace`</p>
+<p>默认情况下由<a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser.parse_args" target="_blank" rel="noopener"><code>parse_args()</code></a> 使用的简单类来创建保存属性并返回的对象 它。</p>
+</li>
+</ul>
+<p>此类是故意简化的，只是一个具有可读字符串表示形式的<a href="https://docs.python.org/zh-cn/3.8/library/functions.html#object" target="_blank" rel="noopener"><code>object</code></a>子类。 如果您希望对属性有类似dict的视图，可以使用标准的Python习惯用法<a href="https://docs.python.org/zh-cn/3.8/library/functions.html#vars" target="_blank" rel="noopener"><code>vars()</code></a>#vars）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'--foo'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>args = parser.parse_args([<span class="string">'--foo'</span>, <span class="string">'BAR'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>vars(args)</span><br><span class="line">&#123;<span class="string">'foo'</span>: <span class="string">'BAR'</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>让  <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.ArgumentParser" target="_blank" rel="noopener"><code>ArgumentParser</code></a>  将属性分配给已经存在的对象，而不是 一个新的[ <a href="https://docs.python.org/zh-cn/3.8/library/argparse.html#argparse.Namespace" target="_blank" rel="noopener"><code>Namespace</code></a>  对象。 这可以通过指定<code>namespace =</code>关键字参数来实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">pass</span></span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c = C()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser = argparse.ArgumentParser()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.add_argument(<span class="string">'--foo'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse_args(args=[<span class="string">'--foo'</span>, <span class="string">'BAR'</span>], namespace=c)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c.foo</span><br><span class="line"><span class="string">'BAR'</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/03/09/python-standard-library-argparse-2/" title="python standard_library argparse 2">https://pinghailinfeng.gitee.io/2020/03/09/python-standard-library-argparse-2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/argparse/" rel="tag"># argparse</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/08/python-standard-library-argparse/" rel="next" title="python standard_library argparse">
+                <i class="fa fa-chevron-left"></i> python standard_library argparse
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/10/python-standard-library-XML/" rel="prev" title="python standard_library XML">
+                python standard_library XML <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">113</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">129</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-argparse-续"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 argparse 续</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#add-arguments-方法"><span class="nav-number">1.1.</span> <span class="nav-text">add_arguments 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#help"><span class="nav-number">1.1.1.</span> <span class="nav-text">help</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#metavar"><span class="nav-number">1.1.2.</span> <span class="nav-text">metavar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dest"><span class="nav-number">1.1.3.</span> <span class="nav-text">dest</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Action-classes"><span class="nav-number">1.1.4.</span> <span class="nav-text">Action classes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parse-args-方法"><span class="nav-number">1.2.</span> <span class="nav-text">parse_args() 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Option-value-syntax"><span class="nav-number">1.2.1.</span> <span class="nav-text">Option value syntax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无效的参数"><span class="nav-number">1.2.2.</span> <span class="nav-text">无效的参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包含-的参数"><span class="nav-number">1.2.3.</span> <span class="nav-text">包含 - 的参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数缩写（前缀匹配）"><span class="nav-number">1.2.4.</span> <span class="nav-text">参数缩写（前缀匹配）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Beyond-sys-argv¶"><span class="nav-number">1.2.5.</span> <span class="nav-text">Beyond sys.argv¶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命名空间对象"><span class="nav-number">1.2.6.</span> <span class="nav-text">命名空间对象</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2to3/">2to3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tkinter/">Tkinter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/argparse/">argparse</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atexit/">atexit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/code/">code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doctest/">doctest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dom/">dom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/">futures</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keyword/">keyword</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minidom/">minidom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">78</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/readline/">readline</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sax/">sax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sched/">sched</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/select/">select</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selectors/">selectors</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standar-library/">standar_library</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">72</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/">turtle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unittest/">unittest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/">venv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/">xml</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">803k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">12:10</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

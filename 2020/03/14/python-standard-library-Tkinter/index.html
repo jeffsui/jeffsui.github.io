@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 Tkinter">
+<meta name="keywords" content="python,standard_library,Tkinter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard_library Tkinter">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/03/14/python-standard-library-Tkinter/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 Tkinter">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200314_what_is_friends_mean_to_u.jpg?raw=true">
+<meta property="og:updated_time" content="2020-03-15T03:49:19.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard_library Tkinter">
+<meta name="twitter:description" content="python 标准库 Tkinter">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200314_what_is_friends_mean_to_u.jpg?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/03/14/python-standard-library-Tkinter/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard_library Tkinter | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/03/14/python-standard-library-Tkinter/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard_library Tkinter
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-14 21:17:11" itemprop="dateCreated datePublished" datetime="2020-03-14T21:17:11+08:00">2020-03-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-15 11:49:19" itemprop="dateModified" datetime="2020-03-15T11:49:19+08:00">2020-03-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">14k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">13 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-Tkinter"><a href="#python-标准库-Tkinter" class="headerlink" title="python 标准库 Tkinter"></a>python 标准库 Tkinter</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200314_what_is_friends_mean_to_u.jpg?raw=true" alt></p>
+<a id="more"></a>
+<blockquote>
+<p>what life should mean to you ?</p>
+<p>推荐这本书 中文版 翻译为：自卑与超越</p>
+</blockquote>
+<p>该<code>Tkinter</code>模块（“Tk接口”）是Tk GUI工具包的标准Python接口。Tk和<code>Tkinter</code>在大多数Unix平台以及Windows系统上均可用。（Tk本身不是Python的一部分;它保存在ActiveState中。）</p>
+<p>注意</p>
+<p><code>Tkinter</code>已被重新命名为<code>tkinter</code>Python 3. 当将源代码转换为Python 3时，<a href="https://docs.python.org/2.7/glossary.html#term-2to3" target="_blank" rel="noopener">2to3</a>工具将自动适应导入。</p>
+<p>扩展内容</p>
+<p> <a href="https://wiki.python.org/moin/TkInter" target="_blank" rel="noopener">Python Tkinter资源</a> Python Tkinter主题指南提供了大量关于从Python使用Tk和链接到Tk上的其他信息源的信息。<a href="http://www.tkdocs.com/" target="_blank" rel="noopener">TKDocs</a>广泛的教程和一些小部件的更友好的小部件页面。<a href="https://infohost.nmt.edu/tcc/help/pubs/tkinter/web/index.html" target="_blank" rel="noopener">Tkinter参考：用于Python的GUI</a>在线参考资料。<a href="http://effbot.org/tkinterbook/" target="_blank" rel="noopener">来自effbot的Tkinter文档由effbot.org</a>支持的tkinter的在线参考。<a href="https://www.tcl.tk/man/tcl8.5/" target="_blank" rel="noopener">Tcl / Tk手册</a>最新tcl / tk版本的官方手册。由Mark Lutz <a href="http://learning-python.com/books/about-pp4e.html" target="_blank" rel="noopener">编写的Python</a>书籍，对Tkinter有很好的报道。<a href="http://www.amazon.com/Modern-Tkinter-Python-Developers-ebook/dp/B0071QDNLO/" target="_blank" rel="noopener">繁忙Python开发人员的现代Tkinter</a>由Mark Rozerman撰写关于用Python和Tkinter构建具有吸引力和现代化图形用户界面的内容。<a href="https://www.manning.com/books/python-and-tkinter-programming" target="_blank" rel="noopener">Python和Tkinter编程</a> John Grayson的书（ISBN 1-884777-81-3）。  </p>
+<h2 id="1-Tkinter模块"><a href="#1-Tkinter模块" class="headerlink" title="1. Tkinter模块"></a>1. Tkinter模块</h2><p>大多数情况下，<code>Tkinter</code>模块都是您真正需要的，但也有一些额外的模块可供选择。Tk接口位于名为的二进制模块中<code>_tkinter</code>。该模块包含Tk的底层接口，不应直接由应用程序员使用。它通常是共享库（或DLL），但在某些情况下可能会与Python解释器静态链接。</p>
+<p>除了Tk接口模块外，<code>Tkinter</code>还包括许多Python模块。两个最重要的模块是<code>Tkinter</code>模块本身，还有一个模块叫做<code>Tkconstants</code>。前者自动导入后者，所以要使用Tkinter，你只需要导入一个模块：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Tkinter</span><br></pre></td></tr></table></figure>
+<p>或者更经常地：</p>
+<figure class="highlight plain"><figcaption><span>Tkinter import *</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class Tkinter.Tk(screenName=None, baseName=None, className=&apos;Tk&apos;, useTk=1)</span><br></pre></td></tr></table></figure>
+<p>将<code>Tk</code>类实例化没有参数。这会创建一个Tk的顶层小部件，它通常是应用程序的主窗口。每个实例都有自己关联的Tcl解释器。</p>
+<p>在版本2.4中更改：添加了<em>useTk</em>参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tkinter.Tcl(screenName=None, baseName=None, className=&apos;Tk&apos;, useTk=0)</span><br></pre></td></tr></table></figure>
+<p>该<code>Tcl()</code>函数是一个工厂函数<code>Tk</code>，除了不初始化Tk子系统外，它创建的对象非常类似于该类创建的对象。在不希望创建无关的顶层窗口的环境中，或者在无法（如没有X服务器的Unix / Linux系统）环境中驱动Tcl解释器时，这通常很有用。由对象创建的<code>Tcl()</code>对象可以通过调用其<code>loadtk()</code>方法创建Toplevel窗口（并初始化Tk子系统）。</p>
+<p>2.4版本中的新功能。</p>
+<p>其他提供Tk支持的模块包括：</p>
+<p>ScrolledTextText小部件，内置一个垂直滚动条in.tkColorChooserDialog，让用户选择一个color.tkCommonDialogBase类，用于在这里列出的其他模块中定义的对话框。tkFileDialogCommon对话框允许用户指定要打开的文件或save.tkFontUtilities以帮助 使用fonts.tkMessageBoxAccess来标准Tk对话框boxes.tkSimpleDialogBasic对话框和便捷函数.Tkdnd拖放支持Tkinter。 这是实验性的，当它在Tk窗口中用Tk DND.turtleTurtle图形取代时应该被弃用。</p>
+<p>这些已经在Python 3中重新命名了; 他们都是新<code>tkinter</code>包装的子模块。</p>
+<h2 id="2-Tkinter救生员系统"><a href="#2-Tkinter救生员系统" class="headerlink" title="2. Tkinter救生员系统"></a>2. Tkinter救生员系统</h2><p>本节不是为Tk或Tkinter的详尽教程而设计的。相反，它旨在作为一个制止差距，为系统提供一些入门指导。</p>
+<p>Credits:</p>
+<ul>
+<li><p>Tkinter由Steen Lumholt和Guido van Rossum撰写。</p>
+</li>
+<li><p>Tk由John Ousterhout在伯克利书写。</p>
+</li>
+<li><p>这个Life Preserver 是由弗吉尼亚大学的马特康威编写的。</p>
+</li>
+<li><p>HTML渲染和一些自由编辑是由Ken Manheimer的FrameMaker版本生成的。</p>
+</li>
+<li><p>Fredrik Lundh详细阐述并修改了类接口描述，以使它们与Tk 4.2一致。</p>
+</li>
+<li><p>Mike Clarkson将文档转换为LaTeX，并编译了参考手册的用户界面章节。</p>
+</li>
+</ul>
+<h3 id="2-1-如何使用本节"><a href="#2-1-如何使用本节" class="headerlink" title="2.1 如何使用本节"></a>2.1 如何使用本节</h3><p>本部分分为两部分：前半部分（大致）包含背景材料，后半部分可作为便于参考的键盘。</p>
+<p>当试图回答“我该怎么做”这个形式的问题时，通常最好找出如何在直接Tk中做“无用”，然后将其转换回相应的<code>Tkinter</code>呼叫。Python程序员通常可以通过查看Tk文档来猜测正确的Python命令。这意味着为了使用Tkinter，你必须知道一些关于Tk的知识。这个文件不能完成这个角色，所以我们能做的最好的事情就是向您提供最好的文档。以下是一些提示：</p>
+<ul>
+<li><p>作者强烈建议获取Tk手册页的副本。具体来说，<code>mann</code>目录中的手册页是最有用的。该<code>man3</code>手册页介绍了C接口Tk库，因此不为脚本编写者特别有用。</p>
+</li>
+<li><p>Addison-Wesley出版了一本名为Tcl的书和John Ousterhout的Tk Toolkit（ISBN 0-201-63337-X），这是对新手Tcl和Tk的一个很好的介绍。这本书并非详尽无遗，对于许多细节，它都遵循手册页。</p>
+</li>
+<li><p><code>Tkinter.py</code> 对大多数人来说是最后的选择，但如果没有其他任何意义的话，它可能是一个很好的去处。</p>
+</li>
+</ul>
+<p>扩展内容</p>
+<p> <a href="http://tcl.activestate.com/" target="_blank" rel="noopener">ActiveState Tcl主页</a> Tk / Tcl开发主要发生在ActiveState上。<a href="http://www.amazon.com/exec/obidos/ASIN/020163337X" target="_blank" rel="noopener">Tcl和Tk工具包</a> Tcl的发明人John Ousterhout的书。<a href="http://www.beedub.com/book/" target="_blank" rel="noopener">Tcl和Tk中的实用编程</a> Brent Welch的百科全书。  </p>
+<h3 id="2-2-一个简单的Hello-World程序"><a href="#2-2-一个简单的Hello-World程序" class="headerlink" title="2.2  一个简单的Hello World程序"></a>2.2  一个简单的Hello World程序</h3><figure class="highlight plain"><figcaption><span>import *</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">class Application(Frame):</span><br><span class="line">    def say_hi(self):</span><br><span class="line">        print &quot;hi there, everyone!&quot;</span><br><span class="line"></span><br><span class="line">    def createWidgets(self):</span><br><span class="line">        self.QUIT = Button(self)</span><br><span class="line">        self.QUIT[&quot;text&quot;] = &quot;QUIT&quot;</span><br><span class="line">        self.QUIT[&quot;fg&quot;]   = &quot;red&quot;</span><br><span class="line">        self.QUIT[&quot;command&quot;] =  self.quit</span><br><span class="line"></span><br><span class="line">        self.QUIT.pack(&#123;&quot;side&quot;: &quot;left&quot;&#125;)</span><br><span class="line"></span><br><span class="line">        self.hi_there = Button(self)</span><br><span class="line">        self.hi_there[&quot;text&quot;] = &quot;Hello&quot;,</span><br><span class="line">        self.hi_there[&quot;command&quot;] = self.say_hi</span><br><span class="line"></span><br><span class="line">        self.hi_there.pack(&#123;&quot;side&quot;: &quot;left&quot;&#125;)</span><br><span class="line"></span><br><span class="line">    def __init__(self, master=None):</span><br><span class="line">        Frame.__init__(self, master)</span><br><span class="line">        self.pack()</span><br><span class="line">        self.createWidgets()</span><br><span class="line"></span><br><span class="line">root = Tk()</span><br><span class="line">app = Application(master=root)</span><br><span class="line">app.mainloop()</span><br><span class="line">root.destroy()</span><br></pre></td></tr></table></figure>
+<h2 id="3-（非常）快速浏览Tcl-Tk"><a href="#3-（非常）快速浏览Tcl-Tk" class="headerlink" title="3. （非常）快速浏览Tcl / Tk"></a>3. （非常）快速浏览Tcl / Tk</h2><p>类层次结构看起来很复杂，但实际上，应用程序员几乎总是引用层次结构底部的类。</p>
+<p>注意：</p>
+<ul>
+<li><p>提供这些类是为了在一个命名空间下组织某些功能。它们不是要独立实例化的。</p>
+</li>
+<li><p>该<code>Tk</code>类，就是要在应用程序中只有一次实例化。应用程序员不需要明确地实例化一个实例，只要有任何其他类实例化，系统就会创建一个。</p>
+</li>
+<li><p>这个<code>Widget</code>类不意味着被实例化，它只是意味着子类化才能生成“真实”的小部件（在C ++中，这被称为“抽象类”）。</p>
+</li>
+</ul>
+<p>为了使用这个参考资料，有时候您需要知道如何阅读Tk的简短段落以及如何识别Tk命令的各个部分。（请参阅将Tk的基本Tk映射到Tkinter中，<code>Tkinter</code>以了解下面的内容。）</p>
+<p>Tk脚本是Tcl程序。像所有的Tcl程序一样，Tk脚本只是由空格分隔的令牌列表。传统知识小部件就是它的<em>类</em>的<em>选项</em>，帮助配置，和<em>行动</em>，使人们做有用的事情。</p>
+<p>要在Tk中创建一个小部件，该命令始终是以下形式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cpythond newPathname options</span><br></pre></td></tr></table></figure>
+<p>classCommand_表示要制作哪种小部件（按钮，标签，菜单…）_ newPathname_是此小部件的新名称。 Tk中的所有名称都必须是唯一的。 为了帮助执行此操作，Tk中的窗口小部件以_pathnames命名，就像文件系统中的文件一样。 调用顶级小部件root。 （期间）和孩子被更多的时期划定界限。 例如，.myApp.controlPanel.okButton可能是一个窗口小部件的名称._options_configure窗口小部件的外观，在某些情况下，它的行为。 选项以标志和值列表的形式出现。 标志前面有一个’ - ‘，就像Unix shell命令标志一样，并且如果值超过一个单词，则会将值放在引号中。</p>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">buttopython  -fg red -text <span class="string">"hi there"</span></span><br><span class="line">   ^       ^     \_____________________/</span><br><span class="line">   |       |                |</span><br><span class="line"> <span class="class"><span class="keyword">class</span>    <span class="title">new</span>            <span class="title">options</span></span></span><br><span class="line"><span class="class"><span class="title">command</span>  <span class="title">widget</span>  <span class="params">(-opt val -opt val ...)</span></span></span><br></pre></td></tr></table></figure>
+<p>一旦创建，小部件的路径名变成新命令。这个新的<em>Widget命令</em>是程序员获取新Widget执行某些<em>操作</em>的句柄。在C语言中，你可以用C ++表示它为someAction（fred，someOptions），你可以将它表示为fred.someAction（someOptions），在Tk中，你会说：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.fred sompythonmeOptions</span><br></pre></td></tr></table></figure>
+<p>请注意，对象名称.fred以点开头。</p>
+<p>正如你所期望的那样，someAction的合法值将取决于窗口部件的类：.fred禁用如果fred是一个按钮（fred变灰），但不起作用，但如果fred是标签，则不起作用（不支持禁用标签 在Tk）。</p>
+<p>someOptions的合法价值取决于行动。 某些操作（如disable）不需要参数，其他操作（如文本输入框的delete命令）需要参数来指定要删除的文本范围。</p>
+<h2 id="4-将Tk映射到Tkinter"><a href="#4-将Tk映射到Tkinter" class="headerlink" title="4.将Tk映射到Tkinter"></a>4.将Tk映射到Tkinter</h2><p>Tk中的类命令对应于Tkinter中的类构造函数。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">button .fred python     =====&gt;  fred = Button()</span><br></pre></td></tr></table></figure>
+<p>对象的主对象隐含在创建时给它的新名称中。在Tkinter中，明确指定了主人。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">button .panel.frepython =====&gt;  fred = Button(panel)</span><br></pre></td></tr></table></figure>
+<p>Tk中的配置选项在带有数值的紧跟标签列表中给出。在Tkinter中，选项在实例构造函数中被指定为关键字参数，在配置调用中被指定为keyword-args，或者在字典样式中被指定为已建立实例的实例索引。请参见设置选项中的设置选项部分。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">button .fred -fg red python==&gt;  fred = Button(panel, fg = "red")</span><br><span class="line">.fred configure -fg red     =====&gt;  fred["fg"] = red</span><br><span class="line">                            OR ==&gt;  fred.config(fg = "red")</span><br></pre></td></tr></table></figure>
+<p>在Tk中，要在小部件上执行操作，请使用小部件名称作为命令，然后使用操作名称，可能带有参数（选项）。在Tkinter中，您可以调用类实例上的方法来调用窗口小部件上的操作。Tkinter.py模块中列出了给定小部件可以执行的动作（方法）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.fred invoke             python fred.invoke()</span><br></pre></td></tr></table></figure>
+<p>要给封装器（几何管理器）提供一个小部件，可以使用可选参数调用封装。在Tkinter中，Pack类拥有所有这些功能，并且各种形式的pack命令都作为方法实现。所有的小部件<code>Tkinter</code>都是从Packer中分类出来的，因此继承了所有的打包方法。有关<code>Tix</code>表格几何管理器的其他信息，请参阅模块文档。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pack .fred -side left       =pythond.pack(side = <span class="string">"left"</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="5-Tk和Tkinter是如何相关的"><a href="#5-Tk和Tkinter是如何相关的" class="headerlink" title="5. Tk和Tkinter是如何相关的"></a>5. Tk和Tkinter是如何相关的</h2><p>从上到下：</p>
+<p>你的应用程序在这里（Python）一个Python应用程序进行<code>Tkinter</code>调用.Tkinter（Python模块）这个调用（例如，创建一个按钮控件）在<em>Tkinter</em>模块中实现，该模块是用Python编写的。这个Python函数将解析命令和参数并将它们转换为一种形式，使它们看起来好像它们来自Tk脚本而不是Python脚本.tkinter（C）这些命令及其参数将传递给C在<em>tkinter</em>中的<em>功能</em> - 注意小写 - 扩展模块.Tk Widgets（C和Tcl）这个C函数可以调用其他C模块，包括组成Tk库的C函数。Tk在C和一些Tcl中实现。Tk小部件的Tcl部分用于将某些默认行为绑定到小部件，并且在<code>Tkinter</code>导入Python 模块的位置执行一次。（用户从不会看到这个阶段）.Tk（C）Tk Widgets的Tk部分实现了最终映射到… Xlib（C）Xlib库在屏幕上绘制图形。</p>
+<h2 id="6-方便的参考"><a href="#6-方便的参考" class="headerlink" title="6.方便的参考"></a>6.方便的参考</h2><h3 id="6-1-设置选项"><a href="#6-1-设置选项" class="headerlink" title="6.1  设置选项"></a>6.1  设置选项</h3><p>选项控制一些东西，比如一个小部件的颜色和边框宽度。选项可以通过三种方式设置：</p>
+<p>在创建对象时，使用关键字参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fred = Button(self, fg = <span class="string">"red"</span>, bpython)</span><br></pre></td></tr></table></figure>
+<p>创建对象后，将选项名称视为字典索引</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fred[<span class="string">"fg"</span>] = <span class="string">"red"</span></span><br><span class="line">fred[<span class="string">"bg"</span>] = <span class="string">"bluepythononfig（）方法更新对象创建后的多个attrs</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">​```python</span></span><br><span class="line"><span class="string">fred.config(fg = "</span>red<span class="string">", bg = "</span>blue<span class="string">")</span></span><br></pre></td></tr></table></figure>
+<p>python为的完整说明，请参阅相关Widget的Tk手册页。</p>
+<p>请注意，手册页列出了每个窗口小部件的“标准选项”和“小部件特定选项”。前者是许多小部件通用的选项列表，后者是特定小部件特有的选项。标准选项记录在<em>选项（3）</em>手册页上。</p>
+<p>本文档没有区分标准和特定于窗口小部件的选项。有些选项不适用于某些类型的小部件。给定小部件是否响应特定选项取决于小部件的类别; 按钮有一个<code>command</code>选项，标签没有。</p>
+<p>给定小部件支持的选项列在该小部件的手册页中，或者可以在运行时通过调用<code>config()</code>没有参数的方法或通过调用该<code>keys()</code>小部件上的方法来查询。这些调用的返回值是一个字典，其中的键是作为字符串（例如，<code>&#39;relief&#39;</code>）的选项的名称，其值是5元组。</p>
+<p>一些选项，如bg是长名称的常见选项的同义词（bg是“背景”的简写）。 传递config（）方法的简写选项的名称将返回一个2元组，而不是5元组。 传回的2元组将包含同义词的名称和“真实”选项（例如（’bg’，’background’））。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">指数</th>
+<th style="text-align:left">含义</th>
+<th style="text-align:left">例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0</td>
+<td style="text-align:left">选项名称</td>
+<td style="text-align:left">‘relief’</td>
+</tr>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">数据库查找的选项名称</td>
+<td style="text-align:left">‘relief’</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">选项类用于数据库查找</td>
+<td style="text-align:left">‘relief’</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left">默认值</td>
+<td style="text-align:left">‘raised’</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left">当前值</td>
+<td style="text-align:left">‘groove’</td>
+</tr>
+</tbody>
+</table>
+<p>例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> fred.config()</span><br><span class="line">&#123;<span class="string">'relief'</span>: (<span class="string">'relief'</span>,python <span class="string">'Relief'</span>, <span class="string">'raised'</span>, <span class="string">'groove'</span>)&#125;</span><br></pre></td></tr></table></figure>
+<p>当然，打印的字典将包括所有可用选项及其值。这只是作为一个例子。</p>
+<h3 id="6-2-包装工"><a href="#6-2-包装工" class="headerlink" title="6.2 包装工"></a>6.2 包装工</h3><p>封隔器是Tk的几何管理机制之一。几何管理器用于指定小部件在其容器中的定位的相对位置 - 它们是相互的<em>主人</em>。相较于较为繁琐<em>placer</em>（用于不常用，我们在这里不介绍），封隔器采用定性关系规范- <em>above</em>, <em>to the left of</em>, <em>filling</em>等等-和工作的一切，以确定确切位置坐标为你。</p>
+<p>任何<em>主</em>控件的大小由内部“从控件”的大小决定。打包器用于控制从站窗口小部件在其打包的主站内出现的位置。您可以将窗口小部件封装到框架中，并将框架封装到其他框架中，以实现您所需的布局。此外，这种安排是动态调整的，以适应配置的增量变化，一旦打包完成。</p>
+<p>请注意，窗口小部件在用几何管理器指定几何图形之前不会显示。忽略几何规格是一个常见的早期错误，然后在创建小部件时会感到惊讶，但没有任何内容出现。例如，小部件只有在<code>pack()</code>应用打包器的方法后才会出现。</p>
+<p>可以使用关键字选项/值对调用pack（）方法，该对控制了窗口小部件出现在其容器中的位置，以及在主应用程序窗口调整大小时的行为方式。这里有些例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fred.pack()                     <span class="comment"># defaults to sidpythonfred.pack(side = "left")</span></span><br><span class="line">fred.pack(expand = <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="6-3-封装选项"><a href="#6-3-封装选项" class="headerlink" title="6.3  封装选项"></a>6.3  封装选项</h3><p>有关打包机的更多信息及其可以选择的选项，请参阅John Ousterhout书中的手册页和第183页。</p>
+<p>anchorAnchor类型。 表示封装器将每个从器件放置在parcel.expandBoolean，0或1.fillLegal值中的位置：’x’，’y’，’both’，’none’.ipadx和ipadyA distance - 指定每个从器件的内部填充 从属widget.padx和padyA距离 - 指定从属widget的每边的外部填充。sideLegal值为：’left’，’right’，’top’，’bottom’。</p>
+<h3 id="6-4-耦合小部件变量"><a href="#6-4-耦合小部件变量" class="headerlink" title="6.4  耦合小部件变量"></a>6.4  耦合小部件变量</h3><p>某些小部件（如文本输入小部件）的当前值设置可以通过使用特殊选项直接连接到应用程序变量。 这些选项是可变的，文本变量，onvalue，offvalue和值。 这种连接可以两种方式工作：如果变量因任何原因而变化，它所连接的小部件将被更新以反映新值。</p>
+<p>不幸的是，在Tkinter的当前实现中，不可能通过变量或文本变量选项将任意Python变量移交给小部件。 这个变量的唯一类型是从Tkinter模块中定义的类变量中分类的变量。</p>
+<p>已经定义了许多有用的变量的子类：StringVar，IntVar，DoubleVar和BooleanVar。 要读取此变量的当前值，请调用get（）方法，并更改其值，您可以调用set（）方法。 如果你遵循这个协议，那么这个小部件将总是跟踪这个变量的值，而不需要你做进一步的干预。</p>
+<p>例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span><span class="params">(Frame)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, master=None)</span><span class="title">pythonFrame</span>.<span class="title">__init__</span><span class="params">(self, master)</span></span></span><br><span class="line"><span class="function">        <span class="title">self</span>.<span class="title">pack</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line">        self.entrythingy = Entry()</span><br><span class="line">        self.entrythingy.pack()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># here is the application variable</span></span><br><span class="line">        self.contents = StringVar()</span><br><span class="line">        <span class="comment"># set it to some value</span></span><br><span class="line">        self.contents.set(<span class="string">"this is a variable"</span>)</span><br><span class="line">        <span class="comment"># tell the entry widget to watch this variable</span></span><br><span class="line">        self.entrythingy[<span class="string">"textvariable"</span>] = self.contents</span><br><span class="line"></span><br><span class="line">        <span class="comment"># and here we get a callback when the user hits return.</span></span><br><span class="line">        <span class="comment"># we will have the program print out the value of the</span></span><br><span class="line">        <span class="comment"># application variable when the user hits return</span></span><br><span class="line">        self.entrythingy.bind(<span class="string">'&lt;Key-Return&gt;'</span>,</span><br><span class="line">                              self.print_contents)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">print_contents</span><span class="params">(self, event)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"hi. contents of entry is now ----&gt;"</span>, \</span><br><span class="line">              self.contents.get()</span><br></pre></td></tr></table></figure>
+<h3 id="6-5-窗口管理器"><a href="#6-5-窗口管理器" class="headerlink" title="6.5  窗口管理器"></a>6.5  窗口管理器</h3><p>在Tk中，有一个实用程序命令wm用于与窗口管理器交互。 wm命令的选项允许您控制标题，位置，图标位图等。 在Tkinter中，这些命令已经作为Wm类的方法实现。 Toplevel小部件从Wm类中继承，因此可以直接调用Wm方法。</p>
+<p>要查看包含给定窗口小部件的顶层窗口，通常可以引用窗口小部件的主窗口。当然，如果这个小部件已经被封装在一个框架内，那么这个主框架将不会代表一个顶层窗口。要访问包含任意小部件的顶级窗口，可以调用该<code>_root()</code>方法。该方法以下划线开头，表示这个函数是实现的一部分，而不是Tk功能的接口。</p>
+<p>以下是一些典型用法的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Tkinter <span class="keyword">import</span> *</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span><span class="params">(Frame)</span>:</span></span><br><span class="line">    def __inipythonmaster=None):</span><br><span class="line">        Frame.__init__(self, master)</span><br><span class="line">        self.pack()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># create the application</span></span><br><span class="line">myapp = App()</span><br><span class="line"></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># here are method calls to the window manager class</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">myapp.master.title(<span class="string">"My Do-Nothing Application"</span>)</span><br><span class="line">myapp.master.maxsize(<span class="number">1000</span>, <span class="number">400</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># start the program</span></span><br><span class="line">myapp.mainloop()</span><br></pre></td></tr></table></figure>
+<h3 id="6-6-Tk选项数据类型"><a href="#6-6-Tk选项数据类型" class="headerlink" title="6.6 Tk选项数据类型"></a>6.6 Tk选项数据类型</h3><p>anchorLegal值是指南针的点：“n”，“ne”，“e”，“se”，“s”，“sw”，“w”，“nw”以及“center”.bitmap有八个 -in，命名位图：<code>&#39;error&#39;</code>, <code>&#39;gray25&#39;</code>, <code>&#39;gray50&#39;</code>, <code>&#39;hourglass&#39;</code>, <code>&#39;info&#39;</code>, <code>&#39;questhead&#39;</code>, <code>&#39;question&#39;</code>, <code>&#39;warning&#39;</code>。 要指定一个X位图文件名，给出该文件的完整路径，前面带@，如“@ / usr / contrib / bitmap / gumby.bit”.boolean您可以传递整数0或1或字符串“yes”或“不”.callback</p>
+<p>这是任何不带参数的Python函数。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_it</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">"hi there"</span></span><br><span class="line">fred[<span class="string">"command"</span>] = print_it</span><br></pre></td></tr></table></figure>
+<p>colorColors可以作为rgb.txt文件中X颜色的名称，或以4位表示RGB值的字符串形式给出：“#RGB”，8位：“#RRGGBB”，12位“#RRRGGGBBB”或16位位“#RRRRGGGGBBBB”范围，其中R，G，B在这里表示任何合法的十六进制数字。有关详细信息，请参阅Ousterhout书籍的第160页.cursor可以使用cursorfont.h中的标准X光标名称，而不使用XC_前缀。例如，要获得手形光标（XC_hand2），请使用字符串“hand2”。你也可以指定你自己的位图和掩码文件。请参阅Ousterhout书的第179页。距离可以在像素或绝对距离中指定屏幕距离。像素以数字和绝对距离作为字符串给出，尾部字符表示单位：c表示厘米，i表示英寸，m表示毫米，p表示打印机的点数。例如，3.5英寸表示为“3.5i”.fontTk使用列表字体名称格式，例如{courier 10 bold}。正数的字体大小以点为单位;尺寸为负数的尺寸以pixels.geometry度量。这是一个widthxheight形式的字符串，其中宽度和高度以像素为单位测量大多数小部件（显示文本的小部件的字符数）。例如：fred [“geometry”] =“200x100”.justifyLegal 值是字符串：“left”，“center”，“right”和“fill”.region这是一个带有四个空格分隔元素的字符串，这是一个合法的距离（见上文）。例如：“2 3 4 5”和“3i 2i 4.5i 2i”和“3c 2c 4c 10.4c”都是合法的区域.relief确定小部件的边框样式。合法值是：<code>&quot;raised&quot;</code>, <code>&quot;sunken&quot;</code>, <code>&quot;flat&quot;</code>, <code>&quot;groove&quot;</code>与 <code>&quot;ridge&quot;</code>.scrollcommand这几乎总是某个滚动条小部件的set（）方法，但可以是任何只有一个参数的小部件方法。例如，请参阅Python源代码分发中的Demo / tkinter / matt / canvas-with-scrollbars.py文件.wrap：必须是“none”，“char”或“word”中的一个。</p>
+<h3 id="6-7-绑定和事件"><a href="#6-7-绑定和事件" class="headerlink" title="6.7 绑定和事件"></a>6.7 绑定和事件</h3><p>通过widget命令的绑定方法，您可以监视某些事件并在发生该事件类型时触发回调函数。绑定方法的形式是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bind</span><span class="params">(self, sequence, func, add=<span class="string">''</span>)</span>:</span></span><br></pre></td></tr></table></figure>
+<p>如下：</p>
+<p>sequence是一个表示事件目标类型的字符串。 （有关详细信息，请参阅John Ousterhout书中的绑定手册页和第201页）。当事件发生时，调用一个带有一个参数的Python函数。 一个Event实例将作为参数传递。 （以这种方式部署的函数通常称为回调。）addis可选，可以是’’或’+’。 传递一个空字符串表示这个绑定是要替换这个事件关联的任何其他绑定。 传递’+’意味着此函数将被添加到绑定到此事件类型的函数列表中。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def turnRed(self, event):</span><br><span class="line">    event.widget[<span class="string">"activeforeground"</span>] = <span class="string">"red"</span></span><br><span class="line"></span><br><span class="line">self.button.bind(<span class="string">"&lt;Enter&gt;"</span>, self.turnRed)</span><br></pre></td></tr></table></figure>
+<p>注意事件的widget字段在turnRed（）回调中被访问。 该字段包含捕获X事件的小部件。 下表列出了您可以访问的其他事件字段以及它们在Tk中的表示方式，这在引用Tk手册页时非常有用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Tk      Tkinter Event Field             Tk      Tkinter Event Field</span><br><span class="line">--      -------------------             --      -------------------</span><br><span class="line">%f      focus                           %A      char</span><br><span class="line">%h      height                          %E      send_event</span><br><span class="line">%k      keycode                         %K      keysym</span><br><span class="line">%s      state                           %N      keysym_num</span><br><span class="line">%t      time                            %T      type</span><br><span class="line">%w      width                           %W      widget</span><br><span class="line">%x      x                               %X      x_root</span><br><span class="line">%y      y                               %Y      y_root</span><br></pre></td></tr></table></figure>
+<h3 id="6-8-索引参数"><a href="#6-8-索引参数" class="headerlink" title="6.8 索引参数"></a>6.8 索引参数</h3><p>许多小部件需要传递“索引”参数。它们用于指向Text小部件中的特定位置，或指向Entry小部件中的特定字符或指向Menu小部件中的特定菜单项。</p>
+<p>Entry widget indexes (index, view index, etc.)</p>
+<p>条目窗口小部件具有涉及正在显示的文本中的字符位置的选项。您可以使用这些<code>Tkinter</code>函数来访问文本小部件中的这些特殊点：</p>
+<p>AtEnd（）指的是textAtInsert（）中的最后一个位置，指的是文本光标isAtSelFirst（）指示选定文本的开始点的点.AtSelLast（）表示所选文本的最后一个点，finallyAt（x，y）指向到像素位置<em>x</em>，<em>y</em>处的字符（对于包含单行文本的文本输入小部件，<em>y</em>不使用<em>y</em>）。文本小部件索引文本小部件的索引符号非常丰富，最好在Tk中进行描述man pages.Menu索引（menu.invoke（），menu.entryconfig（）等）</p>
+<p>一些菜单选项和方法可以操作特定的菜单条目。无论何时，对于选项或参数都需要菜单索引，您可以通过：</p>
+<ul>
+<li><p>一个整数，它指向窗口小部件中的条目的数字位置，从顶部开始计数，从0开始;</p>
+</li>
+<li><p>字符串<code>&#39;active&#39;</code>，它是指当前在光标下的菜单位置;</p>
+</li>
+<li><p><code>&quot;last&quot;</code>引用最后一个菜单项的字符串;</p>
+</li>
+<li><p>通过前面的整数<code>@</code>，如在<code>@6</code>，其中整数被解释为y像素菜单的坐标系统中的坐标;</p>
+</li>
+<li><p>该字符串<code>&quot;none&quot;</code>表示根本没有菜单条目，通常与menu.activate（）一起使用来停用所有条目，最后，</p>
+</li>
+<li><p>一个与菜单条目标签相匹配的文本字符串，从菜单顶部扫描到底部。 请注意，此索引类型在所有其他索引类型之后被考虑，这意味着标记为last，active或none的菜单项的匹配可能会被解释为上述文字。</p>
+</li>
+</ul>
+<h3 id="6-9-图片"><a href="#6-9-图片" class="headerlink" title="6.9 图片"></a>6.9 图片</h3><p>位图/像素图像可以通过以下子类创建<code>Tkinter.Image</code>：</p>
+<ul>
+<li><p><code>BitmapImage</code> 可用于X11位图数据。</p>
+</li>
+<li><p><code>PhotoImage</code> 可用于GIF和PPM / PGM颜色位图。</p>
+</li>
+</ul>
+<p>任何类型的图像都是通过<code>file</code>或<code>data</code>选项创建的（其他选项也可用）。</p>
+<p>这个图像对象可以用于任何一个<code>image</code>小部件支持的选项（例如标签，按钮，菜单）。在这些情况下，Tk将不会保留对图像的引用。当删除对图像对象的最后一个Python引用时，图像数据也会被删除，并且无论图像在哪里使用，Tk都会显示一个空框。</p>
+<h2 id="7-文件处理程序"><a href="#7-文件处理程序" class="headerlink" title="7.文件处理程序"></a>7.文件处理程序</h2><p>Tk允许你注册和取消注册一个回调函数，当一个文件描述符可能有I / O时，这个回调函数将从Tk mainloop调用。每个文件描述符只能注册一个处理程序。示例代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Tkinter</span><br><span class="line">widget = Tkinter.Tk()</span><br><span class="line">mask = Tkinter.READABLE | Tkinter.WRITABLE</span><br><span class="line">widget.tk.createfilehandler(file, mask, callback)</span><br><span class="line">...</span><br><span class="line">widget.tk.deletefilehandler(file)</span><br></pre></td></tr></table></figure>
+<p>此功能在Windows上不可用。</p>
+<p>由于您不知道有多少字节可供读取，因此您可能不想使用<code>BufferedIOBase</code>or <code>TextIOBase</code> <code>read()</code>或<code>readline()</code>方法，因为这些字节会坚持读取预定义的字节数。对于套接字，<code>recv()</code>or <code>recvfrom()</code>方法可以正常工作; 对于其他文件，请使用原始读取或<code>os.read(file.fileno(), maxbytecount)</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Widget.tk.createfilehandler(file, mask, func)</span><br></pre></td></tr></table></figure>
+<p>注册文件处理程序回调函数<em>func</em>。该<em>文件</em>的参数可以是与一个对象<code>fileno()</code>的方法（例如，文件或套接字对象），或一个整数文件描述符。的<em>掩模</em>参数是任何以下三个常量的或运算组合。回调被调用如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">callback(file, mask)</span><br><span class="line">Widget.tk.deletefilehandler(file)</span><br></pre></td></tr></table></figure>
+<p>取消注册文件处理程序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tkinter.READABLETkinter.WRITABLETkinter.EXCEPTION</span><br></pre></td></tr></table></figure>
+<p><em>掩码</em>参数中使用的常量。</p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/03/14/python-standard-library-Tkinter/" title="python standard_library Tkinter">https://pinghailinfeng.gitee.io/2020/03/14/python-standard-library-Tkinter/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/Tkinter/" rel="tag"># Tkinter</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/13/python-standard-library-xml-dom/" rel="next" title="python standard_library xml dom">
+                <i class="fa fa-chevron-left"></i> python standard_library xml dom
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/15/python-standard-library-doctest/" rel="prev" title="python standard_library doctest">
+                python standard_library doctest <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">113</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">129</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-Tkinter"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 Tkinter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Tkinter模块"><span class="nav-number">1.1.</span> <span class="nav-text">1. Tkinter模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Tkinter救生员系统"><span class="nav-number">1.2.</span> <span class="nav-text">2. Tkinter救生员系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-如何使用本节"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 如何使用本节</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-一个简单的Hello-World程序"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2  一个简单的Hello World程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-（非常）快速浏览Tcl-Tk"><span class="nav-number">1.3.</span> <span class="nav-text">3. （非常）快速浏览Tcl / Tk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-将Tk映射到Tkinter"><span class="nav-number">1.4.</span> <span class="nav-text">4.将Tk映射到Tkinter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Tk和Tkinter是如何相关的"><span class="nav-number">1.5.</span> <span class="nav-text">5. Tk和Tkinter是如何相关的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-方便的参考"><span class="nav-number">1.6.</span> <span class="nav-text">6.方便的参考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-设置选项"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1  设置选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-包装工"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2 包装工</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-封装选项"><span class="nav-number">1.6.3.</span> <span class="nav-text">6.3  封装选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-耦合小部件变量"><span class="nav-number">1.6.4.</span> <span class="nav-text">6.4  耦合小部件变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-窗口管理器"><span class="nav-number">1.6.5.</span> <span class="nav-text">6.5  窗口管理器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-Tk选项数据类型"><span class="nav-number">1.6.6.</span> <span class="nav-text">6.6 Tk选项数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7-绑定和事件"><span class="nav-number">1.6.7.</span> <span class="nav-text">6.7 绑定和事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-8-索引参数"><span class="nav-number">1.6.8.</span> <span class="nav-text">6.8 索引参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-9-图片"><span class="nav-number">1.6.9.</span> <span class="nav-text">6.9 图片</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-文件处理程序"><span class="nav-number">1.7.</span> <span class="nav-text">7.文件处理程序</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2to3/">2to3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tkinter/">Tkinter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/argparse/">argparse</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atexit/">atexit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/code/">code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doctest/">doctest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dom/">dom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/">futures</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keyword/">keyword</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minidom/">minidom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">78</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/readline/">readline</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sax/">sax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sched/">sched</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/select/">select</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selectors/">selectors</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standar-library/">standar_library</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">72</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/">turtle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unittest/">unittest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/">venv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/">xml</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">803k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">12:10</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

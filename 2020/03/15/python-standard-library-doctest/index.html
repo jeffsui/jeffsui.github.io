@@ -1,0 +1,2276 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python  标准库 doctest">
+<meta name="keywords" content="python,standard_library,doctest">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard_library doctest">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/03/15/python-standard-library-doctest/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python  标准库 doctest">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200316_westworld_3.jpg?raw=true">
+<meta property="og:updated_time" content="2020-03-16T13:23:04.742Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard_library doctest">
+<meta name="twitter:description" content="python  标准库 doctest">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200316_westworld_3.jpg?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/03/15/python-standard-library-doctest/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard_library doctest | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/03/15/python-standard-library-doctest/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard_library doctest
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-15 11:50:31" itemprop="dateCreated datePublished" datetime="2020-03-15T11:50:31+08:00">2020-03-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-16 21:23:04" itemprop="dateModified" datetime="2020-03-16T21:23:04+08:00">2020-03-16</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">31k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">28 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-doctest"><a href="#python-标准库-doctest" class="headerlink" title="python  标准库 doctest"></a>python  标准库 doctest</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200316_westworld_3.jpg?raw=true" alt></p>
+<a id="more"></a>
+<p><code>doctest</code>模块搜索看起来像交互式Python会话的文本片段，然后执行这些会话以验证它们完全按照所示方式工作。有几种常用的方法可以使用doctest：</p>
+<ul>
+<li><p>通过验证所有交互式示例仍按记录工作来检查模块的文档是否是最新的。</p>
+</li>
+<li><p>通过验证测试文件或测试对象中的交互式示例如预期工作来执行回归测试。</p>
+</li>
+<li><p>为包编写教程文档，用输入输出示例大量地说明。根据实例或说明文本是否被强调，这具有“识字测试”或“可执行文档”的味道。</p>
+</li>
+</ul>
+<p>这是一个完整但很小的示例模块：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">This is the "example" module.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The example module supplies one function, factorial().  For example,</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"><span class="meta">&gt;&gt;&gt; </span>factorial(5)</span></span><br><span class="line"><span class="string">120</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">factorial</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="string">"""Return the factorial of n, an exact integer &gt;= 0.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    If the result is small enough to fit in an int, return an int.</span></span><br><span class="line"><span class="string">    Else return a long.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; [factorial(n) for n in range(6)]</span></span><br><span class="line"><span class="string">    [1, 1, 2, 6, 24, 120]</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; [factorial(long(n)) for n in range(6)]</span></span><br><span class="line"><span class="string">    [1, 1, 2, 6, 24, 120]</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; factorial(30)</span></span><br><span class="line"><span class="string">    265252859812191058636308480000000L</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; factorial(30L)</span></span><br><span class="line"><span class="string">    265252859812191058636308480000000L</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; factorial(-1)</span></span><br><span class="line"><span class="string">    Traceback (most recent call last):</span></span><br><span class="line"><span class="string">        ...</span></span><br><span class="line"><span class="string">    ValueError: n must be &gt;= 0</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Factorials of floats are OK, but the float must be an exact integer:</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; factorial(30.1)</span></span><br><span class="line"><span class="string">    Traceback (most recent call last):</span></span><br><span class="line"><span class="string">        ...</span></span><br><span class="line"><span class="string">    ValueError: n must be exact integer</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; factorial(30.0)</span></span><br><span class="line"><span class="string">    265252859812191058636308480000000L</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    It must also not be ridiculously large:</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; factorial(1e100)</span></span><br><span class="line"><span class="string">    Traceback (most recent call last):</span></span><br><span class="line"><span class="string">        ...</span></span><br><span class="line"><span class="string">    OverflowError: n too large</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">import</span> math</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> n &gt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">"n must be &gt;= 0"</span>)</span><br><span class="line">    <span class="keyword">if</span> math.floor(n) != n:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">"n must be exact integer"</span>)</span><br><span class="line">    <span class="keyword">if</span> n+<span class="number">1</span> == n:  <span class="comment"># catch a value like 1e300</span></span><br><span class="line">        <span class="keyword">raise</span> OverflowError(<span class="string">"n too large"</span>)</span><br><span class="line">    result = <span class="number">1</span></span><br><span class="line">    factor = <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> factor &lt;= n:</span><br><span class="line">        result *= factor</span><br><span class="line">        factor += <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    <span class="keyword">import</span> doctest</span><br><span class="line">    doctest.testmod()</span><br></pre></td></tr></table></figure>
+<p>如果您直接从命令行运行<code>example.py</code>，那么<code>doctest</code>可以发挥它的魔力：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python example.py</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p>没有输出！这很正常，而且这意味着所有的例子都有效。传递<code>-v</code>给脚本，并<code>doctest</code>打印它正在尝试的详细日志，并在最后打印摘要：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ python example.py -v</span><br><span class="line">Trying:</span><br><span class="line">    factorial(<span class="number">5</span>)</span><br><span class="line">Expecting:</span><br><span class="line">    <span class="number">120</span></span><br><span class="line">ok</span><br><span class="line">Trying:</span><br><span class="line">    [factorial(n) <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">6</span>)]</span><br><span class="line">Expecting:</span><br><span class="line">    [<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">24</span>, <span class="number">120</span>]</span><br><span class="line">ok</span><br><span class="line">Trying:</span><br><span class="line">    [factorial(long(n)) <span class="keyword">for</span> n <span class="keyword">in</span> range(<span class="number">6</span>)]</span><br><span class="line">Expecting:</span><br><span class="line">    [<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">24</span>, <span class="number">120</span>]</span><br><span class="line">ok</span><br></pre></td></tr></table></figure>
+<p>以此类推，最终结局如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Trying:</span><br><span class="line">    factorial(<span class="number">1e100</span>)</span><br><span class="line">Expecting:</span><br><span class="line">    Traceback (most recent call last):</span><br><span class="line">        ...</span><br><span class="line">    OverflowError: n too large</span><br><span class="line">ok</span><br><span class="line"><span class="number">2</span> items passed all tests:</span><br><span class="line">   <span class="number">1</span> tests <span class="keyword">in</span> __main__</span><br><span class="line">   <span class="number">8</span> tests <span class="keyword">in</span> __main__.factorial</span><br><span class="line"><span class="number">9</span> tests <span class="keyword">in</span> <span class="number">2</span> items.</span><br><span class="line"><span class="number">9</span> passed <span class="keyword">and</span> <span class="number">0</span> failed.</span><br><span class="line">Test passed.</span><br><span class="line">$</span><br></pre></td></tr></table></figure>
+<p>这就是你需要知道的开始有效使用<code>doctest</code>！跳入。以下部分提供完整的详细信息。请注意，标准Python测试套件和库中有很多文档测试的例子。在标准测试文件中可以找到特别有用的示例<code>Lib/test/test_doctest.py</code>。</p>
+<h2 id="1-简单用法：检查Docstrings中的示例"><a href="#1-简单用法：检查Docstrings中的示例" class="headerlink" title="1.简单用法：检查Docstrings中的示例"></a>1.简单用法：检查Docstrings中的示例</h2><p>开始使用doctest的最简单的方法（但不一定是您继续这样做的方式）是结束每个模块<code>M</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    <span class="keyword">import</span> doctest</span><br><span class="line">    doctest.testmod()</span><br></pre></td></tr></table></figure>
+<p>然后<code>doctest</code>在模块中检查文档字符串<code>M</code>。</p>
+<p>将模块作为脚本运行会导致文档字符串中的示例得到执行和验证：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python M.py</span><br></pre></td></tr></table></figure>
+<p>这将不会显示任何东西，除非一个例子失败，在这种情况下，失败的例子和失败的原因被打印到标准输出，并且输出的最后一行是<code>***Test Failed*** N failures.</code>，其中<em>N</em>是数字失败的例子。</p>
+<p>改为使用开关运行<code>-v</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python M.py -v</span><br></pre></td></tr></table></figure>
+<p>并且所有尝试过的示例的详细报告都会打印到标准输出，并在最后列出各种摘要。</p>
+<p>您可以通过传递<code>verbose=True</code>来强制详细模式<code>testmod()</code>，或通过传递来禁止它<code>verbose=False</code>。在任何一种情况下，<code>sys.argv</code>都不会被检查<code>testmod()</code>（如此通过<code>-v</code>或没有影响）。</p>
+<p>自Python 2.6以来，还有一个用于运行的命令行快捷方式<code>testmod()</code>。您可以指示Python解释器直接从标准库运行doctest模块，并在命令行上传递模块名称：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m doctest -v example.py</span><br></pre></td></tr></table></figure>
+<p>这将<code>example.py</code>作为独立模块导入并<code>testmod()</code>在其上运行。请注意，如果文件是软件包的一部分并从该软件包导入其他子模块，则可能无法正常工作。</p>
+<p>有关更多信息<code>testmod()</code>，请参阅基本API一节。</p>
+<h2 id="2-简单的用法：检查文本文件中的示例"><a href="#2-简单的用法：检查文本文件中的示例" class="headerlink" title="2.简单的用法：检查文本文件中的示例"></a>2.简单的用法：检查文本文件中的示例</h2><p>doctest的另一个简单应用是在文本文件中测试交互式示例。这可以通过以下<code>testfile()</code>功能完成：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> doctest</span><br><span class="line">doctest.testfile(<span class="string">"example.txt"</span>)</span><br></pre></td></tr></table></figure>
+<p>该短脚本执行并验证文件中包含的任何交互式Python示例<code>example.txt</code>。文件内容被视为一个巨大的文档字符串; 该文件不需要包含Python程序！例如，也许<code>example.txt</code>包含这个：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">The ``example`` module</span><br><span class="line">======================</span><br><span class="line"></span><br><span class="line">Using ``factorial``</span><br><span class="line">-------------------</span><br><span class="line"></span><br><span class="line">This <span class="keyword">is</span> an example text file <span class="keyword">in</span> reStructuredText format.  First <span class="keyword">import</span></span><br><span class="line">``factorial`` <span class="keyword">from</span> the ``example`` module:</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; <span class="keyword">from</span> example <span class="keyword">import</span> factorial</span><br><span class="line"></span><br><span class="line">Now use it:</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; factorial(<span class="number">6</span>)</span><br><span class="line">    <span class="number">120</span></span><br></pre></td></tr></table></figure>
+<p>运行<code>doctest.testfile(&quot;example.txt&quot;)</code>然后在这个文档中找到错误：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">File <span class="string">"./example.txt"</span>, line <span class="number">14</span>, <span class="keyword">in</span> example.txt</span><br><span class="line">Failed example:</span><br><span class="line">    factorial(<span class="number">6</span>)</span><br><span class="line">Expected:</span><br><span class="line">    <span class="number">120</span></span><br><span class="line">Got:</span><br><span class="line">    <span class="number">720</span></span><br></pre></td></tr></table></figure>
+<p>与<code>testmod()</code>一样，<code>testfile()</code>除非例子失败，否则不会显示任何内容。如果一个例子失败了，那么失败的例子和失败的原因将被打印到标准输出中，格式为<code>testmod()</code>。</p>
+<p>默认情况下，<code>testfile()</code>查找调用模块目录中的文件。有关可用于指示其在其他位置查找文件的可选参数的说明，请参见Basic API一节。</p>
+<p>就像<code>testmod()</code>，<code>testfile()</code>可以通过<code>-v</code>命令行开关或可选的关键字参数<em>verbose</em>来设置详细程度。</p>
+<p>自Python 2.6以来，还有一个用于运行的命令行快捷方式<code>testfile()</code>。您可以指示Python解释器直接从标准库运行doctest模块，并在命令行上传递文件名：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m doctest -v example.txt</span><br></pre></td></tr></table></figure>
+<p>因为文件名并不以此结束<code>.py</code>，因此<code>doctest</code>推断它必须与其一起运行<code>testfile()</code>，而不是<code>testmod()</code>。</p>
+<p>有关更多信息<code>testfile()</code>，请参阅基本API一节。</p>
+<h2 id="3-它是如何工作的"><a href="#3-它是如何工作的" class="headerlink" title="3.它是如何工作的"></a>3.它是如何工作的</h2><p>本节将详细介绍doctest如何工作：查看它的文档字符串，它如何查找交互式示例，它使用的执行上下文，它如何处理异常以及如何使用选项标志来控制其行为。这是编写doctest示例时需要了解的信息; 有关在这些示例上实际运行doctest的信息，请参阅以下各节。</p>
+<h3 id="3-1-哪些Docstrings被检查？"><a href="#3-1-哪些Docstrings被检查？" class="headerlink" title="3.1. 哪些Docstrings被检查？"></a>3.1. 哪些Docstrings被检查？</h3><p>模块docstring，以及所有函数，类和方法文档字符串被搜索。导入到模块中的对象不被搜索。</p>
+<p>另外，如果<code>M.__test__</code>存在且“为真”，则它必须是字典，并且每个条目将（字符串）名称映射到函数对象，类对象或字符串。从中找到的函数和类对象文档字符串<code>M.__test__</code>被搜索，字符串被视为文档字符串。在输出，一键<code>K</code>在<code>M.__test__</code>出现与名称</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;name of M&gt;.__test__.K</span><br></pre></td></tr></table></figure>
+<p>找到的任何类都以相似的方式递归搜索，以测试其包含的方法和嵌套类中的文档字符串。</p>
+<p>在版本2.4中进行了更改：“专用名称”概念已被弃用且不再有记录。</p>
+<h3 id="3-2-Docstring示例如何被认可？"><a href="#3-2-Docstring示例如何被认可？" class="headerlink" title="3.2. Docstring示例如何被认可？"></a>3.2. Docstring示例如何被认可？</h3><p>在大多数情况下，交互式控制台会话的复制和粘贴工作正常，但doctest并不试图精确模拟任何特定的Python shell。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># comments are ignored</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x = <span class="number">12</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>x</span><br><span class="line"><span class="number">12</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">if</span> x == <span class="number">13</span>:</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">print</span> <span class="string">"yes"</span></span><br><span class="line"><span class="meta">... </span><span class="keyword">else</span>:</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">print</span> <span class="string">"no"</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">print</span> <span class="string">"NO"</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">print</span> <span class="string">"NO!!!"</span></span><br><span class="line">...</span><br><span class="line">no</span><br><span class="line">NO</span><br><span class="line">NO!!!</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>任何期望的输出必须紧跟在包含代码的最后一行<code>&#39;&gt;&gt;&gt; &#39;</code>或<code>&#39;... &#39;</code>一行之后，并且预期的输出（如果有的话）扩展到下一行<code>&#39;&gt;&gt;&gt; &#39;</code>或全空白行。</p>
+<p>细则：</p>
+<ul>
+<li><p>预期的输出不能包含全空白行，因为这样的行被用来表示预期输出的结束。如果预期的输出包含空白行，请<code>&lt;BLANKLINE&gt;</code>在doctest示例中输入空行。新的2.4版本：<code>&lt;BLANKLINE&gt;</code>加入; 没有办法在以前的版本中使用包含空行的预期输出。</p>
+</li>
+<li><p>所有硬标签字符都被扩展为空格，使用8列制表位。测试代码生成的输出中的选项卡不会被修改。由于示例输出<em>中的</em>任何硬标签<em>都是</em>展开的，这意味着如果代码输出包含硬标签，则doctest可以通过的唯一方式是如果<code>NORMALIZE_WHITESPACE</code>选项或指令有效。或者，可以重写测试以捕获输出并将其作为测试的一部分与预期值进行比较。源代码中对制表符的处理是通过反复试验得出的，并且已被证明是处理它们的最不容易出错的方式。通过编写自定义<code>DocTestParser</code>类，可以使用不同的算法来处理选项卡。</p>
+</li>
+<li><p>输出到标准输出被捕获，但不输出到标准错误（异常追溯通过不同的方式捕获）。 </p>
+</li>
+<li><p>如果在交互式会话中通过反斜线继续行，或者出于任何其他原因使用反斜杠，则应该使用原始文档字符串，该字符串将按照键入时的方式保存反斜杠：</p>
+</li>
+</ul>
+<blockquote>
+<p>def f(x): …     r’’’Backslashes in a raw docstring: m\n’’’ &gt;&gt;&gt; print f.<strong>doc</strong> Backslashes in a raw docstring: m\n </p>
+</blockquote>
+<p>否则，反斜杠将被解释为字符串的一部分。例如，<code>\n</code>以上将被解释为一个换行符。或者，您可以在doctest版本中将每个反斜杠加倍（并且不使用原始字符串）：</p>
+<blockquote>
+<p>def f(x): …     ‘’’Backslashes in a raw docstring: m\n’’’ &gt;&gt;&gt; print f.<strong>doc</strong> Backslashes in a raw docstring: m\n </p>
+</blockquote>
+<ul>
+<li>起始栏无关紧要：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">assert</span> <span class="string">"Easy!"</span></span><br><span class="line">      &gt;&gt;&gt; <span class="keyword">import</span> math</span><br><span class="line">          &gt;&gt;&gt; math.floor(<span class="number">1.9</span>)</span><br><span class="line">          <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>并且从开始示例的初始行中出现的预期输出中删除了许多主要的空白字符<code>&#39;&gt;&gt;&gt;&#39;</code>。</p>
+<h3 id="什么是执行上下文？"><a href="#什么是执行上下文？" class="headerlink" title="什么是执行上下文？"></a>什么是执行上下文？</h3><p>默认情况下，每次<a href="https://docs.python.org/3/library/doctest.html#module-doctest" target="_blank" rel="noopener"><code>doctest</code></a>发现一个文档字符串进行测试，它采用的是 <em>浅拷贝</em>的<code>M</code>的全局，使运行测试不会改变模块真实的全局，因此，在一个测试<code>M</code>不能离开屑不小心让另外一个背后测试工作。这意味着示例可以自由使用任何在顶层定义的<code>M</code>名称，以及在运行的文档字符串中定义的名称。示例无法看到其他文档中定义的名称。</p>
+<p>你可以通过强制使用自己的字典作为执行上下文 <code>globs=your_dict</code>来<a href="https://docs.python.org/3/library/doctest.html#doctest.testmod" target="_blank" rel="noopener"><code>testmod()</code></a>或<a href="https://docs.python.org/3/library/doctest.html#doctest.testfile" target="_blank" rel="noopener"><code>testfile()</code></a>替代。</p>
+<h3 id="什么是例外？"><a href="#什么是例外？" class="headerlink" title="什么是例外？"></a>什么是例外？</h3><p>没问题，只要回溯是该示例生成的唯一输出：只需粘贴回溯。<a href="https://docs.python.org/3/library/doctest.html#id2" target="_blank" rel="noopener">[1]</a>由于回溯包含可能快速变化的细节（例如，确切的文件路径和行号），所以这是doctest很难灵活接受的一种情况。</p>
+<p>简单的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].remove(<span class="number">42</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">ValueError: list.remove(x): x <span class="keyword">not</span> <span class="keyword">in</span> list</span><br></pre></td></tr></table></figure>
+<p>该文档测试成功，如果<a href="https://docs.python.org/3/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a>提出，详情如图所示。<code>list.remove(x):</code> <code>x</code> <code>not</code> <code>in</code> <code>list</code></p>
+<p>预期的异常输出必须以追溯标题开头，该标题可以是以下两行中的任一行，缩写与示例的第一行相同：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">Traceback (innermost last):</span><br></pre></td></tr></table></figure>
+<p>traceback头后面跟着一个可选的traceback堆栈，其内容被doctest忽略。回溯堆栈通常被忽略，或者从交互式会话逐字复制。</p>
+<p>跟踪堆栈后面是最有趣的部分：包含异常类型和细节的行。这通常是追溯的最后一行，但如果异常具有多行详细信息，则可以跨越多行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">raise</span> ValueError(<span class="string">'multi\n    line\ndetail'</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">ValueError: multi</span><br><span class="line">    line</span><br><span class="line">detail</span><br></pre></td></tr></table></figure>
+<p>最后三行（以开始<a href="https://docs.python.org/3/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a>）与异常的类型和细节进行比较，其余部分将被忽略。</p>
+<p>最佳做法是省略追溯堆栈，除非它为示例增加了重要的文档值。所以最后一个例子可能更好，因为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">raise</span> ValueError(<span class="string">'multi\n    line\ndetail'</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">    ...</span><br><span class="line">ValueError: multi</span><br><span class="line">    line</span><br><span class="line">detail</span><br></pre></td></tr></table></figure>
+<p>请注意，回溯处理非常特别。特别是，在改写的例子中，使用<code>...</code>独立于doctest的 <a href="https://docs.python.org/3/library/doctest.html#doctest.ELLIPSIS" target="_blank" rel="noopener"><code>ELLIPSIS</code></a>选项。这个例子中的省略号可以省略，或者可以是三个（或三百个）逗号或数字，或者Monty Python skit的缩进记录。</p>
+<p>一些细节你应该阅读一次，但不需要记住：</p>
+<ul>
+<li><p>Doctest无法猜测您的预期输出是来自异常追溯还是来自普通打印。因此，例如，预计<code>ValueError: 42 is prime</code>会传递一个示例，无论是否<code>ValueError</code>实际提出，或者该示例仅打印该追溯文本。实际上，普通输出很少以追溯标题行开始，所以这不会产生实际问题。</p>
+</li>
+<li><p>回溯堆栈的每一行（如果存在）必须比示例的第一行缩进得更远，<em>或者</em>以非字母数字字符开始。追溯标题后面的第一行缩写相同，并以字母数字开头，作为异常详细信息的开始。当然这对于真正的回溯来说是正确的。</p>
+</li>
+<li><p>当<code>IGNORE_EXCEPTION_DETAIL</code>指定doctest选项时，将忽略最左侧冒号后面的所有内容以及异常名称中的所有模块信息。</p>
+</li>
+<li><p>交互式shell省略了一些<code>SyntaxError</code>s 的追溯标题行。但doctest使用traceback标题行来区分异常和非异常。因此，在极少数情况下，如果您需要测试一个<code>SyntaxError</code>省略traceback头的测试，则需要手动将traceback头行添加到测试示例中。</p>
+</li>
+<li><p>对于某些<code>SyntaxError</code>s，Python使用<code>^</code>标记来显示语法错误的字符位置：</p>
+</li>
+</ul>
+<blockquote>
+<p>1 1   File “<stdin>“, line 1     1 1       ^ SyntaxError: invalid syntax </stdin></p>
+</blockquote>
+<p>由于显示错误位置的行出现在异常类型和细节之前，因此它们不会被doctest检查。例如，即使将<code>^</code>标记放在错误的位置，也会通过以下测试：</p>
+<blockquote>
+<p>1 1   File “<stdin>“, line 1     1 1     ^ SyntaxError: invalid syntax </stdin></p>
+</blockquote>
+<h3 id="3-5-Option-Flags"><a href="#3-5-Option-Flags" class="headerlink" title="3.5. Option Flags"></a>3.5. Option Flags</h3><p>许多选项标志控制着doctest行为的各个方面。这些标志的符号名称作为模块常量提供，可以<a href="https://docs.python.org/2.7/reference/expressions.html#bitwise" target="_blank" rel="noopener">按位或运算</a>并传递给各种函数。这些名称也可以在doctest指令中使用。</p>
+<p>第一组选项定义测试语义，控制doctest如何确定实际输出是否与示例预期输出相匹配的方面：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.DONT_ACCEPT_TRUE_FOR_1</span><br></pre></td></tr></table></figure>
+<p>默认情况下，如果预期的输出块只包含<code>1</code>，只是含有实际输出块<code>1</code>或仅<code>True</code>被认为是一个匹配，并类似地用于<code>0</code>对<code>False</code>。当<code>DONT_ACCEPT_TRUE_FOR_1</code>指定时，不允许替换。缺省行为迎合了Python将许多函数的返回类型从整数更改为布尔值; 希望“小整数”输出的doctests在这些情况下仍然有效。这个选项可能会消失，但不会持续数年。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.DONT_ACCEPT_BLANKLINE</span><br></pre></td></tr></table></figure>
+<p>默认情况下，如果预期的输出块包含仅包含字符串的行<code>&lt;BLANKLINE&gt;</code>，则该行将匹配实际输出中的空行。由于真正的空行界定了预期的输出，因此这是沟通预期空行的唯一方式。什么时候<code>DONT_ACCEPT_BLANKLINE</code>被指定，这个替代是不允许的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.NORMALIZE_WHITESPACE</span><br></pre></td></tr></table></figure>
+<p>指定时，所有空白（空格和换行符）都被视为相等。预期输出中的任何空白序列都将与实际输出中的任何空白序列相匹配。默认情况下，空白必须完全匹配。<code>NORMALIZE_WHITESPACE</code>当预期输出的行很长时，并且您想要在源代码中的多行中包装它时，它特别有用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.ELLIPSIS</span><br></pre></td></tr></table></figure>
+<p>指定时，<code>...</code>预期输出中的省略号标记（）可以匹配实际输出中的任何子字符串。这包括跨越行边界的子字符串和空的子字符串，所以最好保持简单的使用。复杂的用途可能会导致相同类型的“oops，它匹配得太多了！” <code>.*</code>在正则表达式中很容易出现意外。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.IGNORE_EXCEPTION_DETAIL</span><br></pre></td></tr></table></figure>
+<p>指定时，即使异常详细信息不匹配，如果引发了期望类型的异常，那么期望异常的示例也会通过。例如，<code>ValueError: 42</code>如果引发的实际异常是预期的例子<code>ValueError: 3*14</code>，但会失败，例如，如果<code>TypeError</code>引发。</p>
+<p>它也会忽略Python 3 doctest报告中使用的模块名称。因此，无论测试是在Python 2.7还是Python 3.2（或更高版本）下运行，这两种变体都可以与指定的标志一起使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; raise CustomError(<span class="string">'message'</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">CustomError: message</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; raise CustomError(<span class="string">'message'</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">my_module.CustomError: message</span><br></pre></td></tr></table></figure>
+<p>请注意，<code>ELLIPSIS</code>也可以用于忽略异常消息的详细信息，但根据是否将模块详细信息作为异常名称的一部分进行打印，此类测试可能仍会失败。使用<code>IGNORE_EXCEPTION_DETAIL</code>和来自Python 2.3的细节也是编写文档测试的唯一明确方式，它不关心异常细节，但仍然在Python 2.3或更低版本中继续传递（这些版本不支持doctest指令并将它们忽略为不相关的注释） 。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; (<span class="number">1</span>, <span class="number">2</span>)[<span class="number">3</span>] = <span class="string">'moo'</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> ?</span><br><span class="line"><span class="built_in">TypeError</span>: object doesn<span class="string">'t support item assignment</span></span><br></pre></td></tr></table></figure>
+<p>虽然Python 2.4中的细节更改为“不”而不是“不”，但在Python 2.3以及更高版本的Python版本中通过了指定的标志。</p>
+<p>在 3.2 版更改:：<code>IGNORE_EXCEPTION_DETAIL</code>现在也忽略了与包含被测异常的模块有关的任何信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.SKIP</span><br></pre></td></tr></table></figure>
+<p>指定时，请不要运行该示例。这在doctest示例既可用作文档也可用作测试用例的情况下非常有用，应将其用于文档目的，但不应进行检查。例如，该示例的输出可能是随机的; 或者该示例可能依赖于测试驱动程序无法使用的资源。</p>
+<p>SKIP标志也可用于临时“注释”示例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.COMPARISON_FLAGS</span><br></pre></td></tr></table></figure>
+<p>将上面的所有比较标志掩盖起来。</p>
+<p>第二组选项控制如何报告测试失败：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.REPORT_UDIFF</span><br></pre></td></tr></table></figure>
+<p>指定时，涉及多行预期和实际输出的故障将使用统一差异显示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.REPORT_CDIFF</span><br></pre></td></tr></table></figure>
+<p>指定时，涉及多行预期输出和实际输出的故障将使用上下文差异显示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.REPORT_NDIFF</span><br></pre></td></tr></table></figure>
+<p>指定时，<code>difflib.Differ</code>使用与常用<code>ndiff.py</code>实用程序相同的算法计算差异。这是标记线内和线间差异的唯一方法。例如，如果预期输出的一行包含数字<code>1</code>，其中实际输出包含字母<code>l</code>，则会插入一行，并在其中插入用于标记不匹配列位置的插入符号。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.REPORT_ONLY_FIRST_FAILURE</span><br></pre></td></tr></table></figure>
+<p>指定时，显示每个doctest中的第一个失败示例，但禁止所有其他示例的输出。这将防止doctest报告因早期故障而中断的正确示例; 但它也可能隐藏不正确的例子，不依靠第一次失败而失败。当<code>REPORT_ONLY_FIRST_FAILURE</code>指定时，剩余的示例仍在运行，并仍然计入报告的故障总数; 只有输出被抑制。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.FAIL_FAST</span><br></pre></td></tr></table></figure>
+<p>指定时，在第一个失败示例后退出，不要尝试运行其余示例。因此，报告的故障数最多为 1。此标志在调试期间可能很有用，因为第一次失败后的示例不会生成调试输出。</p>
+<p>3.4版新功能</p>
+<p>还有一种方法可以注册新的选项标志名称，但除非您打算<code>doctest</code>通过子类扩展内部函数，否则这种方法并不有用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.register_optionflag(name)</span><br></pre></td></tr></table></figure>
+<p>用给定名称创建一个新选项标志，并返回新标志的整数值。<code>register_optionflag()</code>可用于子类化<code>OutputChecker</code>或<code>DocTestRunner</code>创建您的子类支持的新选项。<code>register_optionflag()</code>应该总是使用以下习惯用法来调用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MY_FLAG = register_optionflag(<span class="string">'MY_FLAG'</span>)</span><br></pre></td></tr></table></figure>
+<p>New in version 2.4.</p>
+<h3 id="3-6-Directives"><a href="#3-6-Directives" class="headerlink" title="3.6. Directives"></a>3.6. Directives</h3><p>Doctest指令可用于修改单个示例的选项标志。Doctest指令是遵循示例源代码的特殊Python注释：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">directive             ::=  <span class="string">"#"</span> <span class="string">"doctest:"</span> directive_options</span><br><span class="line">directive_options     ::=  directive_option (<span class="string">","</span> directive_option)\*</span><br><span class="line">directive_option      ::=  on_or_off directive_option_name</span><br><span class="line">on_or_off             ::=  <span class="string">"+"</span> \| <span class="string">"-"</span></span><br><span class="line">directive_option_name ::=  <span class="string">"DONT_ACCEPT_BLANKLINE"</span> \| <span class="string">"NORMALIZE_WHITESPACE"</span> \| ...</span><br></pre></td></tr></table></figure>
+<p><code>+</code>or <code>-</code>和指令选项名称之间不允许有空格。指令选项名称可以是上面解释的任何选项标志名称。</p>
+<p>一个例子的doctest指令修改了doctest的这个例子的行为。使用<code>+</code>启用这个名字的行为，或<code>-</code>将其禁用。</p>
+<p>例如，这个测试通过：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> range(<span class="number">20</span>) <span class="comment"># doctest: +NORMALIZE_WHITESPACE</span></span><br><span class="line">[<span class="number">0</span>,   <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>,  <span class="number">8</span>,  <span class="number">9</span>,</span><br><span class="line"><span class="number">10</span>,  <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>]</span><br></pre></td></tr></table></figure>
+<p>如果没有指令，它会失败，这是因为实际输出在单个数字列表元素之前没有两个空格，并且因为实际输出在单行上。这个测试也通过了，并且还需要一个指令来做到这一点：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> range(<span class="number">20</span>) <span class="comment"># doctest: +ELLIPSIS</span></span><br><span class="line">[<span class="number">0</span>, <span class="number">1</span>, ..., <span class="number">18</span>, <span class="number">19</span>]</span><br></pre></td></tr></table></figure>
+<p>多条指令可用于单条物理线路，用逗号分隔：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">print</span> range(<span class="number">20</span>) <span class="comment"># doctest: +ELLIPSIS, +NORMALIZE_WHITESPACE</span></span><br><span class="line">[<span class="number">0</span>,    <span class="number">1</span>, ...,   <span class="number">18</span>,    <span class="number">19</span>]</span><br></pre></td></tr></table></figure>
+<p>如果单个示例使用多个指令注释，则将它们合并：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print range(20) # doctest: +ELLIPSIS</span><br><span class="line">...                 # doctest: +NORMALIZE_WHITESPACE</span><br><span class="line">[<span class="number">0</span>,    <span class="number">1</span>, ...,   <span class="number">18</span>,    <span class="number">19</span>]</span><br></pre></td></tr></table></figure>
+<p>如前例所示，您可以将<code>...</code>行添加到仅包含指令的示例中。当一个例子对于指令很容易适合同一行时太长了，这会很有用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print range(<span class="number">5</span>) + range(<span class="number">10</span>,<span class="number">20</span>) + range(<span class="number">30</span>,<span class="number">40</span>) + range(<span class="number">50</span>,<span class="number">60</span>)</span><br><span class="line">... # doctest: +ELLIPSIS</span><br><span class="line">[<span class="number">0</span>, ..., <span class="number">4</span>, <span class="number">10</span>, ..., <span class="number">19</span>, <span class="number">30</span>, ..., <span class="number">39</span>, <span class="number">50</span>, ..., <span class="number">59</span>]</span><br></pre></td></tr></table></figure>
+<p>请注意，由于默认情况下所有选项都被禁用，并且指令仅适用于它们出现的示例，因此启用选项（通过<code>+</code>指令）通常是唯一有意义的选择。但是，选项标志也可以传递给运行doctests的函数，建立不同的默认值。在这种情况下，通过<code>-</code>指令禁用选项可能很有用。</p>
+<p>2.4版新增功能：增加了对doctest指令的支持。</p>
+<h3 id="3-7-警告"><a href="#3-7-警告" class="headerlink" title="3.7. 警告"></a>3.7. 警告</h3><p><code>doctest</code>严格要求在预期产出中要求完全匹配。如果即使单个字符不匹配，测试也会失败。这可能会让你感到惊讶，因为你确切地知道Python做了什么，并且不能保证输出。例如，在打印字典时，Python不保证键值对将以任何特定的顺序打印，因此像</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>foo()</span><br><span class="line">&#123;<span class="string">"Hermione"</span>: <span class="string">"hippogryph"</span>, <span class="string">"Harry"</span>: <span class="string">"broomstick"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>很脆弱！一种解决方法是做</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>foo() == &#123;<span class="string">"Hermione"</span>: <span class="string">"hippogryph"</span>, <span class="string">"Harry"</span>: <span class="string">"broomstick"</span>&#125;</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<p>代替。另一个是要做的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d = foo().items()</span><br><span class="line">&gt;&gt;&gt; d.sort()</span><br><span class="line">&gt;&gt;&gt; d</span><br><span class="line">[(<span class="string">'Harry'</span>, <span class="string">'broomstick'</span>), (<span class="string">'Hermione'</span>, <span class="string">'hippogryph'</span>)]</span><br></pre></td></tr></table></figure>
+<p>还有其他的，但你明白了。</p>
+<p>另一个不好的想法是打印嵌入对象地址的东西，比如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(<span class="number">1.0</span>) <span class="comment"># certain to fail some of the time</span></span><br><span class="line"><span class="number">7948648</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">C</span>:</span> <span class="keyword">pass</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>C()   <span class="comment"># the default repr() for instances embeds an address</span></span><br><span class="line">&lt;__main__.C instance at <span class="number">0x00AC18F0</span>&gt;</span><br></pre></td></tr></table></figure>
+<p><code>ELLIPSIS</code>指令为最后一个示例提供了一个很好的方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>C() <span class="comment">#doctest: +ELLIPSIS</span></span><br><span class="line">&lt;__main__.C instance at <span class="number">0</span>x...&gt;</span><br></pre></td></tr></table></figure>
+<p>浮点数也受到跨平台的小输出变化的影响，因为Python遵循平台C库进行浮点格式化，而C库在质量上差别很大。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; 1./7  # risky</span><br><span class="line"><span class="number">0.14285714285714285</span></span><br><span class="line">&gt;&gt;&gt; print 1./7 # safer</span><br><span class="line"><span class="number">0.142857142857</span></span><br><span class="line">&gt;&gt;&gt; print round(1./7, 6) # much safer</span><br><span class="line"><span class="number">0.142857</span></span><br></pre></td></tr></table></figure>
+<p>表格<code>I/2.**J</code>中的数字在所有平台上都是安全的，而且我通常会编写一些doctest的例子来生成这种格式的数字：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">3.</span>/<span class="number">4</span>  <span class="comment"># utterly safe</span></span><br><span class="line"><span class="number">0.75</span></span><br></pre></td></tr></table></figure>
+<p>简单的分数对于人们来说也更容易理解，并且这使得更好的文档。</p>
+<h2 id="4-基本API"><a href="#4-基本API" class="headerlink" title="4.基本API"></a>4.基本API</h2><p>函数<code>testmod()</code>和<code>testfile()</code>提供了一个简单的界面，文档测试，应该是足够了最基本的用途。有关这两个函数的不太正式的介绍，请参见简单用法：检查文档字符串和简单用法中的示例：检查文本文件中的示例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.testfile(filename[, module_relative][, name][, package][, globs][, verbose][, report][, optionflags][, extraglobs][, raise_on_error][, parser][, encoding])</span><br></pre></td></tr></table></figure>
+<p>除<em>文件名</em>以外的所有参数都是可选的，并应以关键字形式指定。</p>
+<p>在名为<em>filename</em>的文件中测试示例。返回<code>(failure_count, test_count)</code>。</p>
+<p>可选参数<em>module_relative</em>指定应如何解释文件名：</p>
+<ul>
+<li><p>如果<em>module_relative</em>是<code>True</code>（缺省值），则<em>filename</em>指定一个与操作系统无关的模块相对路径。默认情况下，这个路径是相对于调用模块的目录；但是如果指定了<em>package</em>参数，那么它与该包相关。为了确保OS独立性，<em>文件名</em>应该使用<code>/</code>字符来分隔路径段，并且可能不是绝对路径（即它可能不以开头<code>/</code>）。</p>
+</li>
+<li><p>如果<em>module_relative</em>是<code>False</code>，则<em>filename</em>指定一个OS特定的路径。路径可以是绝对的或相对的; 相对路径相对于当前工作目录被解析。</p>
+</li>
+</ul>
+<p>可选参数<em>名称</em>给出测试的名称; 默认情况下，或者<code>None</code>，<code>os.path.basename(filename)</code>被使用。</p>
+<p>可选参数<em>包</em>是一个Python包或一个Python包的名称，其目录应该用作模块相关文件名的基本目录。如果未指定包，则调用模块的目录将用作模块相关文件名的基本目录。如果<em>module_relative</em>是指定<em>包，</em>那是错误的。<code>False</code></p>
+<p>可选参数<em>globs</em>在执行示例时给出了一个用作全局变量的字典。这个词典的一个新的浅拷贝是为doctest创建的，所以它的例子从一个干净的石板开始。默认情况下，或者如果<code>None</code>使用新的空字典。</p>
+<p>可选参数<em>extraglobs</em>给出了一个合并到用于执行示例的全局变量中的字典。这适用于<code>dict.update()</code>：如果<em>globs</em>和<em>extraglobs</em>具有共同的键，则<em>extraglobs</em>中的关联值出现在组合字典中。默认情况下，或者如果<code>None</code>，不使用额外的全局变量。这是一个允许doctests参数化的高级功能。例如，可以为基类编写一个doctest，使用该类的通用名称，然后通过传递将泛型名称映射到要测试的子类的<em>extraglobs</em>字典来测试任意数量的子类。</p>
+<p>可选参数<em>详细信息</em>如果为true，则会打印大量内容，如果为false，则仅打印失败; 默认情况下，或者如果<code>None</code>，当且仅当<code>&#39;-v&#39;</code>在时才是<code>sys.argv</code>。</p>
+<p>可选的参数<em>报告</em>在最后打印摘要时为真，否则在最后不打印任何内容。在详细模式下，摘要是详细的，否则摘要非常简短（实际上，如果所有测试都通过，则为空）。</p>
+<p>可选参数<em>optionflags</em>或一起选项标志。请参见选项标志部分。</p>
+<p>可选参数<em>raise_on_error</em>默认为false。如果为true，则在例子中发生第一次失败或意外异常时引发异常。这样可以对故障进行事后调试。默认行为是继续运行示例。</p>
+<p>可选参数<em>解析器</em>指定<code>DocTestParser</code>应该用于从文件中提取测试的一个（或子类）。它默认为一个普通的解析器（即，<code>DocTestParser()</code>）。</p>
+<p>可选的参数<em>编码</em>指定应该用于将文件转换为unicode的编码。</p>
+<p>2.4版本中的新功能。</p>
+<p>在版本2.5中更改：添加了参数<em>编码</em>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.testmod([m][, name][, globs][, verbose][, report][, optionflags][, extraglobs][, raise_on_error][, exclude_empty])</span><br></pre></td></tr></table></figure>
+<p>所有参数都是可选的，除<em>m</em>外的所有参数都应以关键字形式指定。</p>
+<p>在从<em>m开始</em>可以访问的函数和类中的docstrings中的测试示例（或者<code>__main__</code>如果<em>m</em>没有提供或者是<code>None</code>，则为module ），以<code>m.__doc__</code>。开头。</p>
+<p>还有可以从字典中获得的测试例子<code>m.__test__</code>，如果它存在与否<code>None</code>。<code>m.__test__</code>将名称（字符串）映射到函数，类和字符串; 函数和类docstrings搜索的例子; 字符串被直接搜索，就好像它们是docstrings一样。</p>
+<p>仅搜索附加到属于模块<em>m的</em>对象的文档字符串。</p>
+<p>返回<code>(failure_count, test_count)</code>。</p>
+<p>可选参数<em>名称</em>给出模块的名称; 默认情况下，或者<code>None</code>，<code>m.__name__</code>被使用。</p>
+<p>可选参数<em>exclude_empty</em>默认为false。如果属实，则没有找到doctests的对象将被排除在考虑之外。默认值是向后兼容的黑客，使代码仍然使用<code>doctest.master.summarize()</code>连同<code>testmod()</code>继续得到输出，没有测试对象。新构造函数的<em>exclude_empty</em>参数<code>DocTestFinder</code>默认为true。</p>
+<p>可选参数<em>extraglobs</em>，<em>verbose</em>，<em>report</em>，<em>optionflags</em>，<em>raise_on_error</em>和<em>globs</em>与<code>testfile()</code>上述函数相同，只是<em>globs</em>默认为<code>m.__dict__</code>。</p>
+<p>在版本2.3中更改：添加了参数<em>optionflags</em>。</p>
+<p>在版本2.4中更改：添加了参数<em>extraglobs</em>，<em>raise_on_error</em>和<em>exclude_empty</em>。</p>
+<p>在版本2.5中更改：可选参数<em>isprivate</em>，在2.4中弃用，已被删除。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.run_docstring_examples(f, globs[, verbose][, name][, compileflags][, optionflags])</span><br></pre></td></tr></table></figure>
+<p>与对象<em>f</em>相关的测试例子; 例如，<em>f</em>可以是字符串，模块，函数或类对象。</p>
+<p>字典参数<em>glob的</em>浅拷贝用于执行上下文。</p>
+<p>失败消息中使用可选参数<em>名称</em>，缺省值为<code>&quot;NoName&quot;</code>。</p>
+<p>如果可选参数<em>verbose</em>为true，则即使没有失败，也会生成输出。默认情况下，仅在发生示例故障时才会生成输出。</p>
+<p>可选参数<em>compileflags</em>给出了运行示例时应由Python编译器使用的一组标志。默认情况下，或者如果<code>None</code>，推导的标志对应于在<em>globs中</em>找到的一组未来特征。</p>
+<p>可选参数<em>optionflags</em>与<code>testfile()</code>上面的函数一样。</p>
+<h2 id="5-Unittest-API"><a href="#5-Unittest-API" class="headerlink" title="5. Unittest API"></a>5. Unittest API</h2><p>随着您的文档测试模块集合的增长，您需要一种系统地运行所有文档测试的方法。在Python 2.4之前，<code>doctest</code>有一个几乎没有文档记录的<code>Tester</code>类，它提供了一个基本方法来组合多个模块的doctests。<code>Tester</code>是虚弱的，实际上最严重的Python测试框架建立在<code>unittest</code>模块上，它提供了许多灵活的方法来结合多个来源的测试。所以，在Python 2.4，<code>doctest</code>的<code>Tester</code>类已被弃用，<code>doctest</code>提供了可用于创建两个函数<code>unittest</code>从模块和包含文档测试的文本文件的测试套件。要与<code>unittest</code>测试发现集成，<code>load_tests()</code>在您的测试模块中包含一个函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> unittest</span><br><span class="line"><span class="keyword">import</span> doctest</span><br><span class="line"><span class="keyword">import</span> my_module_with_doctests</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_tests</span><span class="params">(loader, tests, ignore)</span>:</span></span><br><span class="line">    tests.addTests(doctest.DocTestSuite(my_module_with_doctests))</span><br><span class="line">    <span class="keyword">return</span> tests</span><br></pre></td></tr></table></figure>
+<p>有两个主要的功能可以用<code>unittest.TestSuite</code>文本文件和模块创建实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.DocFileSuite(*paths, [module_relative][, package][, setUp][, tearDown][, globs][, optionflags][, parser][, encoding])</span><br></pre></td></tr></table></figure>
+<p>将doctest测试从一个或多个文本文件转换为<code>unittest.TestSuite</code>。</p>
+<p>返回的<code>unittest.TestSuite</code>内容将由unittest框架运行并在每个文件中运行交互式示例。如果任何文件中的示例失败，则合成的单元测试将失败，并<code>failureException</code>引发异常，显示包含测试的文件的名称和一个（有时是近似的）行号。</p>
+<p>将一个或多个路径（字符串）传递给要检查的文本文件。</p>
+<p>选项可以作为关键字参数提供：</p>
+<p>可选参数<em>module_relative</em>指定应如何解释<em>路径中</em>的文件名：</p>
+<ul>
+<li><p>如果<em>module_relative</em>是<code>True</code>（缺省值），则<em>路径</em>中的每个文件名指定与操作系统无关的模块相对路径。默认情况下，这个路径是相对于调用模块的目录; 但是如果指定了<em>package</em>参数，那么它与该包相关。为确保操作系统无关性，每个文件名应使用<code>/</code>字符来分隔路径段，并且可能不是绝对路径（即可能不以其开头<code>/</code>）。</p>
+</li>
+<li><p>如果<em>module_relative</em>是<code>False</code>，则<em>路径</em>中的每个文件名都指定一个OS特定的路径。路径可以是绝对的或相对的; 相对路径相对于当前工作目录被解析。</p>
+</li>
+</ul>
+<p>可选参数<em>包</em>是Python包或Python包的名称，其目录应该用作<em>路径中</em>与模块相关的文件名的基本目录。如果未指定包，则调用模块的目录将用作模块相关文件名的基本目录。如果<em>module_relative</em>是指定<em>包，</em>那是<code>False</code>错误的。</p>
+<p>可选参数<em>setUp</em>指定测试套件的设置函数。这在每个文件中运行测试之前被调用。该<em>的setUp</em>函数将被传递一个<code>DocTest</code>对象。setUp函数可以在测试的<em>globs</em>属性通过时访问测试全局变量。</p>
+<p>可选参数<em>tearDown</em>指定测试套件的拆卸函数。这是在每个文件中运行测试后调用的。在<em>拆卸</em>会被传递给一个<code>DocTest</code>对象。setUp函数可以在测试的<em>globs</em>属性通过时访问测试全局变量。</p>
+<p>可选参数<em>globs</em>是包含测试的初始全局变量的字典。每个测试都会创建一本新字典。默认情况下，<em>globs</em>是一个新的空字典。</p>
+<p>可选参数<em>optionflags</em>指定测试的默认doctest选项，由各个选项标记组合或创建。请参见选项标志部分。请参阅<code>set_unittest_reportflags()</code>下面的功能以更好地设置报告选项。</p>
+<p>可选参数<em>解析器</em>指定<code>DocTestParser</code>应该用于从文件中提取测试的一个（或子类）。它默认为一个普通的解析器（即，<code>DocTestParser()</code>）。</p>
+<p>可选的参数<em>编码</em>指定应该用于将文件转换为unicode的编码。</p>
+<p>2.4版本中的新功能。</p>
+<p>在版本2.5中进行了更改：将全局<code>__file__</code>添加到提供给使用文本文件加载的文档测试的全局文件中<code>DocFileSuite()</code>。</p>
+<p>在版本2.5中更改：添加了参数<em>编码</em>。</p>
+<p>注意</p>
+<p>不像<code>testmod()</code>和<code>DocTestFinder</code>，<code>ValueError</code>如果<em>模块不</em>包含文档字符串，该函数会引发一个问题。您可以通过传递一个<code>DocTestFinder</code>实例作为<em>test_finder</em>参数，并将其<em>exclude_empty</em>关键字参数设置为<code>False</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>finder = doctest.DocTestFinder(exclude_empty=<span class="literal">False</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>suite = doctest.DocTestSuite(test_finder=finder)</span><br><span class="line">doctest.DocTestSuite([module][, globs][, extraglobs][, test_finder][, setUp][, tearDown][, checker])</span><br></pre></td></tr></table></figure>
+<p>将模块的doctest测试转换为一个模块<code>unittest.TestSuite</code>。</p>
+<p>返回的<code>unittest.TestSuite</code>是由unittest框架运行并在模块中运行每个doctest。如果有任何文档测试失败，则合成的单元测试失败，并<code>failureException</code>引发异常，显示包含测试的文件的名称和一个（有时是近似的）行号。</p>
+<p>可选参数<em>模块</em>提供要测试的模块。它可以是一个模块对象或一个（可能点缀的）模块名称。如果未指定，则使用调用此函数的模块。</p>
+<p>可选参数<em>globs</em>是包含测试的初始全局变量的字典。每个测试都会创建一本新字典。默认情况下，<em>globs</em>是一个新的空字典。</p>
+<p>可选参数<em>extraglobs</em>指定一组额外的全局变量，这是合并成的<em>水珠</em>。默认情况下，不使用额外的全局变量。</p>
+<p>可选参数<em>test_finder</em>是<code>DocTestFinder</code>用于从模块中提取doctests 的对象（或插入替换）。</p>
+<p>可选参数<em>setUp</em>，<em>tearDown</em>和<em>optionflags</em>与<code>DocFileSuite()</code>上面的函数相同。</p>
+<p>2.3版本的新功能。</p>
+<p>在版本2.4中更改：添加了参数<em>globs</em>，<em>extraglobs</em>，<em>test_finder</em>，<em>setUp</em>，<em>tearDown</em>和<em>optionflags</em> ; 这个功能现在使用和。一样的搜索技术<code>testmod()</code>。</p>
+<p>在幕后，<code>DocTestSuite()</code>创建<code>unittest.TestSuite</code>出的<code>doctest.DocTestCase</code>实例，<code>DocTestCase</code>是的子类<code>unittest.TestCase</code>。<code>DocTestCase</code>这里没有记录（这是一个内部细节），但是研究它的代码可以回答关于<code>unittest</code>集成确切细节的问题。</p>
+<p>同样，<code>DocFileSuite()</code>创建<code>unittest.TestSuite</code>出的<code>doctest.DocFileCase</code>实例，<code>DocFileCase</code>是的子类<code>DocTestCase</code>。</p>
+<p>因此创建<code>unittest.TestSuite</code>运行实例的两种方式<code>DocTestCase</code>。这对于一个微妙的原因很重要：当你<code>doctest</code>自己运行函数时，可以<code>doctest</code>通过将选项标志传递给<code>doctest</code>函数来直接控制正在使用的选项。但是，如果你正在编写一个<code>unittest</code>框架，<code>unittest</code>最终控制何时以及如何运行测试。框架作者通常希望控制<code>doctest</code>报表选项（可能例如由命令行选项指定），但是没有办法将选项传递<code>unittest</code>给<code>doctest</code>测试运行者。</p>
+<p>出于这个原因，<code>doctest</code>还支持通过此功能支持<code>doctest</code>特定于<code>unittest</code>支持的报告标志的概念：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.set_unittest_reportflags(flags)</span><br></pre></td></tr></table></figure>
+<p>设置<code>doctest</code>要使用的报告标志。</p>
+<p>参数<em>标志</em>或一起选项标志。请参见选项标志部分。只能使用“报告标志”。</p>
+<p>这是一个模块全局设置，并影响模块运行的所有将来的doctests <code>unittest</code>：在<code>DocTestCase</code>实例构建时查看为测试用例指定的选项标记<code>DocTestCase</code>的<code>runTest()</code>方法。如果没有指定报告的标志（这是典型的和预期的情况下），<code>doctest</code>的<code>unittest</code>报告标志是<a href="https://docs.python.org/2.7/reference/expressions.html#bitwise" target="_blank" rel="noopener">按位或运算</a>进入选项标志，因此增强选项标志传递给创建运行文档测试<code>DocTestRunner</code>实例。如果时指定的任何报告的标志例如构建<code>DocTestCase</code>，<code>doctest</code>的<code>unittest</code>报告标志被忽略。</p>
+<p>在函数被调用之前生效的报告标志的值由函数返回<code>unittest</code>。</p>
+<p>New in version 2.4.</p>
+<h2 id="6-Advanced-API"><a href="#6-Advanced-API" class="headerlink" title="6. Advanced API"></a>6. Advanced API</h2><p>基本的API是一个简单的包装，旨在使doctest易于使用。它相当灵活，应该满足大多数用户的需求; 但是，如果您需要对测试进行更精细的控制，或者希望扩展doctest的功能，那么您应该使用高级API。</p>
+<p>高级API围绕两个容器类进行，这两个容器类用于存储从doctest案例中提取的交互式示例：</p>
+<ul>
+<li><p><code>Example</code>：一个Python <a href="https://docs.python.org/2.7/glossary.html#term-statement" target="_blank" rel="noopener">语句</a>，与它的预期输出配对。</p>
+</li>
+<li><p><code>DocTest</code>：<code>Example</code>s 的集合，通常从单个文档字符串或文本文件中提取。</p>
+</li>
+</ul>
+<p>定义其他处理类来查找，分析和运行，并检查doctest示例：</p>
+<ul>
+<li><p><code>DocTestFinder</code>：查找给定模块中的所有文档字符串，并使用<code>DocTestParser</code>a <code>DocTest</code>从包含交互式示例的每个文档字符串中创建一个。</p>
+</li>
+<li><p><code>DocTestParser</code>：<code>DocTest</code>从字符串中创建一个对象（例如对象的文档字符串）。</p>
+</li>
+<li><p><code>DocTestRunner</code>：执行<code>DocTest</code>中的例子，并使用一个<code>OutputChecker</code>来验证它们的输出。</p>
+</li>
+<li><p><code>OutputChecker</code>：将doctest示例中的实际输出与预期输出进行比较，并确定它们是否匹配。</p>
+</li>
+</ul>
+<p>下图总结了这些处理类之间的关系：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">                            list <span class="keyword">of</span>:</span><br><span class="line">+------+                   +---------+</span><br><span class="line">|<span class="built_in">module</span>| --DocTestFinder-&gt; | DocTest | --DocTestRunner-&gt; results</span><br><span class="line">+------+    |        ^     +---------+     |       ^    (printed)</span><br><span class="line">            |        |     | Example |     |       |</span><br><span class="line">            v        |     |   ...   |     v       |</span><br><span class="line">           DocTestParser   | Example |   OutputChecker</span><br><span class="line">                           +---------+</span><br></pre></td></tr></table></figure>
+<h3 id="6-1-DocTest-Objects"><a href="#6-1-DocTest-Objects" class="headerlink" title="6.1. DocTest Objects"></a>6.1. DocTest Objects</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class doctest.DocTest(examples, globs, name, filename, lineno, docstring)</span><br></pre></td></tr></table></figure>
+<p>应该在单个命名空间中运行的doctest示例的集合。构造函数参数用于初始化相同名称的属性。</p>
+<p>2.4版本中的新功能。</p>
+<p><code>DocTest</code>定义了以下属性。它们由构造函数初始化，不应该直接修改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">examples</span><br></pre></td></tr></table></figure>
+<p><code>Example</code>编码应该由此测试运行的各个交互式Python示例的对象列表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">globs</span><br></pre></td></tr></table></figure>
+<p>应该运行示例的名称空间（又称全局变量）。这是一个将名称映射到值的字典。<code>globs</code>在测试运行之后，示例所做的任何对名称空间的更改（例如绑定新变量）都会反映出来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name</span><br></pre></td></tr></table></figure>
+<p>一个字符串名称标识<code>DocTest</code>。通常，这是测试从中提取的对象或文件的名称。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">filename</span><br></pre></td></tr></table></figure>
+<p>这<code>DocTest</code>是从中提取的文件的名称; 或者<code>None</code>如果文件名是未知的，或者如果<code>DocTest</code>没有从文件中提取。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lineno</span><br></pre></td></tr></table></figure>
+<p>行号在<code>filename</code>哪里<code>DocTest</code>开始，或<code>None</code>行号是否不可用。该行号相对于文件的开头是从零开始的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docstring</span><br></pre></td></tr></table></figure>
+<p>从中提取测试<code>None</code>的字符串，或者字符串不可用，或者测试未从字符串中提取。</p>
+<h3 id="6-2-示例对象"><a href="#6-2-示例对象" class="headerlink" title="6.2. 示例对象"></a>6.2. 示例对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class doctest.Example(source, want[, exc_msg][, lineno][, indent][, options])</span><br></pre></td></tr></table></figure>
+<p>一个交互式示例，由Python语句及其预期输出组成。构造函数参数用于初始化相同名称的属性。</p>
+<p>2.4版本中的新功能。</p>
+<p><code>Example</code>定义了以下属性。它们由构造函数初始化，不应该直接修改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source</span><br></pre></td></tr></table></figure>
+<p>包含示例源代码的字符串。这个源代码由一个Python语句组成，并且总是以换行符结尾; 构造函数在必要时添加一个换行符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">want</span><br></pre></td></tr></table></figure>
+<p>运行示例源代码的预期输出（来自标准输出，或者异常情况下的回溯）。<code>want</code>除非没有输出，否则以换行符结束，在这种情况下，它是一个空字符串。构造函数在必要时添加一个换行符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exc_msg</span><br></pre></td></tr></table></figure>
+<p>该示例生成的异常消息，如果该示例预计会生成异常; 或者<code>None</code>如果不希望产生异常。该异常消息与返回值进行比较<code>traceback.format_exception_only()</code>。<code>exc_msg</code>除非是换行符，否则以换行符结尾<code>None</code>。如果需要，构造函数会添加一个换行符。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lineno</span><br></pre></td></tr></table></figure>
+<p>包含示例开始处的示例的字符串中的行号。该行号相对于包含字符串的开头是从零开始的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">indent</span><br></pre></td></tr></table></figure>
+<p>包含字符串中的示例缩进，即示例第一个提示之前的空格字符数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">options</span><br></pre></td></tr></table></figure>
+<p>从选项标记到<code>True</code>or的字典映射<code>False</code>，用于覆盖此示例的默认选项。任何未包含在此字典中的选项标志都保留默认值（由<code>DocTestRunner</code>s 指定<code>optionflags</code>）。默认情况下，不设置任何选项。</p>
+<h3 id="6-3-DocTestFinder对象"><a href="#6-3-DocTestFinder对象" class="headerlink" title="6.3. DocTestFinder对象"></a>6.3. DocTestFinder对象</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">doctest</span>.<span class="title">DocTestFinder</span><span class="params">([verbose][, parser][, recurse][, exclude_empty])</span></span></span><br></pre></td></tr></table></figure>
+<p>一个处理类，用于<code>DocTest</code>从文档字符串及其包含对象的文档字符串中提取与给定对象相关的s。<code>DocTest</code>s可以从下列对象类型中提取：模块，函数，类，方法，静态方法，类方法和属性。</p>
+<p>可选参数<em>verbose</em>可用于显示查找器搜索的对象。它默认为<code>False</code>（不输出）。</p>
+<p>可选参数<em>解析器</em>指定<code>DocTestParser</code>用于从文档字符串中提取文档测试的对象（或插入替换）。</p>
+<p>如果可选参数<em>recurse</em>为false，那么<code>DocTestFinder.find()</code>将只检查给定的对象，而不检查任何包含的对象。</p>
+<p>如果可选参数<em>exclude_empty</em>为false，<code>DocTestFinder.find()</code>则将包含具有空文档字符串的对象的测试。</p>
+<p>2.4版本中的新功能。</p>
+<p><code>DocTestFinder</code> 定义了以下方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find(obj[, name][, module][, globs][, extraglobs])</span><br></pre></td></tr></table></figure>
+<p>返回<code>DocTest</code>由<em>obj</em>的文档字符串或其包含的任何对象的文档字符串定义的s 的列表。</p>
+<p>可选参数<em>名称</em>指定对象的名称; 这个名字将被用来为返回的<code>DocTest</code>s 构造名字。如果没有指定<em>名称</em>，则<code>obj.__name__</code>使用。</p>
+<p>可选参数<em>模块</em>是包含给定对象的模块。如果模块没有被指定或者是<code>None</code>，则测试发现者将尝试自动确定正确的模块。使用该对象的模块：</p>
+<ul>
+<li><p>作为默认命名空间，如果没有指定<em>globs</em>。</p>
+</li>
+<li><p>阻止DocTestFinder从其他模块导入的对象中提取DocTests。（包含模块以外的<em>模块的</em>包含对象将被忽略。）</p>
+</li>
+<li><p>查找包含该对象的文件的名称。</p>
+</li>
+<li><p>帮助查找文件中对象的行号。</p>
+</li>
+</ul>
+<p>如果<em>模块</em>是<code>False</code>，则不会尝试找到该模块。这是很晦涩的，主要用于测试doctest本身：如果<em>module</em>是<code>False</code>，或者是<code>None</code>但不能自动找到，那么所有对象都被认为属于（不存在的）模块，因此所有包含的对象将（递归地）被搜索为doctests。</p>
+<p>对于每个全局<code>DocTest</code>通过组合形成<em>水珠</em>和<em>extraglobs</em>（在绑定<em>extraglobs</em>倍率绑定在<em>水珠</em>）。为每个字典创建一个新的globals字典的浅表副本<code>DocTest</code>。如果未指定<em>globs</em>，则默认为模块的<strong>_dict</strong> <em>（如果已指定）或</em><code>*{}*</code><em>以其他方式指定。如果_extraglobs</em>没有被指定，那么它默认为<code>{}</code>。</p>
+<h3 id="6-4-DocTestParser对象"><a href="#6-4-DocTestParser对象" class="headerlink" title="6.4. DocTestParser对象"></a>6.4. DocTestParser对象</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">doctest</span>.<span class="title">DocTestParser</span></span></span><br></pre></td></tr></table></figure>
+<p>一个处理类，用于从字符串中提取交互式示例，并使用它们创建<code>DocTest</code>对象。</p>
+<p>2.4版本中的新功能。</p>
+<p><code>DocTestParser</code> 定义了以下方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get_doctest(string, globs, name, filename, lineno)</span><br></pre></td></tr></table></figure>
+<p>从给定的字符串中提取所有doctest示例，并将它们收集到一个<code>DocTest</code>对象中。</p>
+<p><em>globs</em>，<em>name</em>，<em>filename</em>和<em>lineno</em>是新<code>DocTest</code>对象的属性。请参阅文档以<code>DocTest</code>获取更多信息。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get_examples(string[, name])</span><br></pre></td></tr></table></figure>
+<p>从给定的字符串中提取所有doctest示例，并将它们作为<code>Example</code>对象列表返回。行号是从0开始的。可选参数<em>名称</em>是标识此字符串的名称，仅用于错误消息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parse(string[, name])</span><br></pre></td></tr></table></figure>
+<p>将给定的字符串分成示例和干预文本，并将它们作为交替<code>Example</code>s和字符串的列表返回。<code>Example</code>s的行号是基于0的。可选参数<em>名称</em>是标识此字符串的名称，仅用于错误消息。</p>
+<h3 id="6-5-DocTestRunner对象"><a href="#6-5-DocTestRunner对象" class="headerlink" title="6.5. DocTestRunner对象"></a>6.5. DocTestRunner对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class doctest.DocTestRunner([checker][, verbose][, optionflags])</span><br></pre></td></tr></table></figure>
+<p>处理类用于执行和验证<code>DocTest</code>中的交互式示例。</p>
+<p>预期产出与实际产出之间的比较由<code>OutputChecker</code>。这种比较可以用许多选项标志来定制; 有关更多信息，请参阅选项标志部分。如果选项标志不足，则可以通过<code>OutputChecker</code>向构造函数传递一个子类来定制比较。</p>
+<p>测试运行者的显示输出可以通过两种方式进行控制。首先，可以传递一个输出函数<code>TestRunner.run()</code>; 这个函数将会被显示的字符串调用。它默认为<code>sys.stdout.write</code>。如果捕获的输出不充分，则显示输出也可以通过继承DocTestRunner，并覆盖方法定制<code>report_start()</code>，<code>report_success()</code>，<code>report_unexpected_exception()</code>，和<code>report_failure()</code>。</p>
+<p>可选的关键字参数<em>检查器</em>指定<code>OutputChecker</code>应该用于比较预期输出与doctest示例的实际输出的对象（或插入替换）。</p>
+<p>可选的关键字参数<em>verbose</em>控制着<code>DocTestRunner</code>冗长。如果<em>详细</em>是<code>True</code>，则会在每个示例运行时打印信息。如果<em>详细</em>是<code>False</code>，则只打印故障。如果<em>verbose</em>未指定，或者<code>None</code>使用详细输出，则使用命令行开关<code>-v</code>。</p>
+<p>可选的关键字参数<em>optionflags</em>可用于控制测试运行器如何将预期输出与实际输出进行比较，以及它如何显示故障。有关更多信息，请参见选项标志部分。</p>
+<p>2.4版本中的新功能。</p>
+<p><code>DocTestParser</code> 定义了以下方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">report_start(out, test, example)</span><br></pre></td></tr></table></figure>
+<p>报告测试运行人员即将处理给出的示例。提供此方法以允许其子类<code>DocTestRunner</code>定制其输出；它不应该直接调用。</p>
+<p><em>例子</em>就是要处理的例子。<em>测试</em>是<em>包含示例</em>的测试。<em>out</em>是传递给的输出函数<code>DocTestRunner.run()</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">report_success(out, test, example, got)</span><br></pre></td></tr></table></figure>
+<p>报告给出的示例已成功运行。提供此方法以允许其子类<code>DocTestRunner</code>定制其输出；它不应该直接调用。</p>
+<p><em>例子</em>就是要处理的例子。<em>得到的</em>是实例的实际输出。<em>测试</em>是包含<em>示例</em>的测试。<em>out</em>是传递给的输出函数<code>DocTestRunner.run()</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">report_failure(out, test, example, got)</span><br></pre></td></tr></table></figure>
+<p>报告给出的例子失败。提供此方法以允许其子类<code>DocTestRunner</code>定制其输出; 它不应该直接调用。</p>
+<p><em>例子</em>就是要处理的例子。<em>得到的</em>是实例的实际输出。<em>测试</em>是包含<em>示例</em>的测试。<em>out</em>是传递给的输出函数<code>DocTestRunner.run()</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">report_unexpected_exception(out, test, example, exc_info)</span><br></pre></td></tr></table></figure>
+<p>报告给出的示例引发了意外的异常。提供此方法以允许其子类<code>DocTestRunner</code>定制其输出; 它不应该直接调用。</p>
+<p><em>例子</em>就是要处理的例子。<em>exc_info</em>是包含有关意外异常（由返回的<code>sys.exc_info()</code>）的信息的元组。<em>测试</em>是包含<em>示例</em>的测试。<em>out</em>是传递给的输出函数<code>DocTestRunner.run()</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">run(test[, compileflags][, out][, clear_globs])</span><br></pre></td></tr></table></figure>
+<p>运行在实施例中<em>测试</em>（一个<code>DocTest</code>对象），并使用写入器功能显示结果<em>出来</em>。</p>
+<p>这些示例在命名空间中运行<code>test.globs</code>。如果<em>clear_globs</em>为true（缺省值），那么该名称空间将在测试运行后清除，以帮助进行垃圾回收。如果您想在测试完成后检查名称空间，请使用<em>clear_globs = False</em>。</p>
+<p><em>compileflags</em>给出了运行示例时Python编译器应该使用的一组标志。如果未指定，则它将默认为适用于<em>globs</em>的future-import标志集。</p>
+<p>每个示例的输出都使用<code>DocTestRunner</code>输出检查器进行检查，并且结果由这些<code>DocTestRunner.report_*()</code>方法进行格式化。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">summarize([verbose])</span><br></pre></td></tr></table></figure>
+<p>打印由此DocTestRunner运行的所有测试用例的摘要，并返回一个<a href="https://docs.python.org/2.7/glossary.html#term-named-tuple" target="_blank" rel="noopener">指定的元组</a> <code>TestResults(failed, attempted)</code>。</p>
+<p>可选的<em>详细</em>参数控制摘要的详细程度。如果没有指定<code>DocTestRunner</code>详细程度，则使用冗长度。</p>
+<p>在版本2.6中更改：使用命名的元组。</p>
+<h3 id="6-6-OutputChecker对象"><a href="#6-6-OutputChecker对象" class="headerlink" title="6.6. OutputChecker对象"></a>6.6. OutputChecker对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class doctest.OutputChecker</span><br></pre></td></tr></table></figure>
+<p>用于检查doctest示例的实际输出是否与预期输出匹配的类。<code>OutputChecker</code>定义了两种方法：<code>check_output()</code>，它比较给定的一对输出，如果匹配则返回真; 并<code>output_difference()</code>返回一个描述两个输出之间差异的字符串。</p>
+<p>2.4版本中的新功能。</p>
+<p><code>OutputChecker</code> 定义了以下方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">check_output(want, got, optionflags)</span><br></pre></td></tr></table></figure>
+<p><code>True</code>如果示例（<em>got</em>）的实际输出与预期输出（<em>想要</em>）匹配，则返回。如果这些字符串相同，则始终认为它们匹配；但取决于测试运行器使用的选项标志，还可以使用几种非精确匹配类型。有关选项标志的更多信息，请参见选项标志部分。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">output_difference(example, got, optionflags)</span><br></pre></td></tr></table></figure>
+<p>返回一个字符串，描述给定示例（<em>示例</em>）的预期输出与实际输出（<em>获得</em>）之间的差异。<em>optionflags</em>是用来比较<em>想要</em>和<em>得到</em>的选项标志的集合。</p>
+<h2 id="7-调试"><a href="#7-调试" class="headerlink" title="7.调试"></a>7.调试</h2><p>Doctest提供了几种调试doctest示例的机制：</p>
+<ul>
+<li><p>几个函数将doctests转换为可执行的Python程序，可以在Python调试器下运行<code>pdb</code>。</p>
+</li>
+<li><p><code>DebugRunner</code>类是的一个子类<code>DocTestRunner</code>的是提高用于第一故障的例子的异常，包含有关实施例的信息。该信息可用于对示例执行事后调试。</p>
+</li>
+<li><p><code>unittest</code>通过<code>DocTestSuite()</code>支持由<code>debug()</code>所定义的方法生成的案例<code>unittest.TestCase</code>。</p>
+</li>
+<li><p>您可以<code>pdb.set_trace()</code>在doctest示例中添加调用，并在执行该行时放入Python调试器。然后你可以检查变量的当前值，等等。例如，假设<code>a.py</code>只包含这个模块docstring：</p>
+</li>
+</ul>
+<blockquote>
+<p> “”” &gt;&gt;&gt; def f(x): …     g(x*2) &gt;&gt;&gt; def g(x): …     print x+3 …     import pdb; pdb.set_trace() &gt;&gt;&gt; f(3) 9 “”” </p>
+</blockquote>
+<p> 然后，一个交互式Python会话可能如下所示：</p>
+<blockquote>
+<p>import a, doctest &gt;&gt;&gt; doctest.testmod(a) –Return– &gt; <doctest a1>(3)g()-&gt;None -&gt; import pdb; pdb.set_trace() (Pdb) list   1     def g(x):   2         print x+3   3  -&gt;     import pdb; pdb.set_trace() EOF print x 6 (Pdb) step –Return– &gt; <doctest a0>(2)f()-&gt;None -&gt; g(x<em>2) (Pdb) list   1     def f(x):   2  -&gt;     g(x</em>2) EOF print x 3 (Pdb) step –Return– &gt; <doctest a2>(1)?()-&gt;None -&gt; f(3) (Pdb) cont (0, 3) &gt;&gt;&gt; </doctest></doctest></doctest></p>
+</blockquote>
+<p>  在版本2.4中进行了更改：<code>pdb.set_trace()</code>添加了在文档测试中使用有用的功能。</p>
+<p>将doctests转换为Python代码的函数，并可能在调试器下运行综合代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.script_from_examples(s)</span><br></pre></td></tr></table></figure>
+<p>将带有示例的文本转换为脚本。</p>
+<p>参数<em>s</em>是一个包含doctest示例的字符串。该字符串被转换为Python脚本，其中<em>s</em>中的doctest示例转换为常规代码，其他所有内容都转换为Python注释。生成的脚本作为字符串返回。例如，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> doctest</span><br><span class="line"><span class="keyword">print</span> doctest.script_from_examples(<span class="string">r"""</span></span><br><span class="line"><span class="string">    Set x and y to 1 and 2.</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; x, y = 1, 2</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Print their sum:</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; print x+y</span></span><br><span class="line"><span class="string">    3</span></span><br><span class="line"><span class="string">"""</span>)</span><br></pre></td></tr></table></figure>
+<p>显示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set x and y to 1 and 2.</span></span><br><span class="line">x, y = <span class="number">1</span>, <span class="number">2</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Print their sum:</span></span><br><span class="line"><span class="keyword">print</span> x+y</span><br><span class="line"><span class="comment"># Expected:</span></span><br><span class="line"><span class="comment">## 3</span></span><br></pre></td></tr></table></figure>
+<p>该函数在其他函数的内部使用（请参见下文），但是当您想要将交互式Python会话转换为Python脚本时，该函数也很有用。</p>
+<p>2.4版本中的新功能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.testsource(module, name)</span><br></pre></td></tr></table></figure>
+<p>将对象的doctest转换为脚本。</p>
+<p>参数<em>模块</em>是一个模块对象，或者一个模块的虚线名称，包含其文档感兴趣的对象。参数<em>名称</em>是具有感兴趣的doctests的对象的名称（在模块内）。结果是一个字符串，包含对象的文档字符串转换为Python脚本，<code>script_from_examples()</code>如上所述。例如，如果模块<code>a.py</code>包含顶级函数<code>f()</code>，那么</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> a, doctest</span><br><span class="line">print doctest.testsource(a, <span class="string">"a.f"</span>)</span><br></pre></td></tr></table></figure>
+<p>打印函数<code>f()</code>的文档字符串的脚本版本，将文档转换为代码，其余部分放在注释中。</p>
+<p>2.3版本的新功能。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.debug(module, name[, pm])</span><br></pre></td></tr></table></figure>
+<p>调试对象的doctests。</p>
+<p>该<em>模块</em>和<em>名称</em>参数是相同的功能<code>testsource()</code>之上。已命名对象的文档字符串的合成Python脚本被写入临时文件，然后该文件在Python调试器的控制下运行<code>pdb</code>。</p>
+<p><code>module.__dict__</code>本地和全局执行上下文都使用浅表副本。</p>
+<p>可选参数<em>pm</em>控制是否使用验尸调试。如果<em>pm</em>具有真值，则脚本文件将直接运行，并且仅当脚本通过引发未处理的异常终止时才会涉及调试器。如果确实如此，则通过<code>pdb.post_mortem()</code>从未处理的异常中传递回溯对象来调用验尸调试。如果<em>pm</em>没有被指定，或者是false，那么通过传递一个适当的<code>execfile()</code>调用来从脚本开始运行脚本<code>pdb.run()</code>。</p>
+<p>2.3版本的新功能。</p>
+<p>在版本2.4中更改：添加了<em>pm</em>参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doctest.debug_src(src[, pm][, globs])</span><br></pre></td></tr></table></figure>
+<p>用字符串调试doctests。</p>
+<p>这与<code>debug()</code>上面的函数类似，只是通过<em>src</em>参数直接指定了包含doctest示例的字符串。</p>
+<p>可选参数<em>pm</em>与<code>debug()</code>上面的函数具有相同的含义。</p>
+<p>可选的参数<em>globs</em>给出了一个字典，用作本地和全局执行上下文。如果未指定，或者<code>None</code>使用空字典。如果指定，则使用字典的浅表副本。</p>
+<p>2.4版本中的新功能。</p>
+<p><code>DebugRunner</code>级和特殊的例外可能提高，最感兴趣的测试框架的作者，并且只在这里勾勒。查看源代码，尤其<code>DebugRunner</code>是docstring（这是一个doctest！）以获取更多详细信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">class doctest.DebugRunner([checker][, verbose][, optionflags])</span><br></pre></td></tr></table></figure>
+<p>只要<code>DocTestRunner</code>遇到故障，它的一个子类就会引发异常。如果发生意外异常，则会引发<code>UnexpectedException</code>异常，包含测试，示例和原始异常。如果输出不匹配，则会<code>DocTestFailure</code>引发异常，包含测试，示例和实际输出。</p>
+<p>有关构造函数参数和方法的信息，请参阅<code>DocTestRunner</code>高级API一节中的文档。</p>
+<p><code>DebugRunner</code>实例可能会引发两个例外情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exception doctest.DocTestFailure(test, example, got)</span><br></pre></td></tr></table></figure>
+<p><code>DocTestRunner</code>表示doctest示例的实际输出与预期输出不符的异常。构造函数参数用于初始化相同名称的属性。</p>
+<p><code>DocTestFailure</code> 定义了以下属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DocTestFailure.test</span><br></pre></td></tr></table></figure>
+<p><code>DocTest</code>示例失败时正在运行的对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DocTestFailure.example</span><br></pre></td></tr></table></figure>
+<p><code>Example</code>失败。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DocTestFailure.got</span><br></pre></td></tr></table></figure>
+<p>示例的实际输出。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exception doctest.UnexpectedException(test, example, exc_info)</span><br></pre></td></tr></table></figure>
+<p>一个异常<code>DocTestRunner</code>提示表示doctest示例引发了意外异常。构造函数参数用于初始化相同名称的属性。</p>
+<p><code>UnexpectedException</code> 定义了以下属性：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UnexpectedException.test</span><br></pre></td></tr></table></figure>
+<p><code>DocTest</code>示例失败时正在运行的对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UnexpectedException.example</span><br></pre></td></tr></table></figure>
+<p><code>Example</code>失败。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UnexpectedException.exc_info</span><br></pre></td></tr></table></figure>
+<p>包含有关意外异常的信息的元组，返回的是<code>sys.exc_info()</code>。</p>
+<h2 id="8-Soapbox"><a href="#8-Soapbox" class="headerlink" title="8. Soapbox"></a>8. Soapbox</h2><p>正如引言中提到的，<code>doctest</code>已经发展到三个主要用途：</p>
+<ol>
+<li>检查文档字符串中的示例。</li>
+</ol>
+<p>\2. 回归测试。</p>
+<p>\3. 可执行文档/文字测试。</p>
+<p>这些用途具有不同的要求，区分它们很重要。特别是，用不明确的测试用例填充文档字符串会导致错误的文档。</p>
+<p>在编写文档字符串时，请小心选择文档字符串示例。有一个学问需要学习 - 起初可能并不自然。示例应该为文档增加真正的价值。一个很好的例子往往可以说很多话。如果谨慎处理，这些示例对您的用户来说将是非常宝贵的，并且会随着时间的推移和事情的变化而回报多次收集它们所需的时间。我仍然惊讶于我的一个<code>doctest</code>示例在“无害”更改后停止工作的频率。</p>
+<p>Doctest也是回归测试的绝佳工具，特别是如果你不吝啬解释性文本。通过插入散文和例子，跟踪实际正在测试的内容以及为什么更容易。当一个测试失败时，好的散文可以使得更容易找出问题所在，以及应该如何解决问题。的确，您可以在基于代码的测试中编写大量的评论，但很少有程序员会这样做。许多人已经发现使用doctest方法会导致更清晰的测试。也许这只是因为doctest使编写散文比编写代码容易一些，而在代码中编写注释有点困难。我认为它比以上更深刻：编写基于doctest的测试时的自然态度是您想解释软件的优点，并用示例来说明它们。这反过来自然会导致以最简单的功能开始的测试文件，并在逻辑上进展到复杂性和边缘情况。一个连贯的叙述是结果，而不是一组孤立的函数，它们似乎随机地测试孤立的功能位。这是一种不同的态度，产生不同的结果，模糊了测试和解释之间的区别。</p>
+<p>回归测试最好局限于专用对象或文件。有几种组织测试的选项：</p>
+<ul>
+<li><p>将包含测试用例的文本文件编写为交互式示例，并使用<code>testfile()</code>或测试这些文件<code>DocFileSuite()</code>。这是推荐的，尽管对于从一开始就使用doctest设计的新项目来说，这是最容易做到的。</p>
+</li>
+<li><p>定义名为<code>_regrtest_topic</code>包含单个文档字符串的函数，其中包含指定主题的测试用例。这些功能可以包含在与模块相同的文件中，或者分离到单独的测试文件中。</p>
+</li>
+<li><p>定义<code>__test__</code>从回归测试主题到包含测试用例的文档字符串的字典映射。</p>
+</li>
+</ul>
+<p>当您将测试放入模块中时，模块本身可以成为测试运行者。当测试失败时，您可以安排测试运行者在调试问题时仅重新运行失败的doctest。这是一个这样的测试运行者的最小例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">import</span> doctest</span><br><span class="line">    flags = doctest.REPORT_NDIFF|doctest.REPORT_ONLY_FIRST_FAILURE</span><br><span class="line">    <span class="keyword">if</span> len(sys.argv) &gt; <span class="number">1</span>:</span><br><span class="line">        name = sys.argv[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span> name <span class="keyword">in</span> globals():</span><br><span class="line">            obj = globals()[name]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            obj = __test__[name]</span><br><span class="line">        doctest.run_docstring_examples(obj, globals(), name=name,</span><br><span class="line">                                       optionflags=flags)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        fail, total = doctest.testmod(optionflags=flags)</span><br><span class="line">        print(<span class="string">"&#123;&#125; failures out of &#123;&#125; tests"</span>.format(fail, total))</span><br></pre></td></tr></table></figure>
+<h4 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a>脚注</h4><p>不支持包含预期输出和异常的示例。试图猜测一个结束和另一个开始的地方太容易出错，这也会导致一个令人困惑的测试。</p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/03/15/python-standard-library-doctest/" title="python standard_library doctest">https://pinghailinfeng.gitee.io/2020/03/15/python-standard-library-doctest/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/doctest/" rel="tag"># doctest</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/14/python-standard-library-Tkinter/" rel="next" title="python standard_library Tkinter">
+                <i class="fa fa-chevron-left"></i> python standard_library Tkinter
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">113</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">129</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-doctest"><span class="nav-number">1.</span> <span class="nav-text">python  标准库 doctest</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-简单用法：检查Docstrings中的示例"><span class="nav-number">1.1.</span> <span class="nav-text">1.简单用法：检查Docstrings中的示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-简单的用法：检查文本文件中的示例"><span class="nav-number">1.2.</span> <span class="nav-text">2.简单的用法：检查文本文件中的示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-它是如何工作的"><span class="nav-number">1.3.</span> <span class="nav-text">3.它是如何工作的</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-哪些Docstrings被检查？"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1. 哪些Docstrings被检查？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Docstring示例如何被认可？"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2. Docstring示例如何被认可？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是执行上下文？"><span class="nav-number">1.3.3.</span> <span class="nav-text">什么是执行上下文？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是例外？"><span class="nav-number">1.3.4.</span> <span class="nav-text">什么是例外？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-Option-Flags"><span class="nav-number">1.3.5.</span> <span class="nav-text">3.5. Option Flags</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-Directives"><span class="nav-number">1.3.6.</span> <span class="nav-text">3.6. Directives</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-警告"><span class="nav-number">1.3.7.</span> <span class="nav-text">3.7. 警告</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-基本API"><span class="nav-number">1.4.</span> <span class="nav-text">4.基本API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Unittest-API"><span class="nav-number">1.5.</span> <span class="nav-text">5. Unittest API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Advanced-API"><span class="nav-number">1.6.</span> <span class="nav-text">6. Advanced API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-DocTest-Objects"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1. DocTest Objects</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-示例对象"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2. 示例对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-DocTestFinder对象"><span class="nav-number">1.6.3.</span> <span class="nav-text">6.3. DocTestFinder对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-DocTestParser对象"><span class="nav-number">1.6.4.</span> <span class="nav-text">6.4. DocTestParser对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-DocTestRunner对象"><span class="nav-number">1.6.5.</span> <span class="nav-text">6.5. DocTestRunner对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-OutputChecker对象"><span class="nav-number">1.6.6.</span> <span class="nav-text">6.6. OutputChecker对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-调试"><span class="nav-number">1.7.</span> <span class="nav-text">7.调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Soapbox"><span class="nav-number">1.8.</span> <span class="nav-text">8. Soapbox</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#脚注"><span class="nav-number">1.8.0.1.</span> <span class="nav-text">脚注</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2to3/">2to3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tkinter/">Tkinter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/argparse/">argparse</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atexit/">atexit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/code/">code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doctest/">doctest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dom/">dom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/">futures</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keyword/">keyword</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minidom/">minidom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">78</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/readline/">readline</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sax/">sax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sched/">sched</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/select/">select</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selectors/">selectors</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standar-library/">standar_library</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">72</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/">turtle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unittest/">unittest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/">venv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/">xml</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">803k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">12:10</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

@@ -457,7 +457,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/04/windows-jupyter-notebook-nbextension-usage/">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/15/python-standard-library-iterator-and-generator/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeff Sui">
@@ -477,7 +477,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2020/01/04/windows-jupyter-notebook-nbextension-usage/" class="post-title-link" itemprop="url">windows jupyter notebook nbextension usage</a>
+                <a href="/2020/01/15/python-standard-library-iterator-and-generator/" class="post-title-link" itemprop="url">python standard library iterator and generator</a>
               
             
           </h1>
@@ -502,12 +502,24 @@
                 
               
 
-              <time title="创建时间：2020-01-04 15:22:07 / 修改时间：15:52:25" itemprop="dateCreated datePublished" datetime="2020-01-04T15:22:07+08:00">2020-01-04</time>
+              <time title="创建时间：2020-01-15 06:30:45" itemprop="dateCreated datePublished" datetime="2020-01-15T06:30:45+08:00">2020-01-15</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-17 09:00:01" itemprop="dateModified" datetime="2020-01-17T09:00:01+08:00">2020-01-17</time>
               
             
           </span>
@@ -553,7 +565,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.4k</span>
+                <span title="本文字数">3.6k</span>
               
 
               
@@ -567,7 +579,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">3 分钟</span>
               
             </div>
           
@@ -588,40 +600,26 @@
 
       
         
-          <h1 id="windows下jupyter-安装nbextension-插件填坑记"><a href="#windows下jupyter-安装nbextension-插件填坑记" class="headerlink" title="windows下jupyter 安装nbextension 插件填坑记"></a>windows下jupyter 安装nbextension 插件填坑记</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200104_cold.png?raw=true" alt></p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><table>
-<thead>
-<tr>
-<th>软件和操作系统</th>
-<th>版本号</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>操作系统</td>
-<td>win7 64位 sp1</td>
-</tr>
-<tr>
-<td>python版本</td>
-<td>3.6.2</td>
-</tr>
-<tr>
-<td>jupyter core</td>
-<td>4.5.0</td>
-</tr>
-<tr>
-<td>jupyter notebook</td>
-<td>6.0.0</td>
-</tr>
-</tbody>
-</table>
-<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>本来以为给jupyter安装个插件,分分钟搞定的事,结果三天了还是没解决。</p>
-<p>我回家用win10的电脑,5分钟搞定。</p>
-<p>尝试了各种方式,卸载重装,修改环境变量,换不同的python版本。后来我快要放放弃的时候，我终于搞定了。</p>
+          <h1 id="python-标准库-类型：-迭代器-和-生成器"><a href="#python-标准库-类型：-迭代器-和-生成器" class="headerlink" title="python 标准库 类型： 迭代器 和 生成器"></a>python 标准库 类型： 迭代器 和 生成器</h1><p>每日英语:</p>
+<blockquote>
+<p> miracle n </p>
+<p> [英]   <strong>[</strong>ˈmɪrəkl<strong>]</strong>   [美] [ <strong>ˈmɪrəkəl</strong> ]</p>
+<p> 奇迹，圣迹，神迹； 令人惊奇的人（或事） </p>
+</blockquote>
+<p>推荐一个老电影：</p>
+<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200115_miracle.jpg?raw=true" alt></p>
+<p>每个人终将都会踏上自己的绿色旅程,善恶就在一念之间。愿世界美好,温情以待。</p>
+<p>先看一张图:</p>
+<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200115_python_iterator_generator.jpg?raw=true" alt></p>
+<blockquote>
+<p>1，迭代器协议：对象需要提供next()方法，它要么返回迭代中的下一项，要么就引起一个StopIteration异常，以终止迭代。</p>
+<p>2，可迭代对象：实现了迭代器协议对象。list、tuple、dict都是Iterable（可迭代对象），但不是Iterator（迭代器对象）。但可以使用内建函数iter()，把这些都变成Iterable（可迭代器对象）。</p>
+<p>3，for item in Iterable 循环的本质就是先通过iter()函数获取可迭代对象Iterable的迭代器，然后对获取到的迭代器不断调用next()方法来获取下一个值并将其赋值给item，当遇到StopIteration的异常后循环结束</p>
+</blockquote>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2020/01/04/windows-jupyter-notebook-nbextension-usage/#more" rel="contents">
+              <a class="btn" href="/2020/01/15/python-standard-library-iterator-and-generator/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -681,7 +679,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/03/python-standard-library-webbrowser/">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/14/python-standard-library-pickle/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeff Sui">
@@ -701,7 +699,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2020/01/03/python-standard-library-webbrowser/" class="post-title-link" itemprop="url">python standard library webbrowser</a>
+                <a href="/2020/01/14/python-standard-library-pickle/" class="post-title-link" itemprop="url">python standard library pickle</a>
               
             
           </h1>
@@ -726,24 +724,12 @@
                 
               
 
-              <time title="创建时间：2020-01-03 12:07:55" itemprop="dateCreated datePublished" datetime="2020-01-03T12:07:55+08:00">2020-01-03</time>
+              <time title="创建时间：2020-01-14 10:48:51 / 修改时间：11:44:09" itemprop="dateCreated datePublished" datetime="2020-01-14T10:48:51+08:00">2020-01-14</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-04 21:43:05" itemprop="dateModified" datetime="2020-03-04T21:43:05+08:00">2020-03-04</time>
               
             
           </span>
@@ -764,10 +750,1656 @@
 
                 
                 
-                  ，
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">22k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">20 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="python-标准库-pickle"><a href="#python-标准库-pickle" class="headerlink" title="python 标准库 pickle"></a>python 标准库 pickle</h1><p>快过年了,准备了一些过节用的英语</p>
+<blockquote>
+<ol>
+<li><p>传统中国节日：traditional Chinese festival</p>
+</li>
+<li><p>农历：lunar calendar</p>
+</li>
+<li><p>腊八节：Laba Festival</p>
+</li>
+<li><p>小年：Little New Year</p>
+</li>
+<li><p>除夕：Lunar New Year’s Eve</p>
+</li>
+<li><p>春节：the Spring Festival</p>
+</li>
+<li><p>正月初一：the lunar New Year’s Day</p>
+</li>
+<li><p>元宵节：the Lantern Festival</p>
+</li>
+<li><p>正月：the first month of the lunar year</p>
+</li>
+<li><p>二月二：Dragon Heads-raising Day</p>
+</li>
+</ol>
+</blockquote>
+<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200114_guonian1.jpg?raw=true" alt></p>
+<p>时间过得好快,又是一年过去了。</p>
+<h2 id="python-标准库学习之-pickle"><a href="#python-标准库学习之-pickle" class="headerlink" title="python 标准库学习之 pickle"></a>python 标准库学习之 pickle</h2><p>常用的文本处理 除了文件,数据库,json,xml 以外,python还提供了一种存储方案,这就是<code>pickle</code>。</p>
+<blockquote>
+<p>模块 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#module-pickle" target="_blank" rel="noopener"><code>pickle</code></a> 实现了对一个 Python 对象结构的二进制序列化和反序列化。<em>“pickling”</em> 是将 Python 对象及其所拥有的层次结构转化为一个字节流的过程，而 <em>“unpickling”</em> 是相反的操作，会将（来自一个 <a href="https://docs.python.org/zh-cn/3/glossary.html#term-binary-file" target="_blank" rel="noopener">binary file</a> 或者 <a href="https://docs.python.org/zh-cn/3/glossary.html#term-bytes-like-object" target="_blank" rel="noopener">bytes-like object</a> 的）字节流转化回一个对象层次结构。 pickling（和 unpickling）也被称为“序列化”, “编组” 或者 “平面化”。而为了避免混乱，此处采用术语 “封存 (pickling)” 和 “解封 (unpickling)”。</p>
+</blockquote>
+<blockquote>
+<p><em>警告</em> :  <code>pickle</code> 模块<strong>并不安全</strong>。你只应该对你信任的数据进行unpickle操作。构建恶意的 pickle 数据来<strong>在解封时执行任意代码</strong>是可能的。绝对不要对不信任来源的数据和可能被篡改过的数据进行解封。请考虑使用 <a href="https://docs.python.org/zh-cn/3/library/hmac.html#module-hmac" target="_blank" rel="noopener"><code>hmac</code></a> 来对数据进行签名，确保数据没有被篡改。在你处理不信任数据时，更安全的序列化格式如 <a href="https://docs.python.org/zh-cn/3/library/json.html#module-json" target="_blank" rel="noopener"><code>json</code></a> 可能更为适合。参见 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#comparison-with-json" target="_blank" rel="noopener">与 json 模块的比较</a> </p>
+</blockquote>
+<h3 id="源代码：-Lib-pickle-py"><a href="#源代码：-Lib-pickle-py" class="headerlink" title="源代码： Lib/pickle.py"></a><strong>源代码：</strong> <a href="https://github.com/python/cpython/tree/3.8/Lib/pickle.py" target="_blank" rel="noopener">Lib/pickle.py</a></h3><p>本节内容比较多,先看下类层次结构,有一个大体的概念(节选自源码)：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Classes:</span><br><span class="line">    Pickler</span><br><span class="line">    Unpickler</span><br><span class="line">Functions:</span><br><span class="line">    dump(object, file)</span><br><span class="line">    dumps(object) -&gt; string</span><br><span class="line">    load(file) -&gt; object</span><br><span class="line">    loads(string) -&gt; object</span><br><span class="line">Misc variables:</span><br><span class="line">    __version__</span><br><span class="line">    format_version</span><br><span class="line">    compatible_formats</span><br><span class="line">    </span><br><span class="line">__all__ = [<span class="string">"PickleError"</span>, <span class="string">"PicklingError"</span>, <span class="string">"UnpicklingError"</span>, <span class="string">"Pickler"</span>,</span><br><span class="line">           <span class="string">"Unpickler"</span>, <span class="string">"dump"</span>, <span class="string">"dumps"</span>, <span class="string">"load"</span>, <span class="string">"loads"</span>]</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/01/14/python-standard-library-pickle/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/13/python-standard-library-array-type/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/01/13/python-standard-library-array-type/" class="post-title-link" itemprop="url">python standard library array type</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+              <time title="创建时间：2020-01-13 11:04:53 / 修改时间：12:11:02" itemprop="dateCreated datePublished" datetime="2020-01-13T11:04:53+08:00">2020-01-13</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>每日一词: underdog</p>
+<blockquote>
+<p>英 [ˈʌndədɒg]   美 [ˈʌndərdɔg]</p>
+<p>n.失败者； 退居下风的人； 受压迫者； 打败了的选手</p>
+<p>复数： <a href="http://www.iciba.com/underdogs" target="_blank" rel="noopener">underdogs</a></p>
+</blockquote>
+<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200113underdogs.webp?raw=true" alt></p>
+<blockquote>
+<p> 这个词来自1887年出现，原指在斗狗比赛中战败的狗。后来词义引申至人，指的是各类竞赛和对碰中不被看好的一方，或是指处在逆境中的人和团体。</p>
+<p>被看好的一方，即Topdog，从来不缺喝彩和支持。而Underdog的路则注定孤独许多。不被人看好，较少人支持。</p>
+<p>所幸的是，正如倪匡先生感言：太多的时候，孤独最好。  </p>
+<p>若能与孤独为师,又何须担心underdog呢？</p>
+</blockquote>
+<h2 id="python-标准库学习-array"><a href="#python-标准库学习-array" class="headerlink" title="python 标准库学习 array"></a>python 标准库学习 array</h2><p>此模块定义了一种对象类型，可以紧凑地表示基本类型值的数组：字符、整数、浮点数等。 数组属于序列类型，其行为与列表非常相似，不同之处在于其中存储的对象类型是受限的。 类型在对象创建时使用单个字符的 <em>类型码</em> 来指定。 已定义的类型码如下：</p>
+<table>
+<thead>
+<tr>
+<th>类型码</th>
+<th>C 类型</th>
+<th>Python 类型</th>
+<th>以字节表示的最小尺寸</th>
+<th>注释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&#39;b&#39;</code></td>
+<td>signed char</td>
+<td>int</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>&#39;B&#39;</code></td>
+<td>unsigned char</td>
+<td>int</td>
+<td>1</td>
+<td></td>
+</tr>
+<tr>
+<td><code>&#39;u&#39;</code></td>
+<td>Py_UNICODE</td>
+<td>Unicode 字符</td>
+<td>2</td>
+<td>(1)</td>
+</tr>
+<tr>
+<td><code>&#39;h&#39;</code></td>
+<td>signed short</td>
+<td>int</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>&#39;H&#39;</code></td>
+<td>unsigned short</td>
+<td>int</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>&#39;i&#39;</code></td>
+<td>signed int</td>
+<td>int</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>&#39;I&#39;</code></td>
+<td>无符号整型</td>
+<td>int</td>
+<td>2</td>
+<td></td>
+</tr>
+<tr>
+<td><code>&#39;l&#39;</code></td>
+<td>signed long</td>
+<td>int</td>
+<td>4</td>
+<td></td>
+</tr>
+<tr>
+<td><code>&#39;L&#39;</code></td>
+<td>无符号长整型</td>
+<td>int</td>
+<td>4</td>
+<td></td>
+</tr>
+<tr>
+<td><code>&#39;q&#39;</code></td>
+<td>signed long long</td>
+<td>int</td>
+<td>8</td>
+<td></td>
+</tr>
+<tr>
+<td><code>&#39;Q&#39;</code></td>
+<td>无符号 long long</td>
+<td>int</td>
+<td>8</td>
+<td></td>
+</tr>
+<tr>
+<td><code>&#39;f&#39;</code></td>
+<td>float</td>
+<td>float</td>
+<td>4</td>
+<td></td>
+</tr>
+<tr>
+<td><code>&#39;d&#39;</code></td>
+<td>double</td>
+<td>float</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>==注释== </p>
+<blockquote>
+<p>‘u’类型码在<code>python3</code>已经被废除,默认python的字符串就是<code>unicode</code>字符</p>
+</blockquote>
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><ul>
+<li><p><em>class</em> <code>array.array</code>(<em>typecode</em>[, <em>initializer</em>])</p>
+<p>一个包含由 <em>typecode</em> 限制类型的条目的新数组，并由可选的 <em>initializer</em> 值进行初始化，该值必须为一个列表、<a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-bytes-like-object" target="_blank" rel="noopener">bytes-like object</a> 或包含正确类型元素的可迭代对象。如果给定一个列表或字符串，该 initializer 会被传给新数组的 <a href="https://docs.python.org/zh-cn/3.8/library/array.html#array.array.fromlist" target="_blank" rel="noopener"><code>fromlist()</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/array.html#array.array.frombytes" target="_blank" rel="noopener"><code>frombytes()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/array.html#array.array.fromunicode" target="_blank" rel="noopener"><code>fromunicode()</code></a> 方法（见下文）以将初始条目添加到数组中。 否则会将可迭代对象作为 initializer 传给 <a href="https://docs.python.org/zh-cn/3.8/library/array.html#array.array.extend" target="_blank" rel="noopener"><code>extend()</code></a> 方法。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审核事件</a> <code>array.__new__</code> 附带参数 <code>typecode</code>, <code>initializer</code>。</p>
+</li>
+</ul>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><ul>
+<li><p><code>array.typecodes</code></p>
+<p>包含所有可用类型码的字符串。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import array</span><br><span class="line">&gt;&gt;&gt; array.typecodes</span><br><span class="line">&apos;bBuhHiIlLqQfd&apos;</span><br></pre></td></tr></table></figure>
+<p>数组对象支持普通的序列操作如索引、切片、拼接和重复等。 当使用切片赋值时，所赋的值必须为具有相同类型码的数组对象；所有其他情况都将引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a>。 数组对象也实现了缓冲区接口，可以用于所有支持 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-bytes-like-object" target="_blank" rel="noopener">字节类对象</a> 的场合。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/01/13/python-standard-library-array-type/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/12/python-standard-library-collections-abc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/01/12/python-standard-library-collections-abc/" class="post-title-link" itemprop="url">python standard library collections.abc</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-12 08:49:16" itemprop="dateCreated datePublished" datetime="2020-01-12T08:49:16+08:00">2020-01-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-13 10:57:53" itemprop="dateModified" datetime="2020-01-13T10:57:53+08:00">2020-01-13</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">6.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="python-标准库-之-collections-abc"><a href="#python-标准库-之-collections-abc" class="headerlink" title="python 标准库 之 collections.abc"></a>python 标准库 之 collections.abc</h1><p>每日一词: wrong</p>
+<blockquote>
+<p><em>adj.</em> 不道德的, 不正当的, 不义的</p>
+<p>不确实的, 不正确的, 错误的</p>
+<p>不合要求的, 不适合的, 并非合意的</p>
+<p>有故障, 有毛病</p>
+<p><em>adv.</em> 方式或方向错误地; 错误地; 结果错误地</p>
+<p><em>n.</em> 罪过, 过失, 罪恶</p>
+<p>不义的行为, 不公正的事</p>
+<p>时 态: wronged, wronging, wrongs<br>名 词: wronger<br>副 词: wrongly<br>名 词: wrongness</p>
+<p> 词语：</p>
+<p><em>confound right and wrong</em></p>
+<p>混淆是非，黑白不分</p>
+<p><em>get one wrong</em></p>
+<p>误会某人；误会</p>
+<p> <em>right or wrong</em><br><em>adv.</em> 不管如何 </p>
+<p><em>something wrong with</em></p>
+<p>…出了毛病；…有问题；…不对头</p>
+</blockquote>
+<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200112update1.jpg?raw=true" alt></p>
+<h2 id="python-标准库学习之-抽象基类-collection-abc"><a href="#python-标准库学习之-抽象基类-collection-abc" class="headerlink" title="python 标准库学习之 抽象基类 collection.abc"></a>python 标准库学习之 抽象基类 collection.abc</h2><p>众所周知,python3中所有类默认继承自object类,意味着父类中所有的方法,子类都继承了。</p>
+<p>我个人理解,抽象基类是无法被实例化的,只能子类实现</p>
+<p> <a href="https://docs.python.org/zh-cn/3.8/library/collections.abc.html" target="_blank" rel="noopener">参考文档</a></p>
+<p><strong>源代码：</strong> <a href="https://github.com/python/cpython/tree/3.8/Lib/_collections_abc.py" target="_blank" rel="noopener">Lib/_collections_abc.py</a> </p>
+<p> 该模块定义了一些 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-abstract-base-class" target="_blank" rel="noopener">抽象基类</a>，它们可用于判断一个具体类是否具有某一特定的接口；例如，这个类是否可哈希，或其是否为映射类。 </p>
+<p>模块里方法一览,摘自源码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">__all__ = [<span class="string">"Awaitable"</span>, <span class="string">"Coroutine"</span>,</span><br><span class="line">           <span class="string">"AsyncIterable"</span>, <span class="string">"AsyncIterator"</span>, <span class="string">"AsyncGenerator"</span>,</span><br><span class="line">           <span class="string">"Hashable"</span>, <span class="string">"Iterable"</span>, <span class="string">"Iterator"</span>, <span class="string">"Generator"</span>, <span class="string">"Reversible"</span>,</span><br><span class="line">           <span class="string">"Sized"</span>, <span class="string">"Container"</span>, <span class="string">"Callable"</span>, <span class="string">"Collection"</span>,</span><br><span class="line">           <span class="string">"Set"</span>, <span class="string">"MutableSet"</span>,</span><br><span class="line">           <span class="string">"Mapping"</span>, <span class="string">"MutableMapping"</span>,</span><br><span class="line">           <span class="string">"MappingView"</span>, <span class="string">"KeysView"</span>, <span class="string">"ItemsView"</span>, <span class="string">"ValuesView"</span>,</span><br><span class="line">           <span class="string">"Sequence"</span>, <span class="string">"MutableSequence"</span>,</span><br><span class="line">           <span class="string">"ByteString"</span>,</span><br><span class="line">           ]</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/01/12/python-standard-library-collections-abc/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/11/python-standard-library-context-manager-types/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/01/11/python-standard-library-context-manager-types/" class="post-title-link" itemprop="url">python standard library context-manager-types</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-11 09:37:04 / 修改时间：10:54:51" itemprop="dateCreated datePublished" datetime="2020-01-11T09:37:04+08:00">2020-01-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="python-标准库-上下文管理类型"><a href="#python-标准库-上下文管理类型" class="headerlink" title="python 标准库 上下文管理类型"></a>python 标准库 上下文管理类型</h1><p>每日一词:</p>
+<blockquote>
+<p>intresting : </p>
+<p>US [‘ɪntrəstɪŋ]  UK [‘ɪntrəstɪŋ]</p>
+<ul>
+<li><strong>adj.</strong>有趣的；有吸引力的</li>
+<li><strong>v.</strong>“interest”的现在分词</li>
+<li><strong>Web</strong>有意思的；令人感兴趣的；引人入胜的</li>
+</ul>
+<p>比较级：more interesting<br>最高级：most interesting</p>
+</blockquote>
+<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200111_heihei.jpg?raw=true" alt></p>
+<blockquote>
+<p> 大部分时候,你都是一个人在默默努力,这样,距离成功才会更进一步。</p>
+<p>​                                                        – 凭海临风语录</p>
+</blockquote>
+<h2 id="python-标准库学习-上下文管理"><a href="#python-标准库学习-上下文管理" class="headerlink" title="python 标准库学习  上下文管理"></a>python 标准库学习  上下文管理</h2><p>什么是上下文管理器？上下文管理器就是一个用装饰器实现上下文协议管理的对象。主要用于保存和恢复各种全局状态,例如关闭文件等。下面我们来了解具体的内容。</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ul>
+<li><p><code>contextmanager.__enter__()</code></p>
+<p>进入运行时上下文并返回此对象或关联到该运行时上下文的其他对象。 此方法的返回值会绑定到使用此上下文管理器的 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#with" target="_blank" rel="noopener"><code>with</code></a> 语句的 <code>as</code> 子句中的标识符。一个返回其自身的上下文管理器的例子是 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-file-object" target="_blank" rel="noopener">file object</a>。 文件对象会从 <strong>enter</strong>() 返回其自身，以允许 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#open" target="_blank" rel="noopener"><code>open()</code></a> 被用作 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#with" target="_blank" rel="noopener"><code>with</code></a> 语句中的上下文表达式。一个返回关联对象的上下文管理器的例子是 <a href="https://docs.python.org/zh-cn/3.8/library/decimal.html#decimal.localcontext" target="_blank" rel="noopener"><code>decimal.localcontext()</code></a> 所返回的对象。 此种管理器会将活动的 decimal 上下文设为原始 decimal 上下文的一个副本并返回该副本。 这允许对 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#with" target="_blank" rel="noopener"><code>with</code></a> 语句的语句体中的当前 decimal 上下文进行更改，而不会影响 <code>with</code> 语句以外的代码。</p>
+</li>
+<li><p><code>contextmanager.__exit__(*exc_type*, *exc_val*, *exc_tb*)</code></p>
+<p>退出运行时上下文并返回一个布尔值旗标来表明所发生的任何异常是否应当被屏蔽。 如果在执行 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#with" target="_blank" rel="noopener"><code>with</code></a> 语句的语句体期间发生了异常，则参数会包含异常的类型、值以及回溯信息。 在其他情况下三个参数均为 <code>None</code>。自此方法返回一个真值将导致 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#with" target="_blank" rel="noopener"><code>with</code></a> 语句屏蔽异常并继续执行紧随在 <code>with</code> 语句之后的语句。 否则异常将在此方法结束执行后继续传播。 在此方法执行期间发生的异常将会取代 <code>with</code> 语句的语句体中发生的任何异常。传入的异常绝对不应当被显式地重新引发 —— 相反地，此方法应当返回一个假值以表明方法已成功完成并且不希望屏蔽被引发的异常。 这允许上下文管理代码方便地检测 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#contextmanager.__exit__" target="_blank" rel="noopener"><code>__exit__()</code></a> 方法是否确实已失败。</p>
+</li>
+</ul>
+<h4 id="一个文件操作实例"><a href="#一个文件操作实例" class="headerlink" title="一个文件操作实例"></a>一个文件操作实例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">"/etc/hosts"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> file:</span><br><span class="line"><span class="meta">... </span>    dir(file)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line">[<span class="string">'__class__'</span>, <span class="string">'__delattr__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__enter__'</span>, <span class="string">'__exit__'</span>, <span class="string">'__format__'</span>, <span class="string">'__getattribute__'</span>, <span class="string">'__hash__'</span>, <span class="string">'__init__'</span>, <span class="string">'__iter__'</span>, <span class="string">'__new__'</span>, <span class="string">'__reduce__'</span>, <span class="string">'__reduce_ex__'</span>, <span class="string">'__repr__'</span>, <span class="string">'__setattr__'</span>, <span class="string">'__sizeof__'</span>, <span class="string">'__str__'</span>, <span class="string">'__subclasshook__'</span>, <span class="string">'close'</span>, <span class="string">'closed'</span>, <span class="string">'encoding'</span>, <span class="string">'errors'</span>, <span class="string">'fileno'</span>, <span class="string">'flush'</span>, <span class="string">'isatty'</span>, <span class="string">'mode'</span>, <span class="string">'name'</span>, <span class="string">'newlines'</span>, <span class="string">'next'</span>, <span class="string">'read'</span>, <span class="string">'readinto'</span>, <span class="string">'readline'</span>, <span class="string">'readlines'</span>, <span class="string">'seek'</span>, <span class="string">'softspace'</span>, <span class="string">'tell'</span>, <span class="string">'truncate'</span>, <span class="string">'write'</span>, <span class="string">'writelines'</span>, <span class="string">'xreadlines'</span>]</span><br></pre></td></tr></table></figure>
+<p>此时的open返回的对象file,就实现了管理打开文件、关闭文件的上下文管理协议。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/01/11/python-standard-library-context-manager-types/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/10/python-standard-library-operator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/01/10/python-standard-library-operator/" class="post-title-link" itemprop="url">python standard_library operator</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-10 09:21:50 / 修改时间：11:11:40" itemprop="dateCreated datePublished" datetime="2020-01-10T09:21:50+08:00">2020-01-10</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">6.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="python-标准库-operator"><a href="#python-标准库-operator" class="headerlink" title="python 标准库 operator"></a>python 标准库 operator</h1><p>今天的关键词: trouble </p>
+<blockquote>
+<p>trouble</p>
+<p>[英]  [ˈtrʌbl]</p>
+<p>[美] [ˈtrʌbəl]</p>
+<p>n.麻烦； 烦恼； 故障； 动乱；</p>
+<p>vi.费心； 烦恼；</p>
+<p>vt.麻烦； 使烦恼； 折磨；</p>
+</blockquote>
+<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200110_fan2.jpg?raw=true" alt></p>
+<h2 id="python-标准库学习-operator"><a href="#python-标准库学习-operator" class="headerlink" title="python 标准库学习  operator"></a>python 标准库学习  operator</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/operator.html#module-operator" target="_blank" rel="noopener"><code>operator</code></a> 模块提供了一套与Python的内置运算符对应的高效率函数。例如，<code>operator.add(x, y)</code> 与表达式 <code>x+y</code> 相同。 许多函数名与特殊方法名相同，只是没有双下划线。为了向后兼容性，也保留了许多包含双下划线的函数。为了表述清楚，建议使用没有双下划线的函数。</p>
+<p>函数包含的种类有：对象的比较运算、逻辑运算、数学运算以及序列运算。</p>
+<p>对象比较函数适用于所有的对象，函数名根据它们对应的比较运算符命名。</p>
+<h3 id="比较运算"><a href="#比较运算" class="headerlink" title="比较运算"></a>比较运算</h3><p><code>operator.lt(*a*, *b*)</code></p>
+<p><code>operator.le(*a*, *b*)</code></p>
+<p><code>operator.eq(*a*, *b*)</code></p>
+<p><code>operator.ne*a*, *b*)</code></p>
+<p><code>operator.ge*a*, *b*)</code></p>
+<p><code>operator.gt*a*, *b*)</code></p>
+<p><code>operator.__lt__*a*, *b*)</code></p>
+<p><code>operator.__le__*a*, *b*)</code></p>
+<p><code>operator.__eq__*a*, *b*)</code></p>
+<p><code>operator.__ne__*a*, *b*)</code></p>
+<p><code>operator.__ge__*a*, *b*)</code></p>
+<p><code>operator.__gt__*a*, *b*)</code></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/01/10/python-standard-library-operator/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/09/python-standard-library-http-cookies/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/01/09/python-standard-library-http-cookies/" class="post-title-link" itemprop="url">python standard library http.cookies</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-09 09:25:34 / 修改时间：14:08:43" itemprop="dateCreated datePublished" datetime="2020-01-09T09:25:34+08:00">2020-01-09</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">5.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">5 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="python-标准库-http-cookies"><a href="#python-标准库-http-cookies" class="headerlink" title="python 标准库 http.cookies"></a>python 标准库 http.cookies</h1><p>最近需要教孩子自然拼读,所以我想还是每天用一个关键词描述吧。</p>
+<blockquote>
+<p>traffic  .n UK /træf.ɪk/  US /ˈtræf.ɪk/  交通(拥堵)</p>
+<p><em>There was heavy/a lot of traffic on the roads this morning.</em>今天早晨道路上车流量很大。</p>
+<p><em>We got stuck in traffic for several hours.</em>我们碰上交通阻塞被堵了好几个小时。</p>
+<p><em>New measures have been introduced to try and ease traffic congestion in the city.</em>这个城市已经采取了新措施，试图缓解交通拥堵。</p>
+<p><em>Five people were injured in a traffic accident (= one involving vehicles).</em>有5人在交通事故中受伤。</p>
+<p>US <em>I heard about the accident on the traffic report on the radio this morning.</em>我在今早电台的交通节目中听到了这起事故。</p>
+<p><em>Air traffic has increased 30 percent in the last decade.</em>在过去的10年里，空中交通量增加了30%。</p>
+</blockquote>
+<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200109_traffic.jpg?raw=true" alt></p>
+<h2 id="python-标准库学习-http-cookies"><a href="#python-标准库学习-http-cookies" class="headerlink" title="python 标准库学习   http.cookies"></a>python 标准库学习   http.cookies</h2><p>http.cookies 模块定义了类实现了http状态管理机制和cookies概念。不仅支持字符串格式化的cookie值,还支持任何序列化对象的cookie值。</p>
+<p>模块的实现完全遵循 <a href="https://tools.ietf.org/html/rfc2109.html" target="_blank" rel="noopener"><strong>RFC 2109</strong></a> 和  <a href="https://tools.ietf.org/html/rfc2068.html" target="_blank" rel="noopener"><strong>RFC 2068</strong></a> 协议规范。但MSIE 3.0x不遵循那些规范中概述的字符规则，并且当涉及Cookie处理时，许多当今的浏览器和服务器已经放宽了解析规则。</p>
+<p>Cookie名定义字符集中非法字符囊括在 <code>string.ascii_letters</code>,<code>string.digits</code> 和 <code>!#$%&amp;&#39;*+-.^_</code>|~:`中。    </p>
+<h2 id="核心类"><a href="#核心类" class="headerlink" title="核心类"></a>核心类</h2><ul>
+<li><p><em>exception</em> <code>http.cookies.CookieError</code></p>
+<p>违反<a href="https://tools.ietf.org/html/rfc2109.html" target="_blank" rel="noopener"><strong>RFC 2109</strong></a> 规范中的错误,例如:不正确的属性或不正确的Set-Cookies header</p>
+</li>
+<li><p><em>class</em> <code>http.cookies.BaseCookie([*input*])</code></p>
+<p>这个类是一个字典类型的对象,键是字符串,值是 <a href="https://docs.python.org/zh-cn/3.8/library/http.cookies.html#http.cookies.Morsel" target="_blank" rel="noopener"><code>Morsel</code></a> 的实例。</p>
+<p>如果设置参数<code>input</code>,实际上是通过<a href="https://docs.python.org/zh-cn/3.8/library/http.cookies.html#http.cookies.BaseCookie.load" target="_blank" rel="noopener"><code>load()</code></a> 方法设置。</p>
+</li>
+<li><p><em>class</em> <code>http.cookies.SimpleCookie([*input*])</code></p>
+<p>这个类是从<a href="https://docs.python.org/zh-cn/3.8/library/http.cookies.html#http.cookies.BaseCookie" target="_blank" rel="noopener"><code>BaseCookie</code></a> 继承过来并重写了   <code>value_decode()</code> and <code>value_encode()</code>方法。</p>
+<p>SimpleCookies支持字符串格式的cookie values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       </p>
+</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/01/09/python-standard-library-http-cookies/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/08/python-standard-library-http/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/01/08/python-standard-library-http/" class="post-title-link" itemprop="url">python standard library http</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-08 10:57:24 / 修改时间：11:55:07" itemprop="dateCreated datePublished" datetime="2020-01-08T10:57:24+08:00">2020-01-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">13k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">12 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="python-标准库之-http"><a href="#python-标准库之-http" class="headerlink" title="python 标准库之 http"></a>python 标准库之 http</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20191223_blog_2.jpg?raw=true" alt></p>
+<p>山雨欲来风满楼,最近不是很太平,希望世界和平吧。</p>
+<h2 id="python-标准库学习-之-http"><a href="#python-标准库学习-之-http" class="headerlink" title="python 标准库学习 之  http"></a>python 标准库学习 之  http</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/http.html#module-http" target="_blank" rel="noopener"><code>http</code></a> 是一个包，它收集了多个用于处理超文本传输协议的模块:</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/http.html" target="_blank" rel="noopener">参考文档</a></p>
+<ul>
+<li><a href="https://docs.python.org/zh-cn/3.8/library/http.client.html#module-http.client" target="_blank" rel="noopener"><code>http.client</code></a> 是一个低层级的 HTTP 协议客户端；对于高层级的 URL 访问请使用 <a href="https://docs.python.org/zh-cn/3.8/library/urllib.request.html#module-urllib.request" target="_blank" rel="noopener"><code>urllib.request</code></a></li>
+<li><a href="https://docs.python.org/zh-cn/3.8/library/http.server.html#module-http.server" target="_blank" rel="noopener"><code>http.server</code></a> 包含基于 <a href="https://docs.python.org/zh-cn/3.8/library/socketserver.html#module-socketserver" target="_blank" rel="noopener"><code>socketserver</code></a> 的基本 HTTP 服务类</li>
+<li><a href="https://docs.python.org/zh-cn/3.8/library/http.cookies.html#module-http.cookies" target="_blank" rel="noopener"><code>http.cookies</code></a> 包含一些有用来实现通过 cookies 进行状态管理的工具</li>
+<li><a href="https://docs.python.org/zh-cn/3.8/library/http.cookiejar.html#module-http.cookiejar" target="_blank" rel="noopener"><code>http.cookiejar</code></a> 提供了 cookies 的持久化</li>
+</ul>
+<p>本次只整理 http.client的内容,后面持续更新。</p>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p><code>class http.HTTPStatus</code></p>
+<p>使用方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> http <span class="keyword">import</span> HTTPStatus</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>HTTPStatus.OK</span><br><span class="line">&lt;HTTPStatus.OK: <span class="number">200</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>HTTPStatus.OK == <span class="number">200</span></span><br><span class="line"><span class="literal">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>HTTPStatus.OK.value</span><br><span class="line"><span class="number">200</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>HTTPStatus.OK.phrase</span><br><span class="line"><span class="string">'OK'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>HTTPStatus.OK.description</span><br><span class="line"><span class="string">'Request fulfilled, document follows'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(HTTPStatus)</span><br><span class="line">[&lt;HTTPStatus.CONTINUE: <span class="number">100</span>&gt;, &lt;HTTPStatus.SWITCHING_PROTOCOLS: <span class="number">101</span>&gt;, ...]</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/01/08/python-standard-library-http/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/07/python-standard-library-glob/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/01/07/python-standard-library-glob/" class="post-title-link" itemprop="url">python standard library glob</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-07 09:37:46 / 修改时间：11:23:55" itemprop="dateCreated datePublished" datetime="2020-01-07T09:37:46+08:00">2020-01-07</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
 
                 
                 
@@ -831,466 +2463,36 @@
 
       
         
-          <h1 id="python-标准库之-webbrowser"><a href="#python-标准库之-webbrowser" class="headerlink" title="python 标准库之 webbrowser"></a>python 标准库之 webbrowser</h1><h2 id="没啥前提"><a href="#没啥前提" class="headerlink" title="没啥前提"></a>没啥前提</h2><p>一张图表示我现在的心情</p>
-<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200103_cold.jpg?raw=true" alt="冷啊"></p>
-<h2 id="标准库-webbrowser"><a href="#标准库-webbrowser" class="headerlink" title="标准库 webbrowser"></a>标准库 webbrowser</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/webbrowser.html#module-webbrowser" target="_blank" rel="noopener"><code>webbrowser</code></a> 模块提供了一个高级接口，允许向用户显示基于Web的文档。 在大多数情况下，只需从该模块调用 <a href="https://docs.python.org/zh-cn/3.8/library/webbrowser.html#webbrowser.open" target="_blank" rel="noopener"><code>open()</code></a> 函数就可以了。</p>
-<p>在 Unix 下，图形浏览器在 X11 下是首选，但如果图形浏览器不可用或 X11 显示不可用，则将使用文本模式浏览器。 如果使用文本模式浏览器，则调用进程将阻塞，直到用户退出浏览器。</p>
-<p>如果存在环境变量 <code>BROWSER</code> ，则将其解释为 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.pathsep" target="_blank" rel="noopener"><code>os.pathsep</code></a> 分隔的浏览器列表，以便在平台默认值之前尝试。 当列表部分的值包含字符串 <code>％s</code> 时，它被解释为一个文字浏览器命令行，用于替换 <code>％s</code> 的参数 URL ；如果该部分不包含 <code>％s</code>，则它只被解释为要启动的浏览器的名称。</p>
-<p>脚本 <strong>webbrowser</strong> 可以用作模块的命令行界面。它接受一个 URL 作为参数。还接受以下可选参数：<code>-n</code> 如果可能，在新的浏览器窗口中打开 URL ； <code>-t</code> 在新的浏览器页面（“标签”）中打开 URL。这些选择当然是相互排斥的。用法示例:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m webbrowser -t <span class="string">"https://jeffsui.github.io"</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2020/01/03/python-standard-library-webbrowser/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/02/python-standard-library-csv/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/01/02/python-standard-library-csv/" class="post-title-link" itemprop="url">python standard library csv</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-01-02 14:33:07" itemprop="dateCreated datePublished" datetime="2020-01-02T14:33:07+08:00">2020-01-02</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-03 21:58:47" itemprop="dateModified" datetime="2020-03-03T21:58:47+08:00">2020-03-03</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">5.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">5 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="python-标准库学习之csv"><a href="#python-标准库学习之csv" class="headerlink" title="python 标准库学习之csv"></a>python 标准库学习之<code>csv</code></h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>2019年立的flag,今年继续,标准库系列文章继续更新。</p>
-<p>今天是真冷啊,屋里头才16℃,只能用一张图来表示我的心情。</p>
-<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200102_not_cold.jpg?raw=true" alt></p>
-<h2 id="标准库-csv"><a href="#标准库-csv" class="headerlink" title="标准库 csv"></a>标准库 csv</h2><h3 id="文档路径"><a href="#文档路径" class="headerlink" title="文档路径"></a>文档路径</h3><p><a href="https://docs.python.org/zh-cn/3.8/library/csv.html" target="_blank" rel="noopener">python标准库csv</a></p>
-<h3 id="CSV-文件格式"><a href="#CSV-文件格式" class="headerlink" title="CSV 文件格式"></a><code>CSV</code> 文件格式</h3><p>文件扩展名为.csv,通用的电子表格文件格式,经常使用在数据分析中。</p>
-<p>分隔符可能有所差别, python中的csv模块提供了对csv文件的读写操作,非常方便。</p>
-<h3 id="csv-常用方法"><a href="#csv-常用方法" class="headerlink" title="csv 常用方法"></a><code>csv</code> 常用方法</h3><h4 id="csv-reader-csvfile-dialect-39-excel-39-fmtparams"><a href="#csv-reader-csvfile-dialect-39-excel-39-fmtparams" class="headerlink" title="csv.reader(csvfile,dialect=&#39;excel&#39;, ***fmtparams)"></a><code>csv.reader(csvfile,dialect=&#39;excel&#39;, ***fmtparams)</code></h4><blockquote>
-<p>返回一个reader对象,该对象遍历csvfile。csv对象可以是任何对象,只要这个对象支持iteratable协议,并在每次调用<code>__next__()</code>方法时都返回字符串即可。如果csvfile是文件对象,则打开它时应使用<code>newline=&#39;&#39;</code>。可选参数dialect是用于不同的csv文件类型,它可以是 <a href="https://docs.python.org/zh-cn/3.8/library/csv.html#csv.Dialect" target="_blank" rel="noopener"><code>Dialect</code></a> 类的子类的实例，也可以是 <a href="https://docs.python.org/zh-cn/3.8/library/csv.html#csv.list_dialects" target="_blank" rel="noopener"><code>list_dialects()</code></a> 函数返回的字符串之一。完整的解释可以参考<a href="https://docs.python.org/zh-cn/3.8/library/csv.html#csv-fmt-params" target="_blank" rel="noopener">csv文件格式参数</a>。</p>
-<p>csv文件的每一行都会默认当做字符串列表解析,除非指定了 <code>QUOTE_NONNUMERIC</code> 格式选项（在这种情况下，未加引号的字段会转换为浮点数），否则不会执行自动数据类型转换。</p>
+          <h1 id="python-标准库之-glob"><a href="#python-标准库之-glob" class="headerlink" title="python 标准库之 glob"></a>python 标准库之 glob</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200107_cold.jpg?raw=true" alt></p>
+<p>在严寒的冬季,温暖人的只有笑脸了吧。</p>
+<h2 id="今天继续给大家介绍python标准库-glob"><a href="#今天继续给大家介绍python标准库-glob" class="headerlink" title="今天继续给大家介绍python标准库 glob"></a>今天继续给大家介绍python标准库 glob</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/glob.html" target="_blank" rel="noopener">参考文档</a></p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/glob.html#module-glob" target="_blank" rel="noopener"><code>glob</code></a> 模块可根据 Unix 终端所用规则找出所有匹配特定模式的路径名，但会按不确定的顺序返回结果。支持查找文件只用到三个匹配符：’*’, “?”, “[ ]”，不包括波浪线~,因为这个符号在linux代表当前用户的home目录。</p>
+<p>对于波浪号和终端变量扩展，请使用 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.expanduser" target="_blank" rel="noopener"><code>os.path.expanduser()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.expandvars" target="_blank" rel="noopener"><code>os.path.expandvars()</code></a>)。</p>
+<p>根据阅读代码发现,这个底层使用cpython实现, 有兴趣的童鞋可以移步到源代码: <a href="https://github.com/python/cpython/tree/3.8/Lib/glob.py" target="_blank" rel="noopener">Lib/glob.py</a></p>
+<p>相对于高级面向对象路径查找模块<a href="https://docs.python.org/zh-cn/3.8/library/pathlib.html#module-pathlib" target="_blank" rel="noopener">pathlib</a>  ,glob更偏向底层实现。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><ul>
+<li><p><code>glob.glob(pathname, *, recursive=False)</code></p>
+<blockquote>
+<p>返回匹配 <em>pathname</em> 的可能为空的路径名列表，其中的元素必须为包含一个路径信息的字符串。 <em>pathname</em> 可以是绝对路径 (如 <code>/usr/src/Python-1.5/Makefile</code>) 或相对路径 (如 <code>../../Tools/*/*.gif</code>)，并且可包含 shell 风格的通配符。 结果也将包含无效的符号链接 (与在 shell 中一致)。 结果是否排序取决于具体文件系统。</p>
+<p>如果 <em>recursive</em> 为真值，则模式 “<code>**</code>“ 将匹配目录中的任何文件以及零个或多个目录、子目录和符号链接。 如果模式加了一个 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.sep" target="_blank" rel="noopener"><code>os.sep</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.altsep" target="_blank" rel="noopener"><code>os.altsep</code></a> 则将不匹配文件。</p>
 </blockquote>
-<p>一个读文件例子</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> csv</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">with</span> open(<span class="string">'eggs.csv'</span>, newline=<span class="string">''</span>) <span class="keyword">as</span> csvfile:</span><br><span class="line"><span class="meta">... </span>    spamreader = csv.reader(csvfile, delimiter=<span class="string">' '</span>, quotechar=<span class="string">'|'</span>)</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">for</span> row <span class="keyword">in</span> spamreader:</span><br><span class="line"><span class="meta">... </span>        print(<span class="string">', '</span>.join(row))</span><br><span class="line">Spam, Spam, Spam, Spam, Spam, Baked Beans</span><br><span class="line">Spam, Lovely Spam, Wonderful Spam</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2020/01/02/python-standard-library-csv/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/26/using-python-venv-to-create-virtual-environment/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/12/26/using-python-venv-to-create-virtual-environment/" class="post-title-link" itemprop="url">using python venv to create virtual environment</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-12-26 11:17:57" itemprop="dateCreated datePublished" datetime="2019-12-26T11:17:57+08:00">2019-12-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-03 21:56:41" itemprop="dateModified" datetime="2020-03-03T21:56:41+08:00">2020-03-03</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">14k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">13 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="python-env-创建虚拟环境"><a href="#python-env-创建虚拟环境" class="headerlink" title="python env 创建虚拟环境"></a>python env 创建虚拟环境</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>又断更了,长此以往,我可能无法完成100天打卡任务了。</p>
-<p>红包是刺激自己前进的动力。</p>
-<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20191223_blog_3.jpg?raw=true" alt></p>
-<h2 id="python-标准库03之虚拟环境创建"><a href="#python-标准库03之虚拟环境创建" class="headerlink" title="python 标准库03之虚拟环境创建"></a>python 标准库03之虚拟环境创建</h2><p><a href="https://docs.python.org/zh-cn/3/library/venv.html" target="_blank" rel="noopener">参考文档</a></p>
-<p>python目前官方推荐的工具是<code>venv</code></p>
-<p>顺便介绍下目前常用的python虚拟环境工具</p>
-<ul>
-<li>virsualenv</li>
-<li>pyvenv (3.3,3.4中推荐的虚拟环境创建工具,3.6中被弃用)</li>
-<li>venv(3.6以后推荐的虚拟环境创建工具)</li>
+<p><strong>备注</strong>：在一个较大的目录树中使用 “<code>**</code>“ 模式可能会消耗非常多的时间。 <em>3.5 版更改:</em> 支持使用 “<code>**</code>“ 的递归 glob</p>
+</li>
+<li><p><code>glob.iglob(pathname, *, recursive=False)</code></p>
+<blockquote>
+<p>返回一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-iterator" target="_blank" rel="noopener">iterator</a>，它会产生与 <a href="https://docs.python.org/zh-cn/3.8/library/glob.html#module-glob" target="_blank" rel="noopener"><code>glob()</code></a> 相同的结果，但不会实际地同时保存它们。</p>
+</blockquote>
+</li>
+<li><p><code>glob.escape(pathname)</code></p>
+<blockquote>
+<p>转义所有特殊字符 (<code>&#39;?&#39;</code>, <code>&#39;*&#39;</code> 和 <code>&#39;[&#39;</code>)。 这适用于当你想要匹配可能带有特殊字符的任意字符串字面值的情况。 在 drive/UNC 共享点中的特殊字符不会被转义，例如在 Windows 上 <code>escape(&#39;//?/c:/Quo vadis?.txt&#39;)</code> 将返回 <code>&#39;//?/c:/Quo vadis[?].txt&#39;</code>。</p>
+</blockquote>
+</li>
 </ul>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/12/26/using-python-venv-to-create-virtual-environment/#more" rel="contents">
+              <a class="btn" href="/2020/01/07/python-standard-library-glob/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1350,7 +2552,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/23/python-standard-library-2-dictionary/">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/06/python-standard-library-textwrap/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jeff Sui">
@@ -1370,7 +2572,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/12/23/python-standard-library-2-dictionary/" class="post-title-link" itemprop="url">python standard library -2 dictionary</a>
+                <a href="/2020/01/06/python-standard-library-textwrap/" class="post-title-link" itemprop="url">python standard library textwrap</a>
               
             
           </h1>
@@ -1395,24 +2597,12 @@
                 
               
 
-              <time title="创建时间：2019-12-23 14:09:14" itemprop="dateCreated datePublished" datetime="2019-12-23T14:09:14+08:00">2019-12-23</time>
+              <time title="创建时间：2020-01-06 14:56:14 / 修改时间：15:33:40" itemprop="dateCreated datePublished" datetime="2020-01-06T14:56:14+08:00">2020-01-06</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-03 21:57:08" itemprop="dateModified" datetime="2020-03-03T21:57:08+08:00">2020-03-03</time>
               
             
           </span>
@@ -1430,13 +2620,6 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
 
                 
                 
@@ -1465,7 +2648,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">7.7k</span>
+                <span title="本文字数">3.7k</span>
               
 
               
@@ -1479,7 +2662,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">7 分钟</span>
+                <span title="阅读时长">3 分钟</span>
               
             </div>
           
@@ -1500,1310 +2683,30 @@
 
       
         
-          <h1 id="python-标准库学习笔记-–-dictionary"><a href="#python-标准库学习笔记-–-dictionary" class="headerlink" title="python 标准库学习笔记 – dictionary"></a>python 标准库学习笔记 – dictionary</h1><h2 id="0-0-前言"><a href="#0-0-前言" class="headerlink" title="0.0 前言"></a>0.0 前言</h2><p>家里孩子发烧了,延迟更新标准库学习笔记</p>
-<p>折腾了三个晚上,一家三口都累倒了。</p>
-<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20191223_rear-view-of-man-in-knit-hat.jpg?raw=true" alt></p>
-<p>人生就好比一个蹒跚学步的孩童,很容易被外界环境影响。</p>
-<h2 id="1-0-标准库-内置函数"><a href="#1-0-标准库-内置函数" class="headerlink" title="1.0 标准库- 内置函数"></a>1.0 标准库- 内置函数</h2><p>参考文档:  <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#mapping-types-dict" target="_blank" rel="noopener">内置类型-字典</a></p>
-<p>python中主要内置类型包括<code>numbers</code>,<code>sequences</code>,<code>mappings</code>,<code>classes</code>,<code>instance</code>和<code>exception</code>。</p>
-<h3 id="1-1-逻辑值检测"><a href="#1-1-逻辑值检测" class="headerlink" title="1.1 逻辑值检测"></a>1.1 逻辑值检测</h3><p>任何对象都可以进行逻辑值检测,以便在<code>if</code> 或<code>while</code>作为条件或是作为上下文所指返回值是布尔类型的表达式来使用。所以就有下面的用法。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">L = []</span><br><span class="line"><span class="keyword">if</span>(L):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">while</span>(L):</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-<p>一个对象在默认情况下被认为是<code>True</code>,除非该对象定义了<code>__boolean__()</code> 方法且返回<code>False</code> 或者定义<code>__len__()</code>方法且返回零。下面三种情况的内置对象都会被认为是逻辑假值。</p>
+          <h1 id="Python-标准库-之-textwrap"><a href="#Python-标准库-之-textwrap" class="headerlink" title="Python 标准库 之 textwrap"></a>Python 标准库 之 textwrap</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200106_code_2.jpg?raw=true" alt></p>
+<h2 id="今天给大家介绍-python标准库中的-textwrap"><a href="#今天给大家介绍-python标准库中的-textwrap" class="headerlink" title="今天给大家介绍 python标准库中的 textwrap"></a>今天给大家介绍 python标准库中的 textwrap</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/textwrap.html" target="_blank" rel="noopener">参考文档</a></p>
+<p>标准库 <code>textwrap</code> 是一个关于文本自动换行和填充的模块。</p>
+<p>关于这个模块官网介绍如下:</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/textwrap.html#module-textwrap" target="_blank" rel="noopener"><code>textwrap</code></a> 模块提供了一些快捷函数，以及可以完成所有工作的类 <a href="https://docs.python.org/zh-cn/3.8/library/textwrap.html#textwrap.TextWrapper" target="_blank" rel="noopener"><code>TextWrapper</code></a>。 </p>
+<p>如果你只是要对一两个文本字符串进行自动换行或填充，快捷函数应该就够用了；</p>
+<p>否则的话，你应该使用 <a href="https://docs.python.org/zh-cn/3.8/library/textwrap.html#textwrap.TextWrapper" target="_blank" rel="noopener"><code>TextWrapper</code></a> 的实例来提高效率。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><ul>
+<li><code>textwrap.wrap(*text*, *width=70*, kwargs)</code></li>
+</ul>
+<p>对 <em>text</em> (字符串) 中的单独段落自动换行以使每行长度最多为 <em>width</em> 个字符。 返回由输出行组成的列表，行尾不带换行符。</p>
 <ul>
-<li><p>None 或 False</p>
-</li>
-<li><p>任何数值类型的零</p>
-</li>
-<li><p>空的序列和多项集 包括 空字符串、空列表、空集合、空字典、空元组以及空数列(reange(0))</p>
+<li><code>textwrap.fill</code>(<em>text</em>, <em>width=70</em>, kwargs)</li>
+</ul>
+<p>对 <em>text</em> 中的单独段落自动换行，并返回一个包含被自动换行段落的单独字符串。 <a href="https://docs.python.org/zh-cn/3.8/library/textwrap.html#textwrap.fill" target="_blank" rel="noopener"><code>fill()</code></a> 是以下语句的快捷方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"\n"</span>.join(wrap(text, ...))</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>textwrap.shorten(text, width, kwargs)</code></li>
+</ul>
+<p>折叠并截短给定的 <em>text</em> 以符合给定的 <em>width</em>。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/12/23/python-standard-library-2-dictionary/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </li></ul></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/20/python-standard-library-1-string/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/12/20/python-standard-library-1-string/" class="post-title-link" itemprop="url">python_standard_library_1_string</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-12-20 09:20:15" itemprop="dateCreated datePublished" datetime="2019-12-20T09:20:15+08:00">2019-12-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-03-03 21:58:06" itemprop="dateModified" datetime="2020-03-03T21:58:06+08:00">2020-03-03</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">8.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">8 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="python-标准库学习笔记-–-string"><a href="#python-标准库学习笔记-–-string" class="headerlink" title="python 标准库学习笔记 – string"></a>python 标准库学习笔记 – string</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天是2019年12月20日,刚刚晴朗的天</p>
-<p><a href="https://postimg.cc/mcq3BC7F" target="_blank" rel="noopener"><img src="https://i.postimg.cc/xCj6GPCg/20191220.jpg" alt="20191220.jpg"></a></p>
-<p>入冬以来的第二场雪就悄然而至</p>
-<p><a href="https://postimg.cc/9rHxR2ZD" target="_blank" rel="noopener"><img src="https://i.postimg.cc/ZKCXQKqx/20191220-1.jpg" alt="20191220-1.jpg"></a></p>
-<p>从今天开始,坚持更新博文100天,也算是对python学习的总结。那么从哪里开始呢？</p>
-<p>那就从<a href="&quot;https://docs.python.org/zh-cn/3.8/library&quot;">python标准库</a>开始撸吧。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/12/20/python-standard-library-1-string/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/12/vscode-Cannot-edit-in-read-only-editor/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/12/12/vscode-Cannot-edit-in-read-only-editor/" class="post-title-link" itemprop="url">vscode Cannot edit in read-only editor</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-12-12 14:35:56 / 修改时间：14:45:34" itemprop="dateCreated datePublished" datetime="2019-12-12T14:35:56+08:00">2019-12-12</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/IDEs/" itemprop="url" rel="index"><span itemprop="name">IDEs</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">232</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="vscode-Cannot-edit-in-read-only-editor-错误解决"><a href="#vscode-Cannot-edit-in-read-only-editor-错误解决" class="headerlink" title="vscode Cannot edit in read-only editor 错误解决"></a>vscode Cannot edit in read-only editor 错误解决</h1><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><blockquote>
-<p>使用了<code>Run Code</code>插件,output是只读的</p>
-</blockquote>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>将 run code设置为在Terminal中运行</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File -&gt; Preferences -&gt; Settings</span><br></pre></td></tr></table></figure>
-<p>找到 <code>run code in terminal</code> 打上 √</p>
-<p>或 在settings.json文件中,添加一行配置信息</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"code-runner.runInTerminal": true</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/03/Install-python3-8-on-Centos6-5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/12/03/Install-python3-8-on-Centos6-5/" class="post-title-link" itemprop="url">Install python3.8 on Centos6.5</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-12-03 09:48:12 / 修改时间：09:55:47" itemprop="dateCreated datePublished" datetime="2019-12-03T09:48:12+08:00">2019-12-03</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">742</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="1-安装必要的工具"><a href="#1-安装必要的工具" class="headerlink" title="1. 安装必要的工具"></a>1. 安装必要的工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install yum-utils</span><br></pre></td></tr></table></figure>
-<h3 id="2-使用-yum-builddep-命令-设置-python-编译环境，下载缺少的依赖"><a href="#2-使用-yum-builddep-命令-设置-python-编译环境，下载缺少的依赖" class="headerlink" title="2. 使用 yum-builddep 命令 设置 python 编译环境，下载缺少的依赖"></a>2. 使用 yum-builddep 命令 设置 python 编译环境，下载缺少的依赖</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum-builddep python</span><br></pre></td></tr></table></figure>
-<h3 id="3-下载-python3-的源代码"><a href="#3-下载-python3-的源代码" class="headerlink" title="3. 下载 python3 的源代码"></a>3. 下载 python3 的源代码</h3><p>源代码可以在 <a href="https://www.python.org/ftp/" target="_blank" rel="noopener">https://www.python.org/ftp/python/ </a> 下载</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://www.python.org/ftp/python/3.8.0/Python-3.8.0a1.tgz</span><br></pre></td></tr></table></figure>
-<h3 id="4-对源代码进行解压并编译安装"><a href="#4-对源代码进行解压并编译安装" class="headerlink" title="4. 对源代码进行解压并编译安装"></a>4. 对源代码进行解压并编译安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar xf Python-3.8.0a1.tgz</span><br><span class="line">cd Python-3.8.0a1</span><br><span class="line">./configure</span><br><span class="line">sudo make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/12/03/Install-python3-8-on-Centos6-5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/12/02/ios-devices-list/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/12/02/ios-devices-list/" class="post-title-link" itemprop="url">ios devices list</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-12-02 09:18:48 / 修改时间：09:27:15" itemprop="dateCreated datePublished" datetime="2019-12-02T09:18:48+08:00">2019-12-02</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ios/" itemprop="url" rel="index"><span itemprop="name">ios</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">2.7k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="ios-设备一览表"><a href="#ios-设备一览表" class="headerlink" title="ios 设备一览表"></a>ios 设备一览表</h1><h2 id="iPhone"><a href="#iPhone" class="headerlink" title="iPhone"></a>iPhone</h2><table>
-<thead>
-<tr>
-<th>设备</th>
-<th>时间</th>
-<th>CPU</th>
-<th>分辨率</th>
-<th>大小</th>
-<th>密度</th>
-<th>@Nx</th>
-<th>iOS系统</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>iPhone</td>
-<td>2007</td>
-<td>armv6</td>
-<td>320 x 480</td>
-<td>3.5</td>
-<td>165</td>
-<td>@1x</td>
-<td>1.0 - 3.1.3</td>
-</tr>
-<tr>
-<td>iPhone 3G</td>
-<td>2008</td>
-<td>armv6</td>
-<td>320 x 480</td>
-<td>3.5</td>
-<td>165</td>
-<td>@1x</td>
-<td>2.0 - 4.2.1</td>
-</tr>
-<tr>
-<td>iPhone 3GS</td>
-<td>2009</td>
-<td>armv7</td>
-<td>320 x 480</td>
-<td>3.5</td>
-<td>165</td>
-<td>@1x</td>
-<td>3.0 - 6.1.4</td>
-</tr>
-<tr>
-<td>iPhone 4 (GSM)</td>
-<td>2010</td>
-<td>armv7</td>
-<td>640 x 960</td>
-<td>3.5</td>
-<td>330</td>
-<td>@2x</td>
-<td>4.0 - 7.1.2</td>
-</tr>
-<tr>
-<td>iPhone 4 (CDMA)</td>
-<td>2011</td>
-<td>armv7</td>
-<td>640 x 960</td>
-<td>3.5</td>
-<td>330</td>
-<td>@2x</td>
-<td>4.2.4 - 7.1.2</td>
-</tr>
-<tr>
-<td>iPhone 4S</td>
-<td>2011</td>
-<td>armv7</td>
-<td>640 x 960</td>
-<td>3.5</td>
-<td>330</td>
-<td>@2x</td>
-<td>5.0 - 9.3.5</td>
-</tr>
-<tr>
-<td>iPhone 5</td>
-<td>2012</td>
-<td>armv7s</td>
-<td>640 x 1136</td>
-<td>4</td>
-<td>326</td>
-<td>@2x</td>
-<td>6.0 - 10.3.3</td>
-</tr>
-<tr>
-<td>iPhone 5c</td>
-<td>2013</td>
-<td>armv7s</td>
-<td>640 x 1136</td>
-<td>4</td>
-<td>326</td>
-<td>@2x</td>
-<td>7.0 - 10.3.3</td>
-</tr>
-<tr>
-<td>iPhone 5s</td>
-<td>2013</td>
-<td>arm64</td>
-<td>640 x 1136</td>
-<td>4</td>
-<td>326</td>
-<td>@2x</td>
-<td>7.0 -</td>
-</tr>
-<tr>
-<td>iPhone 6</td>
-<td>2014</td>
-<td>arm64</td>
-<td>750 x 1334</td>
-<td>4.7</td>
-<td>326</td>
-<td>@2x</td>
-<td>8.0 -</td>
-</tr>
-<tr>
-<td>iPhone 6 Plus</td>
-<td>2014</td>
-<td>arm64</td>
-<td>1242 x 2208</td>
-<td>5.5</td>
-<td>461</td>
-<td>@3x</td>
-<td>8.0 -</td>
-</tr>
-<tr>
-<td>iPhone 6s</td>
-<td>2015</td>
-<td>arm64</td>
-<td>750 x 1334</td>
-<td>4.7</td>
-<td>326</td>
-<td>@2x</td>
-<td>9.0 -</td>
-</tr>
-<tr>
-<td>iPhone 6s Plus</td>
-<td>2015</td>
-<td>arm64</td>
-<td>1242 x 2208</td>
-<td>5.5</td>
-<td>461</td>
-<td>@3x</td>
-<td>9.0 -</td>
-</tr>
-<tr>
-<td>iPhone SE</td>
-<td>2016</td>
-<td>arm64</td>
-<td>640 x 1136</td>
-<td>4</td>
-<td>326</td>
-<td>@2x</td>
-<td>9.3 -</td>
-</tr>
-<tr>
-<td>iPhone 7</td>
-<td>2016</td>
-<td>arm64</td>
-<td>750 x 1334</td>
-<td>4.7</td>
-<td>326</td>
-<td>@2x</td>
-<td>10.0 -</td>
-</tr>
-<tr>
-<td>iPhone 7 Plus</td>
-<td>2016</td>
-<td>arm64</td>
-<td>1242 x 2208</td>
-<td>5.5</td>
-<td>461</td>
-<td>@3x</td>
-<td>10.0 -</td>
-</tr>
-<tr>
-<td>iPhone 8</td>
-<td>2017</td>
-<td>arm64</td>
-<td>750 x 1334</td>
-<td>4.7</td>
-<td>326</td>
-<td>@2x</td>
-<td>11.0 -</td>
-</tr>
-<tr>
-<td>iPhone 8 Plus</td>
-<td>2017</td>
-<td>arm64</td>
-<td>1242 x 2208</td>
-<td>5.5</td>
-<td>461</td>
-<td>@3x</td>
-<td>11.0 -</td>
-</tr>
-<tr>
-<td>iPhone X</td>
-<td>2017</td>
-<td>arm64</td>
-<td>1125 x 2436</td>
-<td>5.8</td>
-<td>463</td>
-<td>@3x</td>
-<td>11.0 -</td>
-</tr>
-<tr>
-<td>iPhone XS</td>
-<td>2018</td>
-<td>arm64</td>
-<td>1125 x 2436</td>
-<td>5.8</td>
-<td>463</td>
-<td>@3x</td>
-<td>12.0 -</td>
-</tr>
-<tr>
-<td>iPhone XS Max</td>
-<td>2018</td>
-<td>arm64</td>
-<td>1242 x 2688</td>
-<td>6.5</td>
-<td>458</td>
-<td>@3x</td>
-<td>12.0 -</td>
-</tr>
-<tr>
-<td>iPhone XR</td>
-<td>2018</td>
-<td>arm64</td>
-<td>828 x 1792</td>
-<td>6.1</td>
-<td>326</td>
-<td>@2x</td>
-<td>12.0 -</td>
-</tr>
-<tr>
-<td>iPhone 11</td>
-<td>2019</td>
-<td>arm64</td>
-<td>828 x 1792</td>
-<td>6.1</td>
-<td>326</td>
-<td>@2x</td>
-<td>13.0 -</td>
-</tr>
-<tr>
-<td>iPhone 11 Pro</td>
-<td>2019</td>
-<td>arm64</td>
-<td>1125 x 2436</td>
-<td>5.8</td>
-<td>458</td>
-<td>@3x</td>
-<td>13.0 -</td>
-</tr>
-<tr>
-<td>iPhone 11 Pro Max</td>
-<td>2019</td>
-<td>arm64</td>
-<td>1242 x 2688</td>
-<td>6.5</td>
-<td>458</td>
-<td>@3x</td>
-<td>13.0 -</td>
-</tr>
-</tbody>
-</table>
-<p>注：屏幕分辨率单位为英寸(inch)，分辨率密度单位为ppi</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/12/02/ios-devices-list/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2019/11/21/git-diff-usage/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jeff Sui">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="凭海临风的IT江湖">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/11/21/git-diff-usage/" class="post-title-link" itemprop="url">git diff usage</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-11-21 12:04:12 / 修改时间：13:58:19" itemprop="dateCreated datePublished" datetime="2019-11-21T12:04:12+08:00">2019-11-21</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/版本管理/" itemprop="url" rel="index"><span itemprop="name">版本管理</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">881</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Git-中-diff-命令使用"><a href="#Git-中-diff-命令使用" class="headerlink" title="Git 中 diff 命令使用"></a>Git 中 diff 命令使用</h1><p>整理总结工作中常用的<code>git</code> 命令, 今天是一个非常有用的命令 <code>git diff</code></p>
-<p>主要作用是用来比较差异，包括 <code>commits</code>之间,<code>commit</code> 和 工作区间 差异 </p>
-<p>命令格式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git diff [&lt;options&gt;] [&lt;commit&gt;] [--] [&lt;path&gt;…​]</span><br><span class="line">git diff [&lt;options&gt;] --cached [&lt;commit&gt;] [--] [&lt;path&gt;…​]</span><br><span class="line">git diff [&lt;options&gt;] &lt;commit&gt; &lt;commit&gt; [--] [&lt;path&gt;…​]</span><br><span class="line">git diff [&lt;options&gt;] &lt;blob&gt; &lt;blob&gt;</span><br><span class="line">git diff [&lt;options&gt;] --no-index [--] &lt;path&gt; &lt;path&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="1-比较工作区与暂存区"><a href="#1-比较工作区与暂存区" class="headerlink" title="1. 比较工作区与暂存区"></a>1. 比较工作区与暂存区</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff 不加参数</span><br></pre></td></tr></table></figure>
-<h2 id="2-比较暂存区与-本地-最新版本-最后一次commit"><a href="#2-比较暂存区与-本地-最新版本-最后一次commit" class="headerlink" title="2. 比较暂存区与 本地 最新版本 (最后一次commit)"></a>2. 比较暂存区与 本地 最新版本 (最后一次commit)</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached</span><br></pre></td></tr></table></figure>
-<h2 id="3-比较工作区与最新本地版本库"><a href="#3-比较工作区与最新本地版本库" class="headerlink" title="3. 比较工作区与最新本地版本库"></a>3. 比较工作区与最新本地版本库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD</span><br></pre></td></tr></table></figure>
-<h2 id="4-比较工作区与commit-id的差异"><a href="#4-比较工作区与commit-id的差异" class="headerlink" title="4. 比较工作区与commit-id的差异"></a>4. 比较工作区与commit-id的差异</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff commit-id</span><br></pre></td></tr></table></figure>
-<h2 id="5-比较暂存区与指定commit-id的差异"><a href="#5-比较暂存区与指定commit-id的差异" class="headerlink" title="5. 比较暂存区与指定commit-id的差异"></a>5. <strong>比较暂存区与指定commit-id的差异</strong></h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff --cached commit-id</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/11/21/git-diff-usage/#more" rel="contents">
+              <a class="btn" href="/2020/01/06/python-standard-library-textwrap/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2852,7 +2755,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2896,7 +2799,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">102</span>
+                    <span class="site-state-item-count">113</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -3208,7 +3111,31 @@
                     
                       
                     
-                    <span class="site-state-item-count">117</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">129</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -3285,7 +3212,7 @@
 <div class="widget-wrap">
     <div id="myCanvasContainer" class="widget tagcloud">
         <canvas width="250" height="250" id="resCanvas" style="width=100%">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2to3/">2to3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atexit/">atexit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keyword/">keyword</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">67</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/readline/">readline</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/select/">select</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selectors/">selectors</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">62</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/">turtle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unittest/">unittest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/">venv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2to3/">2to3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tkinter/">Tkinter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/argparse/">argparse</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atexit/">atexit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/code/">code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doctest/">doctest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dom/">dom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/">futures</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keyword/">keyword</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minidom/">minidom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">78</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/readline/">readline</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sax/">sax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sched/">sched</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/select/">select</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selectors/">selectors</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standar-library/">standar_library</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">72</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/">turtle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unittest/">unittest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/">venv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/">xml</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
         </canvas>
     </div>
 </div>
@@ -3321,7 +3248,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">686k</span>
+    <span title="站点总字数">803k</span>
   
 
   
@@ -3330,7 +3257,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">10:24</span>
+    <span title="站点阅读时长">12:10</span>
   
 </div>
 
