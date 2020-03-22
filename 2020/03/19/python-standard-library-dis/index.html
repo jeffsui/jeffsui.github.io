@@ -1,0 +1,2300 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-atom.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 dis">
+<meta name="keywords" content="python,standard_library,dis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard_library dis">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/03/19/python-standard-library-dis/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 dis">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200319_boring.jpg?raw=true">
+<meta property="og:updated_time" content="2020-03-22T15:54:04.453Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard_library dis">
+<meta name="twitter:description" content="python 标准库 dis">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200319_boring.jpg?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/03/19/python-standard-library-dis/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard_library dis | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/03/19/python-standard-library-dis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard_library dis
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-03-19 21:40:45" itemprop="dateCreated datePublished" datetime="2020-03-19T21:40:45+08:00">2020-03-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-03-22 23:54:04" itemprop="dateModified" datetime="2020-03-22T23:54:04+08:00">2020-03-22</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">15k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">14 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-dis"><a href="#python-标准库-dis" class="headerlink" title="python 标准库 dis"></a>python 标准库 dis</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200319_boring.jpg?raw=true" alt></p>
+<a id="more"></a>
+<blockquote>
+<p>每日一词</p>
+<p>boring  英 [bɔːd] 美 [bɔrd]  </p>
+<p>n.钻孔；镗削；地质钻探；钻屑</p>
+<p>adj.没趣的；令人厌倦（或厌烦）的</p>
+<p>v.“bore”的现在分词</p>
+<p>网络无聊的；令人厌烦的；乏味的</p>
+</blockquote>
+<p><strong>Source code:</strong> <a href="https://github.com/python/cpython/tree/3.8/Lib/dis.py" target="_blank" rel="noopener">Lib/dis.py</a></p>
+<hr>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/dis.html#module-dis" target="_blank" rel="noopener"><code>dis</code></a> 模块通过反汇编支持CPython的 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-bytecode" target="_blank" rel="noopener">bytecode</a> 分析。该模块作为输入的 CPython 字节码在文件 <code>Include/opcode.h</code> 中定义，并由编译器和解释器使用。</p>
+<p><strong>CPython implementation detail:</strong> 字节码是 CPython 解释器的实现细节。不保证不会在Python版本之间添加、删除或更改字节码。不应考虑将此模块的跨 Python VM 或 Python 版本的使用。</p>
+<p><em>在 3.6 版更改:</em> 每条指令使用2个字节。以前字节数因指令而异。</p>
+<p>示例：给出函数 <code>myfunc()</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myfunc</span><span class="params">(alist)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> len(alist)</span><br></pre></td></tr></table></figure>
+<p>可以使用以下命令显示 <code>myfunc()</code> 的反汇编</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>dis.dis(myfunc)</span><br><span class="line">  <span class="number">2</span>           <span class="number">0</span> LOAD_GLOBAL              <span class="number">0</span> (len)</span><br><span class="line">              <span class="number">2</span> LOAD_FAST                <span class="number">0</span> (alist)</span><br><span class="line">              <span class="number">4</span> CALL_FUNCTION            <span class="number">1</span></span><br><span class="line">              <span class="number">6</span> RETURN_VALUE</span><br></pre></td></tr></table></figure>
+<p>(“2” 是行号)。</p>
+<h2 id="字节码分析"><a href="#字节码分析" class="headerlink" title="字节码分析"></a>字节码分析</h2><p><em>3.4 新版功能.</em></p>
+<p>字节码分析 API 允许将 Python 代码片段包装在 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#dis.Bytecode" target="_blank" rel="noopener"><code>Bytecode</code></a> 对象中，以便轻松访问已编译代码的详细信息。</p>
+<ul>
+<li><p><em>class</em> <code>dis.Bytecode</code>(<em>x</em>, <em>**, </em>first_line=None<em>, </em>current_offset=None*)</p>
+<p>分析的字节码对应于函数、生成器、异步生成器、协程、方法、源代码字符串或代码对象（由 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#compile" target="_blank" rel="noopener"><code>compile()</code></a> 返回）。这是下面列出的许多函数的便利包装，最值得注意的是 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#dis.get_instructions" target="_blank" rel="noopener"><code>get_instructions()</code></a> ，迭代于 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#dis.Bytecode" target="_blank" rel="noopener"><code>Bytecode</code></a> 的实例产生字节码操作 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#dis.Instruction" target="_blank" rel="noopener"><code>Instruction</code></a> 的实例。如果 <em>first_line</em> 不是 <code>None</code> ，则表示应该为反汇编代码中的第一个源代码行报告的行号。否则，源行信息（如果有的话）直接来自反汇编的代码对象。如果 <em>current_offset</em> 不是 <code>None</code> ，则它指的是反汇编代码中的指令偏移量。设置它意味着 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#dis.Bytecode.dis" target="_blank" rel="noopener"><code>dis()</code></a> 将针对指定的操作码显示“当前指令”标记。<em>classmethod</em> <code>from_traceback</code>(<em>tb</em>)从给定回溯构造一个 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#dis.Bytecode" target="_blank" rel="noopener"><code>Bytecode</code></a> 实例，将设置 <em>current_offset</em> 为异常负责的指令。<code>codeobj</code>已编译的代码对象。<code>first_line</code>代码对象的第一个源代码行（如果可用）<code>dis</code>()返回字节码操作的格式化视图（与 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#dis.dis" target="_blank" rel="noopener"><code>dis.dis()</code></a> 打印相同，但作为多行字符串返回）。<code>info</code>()返回带有关于代码对象的详细信息的格式化多行字符串，如 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#dis.code_info" target="_blank" rel="noopener"><code>code_info()</code></a> 。<em>在 3.7 版更改:</em> 现在可以处理协程和异步生成器对象。</p>
+</li>
+</ul>
+<p>示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>bytecode = dis.Bytecode(myfunc)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> instr <span class="keyword">in</span> bytecode:</span><br><span class="line"><span class="meta">... </span>    print(instr.opname)</span><br><span class="line">...</span><br><span class="line">LOAD_GLOBAL</span><br><span class="line">LOAD_FAST</span><br><span class="line">CALL_FUNCTION</span><br><span class="line">RETURN_VALUE</span><br></pre></td></tr></table></figure>
+<h2 id="分析函数"><a href="#分析函数" class="headerlink" title="分析函数"></a>分析函数</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/dis.html#module-dis" target="_blank" rel="noopener"><code>dis</code></a> 模块还定义了以下分析函数，它们将输入直接转换为所需的输出。如果只执行单个操作，它们可能很有用，因此中间分析对象没用：</p>
+<ul>
+<li><p><code>dis.code_info</code>(<em>x</em>)</p>
+<p>返回格式化的多行字符串，其包含详细代码对象信息的用于被提供的函数、生成器、异步生成器、协程、方法、源代码字符串或代码对象。请注意，代码信息字符串的确切内容是高度依赖于实现的，它们可能会在Python VM或Python版本中任意更改。<em>3.2 新版功能.**在 3.7 版更改:</em> 现在可以处理协程和异步生成器对象。</p>
+</li>
+<li><p><code>dis.show_code</code>(<em>x</em>, <em>**, </em>file=None*)</p>
+<p>将提供的函数、方法。源代码字符串或代码对象的详细代码对象信息打印到 <em>file</em> （如果未指定 <em>file</em> ，则为 <code>sys.stdout</code> ）。这是 <code>print(code_info(x), file=file)</code> 的便捷简写，用于在解释器提示符下进行交互式探索。<em>3.2 新版功能.**在 3.4 版更改:</em> 添加 <em>file</em> 形参。</p>
+</li>
+<li><p><code>dis.dis</code>(<em>x=None</em>, <em>**, </em>file=None<em>, </em>depth=None*)</p>
+<p>反汇编 <em>x</em> 对象。 <em>x</em> 可以表示模块、类、方法、函数、生成器、异步生成器、协程、代码对象、源代码字符串或原始字节码的字节序列。对于模块，它会反汇编所有功能。对于一个类，它反汇编所有方法（包括类和静态方法）。对于代码对象或原始字节码序列，它每字节码指令打印一行。它还递归地反汇编嵌套代码对象（推导式代码，生成器表达式和嵌套函数，以及用于构建嵌套类的代码）。在被反汇编之前，首先使用 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#compile" target="_blank" rel="noopener"><code>compile()</code></a> 内置函数将字符串编译为代码对象。如果未提供任何对象，则此函数会反汇编最后一次回溯。如果提供的话，反汇编将作为文本写入提供的 <em>file</em> 参数，否则写入 <code>sys.stdout</code> 。递归的最大深度受 <em>depth</em> 限制，除非它是 <code>None</code> 。 <code>depth=0</code> 表示没有递归。<em>在 3.4 版更改:</em> 添加 <em>file</em> 形参。<em>在 3.7 版更改:</em> 实现了递归反汇编并添加了 <em>depth</em> 参数。<em>在 3.7 版更改:</em> 现在可以处理协程和异步生成器对象。</p>
+</li>
+<li><p><code>dis.distb</code>(<em>tb=None</em>, <em>**, </em>file=None*)</p>
+<p>如果没有传递，则使用最后一个回溯来反汇编回溯的堆栈顶部函数。 指示了导致异常的指令。如果提供的话，反汇编将作为文本写入提供的 <em>file</em> 参数，否则写入 <code>sys.stdout</code> 。<em>在 3.4 版更改:</em> 添加 <em>file</em> 形参。</p>
+</li>
+<li><p><code>dis.disassemble</code>(<em>code</em>, <em>lasti=-1</em>, <em>**, </em>file=None*)</p>
+</li>
+<li><p><code>dis.disco</code>(<em>code</em>, <em>lasti=-1</em>, <em>**, </em>file=None*)</p>
+<p>反汇编代码对象，如果提供了 <em>lasti</em> ，则指示最后一条指令。输出分为以下几列：行号，用于每行的第一条指令当前指令，表示为 <code>--&gt;</code> ，一个标记的指令，用 <code>&gt;&gt;</code> 表示，指令的地址，操作码名称，操作参数，和括号中参数的解释。参数解释识别本地和全局变量名称、常量值、分支目标和比较运算符。如果提供的话，反汇编将作为文本写入提供的 <em>file</em> 参数，否则写入 <code>sys.stdout</code> 。<em>在 3.4 版更改:</em> 添加 <em>file</em> 形参。</p>
+</li>
+<li><p><code>dis.get_instructions</code>(<em>x</em>, <em>**, </em>first_line=None*)</p>
+<p>在所提供的函数、方法、源代码字符串或代码对象中的指令上返回一个迭代器。迭代器生成一系列 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#dis.Instruction" target="_blank" rel="noopener"><code>Instruction</code></a> ，命名为元组，提供所提供代码中每个操作的详细信息。如果 <em>first_line</em> 不是 <code>None</code> ，则表示应该为反汇编代码中的第一个源代码行报告的行号。否则，源行信息（如果有的话）直接来自反汇编的代码对象。<em>3.4 新版功能.</em></p>
+</li>
+<li><p><code>dis.findlinestarts</code>(<em>code</em>)</p>
+<p>此生成器函数使用代码对象 <em>code</em> 的 <code>co_firstlineno</code> 和 <code>co_lnotab</code> 属性来查找源代码中行开头的偏移量。它们生成为 <code>(offset, lineno)</code> 对。请参阅 <a href="https://github.com/python/cpython/tree/3.8/objects/lnotab_notes.txt" target="_blank" rel="noopener">objects/lnotab_notes.txt</a> ，了解 <code>co_lnotab</code> 格式以及如何解码它。<em>在 3.6 版更改:</em> 行号可能会减少。 以前，他们总是在增加。</p>
+</li>
+<li><p><code>dis.findlabels</code>(<em>code</em>)</p>
+<p>检测作为跳转目标的代码对象 <em>code</em> 中的所有偏移量，并返回这些偏移量的列表。</p>
+</li>
+<li><p><code>dis.stack_effect</code>(<em>opcode</em>, <em>oparg=None</em>, <em>**, </em>jump=None*)</p>
+<p>使用参数 <em>oparg</em> 计算 <em>opcode</em> 的堆栈效果。如果代码有一个跳转目标并且 <em>jump</em> 是 <code>True</code> ，则 <code>drag_effect()</code> 将返回跳转的堆栈效果。如果 <em>jump</em> 是 <code>False</code> ，它将返回不跳跃的堆栈效果。如果 <em>jump</em> 是 <code>None</code> （默认值），它将返回两种情况的最大堆栈效果。<em>3.4 新版功能.**在 3.8 版更改:</em> 添加 <em>jump</em> 参数。</p>
+</li>
+</ul>
+<h2 id="Python字节码说明"><a href="#Python字节码说明" class="headerlink" title="Python字节码说明"></a>Python字节码说明</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/dis.html#dis.get_instructions" target="_blank" rel="noopener"><code>get_instructions()</code></a> 函数和 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#dis.Bytecode" target="_blank" rel="noopener"><code>Bytecode</code></a> 类提供字节码指令的详细信息的 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#dis.Instruction" target="_blank" rel="noopener"><code>Instruction</code></a> 实例：</p>
+<ul>
+<li><p><em>class</em> <code>dis.Instruction</code></p>
+<p>字节码操作的详细信息<code>opcode</code>操作的数字代码，对应于下面列出的操作码值和 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-collections" target="_blank" rel="noopener">操作码集合</a> 中的字节码值。<code>opname</code>人类可读的操作名称<code>arg</code>操作的数字参数（如果有的话），否则为 <code>Noneargval</code>已解析的 arg 值（如果已知），否则与 arg 相同<code>argrepr</code>人类可读的操作参数描述<code>offset</code>在字节码序列中启动操作索引<code>starts_line</code>行由此操作码（如果有）启动，否则为 <code>Noneis_jump_target</code>如果其他代码跳到这里，则为 <code>True</code> ，否则为 <code>False</code><em>3.4 新版功能.</em></p>
+</li>
+</ul>
+<p>Python编译器当前生成以下字节码指令。</p>
+<p><strong>一般指令</strong></p>
+<ul>
+<li><p><code>NOP</code></p>
+<p>什么都不做。 用作字节码优化器的占位符。</p>
+</li>
+<li><p><code>POP_TOP</code></p>
+<p>删除堆栈顶部（TOS）项。</p>
+</li>
+<li><p><code>ROT_TWO</code></p>
+<p>交换两个最顶层的堆栈项。</p>
+</li>
+<li><p><code>ROT_THREE</code></p>
+<p>将第二个和第三个堆栈项向上提升一个位置，顶项移动到位置三。</p>
+</li>
+<li><p><code>ROT_FOUR</code></p>
+<p>将第二个，第三个和第四个堆栈项向上提升一个位置，将顶项移动到第四个位置。<em>3.8 新版功能.</em></p>
+</li>
+<li><p><code>DUP_TOP</code></p>
+<p>复制堆栈顶部的引用。<em>3.2 新版功能.</em></p>
+</li>
+<li><p><code>DUP_TOP_TWO</code></p>
+<p>复制堆栈顶部的两个引用，使它们保持相同的顺序。<em>3.2 新版功能.</em></p>
+</li>
+</ul>
+<p><strong>一元操作</strong></p>
+<p>一元操作获取堆栈顶部元素，应用操作，并将结果推回堆栈。</p>
+<ul>
+<li><p><code>UNARY_POSITIVE</code></p>
+<p>实现 <code>TOS = +TOS</code> 。</p>
+</li>
+<li><p><code>UNARY_NEGATIVE</code></p>
+<p>实现 <code>TOS = -TOS</code> 。</p>
+</li>
+<li><p><code>UNARY_NOT</code></p>
+<p>实现 <code>TOS = not TOS</code> 。</p>
+</li>
+<li><p><code>UNARY_INVERT</code></p>
+<p>实现 <code>TOS = ~TOS</code> 。</p>
+</li>
+<li><p><code>GET_ITER</code></p>
+<p>实现 <code>TOS = iter(TOS)</code> 。</p>
+</li>
+<li><p><code>GET_YIELD_FROM_ITER</code></p>
+<p>如果 <code>TOS</code> 是一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-generator-iterator" target="_blank" rel="noopener">generator iterator</a> 或 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-coroutine" target="_blank" rel="noopener">coroutine</a> 对象则保持原样。否则实现 <code>TOS = iter(TOS)</code> 。<em>3.5 新版功能.</em></p>
+</li>
+</ul>
+<p><strong>二元操作</strong></p>
+<p>二元操作从堆栈中删除堆栈顶部（TOS）和第二个最顶层堆栈项（TOS1）。 它们执行操作，并将结果放回堆栈。</p>
+<ul>
+<li><p><code>BINARY_POWER</code></p>
+<p>实现 <code>TOS = TOS1 ** TOS</code> 。</p>
+</li>
+<li><p><code>BINARY_MULTIPLY</code></p>
+<p>实现 <code>TOS = TOS1 * TOS</code> 。</p>
+</li>
+<li><p><code>BINARY_MATRIX_MULTIPLY</code></p>
+<p>实现 <code>TOS = TOS1 @ TOS</code> 。<em>3.5 新版功能.</em></p>
+</li>
+<li><p><code>BINARY_FLOOR_DIVIDE</code></p>
+<p>实现 <code>TOS = TOS1 // TOS</code>。</p>
+</li>
+<li><p><code>BINARY_TRUE_DIVIDE</code></p>
+<p>实现 <code>TOS = TOS1 / TOS</code> 。</p>
+</li>
+<li><p><code>BINARY_MODULO</code></p>
+<p>实现 <code>TOS = TOS1 % TOS</code> 。</p>
+</li>
+<li><p><code>BINARY_ADD</code></p>
+<p>实现 <code>TOS = TOS1 + TOS</code> 。</p>
+</li>
+<li><p><code>BINARY_SUBTRACT</code></p>
+<p>实现 <code>TOS = TOS1 - TOS</code> 。</p>
+</li>
+<li><p><code>BINARY_SUBSCR</code></p>
+<p>实现 <code>TOS = TOS1[TOS]</code> 。</p>
+</li>
+<li><p><code>BINARY_LSHIFT</code></p>
+<p>实现 <code>TOS = TOS1 &lt;&lt; TOS</code> 。</p>
+</li>
+<li><p><code>BINARY_RSHIFT</code></p>
+<p>实现 <code>TOS = TOS1 &gt;&gt; TOS</code> 。</p>
+</li>
+<li><p><code>BINARY_AND</code></p>
+<p>实现 <code>TOS = TOS1 &amp; TOS</code> 。</p>
+</li>
+<li><p><code>BINARY_XOR</code></p>
+<p>实现 <code>TOS = TOS1 ^ TOS</code> 。</p>
+</li>
+<li><p><code>BINARY_OR</code></p>
+<p>实现 <code>TOS = TOS1 | TOS</code> 。</p>
+</li>
+</ul>
+<p><strong>就地操作</strong></p>
+<p>就地操作就像二元操作，因为它们删除了TOS和TOS1，并将结果推回到堆栈上，但是当TOS1支持它时，操作就地完成，并且产生的TOS可能是（但不一定） 原来的TOS1。</p>
+<ul>
+<li><p><code>INPLACE_POWER</code></p>
+<p>就地实现 <code>TOS = TOS1 ** TOS</code> 。</p>
+</li>
+<li><p><code>INPLACE_MULTIPLY</code></p>
+<p>就地实现 <code>TOS = TOS1 * TOS</code> 。</p>
+</li>
+<li><p><code>INPLACE_MATRIX_MULTIPLY</code></p>
+<p>就地实现 <code>TOS = TOS1 @ TOS</code> 。<em>3.5 新版功能.</em></p>
+</li>
+<li><p><code>INPLACE_FLOOR_DIVIDE</code></p>
+<p>就地实现 <code>TOS = TOS1 // TOS</code> 。</p>
+</li>
+<li><p><code>INPLACE_TRUE_DIVIDE</code></p>
+<p>就地实现 <code>TOS = TOS1 / TOS</code> 。</p>
+</li>
+<li><p><code>INPLACE_MODULO</code></p>
+<p>就地实现 <code>TOS = TOS1 % TOS</code> 。</p>
+</li>
+<li><p><code>INPLACE_ADD</code></p>
+<p>就地实现 <code>TOS = TOS1 + TOS</code> 。</p>
+</li>
+<li><p><code>INPLACE_SUBTRACT</code></p>
+<p>就地实现 <code>TOS = TOS1 - TOS</code> 。</p>
+</li>
+<li><p><code>INPLACE_LSHIFT</code></p>
+<p>就地实现 <code>TOS = TOS1 &lt;&lt; TOS</code> 。</p>
+</li>
+<li><p><code>INPLACE_RSHIFT</code></p>
+<p>就地实现 <code>TOS = TOS1 &gt;&gt; TOS</code> 。</p>
+</li>
+<li><p><code>INPLACE_AND</code></p>
+<p>就地实现 <code>TOS = TOS1 &amp; TOS</code> 。</p>
+</li>
+<li><p><code>INPLACE_XOR</code></p>
+<p>就地实现 <code>TOS = TOS1 ^ TOS</code> 。</p>
+</li>
+<li><p><code>INPLACE_OR</code></p>
+<p>就地实现 <code>TOS = TOS1 | TOS</code> 。</p>
+</li>
+<li><p><code>STORE_SUBSCR</code></p>
+<p>实现 <code>TOS1[TOS] = TOS2</code> 。</p>
+</li>
+<li><p><code>DELETE_SUBSCR</code></p>
+<p>实现 <code>del TOS1[TOS]</code> 。</p>
+</li>
+</ul>
+<p><strong>协程操作码</strong></p>
+<ul>
+<li><p><code>GET_AWAITABLE</code></p>
+<p>实现 <code>TOS = get_awaitable(TOS)</code> ，其中 <code>get_awaitable(o)</code> 返回 <code>o</code> 如果 <code>o</code> 是一个有 CO_ITERABLE_COROUTINE 标志的协程对象或生成器对象，否则解析 <code>o.__await__</code> 。<em>3.5 新版功能.</em></p>
+</li>
+<li><p><code>GET_AITER</code></p>
+<p>实现 <code>TOS = TOS.__aiter__()</code> 。<em>3.5 新版功能.**在 3.7 版更改:</em> 已经不再支持从 <code>__aiter__</code> 返回可等待对象。</p>
+</li>
+<li><p><code>GET_ANEXT</code></p>
+<p>实现 <code>PUSH(get_awaitable(TOS.__anext__()))</code> 。参见 <code>GET_AWAITABLE</code> 获取更多 <code>get_awaitable</code> 的细节<em>3.5 新版功能.</em></p>
+</li>
+<li><p><code>END_ASYNC_FOR</code></p>
+<p>终止一个 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#async-for" target="_blank" rel="noopener"><code>async for</code></a> 循环。处理等待下一个项目时引发的异常。如果 TOS 是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#StopAsyncIteration" target="_blank" rel="noopener"><code>StopAsyncIteration</code></a>， 从堆栈弹出7个值，并使用后三个恢复异常状态。否则，使用堆栈中的三个值重新引发异常。从块堆栈中删除异常处理程序块。<em>3.8 新版功能.</em></p>
+</li>
+<li><p><code>BEFORE_ASYNC_WITH</code></p>
+<p>从栈顶对象解析 <code>__aenter__</code> 和 <code>__aexit__</code> 。将 <code>__aexit__</code> 和 <code>__aenter__()</code> 的结果推入堆栈。<em>3.5 新版功能.</em></p>
+</li>
+<li><p><code>SETUP_ASYNC_WITH</code></p>
+<p>创建一个新的帧对象。<em>3.5 新版功能.</em></p>
+</li>
+</ul>
+<p><strong>其他操作码</strong></p>
+<ul>
+<li><p><code>PRINT_EXPR</code></p>
+<p>实现交互模式的表达式语句。TOS从堆栈中被移除并打印。在非交互模式下，表达式语句以 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-POP_TOP" target="_blank" rel="noopener"><code>POP_TOP</code></a> 终止。</p>
+</li>
+<li><p><code>SET_ADD</code>(<em>i</em>)</p>
+<p>调用 <code>set.add(TOS1[-i], TOS)</code> 。 用于实现集合推导。</p>
+</li>
+<li><p><code>LIST_APPEND</code>(<em>i</em>)</p>
+<p>调用 <code>list.append(TOS[-i], TOS)</code> 。 用于实现列表推导。</p>
+</li>
+<li><p><code>MAP_ADD</code>(<em>i</em>)</p>
+<p>调用 <code>dict.__setitem__(TOS1[-i], TOS1, TOS)</code> 。 用于实现字典推导。<em>3.1 新版功能.**在 3.8 版更改:</em> 映射值为 TOS ，映射键为 TOS1 。之前，它们被颠倒了。</p>
+</li>
+</ul>
+<p>对于所有 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-SET_ADD" target="_blank" rel="noopener"><code>SET_ADD</code></a> 、 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-LIST_APPEND" target="_blank" rel="noopener"><code>LIST_APPEND</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-MAP_ADD" target="_blank" rel="noopener"><code>MAP_ADD</code></a> 指令，当弹出添加的值或键值对时，容器对象保留在堆栈上，以便它可用于循环的进一步迭代。</p>
+<ul>
+<li><p><code>RETURN_VALUE</code></p>
+<p>返回 TOS 到函数的调用者。</p>
+</li>
+<li><p><code>YIELD_VALUE</code></p>
+<p>弹出 TOS 并从一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-generator" target="_blank" rel="noopener">generator</a> 生成它。</p>
+</li>
+<li><p><code>YIELD_FROM</code></p>
+<p>弹出 TOS 并将其委托给它作为 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-generator" target="_blank" rel="noopener">generator</a> 的子迭代器。<em>3.3 新版功能.</em></p>
+</li>
+<li><p><code>SETUP_ANNOTATIONS</code></p>
+<p>检查 <code>__annotations__</code> 是否在 <code>locals()</code> 中定义，如果没有，它被设置为空 <code>dict</code> 。只有在类或模块体静态地包含 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-variable-annotation" target="_blank" rel="noopener">variable annotations</a> 时才会发出此操作码。<em>3.6 新版功能.</em></p>
+</li>
+<li><p><code>IMPORT_STAR</code></p>
+<p>将所有不以 <code>&#39;_&#39;</code> 开头的符号直接从模块 TOS 加载到局部命名空间。加载所有名称后弹出该模块。这个操作码实现了 <code>from module import *</code> 。</p>
+</li>
+<li><p><code>POP_BLOCK</code></p>
+<p>从块堆栈中删除一个块。有一块堆栈，每帧用于表示 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#try" target="_blank" rel="noopener"><code>try</code></a> 语句等。</p>
+</li>
+<li><p><code>POP_EXCEPT</code></p>
+<p>从块堆栈中删除一个块。 弹出的块必须是异常处理程序块，在进入 except 处理程序时隐式创建。除了从帧堆栈弹出无关值之外，最后三个弹出值还用于恢复异常状态。</p>
+</li>
+<li><p><code>POP_FINALLY</code>(<em>preserve_tos</em>)</p>
+<p>清除值堆栈和块堆栈。如果 <em>preserve_tos</em> 不是 <code>0</code> ，则在执行其他堆栈操作后，首先从堆栈中弹出 TOS 并将其推入堆栈：如果TOS是 <code>NULL</code> 或整数（由 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-BEGIN_FINALLY" target="_blank" rel="noopener"><code>BEGIN_FINALLY</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-CALL_FINALLY" target="_blank" rel="noopener"><code>CALL_FINALLY</code></a> 推入），它将从堆栈中弹出。如果TOS是异常类型（在引发异常时被推入），则从堆栈中弹出6个值，最后三个弹出值用于恢复异常状态。从块堆栈中删除异常处理程序块。它类似于 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-END_FINALLY" target="_blank" rel="noopener"><code>END_FINALLY</code></a> ，但不会更改字节码计数器也不会引发异常。用于在 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#finally" target="_blank" rel="noopener"><code>finally</code></a> 块中实现 <a href="https://docs.python.org/zh-cn/3.8/reference/simple_stmts.html#break" target="_blank" rel="noopener"><code>break</code></a> 、 <a href="https://docs.python.org/zh-cn/3.8/reference/simple_stmts.html#continue" target="_blank" rel="noopener"><code>continue</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/reference/simple_stmts.html#return" target="_blank" rel="noopener"><code>return</code></a> 。<em>3.8 新版功能.</em></p>
+</li>
+<li><p><code>BEGIN_FINALLY</code></p>
+<p>将 <code>NULL</code> 推入堆栈以便在以下操作中使用 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-END_FINALLY" target="_blank" rel="noopener"><code>END_FINALLY</code></a> 、 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-POP_FINALLY" target="_blank" rel="noopener"><code>POP_FINALLY</code></a> 、 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-WITH_CLEANUP_START" target="_blank" rel="noopener"><code>WITH_CLEANUP_START</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-WITH_CLEANUP_FINISH" target="_blank" rel="noopener"><code>WITH_CLEANUP_FINISH</code></a> 。开始 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#finally" target="_blank" rel="noopener"><code>finally</code></a> 块。<em>3.8 新版功能.</em></p>
+</li>
+<li><p><code>END_FINALLY</code></p>
+<p>终止 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#finally" target="_blank" rel="noopener"><code>finally</code></a> 子句。解释器回溯是否有必须重新抛出异常的情况或根据 TOS 的值继续执行。如果 TOS 是 <code>NULL</code> （由 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-BEGIN_FINALLY" target="_blank" rel="noopener"><code>BEGIN_FINALLY</code></a> 推入）继续下一条指令。 TOS 被弹出。如果 TO S是一个整数（由 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-CALL_FINALLY" target="_blank" rel="noopener"><code>CALL_FINALLY</code></a> 推入），则将字节码计数器设置为 TOS 。 TOS 被弹出。如果TOS是异常类型（在引发异常时被推送），则从堆栈中弹出 6 个值，前三个弹出值用于重新引发异常，最后三个弹出值用于恢复异常状态。从块堆栈中删除异常处理程序块。</p>
+</li>
+<li><p><code>LOAD_BUILD_CLASS</code></p>
+<p>将 <code>builtins .__ build_class__()</code> 推到堆栈上。它之后被 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-CALL_FUNCTION" target="_blank" rel="noopener"><code>CALL_FUNCTION</code></a> 调用来构造一个类。</p>
+</li>
+<li><p><code>SETUP_WITH</code>(<em>delta</em>)</p>
+<p>此操作码在 with 块开始之前执行多个操作。首先，它从上下文管理器加载 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__exit__" target="_blank" rel="noopener"><code>__exit__()</code></a> 并将其推入到堆栈以供以后被 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-WITH_CLEANUP_START" target="_blank" rel="noopener"><code>WITH_CLEANUP_START</code></a> 使用。然后，调用 <code>__enter__()</code> ，并推入指向 <em>delta</em> 的 finally 块。最后，调用 <code>__enter__()</code> 方法的结果被压入堆栈。一个操作码将忽略它（ <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-POP_TOP" target="_blank" rel="noopener"><code>POP_TOP</code></a> ），或将其存储在一个或多个变量（ <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-STORE_FAST" target="_blank" rel="noopener"><code>STORE_FAST</code></a> 、 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-STORE_NAME" target="_blank" rel="noopener"><code>STORE_NAME</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-UNPACK_SEQUENCE" target="_blank" rel="noopener"><code>UNPACK_SEQUENCE</code></a> ）中。<em>3.2 新版功能.</em></p>
+</li>
+<li><p><code>WITH_CLEANUP_START</code></p>
+<p>当 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#with" target="_blank" rel="noopener"><code>with</code></a> 语句块退出时，开始清理堆栈。在堆栈的顶部是 <code>NULL</code> （由 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-BEGIN_FINALLY" target="_blank" rel="noopener"><code>BEGIN_FINALLY</code></a> 推送）或者如果在 with 块中引发了异常，则推送 6 个值。下面是上下文管理器 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__exit__" target="_blank" rel="noopener"><code>__exit__()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/reference/datamodel.html#object.__aexit__" target="_blank" rel="noopener"><code>__aexit__()</code></a> 绑定方法。如果TOS是 <code>NULL</code> ，则调用 <code>SECOND(None, None, None)</code> ，从堆栈中删除函数，离开 TOS ，并将 <code>None</code> 推送到堆栈。 否则调用 <code>SEVENTH(TOP, SECOND, THIRD)</code> ，将堆栈的底部3值向下移动，用 <code>NULL</code> 替换空位并推入 TOS 。最后拖入调用的结果。</p>
+</li>
+<li><p><code>WITH_CLEANUP_FINISH</code></p>
+<p>当 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#with" target="_blank" rel="noopener"><code>with</code></a> 语句块退出时，完成清理堆栈。TOS 是 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-WITH_CLEANUP_START" target="_blank" rel="noopener"><code>WITH_CLEANUP_START</code></a> 推送的 <code>__exit__()</code> 或 <code>__aexit__()</code> 函数的结果。 SECOND是 <code>None</code> 或异常类型（引发异常时推入的）。从堆栈中弹出两个值。如果 SECOND 不为 None 并且 TOS 为 true ，则展开 EXCEPT_HANDLER 块，该块是在捕获异常时创建的，并将 <code>NULL</code> 推入堆栈。</p>
+</li>
+</ul>
+<p>以下所有操作码均使用其参数。</p>
+<ul>
+<li><p><code>STORE_NAME</code>(<em>namei</em>)</p>
+<p>实现 <code>name = TOS</code>。 <em>namei</em> 是 <em>name</em> 在代码对象的 <code>co_names</code> 属性中的索引。 在可能的情况下，编译器会尝试使用 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-STORE_FAST" target="_blank" rel="noopener"><code>STORE_FAST</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-STORE_GLOBAL" target="_blank" rel="noopener"><code>STORE_GLOBAL</code></a>。</p>
+</li>
+<li><p><code>DELETE_NAME</code>(<em>namei</em>)</p>
+<p>实现 <code>del name</code> ，其中 <em>namei</em> 是代码对象的 <code>co_names</code> 属性的索引。</p>
+</li>
+<li><p><code>UNPACK_SEQUENCE</code>(<em>count</em>)</p>
+<p>将 TOS 解包为 <em>count</em> 个单独的值，它们将按从右至左的顺序被放入堆栈。</p>
+</li>
+<li><p><code>UNPACK_EX</code>(<em>counts</em>)</p>
+<p>实现使用带星号的目标进行赋值：将 TOS 中的可迭代对象解包为单独的值，其中值的总数可以小于可迭代对象中的项数：新值之一将是由所有剩余项构成的列表。<em>counts</em> 的低字节是列表值之前的值的数量，<em>counts</em> 中的高字节则是之后的值的数量。 结果值会按从右至左的顺序入栈。</p>
+</li>
+<li><p><code>STORE_ATTR</code>(<em>namei</em>)</p>
+<p>实现 <code>TOS.name = TOS1</code>，其中 <em>namei</em> 是 name 在 <code>co_names</code> 中的索引号。</p>
+</li>
+<li><p><code>DELETE_ATTR</code>(<em>namei</em>)</p>
+<p>实现 <code>del TOS.name</code>，使用 <em>namei</em> 作为 <code>co_names</code> 中的索引号。</p>
+</li>
+<li><p><code>STORE_GLOBAL</code>(<em>namei</em>)</p>
+<p>类似于 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-STORE_NAME" target="_blank" rel="noopener"><code>STORE_NAME</code></a> 但会将 name 存储为全局变量。</p>
+</li>
+<li><p><code>DELETE_GLOBAL</code>(<em>namei</em>)</p>
+<p>类似于 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-DELETE_NAME" target="_blank" rel="noopener"><code>DELETE_NAME</code></a> 但会删除一个全局变量。</p>
+</li>
+<li><p><code>LOAD_CONST</code>(<em>consti</em>)</p>
+<p>将 <code>co_consts[consti]</code> 推入栈顶。</p>
+</li>
+<li><p><code>LOAD_NAME</code>(<em>namei</em>)</p>
+<p>将与 <code>co_names[namei]</code> 相关联的值推入栈顶。</p>
+</li>
+<li><p><code>BUILD_TUPLE</code>(<em>count</em>)</p>
+<p>创建一个使用了来自栈的 <em>count</em> 个项的元组，并将结果元组推入栈顶。</p>
+</li>
+<li><p><code>BUILD_LIST</code>(<em>count</em>)</p>
+<p>类似于 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-BUILD_TUPLE" target="_blank" rel="noopener"><code>BUILD_TUPLE</code></a> 但会创建一个列表。</p>
+</li>
+<li><p><code>BUILD_SET</code>(<em>count</em>)</p>
+<p>类似于 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-BUILD_TUPLE" target="_blank" rel="noopener"><code>BUILD_TUPLE</code></a> 但会创建一个集合。</p>
+</li>
+<li><p><code>BUILD_MAP</code>(<em>count</em>)</p>
+<p>将一个新字典对象推入栈顶。 弹出 <code>2 * count</code> 项使得字典包含 <em>count</em> 个条目: <code>{..., TOS3: TOS2, TOS1: TOS}</code>。<em>在 3.5 版更改:</em> 字典是根据栈中的项创建而不是创建一个预设大小包含 <em>count</em> 项的空字典。</p>
+</li>
+<li><p><code>BUILD_CONST_KEY_MAP</code>(<em>count</em>)</p>
+<p>专用于常量键的 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-BUILD_MAP" target="_blank" rel="noopener"><code>BUILD_MAP</code></a> 版本。 <em>count</em> 值是从栈中提取的。 栈顶的元素包含一个由键构成的元组。<em>3.6 新版功能.</em></p>
+</li>
+<li><p><code>BUILD_STRING</code>(<em>count</em>)</p>
+<p>拼接 <em>count</em> 个来自栈的字符串并将结果字符串推入栈顶。<em>3.6 新版功能.</em></p>
+</li>
+<li><p><code>BUILD_TUPLE_UNPACK</code>(<em>count</em>)</p>
+<p>从栈中弹出 <em>count</em> 个可迭代对象，将它们合并为单个元组，并将结果推入栈顶。 实现可迭代对象解包为元组形式 <code>(*x, *y, *z)</code>。<em>3.5 新版功能.</em></p>
+</li>
+<li><p><code>BUILD_TUPLE_UNPACK_WITH_CALL</code>(<em>count</em>)</p>
+<p>这类似于 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-BUILD_TUPLE_UNPACK" target="_blank" rel="noopener"><code>BUILD_TUPLE_UNPACK</code></a> 但专用于 <code>f(*x, *y, *z)</code> 调用语法。 栈中 <code>count + 1</code> 位置上的项应当是相应的可调用对象 <code>f</code>。<em>3.6 新版功能.</em></p>
+</li>
+<li><p><code>BUILD_LIST_UNPACK</code>(<em>count</em>)</p>
+<p>这类似于 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-BUILD_TUPLE_UNPACK" target="_blank" rel="noopener"><code>BUILD_TUPLE_UNPACK</code></a> 但会将一个列表而非元组推入栈顶。 实现可迭代对象解包为列表形式 <code>[*x, *y, *z]</code>。<em>3.5 新版功能.</em></p>
+</li>
+<li><p><code>BUILD_SET_UNPACK</code>(<em>count</em>)</p>
+<p>这类似于 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-BUILD_TUPLE_UNPACK" target="_blank" rel="noopener"><code>BUILD_TUPLE_UNPACK</code></a> 但会将一个集合而非元组推入栈顶。 实现可迭代对象解包为集合形式 <code>{*x, *y, *z}</code>。<em>3.5 新版功能.</em></p>
+</li>
+<li><p><code>BUILD_MAP_UNPACK</code>(<em>count</em>)</p>
+<p>从栈中弹出 <em>count</em> 个映射对象，将它们合并为单个字典，并将结果推入栈顶。 实现字典解包为字典形式 <code>{**x, **y, **z}</code>。<em>3.5 新版功能.</em></p>
+</li>
+<li><p><code>BUILD_MAP_UNPACK_WITH_CALL</code>(<em>count</em>)</p>
+<p>这类似于 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-BUILD_MAP_UNPACK" target="_blank" rel="noopener"><code>BUILD_MAP_UNPACK</code></a> 但专用于 <code>f(**x, **y, **z)</code> 调用语法。 栈中 <code>count + 2</code> 位置上的项应当是相应的可调用对象 <code>f</code>。<em>3.5 新版功能.**在 3.6 版更改:</em> 可迭代对象的位置的确定方式是将操作码参数加 2 而不是将其编码到参数的第二个字节。</p>
+</li>
+<li><p><code>LOAD_ATTR</code>(<em>namei</em>)</p>
+<p>将 TOS 替换为 <code>getattr(TOS, co_names[namei])</code>。</p>
+</li>
+<li><p><code>COMPARE_OP</code>(<em>opname</em>)</p>
+<p>执行布尔运算操作。 操作名称可在 <code>cmp_op[opname]</code> 中找到。</p>
+</li>
+<li><p><code>IMPORT_NAME</code>(<em>namei</em>)</p>
+<p>导入模块 <code>co_names[namei]</code>。 会弹出 TOS 和 TOS1 以提供 <em>fromlist</em> 和 <em>level</em> 参数给 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#__import__" target="_blank" rel="noopener"><code>__import__()</code></a>。 模块对象会被推入栈顶。 当前命名空间不受影响：对于一条标准 import 语句，会执行后续的 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-STORE_FAST" target="_blank" rel="noopener"><code>STORE_FAST</code></a> 指令来修改命名空间。</p>
+</li>
+<li><p><code>IMPORT_FROM</code>(<em>namei</em>)</p>
+<p>从在 TOS 内找到的模块中加载属性 <code>co_names[namei]</code>。 结果对象会被推入栈顶，以便由后续的 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-STORE_FAST" target="_blank" rel="noopener"><code>STORE_FAST</code></a> 指令来保存。</p>
+</li>
+<li><p><code>JUMP_FORWARD</code>(<em>delta</em>)</p>
+<p>将字节码计数器的值增加 <em>delta</em>。</p>
+</li>
+<li><p><code>POP_JUMP_IF_TRUE</code>(<em>target</em>)</p>
+<p>如果 TOS 为真值，则将字节码计数器的值设为 <em>target</em>。 TOS 会被弹出。<em>3.1 新版功能.</em></p>
+</li>
+<li><p><code>POP_JUMP_IF_FALSE</code>(<em>target</em>)</p>
+<p>如果 TOS 为假值，则将字节码计数器的值设为 <em>target</em>。 TOS 会被弹出。<em>3.1 新版功能.</em></p>
+</li>
+<li><p><code>JUMP_IF_TRUE_OR_POP</code>(<em>target</em>)</p>
+<p>如果 TOS 为真值，则将字节码计数器的值设为 <em>target</em> 并将 TOS 留在栈顶。 否则（如 TOS 为假值），TOS 会被弹出。<em>3.1 新版功能.</em></p>
+</li>
+<li><p><code>JUMP_IF_FALSE_OR_POP</code>(<em>target</em>)</p>
+<p>如果 TOS 为假值，则将字节码计数器的值设为 <em>target</em> 并将 TOS 留在栈顶。 否则（如 TOS 为假值），TOS 会被弹出。<em>3.1 新版功能.</em></p>
+</li>
+<li><p><code>JUMP_ABSOLUTE</code>(<em>target</em>)</p>
+<p>将字节码计数器的值设为 <em>target</em>。</p>
+</li>
+<li><p><code>FOR_ITER</code>(<em>delta</em>)</p>
+<p>TOS 是一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-iterator" target="_blank" rel="noopener">iterator</a>。 可调用它的 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#iterator.__next__" target="_blank" rel="noopener"><code>__next__()</code></a> 方法。 如果产生了一个新值，则将其推入栈顶（将迭代器留在其下方）。 如果迭代器提示已耗尽则 TOS 会被弹出，并将字节码计数器的值增加 <em>delta</em>。</p>
+</li>
+<li><p><code>LOAD_GLOBAL</code>(<em>namei</em>)</p>
+<p>加载名称为 <code>co_names[namei]</code> 的全局对象推入栈顶。</p>
+</li>
+<li><p><code>SETUP_FINALLY</code>(<em>delta</em>)</p>
+<p>将一个来自 try-finally 或 try-except 子句的 try 代码块推入代码块栈顶。 相对 finally 代码块或第一个 except 代码块 <em>delta</em> 个点数。</p>
+</li>
+<li><p><code>CALL_FINALLY</code>(<em>delta</em>)</p>
+<p>将下一条指令的地址推入栈顶并将字节码计数器的值增加 <em>delta</em>。 用于将 finally 代码块作为一个“子例程”调用。<em>3.8 新版功能.</em></p>
+</li>
+<li><p><code>LOAD_FAST</code>(<em>var_num</em>)</p>
+<p>将指向局部对象 <code>co_varnames[var_num]</code> 的引用推入栈顶。</p>
+</li>
+<li><p><code>STORE_FAST</code>(<em>var_num</em>)</p>
+<p>将 TOS 存放到局部对象 <code>co_varnames[var_num]</code>。</p>
+</li>
+<li><p><code>DELETE_FAST</code>(<em>var_num</em>)</p>
+<p>移除局部对象 <code>co_varnames[var_num]</code>。</p>
+</li>
+<li><p><code>LOAD_CLOSURE</code>(<em>i</em>)</p>
+<p>将一个包含在单元的第 <em>i</em> 个空位中的对单元的引用推入栈顶并释放可用的存储空间。 如果 <em>i</em> 小于 <em>co_cellvars</em> 的长度则变量的名称为 <code>co_cellvars[i]</code>。 否则为 <code>co_freevars[i - len(co_cellvars)]</code>。</p>
+</li>
+<li><p><code>LOAD_DEREF</code>(<em>i</em>)</p>
+<p>加载包含在单元的第 <em>i</em> 个空位中的单元并释放可用的存储空间。 将一个对单元所包含对象的引用推入栈顶。</p>
+</li>
+<li><p><code>LOAD_CLASSDEREF</code>(<em>i</em>)</p>
+<p>类似于 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-LOAD_DEREF" target="_blank" rel="noopener"><code>LOAD_DEREF</code></a> 但在查询单元之前会首先检查局部对象字典。 这被用于加载类语句体中的自由变量。<em>3.4 新版功能.</em></p>
+</li>
+<li><p><code>STORE_DEREF</code>(<em>i</em>)</p>
+<p>将 TOS 存放到包含在单元的第 <em>i</em> 个空位中的单元内并释放可用存储空间。</p>
+</li>
+<li><p><code>DELETE_DEREF</code>(<em>i</em>)</p>
+<p>清空包含在单元的第 <em>i</em> 个空位中的单元并释放可用存储空间。 被用于 <a href="https://docs.python.org/zh-cn/3.8/reference/simple_stmts.html#del" target="_blank" rel="noopener"><code>del</code></a> 语句。<em>3.2 新版功能.</em></p>
+</li>
+<li><p><code>RAISE_VARARGS</code>(<em>argc</em>)</p>
+<p>使用 <code>raise</code> 语句的 3 种形式之一引发异常，具体形式取决于 <em>argc</em> 的值：0: <code>raise</code> (重新引发之前的异常)1: <code>raise TOS</code> (在 <code>TOS</code> 上引发异常实例或类型)2: <code>raise TOS1 from TOS</code> (在 <code>TOS1</code> 上引发异常实例或类型并将 <code>__cause__</code> 设为 <code>TOS</code>)</p>
+</li>
+<li><p><code>CALL_FUNCTION</code>(<em>argc</em>)</p>
+<p>调用一个可调用对象并传入位置参数。 <em>argc</em> 指明位置参数的数量。 栈顶包含位置参数，其中最右边的参数在最顶端。 在参数之下是一个待调用的可调用对象。 <code>CALL_FUNCTION</code> 会从栈中弹出所有参数以及可调用对象，附带这些参数调用该可调用对象，并将可调用对象所返回的返回值推入栈顶。<em>在 3.6 版更改:</em> 此操作码仅用于附带位置参数的调用。</p>
+</li>
+<li><p><code>CALL_FUNCTION_KW</code>(<em>argc</em>)</p>
+<p>调用一个可调用对象并传入位置参数（如果有的话）和关键字参数。 <em>argc</em> 指明位置参数和关键字参数的总数量。 栈顶元素包含一个关键字参数名称的元组。 在元组之下是根据元组排序的关键字参数。 在关键字参数之下是位置参数，其中最右边的参数在最顶端。 在参数之下是一个待调用的可调用对象。 <code>CALL_FUNCTION_KW</code> 会从栈中弹出所有参数以及可调用对象，附带这些参数调用该可调用对象，并将可调用对象所返回的返回值推入栈顶。<em>在 3.6 版更改:</em> 关键字参数会被打包为一个元组而非字典，<em>argc</em> 指明参数的总数量。</p>
+</li>
+<li><p><code>CALL_FUNCTION_EX</code>(<em>flags</em>)</p>
+<p>调用一个可调用对象并附带位置参数和关键字参数变量集合。 如果设置了 <em>flags</em> 的最低位，则栈顶包含一个由额外关键字参数组成的映射对象。 在该对象之下是一个包含位置参数的可迭代对象和一个待调用的可调用对象。 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-BUILD_MAP_UNPACK_WITH_CALL" target="_blank" rel="noopener"><code>BUILD_MAP_UNPACK_WITH_CALL</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-BUILD_TUPLE_UNPACK_WITH_CALL" target="_blank" rel="noopener"><code>BUILD_TUPLE_UNPACK_WITH_CALL</code></a> 可用于合并多个映射对象和包含参数的可迭代对象。 在该可调用对象被调用之前，映射对象和可迭代对象会被分别“解包”并将它们的内容分别作为关键字参数和位置参数传入。 <code>CALL_FUNCTION_EX</code> 会从栈中弹出所有参数以及可调用对象，附带这些参数调用该可调用对象，并将可调用对象所返回的返回值推入栈顶。<em>3.6 新版功能.</em></p>
+</li>
+<li><p><code>LOAD_METHOD</code>(<em>namei</em>)</p>
+<p>从 TOS 对象加载一个名为 <code>co_names[namei]</code> 的方法。 TOS 将被弹出。 此字节码可区分两种情况：如果 TOS 有一个名称正确的方法，字节码会将未绑定方法和 TOS 推入栈顶。 TOS 将在调用未绑定方法时被用作 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-CALL_METHOD" target="_blank" rel="noopener"><code>CALL_METHOD</code></a> 的第一个参数 (<code>self</code>)。 否则会将 <code>NULL</code> 和属性查找所返回的对象推入栈顶。<em>3.7 新版功能.</em></p>
+</li>
+<li><p><code>CALL_METHOD</code>(<em>argc</em>)</p>
+<p>调用一个方法。 <em>argc</em> 是位置参数的数量。 关键字参数不受支持。 此操作码被设计用于配合 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-LOAD_METHOD" target="_blank" rel="noopener"><code>LOAD_METHOD</code></a> 使用。 位置参数放在栈顶。 在它们之下放在栈中的是由 <a href="https://docs.python.org/zh-cn/3.8/library/dis.html#opcode-LOAD_METHOD" target="_blank" rel="noopener"><code>LOAD_METHOD</code></a> 所描述的两个条目（或者是 <code>self</code> 和一个未绑定方法对象，或者是 <code>NULL</code> 和一个任意可调用对象）。 它们会被全部弹出并将返回值推入栈顶。<em>3.7 新版功能.</em></p>
+</li>
+<li><p><code>MAKE_FUNCTION</code>(<em>flags</em>)</p>
+<p>将一个新函数对象推入栈顶。 从底端到顶端，如果参数带有指定的旗标值则所使用的栈必须由这些值组成。<code>0x01</code> 一个默认值的元组，用于按位置排序的仅限位置形参以及位置或关键字形参<code>0x02</code> 一个仅限关键字形参的默认值的字典<code>0x04</code> 是一个标注字典<code>0x08</code> 一个包含用于自由变量的单元的元组，生成一个闭包与函数相关联的代码 (在 TOS1)函数的 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-qualified-name" target="_blank" rel="noopener">qualified name</a> (在 TOS)</p>
+</li>
+<li><p><code>BUILD_SLICE</code>(<em>argc</em>)</p>
+<p>将一个切片对象推入栈顶。 <em>argc</em> 必须为 2 或 3。 如果为 2，则推入 <code>slice(TOS1, TOS)</code>；如果为 3，则推入 <code>slice(TOS2, TOS1, TOS)</code>。 请参阅 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#slice" target="_blank" rel="noopener"><code>slice()</code></a> 内置函数了解详细信息。</p>
+</li>
+<li><p><code>EXTENDED_ARG</code>(<em>ext</em>)</p>
+<p>为任意带有大到无法放入默认的单字节的参数的操作码添加前缀。 <em>ext</em> 存放一个附加字节作为参数中的高比特位。 对于每个操作码，最多允许三个 <code>EXTENDED_ARG</code> 前缀，构成两字节到三字节的参数。</p>
+</li>
+<li><p><code>FORMAT_VALUE</code>(<em>flags</em>)</p>
+<p>用于实现格式化字面值字符串（f-字符串）。 从栈中弹出一个可选的 <em>fmt_spec</em>，然后是一个必须的 <em>value</em>。 <em>flags</em> 的解读方式如下：<code>(flags &amp; 0x03) == 0x00</code>: <em>value</em> 按原样格式化。<code>(flags &amp; 0x03) == 0x01</code>: 在格式化 <em>value</em> 之前调用其 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str()</code></a>。<code>(flags &amp; 0x03) == 0x02</code>: 在格式化 <em>value</em> 之前调用其 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#repr" target="_blank" rel="noopener"><code>repr()</code></a>。<code>(flags &amp; 0x03) == 0x03</code>: 在格式化 <em>value</em> 之前调用其 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#ascii" target="_blank" rel="noopener"><code>ascii()</code></a>。<code>(flags &amp; 0x04) == 0x04</code>: 从栈中弹出 <em>fmt_spec</em> 并使用它，否则使用空的 <em>fmt_spec</em>。使用 <code>PyObject_Format()</code> 执行格式化。 结果会被推入栈顶。<em>3.6 新版功能.</em></p>
+</li>
+<li><p><code>HAVE_ARGUMENT</code></p>
+<p>这不是一个真正的操作码。 它用于标明使用参数和不使用参数的操作码 (分别为 <code>&lt; HAVE_ARGUMENT</code> 和 <code>&gt;= HAVE_ARGUMENT</code>) 之间的分隔线。<em>在 3.6 版更改:</em> 现在每条指令都带有参数，但操作码 <code>&lt; HAVE_ARGUMENT</code> 会忽略它。 之前仅限操作码 <code>&gt;= HAVE_ARGUMENT</code> 带有参数。</p>
+</li>
+</ul>
+<h2 id="操作码集合"><a href="#操作码集合" class="headerlink" title="操作码集合"></a>操作码集合</h2><p>提供这些集合用于字节码指令的自动内省：</p>
+<ul>
+<li><p><code>dis.opname</code></p>
+<p>操作名称的序列，可使用字节码来索引。</p>
+</li>
+<li><p><code>dis.opmap</code></p>
+<p>映射操作名称到字节码的字典</p>
+</li>
+<li><p><code>dis.cmp_op</code></p>
+<p>所有比较操作名称的序列。</p>
+</li>
+<li><p><code>dis.hasconst</code></p>
+<p>访问常量的字节码序列。</p>
+</li>
+<li><p><code>dis.hasfree</code></p>
+<p>访问自由变量的字节码序列（请注意这里所说的‘自由’是指在当前作用域中被内部作用域所引用的名称，或在外部作用域中被此作用域所引用的名称。 它 <em>并不</em> 包括对全局或内置作用域的引用）。</p>
+</li>
+<li><p><code>dis.hasname</code></p>
+<p>按名称访问属性的字节码序列。</p>
+</li>
+<li><p><code>dis.hasjrel</code></p>
+<p>具有相对跳转目标的字节码序列。</p>
+</li>
+<li><p><code>dis.hasjabs</code></p>
+<p>具有绝对跳转目标的字节码序列。</p>
+</li>
+<li><p><code>dis.haslocal</code></p>
+<p>访问局部变量的字节码序列。</p>
+</li>
+<li><p><code>dis.hascompare</code></p>
+<p>布尔运算的字节码序列。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/03/19/python-standard-library-dis/" title="python standard_library dis">https://pinghailinfeng.gitee.io/2020/03/19/python-standard-library-dis/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/dis/" rel="tag"># dis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/18/python-standard-library-re/" rel="next" title="python standard_library re">
+                <i class="fa fa-chevron-left"></i> python standard_library re
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/20/python-standard-library-pwd/" rel="prev" title="python standard_library pwd">
+                python standard_library pwd <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">120</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">135</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-dis"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 dis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字节码分析"><span class="nav-number">1.1.</span> <span class="nav-text">字节码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析函数"><span class="nav-number">1.2.</span> <span class="nav-text">分析函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python字节码说明"><span class="nav-number">1.3.</span> <span class="nav-text">Python字节码说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作码集合"><span class="nav-number">1.4.</span> <span class="nav-text">操作码集合</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2to3/">2to3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tkinter/">Tkinter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">_thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/argparse/">argparse</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atexit/">atexit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/code/">code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dis/">dis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doctest/">doctest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dom/">dom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fileinput/">fileinput</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/">futures</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keyword/">keyword</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minidom/">minidom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modulefinder/">modulefinder</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwd/">pwd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">84</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re/">re</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/readline/">readline</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sax/">sax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sched/">sched</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/select/">select</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selectors/">selectors</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standar-library/">standar_library</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">78</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/">turtle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unittest/">unittest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/">venv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/">xml</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">871k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">13:12</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
