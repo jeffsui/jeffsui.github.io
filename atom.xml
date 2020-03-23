@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2020-03-22T16:06:24.692Z</updated>
+  <updated>2020-03-23T15:52:13.988Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>esp32 micropython tutorial 01 environment setup</title>
+    <link href="https://pinghailinfeng.gitee.io/2020/03/23/esp32-micropython-tutorial-01-environment-setup/"/>
+    <id>https://pinghailinfeng.gitee.io/2020/03/23/esp32-micropython-tutorial-01-environment-setup/</id>
+    <published>2020-03-23T15:27:29.000Z</published>
+    <updated>2020-03-23T15:52:13.988Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="esp32-micropython-之旅-01-环境搭建"><a href="#esp32-micropython-之旅-01-环境搭建" class="headerlink" title="esp32  micropython 之旅 01 环境搭建"></a>esp32  micropython 之旅 01 环境搭建</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/ardunio_logo.jpg?raw=true" alt></p><a id="more"></a><p>今天开始另一个系列的文章,有关嵌入式的专题,希望大家能支持我！</p><h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><table><thead><tr><th>环境</th><th>版本</th></tr></thead><tbody><tr><td>操作系统</td><td>win7 64位 旗舰版</td></tr><tr><td>micropython</td><td>v1.12</td></tr><tr><td>esp32</td><td>uno D1 R32</td></tr><tr><td>ardunio ide</td><td>v1.8.12</td></tr></tbody></table><h2 id="开箱时刻"><a href="#开箱时刻" class="headerlink" title="开箱时刻"></a>开箱时刻</h2><p>某宝买了一个不到30块钱的板子,支持蓝牙、WIFI,4m缓存,直接开搞</p><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/b3c9d52def57969321ed5dad73c169a.jpg?raw=true" alt></p><p>开箱通电</p><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/6fd65f0e334bf5b843ec2a3367e0b7c.jpg?raw=true" alt></p><p>安装驱动部分我一篇再说,下面是具体刷<code>micropython</code>固件过程</p><h2 id="安装-esptool"><a href="#安装-esptool" class="headerlink" title="安装 esptool"></a>安装 esptool</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install esptool</span><br></pre></td></tr></table></figure><h2 id="擦除固件"><a href="#擦除固件" class="headerlink" title="擦除固件"></a>擦除固件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">esptool.py --chip esp32 --port /dev/ttyUSB0 erase_flash</span><br></pre></td></tr></table></figure><h2 id="刷micropython固件"><a href="#刷micropython固件" class="headerlink" title="刷micropython固件"></a>刷micropython固件</h2><p><a href="https://micropython.org/download#esp32" target="_blank" rel="noopener">固件下载地址</a></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">esptool.py --port COM13 write_flash 0x1000 esp32-idf3-20200323-v1.12-270-g38ccb4c64.bin</span><br></pre></td></tr></table></figure><h2 id="编写小灯闪亮程序"><a href="#编写小灯闪亮程序" class="headerlink" title="编写小灯闪亮程序"></a>编写小灯闪亮程序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> machine <span class="keyword">import</span> Pin</span><br><span class="line">p0 = Pin(<span class="number">2</span>,Pin.OUT)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    p0.value(<span class="number">0</span>)</span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    p0.value(<span class="number">1</span>)</span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure><h2 id="通过ampy命令推送到uno中"><a href="#通过ampy命令推送到uno中" class="headerlink" title="通过ampy命令推送到uno中"></a>通过ampy命令推送到uno中</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install adafruit-ampy</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ampy --port COM13 put blink.py</span><br></pre></td></tr></table></figure><h2 id="查看固件中的文件"><a href="#查看固件中的文件" class="headerlink" title="查看固件中的文件"></a>查看固件中的文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Type "help()" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import os</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; os.listdir()</span></span><br><span class="line">['boot.py', 'blink.py']</span><br></pre></td></tr></table></figure><h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.remove('blink.py')</span><br></pre></td></tr></table></figure><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>引脚问题还没解决,小灯正常应该可以点亮,以后有得玩了。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;esp32-micropython-之旅-01-环境搭建&quot;&gt;&lt;a href=&quot;#esp32-micropython-之旅-01-环境搭建&quot; class=&quot;headerlink&quot; title=&quot;esp32  micropython 之旅 01 环境搭建&quot;&gt;&lt;/a&gt;esp32  micropython 之旅 01 环境搭建&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://github.com/jeffsui/app_image_resource/blob/master/ardunio_logo.jpg?raw=true&quot; alt&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="micropython" scheme="https://pinghailinfeng.gitee.io/categories/micropython/"/>
+    
+      <category term="esp32" scheme="https://pinghailinfeng.gitee.io/categories/micropython/esp32/"/>
+    
+    
+      <category term="micropython" scheme="https://pinghailinfeng.gitee.io/tags/micropython/"/>
+    
+      <category term="esp32" scheme="https://pinghailinfeng.gitee.io/tags/esp32/"/>
+    
+      <category term="esptool" scheme="https://pinghailinfeng.gitee.io/tags/esptool/"/>
+    
+  </entry>
   
   <entry>
     <title>python standard_library fileinput</title>
@@ -541,34 +569,6 @@
       <category term="standard_library" scheme="https://pinghailinfeng.gitee.io/tags/standard-library/"/>
     
       <category term="readline" scheme="https://pinghailinfeng.gitee.io/tags/readline/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python standard library atexit</title>
-    <link href="https://pinghailinfeng.gitee.io/2020/03/03/python-standard-library-atexit/"/>
-    <id>https://pinghailinfeng.gitee.io/2020/03/03/python-standard-library-atexit/</id>
-    <published>2020-03-03T13:09:49.000Z</published>
-    <updated>2020-03-03T13:51:30.607Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="python-标准库-atexit"><a href="#python-标准库-atexit" class="headerlink" title="python 标准库 atexit"></a>python 标准库 atexit</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200303_Prometheus.jpeg?raw=true" alt></p><a id="more"></a><blockquote><p>Prometheus  普罗米修斯(盗火者)</p><p>在希腊神话中，是最具智慧的神明之一，最早的泰坦巨神后代，名字有“先见之明”（Forethought）的意思。<a href="https://baike.baidu.com/item/%E6%B3%B0%E5%9D%A6%E5%8D%81%E4%BA%8C%E7%A5%9E/3078723" target="_blank" rel="noopener">泰坦十二神</a><a href="https://baike.baidu.com/item/%E4%BC%8A%E9%98%BF%E4%BD%A9%E6%89%98%E6%96%AF/10284100" target="_blank" rel="noopener">伊阿佩托斯</a>与<a href="https://baike.baidu.com/item/%E5%85%8B%E5%90%95%E5%A2%A8%E6%B6%85" target="_blank" rel="noopener">克吕墨涅</a>的儿子。普罗米修斯不仅创造了人类，给人类带来了火，还教会了他们许多知识和技能。</p><p>例句:</p><p>Zeus saw through the trick and felt displeased at the Titan’s favour towards men. </p><p>宙斯识破了这套把戏,<strong>普罗米修斯</strong>对人类的偏爱让他很不高兴.</p><p>扩展:</p><p> 电影&lt;普罗米修斯&gt;  讲述的是 21世纪末，人类的科技水平已高度发达，克隆人技术和宇宙航行早已实现，不再是梦想。与此同时，许多科学家仍孜孜不倦追索着人类起源的秘密与真相。人类可能是来自一个遥远星系的外星人创造的,经典中的经典。</p></blockquote><p><a href="https://docs.python.org/zh-cn/3.8/library/atexit.html#module-atexit" target="_blank" rel="noopener"><code>atexit</code></a> 模块定义了清理函数的注册和反注册函数. 被注册的函数会在解释器正常终止时执行. <a href="https://docs.python.org/zh-cn/3.8/library/atexit.html#module-atexit" target="_blank" rel="noopener"><code>atexit</code></a> 会按照注册顺序的<em>逆序</em>执行; 如果你注册了 <code>A</code>, <code>B</code> 和 <code>C</code>, 那么在解释器终止时会依序执行 <code>C</code>, <code>B</code>, <code>A</code>.</p><p><strong>注意:</strong> 通过该模块注册的函数, 在程序被未被 Python 捕获的信号杀死时并不会执行, 在检测到 Python 内部致命错误以及调用了 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os._exit" target="_blank" rel="noopener"><code>os._exit()</code></a> 时也不会执行.</p><p><em>在 3.7 版更改:</em> 当配合 C-API 子解释器使用时，已注册函数是它们所注册解释器中的局部对象。</p><ul><li><p><code>atexit.register</code>(<em>func</em>, <strong>args<em>, </em></strong>kwargs*)</p><p>将 <em>func</em> 注册为终止时执行的函数. 任何传给 <em>func</em> 的可选的参数都应当作为参数传给 <a href="https://docs.python.org/zh-cn/3.8/library/atexit.html#atexit.register" target="_blank" rel="noopener"><code>register()</code></a>. 可以多次注册同样的函数及参数.在正常的程序终止时 (举例来说, 当调用了 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#sys.exit" target="_blank" rel="noopener"><code>sys.exit()</code></a> 或是主模块的执行完成时), 所有注册过的函数都会以后进先出的顺序执行. 这样做是假定更底层的模块通常会比高层模块更早引入, 因此需要更晚清理.如果在 exit 处理程序执行期间引发了异常，将会打印回溯信息 (除非引发的是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#SystemExit" target="_blank" rel="noopener"><code>SystemExit</code></a>) 并且异常信息会被保存。 在所有 exit 处理程序获得运行机会之后，所引发的最后一个异常会被重新引发。这个函数返回 <em>func</em> 对象，可以把它当作装饰器使用。</p></li><li><p><code>atexit.unregister</code>(<em>func</em>)</p><p>从解释器关闭前要运行的函数列表中移除 <em>func</em>。 在调用 <a href="https://docs.python.org/zh-cn/3.8/library/atexit.html#atexit.unregister" target="_blank" rel="noopener"><code>unregister()</code></a> 之后，当解释器关闭时会确保 <em>func</em> 不会被调用，即使它被多次注册。 如果 <em>func</em> 之前没有被注册，<a href="https://docs.python.org/zh-cn/3.8/library/atexit.html#atexit.unregister" target="_blank" rel="noopener"><code>unregister()</code></a> 会静默地不做任何操作。</p></li></ul><p>参见</p><ul><li><p>模块 <a href="https://docs.python.org/zh-cn/3.8/library/readline.html#module-readline" target="_blank" rel="noopener"><code>readline</code></a></p><p>使用 <a href="https://docs.python.org/zh-cn/3.8/library/atexit.html#module-atexit" target="_blank" rel="noopener"><code>atexit</code></a> 读写 <a href="https://docs.python.org/zh-cn/3.8/library/readline.html#module-readline" target="_blank" rel="noopener"><code>readline</code></a> 历史文件的有用的例子。</p></li></ul><h2 id="atexit-示例"><a href="#atexit-示例" class="headerlink" title="atexit 示例"></a><a href="https://docs.python.org/zh-cn/3.8/library/atexit.html#module-atexit" target="_blank" rel="noopener"><code>atexit</code></a> 示例</h2><p>以下简单例子演示了一个模块在被导入时如何从文件初始化一个计数器，并在程序终结时自动保存计数器的更新值，此操作不依赖于应用在终结时对此模块进行显式调用。:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    with open(&quot;counterfile&quot;) as infile:</span><br><span class="line">        _count = int(infile.read())</span><br><span class="line">except FileNotFoundError:</span><br><span class="line">    _count = 0</span><br><span class="line"></span><br><span class="line">def incrcounter(n):</span><br><span class="line">    global _count</span><br><span class="line">    _count = _count + n</span><br><span class="line"></span><br><span class="line">def savecounter():</span><br><span class="line">    with open(&quot;counterfile&quot;, &quot;w&quot;) as outfile:</span><br><span class="line">        outfile.write(&quot;%d&quot; % _count)</span><br><span class="line"></span><br><span class="line">import atexit</span><br><span class="line">atexit.register(savecounter)</span><br></pre></td></tr></table></figure><p>位置和关键字参数也可传入 <a href="https://docs.python.org/zh-cn/3.8/library/atexit.html#atexit.register" target="_blank" rel="noopener"><code>register()</code></a> 以便传递给被调用的已注册函数:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def goodbye(name, adjective):</span><br><span class="line">    print(&apos;Goodbye, %s, it was %s to meet you.&apos; % (name, adjective))</span><br><span class="line"></span><br><span class="line">import atexit</span><br><span class="line">atexit.register(goodbye, &apos;Donny&apos;, &apos;nice&apos;)</span><br><span class="line"></span><br><span class="line"># or:</span><br><span class="line">atexit.register(goodbye, adjective=&apos;nice&apos;, name=&apos;Donny&apos;)</span><br></pre></td></tr></table></figure><p>作为 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-decorator" target="_blank" rel="noopener">decorator</a>: 使用:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import atexit</span><br><span class="line"></span><br><span class="line">@atexit.register</span><br><span class="line">def goodbye():</span><br><span class="line">    print(&quot;You are now leaving the Python sector.&quot;)</span><br></pre></td></tr></table></figure><p>只有在函数不需要任何参数调用时才能工作.</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;python-标准库-atexit&quot;&gt;&lt;a href=&quot;#python-标准库-atexit&quot; class=&quot;headerlink&quot; title=&quot;python 标准库 atexit&quot;&gt;&lt;/a&gt;python 标准库 atexit&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://github.com/jeffsui/app_image_resource/blob/master/20200303_Prometheus.jpeg?raw=true&quot; alt&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
-    
-      <category term="standard_library" scheme="https://pinghailinfeng.gitee.io/categories/python/standard-library/"/>
-    
-    
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
-    
-      <category term="standard_library" scheme="https://pinghailinfeng.gitee.io/tags/standard-library/"/>
-    
-      <category term="atexit" scheme="https://pinghailinfeng.gitee.io/tags/atexit/"/>
     
   </entry>
   
