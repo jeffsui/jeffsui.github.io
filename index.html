@@ -502,7 +502,7 @@
                 
               
 
-              <time title="创建时间：2020-09-14 16:57:20 / 修改时间：17:08:40" itemprop="dateCreated datePublished" datetime="2020-09-14T16:57:20+08:00">2020-09-14</time>
+              <time title="创建时间：2020-09-14 16:57:20 / 修改时间：17:20:18" itemprop="dateCreated datePublished" datetime="2020-09-14T16:57:20+08:00">2020-09-14</time>
             
 
             
@@ -550,7 +550,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.5k</span>
+                <span title="本文字数">2k</span>
               
 
               
@@ -564,7 +564,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -591,7 +591,9 @@
 <h2 id="settings-py-中添加"><a href="#settings-py-中添加" class="headerlink" title="settings.py 中添加"></a>settings.py 中添加</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">'django.contrib.admin'</span>,</span><br><span class="line">    <span class="string">'django.contrib.auth'</span>,</span><br><span class="line">    <span class="string">'django.contrib.contenttypes'</span>,</span><br><span class="line">    <span class="string">'django.contrib.sessions'</span>,</span><br><span class="line">    <span class="string">'django.contrib.messages'</span>,</span><br><span class="line">    <span class="string">'django.contrib.staticfiles'</span>,</span><br><span class="line">    <span class="string">'blog'</span>,</span><br><span class="line">    <span class="string">'mdeditor'</span>,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"><span class="comment"># add uploads文件夹</span></span><br><span class="line">MEDIA_ROOT = os.path.join(BASE_DIR, <span class="string">'uploads'</span>)  <span class="comment">#uploads必须存在，且在项目目录下</span></span><br><span class="line">MEDIA_URL = <span class="string">'/media/'</span></span><br></pre></td></tr></table></figure>
 <h2 id="添加站点路由-mysite-urls-py"><a href="#添加站点路由-mysite-urls-py" class="headerlink" title="添加站点路由 mysite/urls.py"></a>添加站点路由 <code>mysite/urls.py</code></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path,include</span><br><span class="line"><span class="keyword">from</span> django.conf.urls.static <span class="keyword">import</span>  static</span><br><span class="line"><span class="keyword">from</span> django.conf <span class="keyword">import</span> settings</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">'admin/'</span>, admin.site.urls),</span><br><span class="line">    path(<span class="string">'blog/'</span>, include((<span class="string">'blog.urls'</span>,<span class="string">'blog'</span>),namespace=<span class="string">'blog'</span>)),</span><br><span class="line">    path(<span class="string">'mdeditor/'</span>,include(<span class="string">'mdeditor.urls'</span>)),</span><br><span class="line">]</span><br><span class="line"><span class="keyword">if</span> settings.DEBUG:</span><br><span class="line">    <span class="comment"># static files (images, css, javascript, etc.)</span></span><br><span class="line">    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)</span><br></pre></td></tr></table></figure>
 <h2 id="修改blog下models-py中内容类型"><a href="#修改blog下models-py中内容类型" class="headerlink" title="修改blog下models.py中内容类型"></a>修改blog下<code>models.py</code>中内容类型</h2><p><code>导入MDTextField</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">from</span> mdeditor.fields <span class="keyword">import</span> MDTextField</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BlogPost</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    title = models.CharField(max_length= <span class="number">150</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># body = models.TextField()</span></span><br><span class="line">    body = MDTextField()</span><br><span class="line"></span><br><span class="line">    create_time = models.DateTimeField()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">f"&lt;BlogPost <span class="subst">&#123;self.title&#125;</span>&gt;"</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        verbose_name =<span class="string">"文章"</span></span><br><span class="line">        verbose_name_plural = verbose_name</span><br></pre></td></tr></table></figure></p>
+<h2 id="blog应用views-py"><a href="#blog应用views-py" class="headerlink" title="blog应用views.py"></a>blog应用views.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">details</span><span class="params">(request, blog_id)</span>:</span></span><br><span class="line">    blog = get_object_or_404 (BlogPost, pk=blog_id)</span><br><span class="line">    blog.body = markdown(blog.body, extensions=[</span><br><span class="line">        <span class="comment"># 包含 缩写、表格等常用扩展</span></span><br><span class="line">        <span class="string">'markdown.extensions.extra'</span>,</span><br><span class="line">        <span class="comment"># 语法高亮扩展</span></span><br><span class="line">        <span class="string">'markdown.extensions.codehilite'</span>,</span><br><span class="line">        <span class="comment">#允许我们自动生成目录</span></span><br><span class="line">         <span class="string">'markdown.extensions.toc'</span>,</span><br><span class="line">        ])</span><br><span class="line">    <span class="keyword">return</span> render (request, <span class="string">'blog_detail.html'</span>, &#123;<span class="string">'blog'</span>: blog&#125;)</span><br></pre></td></tr></table></figure>
 <h2 id="前台页面添加markdown-css支持"><a href="#前台页面添加markdown-css支持" class="headerlink" title="前台页面添加markdown css支持"></a>前台页面添加markdown css支持</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://cdn.bootcss.com/github-markdown-css/3.0.1/github-markdown.css"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="前台页面添加-safe渲染"><a href="#前台页面添加-safe渲染" class="headerlink" title="前台页面添加 safe渲染"></a>前台页面添加 safe渲染</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; blog.title &#125;&#125;</span><br><span class="line">&#123;&#123; blog.body | safe &#125;&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="重新启动服务"><a href="#重新启动服务" class="headerlink" title="重新启动服务"></a>重新启动服务</h2><p><code>python manage.py runserver 127.0.0.1:8000</code></p>
 
           
@@ -3084,7 +3086,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">879k</span>
+    <span title="站点总字数">880k</span>
   
 
   
@@ -3093,7 +3095,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">13:19</span>
+    <span title="站点阅读时长">13:20</span>
   
 </div>
 
