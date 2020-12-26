@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2020-12-26T08:50:08.644Z</updated>
+  <updated>2020-12-26T21:49:45.337Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>node14.4 run hexo TypeError [ERR_INVALID_ARG_TYPE]</title>
+    <link href="https://pinghailinfeng.gitee.io/2020/12/27/node14-4-run-hexo-TypeError-ERR-INVALID-ARG-TYPE/"/>
+    <id>https://pinghailinfeng.gitee.io/2020/12/27/node14-4-run-hexo-TypeError-ERR-INVALID-ARG-TYPE/</id>
+    <published>2020-12-26T21:35:28.000Z</published>
+    <updated>2020-12-26T21:49:45.337Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Node升级到14-4-hexo-运行失败"><a href="#Node升级到14-4-hexo-运行失败" class="headerlink" title="Node升级到14.4 hexo 运行失败"></a>Node升级到14.4 hexo 运行失败</h1><p><img src="https://www.prajwaldesai.com/wp-content/uploads/2014/01/error-code.jpeg" alt></p><a id="more"></a><p>node刚升级到14.4,结果发现使用<code>hexo d</code>命令部署到<code>gitee</code>上发现如下错误</p><blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; typeError [ERR_INVALID_ARG_TYPE]: The <span class="string">"mode"</span> argument must be <span class="built_in">integer</span>. Received an instance of Object</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote><p>查阅相关资料发现是node版本太高导致,最终将node降级到12.14.0后,重新部署就成功了。</p><p>当然你也可以使用nvm来切换node版本。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Node升级到14-4-hexo-运行失败&quot;&gt;&lt;a href=&quot;#Node升级到14-4-hexo-运行失败&quot; class=&quot;headerlink&quot; title=&quot;Node升级到14.4 hexo 运行失败&quot;&gt;&lt;/a&gt;Node升级到14.4 hexo 运行失败&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://www.prajwaldesai.com/wp-content/uploads/2014/01/error-code.jpeg&quot; alt&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="hexo" scheme="https://pinghailinfeng.gitee.io/categories/hexo/"/>
+    
+      <category term="博客搭建" scheme="https://pinghailinfeng.gitee.io/categories/hexo/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    
+    
+      <category term="hexo" scheme="https://pinghailinfeng.gitee.io/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>Farewell, 2020</title>
@@ -135,11 +159,11 @@
       <category term="java" scheme="https://pinghailinfeng.gitee.io/categories/selenium/java/"/>
     
     
-      <category term="java" scheme="https://pinghailinfeng.gitee.io/tags/java/"/>
-    
       <category term="selenium" scheme="https://pinghailinfeng.gitee.io/tags/selenium/"/>
     
       <category term="自动化测试" scheme="https://pinghailinfeng.gitee.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
+    
+      <category term="java" scheme="https://pinghailinfeng.gitee.io/tags/java/"/>
     
   </entry>
   
@@ -524,36 +548,6 @@
       <category term="xml" scheme="https://pinghailinfeng.gitee.io/tags/xml/"/>
     
       <category term="dom" scheme="https://pinghailinfeng.gitee.io/tags/dom/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python standard_library xml sax</title>
-    <link href="https://pinghailinfeng.gitee.io/2020/03/12/python-standard-library-xml-sax/"/>
-    <id>https://pinghailinfeng.gitee.io/2020/03/12/python-standard-library-xml-sax/</id>
-    <published>2020-03-12T13:52:19.000Z</published>
-    <updated>2020-03-15T03:49:19.794Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="python-标准库-xml-sax"><a href="#python-标准库-xml-sax" class="headerlink" title="python 标准库  xml.sax"></a>python 标准库  xml.sax</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200312_youmo.jpg?raw=true" alt></p><a id="more"></a><h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><p> <a href="https://github.com/python/cpython/tree/3.8/Lib/xml/sax/__init__.py" target="_blank" rel="noopener">Lib/xml/sax/<strong>init</strong>.py</a> </p><p>该<code>xml.sax</code>软件包提供了许多实现Python简单API（SAX）接口的模块。程序包本身提供SAX异常和SAX API用户最常使用的便利功能。</p><p>Warning</p><p>该<code>xml.sax</code>模块对恶意构建的数据不安全。如果您需要解析不可信或未经身份验证的数据，请参阅XML漏洞。</p><p>便利功能是：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xml.sax.make_parser([parser_list])</span><br></pre></td></tr></table></figure><p>创建并返回一个SAX <code>XMLReader</code>对象。找到的第一个解析器将被使用。如果提供了<em>parser_list</em>，它必须是一个字符串序列，这些字符串命名具有名为函数的模块<code>create_parser()</code>。<em>parser_list中</em>列出的模块将在解析器默认列表中的模块之前使用。</p><p> <em>在 3.8 版更改</em> ,parser_list参数可以是认可可迭代对象，不仅只是列表。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xml.sax.parse(filename_or_stream, handler[, error_handler])</span><br></pre></td></tr></table></figure><p>创建一个SAX解析器并用它来解析文档。 以filename_or_stream形式传入的文档可以是文件名或文件对象。 处理程序参数需要是SAX ContentHandler实例。 如果给出error_handler，它必须是一个SAX ErrorHandler实例; 如果省略，则会在所有错误中引发SAXParseException。 没有回报价值; 所有的工作必须由传入的处理程序来完成。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xml.sax.parseString(string, handler[, error_handler])</span><br></pre></td></tr></table></figure><p>与parse（）类似，但从作为参数接收的缓冲区字符串中解析。</p><p>典型的SAX应用程序使用三种对象：读者，处理程序和输入源。在这种情况下，“读者”是解析器的另一个术语，即某些代码从输入源读取字节或字符，并产生一系列事件。事件然后被分配给处理程序对象，即读者调用处理程序上的方法。因此，SAX应用程序必须获取reader对象，创建或打开输入源，创建处理程序并将这些对象连接在一起。作为准备的最后一步，读者被调用来解析输入。在解析过程中，处理程序对象的方法基于来自输入数据的结构和语法事件来调用。</p><p>对于这些对象，只有接口是相关的; 它们通常不是由应用程序本身实例化的。 由于Python没有明确的接口概念，因此它们被正式引入为类，但是应用程序可能会使用不从所提供的类继承的实现。 InputSource，Locator，Attributes，AttributesNS和XMLReader接口在模块xml.sax.xmlreader中定义。 处理程序接口在xml.sax.handler中定义。 为了方便，InputSource（通常直接实例化）和处理程序类也可以从xml.sax中获得。 这些接口如下所述。</p><p>除这些类外，<code>xml.sax</code>还提供以下异常类。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exception xml.sax.SAXException(msg[, exception])</span><br></pre></td></tr></table></figure><p>封装XML错误或警告。该类可以包含来自XML解析器或应用程序的基本错误或警告信息：它可以被分类以提供附加功能或添加本地化。请注意，虽然<code>ErrorHandler</code>界面中定义的处理程序会接收此异常的实例，但实际并不需要引发异常 - 它也可用作信息容器。</p><p>实例化时，<em>msg</em> 应该是错误的可读描述。可选的<em>异常</em>参数（如果给出）应该是<code>None</code>解析代码捕获的异常，并作为信息传递。</p><p>这是其他SAX异常类的基类。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exception xml.sax.SAXParseException(msg, exception, locator)</span><br></pre></td></tr></table></figure><p>解析错误引发SAXException的子类。 将此类的实例传递给SAX ErrorHandler接口的方法，以提供有关分析错误的信息。 该类支持SAX Locator接口以及SAXException接口。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exception xml.sax.SAXNotRecognizedException(msg[, exception])</span><br></pre></td></tr></table></figure><p>当SAX XMLReader遇到无法识别的特征或属性时引发SAXException的子类。 SAX应用程序和扩展可能会将此类用于类似目的。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exception xml.sax.SAXNotSupportedException(msg[, exception])</span><br></pre></td></tr></table></figure><p>SAXException的子类在SAX XMLReader被要求启用不支持的功能或将属性设置为实现不支持的值时引发。 SAX应用程序和扩展可能会将此类用于类似目的。</p><p>扩展内容</p><p>SAX：XML的简单API这个站点是定义SAX API的焦点。 它提供了Java实现和在线文档。 实现和历史信息的链接也可用。 模块xml.sax.handler应用程序提供的对象的接口定义。 模块xml.sax.saxutils用于SAX应用程序的便捷函数。 模块xml.sax.xmlreader解析器提供的对象的接口定义。</p><h2 id="1-SAXException对象"><a href="#1-SAXException对象" class="headerlink" title="1. SAXException对象"></a>1. SAXException对象</h2><p>该<code>SAXException</code>异常类支持下列方法：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SAXException.getMessage()</span><br></pre></td></tr></table></figure><p>返回描述错误情况的可读信息。</p><p><a href="javascript:;" target="_blank" rel="noopener">纠错</a></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SAXException.getException()</span><br></pre></td></tr></table></figure><p>返回一个封装的异常对象，或者<code>None</code>。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;python-标准库-xml-sax&quot;&gt;&lt;a href=&quot;#python-标准库-xml-sax&quot; class=&quot;headerlink&quot; title=&quot;python 标准库  xml.sax&quot;&gt;&lt;/a&gt;python 标准库  xml.sax&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://github.com/jeffsui/app_image_resource/blob/master/20200312_youmo.jpg?raw=true&quot; alt&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
-    
-      <category term="standard_library" scheme="https://pinghailinfeng.gitee.io/categories/python/standard-library/"/>
-    
-    
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
-    
-      <category term="standard_library" scheme="https://pinghailinfeng.gitee.io/tags/standard-library/"/>
-    
-      <category term="xml" scheme="https://pinghailinfeng.gitee.io/tags/xml/"/>
-    
-      <category term="sax" scheme="https://pinghailinfeng.gitee.io/tags/sax/"/>
     
   </entry>
   
