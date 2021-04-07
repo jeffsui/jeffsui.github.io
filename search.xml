@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[ubuntu install nodejs config taobao source]]></title>
+    <url>%2F2021%2F04%2F07%2Fubuntu-install-nodejs-config-taobao-source%2F</url>
+    <content type="text"><![CDATA[Ubuntu npm 切换淘宝镜像源 npm 切换到淘宝源默认的npm下载地址：http://www.npmjs.org/淘宝npm镜像的地址：https://npm.taobao.org/临时使用淘宝源： $ npm --registry https://registry.npm.taobao.org install node-red-contrib-composer@latest 全局配置切换到淘宝源：$ npm config set registry https://registry.npm.taobao.org 全局配置切换到官方源：$ npm config set registry http://www.npmjs.org 检测是否切换到了淘宝源：$ npm info underscore]]></content>
+      <categories>
+        <category>nodejs</category>
+      </categories>
+      <tags>
+        <tag>nodejs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Javascript keep i variable value in loop]]></title>
     <url>%2F2021%2F01%2F11%2FJavascript-keep-i-variable-value-in-loop%2F</url>
     <content type="text"><![CDATA[JavaScript的循环中保留变量i的值 又一波疫情,本来就景气的大连又一次雪上加霜。只要有希望,一切都会好的。 循环是我们常用的控制语句，在javascript中每次循环结束后其 i 值会指向最后一次的结果，这样循环注册事件时使用到 i 值便会出错 点击图片切换背景的javascript脚本 12345678910111213141516 &lt;ul&gt; &lt;li&gt;&lt;img src="images/1.jpg" alt=""&gt;&lt;/li&gt; &lt;li&gt;&lt;img src="images/2.jpg" alt=""&gt;&lt;/li&gt; &lt;li&gt;&lt;img src="images/3.jpg" alt=""&gt;&lt;/li&gt; &lt;li&gt;&lt;img src="images/4.jpg" alt=""&gt;&lt;/li&gt; &lt;/ul&gt;&lt;script&gt; var imgs = document.querySelector('ul').querySelectorAll('img') for (var i = 0; i &lt; imgs.length; i++) &#123; imgs[i].onclick = function () &#123; // console.log(imgs[i].src); console.log(i); document.body.style.backgroundImage = 'url(' + imgs[i].src + ')'; &#125;&#125;&lt;/script&gt; 直接报错: 1Uncaught TypeError: Cannot read property 'src' of undefined 打印变量i,永远都是指向最大索引值4 1&gt; 4 下面是解决方案 123456789101112131415161718192021222324252627282930//第一种解决方案： this关键字 for (var i = 0; i &lt; imgs.length; i++) &#123; imgs[i].onclick = function () &#123; // console.log(imgs[i].src); console.log(i); document.body.style.backgroundImage = 'url(' + this.src + ')'; &#125;&#125; //第二种解决方案: 自动执行函数 for (var i = 0; i &lt; imgs.length; i++) &#123; (function (inner) &#123; imgs[inner].onclick = function () &#123; console.log(imgs[inner]); &#125; &#125;)(i); &#125; //第三种解决方案 闭包 for (var i = 0; i &lt; imgs.length; i++) &#123; imgs[i].onclick = function (inner) &#123; return function () &#123; console.log(inner); &#125; &#125;(i); &#125; //第四种解决方案 let 块级作用域 for (let i = 0; i &lt; imgs.length; i++) &#123; imgs[i].onclick = function () &#123; console.log(i); &#125;; &#125;]]></content>
@@ -1608,8 +1619,8 @@
       </categories>
       <tags>
         <tag>git</tag>
-        <tag>gitcafe</tag>
         <tag>版本管理</tag>
+        <tag>gitcafe</tag>
       </tags>
   </entry>
   <entry>
@@ -1667,9 +1678,9 @@
     <url>%2F2015%2F04%2F17%2Fmy-new-post%2F</url>
     <content type="text"><![CDATA[#我的新文章 这是我的第一篇在github上的博客。记录下我的工作和生活,慢慢给其他的文章都更新到这里。嬉笑怒骂也好,喜怒哀乐也罢,我就是一个俗人罢了。]]></content>
       <tags>
-        <tag>杂记</tag>
         <tag>博客</tag>
         <tag>文章</tag>
+        <tag>杂记</tag>
       </tags>
   </entry>
   <entry>
