@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[how to use maketrans in python3]]></title>
+    <url>%2F2021%2F04%2F09%2Fhow-to-use-maketrans-in-python3%2F</url>
+    <content type="text"><![CDATA[如何在python3中使用maketrans python3中的maketrans应用场景 Python maketrans() 方法用于给 translate()方法创建字符映射转换表。 可以只接受一个参数，此时这个参数是个字典类型（暂不研究这种情况）。 对于接受两个参数的最简单的调用方式，第一个参数是字符串，表示需要转换的字符，第二个参数也是字符串，表示转换的目标。两个字符串的长度必须相同，为一一对应的关系。 在Python3中可以有第三个参数，表示要删除的字符，也是字符串。 一般 maketrans() 方法需要配合 translate() 方法一起使用。 注：Python3.4 以后已经不需要从外部 string 模块中来调用 maketrans() 方法了，取而代之的是内建函数: bytearray.maketrans()、bytes.maketrans()、str.maketrans()。 基本语法 python3中 1str.maketrans(intab,outtab[,delchars]) python2中 12import stringstring.maketrans(intab,outtab) 参数 intab – 需要转换的字符组成的字符串。 outtab – 转换的目标字符组成的字符串。 delchars – 可选参数，表示要删除的字符组成的字符串。 返回值返回一个字符映射转换表供 translate()方法调用。 实例借用 python挑战 第一关 提示信息显示: 123K--&gt;M O--&gt;QE--&gt;G 每个字母向后移动两位就是加密之前的单词了,于是就有下面的方法。 123456 str = "g fmnc wms bgblr rpylqjyrc gr zw fylb. rfyrq ufyr amknsrcpq ypc dmp. bmgle gr gl zw fylb gq glcddgagclr ylb rfyr'q ufw rfgq rcvr gq qm jmle. sqgle qrpgle.kyicrpylq() gq pcamkkclbcb. lmu ynnjw ml rfc spj." table=str.maketrans('abcdefghijklmnopqrstuvwxyz','cdefghijklmnopqrstuvwxyzab')print str.translate(table) 翻译过来: i hope you didnt translate it by hand. thats what computers are for. doing it in by hand is inefficient and that’s why this text is so long. using string.maketrans() is recommended. now apply on the url 通过转换得到下一关的地址 http://www.pythonchallenge.com/pc/def/ocr.html]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ubuntu install nodejs config taobao source]]></title>
     <url>%2F2021%2F04%2F07%2Fubuntu-install-nodejs-config-taobao-source%2F</url>
     <content type="text"><![CDATA[Ubuntu npm 切换淘宝镜像源 npm 切换到淘宝源默认的npm下载地址：http://www.npmjs.org/淘宝npm镜像的地址：https://npm.taobao.org/临时使用淘宝源： $ npm --registry https://registry.npm.taobao.org install node-red-contrib-composer@latest 全局配置切换到淘宝源：$ npm config set registry https://registry.npm.taobao.org 全局配置切换到官方源：$ npm config set registry http://www.npmjs.org 检测是否切换到了淘宝源：$ npm info underscore]]></content>
