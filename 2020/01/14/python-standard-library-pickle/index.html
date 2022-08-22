@@ -1,0 +1,2113 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 pickle快过年了,准备了一些过节用的英语   传统中国节日：traditional Chinese festival  农历：lunar calendar  腊八节：Laba Festival  小年：Little New Year  除夕：Lunar New Year’s Eve  春节：the Spring Festival  正月初一：the lunar New Y">
+<meta name="keywords" content="python,standard_library,pickle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library pickle">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/01/14/python-standard-library-pickle/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 pickle快过年了,准备了一些过节用的英语   传统中国节日：traditional Chinese festival  农历：lunar calendar  腊八节：Laba Festival  小年：Little New Year  除夕：Lunar New Year’s Eve  春节：the Spring Festival  正月初一：the lunar New Y">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200114_guonian1.jpg?raw=true">
+<meta property="og:updated_time" content="2022-08-18T08:03:08.573Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library pickle">
+<meta name="twitter:description" content="python 标准库 pickle快过年了,准备了一些过节用的英语   传统中国节日：traditional Chinese festival  农历：lunar calendar  腊八节：Laba Festival  小年：Little New Year  除夕：Lunar New Year’s Eve  春节：the Spring Festival  正月初一：the lunar New Y">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200114_guonian1.jpg?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/01/14/python-standard-library-pickle/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library pickle | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/14/python-standard-library-pickle/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library pickle
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-14 10:48:51" itemprop="dateCreated datePublished" datetime="2020-01-14T10:48:51+08:00">2020-01-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-08-18 16:03:08" itemprop="dateModified" datetime="2022-08-18T16:03:08+08:00">2022-08-18</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">19k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">18 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-pickle"><a href="#python-标准库-pickle" class="headerlink" title="python 标准库 pickle"></a>python 标准库 pickle</h1><p>快过年了,准备了一些过节用的英语</p>
+<blockquote>
+<ol>
+<li><p>传统中国节日：traditional Chinese festival</p>
+</li>
+<li><p>农历：lunar calendar</p>
+</li>
+<li><p>腊八节：Laba Festival</p>
+</li>
+<li><p>小年：Little New Year</p>
+</li>
+<li><p>除夕：Lunar New Year’s Eve</p>
+</li>
+<li><p>春节：the Spring Festival</p>
+</li>
+<li><p>正月初一：the lunar New Year’s Day</p>
+</li>
+<li><p>元宵节：the Lantern Festival</p>
+</li>
+<li><p>正月：the first month of the lunar year</p>
+</li>
+<li><p>二月二：Dragon Heads-raising Day</p>
+</li>
+</ol>
+</blockquote>
+<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200114_guonian1.jpg?raw=true" alt></p>
+<p>时间过得好快,又是一年过去了。</p>
+<h2 id="python-标准库学习之-pickle"><a href="#python-标准库学习之-pickle" class="headerlink" title="python 标准库学习之 pickle"></a>python 标准库学习之 pickle</h2><p>常用的文本处理 除了文件,数据库,json,xml 以外,python还提供了一种存储方案,这就是<code>pickle</code>。</p>
+<blockquote>
+<p>模块 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#module-pickle" target="_blank" rel="noopener"><code>pickle</code></a> 实现了对一个 Python 对象结构的二进制序列化和反序列化。<em>“pickling”</em> 是将 Python 对象及其所拥有的层次结构转化为一个字节流的过程，而 <em>“unpickling”</em> 是相反的操作，会将（来自一个 <a href="https://docs.python.org/zh-cn/3/glossary.html#term-binary-file" target="_blank" rel="noopener">binary file</a> 或者 <a href="https://docs.python.org/zh-cn/3/glossary.html#term-bytes-like-object" target="_blank" rel="noopener">bytes-like object</a> 的）字节流转化回一个对象层次结构。 pickling（和 unpickling）也被称为“序列化”, “编组” 或者 “平面化”。而为了避免混乱，此处采用术语 “封存 (pickling)” 和 “解封 (unpickling)”。</p>
+</blockquote>
+<blockquote>
+<p><em>警告</em> :  <code>pickle</code> 模块<strong>并不安全</strong>。你只应该对你信任的数据进行unpickle操作。构建恶意的 pickle 数据来<strong>在解封时执行任意代码</strong>是可能的。绝对不要对不信任来源的数据和可能被篡改过的数据进行解封。请考虑使用 <a href="https://docs.python.org/zh-cn/3/library/hmac.html#module-hmac" target="_blank" rel="noopener"><code>hmac</code></a> 来对数据进行签名，确保数据没有被篡改。在你处理不信任数据时，更安全的序列化格式如 <a href="https://docs.python.org/zh-cn/3/library/json.html#module-json" target="_blank" rel="noopener"><code>json</code></a> 可能更为适合。参见 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#comparison-with-json" target="_blank" rel="noopener">与 json 模块的比较</a> </p>
+</blockquote>
+<h3 id="源代码：-Lib-pickle-py"><a href="#源代码：-Lib-pickle-py" class="headerlink" title="源代码： Lib/pickle.py"></a><strong>源代码：</strong> <a href="https://github.com/python/cpython/tree/3.8/Lib/pickle.py" target="_blank" rel="noopener">Lib/pickle.py</a></h3><p>本节内容比较多,先看下类层次结构,有一个大体的概念(节选自源码)：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Classes:</span><br><span class="line">    Pickler</span><br><span class="line">    Unpickler</span><br><span class="line">Functions:</span><br><span class="line">    dump(object, file)</span><br><span class="line">    dumps(object) -&gt; string</span><br><span class="line">    load(file) -&gt; object</span><br><span class="line">    loads(string) -&gt; object</span><br><span class="line">Misc variables:</span><br><span class="line">    __version__</span><br><span class="line">    format_version</span><br><span class="line">    compatible_formats</span><br><span class="line">    </span><br><span class="line">__all__ = [<span class="string">"PickleError"</span>, <span class="string">"PicklingError"</span>, <span class="string">"UnpicklingError"</span>, <span class="string">"Pickler"</span>,</span><br><span class="line">           <span class="string">"Unpickler"</span>, <span class="string">"dump"</span>, <span class="string">"dumps"</span>, <span class="string">"load"</span>, <span class="string">"loads"</span>]</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="数据流格式"><a href="#数据流格式" class="headerlink" title="数据流格式"></a>数据流格式</h3><p><a href="https://docs.python.org/zh-cn/3/library/pickletools.html#module-pickletools" target="_blank" rel="noopener"><code>pickletools</code></a> 模块包含了相应的工具用于分析 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#module-pickle" target="_blank" rel="noopener"><code>pickle</code></a> 生成的数据流。<a href="https://docs.python.org/zh-cn/3/library/pickletools.html#module-pickletools" target="_blank" rel="noopener"><code>pickletools</code></a> 源码中包含了对 pickle 协议使用的操作码的大量注释。</p>
+<p>当前共有 6 种不同的协议可用于封存操作。 使用的协议版本越高，读取所生成 pickle 对象所需的 Python 版本就要越新。</p>
+<ul>
+<li>v0 版协议是原始的“人类可读”协议，并且向后兼容早期版本的 Python。</li>
+<li>v1 版协议是较早的二进制格式，它也与早期版本的 Python 兼容。</li>
+<li>v2 版协议是在 Python 2.3 中引入的。它为存储 <a href="https://docs.python.org/zh-cn/3/glossary.html#term-new-style-class" target="_blank" rel="noopener">new-style class</a> 提供了更高效的机制。欲了解有关第 2 版协议带来的改进，请参阅 <a href="https://www.python.org/dev/peps/pep-0307" target="_blank" rel="noopener"><strong>PEP 307</strong></a>。</li>
+<li>v3 版协议是在 Python 3.0 中引入的。 它显式地支持 <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#bytes" target="_blank" rel="noopener"><code>bytes</code></a> 字节对象，不能使用 Python 2.x 解封。这是 Python 3.0-3.7 的默认协议。</li>
+<li>v4 版协议添加于 Python 3.4。它支持存储非常大的对象，能存储更多种类的对象，还包括一些针对数据格式的优化。它是Python 3.8使用的默认协议。有关第 4 版协议带来改进的信息，请参阅 <a href="https://www.python.org/dev/peps/pep-3154" target="_blank" rel="noopener"><strong>PEP 3154</strong></a>。</li>
+<li>第 5 版协议是在 Python 3.8 中加入的。 它增加了对带外数据的支持，并可加速带内数据处理。 请参阅 <a href="https://www.python.org/dev/peps/pep-0574" target="_blank" rel="noopener"><strong>PEP 574</strong></a> 了解第 5 版协议所带来的改进的详情。</li>
+</ul>
+<h3 id="模块接口"><a href="#模块接口" class="headerlink" title="模块接口"></a>模块接口</h3><p>要序列化某个包含层次结构的对象，只需调用 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.dumps" target="_blank" rel="noopener"><code>dumps()</code></a> 函数即可。同样，要反序列化数据流，可以调用 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.loads" target="_blank" rel="noopener"><code>loads()</code></a> 函数。但是，如果要对序列化和反序列化加以更多的控制，可以分别创建 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler" target="_blank" rel="noopener"><code>Pickler</code></a> 或 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Unpickler" target="_blank" rel="noopener"><code>Unpickler</code></a> 对象。</p>
+<p><a href="https://docs.python.org/zh-cn/3/library/pickle.html#module-pickle" target="_blank" rel="noopener"><code>pickle</code></a> 模块包含了以下常量：</p>
+<ul>
+<li><p><code>pickle.HIGHEST_PROTOCOL</code></p>
+<p>整数，可用的最高 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle-protocols" target="_blank" rel="noopener">协议版本</a>。此值可以作为 <em>协议</em> 值传递给 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.dump" target="_blank" rel="noopener"><code>dump()</code></a> 和 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.dumps" target="_blank" rel="noopener"><code>dumps()</code></a> 函数，以及 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler" target="_blank" rel="noopener"><code>Pickler</code></a> 的构造函数。</p>
+</li>
+<li><p><code>pickle.DEFAULT_PROTOCOL</code></p>
+<p>整数，用于 pickle 数据的默认 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle-protocols" target="_blank" rel="noopener">协议版本</a>。它可能小于 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.HIGHEST_PROTOCOL" target="_blank" rel="noopener"><code>HIGHEST_PROTOCOL</code></a>。当前默认协议是 v4，它在 Python 3.4 中首次引入，与之前的版本不兼容。<em>在 3.8 版更改:</em> 默认协议版本还是 4。</p>
+</li>
+</ul>
+<h3 id="模块方法"><a href="#模块方法" class="headerlink" title="模块方法"></a>模块方法</h3><ul>
+<li><p><code>pickle.dump</code>(<em>obj</em>, <em>file</em>, <em>protocol=None</em>, <em>**, </em>fix_imports=True<em>, </em>buffer_callback=None*)</p>
+<p>将对象 <em>obj</em> 封存以后的对象写入已打开的 <a href="https://docs.python.org/zh-cn/3/glossary.html#term-file-object" target="_blank" rel="noopener">file object</a> <em>file</em>。它等同于 <code>Pickler(file, protocol).dump(obj)</code>。参数 <em>file</em>、<em>protocol</em>、<em>fix_imports</em> 和 <em>buffer_callback</em> 的含义与它们在 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler" target="_blank" rel="noopener"><code>Pickler</code></a> 的构造函数中的含义相同。<em>在 3.8 版更改:</em> 加入了 <em>buffer_callback</em> 参数。</p>
+</li>
+<li><p><code>pickle.dumps</code>(<em>obj</em>, <em>protocol=None</em>, <em>**, </em>fix_imports=True<em>, </em>buffer_callback=None*)</p>
+<p>将 <em>obj</em> 封存以后的对象作为 <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#bytes" target="_blank" rel="noopener"><code>bytes</code></a> 类型直接返回，而不是将其写入到文件。参数 <em>protocol</em>、<em>fix_imports</em> 和 <em>buffer_callback</em> 的含义与它们在 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler" target="_blank" rel="noopener"><code>Pickler</code></a> 的构造函数中的含义相同。<em>在 3.8 版更改:</em> 加入了 <em>buffer_callback</em> 参数。</p>
+</li>
+<li><p><code>pickle.load</code>(<em>file</em>, <em>**, </em>fix_imports=True<em>, </em>encoding=”ASCII”<em>, </em>errors=”strict”<em>, </em>buffers=None*)</p>
+<p>从已打开的 <a href="https://docs.python.org/zh-cn/3/glossary.html#term-file-object" target="_blank" rel="noopener">file object</a> <em>文件</em> 中读取封存后的对象，重建其中特定对象的层次结构并返回。它相当于 <code>Unpickler(file).load()</code>。Pickle 协议版本是自动检测出来的，所以不需要参数来指定协议。封存对象以外的其他字节将被忽略。参数 <em>file</em>、<em>fix_imports</em>、<em>encoding</em>、<em>errors</em>、<em>strict</em> 和 <em>buffers</em> 的含义与它们在 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Unpickler" target="_blank" rel="noopener"><code>Unpickler</code></a> 的构造函数中的含义相同。<em>在 3.8 版更改:</em> 加入了 <em>buffers</em> 参数。</p>
+</li>
+<li><p><code>pickle.loads</code>(<em>bytes_object</em>, <em>**, </em>fix_imports=True<em>, </em>encoding=”ASCII”<em>, </em>errors=”strict”<em>, </em>buffers=None*)</p>
+<p>对于封存生成的对象 <em>bytes_object</em>，还原出原对象的结构并返回。Pickle 协议版本是自动检测出来的，所以不需要参数来指定协议。封存对象以外的其他字节将被忽略。参数 <em>file</em>、<em>fix_imports</em>、<em>encoding</em>、<em>errors</em>、<em>strict</em> 和 <em>buffers</em> 的含义与它们在 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Unpickler" target="_blank" rel="noopener"><code>Unpickler</code></a> 的构造函数中的含义相同。</p>
+</li>
+</ul>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><p><a href="https://docs.python.org/zh-cn/3/library/pickle.html#module-pickle" target="_blank" rel="noopener"><code>pickle</code></a> 模块定义了以下 3 个异常：</p>
+<ul>
+<li><p><em>exception</em> <code>pickle.PickleError</code></p>
+<p>其他 pickle 异常的基类。它是 <a href="https://docs.python.org/zh-cn/3/library/exceptions.html#Exception" target="_blank" rel="noopener"><code>Exception</code></a> 的一个子类。</p>
+</li>
+<li><p><em>exception</em> <code>pickle.PicklingError</code></p>
+<p>当 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler" target="_blank" rel="noopener"><code>Pickler</code></a> 遇到无法解封的对象时抛出此错误。它是 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.PickleError" target="_blank" rel="noopener"><code>PickleError</code></a> 的子类。参考 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle-picklable" target="_blank" rel="noopener">可以被封存/解封的对象</a> 来了解哪些对象可以被封存。</p>
+</li>
+<li><p><em>exception</em> <code>pickle.UnpicklingError</code></p>
+<p>当解封出错时抛出此异常，例如数据损坏或对象不安全。它是 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.PickleError" target="_blank" rel="noopener"><code>PickleError</code></a> 的子类。注意，解封时可能还会抛出其他异常，包括（但不限于） AttributeError、EOFError、ImportError 和 IndexError。</p>
+</li>
+</ul>
+<h3 id="模块中的类"><a href="#模块中的类" class="headerlink" title="模块中的类"></a>模块中的类</h3><p><a href="https://docs.python.org/zh-cn/3/library/pickle.html#module-pickle" target="_blank" rel="noopener"><code>pickle</code></a> 模块包含了 3 个类，<a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler" target="_blank" rel="noopener"><code>Pickler</code></a>、<a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Unpickler" target="_blank" rel="noopener"><code>Unpickler</code></a> 和 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.PickleBuffer" target="_blank" rel="noopener"><code>PickleBuffer</code></a>：</p>
+<h4 id="Pickler"><a href="#Pickler" class="headerlink" title="Pickler"></a>Pickler</h4><p><em>class</em> <code>pickle.Pickler</code>(<em>file</em>, <em>protocol=None</em>, <em>**, </em>fix_imports=True<em>, </em>buffer_callback=None*)</p>
+<p>它接受一个二进制文件用于写入 pickle 数据流。</p>
+<p>可选参数 <em>protocol</em> 是一个整数，告知 pickler 使用指定的协议，可选择的协议范围从 0 到 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.HIGHEST_PROTOCOL" target="_blank" rel="noopener"><code>HIGHEST_PROTOCOL</code></a>。如果没有指定，这一参数默认值为 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.DEFAULT_PROTOCOL" target="_blank" rel="noopener"><code>DEFAULT_PROTOCOL</code></a>。指定一个负数就相当于指定 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.HIGHEST_PROTOCOL" target="_blank" rel="noopener"><code>HIGHEST_PROTOCOL</code></a>。</p>
+<p>参数 <em>file</em> 必须有一个 write() 方法，该 write() 方法要能接收字节作为其唯一参数。因此，它可以是一个打开的磁盘文件（用于写入二进制内容），也可以是一个 <a href="https://docs.python.org/zh-cn/3/library/io.html#io.BytesIO" target="_blank" rel="noopener"><code>io.BytesIO</code></a> 实例，也可以是满足这一接口的其他任何自定义对象。</p>
+<p>如果 <em>fix_imports</em> 为 True 且 <em>protocol</em> 小于 3，pickle 将尝试将 Python 3 中的新名称映射到 Python 2 中的旧模块名称，因此 Python 2 也可以读取封存的数据流。</p>
+<p>如果 <em>buffer_callback</em> 为 None（默认情况），缓冲区视图（buffer view）将会作为 pickle 流的一部分被序列化到 <em>file</em> 中。</p>
+<p>如果 <em>buffer_callback</em> 不为 None，那它可以用缓冲区视图调用任意次。如果某次调用返回了 False 值（例如 None），则给定的缓冲区是 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle-oob" target="_blank" rel="noopener">带外的</a>，否则缓冲区是带内的（例如保存在了 pickle 流里面）。</p>
+<p>如果 <em>buffer_callback</em> 不是 None 且 <em>protocol</em> 是 None 或小于 5，就会出错。</p>
+<p><em>在 3.8 版更改:</em> 加入了 <em>buffer_callback</em> 参数。</p>
+<ul>
+<li><p><code>dump</code>(<em>obj</em>)</p>
+<p>将 <em>obj</em> 封存后的内容写入已打开的文件对象，该文件对象已经在构造函数中指定。</p>
+</li>
+<li><p><code>persistent_id</code>(<em>obj</em>)</p>
+<p>默认无动作，子类继承重载时使用。如果 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler.persistent_id" target="_blank" rel="noopener"><code>persistent_id()</code></a> 返回 <code>None</code>，<em>obj</em> 会被照常 pickle。如果返回其他值，<a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler" target="_blank" rel="noopener"><code>Pickler</code></a> 会将这个函数的返回值作为 <em>obj</em> 的持久化 ID（Pickler 本应得到序列化数据流并将其写入文件，若此函数有返回值，则得到此函数的返回值并写入文件）。这个持久化 ID 的解释应当定义在 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Unpickler.persistent_load" target="_blank" rel="noopener"><code>Unpickler.persistent_load()</code></a> 中（该方法定义还原对象的过程，并返回得到的对象）。注意，<a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler.persistent_id" target="_blank" rel="noopener"><code>persistent_id()</code></a> 的返回值本身不能拥有持久化 ID。参阅 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle-persistent" target="_blank" rel="noopener">持久化外部对象</a> 获取详情和使用示例。</p>
+</li>
+<li><p><code>dispatch_table</code></p>
+<p>Pickler 对象的 dispatch 表是 <a href="https://docs.python.org/zh-cn/3/library/copyreg.html#copyreg.pickle" target="_blank" rel="noopener"><code>copyreg.pickle()</code></a> 中用到的 <em>reduction 函数</em> 的注册。dispatch 表本身是一个 class 到其 reduction 函数的映射键值对。一个 reduction 函数只接受一个参数，就是其关联的 class，函数行为应当遵守 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__reduce__" target="_blank" rel="noopener"><code>__reduce__()</code></a> 接口规范。Pickler 对象默认并没有 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler.dispatch_table" target="_blank" rel="noopener"><code>dispatch_table</code></a> 属性，该对象默认使用 <a href="https://docs.python.org/zh-cn/3/library/copyreg.html#module-copyreg" target="_blank" rel="noopener"><code>copyreg</code></a> 模块中定义的全局 dispatch 表。如果要为特定 Pickler 对象自定义序列化过程，可以将 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler.dispatch_table" target="_blank" rel="noopener"><code>dispatch_table</code></a> 属性设置为类字典对象（dict-like object）。另外，如果 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler" target="_blank" rel="noopener"><code>Pickler</code></a> 的子类设置了 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler.dispatch_table" target="_blank" rel="noopener"><code>dispatch_table</code></a> 属性，则该子类的实例会使用这个表作为默认的 dispatch 表。参阅 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle-dispatch" target="_blank" rel="noopener">Dispatch 表</a> 获取使用示例。<em>3.3 新版功能.</em></p>
+</li>
+<li><p><code>reducer_override</code>(<em>self</em>, <em>obj</em>)</p>
+<p>可以在 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler" target="_blank" rel="noopener"><code>Pickler</code></a> 的子类中定义的特殊 reducer。此方法的优先级高于 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler.dispatch_table" target="_blank" rel="noopener"><code>dispatch_table</code></a> 中的任何 reducer。它应该与 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__reduce__" target="_blank" rel="noopener"><code>__reduce__()</code></a> 方法遵循相同的接口，它也可以返回 <code>NotImplemented</code>，这将使用 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler.dispatch_table" target="_blank" rel="noopener"><code>dispatch_table</code></a> 里注册的 reducer 来封存 <code>obj</code>。</p>
+</li>
+</ul>
+<h4 id="Unpickler"><a href="#Unpickler" class="headerlink" title="Unpickler"></a>Unpickler</h4><p><em>class</em> <code>pickle.Unpickler</code>(<em>file</em>, <em>**, </em>fix_imports=True<em>, </em>encoding=”ASCII”<em>, </em>errors=”strict”<em>, </em>buffers=None*)</p>
+<p>它接受一个二进制文件用于读取 pickle 数据流。</p>
+<p>Pickle 协议版本是自动检测出来的，所以不需要参数来指定协议。</p>
+<p>参数 <em>file</em> 必须有三个方法，read() 方法接受一个整数参数，readinto() 方法接受一个缓冲区作为参数，readline() 方法不需要参数，这与 <a href="https://docs.python.org/zh-cn/3/library/io.html#io.BufferedIOBase" target="_blank" rel="noopener"><code>io.BufferedIOBase</code></a> 里定义的接口是相同的。因此 <em>file</em> 可以是一个磁盘上用于二进制读取的文件，也可以是一个 <a href="https://docs.python.org/zh-cn/3/library/io.html#io.BytesIO" target="_blank" rel="noopener"><code>io.BytesIO</code></a> 实例，也可以是满足这一接口的其他任何自定义对象。</p>
+<p>可选的参数是 <em>fix_imports</em>, <em>encoding</em> 和 <em>errors</em>，用于控制由Python 2 生成的 pickle 流的兼容性。如果 <em>fix_imports</em> 为 True，则 pickle 将尝试将旧的 Python 2 名称映射到 Python 3 中对应的新名称。<em>encoding</em> 和 <em>errors</em> 参数告诉 pickle 如何解码 Python 2 存储的 8 位字符串实例；这两个参数默认分别为 ‘ASCII’ 和 ‘strict’。<em>encoding</em> 参数可置为 ‘bytes’ 来将这些 8 位字符串实例读取为字节对象。读取 NumPy array 和 Python 2 存储的 <a href="https://docs.python.org/zh-cn/3/library/datetime.html#datetime.datetime" target="_blank" rel="noopener"><code>datetime</code></a>、<a href="https://docs.python.org/zh-cn/3/library/datetime.html#datetime.date" target="_blank" rel="noopener"><code>date</code></a> 和 <a href="https://docs.python.org/zh-cn/3/library/datetime.html#datetime.time" target="_blank" rel="noopener"><code>time</code></a> 实例时，请使用 <code>encoding=&#39;latin1&#39;</code>。</p>
+<p>如果 <em>buffers</em> 为 None（默认值），则反序列化所需的所有数据都必须包含在 pickle 流中。这意味着在实例化 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler" target="_blank" rel="noopener"><code>Pickler</code></a> 时（或调用 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.dump" target="_blank" rel="noopener"><code>dump()</code></a> 或 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.dumps" target="_blank" rel="noopener"><code>dumps()</code></a> 时），参数 <em>buffer_callback</em> 为 None。</p>
+<p>如果 <em>buffers</em> 不为 None，则每次 pickle 流引用 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle-oob" target="_blank" rel="noopener">带外</a> 缓冲区视图时，消耗的对象都应该是可迭代的启用缓冲区的对象。这样的缓冲区应该按顺序地提供给 Pickler 对象的 <em>buffer_callback</em> 方法。</p>
+<p><em>在 3.8 版更改:</em> 加入了 <em>buffers</em> 参数。</p>
+<ul>
+<li><p><code>load</code>()</p>
+<p>从构造函数中指定的文件对象里读取封存好的对象，重建其中特定对象的层次结构并返回。封存对象以外的其他字节将被忽略。</p>
+</li>
+<li><p><code>persistent_load</code>(<em>pid</em>)</p>
+<p>默认抛出 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.UnpicklingError" target="_blank" rel="noopener"><code>UnpicklingError</code></a> 异常。如果定义了此方法，<a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Unpickler.persistent_load" target="_blank" rel="noopener"><code>persistent_load()</code></a> 应当返回持久化 ID <em>pid</em> 所指定的对象。 如果遇到无效的持久化 ID，则应当引发 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.UnpicklingError" target="_blank" rel="noopener"><code>UnpicklingError</code></a>。参阅 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle-persistent" target="_blank" rel="noopener">持久化外部对象</a> 获取详情和使用示例。</p>
+</li>
+<li><p><code>find_class</code>(<em>module</em>, <em>name</em>)</p>
+<p>如有必要，导入 <em>module</em> 模块并返回其中名叫 <em>name</em> 的对象，其中 <em>module</em> 和 <em>name</em> 参数都是 <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a> 对象。注意，不要被这个函数的名字迷惑， <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Unpickler.find_class" target="_blank" rel="noopener"><code>find_class()</code></a> 同样可以用来导入函数。子类可以重载此方法，来控制加载对象的类型和加载对象的方式，从而尽可能降低安全风险。参阅 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle-restrict" target="_blank" rel="noopener">限制全局变量</a> 获取更详细的信息。引发一个 <a href="https://docs.python.org/zh-cn/3/library/sys.html#auditing" target="_blank" rel="noopener">审核事件</a> <code>pickle.find_class</code> 附带参数 <code>module</code>、<code>name</code>。</p>
+</li>
+</ul>
+<h4 id="PickleBuffer"><a href="#PickleBuffer" class="headerlink" title="PickleBuffer"></a>PickleBuffer</h4><p><em>class</em> <code>pickle.PickleBuffer</code>(<em>buffer</em>)</p>
+<p>缓冲区的包装器 (wrapper)，缓冲区中包含着可封存的数据。<em>buffer</em> 必须是一个 <a href="https://docs.python.org/zh-cn/3/c-api/buffer.html#bufferobjects" target="_blank" rel="noopener">buffer-providing</a> 对象，比如 <a href="https://docs.python.org/zh-cn/3/glossary.html#term-bytes-like-object" target="_blank" rel="noopener">bytes-like object</a> 或多维数组。</p>
+<p><a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.PickleBuffer" target="_blank" rel="noopener"><code>PickleBuffer</code></a> 本身就可以生成缓冲区对象，因此可以将其传递给需要缓冲区生成器的其他 API，比如 <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#memoryview" target="_blank" rel="noopener"><code>memoryview</code></a>。</p>
+<p><a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.PickleBuffer" target="_blank" rel="noopener"><code>PickleBuffer</code></a> 对象只能用 pickle 版本 5 及以上协议进行序列化。它们符合 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle-oob" target="_blank" rel="noopener">带外序列化</a> 的条件。</p>
+<p><em>3.8 新版功能.</em></p>
+<ul>
+<li><p><code>raw</code>()</p>
+<p>返回该缓冲区底层内存区域的 <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#memoryview" target="_blank" rel="noopener"><code>memoryview</code></a>。 返回的对象是一维的、C 连续布局的 memoryview，格式为 <code>B</code> (无符号字节)。 如果缓冲区既不是 C 连续布局也不是 Fortran 连续布局的，则抛出 <a href="https://docs.python.org/zh-cn/3/library/exceptions.html#BufferError" target="_blank" rel="noopener"><code>BufferError</code></a> 异常。</p>
+</li>
+<li><p><code>release</code>()</p>
+<p>释放由 PickleBuffer 占用的底层缓冲区。</p>
+</li>
+</ul>
+<h3 id="可以被封存-解封的对象"><a href="#可以被封存-解封的对象" class="headerlink" title="可以被封存/解封的对象"></a>可以被封存/解封的对象</h3><p>下列类型可以被封存：</p>
+<ul>
+<li><code>None</code>、<code>True</code> 和 <code>False</code></li>
+<li>整数、浮点数、复数</li>
+<li>str、byte、bytearray</li>
+<li>只包含可封存对象的集合，包括 tuple、list、set 和 dict</li>
+<li>定义在模块最外层的函数（使用 <a href="https://docs.python.org/zh-cn/3/reference/compound_stmts.html#def" target="_blank" rel="noopener"><code>def</code></a> 定义，<a href="https://docs.python.org/zh-cn/3/reference/expressions.html#lambda" target="_blank" rel="noopener"><code>lambda</code></a> 函数则不可以）</li>
+<li>定义在模块最外层的内置函数</li>
+<li>定义在模块最外层的类</li>
+<li>某些类实例，这些类的 <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#object.__dict__" target="_blank" rel="noopener"><code>__dict__</code></a> 属性值或 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__getstate__" target="_blank" rel="noopener"><code>__getstate__()</code></a> 函数的返回值可以被封存（详情参阅 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle-inst" target="_blank" rel="noopener">封存类实例</a> 这一段）。</li>
+</ul>
+<p>尝试封存不能被封存的对象会抛出 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.PicklingError" target="_blank" rel="noopener"><code>PicklingError</code></a> 异常，异常发生时，可能有部分字节已经被写入指定文件中。尝试封存递归层级很深的对象时，可能会超出最大递归层级限制，此时会抛出 <a href="https://docs.python.org/zh-cn/3/library/exceptions.html#RecursionError" target="_blank" rel="noopener"><code>RecursionError</code></a> 异常，可以通过 <a href="https://docs.python.org/zh-cn/3/library/sys.html#sys.setrecursionlimit" target="_blank" rel="noopener"><code>sys.setrecursionlimit()</code></a> 调整递归层级，不过请谨慎使用这个函数，因为可能会导致解释器崩溃。</p>
+<p><strong>注意</strong></p>
+<ol>
+<li><p>函数封存</p>
+<blockquote>
+<p>函数（内置函数或用户自定义函数）在被封存时，引用的是函数全名。<a href="https://docs.python.org/zh-cn/3/library/pickle.html#id8" target="_blank" rel="noopener">2</a> 这意味着只有函数所在的模块名，与函数名会被封存，函数体及其属性不会被封存。因此，在解封的环境中，函数所属的模块必须是可以被导入的，而且模块必须包含这个函数被封存时的名称，否则会抛出异常。</p>
+</blockquote>
+</li>
+<li><p>类封存</p>
+<blockquote>
+<p>类也只封存名称，所以在解封环境中也有和函数相同的限制。注意，类体及其数据不会被封存，所以在下面的例子中类属性 <code>attr</code> 不会存在于解封后的环境中：</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span>:</span></span><br><span class="line">    attr = <span class="string">'A class attribute'</span></span><br><span class="line"></span><br><span class="line">picklestring = pickle.dumps(Foo)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol start="3">
+<li><p>类的实例封存</p>
+<blockquote>
+<p>在封存类的实例时，其类体和类数据不会跟着实例一起被封存，只有实例数据会被封存。这样设计是有目的的，在将来修复类中的错误、给类增加方法之后，仍然可以载入原来版本类实例的封存数据来还原该实例。如果你准备长期使用一个对象，可能会同时存在较多版本的类体，可以为对象添加版本号，这样就可以通过类的 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__setstate__" target="_blank" rel="noopener"><code>__setstate__()</code></a> 方法将老版本转换成新版本</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="封存类实例"><a href="#封存类实例" class="headerlink" title="封存类实例"></a>封存类实例</h3><blockquote>
+<p>通常，使一个实例可被封存不需要附加任何代码。Pickle 默认会通过 Python 的内省机制获得实例的类及属性。而当实例解封时，它的 <a href="https://docs.python.org/zh-cn/3/reference/datamodel.html#object.__init__" target="_blank" rel="noopener"><code>__init__()</code></a> 方法通常 <em>不会</em> 被调用。其默认动作是：先创建一个未初始化的实例，然后还原其属性，下面的代码展示了这种行为的实现机制：</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save</span><span class="params">(obj)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (obj.__class__, obj.__dict__)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load</span><span class="params">(cls, attributes)</span>:</span></span><br><span class="line">    obj = cls.__new__(cls)</span><br><span class="line">    obj.__dict__.update(attributes)</span><br><span class="line">    <span class="keyword">return</span> obj</span><br></pre></td></tr></table></figure>
+<p>类可以改变默认行为，只需定义以下一种或几种特殊方法：</p>
+<ul>
+<li><p><code>object.__getnewargs_ex__</code>()</p>
+<p>对于使用第 2 版或更高版协议的 pickle，实现了 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__getnewargs_ex__" target="_blank" rel="noopener"><code>__getnewargs_ex__()</code></a> 方法的类可以控制在解封时传给 <a href="https://docs.python.org/zh-cn/3/reference/datamodel.html#object.__new__" target="_blank" rel="noopener"><code>__new__()</code></a> 方法的参数。本方法必须返回一对 <code>(args, kwargs)</code> 用于构建对象，其中 <em>args</em> 是表示位置参数的 tuple，而 <em>kwargs</em> 是表示命名参数的 dict。它们会在解封时传递给 <a href="https://docs.python.org/zh-cn/3/reference/datamodel.html#object.__new__" target="_blank" rel="noopener"><code>__new__()</code></a> 方法。如果类的 <a href="https://docs.python.org/zh-cn/3/reference/datamodel.html#object.__new__" target="_blank" rel="noopener"><code>__new__()</code></a> 方法只接受关键字参数，则应当实现这个方法。否则，为了兼容性，更推荐实现 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__getnewargs__" target="_blank" rel="noopener"><code>__getnewargs__()</code></a> 方法。<em>在 3.6 版更改:</em> <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__getnewargs_ex__" target="_blank" rel="noopener"><code>__getnewargs_ex__()</code></a> 现在可用于第 2 和第 3 版协议。</p>
+</li>
+<li><p><code>object.__getnewargs__</code>()</p>
+<p>这个方法与上一个 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__getnewargs_ex__" target="_blank" rel="noopener"><code>__getnewargs_ex__()</code></a> 方法类似，但仅支持位置参数。它要求返回一个 tuple 类型的 <code>args</code>，用于解封时传递给 <a href="https://docs.python.org/zh-cn/3/reference/datamodel.html#object.__new__" target="_blank" rel="noopener"><code>__new__()</code></a> 方法。如果定义了 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__getnewargs_ex__" target="_blank" rel="noopener"><code>__getnewargs_ex__()</code></a>，那么 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__getnewargs__" target="_blank" rel="noopener"><code>__getnewargs__()</code></a> 就不会被调用。<em>在 3.6 版更改:</em> 在 Python 3.6 前，第 2、3 版协议会调用 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__getnewargs__" target="_blank" rel="noopener"><code>__getnewargs__()</code></a>，更高版本协议会调用 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__getnewargs_ex__" target="_blank" rel="noopener"><code>__getnewargs_ex__()</code></a>。</p>
+</li>
+<li><p><code>object.__getstate__</code>()</p>
+<p>类还可以进一步控制其实例的封存过程。如果类定义了 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__getstate__" target="_blank" rel="noopener"><code>__getstate__()</code></a>，它就会被调用，其返回的对象是被当做实例内容来封存的，否则封存的是实例的 <strong>dict</strong>。如果 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__getstate__" target="_blank" rel="noopener"><code>__getstate__()</code></a> 未定义，实例的 <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#object.__dict__" target="_blank" rel="noopener"><code>__dict__</code></a> 会被照常封存。</p>
+</li>
+<li><p><code>object.__setstate__</code>(<em>state</em>)</p>
+<p>当解封时，如果类定义了 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__setstate__" target="_blank" rel="noopener"><code>__setstate__()</code></a>，就会在已解封状态下调用它。此时不要求实例的 state 对象必须是 dict。没有定义此方法的话，先前封存的 state 对象必须是 dict，且该 dict 内容会在解封时赋给新实例的 <strong>dict</strong>。</p>
+<p>==备注==： 如果 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__getstate__" target="_blank" rel="noopener"><code>__getstate__()</code></a> 返回 False，那么在解封时就不会调用 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__setstate__" target="_blank" rel="noopener"><code>__setstate__()</code></a> 方法。 </p>
+</li>
+<li><p><code>object.__reduce__</code>()</p>
+<p>该接口当前定义如下。<a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__reduce__" target="_blank" rel="noopener"><code>__reduce__()</code></a> 方法不带任何参数，并且应返回字符串或最好返回一个元组（返回的对象通常称为“reduce 值”）。如果返回字符串，该字符串会被当做一个全局变量的名称。它应该是对象相对于其模块的本地名称，pickle 模块会搜索模块命名空间来确定对象所属的模块。这种行为常在单例模式使用。如果返回的是元组，则应当包含 2 到 6 个元素，可选元素可以省略或设置为 <code>None</code>。每个元素代表的意义如下：一个可调用对象，该对象会在创建对象的最初版本时调用。可调用对象的参数，是一个元组。如果可调用对象不接受参数，必须提供一个空元组。可选元素，用于表示对象的状态，将被传给前述的 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__setstate__" target="_blank" rel="noopener"><code>__setstate__()</code></a> 方法。 如果对象没有此方法，则这个元素必须是字典类型，并会被添加至 <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#object.__dict__" target="_blank" rel="noopener"><code>__dict__</code></a> 属性中。可选元素，一个返回连续项的迭代器（而不是序列）。这些项会被 <code>obj.append(item)</code> 逐个加入对象，或被 <code>obj.extend(list_of_items)</code> 批量加入对象。这个元素主要用于 list 的子类，也可以用于那些正确实现了 <code>append()</code> 和 <code>extend()</code> 方法的类。（具体是使用 <code>append()</code> 还是 <code>extend()</code> 取决于 pickle 协议版本以及待插入元素的项数，所以这两个方法必须同时被类支持。）可选元素，一个返回连续键值对的迭代器（而不是序列）。这些键值对将会以 <code>obj[key] = value</code> 的方式存储于对象中。该元素主要用于 dict 子类，也可以用于那些实现了 <a href="https://docs.python.org/zh-cn/3/reference/datamodel.html#object.__setitem__" target="_blank" rel="noopener"><code>__setitem__()</code></a> 的类。可选元素，一个带有 <code>(obj, state)</code> 签名的可调用对象。该可调用对象允许用户以编程方式控制特定对象的状态更新行为，而不是使用 <code>obj</code> 的静态 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__setstate__" target="_blank" rel="noopener"><code>__setstate__()</code></a> 方法。如果此处不是 <code>None</code>，则此可调用对象的优先级高于 <code>obj</code> 的 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__setstate__" target="_blank" rel="noopener"><code>__setstate__()</code></a>。<em>3.8 新版功能:</em> 新增了元组的第 6 项，可选元素 <code>(obj, state)</code>。</p>
+</li>
+<li><p><code>object.__reduce_ex__</code>(<em>protocol</em>)</p>
+<p>作为替代选项，也可以实现 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__reduce_ex__" target="_blank" rel="noopener"><code>__reduce_ex__()</code></a> 方法。 此方法的唯一不同之处在于它应接受一个整型参数用于指定协议版本。 如果定义了这个函数，则会覆盖 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__reduce__" target="_blank" rel="noopener"><code>__reduce__()</code></a> 的行为。 此外，<a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__reduce__" target="_blank" rel="noopener"><code>__reduce__()</code></a> 方法会自动成为扩展版方法的同义词。 这个函数主要用于为以前的 Python 版本提供向后兼容的 reduce 值。</p>
+</li>
+</ul>
+<h3 id="持久化外部对象"><a href="#持久化外部对象" class="headerlink" title="持久化外部对象"></a>持久化外部对象</h3><p>为了获取对象持久化的利益， <a href="https://docs.python.org/zh-cn/3/library/pickle.html#module-pickle" target="_blank" rel="noopener"><code>pickle</code></a> 模块支持引用已封存数据流之外的对象。 这样的对象是通过一个持久化 ID 来引用的，它应当是一个由字母数字类字符组成的字符串 (对于第 0 版协议) <a href="https://docs.python.org/zh-cn/3/library/pickle.html#id11" target="_blank" rel="noopener">5</a> 或是一个任意对象 (用于任意新版协议)。</p>
+<p><a href="https://docs.python.org/zh-cn/3/library/pickle.html#module-pickle" target="_blank" rel="noopener"><code>pickle</code></a> 模块不提供对持久化 ID 的解析工作，它将解析工作分配给用户定义的方法，分别是 pickler 中的 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler.persistent_id" target="_blank" rel="noopener"><code>persistent_id()</code></a> 方法和 unpickler 中的 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Unpickler.persistent_load" target="_blank" rel="noopener"><code>persistent_load()</code></a> 方法。</p>
+<p>要通过持久化 ID 将外部对象封存，必须在 pickler 中实现 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler.persistent_id" target="_blank" rel="noopener"><code>persistent_id()</code></a> 方法，该方法接受需要被封存的对象作为参数，返回一个 <code>None</code> 或返回该对象的持久化 ID。如果返回 <code>None</code>，该对象会被按照默认方式封存为数据流。如果返回字符串形式的持久化 ID，则会封存这个字符串并加上一个标记，这样 unpickler 才能将其识别为持久化 ID。</p>
+<p>要解封外部对象，Unpickler 必须实现 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Unpickler.persistent_load" target="_blank" rel="noopener"><code>persistent_load()</code></a> 方法，接受一个持久化 ID 对象作为参数并返回一个引用的对象。</p>
+<p>下面是一个全面的例子，展示了如何使用持久化 ID 来封存外部对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Simple example presenting how persistent ID can be used to pickle</span></span><br><span class="line"><span class="comment"># external objects by reference.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> sqlite3</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"></span><br><span class="line"><span class="comment"># Simple class representing a record in our database.</span></span><br><span class="line">MemoRecord = namedtuple(<span class="string">"MemoRecord"</span>, <span class="string">"key, task"</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DBPickler</span><span class="params">(pickle.Pickler)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">persistent_id</span><span class="params">(self, obj)</span>:</span></span><br><span class="line">        <span class="comment"># Instead of pickling MemoRecord as a regular class instance, we emit a</span></span><br><span class="line">        <span class="comment"># persistent ID.</span></span><br><span class="line">        <span class="keyword">if</span> isinstance(obj, MemoRecord):</span><br><span class="line">            <span class="comment"># Here, our persistent ID is simply a tuple, containing a tag and a</span></span><br><span class="line">            <span class="comment"># key, which refers to a specific record in the database.</span></span><br><span class="line">            <span class="keyword">return</span> (<span class="string">"MemoRecord"</span>, obj.key)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># If obj does not have a persistent ID, return None. This means obj</span></span><br><span class="line">            <span class="comment"># needs to be pickled as usual.</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DBUnpickler</span><span class="params">(pickle.Unpickler)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, file, connection)</span>:</span></span><br><span class="line">        super().__init__(file)</span><br><span class="line">        self.connection = connection</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">persistent_load</span><span class="params">(self, pid)</span>:</span></span><br><span class="line">        <span class="comment"># This method is invoked whenever a persistent ID is encountered.</span></span><br><span class="line">        <span class="comment"># Here, pid is the tuple returned by DBPickler.</span></span><br><span class="line">        cursor = self.connection.cursor()</span><br><span class="line">        type_tag, key_id = pid</span><br><span class="line">        <span class="keyword">if</span> type_tag == <span class="string">"MemoRecord"</span>:</span><br><span class="line">            <span class="comment"># Fetch the referenced record from the database and return it.</span></span><br><span class="line">            cursor.execute(<span class="string">"SELECT * FROM memos WHERE key=?"</span>, (str(key_id),))</span><br><span class="line">            key, task = cursor.fetchone()</span><br><span class="line">            <span class="keyword">return</span> MemoRecord(key, task)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># Always raises an error if you cannot return the correct object.</span></span><br><span class="line">            <span class="comment"># Otherwise, the unpickler will think None is the object referenced</span></span><br><span class="line">            <span class="comment"># by the persistent ID.</span></span><br><span class="line">            <span class="keyword">raise</span> pickle.UnpicklingError(<span class="string">"unsupported persistent object"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">import</span> io</span><br><span class="line">    <span class="keyword">import</span> pprint</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Initialize and populate our database.</span></span><br><span class="line">    conn = sqlite3.connect(<span class="string">":memory:"</span>)</span><br><span class="line">    cursor = conn.cursor()</span><br><span class="line">    cursor.execute(<span class="string">"CREATE TABLE memos(key INTEGER PRIMARY KEY, task TEXT)"</span>)</span><br><span class="line">    tasks = (</span><br><span class="line">        <span class="string">'give food to fish'</span>,</span><br><span class="line">        <span class="string">'prepare group meeting'</span>,</span><br><span class="line">        <span class="string">'fight with a zebra'</span>,</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">for</span> task <span class="keyword">in</span> tasks:</span><br><span class="line">        cursor.execute(<span class="string">"INSERT INTO memos VALUES(NULL, ?)"</span>, (task,))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Fetch the records to be pickled.</span></span><br><span class="line">    cursor.execute(<span class="string">"SELECT * FROM memos"</span>)</span><br><span class="line">    memos = [MemoRecord(key, task) <span class="keyword">for</span> key, task <span class="keyword">in</span> cursor]</span><br><span class="line">    <span class="comment"># Save the records using our custom DBPickler.</span></span><br><span class="line">    file = io.BytesIO()</span><br><span class="line">    DBPickler(file).dump(memos)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"Pickled records:"</span>)</span><br><span class="line">    pprint.pprint(memos)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Update a record, just for good measure.</span></span><br><span class="line">    cursor.execute(<span class="string">"UPDATE memos SET task='learn italian' WHERE key=1"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Load the records from the pickle data stream.</span></span><br><span class="line">    file.seek(<span class="number">0</span>)</span><br><span class="line">    memos = DBUnpickler(file, conn).load()</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"Unpickled records:"</span>)</span><br><span class="line">    pprint.pprint(memos)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h3 id="自定义封存-Dispatch-表"><a href="#自定义封存-Dispatch-表" class="headerlink" title="自定义封存 Dispatch 表"></a>自定义封存 Dispatch 表</h3><p>如果想对某些类进行自定义封存，而又不想在类中增加用于封存的代码，就可以创建带有特殊 dispatch 表的 pickler。</p>
+<p>在 <a href="https://docs.python.org/zh-cn/3/library/copyreg.html#module-copyreg" target="_blank" rel="noopener"><code>copyreg</code></a> 模块的 <code>copyreg.dispatch_table</code> 中定义了全局 dispatch 表。因此，可以使用 <code>copyreg.dispatch_table</code> 修改后的副本作为自有 dispatch 表。</p>
+<p>例如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f = io.BytesIO()</span><br><span class="line">p = pickle.Pickler(f)</span><br><span class="line">p.dispatch_table = copyreg.dispatch_table.copy()</span><br><span class="line">p.dispatch_table[SomeClass] = reduce_SomeClass</span><br></pre></td></tr></table></figure>
+<p>创建了一个带有自有 dispatch 表的 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler" target="_blank" rel="noopener"><code>pickle.Pickler</code></a> 实例，它可以对 <code>SomeClass</code> 类进行特殊处理。另外，下列代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyPickler</span><span class="params">(pickle.Pickler)</span>:</span></span><br><span class="line">    dispatch_table = copyreg.dispatch_table.copy()</span><br><span class="line">    dispatch_table[SomeClass] = reduce_SomeClass</span><br><span class="line">f = io.BytesIO()</span><br><span class="line">p = MyPickler(f)</span><br></pre></td></tr></table></figure>
+<p>完成了相同的操作，但所有 <code>MyPickler</code> 的实例都会共用同一份 dispatch 表。使用 <a href="https://docs.python.org/zh-cn/3/library/copyreg.html#module-copyreg" target="_blank" rel="noopener"><code>copyreg</code></a> 模块实现的等效代码是</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">copyreg.pickle(SomeClass, reduce_SomeClass)</span><br><span class="line">f = io.BytesIO()</span><br><span class="line">p = pickle.Pickler(f)</span><br></pre></td></tr></table></figure>
+<h3 id="处理有状态的对象"><a href="#处理有状态的对象" class="headerlink" title="处理有状态的对象"></a>处理有状态的对象</h3><blockquote>
+<p>下面的示例展示了如何修改类在封存时的行为。其中 <code>TextReader</code> 类打开了一个文本文件，每次调用其 <code>readline()</code> 方法则返回行号和该行的字符。 在封存这个 <code>TextReader</code> 的实例时，<em>除了</em> 文件对象，其他属性都会被保存。 当解封实例时，需要重新打开文件，然后从上次的位置开始继续读取。实现这些功能需要实现 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__setstate__" target="_blank" rel="noopener"><code>__setstate__()</code></a> 和 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__getstate__" target="_blank" rel="noopener"><code>__getstate__()</code></a> 方法。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextReader</span>:</span></span><br><span class="line">    <span class="string">"""Print and number lines in a text file."""</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, filename)</span>:</span></span><br><span class="line">        self.filename = filename</span><br><span class="line">        self.file = open(filename)</span><br><span class="line">        self.lineno = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">readline</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.lineno += <span class="number">1</span></span><br><span class="line">        line = self.file.readline()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> line:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">if</span> line.endswith(<span class="string">'\n'</span>):</span><br><span class="line">            line = line[:<span class="number">-1</span>]</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"%i: %s"</span> % (self.lineno, line)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getstate__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># Copy the object's state from self.__dict__ which contains</span></span><br><span class="line">        <span class="comment"># all our instance attributes. Always use the dict.copy()</span></span><br><span class="line">        <span class="comment"># method to avoid modifying the original state.</span></span><br><span class="line">        state = self.__dict__.copy()</span><br><span class="line">        <span class="comment"># Remove the unpicklable entries.</span></span><br><span class="line">        <span class="keyword">del</span> state[<span class="string">'file'</span>]</span><br><span class="line">        <span class="keyword">return</span> state</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__setstate__</span><span class="params">(self, state)</span>:</span></span><br><span class="line">        <span class="comment"># Restore instance attributes (i.e., filename and lineno).</span></span><br><span class="line">        self.__dict__.update(state)</span><br><span class="line">        <span class="comment"># Restore the previously opened file's state. To do so, we need to</span></span><br><span class="line">        <span class="comment"># reopen it and read from it until the line count is restored.</span></span><br><span class="line">        file = open(self.filename)</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> range(self.lineno):</span><br><span class="line">            file.readline()</span><br><span class="line">        <span class="comment"># Finally, save the file.</span></span><br><span class="line">        self.file = file</span><br></pre></td></tr></table></figure>
+<p>使用方法如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>reader = TextReader(<span class="string">"hello.txt"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>reader.readline()</span><br><span class="line"><span class="string">'1: Hello world!'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>reader.readline()</span><br><span class="line"><span class="string">'2: I am line number two.'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>new_reader = pickle.loads(pickle.dumps(reader))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>new_reader.readline()</span><br><span class="line"><span class="string">'3: Goodbye!'</span></span><br></pre></td></tr></table></figure>
+<h3 id="除了Dispatcher-类型和函数及其他对象自定义规约"><a href="#除了Dispatcher-类型和函数及其他对象自定义规约" class="headerlink" title="除了Dispatcher,类型和函数及其他对象自定义规约"></a>除了Dispatcher,类型和函数及其他对象自定义规约</h3><blockquote>
+<p>有时，<a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler.dispatch_table" target="_blank" rel="noopener"><code>dispatch_table</code></a> 可能不够灵活。 特别是当我们想要基于对象类型以外的其他规则来对封存进行定制，或是当我们想要对函数和类的封存进行定制的时候。</p>
+<p>对于那些情况，可能要基于 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler" target="_blank" rel="noopener"><code>Pickler</code></a> 类进行子类化并实现 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler.reducer_override" target="_blank" rel="noopener"><code>reducer_override()</code></a> 方法。 此方法可返回任意的归约元组 (参见 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__reduce__" target="_blank" rel="noopener"><code>__reduce__()</code></a>)。 它也可以选择返回 <code>NotImplemented</code> 来回退到传统行为。</p>
+<p>如果同时定义了 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler.dispatch_table" target="_blank" rel="noopener"><code>dispatch_table</code></a> 和 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler.reducer_override" target="_blank" rel="noopener"><code>reducer_override()</code></a>，则 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler.reducer_override" target="_blank" rel="noopener"><code>reducer_override()</code></a> 方法具有优先权。</p>
+</blockquote>
+<p><strong>注解</strong>：出于性能理由，可能不会为以下对象调用 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler.reducer_override" target="_blank" rel="noopener"><code>reducer_override()</code></a>: <code>None</code>, <code>True</code>, <code>False</code>, 以及 <a href="https://docs.python.org/zh-cn/3/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a>, <a href="https://docs.python.org/zh-cn/3/library/functions.html#float" target="_blank" rel="noopener"><code>float</code></a>, <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#bytes" target="_blank" rel="noopener"><code>bytes</code></a>, <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a>, <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#dict" target="_blank" rel="noopener"><code>dict</code></a>, <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#set" target="_blank" rel="noopener"><code>set</code></a>, <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#frozenset" target="_blank" rel="noopener"><code>frozenset</code></a>, <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#list" target="_blank" rel="noopener"><code>list</code></a> 和 <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#tuple" target="_blank" rel="noopener"><code>tuple</code></a> 的具体实例。</p>
+<p>以下是一个简单的例子，其中我们允许封存并重新构建一个给定的类:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span>:</span></span><br><span class="line">    my_attribute = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyPickler</span><span class="params">(pickle.Pickler)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reducer_override</span><span class="params">(self, obj)</span>:</span></span><br><span class="line">        <span class="string">"""Custom reducer for MyClass."""</span></span><br><span class="line">        <span class="keyword">if</span> getattr(obj, <span class="string">"__name__"</span>, <span class="literal">None</span>) == <span class="string">"MyClass"</span>:</span><br><span class="line">            <span class="keyword">return</span> type, (obj.__name__, obj.__bases__,</span><br><span class="line">                          &#123;<span class="string">'my_attribute'</span>: obj.my_attribute&#125;)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># For any other object, fallback to usual reduction</span></span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">NotImplemented</span></span><br><span class="line"></span><br><span class="line">f = io.BytesIO()</span><br><span class="line">p = MyPickler(f)</span><br><span class="line">p.dump(MyClass)</span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span> MyClass</span><br><span class="line"></span><br><span class="line">unpickled_class = pickle.loads(f.getvalue())</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span> isinstance(unpickled_class, type)</span><br><span class="line"><span class="keyword">assert</span> unpickled_class.__name__ == <span class="string">"MyClass"</span></span><br><span class="line"><span class="keyword">assert</span> unpickled_class.my_attribute == <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="外部缓冲区"><a href="#外部缓冲区" class="headerlink" title="外部缓冲区"></a>外部缓冲区</h3><p>在某些场景中，<a href="https://docs.python.org/zh-cn/3/library/pickle.html#module-pickle" target="_blank" rel="noopener"><code>pickle</code></a> 模块会被用来传输海量的数据。 因此，最小化内存复制次数以保证性能和节省资源是很重要的。 但是 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#module-pickle" target="_blank" rel="noopener"><code>pickle</code></a> 模块的正常运作会将图类对象结构转换为字节序列流，因此在本质上就要从封存流中来回复制数据。</p>
+<p>如果 <em>provider</em> (待传输对象类型的实现) 和 <em>consumer</em> (通信系统的实现) 都支持 pickle 第 5 版或更高版本所提供的外部传输功能，则此约束可以被撤销。</p>
+<h3 id="提供方API"><a href="#提供方API" class="headerlink" title="提供方API"></a>提供方API</h3><p>大的待封存数据对象必须实现协议 5 及以上版本专属的 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#object.__reduce_ex__" target="_blank" rel="noopener"><code>__reduce_ex__()</code></a> 方法，该方法将为任意大的数据返回一个 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.PickleBuffer" target="_blank" rel="noopener"><code>PickleBuffer</code></a> 实例（而不是 <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#bytes" target="_blank" rel="noopener"><code>bytes</code></a> 对象等）。</p>
+<p><a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.PickleBuffer" target="_blank" rel="noopener"><code>PickleBuffer</code></a> 对象会 <em>表明</em> 底层缓冲区可被用于外部数据传输。 那些对象仍将保持与 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#module-pickle" target="_blank" rel="noopener"><code>pickle</code></a> 模块的正常用法兼容。 但是，使用方也可以选择告知 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#module-pickle" target="_blank" rel="noopener"><code>pickle</code></a> 它们将自行处理那些缓冲区。</p>
+<h3 id="使用方API"><a href="#使用方API" class="headerlink" title="使用方API"></a>使用方API</h3><p>当序列化一个对象图时，通信系统可以启用对所生成 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.PickleBuffer" target="_blank" rel="noopener"><code>PickleBuffer</code></a> 对象的定制处理。</p>
+<p>发送端需要传递 <em>buffer_callback</em> 参数到 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Pickler" target="_blank" rel="noopener"><code>Pickler</code></a> (或是到 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.dump" target="_blank" rel="noopener"><code>dump()</code></a> 或 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.dumps" target="_blank" rel="noopener"><code>dumps()</code></a> 函数)，该回调函数将在封存对象图时附带每个所生成的 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.PickleBuffer" target="_blank" rel="noopener"><code>PickleBuffer</code></a> 被调用。 由 <em>buffer_callback</em> 所累积的缓冲区的数据将不会被拷贝到 pickle 流，而是仅插入一个简单的标记。</p>
+<p>接收端需要传递 <em>buffers</em> 参数到 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Unpickler" target="_blank" rel="noopener"><code>Unpickler</code></a> (或是到 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.load" target="_blank" rel="noopener"><code>load()</code></a> 或 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.loads" target="_blank" rel="noopener"><code>loads()</code></a> 函数)，其值是一个由缓冲区组成的可迭代对象，它会被传递给 <em>buffer_callback</em>。 该可迭代对象应当按其被传递给 <em>buffer_callback</em> 时的顺序产生缓冲区。 这些缓冲区将提供对象重构造器所期望的数据，对这些数据的封存产生了原本的 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.PickleBuffer" target="_blank" rel="noopener"><code>PickleBuffer</code></a> 对象。</p>
+<p>在发送端和接受端之间，通信系统可以自由地实现它自己用于外部缓冲区的传输机制。 潜在的优化包括使用共享内存或基于特定数据类型的压缩等。</p>
+<p>实例:下面是一个小例子，在其中我们实现了一个 <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#bytearray" target="_blank" rel="noopener"><code>bytearray</code></a> 的子类，能够用于外部缓冲区封存:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ZeroCopyByteArray</span><span class="params">(bytearray)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__reduce_ex__</span><span class="params">(self, protocol)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> protocol &gt;= <span class="number">5</span>:</span><br><span class="line">            <span class="keyword">return</span> type(self)._reconstruct, (PickleBuffer(self),), <span class="literal">None</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># PickleBuffer is forbidden with pickle protocols &lt;= 4.</span></span><br><span class="line">            <span class="keyword">return</span> type(self)._reconstruct, (bytearray(self),)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_reconstruct</span><span class="params">(cls, obj)</span>:</span></span><br><span class="line">        <span class="keyword">with</span> memoryview(obj) <span class="keyword">as</span> m:</span><br><span class="line">            <span class="comment"># Get a handle over the original buffer object</span></span><br><span class="line">            obj = m.obj</span><br><span class="line">            <span class="keyword">if</span> type(obj) <span class="keyword">is</span> cls:</span><br><span class="line">                <span class="comment"># Original buffer object is a ZeroCopyByteArray, return it</span></span><br><span class="line">                <span class="comment"># as-is.</span></span><br><span class="line">                <span class="keyword">return</span> obj</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> cls(obj)</span><br></pre></td></tr></table></figure>
+<p>重构造器 (<code>_reconstruct</code> 类方法) 会在缓冲区的提供对象具有正确类型时返回该对象。 在此小示例中这是模拟零拷贝行为的便捷方式。</p>
+<p>在使用方，我们可以按通常方式封存那些对象，它们在反序列化时将提供原始对象的一个副本:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">b = ZeroCopyByteArray(<span class="string">b"abc"</span>)</span><br><span class="line">data = pickle.dumps(b, protocol=<span class="number">5</span>)</span><br><span class="line">new_b = pickle.loads(data)</span><br><span class="line">print(b == new_b)  <span class="comment"># True</span></span><br><span class="line">print(b <span class="keyword">is</span> new_b)  <span class="comment"># False: a copy was made</span></span><br></pre></td></tr></table></figure>
+<p>但是如果我们传入 <em>buffer_callback</em> 然后在反序列化时给回累积的缓冲区，我们就能够取回原始对象:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">b = ZeroCopyByteArray(<span class="string">b"abc"</span>)</span><br><span class="line">buffers = []</span><br><span class="line">data = pickle.dumps(b, protocol=<span class="number">5</span>, buffer_callback=buffers.append)</span><br><span class="line">new_b = pickle.loads(data, buffers=buffers)</span><br><span class="line">print(b == new_b)  <span class="comment"># True</span></span><br><span class="line">print(b <span class="keyword">is</span> new_b)  <span class="comment"># True: no copy was made</span></span><br></pre></td></tr></table></figure>
+<p>这个例子受限于 <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#bytearray" target="_blank" rel="noopener"><code>bytearray</code></a> 会自行分配内存这一事实：你无法基于另一个对象的内存创建 <a href="https://docs.python.org/zh-cn/3/library/stdtypes.html#bytearray" target="_blank" rel="noopener"><code>bytearray</code></a> 的实例。 但是，第三方数据类型例如 NumPy 数组则没有这种限制，允许在单独进程或系统间传输时使用零拷贝的封存（或是尽可能少地拷贝） 。</p>
+<blockquote>
+<p>参见：<a href="https://www.python.org/dev/peps/pep-0574" target="_blank" rel="noopener"><strong>PEP 574</strong></a> – 带有外部数据缓冲区的 pickle 协议 5</p>
+</blockquote>
+<h3 id="限制全局变量"><a href="#限制全局变量" class="headerlink" title="限制全局变量"></a>限制全局变量</h3><p>默认情况下，解封将会导入在 pickle 数据中找到的任何类或函数。 对于许多应用来说，此行为是不可接受的，因为它会允许解封器导入并发起调用任意代码。 只须考虑当这个手工构建的 pickle 数据流被加载时会做什么:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> pickle</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pickle.loads(<span class="string">b"cos\nsystem\n(S'echo hello world'\ntR."</span>)</span><br><span class="line">hello world</span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>在这个例子里，解封器导入 <a href="https://docs.python.org/zh-cn/3/library/os.html#os.system" target="_blank" rel="noopener"><code>os.system()</code></a> 函数然后应用字符串参数 “echo hello world”。 虽然这个例子不具攻击性，但是不难想象别人能够通过此方式对你的系统造成损害。</p>
+<p>出于这样的理由，你可能会希望通过定制 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Unpickler.find_class" target="_blank" rel="noopener"><code>Unpickler.find_class()</code></a> 来控制要解封的对象。 与其名称所提示的不同，<a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.Unpickler.find_class" target="_blank" rel="noopener"><code>Unpickler.find_class()</code></a> 会在执行对任何全局对象（例如一个类或一个函数）的请求时被调用。 因此可以完全禁止全局对象或是将它们限制在一个安全的子集中。</p>
+<p>下面的例子是一个解封器，它只允许某一些安全的来自 <a href="https://docs.python.org/zh-cn/3/library/builtins.html#module-builtins" target="_blank" rel="noopener"><code>builtins</code></a> 模块的类被加载:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> builtins</span><br><span class="line"><span class="keyword">import</span> io</span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line">safe_builtins = &#123;</span><br><span class="line">    <span class="string">'range'</span>,</span><br><span class="line">    <span class="string">'complex'</span>,</span><br><span class="line">    <span class="string">'set'</span>,</span><br><span class="line">    <span class="string">'frozenset'</span>,</span><br><span class="line">    <span class="string">'slice'</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RestrictedUnpickler</span><span class="params">(pickle.Unpickler)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">find_class</span><span class="params">(self, module, name)</span>:</span></span><br><span class="line">        <span class="comment"># Only allow safe classes from builtins.</span></span><br><span class="line">        <span class="keyword">if</span> module == <span class="string">"builtins"</span> <span class="keyword">and</span> name <span class="keyword">in</span> safe_builtins:</span><br><span class="line">            <span class="keyword">return</span> getattr(builtins, name)</span><br><span class="line">        <span class="comment"># Forbid everything else.</span></span><br><span class="line">        <span class="keyword">raise</span> pickle.UnpicklingError(<span class="string">"global '%s.%s' is forbidden"</span> %</span><br><span class="line">                                     (module, name))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">restricted_loads</span><span class="params">(s)</span>:</span></span><br><span class="line">    <span class="string">"""Helper function analogous to pickle.loads()."""</span></span><br><span class="line">    <span class="keyword">return</span> RestrictedUnpickler(io.BytesIO(s)).load()</span><br></pre></td></tr></table></figure>
+<p>我们这个解封器的一个示例用法所达成的目标:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>restricted_loads(pickle.dumps([<span class="number">1</span>, <span class="number">2</span>, range(<span class="number">15</span>)]))</span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, range(<span class="number">0</span>, <span class="number">15</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>restricted_loads(<span class="string">b"cos\nsystem\n(S'echo hello world'\ntR."</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">pickle.UnpicklingError: <span class="keyword">global</span> <span class="string">'os.system'</span> <span class="keyword">is</span> forbidden</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>restricted_loads(<span class="string">b'cbuiltins\neval\n'</span></span><br><span class="line"><span class="meta">... </span>                 <span class="string">b'(S\'getattr(__import__("os"), "system")'</span></span><br><span class="line"><span class="meta">... </span>                 <span class="string">b'("echo hello world")\'\ntR.'</span>)</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  ...</span><br><span class="line">pickle.UnpicklingError: <span class="keyword">global</span> <span class="string">'builtins.eval'</span> <span class="keyword">is</span> forbidden</span><br></pre></td></tr></table></figure>
+<p>正如我们这个例子所显示的，对于允许解封的对象你必须要保持谨慎。 因此如果要保证安全，你可以考虑其他选择例如 <a href="https://docs.python.org/zh-cn/3/library/xmlrpc.client.html#module-xmlrpc.client" target="_blank" rel="noopener"><code>xmlrpc.client</code></a> 中的编组 API 或是第三方解决方案。</p>
+<h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><p>较新版本的 pickle 协议（第 2 版或更高）具有针对某些常见特性和内置类型的高效二进制编码格式。 此外，<a href="https://docs.python.org/zh-cn/3/library/pickle.html#module-pickle" target="_blank" rel="noopener"><code>pickle</code></a> 模块还拥有一个以 C 编写的透明优化器。</p>
+<p>实例</p>
+<p>对于最简单的代码，请使用 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.dump" target="_blank" rel="noopener"><code>dump()</code></a> 和 <a href="https://docs.python.org/zh-cn/3/library/pickle.html#pickle.load" target="_blank" rel="noopener"><code>load()</code></a> 函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line"><span class="comment"># An arbitrary collection of objects supported by pickle.</span></span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">'a'</span>: [<span class="number">1</span>, <span class="number">2.0</span>, <span class="number">3</span>, <span class="number">4</span>+<span class="number">6j</span>],</span><br><span class="line">    <span class="string">'b'</span>: (<span class="string">"character string"</span>, <span class="string">b"byte string"</span>),</span><br><span class="line">    <span class="string">'c'</span>: &#123;<span class="literal">None</span>, <span class="literal">True</span>, <span class="literal">False</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data.pickle'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># Pickle the 'data' dictionary using the highest protocol available.</span></span><br><span class="line">    pickle.dump(data, f, pickle.HIGHEST_PROTOCOL)</span><br></pre></td></tr></table></figure>
+<p>以下示例读取之前封存的数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'data.pickle'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># The protocol version used is detected automatically, so we do not</span></span><br><span class="line">    <span class="comment"># have to specify it.</span></span><br><span class="line">    data = pickle.load(f)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/01/14/python-standard-library-pickle/" title="python standard library pickle">https://pinghailinfeng.gitee.io/2020/01/14/python-standard-library-pickle/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/pickle/" rel="tag"># pickle</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/13/python-standard-library-array-type/" rel="next" title="python standard library array type">
+                <i class="fa fa-chevron-left"></i> python standard library array type
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/15/python-standard-library-iterator-and-generator/" rel="prev" title="python standard library iterator and generator">
+                python standard library iterator and generator <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">135</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">154</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-pickle"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 pickle</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#python-标准库学习之-pickle"><span class="nav-number">1.1.</span> <span class="nav-text">python 标准库学习之 pickle</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#源代码：-Lib-pickle-py"><span class="nav-number">1.1.1.</span> <span class="nav-text">源代码： Lib/pickle.py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据流格式"><span class="nav-number">1.1.2.</span> <span class="nav-text">数据流格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块接口"><span class="nav-number">1.1.3.</span> <span class="nav-text">模块接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块方法"><span class="nav-number">1.1.4.</span> <span class="nav-text">模块方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常处理"><span class="nav-number">1.1.5.</span> <span class="nav-text">异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块中的类"><span class="nav-number">1.1.6.</span> <span class="nav-text">模块中的类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Pickler"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">Pickler</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Unpickler"><span class="nav-number">1.1.6.2.</span> <span class="nav-text">Unpickler</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PickleBuffer"><span class="nav-number">1.1.6.3.</span> <span class="nav-text">PickleBuffer</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可以被封存-解封的对象"><span class="nav-number">1.1.7.</span> <span class="nav-text">可以被封存/解封的对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封存类实例"><span class="nav-number">1.1.8.</span> <span class="nav-text">封存类实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持久化外部对象"><span class="nav-number">1.1.9.</span> <span class="nav-text">持久化外部对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义封存-Dispatch-表"><span class="nav-number">1.1.10.</span> <span class="nav-text">自定义封存 Dispatch 表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理有状态的对象"><span class="nav-number">1.1.11.</span> <span class="nav-text">处理有状态的对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#除了Dispatcher-类型和函数及其他对象自定义规约"><span class="nav-number">1.1.12.</span> <span class="nav-text">除了Dispatcher,类型和函数及其他对象自定义规约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外部缓冲区"><span class="nav-number">1.1.13.</span> <span class="nav-text">外部缓冲区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提供方API"><span class="nav-number">1.1.14.</span> <span class="nav-text">提供方API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用方API"><span class="nav-number">1.1.15.</span> <span class="nav-text">使用方API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#限制全局变量"><span class="nav-number">1.1.16.</span> <span class="nav-text">限制全局变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能"><span class="nav-number">1.1.17.</span> <span class="nav-text">性能</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2020/">2020</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2to3/">2to3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tkinter/">Tkinter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">_thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/argparse/">argparse</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atexit/">atexit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/code/">code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dis/">dis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doctest/">doctest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dom/">dom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp32/">esp32</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esptool/">esptool</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fileinput/">fileinput</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/">futures</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keyword/">keyword</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lite-server/">lite-server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micorpython/">micorpython</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micropython/">micropython</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minidom/">minidom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modulefinder/">modulefinder</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/others/">others</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwd/">pwd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">89</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re/">re</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/readline/">readline</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sax/">sax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sched/">sched</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/select/">select</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selectors/">selectors</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standar-library/">standar_library</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">78</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/">turtle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/">typescript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uPycraft/">uPycraft</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unittest/">unittest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/">venv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webrepl/">webrepl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/">xml</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环/">循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感悟/">感悟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化测试/">自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">787k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">11:55</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

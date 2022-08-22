@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 os.path">
+<meta name="keywords" content="python,standard_library,os.path">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library os.path">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/02/15/python-standard-library-os-path/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 os.path">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200215_nixingzhe.jpg?raw=true">
+<meta property="og:updated_time" content="2022-08-18T08:03:08.591Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library os.path">
+<meta name="twitter:description" content="python 标准库 os.path">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200215_nixingzhe.jpg?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/02/15/python-standard-library-os-path/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library os.path | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/02/15/python-standard-library-os-path/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library os.path
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-15 07:50:49" itemprop="dateCreated datePublished" datetime="2020-02-15T07:50:49+08:00">2020-02-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-08-18 16:03:08" itemprop="dateModified" datetime="2022-08-18T16:03:08+08:00">2022-08-18</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">6.3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">6 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-os-path"><a href="#python-标准库-os-path" class="headerlink" title="python 标准库 os.path"></a>python 标准库 os.path</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200215_nixingzhe.jpg?raw=true" alt></p>
+<a id="more"></a>
+<blockquote>
+<p>每日一词</p>
+<p> retrograde  [ˈrɛtrəɡreɪd] </p>
+<p>v   directed or moving backwards. </p>
+<p>n retrograder 逆行者</p>
+<ol>
+<li><p>倒行；不按正常方向行进。《孟子·滕文公下》：“当 尧 之时，水<a href="https://cidian.911cha.com/MjA1MXc=.html" target="_blank" rel="noopener">逆行</a>，氾滥於中国。”《史记·孝景本纪》：“彗星出东北。秋， 衡山 雨雹，大者五寸，深者二尺。荧惑<a href="https://cidian.911cha.com/MjA1MXc=.html" target="_blank" rel="noopener">逆行</a>，守北辰。”《后汉书·杨震传》：“ 丰 等闻，惶怖，会太史言星变<a href="https://cidian.911cha.com/MjA1MXc=.html" target="_blank" rel="noopener">逆行</a>，遂共譖 震 。”</p>
+</li>
+<li><p>指逆流而行。 </p>
+</li>
+</ol>
+</blockquote>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p><strong>源代码：</strong> <a href="https://github.com/python/cpython/tree/3.8/Lib/posixpath.py" target="_blank" rel="noopener">Lib/posixpath.py</a> （用于 POSIX）和 <a href="https://github.com/python/cpython/tree/3.8/Lib/ntpath.py" target="_blank" rel="noopener">Lib/ntpath.py</a> （用于 Windows NT）</p>
+<hr>
+<p>该模块在路径名上实现了一些有用的功能：如需读取或写入文件，请参见 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#open" target="_blank" rel="noopener"><code>open()</code></a> ；有关访问文件系统的信息，请参见 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#module-os" target="_blank" rel="noopener"><code>os</code></a> 模块。路径参数可以字符串或字节形式传递。我们鼓励应用程序将文件名表示为（Unicode）字符串。不幸的是，某些文件名在Unix上可能无法用字符串表示，因此在Unix上平台上需要支持任意文件名的应用程序，应使用字节对象来表示路径名。反之亦然，在Windows平台上仅使用字节对象，不能表示的所有文件名（以标准 <code>mbcs</code> 编码），因此Windows应用程序应使用字符串对象来访问所有文件。</p>
+<p>与unix shell不同，Python不执行任何 <em>自动</em> 路径扩展。当应用程序需要类似shell的路径扩展时，可以显式调用诸如 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.expanduser" target="_blank" rel="noopener"><code>expanduser()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.expandvars" target="_blank" rel="noopener"><code>expandvars()</code></a> 之类的函数。 （另请参见 <a href="https://docs.python.org/zh-cn/3.8/library/glob.html#module-glob" target="_blank" rel="noopener"><code>glob</code></a> 模块。）</p>
+<blockquote>
+<p>参见 <a href="https://docs.python.org/zh-cn/3.8/library/pathlib.html#module-pathlib" target="_blank" rel="noopener"><code>pathlib</code></a> 模块提供高级路径对象。</p>
+</blockquote>
+<blockquote>
+<p>所有这些函数都仅接受字节或字符串对象作为其参数。如果返回路径或文件名，则结果是相同类型的对象。</p>
+</blockquote>
+<blockquote>
+<p>由于不同的操作系统具有不同的路径名称约定，因此标准库中有此模块的几个版本。<a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#module-os.path" target="_blank" rel="noopener"><code>os.path</code></a> 模块始终是适合 Python 运行的操作系统的路径模块，因此可用于本地路径。但是，如果操作的路径 <em>总是</em> 以一种不同的格式显示，那么也可以分别导入和使用各个模块。它们都具有相同的接口：</p>
+<ul>
+<li><code>posixpath</code> 用于Unix 样式的路径</li>
+<li><code>ntpath</code> 用于 Windows 路径</li>
+</ul>
+</blockquote>
+<p><em>在 3.8 版更改:</em> <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.exists" target="_blank" rel="noopener"><code>exists()</code></a>、<a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.lexists" target="_blank" rel="noopener"><code>lexists()</code></a>、<a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.isdir" target="_blank" rel="noopener"><code>isdir()</code></a>、<a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.isfile" target="_blank" rel="noopener"><code>isfile()</code></a>、<a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.islink" target="_blank" rel="noopener"><code>islink()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.ismount" target="_blank" rel="noopener"><code>ismount()</code></a> 现在遇到系统层面上不可表示的字符或字节的路径时，会返回 <code>False</code>，而不是抛出异常。</p>
+<ul>
+<li><p><code>os.path.abspath</code>(<em>path</em>)</p>
+<p>返回路径 <em>path</em> 的绝对路径（标准化的）。在大多数平台上，这等同于用 <code>normpath(join(os.getcwd(), path))</code> 的方式调用 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.normpath" target="_blank" rel="noopener"><code>normpath()</code></a> 函数。<em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.basename</code>(<em>path</em>)</p>
+<p>返回路径 <em>path</em> 的基本名称。这是将 <em>path</em> 传入函数 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.split" target="_blank" rel="noopener"><code>split()</code></a> 之后，返回的一对值中的第二个元素。请注意，此函数的结果与Unix <strong>basename</strong> 程序不同。<strong>basename</strong> 在 <code>&#39;/foo/bar/&#39;</code> 上返回 <code>&#39;bar&#39;</code>，而 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.basename" target="_blank" rel="noopener"><code>basename()</code></a> 函数返回一个空字符串 (<code>&#39;&#39;</code>)。<em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.commonpath</code>(<em>paths</em>)</p>
+<p>接受包含多个路径的序列 <em>paths</em>，返回 <em>paths</em> 的最长公共子路径。如果 <em>paths</em> 同时包含绝对路径和相对路径，或 <em>paths</em> 在不同的驱动器上，或 <em>paths</em> 为空，则抛出 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a> 异常。与 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.commonprefix" target="_blank" rel="noopener"><code>commonprefix()</code></a> 不同，本方法返回有效路径。<a href="https://docs.python.org/zh-cn/3.8/library/intro.html#availability" target="_blank" rel="noopener">可用性</a>: Unix, Windows。<em>3.5 新版功能.**在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a> 序列。</p>
+</li>
+<li><p><code>os.path.commonprefix</code>(<em>list</em>)</p>
+<p>接受包含多个路径的 <em>列表</em>，返回所有路径的最长公共前缀（逐字符比较）。如果 <em>列表</em> 为空，则返回空字符串 (<code>&#39;&#39;</code>)。</p>
+<p>此函数是逐字符比较，因此可能返回无效路径。要获取有效路径，参见 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.commonpath" target="_blank" rel="noopener"><code>commonpath()</code></a>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.commonprefix([<span class="string">'/usr/lib'</span>, <span class="string">'/usr/local/lib'</span>])</span><br><span class="line"><span class="string">'/usr/l'</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.commonpath([<span class="string">'/usr/lib'</span>, <span class="string">'/usr/local/lib'</span>])</span><br><span class="line"><span class="string">'/usr'</span></span><br></pre></td></tr></table></figure>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.dirname</code>(<em>path</em>)</p>
+<p>返回路径 <em>path</em> 的目录名称。这是将 <em>path</em> 传入函数 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.split" target="_blank" rel="noopener"><code>split()</code></a> 之后，返回的一对值中的第一个元素。<em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.exists</code>(<em>path</em>)</p>
+<p>如果 <em>path</em> 指向一个已存在的路径或已打开的文件描述符，返回 <code>True</code>。对于失效的符号链接，返回 <code>False</code>。在某些平台上，如果使用 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.stat" target="_blank" rel="noopener"><code>os.stat()</code></a> 查询到目标文件没有执行权限，即使 <em>path</em> 确实存在，本函数也可能返回 <code>False</code>。<em>在 3.3 版更改:</em> <em>path</em> 现在可以是一个整数：如果该整数是一个已打开的文件描述符，返回 <code>True</code>，否则返回 <code>False</code>。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.lexists</code>(<em>path</em>)</p>
+<p>如果 <em>path</em> 指向一个已存在的路径，返回 <code>True</code>。对于失效的符号链接，也返回 <code>True</code>。在缺失 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.lstat" target="_blank" rel="noopener"><code>os.lstat()</code></a> 的平台上等同于 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.exists" target="_blank" rel="noopener"><code>exists()</code></a>。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.expanduser</code>(<em>path</em>)</p>
+<p>在 Unix 和 Windows 上，将参数中开头部分的 <code>~</code> 或 <code>~user</code> 替换为当前 <em>用户</em> 的家目录并返回。在 Unix 上，开头的 <code>~</code> 会被环境变量 <code>HOME</code> 代替，如果变量未设置，则通过内置模块 <a href="https://docs.python.org/zh-cn/3.8/library/pwd.html#module-pwd" target="_blank" rel="noopener"><code>pwd</code></a> 在 password 目录中查找当前用户的主目录。以 <code>~user</code> 开头则直接在 password 目录中查找。在 Windows 上，如果设置了 <code>USERPROFILE</code>，就使用这个变量，否则会将 <code>HOMEPATH</code> 和 <code>HOMEDRIVE</code> 结合在一起使用。以 <code>~user</code> 开头则将上述方法生成路径的最后一截目录替换成 user。如果展开路径失败，或者路径不是以波浪号开头，则路径将保持不变。<em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+<p><em>在 3.8 版更改:</em> Windows 不再使用 <code>HOME</code>。</p>
+</li>
+<li><p><code>os.path.expandvars</code>(<em>path</em>)</p>
+<p>输入带有环境变量的路径作为参数，返回展开变量以后的路径。<code>$name</code> 或 <code>${name}</code> 形式的子字符串被环境变量 <em>name</em> 的值替换。格式错误的变量名称和对不存在变量的引用保持不变。在 Windows 上，除了 <code>$name</code> 和 <code>${name}</code> 外，还可以展开 <code>%name%</code>。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.getatime</code>(<em>path</em>)</p>
+<p>返回 <em>path</em> 的最后访问时间。返回值是一个浮点数，为纪元秒数（参见 <a href="https://docs.python.org/zh-cn/3.8/library/time.html#module-time" target="_blank" rel="noopener"><code>time</code></a> 模块）。如果该文件不存在或不可访问，则抛出 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a> 异常。</p>
+</li>
+<li><p><code>os.path.getmtime</code>(<em>path</em>)</p>
+<p>返回 <em>path</em> 的最后修改时间。返回值是一个浮点数，为纪元秒数（参见 <a href="https://docs.python.org/zh-cn/3.8/library/time.html#module-time" target="_blank" rel="noopener"><code>time</code></a> 模块）。如果该文件不存在或不可访问，则抛出 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a> 异常。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.getctime</code>(<em>path</em>)</p>
+<p>返回 <em>path</em> 在系统中的 ctime，在有些系统（比如 Unix）上，它是元数据的最后修改时间，其他系统（比如 Windows）上，它是 <em>path</em> 的创建时间。返回值是一个数，为纪元秒数（参见 <a href="https://docs.python.org/zh-cn/3.8/library/time.html#module-time" target="_blank" rel="noopener"><code>time</code></a> 模块）。如果该文件不存在或不可访问，则抛出 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a> 异常。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.getsize</code>(<em>path</em>)</p>
+<p>返回 <em>path</em> 的大小，以字节为单位。如果该文件不存在或不可访问，则抛出 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a> 异常。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.isabs</code>(<em>path</em>)</p>
+<p>如果 <em>path</em> 是一个绝对路径，则返回 <code>True</code>。在 Unix 上，它就是以斜杠开头，而在 Windows 上，它可以是去掉驱动器号后以斜杠（或反斜杠）开头。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.isfile</code>(<em>path</em>)</p>
+<p>如果 <em>path</em> 是 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.exists" target="_blank" rel="noopener"><code>现有的</code></a> 常规文件，则返回 <code>True</code>。本方法会跟踪符号链接，因此，对于同一路径，<a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.islink" target="_blank" rel="noopener"><code>islink()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.isfile" target="_blank" rel="noopener"><code>isfile()</code></a> 都可能为 <code>True</code>。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.isdir</code>(<em>path</em>)</p>
+<p>如果 <em>path</em> 是 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.exists" target="_blank" rel="noopener"><code>现有的</code></a> 目录，则返回 <code>True</code>。本方法会跟踪符号链接，因此，对于同一路径，<a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.islink" target="_blank" rel="noopener"><code>islink()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.isdir" target="_blank" rel="noopener"><code>isdir()</code></a> 都可能为 <code>True</code>。<em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.islink</code>(<em>path</em>)</p>
+<p>如果 <em>path</em> 指向的 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.exists" target="_blank" rel="noopener"><code>现有</code></a> 目录条目是一个符号链接，则返回 <code>True</code>。如果 Python 运行时不支持符号链接，则总是返回 <code>False</code>。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.ismount</code>(<em>path</em>)</p>
+<p>如果路径 <em>path</em> 是 <em>挂载点</em> （文件系统中挂载其他文件系统的点），则返回 <code>True</code>。在 POSIX 上，该函数检查 <em>path</em> 的父目录 <code>*path*/..</code> 是否在与 <em>path</em> 不同的设备上，或者 <code>*path*/..</code> 和 <em>path</em> 是否指向同一设备上的同一 inode（这一检测挂载点的方法适用于所有 Unix 和 POSIX 变体）。本方法不能可靠地检测同一文件系统上的绑定挂载 (bind mount)。在 Windows 上，盘符和共享 UNC 始终是挂载点，对于任何其他路径，将调用 <code>GetVolumePathName</code> 来查看它是否与输入的路径不同。<em>3.4 新版功能:</em> 支持在 Windows 上检测非根挂载点。<em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.join</code>(<em>path</em>, *<em>paths</em>)</p>
+<p>合理地拼接一个或多个路径部分。返回值是 <em>path</em> 和 *<em>paths</em> 所有值的连接，每个非空部分后面都紧跟一个目录分隔符 (<code>os.sep</code>)，除了最后一部分。这意味着如果最后一部分为空，则结果将以分隔符结尾。如果参数中某个部分是绝对路径，则绝对路径前的路径都将被丢弃，并从绝对路径部分开始连接。在 Windows 上，遇到绝对路径部分（例如 <code>r&#39;\foo&#39;</code>）时，不会重置盘符。如果某部分路径包含盘符，则会丢弃所有先前的部分，并重置盘符。请注意，由于每个驱动器都有一个“当前目录”，所以 <code>os.path.join(&quot;c:&quot;, &quot;foo&quot;)</code> 表示驱动器 <code>C:</code> 上当前目录的相对路径 (<code>c:foo</code>)，而不是 <code>c:\foo</code>。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a> 用于 <em>path</em> 和 <em>paths</em> 。</p>
+</li>
+<li><p><code>os.path.normcase</code>(<em>path</em>)</p>
+<p>规范路径的大小写。在 Windows 上，将路径中的所有字符都转换为小写，并将正斜杠转换为反斜杠。在其他操作系统上返回原路径。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.normpath</code>(<em>path</em>)</p>
+<p>通过折叠多余的分隔符和对上级目录的引用来标准化路径名，所以 <code>A//B</code>、<code>A/B/</code>、<code>A/./B</code> 和 <code>A/foo/../B</code> 都会转换成 <code>A/B</code>。这个字符串操作可能会改变带有符号链接的路径的含义。在 Windows 上，本方法将正斜杠转换为反斜杠。要规范大小写，请使用 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.normcase" target="_blank" rel="noopener"><code>normcase()</code></a>。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.realpath</code>(<em>path</em>)</p>
+<p>返回指定文件的规范路径，消除路径中存在的任何符号链接（如果操作系统支持）。注解 当发生符号链接循环时，返回的路径将是该循环的某个组成部分，但不能保证是哪个部分。<em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+<p><em>在 3.8 版更改:</em> 在 Windows 上现在可以正确解析符号链接和交接点 (junction point)。</p>
+</li>
+<li><p><code>os.path.relpath</code>(<em>path</em>, <em>start=os.curdir</em>)</p>
+<p>返回从当前目录或 <em>start</em> 目录（可选）到达 <em>path</em> 之间要经过的相对路径。这仅仅是对路径的计算，不会访问文件系统来确认 <em>path</em> 或 <em>start</em> 的存在性或属性。<em>start</em> 默认为 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.curdir" target="_blank" rel="noopener"><code>os.curdir</code></a>。<a href="https://docs.python.org/zh-cn/3.8/library/intro.html#availability" target="_blank" rel="noopener">可用性</a>: Unix, Windows。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.samefile</code>(<em>path1</em>, <em>path2</em>)</p>
+<p>如果两个路径都指向相同的文件或目录，则返回 <code>True</code>。这由设备号和 inode 号确定，在任一路径上调用 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.stat" target="_blank" rel="noopener"><code>os.stat()</code></a> 失败则抛出异常。<a href="https://docs.python.org/zh-cn/3.8/library/intro.html#availability" target="_blank" rel="noopener">可用性</a>: Unix, Windows。<em>在 3.2 版更改:</em> 添加了 Windows 支持。<em>在 3.4 版更改:</em> Windows现在使用与其他所有平台相同的实现。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.sameopenfile</code>(<em>fp1</em>, <em>fp2</em>)</p>
+<p>如果文件描述符 <em>fp1</em> 和 <em>fp2</em> 指向相同文件，则返回 <code>True</code>。<a href="https://docs.python.org/zh-cn/3.8/library/intro.html#availability" target="_blank" rel="noopener">可用性</a>: Unix, Windows。<em>在 3.2 版更改:</em> 添加了 Windows 支持。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.samestat</code>(<em>stat1</em>, <em>stat2</em>)</p>
+<p>如果 stat 元组 <em>stat1</em> 和 <em>stat2</em> 指向相同文件，则返回 <code>True</code>。这些 stat 元组可能是由 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.fstat" target="_blank" rel="noopener"><code>os.fstat()</code></a>、<a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.lstat" target="_blank" rel="noopener"><code>os.lstat()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.stat" target="_blank" rel="noopener"><code>os.stat()</code></a> 返回的。本函数实现了 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.samefile" target="_blank" rel="noopener"><code>samefile()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.sameopenfile" target="_blank" rel="noopener"><code>sameopenfile()</code></a> 底层所使用的比较过程。<a href="https://docs.python.org/zh-cn/3.8/library/intro.html#availability" target="_blank" rel="noopener">可用性</a>: Unix, Windows。<em>在 3.4 版更改:</em> 添加了 Windows 支持。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.split</code>(<em>path</em>)</p>
+<p>将路径 <em>path</em> 拆分为一对，即 <code>(head, tail)</code>，其中，<em>tail</em> 是路径的最后一部分，而 <em>head</em> 里是除最后部分外的所有内容。<em>tail</em> 部分不会包含斜杠，如果 <em>path</em> 以斜杠结尾，则 <em>tail</em> 将为空。如果 <em>path</em> 中没有斜杠，<em>head</em> 将为空。如果 <em>path</em> 为空，则 <em>head</em> 和 <em>tail</em> 均为空。<em>head</em> 末尾的斜杠会被去掉，除非它是根目录（即它仅包含一个或多个斜杠）。在所有情况下，<code>join(head, tail)</code> 指向的位置都与 <em>path</em> 相同（但字符串可能不同）。另请参见函数 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.dirname" target="_blank" rel="noopener"><code>dirname()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/os.path.html#os.path.basename" target="_blank" rel="noopener"><code>basename()</code></a>。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.splitdrive</code>(<em>path</em>)</p>
+<p>将路径 <em>path</em> 拆分为一对，即 <code>(drive, tail)</code>，其中 <em>drive</em> 是挂载点或空字符串。在没有驱动器概念的系统上，<em>drive</em> 将始终为空字符串。在所有情况下，<code>drive + tail</code> 都与 <em>path</em> 相同。在 Windows 上，本方法将路径拆分为驱动器/UNC 根节点和相对路径。如果路径 path 包含盘符，则 drive 将包含冒号及冒号前面的所有内容。例如 <code>splitdrive(&quot;c:/dir&quot;)</code> 返回 <code>(&quot;c:&quot;, &quot;/dir&quot;)</code>。如果 path 是一个 UNC 路径，则 drive 将包含主机名和共享点，但不包括第四个分隔符。例如 <code>splitdrive(&quot;//host/computer/dir&quot;)</code> 返回 <code>(&quot;//host/computer&quot;, &quot;/dir&quot;)</code>。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.splitext</code>(<em>path</em>)</p>
+<p>将路径 <em>path</em> 拆分为一对，即 <code>(root, ext)</code>，使 <code>root + ext == path</code>，其中 <em>ext</em> 为空或以英文句点开头，且最多包含一个句点。路径前的句点将被忽略，例如 <code>splitext(&#39;.cshrc&#39;)</code> 返回 <code>(&#39;.cshrc&#39;, &#39;&#39;)</code>。</p>
+<p><em>在 3.6 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">类路径对象</a>。</p>
+</li>
+<li><p><code>os.path.supports_unicode_filenames</code></p>
+<p>如果（在文件系统限制下）允许将任意 Unicode 字符串用作文件名，则为 <code>True</code>。</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/02/15/python-standard-library-os-path/" title="python standard library os.path">https://pinghailinfeng.gitee.io/2020/02/15/python-standard-library-os-path/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/os-path/" rel="tag"># os.path</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/14/python-standard-library-linecache/" rel="next" title="python standard library linecache">
+                <i class="fa fa-chevron-left"></i> python standard library linecache
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/16/python-standard-library-marshal/" rel="prev" title="python standard library marshal">
+                python standard library marshal <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">135</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">154</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-os-path"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 os.path</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">1.1.</span> <span class="nav-text">源码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2020/">2020</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2to3/">2to3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tkinter/">Tkinter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">_thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/argparse/">argparse</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atexit/">atexit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/code/">code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dis/">dis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doctest/">doctest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dom/">dom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp32/">esp32</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esptool/">esptool</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fileinput/">fileinput</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/">futures</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keyword/">keyword</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lite-server/">lite-server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micorpython/">micorpython</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micropython/">micropython</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minidom/">minidom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modulefinder/">modulefinder</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/others/">others</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwd/">pwd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">89</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re/">re</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/readline/">readline</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sax/">sax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sched/">sched</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/select/">select</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selectors/">selectors</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standar-library/">standar_library</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">78</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/">turtle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/">typescript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uPycraft/">uPycraft</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unittest/">unittest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/">venv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webrepl/">webrepl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/">xml</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环/">循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感悟/">感悟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化测试/">自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">787k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">11:55</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

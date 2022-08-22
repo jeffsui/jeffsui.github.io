@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库学习  difflib每日一词:  wink  US[wɪŋk]  UK[wɪŋk] n.眼色；眨一只眼；眨眼示意 v.闪烁；眨眼示意（尤指使眼色或表示开玩笑）；明灭 网络瞬间；眨眼睛；你眨了眨眼 推荐一个电影： 记忆碎片👴 又是诺兰的大作,强烈推荐 推荐指数： 🌟🌟🌟🌟🌟">
+<meta name="keywords" content="python,standard_library,difflib">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library difflib">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/01/21/python-standard-library-difflib/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库学习  difflib每日一词:  wink  US[wɪŋk]  UK[wɪŋk] n.眼色；眨一只眼；眨眼示意 v.闪烁；眨眼示意（尤指使眼色或表示开玩笑）；明灭 网络瞬间；眨眼睛；你眨了眨眼 推荐一个电影： 记忆碎片👴 又是诺兰的大作,强烈推荐 推荐指数： 🌟🌟🌟🌟🌟">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://pic2.zhimg.com/2af9e3d253beebcab32903659da092d7_r.jpg">
+<meta property="og:updated_time" content="2022-08-18T08:03:08.577Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library difflib">
+<meta name="twitter:description" content="python 标准库学习  difflib每日一词:  wink  US[wɪŋk]  UK[wɪŋk] n.眼色；眨一只眼；眨眼示意 v.闪烁；眨眼示意（尤指使眼色或表示开玩笑）；明灭 网络瞬间；眨眼睛；你眨了眨眼 推荐一个电影： 记忆碎片👴 又是诺兰的大作,强烈推荐 推荐指数： 🌟🌟🌟🌟🌟">
+<meta name="twitter:image" content="https://pic2.zhimg.com/2af9e3d253beebcab32903659da092d7_r.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/01/21/python-standard-library-difflib/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library difflib | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/01/21/python-standard-library-difflib/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library difflib
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-21 09:17:59" itemprop="dateCreated datePublished" datetime="2020-01-21T09:17:59+08:00">2020-01-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-08-18 16:03:08" itemprop="dateModified" datetime="2022-08-18T16:03:08+08:00">2022-08-18</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">16k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">14 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库学习-difflib"><a href="#python-标准库学习-difflib" class="headerlink" title="python 标准库学习  difflib"></a>python 标准库学习  difflib</h1><p>每日一词:</p>
+<blockquote>
+<p>wink </p>
+<p>US[wɪŋk]  UK[wɪŋk]</p>
+<p>n.眼色；眨一只眼；眨眼示意</p>
+<p>v.闪烁；眨眼示意（尤指使眼色或表示开玩笑）；明灭</p>
+<p>网络瞬间；眨眼睛；你眨了眨眼</p>
+<p>推荐一个电影：</p>
+<p>记忆碎片👴</p>
+<p>又是诺兰的大作,强烈推荐</p>
+<p>推荐指数： 🌟🌟🌟🌟🌟</p>
+</blockquote>
+<p><img src="https://pic2.zhimg.com/2af9e3d253beebcab32903659da092d7_r.jpg" alt></p>
+<a id="more"></a>
+<p>马上就要过年了,尽量少去人流密集场所吧。</p>
+<h2 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h2><p><strong>源代码:</strong> <a href="https://github.com/python/cpython/tree/3.8/Lib/difflib.py" target="_blank" rel="noopener">Lib/difflib.py</a></p>
+<p>此模块提供用于比较序列的类和函数。 例如，它可以用于比较文件，并可以产生各种格式的不同信息，包括 HTML 和上下文以及统一格式的差异点。 有关目录和文件的比较，请参见 <a href="https://docs.python.org/zh-cn/3.8/library/filecmp.html#module-filecmp" target="_blank" rel="noopener"><code>filecmp</code></a> 模块。</p>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p><em>class</em> <code>difflib.SequenceMatcher</code></p>
+<p>这是一个灵活的类，可用于比较任何类型的序列对，只要序列元素为 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-hashable" target="_blank" rel="noopener">hashable</a> 对象。 其基本算法要早于由 Ratcliff 和 Obershelp 于 1980 年代末期发表并以“格式塔模式匹配”的夸张名称命名的算法，并且更加有趣一些。 其思路是找到不包含“垃圾”元素的最长连续匹配子序列；所谓“垃圾”元素是指其在某种意义上没有价值，例如空白行或空白符。 （处理垃圾元素是对 Ratcliff 和 Obershelp 算法的一个扩展。） 然后同样的思路将递归地应用于匹配序列的左右序列片段。 这并不能产生最小编辑序列，但确实能产生在人们看来“正确”的匹配。</p>
+<p><strong>耗时:</strong> 基本 Ratcliff-Obershelp 算法在最坏情况下为立方时间而在一般情况下为平方时间。 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher" target="_blank" rel="noopener"><code>SequenceMatcher</code></a> 在最坏情况下为平方时间而在一般情况下的行为受到序列中有多少相同元素这一因素的微妙影响；在最佳情况下则为线性时间。</p>
+<p><strong>自动垃圾启发式计算:</strong> <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher" target="_blank" rel="noopener"><code>SequenceMatcher</code></a> 支持使用启发式计算来自动将特定序列项视为垃圾。 这种启发式计算会统计每个单独项在序列中出现的次数。 如果某一项（在第一项之后）的重复次数超过序列长度的 1% 并且序列长度至少有 200 项，该项会被标记为“热门”并被视为序列匹配中的垃圾。 这种启发式计算可以通过在创建 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher" target="_blank" rel="noopener"><code>SequenceMatcher</code></a> 时将 <code>autojunk</code> 参数设为 <code>False</code> 来关闭。</p>
+<p><em>class</em> <code>difflib.Differ</code></p>
+<p>这个类的作用是比较由文本行组成的序列，并产生可供人阅读的差异或增量信息。 Differ 统一使用 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher" target="_blank" rel="noopener"><code>SequenceMatcher</code></a> 来完成行序列的比较以及相似（接近匹配）行内部字符序列的比较。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.Differ" target="_blank" rel="noopener"><code>Differ</code></a> 增量的每一行均以双字母代码打头：</p>
+<table>
+<thead>
+<tr>
+<th>双字母代码</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&#39;- &#39;</code></td>
+<td>行为序列 1 所独有</td>
+</tr>
+<tr>
+<td><code>&#39;+ &#39;</code></td>
+<td>行为序列 2 所独有</td>
+</tr>
+<tr>
+<td><code>&#39;  &#39;</code></td>
+<td>行在两序列中相同</td>
+</tr>
+<tr>
+<td><code>&#39;? &#39;</code></td>
+<td>行不存在于任一输入序列</td>
+</tr>
+</tbody>
+</table>
+<p>以 ‘<code>?</code>‘ 打头的行尝试将视线引至行以外而不存在于任一输入序列的差异。 如果序列包含制表符则这些行可能会令人感到迷惑。</p>
+<p><em>class</em> <code>difflib.HtmlDiff</code></p>
+<p>这个类可用于创建 HTML 表格（或包含表格的完整 HTML 文件）以并排地逐行显示文本比较，行间与行外的更改将突出显示。 此表格可以基于完全或上下文差异模式来生成。</p>
+<p>这个类的构造函数：</p>
+<ul>
+<li><p><code>__init__</code>(<em>tabsize=8</em>, <em>wrapcolumn=None</em>, <em>linejunk=None</em>, <em>charjunk=IS_CHARACTER_JUNK</em>)</p>
+<p>初始化 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.HtmlDiff" target="_blank" rel="noopener"><code>HtmlDiff</code></a> 的实例。</p>
+<p><em>tabsize</em> 是一个可选关键字参数，指定制表位的间隔，默认值为 <code>8</code>。</p>
+<p><em>wrapcolumn</em> 是一个可选关键字参数，指定行文本自动打断并换行的列位置，默认值为 <code>None</code> 表示不自动换行。</p>
+<p><em>linejunk</em> 和 <em>charjunk</em> 均是可选关键字参数，会传入 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.ndiff" target="_blank" rel="noopener"><code>ndiff()</code></a> (被 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.HtmlDiff" target="_blank" rel="noopener"><code>HtmlDiff</code></a> 用来生成并排显示的 HTML 差异)。 请参阅 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.ndiff" target="_blank" rel="noopener"><code>ndiff()</code></a> 文档了解参数默认值及其说明。</p>
+</li>
+<li><p><code>make_file</code>(<em>fromlines</em>, <em>tolines</em>, <em>fromdesc=’’</em>, <em>todesc=’’</em>, <em>context=False</em>, <em>numlines=5</em>, <em>**, </em>charset=’utf-8’*)</p>
+<p>比较 <em>fromlines</em> 和 <em>tolines</em> (字符串列表) 并返回一个字符串，表示一个完整 HTML 文件，其中包含各行差异的表格，行间与行外的更改将突出显示。</p>
+<p><em>fromdesc</em> 和 <em>todesc</em> 均是可选关键字参数，指定来源/目标文件的列标题字符串（默认均为空白字符串）。</p>
+<p><em>context</em> 和 <em>numlines</em> 均是可选关键字参数。 当只要显示上下文差异时就将 <em>context</em> 设为 <code>True</code>，否则默认值 <code>False</code> 为显示完整文件。 <em>numlines</em> 默认为 <code>5</code>。 当 <em>context</em> 为 <code>True</code> 时 <em>numlines</em> 将控制围绕突出显示差异部分的上下文行数。 当 <em>context</em> 为 <code>False</code> 时 <em>numlines</em> 将控制在使用 “next” 超链接时突出显示差异部分之前所显示的行数（设为零则会导致 “next” 超链接将下一个突出显示差异部分放在浏览器顶端，不添加任何前导上下文）。</p>
+<blockquote>
+<p><em>fromdesc</em> 和 <em>todesc</em> 会被当作未转义的 HTML 来解读，当接收不可信来源的输入时应该适当地进行转义。</p>
+</blockquote>
+</li>
+<li><p><code>make_table</code>(<em>fromlines</em>, <em>tolines</em>, <em>fromdesc=’’</em>, <em>todesc=’’</em>, <em>context=False</em>, <em>numlines=5</em>)</p>
+<p>比较 <em>fromlines</em> 和 <em>tolines</em> (字符串列表) 并返回一个字符串，表示一个包含各行差异的完整 HTML 表格，行间与行外的更改将突出显示。</p>
+<p>此方法的参数与 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.HtmlDiff.make_file" target="_blank" rel="noopener"><code>make_file()</code></a> 方法的相同。</p>
+<p><code>Tools/scripts/diff.py</code> 是这个类的命令行前端，其中包含一个很好的使用示例。</p>
+</li>
+</ul>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p><code>difflib.context_diff</code>(<em>a</em>, <em>b</em>, <em>fromfile=’’</em>, <em>tofile=’’</em>, <em>fromfiledate=’’</em>, <em>tofiledate=’’</em>, <em>n=3</em>, <em>lineterm=’\n’</em>)</p>
+<p>比较 <em>a</em> 和 <em>b</em> (字符串列表)；返回上下文差异格式的增量信息 (一个产生增量行的 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-generator" target="_blank" rel="noopener">generator</a>)。</p>
+<p>所谓上下文差异是一种只显示有更改的行再加几个上下文行的紧凑形式。 更改被显示为之前/之后的样式。 上下文行数由 <em>n</em> 设定，默认为三行。</p>
+<p>默认情况下，差异控制行（以 <code>***</code> or <code>---</code> 表示）是通过末尾换行符来创建的。 这样做的好处是从 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#io.IOBase.readlines" target="_blank" rel="noopener"><code>io.IOBase.readlines()</code></a> 创建的输入将得到适用于 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#io.IOBase.writelines" target="_blank" rel="noopener"><code>io.IOBase.writelines()</code></a> 的差异信息，因为输入和输出都带有末尾换行符。</p>
+<p>对于没有末尾换行符的输入，应将 <em>lineterm</em> 参数设为 <code>&quot;&quot;</code>，这样输出内容将统一不带换行符。</p>
+<p>上下文差异格式通常带有一个记录文件名和修改时间的标头。 这些信息的部分或全部可以使用字符串 <em>fromfile</em>, <em>tofile</em>, <em>fromfiledate</em> 和 <em>tofiledate</em> 来指定。 修改时间通常以 ISO 8601 格式表示。 如果未指定，这些字符串默认为空。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s1 = [<span class="string">'bacon\n'</span>, <span class="string">'eggs\n'</span>, <span class="string">'ham\n'</span>, <span class="string">'guido\n'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s2 = [<span class="string">'python\n'</span>, <span class="string">'eggy\n'</span>, <span class="string">'hamster\n'</span>, <span class="string">'guido\n'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.stdout.writelines(context_diff(s1, s2, fromfile=<span class="string">'before.py'</span>,tofile=<span class="string">'after.py'</span>))</span><br><span class="line">*** before.py</span><br><span class="line">--- after.py</span><br><span class="line">***************</span><br><span class="line">*** <span class="number">1</span>,<span class="number">4</span> ****</span><br><span class="line">! bacon</span><br><span class="line">! eggs</span><br><span class="line">! ham</span><br><span class="line">  guido</span><br><span class="line">--- <span class="number">1</span>,<span class="number">4</span> ----</span><br><span class="line">! python</span><br><span class="line">! eggy</span><br><span class="line">! hamster</span><br><span class="line">  guido</span><br></pre></td></tr></table></figure>
+<p><code>difflib.get_close_matches</code>(<em>word</em>, <em>possibilities</em>, <em>n=3</em>, <em>cutoff=0.6</em>)</p>
+<p>返回由最佳“近似”匹配构成的列表。 <em>word</em> 为一个指定目标近似匹配的序列（通常为字符串），<em>possibilities</em> 为一个由用于匹配 <em>word</em> 的序列构成的列表（通常为字符串列表）。</p>
+<p>可选参数 <em>n</em> (默认为 <code>3</code>) 指定最多返回多少个近似匹配； <em>n</em> 必须大于 <code>0</code>.</p>
+<p>可选参数 <em>cutoff</em> (默认为 <code>0.6</code>) 是一个 [0, 1] 范围内的浮点数。 与 <em>word</em> 相似度得分未达到该值的候选匹配将被忽略。</p>
+<p>候选匹配中（不超过 <em>n</em> 个）的最佳匹配将以列表形式返回，按相似度得分排序，最相似的排在最前面。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>get_close_matches(<span class="string">'appel'</span>, [<span class="string">'ape'</span>, <span class="string">'apple'</span>, <span class="string">'peach'</span>, <span class="string">'puppy'</span>])</span><br><span class="line">[<span class="string">'apple'</span>, <span class="string">'ape'</span>]</span><br><span class="line">&gt;&gt;&gt;<span class="keyword">import</span> keyword</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>get_close_matches(<span class="string">'wheel'</span>, keyword.kwlist)</span><br><span class="line">[<span class="string">'while'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>get_close_matches(<span class="string">'pineapple'</span>, keyword.kwlist)</span><br><span class="line">[]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>get_close_matches(<span class="string">'accept'</span>, keyword.kwlist)</span><br><span class="line">[<span class="string">'except'</span>]</span><br></pre></td></tr></table></figure>
+<p><code>difflib.ndiff</code>(<em>a</em>, <em>b</em>, <em>linejunk=None</em>, <em>charjunk=IS_CHARACTER_JUNK</em>)</p>
+<p>比较 <em>a</em> 和 <em>b</em> (字符串列表)；返回 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.Differ" target="_blank" rel="noopener"><code>Differ</code></a> 形式的增量信息 (一个产生增量行的 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-generator" target="_blank" rel="noopener">generator</a>)。</p>
+<p>可选关键字形参 <em>linejunk</em> 和 <em>charjunk</em> 均为过滤函数 (或为 <code>None</code>)：</p>
+<p><em>linejunk</em>: 此函数接受单个字符串参数，如果其为垃圾字符串则返回真值，否则返回假值。 默认为 <code>None</code>。 此外还有一个模块层级的函数 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.IS_LINE_JUNK" target="_blank" rel="noopener"><code>IS_LINE_JUNK()</code></a>，它会过滤掉没有可见字符的行，除非该行添加了至多一个井号符 (<code>&#39;#&#39;</code>) – 但是下层的 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher" target="_blank" rel="noopener"><code>SequenceMatcher</code></a> 类会动态分析哪些行的重复频繁到足以形成噪音，这通常会比使用此函数的效果更好。</p>
+<p><em>charjunk</em>: 此函数接受一个字符（长度为 1 的字符串)，如果其为垃圾字符则返回真值，否则返回假值。 默认为模块层级的函数 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.IS_CHARACTER_JUNK" target="_blank" rel="noopener"><code>IS_CHARACTER_JUNK()</code></a>，它会过滤掉空白字符（空格符或制表符；但包含换行符可不是个好主意！）。</p>
+<p><code>Tools/scripts/ndiff.py</code> 是这个函数的命令行前端。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>diff = ndiff(<span class="string">'one\ntwo\nthree\n'</span>.splitlines(keepends=<span class="literal">True</span>),</span><br><span class="line"><span class="meta">... </span>            <span class="string">'ore\ntree\nemu\n'</span>.splitlines(keepends=<span class="literal">True</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">''</span>.join(diff), end=<span class="string">""</span>)</span><br><span class="line">- one</span><br><span class="line">?  ^</span><br><span class="line">+ ore</span><br><span class="line">?  ^</span><br><span class="line">- two</span><br><span class="line">- three</span><br><span class="line">?  -</span><br><span class="line">+ tree</span><br><span class="line">+ emu</span><br></pre></td></tr></table></figure>
+<p><code>difflib.restore</code>(<em>sequence</em>, <em>which</em>)</p>
+<p>返回两个序列中产生增量的那一个。</p>
+<p>给出一个由 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.Differ.compare" target="_blank" rel="noopener"><code>Differ.compare()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.ndiff" target="_blank" rel="noopener"><code>ndiff()</code></a> 产生的 <em>序列</em>，提取出来自文件 1 或 2 (<em>which</em> 形参) 的行，去除行前缀。</p>
+<p>示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>diff = ndiff(<span class="string">'one\ntwo\nthree\n'</span>.splitlines(keepends=<span class="literal">True</span>),</span><br><span class="line"><span class="meta">... </span>            <span class="string">'ore\ntree\nemu\n'</span>.splitlines(keepends=<span class="literal">True</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>diff = list(diff) <span class="comment"># materialize the generated delta into a list</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">''</span>.join(restore(diff, <span class="number">1</span>)), end=<span class="string">""</span>)</span><br><span class="line">one</span><br><span class="line">two</span><br><span class="line">three</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">''</span>.join(restore(diff, <span class="number">2</span>)), end=<span class="string">""</span>)</span><br><span class="line">ore</span><br><span class="line">tree</span><br><span class="line">emu</span><br></pre></td></tr></table></figure>
+<p><code>difflib.unified_diff</code>(<em>a</em>, <em>b</em>, <em>fromfile=’’</em>, <em>tofile=’’</em>, <em>fromfiledate=’’</em>, <em>tofiledate=’’</em>, <em>n=3</em>, <em>lineterm=’\n’</em>)</p>
+<p>比较 <em>a</em> 和 <em>b</em> (字符串列表)；返回统一差异格式的增量信息 (一个产生增量行的 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-generator" target="_blank" rel="noopener">generator</a>)。</p>
+<p>所以统一差异是一种只显示有更改的行再加几个上下文行的紧凑形式。 更改被显示为内联的样式（而不是分开的之前/之后文本块）。 上下文行数由 <em>n</em> 设定，默认为三行。</p>
+<p>默认情况下，差异控制行 (以 <code>---</code>, <code>+++</code> 或 <code>@@</code> 表示) 是通过末尾换行符来创建的。 这样做的好处是从 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#io.IOBase.readlines" target="_blank" rel="noopener"><code>io.IOBase.readlines()</code></a> 创建的输入将得到适用于 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#io.IOBase.writelines" target="_blank" rel="noopener"><code>io.IOBase.writelines()</code></a> 的差异信息，因为输入和输出都带有末尾换行符。</p>
+<p>对于没有末尾换行符的输入，应将 <em>lineterm</em> 参数设为 <code>&quot;&quot;</code>，这样输出内容将统一不带换行符。</p>
+<p>上下文差异格式通常带有一个记录文件名和修改时间的标头。 这些信息的部分或全部可以使用字符串 <em>fromfile</em>, <em>tofile</em>, <em>fromfiledate</em> 和 <em>tofiledate</em> 来指定。 修改时间通常以 ISO 8601 格式表示。 如果未指定，这些字符串默认为空。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s1 = [<span class="string">'bacon\n'</span>, <span class="string">'eggs\n'</span>, <span class="string">'ham\n'</span>, <span class="string">'guido\n'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s2 = [<span class="string">'python\n'</span>, <span class="string">'eggy\n'</span>, <span class="string">'hamster\n'</span>, <span class="string">'guido\n'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.stdout.writelines(unified_diff(s1, s2, fromfile=<span class="string">'before.py'</span>,tofile=<span class="string">'after.py'</span>))</span><br><span class="line">--- before.py</span><br><span class="line">+++ after.py</span><br><span class="line"><span class="meta">@@ -1,4 +1,4 @@</span></span><br><span class="line">-bacon</span><br><span class="line">-eggs</span><br><span class="line">-ham</span><br><span class="line">+python</span><br><span class="line">+eggy</span><br><span class="line">+hamster</span><br><span class="line"> guido</span><br></pre></td></tr></table></figure>
+<p><code>difflib.diff_bytes</code>(<em>dfunc</em>, <em>a</em>, <em>b</em>, <em>fromfile=b’’</em>, <em>tofile=b’’</em>, <em>fromfiledate=b’’</em>, <em>tofiledate=b’’</em>, <em>n=3</em>, <em>lineterm=b’\n’</em>)</p>
+<p>使用 <em>dfunc</em> 比较 <em>a</em> 和 <em>b</em> (字节串对象列表)；产生以 <em>dfunc</em> 所返回格式表示的差异行列表（也是字节串）。 <em>dfunc</em> 必须是可调用对象，通常为 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.unified_diff" target="_blank" rel="noopener"><code>unified_diff()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.context_diff" target="_blank" rel="noopener"><code>context_diff()</code></a>。</p>
+<p>允许你比较编码未知或不一致的数据。 除 <em>n</em> 之外的所有输入都必须为字节串对象而非字符串。 作用方式为无损地将所有输入 (除 <em>n</em> 之外) 转换为字符串，并调用 <code>dfunc(a, b, fromfile, tofile, fromfiledate, tofiledate, n, lineterm)</code>。 <em>dfunc</em> 的输出会被随即转换回字节串，这样你所得到的增量行将具有与 <em>a</em> 和 <em>b</em> 相同的未知/不一致编码。</p>
+<p><code>difflib.IS_LINE_JUNK</code>(<em>line</em>)</p>
+<p>对于可忽略的行返回 <code>True</code>。 如果 <em>line</em> 为空行或只包含单个 <code>&#39;#&#39;</code> 则 <em>line</em> 行就是可忽略的，否则就是不可忽略的。 此函数被用作较旧版本 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.ndiff" target="_blank" rel="noopener"><code>ndiff()</code></a> 中 <em>linejunk</em> 形参的默认值。    </p>
+<p><code>difflib.IS_CHARACTER_JUNK</code></p>
+<p>对于可忽略的字符返回 <code>True</code>。 字符 <em>ch</em> 如果为空格符或制表符则 <em>ch</em> 就是可忽略的，否则就是不可忽略的。 此函数被用作 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.ndiff" target="_blank" rel="noopener"><code>ndiff()</code></a> 中 <em>charjunk</em> 形参的默认值。</p>
+<h2 id="SequenceMatcher-对象"><a href="#SequenceMatcher-对象" class="headerlink" title="SequenceMatcher 对象"></a>SequenceMatcher 对象</h2><p><a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher" target="_blank" rel="noopener"><code>SequenceMatcher</code></a> 类具有这样的构造器：</p>
+<p><em>class</em> <code>difflib.SequenceMatcher</code>(<em>isjunk=None</em>, <em>a=’’</em>, <em>b=’’</em>, <em>autojunk=True</em>)</p>
+<p>可选参数 <em>isjunk</em> 必须为 <code>None</code> (默认值) 或为接受一个序列元素并当且仅当其为应忽略的“垃圾”元素时返回真值的单参数函数。 传入 <code>None</code> 作为 <em>isjunk</em> 的值就相当于传入 <code>lambda x: False</code>；也就是说不忽略任何值。 例如，传入:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lambda</span> x: x <span class="keyword">in</span> <span class="string">" \t"</span></span><br></pre></td></tr></table></figure>
+<p>如果你以字符序列的形式对行进行比较，并且不希望区分空格符或硬制表符。</p>
+<p>可选参数 <em>a</em> 和 <em>b</em> 为要比较的序列；两者默认为空字符串。 两个序列的元素都必须为 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-hashable" target="_blank" rel="noopener">hashable</a>。</p>
+<p>可选参数 <em>autojunk</em> 可用于启用自动垃圾启发式计算。</p>
+<p>SequenceMatcher 对象接受三个数据属性: <em>bjunk</em> 是 <em>b</em> 当中 <em>isjunk</em> 为 <code>True</code> 的元素集合；<em>bpopular</em> 是被启发式计算（如果其未被禁用）视为热门候选的非垃圾元素集合；<em>b2j</em> 是将 <em>b</em> 当中剩余元素映射到一个它们出现位置列表的字典。 所有三个数据属性将在 <em>b</em> 通过 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher.set_seqs" target="_blank" rel="noopener"><code>set_seqs()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher.set_seq2" target="_blank" rel="noopener"><code>set_seq2()</code></a> 重置时被重置。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
+<li><code>set_seqs</code>(<em>a</em>, <em>b</em>)</li>
+</ul>
+<p>设置要比较的两个序列。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher" target="_blank" rel="noopener"><code>SequenceMatcher</code></a> 计算并缓存有关第二个序列的详细信息，这样如果你想要将一个序列与多个序列进行比较，可使用 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher.set_seq2" target="_blank" rel="noopener"><code>set_seq2()</code></a> 一次性地设置该常用序列并重复地对每个其他序列各调用一次 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher.set_seq1" target="_blank" rel="noopener"><code>set_seq1()</code></a>。</p>
+<ul>
+<li><p><code>set_seq1</code>(<em>a</em>)</p>
+<p>设置要比较的第一个序列。 要比较的第二个序列不会改变。</p>
+</li>
+<li><p><code>set_seq2</code>(<em>b</em>)</p>
+<p>设置要比较的第二个序列。 要比较的第一个序列不会改变。</p>
+</li>
+<li><p><code>find_longest_match</code>(<em>alo</em>, <em>ahi</em>, <em>blo</em>, <em>bhi</em>)</p>
+<p>找出 <code>a[alo:ahi]</code> 和 <code>b[blo:bhi]</code> 中的最长匹配块。</p>
+<p>如果 <em>isjunk</em> 被省略或为 <code>None</code>，<a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher.find_longest_match" target="_blank" rel="noopener"><code>find_longest_match()</code></a> 将返回 <code>(i, j, k)</code> 使得 <code>a[i:i+k]</code> 等于 <code>b[j:j+k]</code>，其中 <code>alo &lt;= i &lt;= i+k &lt;= ahi</code> 并且 <code>blo &lt;= j &lt;= j+k &lt;= bhi</code>。 对于所有满足这些条件的 <code>(i&#39;, j&#39;, k&#39;)</code>，如果 <code>i == i&#39;</code>, <code>j &lt;= j&#39;</code> 也被满足，则附加条件 <code>k &gt;= k&#39;</code>, <code>i &lt;= i&#39;</code>。 换句话说，对于所有最长匹配块，返回在 <em>a</em> 当中最先出现的一个，而对于在 <em>a</em> 当中最先出现的所有最长匹配块，则返回在 <em>b</em> 当中最先出现的一个。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = SequenceMatcher(<span class="literal">None</span>, <span class="string">" abcd"</span>, <span class="string">"abcd abcd"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.find_longest_match(<span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">9</span>)</span><br><span class="line">Match(a=<span class="number">0</span>, b=<span class="number">4</span>, size=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+<p>如果提供了 <em>isjunk</em>，将按上述规则确定第一个最长匹配块，但额外附加不允许块内出现垃圾元素的限制。 然后将通过（仅）匹配两边的垃圾元素来尽可能地扩展该块。 这样结果块绝对不会匹配垃圾元素，除非同样的垃圾元素正好与有意义的匹配相邻。</p>
+<p>这是与之前相同的例子，但是将空格符视为垃圾。 这将防止 <code>&#39; abcd&#39;</code> 直接与第二个序列末尾的 <code>&#39; abcd&#39;</code> 相匹配。 而只可以匹配 <code>&#39;abcd&#39;</code>，并且是匹配第二个序列最左边的 <code>&#39;abcd&#39;</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = SequenceMatcher(<span class="keyword">lambda</span> x: x==<span class="string">" "</span>, <span class="string">" abcd"</span>, <span class="string">"abcd abcd"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.find_longest_match(<span class="number">0</span>, <span class="number">5</span>, <span class="number">0</span>, <span class="number">9</span>)</span><br><span class="line">Match(a=<span class="number">1</span>, b=<span class="number">0</span>, size=<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p>如果未找到匹配块，此方法将返回 <code>(alo, blo, 0)</code>。</p>
+<p>此方法将返回一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-named-tuple" target="_blank" rel="noopener">named tuple</a> <code>Match(a, b, size)</code>。</p>
+</li>
+<li><p><code>get_matching_blocks</code>()</p>
+</li>
+</ul>
+<p>返回描述非重叠匹配子序列的三元组列表。 每个三元组的形式为 <code>(i, j, n)</code>，其含义为 <code>a[i:i+n] == b[j:j+n]</code>。 这些三元组按 <em>i</em> 和 <em>j</em> 单调递增排列。</p>
+<p>最后一个三元组用于占位，其值为 <code>(len(a), len(b), 0)</code>。 它是唯一 <code>n == 0</code> 的三元组。 如果 <code>(i, j, n)</code> 和 <code>(i&#39;, j&#39;, n&#39;)</code> 是在列表中相邻的三元组，且后者不是列表中的最后一个三元组，则 <code>i+n &lt; i&#39;</code> 或 <code>j+n &lt; j&#39;</code>；换句话说，相邻的三元组总是描述非相邻的相等块。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = SequenceMatcher(<span class="literal">None</span>, <span class="string">"abxcd"</span>, <span class="string">"abcd"</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.get_matching_blocks()</span><br><span class="line">[Match(a=<span class="number">0</span>, b=<span class="number">0</span>, size=<span class="number">2</span>), Match(a=<span class="number">3</span>, b=<span class="number">2</span>, size=<span class="number">2</span>), Match(a=<span class="number">5</span>, b=<span class="number">4</span>, size=<span class="number">0</span>)]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>get_opcodes</code>()</li>
+</ul>
+<p>返回描述如何将 <em>a</em> 变为 <em>b</em> 的 5 元组列表，每个元组的形式为 <code>(tag, i1, i2, j1, j2)</code>。 在第一个元组中 <code>i1 == j1 == 0</code>，而在其余的元组中 <em>i1</em> 等于前一个元组的 <em>i2</em>，并且 <em>j1</em> 也等于前一个元组的 <em>j2</em>。</p>
+<p><em>tag</em> 值为字符串，其含义如下：</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&#39;replace&#39;</code></td>
+<td><code>a[i1:i2]</code> 应由 <code>b[j1:j2]</code> 替换。</td>
+</tr>
+<tr>
+<td><code>&#39;delete&#39;</code></td>
+<td><code>a[i1:i2]</code> 应被删除。 请注意在此情况下 <code>j1 == j2</code>。</td>
+</tr>
+<tr>
+<td><code>&#39;insert&#39;</code></td>
+<td><code>b[j1:j2]</code> 应插入到 <code>a[i1:i1]</code>。 请注意在此情况下 <code>i1 == i2</code>。</td>
+</tr>
+<tr>
+<td><code>&#39;equal&#39;</code></td>
+<td><code>a[i1:i2] == b[j1:j2]</code> (两个子序列相同)。</td>
+</tr>
+</tbody>
+</table>
+<p>例如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="string">"qabxcd"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>b = <span class="string">"abycdf"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = SequenceMatcher(<span class="literal">None</span>, a, b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> tag, i1, i2, j1, j2 <span class="keyword">in</span> s.get_opcodes():</span><br><span class="line"><span class="meta">... </span>    print(<span class="string">'&#123;:7&#125;   a[&#123;&#125;:&#123;&#125;] --&gt; b[&#123;&#125;:&#123;&#125;] &#123;!r:&gt;8&#125; --&gt; &#123;!r&#125;'</span>.format(</span><br><span class="line"><span class="meta">... </span>        tag, i1, i2, j1, j2, a[i1:i2], b[j1:j2]))</span><br><span class="line">delete    a[0:1] --&gt; b[0:0]      'q' --&gt; ''</span><br><span class="line">equal     a[1:3] --&gt; b[0:2]     'ab' --&gt; 'ab'</span><br><span class="line">replace   a[3:4] --&gt; b[2:3]      'x' --&gt; 'y'</span><br><span class="line">equal     a[4:6] --&gt; b[3:5]     'cd' --&gt; 'cd'</span><br><span class="line">insert    a[6:6] --&gt; b[5:6]       '' --&gt; 'f'</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>get_grouped_opcodes</code>(<em>n=3</em>)</p>
+<p>返回一个带有最多 <em>n</em> 行上下文的分组的 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-generator" target="_blank" rel="noopener">generator</a>。从 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher.get_opcodes" target="_blank" rel="noopener"><code>get_opcodes()</code></a> 所返回的组开始，此方法会拆分出较小的更改簇并消除没有更改的间隔区域。这些分组以与 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher.get_opcodes" target="_blank" rel="noopener"><code>get_opcodes()</code></a> 相同的格式返回。</p>
+</li>
+<li><p><code>ratio</code>()</p>
+<p>返回一个取值范围 [0, 1] 的浮点数作为序列相似性度量。其中 T 是两个序列中元素的总数量，M 是匹配的数量，即 2.0*M / T。 请注意如果两个序列完全相同则该值为 <code>1.0</code>，如果两者完全不同则为 <code>0.0</code>。如果 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher.get_matching_blocks" target="_blank" rel="noopener"><code>get_matching_blocks()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher.get_opcodes" target="_blank" rel="noopener"><code>get_opcodes()</code></a> 尚未被调用则此方法运算消耗较大，在此情况下你可能需要先调用 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher.quick_ratio" target="_blank" rel="noopener"><code>quick_ratio()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher.real_quick_ratio" target="_blank" rel="noopener"><code>real_quick_ratio()</code></a> 来获取一个上界。</p>
+</li>
+</ul>
+<blockquote>
+<p>注意: <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher.ratio" target="_blank" rel="noopener"><code>ratio()</code></a> 调用的结果可能会取决于参数的顺序。 例如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; &gt;&gt;&gt; SequenceMatcher(<span class="literal">None</span>, <span class="string">'tide'</span>, <span class="string">'diet'</span>).ratio()</span><br><span class="line">&gt; <span class="number">0.25</span></span><br><span class="line">&gt; &gt;&gt;&gt; SequenceMatcher(<span class="literal">None</span>, <span class="string">'diet'</span>, <span class="string">'tide'</span>).ratio()</span><br><span class="line">&gt; <span class="number">0.5</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<ul>
+<li><p><code>quick_ratio</code>()</p>
+<p>相对快速地返回一个 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher.ratio" target="_blank" rel="noopener"><code>ratio()</code></a> 的上界。</p>
+</li>
+<li><p><code>real_quick_ratio</code>()</p>
+<p>非常快速地返回一个 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher.ratio" target="_blank" rel="noopener"><code>ratio()</code></a> 的上界。</p>
+<p>这三个返回匹配部分占字符总数的比率的方法可能由于不同的近似级别而给出不一样的结果，但是 <code>quick_ratio()</code> 和 <code>real_quick_ratio()</code> 总是会至少与 <code>ratio()</code> 一样大：</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = SequenceMatcher(<span class="literal">None</span>, <span class="string">"abcd"</span>, <span class="string">"bcde"</span>)</span><br><span class="line">s.ratio()</span><br><span class="line"><span class="number">0.75</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.quick_ratio()</span><br><span class="line"><span class="number">0.75</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.real_quick_ratio()</span><br><span class="line"><span class="number">1.0</span></span><br></pre></td></tr></table></figure>
+<h2 id="SequenceMatcher-的示例"><a href="#SequenceMatcher-的示例" class="headerlink" title="SequenceMatcher 的示例"></a>SequenceMatcher 的示例</h2><p>以下示例比较两个字符串，并将空格视为“垃圾”：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = SequenceMatcher(<span class="keyword">lambda</span> x: x == <span class="string">" "</span>,</span><br><span class="line"><span class="meta">... </span>                   <span class="string">"private Thread currentThread;"</span>,</span><br><span class="line"><span class="meta">... </span>                   <span class="string">"private volatile Thread currentThread;"</span>)</span><br></pre></td></tr></table></figure>
+<p><code>ratio()</code> 返回一个 [0, 1] 范围内的整数作为两个序列相似性的度量。 根据经验，<code>ratio()</code> 值超过 0.6 就意味着两个序列是近似匹配的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(round(s.ratio(), <span class="number">3</span>))</span><br><span class="line"><span class="number">0.866</span></span><br></pre></td></tr></table></figure>
+<p>如果你只对两个序列相匹配的位置感兴趣，则 <code>get_matching_blocks()</code> 就很方便：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> block <span class="keyword">in</span> s.get_matching_blocks():</span><br><span class="line"><span class="meta">... </span>    print(<span class="string">"a[%d] and b[%d] match for %d elements"</span> % block)</span><br><span class="line">a[<span class="number">0</span>] <span class="keyword">and</span> b[<span class="number">0</span>] match <span class="keyword">for</span> <span class="number">8</span> elements</span><br><span class="line">a[<span class="number">8</span>] <span class="keyword">and</span> b[<span class="number">17</span>] match <span class="keyword">for</span> <span class="number">21</span> elements</span><br><span class="line">a[<span class="number">29</span>] <span class="keyword">and</span> b[<span class="number">38</span>] match <span class="keyword">for</span> <span class="number">0</span> elements</span><br></pre></td></tr></table></figure>
+<p>请注意 <code>get_matching_blocks()</code> 返回的最后一个元组总是只用于占位的 <code>(len(a), len(b), 0)</code>，这也是元组末尾元素（匹配的元素数量）为 <code>0</code> 的唯一情况。</p>
+<p>如果你想要知道如何将第一个序列转成第二个序列，可以使用 <code>get_opcodes()</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">for</span> opcode <span class="keyword">in</span> s.get_opcodes():</span><br><span class="line"><span class="meta">... </span>   print(<span class="string">"%6s a[%d:%d] b[%d:%d]"</span> % opcode)</span><br><span class="line"> equal a[<span class="number">0</span>:<span class="number">8</span>] b[<span class="number">0</span>:<span class="number">8</span>]</span><br><span class="line">insert a[<span class="number">8</span>:<span class="number">8</span>] b[<span class="number">8</span>:<span class="number">17</span>]</span><br><span class="line"> equal a[<span class="number">8</span>:<span class="number">29</span>] b[<span class="number">17</span>:<span class="number">38</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="Differ-对象"><a href="#Differ-对象" class="headerlink" title="Differ 对象"></a>Differ 对象</h2><p>请注意 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.Differ" target="_blank" rel="noopener"><code>Differ</code></a> 所生成的增量并不保证是 <strong>最小</strong> 差异。 相反，最小差异往往是违反直觉的，因为它们会同步任何可能的地方，有时甚至意外产生相距 100 页的匹配。 将同步点限制为连续匹配保留了一些局部性概念，这偶尔会带来产生更长差异的代价。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.Differ" target="_blank" rel="noopener"><code>Differ</code></a> 类具有这样的构造器：</p>
+<p><em>class</em> <code>difflib.Differ</code>(<em>linejunk=None</em>, <em>charjunk=None</em>)</p>
+<p>可选关键字形参 <em>linejunk</em> 和 <em>charjunk</em> 均为过滤函数 (或为 <code>None</code>)：</p>
+<p><em>linejunk</em>: 接受单个字符串作为参数的函数，如果其为垃圾字符串则返回真值。 默认值为 <code>None</code>，意味着没有任何行会被视为垃圾行。</p>
+<p><em>charjunk</em>: 接受单个字符（长度为 1 的字符串）作为参数的函数，如果其为垃圾字符则返回真值。 默认值为 <code>None</code>，意味着没有任何字符会被视为垃圾字符。</p>
+<p>这些垃圾过滤函数可加快查找差异的匹配速度，并且不会导致任何差异行或字符被忽略。 请阅读 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.SequenceMatcher.find_longest_match" target="_blank" rel="noopener"><code>find_longest_match()</code></a> 方法的 <em>isjunk</em> 形参的描述了解详情。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.Differ" target="_blank" rel="noopener"><code>Differ</code></a> 对象是通过一个单独方法来使用（生成增量）的：</p>
+<ul>
+<li><p><code>compare</code>(<em>a</em>, <em>b</em>)</p>
+<p>比较两个由行组成的序列，并生成增量（一个由行组成的序列）。每个序列必须包含一个以换行符结尾的单行字符串。 这样的序列可以通过文件类对象的 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#io.IOBase.readlines" target="_blank" rel="noopener"><code>readlines()</code></a> 方法来获取。 所生成的增量同样由以换行符结尾的字符串构成，可以通过文件类对象的 <a href="https://docs.python.org/zh-cn/3.8/library/io.html#io.IOBase.writelines" target="_blank" rel="noopener"><code>writelines()</code></a> 方法原样打印出来。</p>
+</li>
+</ul>
+<h2 id="Differ-示例"><a href="#Differ-示例" class="headerlink" title="Differ 示例"></a>Differ 示例</h2><p>此示例比较两段文本。 首先我们设置文本为以换行符结尾的单行字符串构成的序列（这样的序列也可以通过文件类对象的 <code>readlines()</code> 方法来获取）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>text1 = <span class="string">'''  1. Beautiful is better than ugly.</span></span><br><span class="line"><span class="string"><span class="meta">... </span>  2. Explicit is better than implicit.</span></span><br><span class="line"><span class="string"><span class="meta">... </span>  3. Simple is better than complex.</span></span><br><span class="line"><span class="string"><span class="meta">... </span>  4. Complex is better than complicated.</span></span><br><span class="line"><span class="string"><span class="meta">... </span>'''</span>.splitlines(keepends=<span class="literal">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>len(text1)</span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text1[<span class="number">0</span>][<span class="number">-1</span>]</span><br><span class="line"><span class="string">'\n'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>text2 = <span class="string">'''  1. Beautiful is better than ugly.</span></span><br><span class="line"><span class="string"><span class="meta">... </span>  3.   Simple is better than complex.</span></span><br><span class="line"><span class="string"><span class="meta">... </span>  4. Complicated is better than complex.</span></span><br><span class="line"><span class="string"><span class="meta">... </span>  5. Flat is better than nested.</span></span><br><span class="line"><span class="string"><span class="meta">... </span>'''</span>.splitlines(keepends=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<p>接下来我们实例化一个 Differ 对象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>d = Differ()</span><br></pre></td></tr></table></figure>
+<p>请注意在实例化 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.Differ" target="_blank" rel="noopener"><code>Differ</code></a> 对象时我们可以传入函数来过滤掉“垃圾”行和字符。 详情参见 <a href="https://docs.python.org/zh-cn/3.8/library/difflib.html#difflib.Differ" target="_blank" rel="noopener"><code>Differ()</code></a> 构造器说明。</p>
+<p>最后，我们比较两个序列：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>result = list(d.compare</span><br></pre></td></tr></table></figure>
+<p><code>result</code> 是一个字符串列表，让我们将其美化打印出来：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> pprint <span class="keyword">import</span> pprint</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>pprint(result)</span><br><span class="line">[<span class="string">'    1. Beautiful is better than ugly.\n'</span>,</span><br><span class="line"> <span class="string">'-   2. Explicit is better than implicit.\n'</span>,</span><br><span class="line"> <span class="string">'-   3. Simple is better than complex.\n'</span>,</span><br><span class="line"> <span class="string">'+   3.   Simple is better than complex.\n'</span>,</span><br><span class="line"> <span class="string">'?     ++\n'</span>,</span><br><span class="line"> <span class="string">'-   4. Complex is better than complicated.\n'</span>,</span><br><span class="line"> <span class="string">'?            ^                     ---- ^\n'</span>,</span><br><span class="line"> <span class="string">'+   4. Complicated is better than complex.\n'</span>,</span><br><span class="line"> <span class="string">'?           ++++ ^                      ^\n'</span>,</span><br><span class="line"> <span class="string">'+   5. Flat is better than nested.\n'</span>]</span><br></pre></td></tr></table></figure>
+<p>作为单独的多行字符串显示出来则是这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sys.stdout.writelines(result)</span><br><span class="line">    <span class="number">1.</span> Beautiful <span class="keyword">is</span> better than ugly.</span><br><span class="line">-   <span class="number">2.</span> Explicit <span class="keyword">is</span> better than implicit.</span><br><span class="line">-   <span class="number">3.</span> Simple <span class="keyword">is</span> better than complex.</span><br><span class="line">+   <span class="number">3.</span>   Simple <span class="keyword">is</span> better than complex.</span><br><span class="line">?     ++</span><br><span class="line">-   <span class="number">4.</span> Complex <span class="keyword">is</span> better than complicated.</span><br><span class="line">?            ^                     ---- ^</span><br><span class="line">+   <span class="number">4.</span> Complicated <span class="keyword">is</span> better than complex.</span><br><span class="line">?           ++++ ^                      ^</span><br><span class="line">+   <span class="number">5.</span> Flat <span class="keyword">is</span> better than nested.</span><br></pre></td></tr></table></figure>
+<h2 id="difflib-的命令行接口"><a href="#difflib-的命令行接口" class="headerlink" title="difflib 的命令行接口"></a>difflib 的命令行接口</h2><p>这个实例演示了如何使用 difflib 来创建一个类似于 <code>diff</code> 的工具。 它同样包含在 Python 源码发布包中，文件名为 <code>Tools/scripts/diff.py</code>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="string">""" Command line interface to difflib.py providing diffs in four formats:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">* ndiff:    lists every line and highlights interline changes.</span></span><br><span class="line"><span class="string">* context:  highlights clusters of changes in a before/after format.</span></span><br><span class="line"><span class="string">* unified:  highlights clusters of changes in an inline format.</span></span><br><span class="line"><span class="string">* html:     generates side by side comparison with change highlights.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys, os, difflib, argparse</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timezone</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">file_mtime</span><span class="params">(path)</span>:</span></span><br><span class="line">    t = datetime.fromtimestamp(os.stat(path).st_mtime,</span><br><span class="line">                               timezone.utc)</span><br><span class="line">    <span class="keyword">return</span> t.astimezone().isoformat()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    parser = argparse.ArgumentParser()</span><br><span class="line">    parser.add_argument(<span class="string">'-c'</span>, action=<span class="string">'store_true'</span>, default=<span class="literal">False</span>,</span><br><span class="line">                        help=<span class="string">'Produce a context format diff (default)'</span>)</span><br><span class="line">    parser.add_argument(<span class="string">'-u'</span>, action=<span class="string">'store_true'</span>, default=<span class="literal">False</span>,</span><br><span class="line">                        help=<span class="string">'Produce a unified format diff'</span>)</span><br><span class="line">    parser.add_argument(<span class="string">'-m'</span>, action=<span class="string">'store_true'</span>, default=<span class="literal">False</span>,</span><br><span class="line">                        help=<span class="string">'Produce HTML side by side diff '</span></span><br><span class="line">                             <span class="string">'(can use -c and -l in conjunction)'</span>)</span><br><span class="line">    parser.add_argument(<span class="string">'-n'</span>, action=<span class="string">'store_true'</span>, default=<span class="literal">False</span>,</span><br><span class="line">                        help=<span class="string">'Produce a ndiff format diff'</span>)</span><br><span class="line">    parser.add_argument(<span class="string">'-l'</span>, <span class="string">'--lines'</span>, type=int, default=<span class="number">3</span>,</span><br><span class="line">                        help=<span class="string">'Set number of context lines (default 3)'</span>)</span><br><span class="line">    parser.add_argument(<span class="string">'fromfile'</span>)</span><br><span class="line">    parser.add_argument(<span class="string">'tofile'</span>)</span><br><span class="line">    options = parser.parse_args()</span><br><span class="line"></span><br><span class="line">    n = options.lines</span><br><span class="line">    fromfile = options.fromfile</span><br><span class="line">    tofile = options.tofile</span><br><span class="line"></span><br><span class="line">    fromdate = file_mtime(fromfile)</span><br><span class="line">    todate = file_mtime(tofile)</span><br><span class="line">    <span class="keyword">with</span> open(fromfile) <span class="keyword">as</span> ff:</span><br><span class="line">        fromlines = ff.readlines()</span><br><span class="line">    <span class="keyword">with</span> open(tofile) <span class="keyword">as</span> tf:</span><br><span class="line">        tolines = tf.readlines()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> options.u:</span><br><span class="line">        diff = difflib.unified_diff(fromlines, tolines, fromfile, tofile, fromdate, todate, n=n)</span><br><span class="line">    <span class="keyword">elif</span> options.n:</span><br><span class="line">        diff = difflib.ndiff(fromlines, tolines)</span><br><span class="line">    <span class="keyword">elif</span> options.m:</span><br><span class="line">        diff = difflib.HtmlDiff().make_file(fromlines,tolines,fromfile,tofile,context=options.c,numlines=n)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        diff = difflib.context_diff(fromlines, tolines, fromfile, tofile, fromdate, todate, n=n)</span><br><span class="line"></span><br><span class="line">    sys.stdout.writelines(diff)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h2 id="补充关于HtmlDiff类用法"><a href="#补充关于HtmlDiff类用法" class="headerlink" title="补充关于HtmlDiff类用法"></a>补充关于<code>HtmlDiff</code>类用法</h2><p>结合webbrowser创建差异比较页面</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> difflib</span><br><span class="line"><span class="keyword">import</span> webbrowser</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_diff</span><span class="params">(self, index, wrapcolumn)</span>:</span></span><br><span class="line">       file1, file2 = self.differing[index]</span><br><span class="line">       <span class="keyword">with</span> open(file1, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">           content1 = f.read().splitlines()</span><br><span class="line">       <span class="keyword">with</span> open(file2, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">           content2 = f.read().splitlines()</span><br><span class="line">       htmlDiff = HtmlDiff(tabsize=<span class="number">2</span>,wrapcolumn=wrapcolumn)</span><br><span class="line">       <span class="keyword">with</span> open(<span class="string">'tmp.html'</span>, <span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">           f.write(htmlDiff.make_file(content1, content2, fromdesc=self.dir1, todesc=self.dir2))</span><br><span class="line">       webbrowser.open(<span class="string">'tmp.html'</span>)</span><br></pre></td></tr></table></figure>
+<p>对比Nginx配置文件差异脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> difflib</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"> </span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    textfile1 = sys.argv[<span class="number">1</span>]</span><br><span class="line">    textfile2 = sys.argv[<span class="number">2</span>]</span><br><span class="line"><span class="keyword">except</span> Exception:</span><br><span class="line">    print(<span class="string">"Error:"</span> + str(e))</span><br><span class="line">    print(<span class="string">"Usage: xxxx.py filename1 filename2"</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readfile</span><span class="params">(filename)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fileHandle = open(filename,<span class="string">'r'</span>)</span><br><span class="line">        text = fileHandle.read().splitlines()</span><br><span class="line">        fileHandle.close()</span><br><span class="line">        <span class="keyword">return</span> text</span><br><span class="line">    <span class="keyword">except</span> IOError <span class="keyword">as</span> error:</span><br><span class="line">        print(<span class="string">'Read file Error:'</span> + str(error))</span><br><span class="line">        sys.exit()</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> textfile1 == <span class="string">""</span> <span class="keyword">or</span> textfile2 == <span class="string">""</span>:</span><br><span class="line">    print(<span class="string">"Usage:test.py filename1 filename2"</span>)</span><br><span class="line">    sys.exit()</span><br><span class="line"> </span><br><span class="line">text1_lines = readfile(textfile1)</span><br><span class="line">text2_lines = readfile(textfile2)</span><br><span class="line"> </span><br><span class="line">d = difflib.HtmlDiff()</span><br><span class="line">print(d.make_file(text1_lines,text2_lines))</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/01/21/python-standard-library-difflib/" title="python standard library difflib">https://pinghailinfeng.gitee.io/2020/01/21/python-standard-library-difflib/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/difflib/" rel="tag"># difflib</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/20/python-standard-library-sqlite3/" rel="next" title="python standard library sqlite3">
+                <i class="fa fa-chevron-left"></i> python standard library sqlite3
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/22/python-standard-library-filecmp/" rel="prev" title="python standard library filecmp">
+                python standard library filecmp <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">135</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">154</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库学习-difflib"><span class="nav-number">1.</span> <span class="nav-text">python 标准库学习  difflib</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码"><span class="nav-number">1.1.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类"><span class="nav-number">1.2.</span> <span class="nav-text">类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">1.3.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SequenceMatcher-对象"><span class="nav-number">1.4.</span> <span class="nav-text">SequenceMatcher 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">1.4.1.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SequenceMatcher-的示例"><span class="nav-number">1.5.</span> <span class="nav-text">SequenceMatcher 的示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Differ-对象"><span class="nav-number">1.6.</span> <span class="nav-text">Differ 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Differ-示例"><span class="nav-number">1.7.</span> <span class="nav-text">Differ 示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#difflib-的命令行接口"><span class="nav-number">1.8.</span> <span class="nav-text">difflib 的命令行接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充关于HtmlDiff类用法"><span class="nav-number">1.9.</span> <span class="nav-text">补充关于HtmlDiff类用法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2020/">2020</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2to3/">2to3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tkinter/">Tkinter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">_thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/argparse/">argparse</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atexit/">atexit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/code/">code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dis/">dis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doctest/">doctest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dom/">dom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp32/">esp32</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esptool/">esptool</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fileinput/">fileinput</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/">futures</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keyword/">keyword</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lite-server/">lite-server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micorpython/">micorpython</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micropython/">micropython</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minidom/">minidom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modulefinder/">modulefinder</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/others/">others</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwd/">pwd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">89</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re/">re</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/readline/">readline</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sax/">sax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sched/">sched</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/select/">select</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selectors/">selectors</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standar-library/">standar_library</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">78</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/">turtle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/">typescript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uPycraft/">uPycraft</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unittest/">unittest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/">venv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webrepl/">webrepl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/">xml</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环/">循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感悟/">感悟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化测试/">自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">787k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">11:55</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

@@ -1,0 +1,2144 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 coroutines 协程">
+<meta name="keywords" content="python,standard_library,coroutines">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library coroutines">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/02/12/python-standard-library-coroutines/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 coroutines 协程">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200213_coroutine.jpg?raw=true">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200213_writing.jpg?raw=true">
+<meta property="og:updated_time" content="2022-08-18T08:03:08.589Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library coroutines">
+<meta name="twitter:description" content="python 标准库 coroutines 协程">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200213_coroutine.jpg?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/02/12/python-standard-library-coroutines/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library coroutines | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/02/12/python-standard-library-coroutines/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library coroutines
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-12 21:59:58" itemprop="dateCreated datePublished" datetime="2020-02-12T21:59:58+08:00">2020-02-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-08-18 16:03:08" itemprop="dateModified" datetime="2022-08-18T16:03:08+08:00">2022-08-18</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">13k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">12 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-coroutines-协程"><a href="#python-标准库-coroutines-协程" class="headerlink" title="python 标准库 coroutines 协程"></a>python 标准库 coroutines 协程</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200213_coroutine.jpg?raw=true" alt></p>
+<a id="more"></a>
+<p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200213_writing.jpg?raw=true" alt></p>
+<h2 id="协程"><a href="#协程" class="headerlink" title="协程"></a><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#id2" target="_blank" rel="noopener">协程</a></h2><p> <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-coroutine" target="_blank" rel="noopener">Coroutines</a> declared with the async/await syntax is the preferred way of writing asyncio applications. For example, the following snippet of code (requires Python 3.7+) prints “hello”, waits 1 second, and then prints “world”: </p>
+<p> <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-coroutine" target="_blank" rel="noopener">Coroutines</a> 通过 async/await 语法声明是编写异步应用程序的首选方式。例如下面的语法片段(需要Python 3.7+),我们实现了等待一秒,打印’’world“的功能。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line"><span class="meta">... </span>    print(<span class="string">'hello'</span>)</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">await</span> asyncio.sleep(<span class="number">1</span>)</span><br><span class="line"><span class="meta">... </span>    print(<span class="string">'world'</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>asyncio.run(main())</span><br><span class="line">hello</span><br><span class="line">world</span><br></pre></td></tr></table></figure>
+<p> 注意：简单地调用一个协程并不会将其加入执行日程: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>main()</span><br><span class="line">&lt;coroutine object main at <span class="number">0x1053bb7c8</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>要真正运行一个协程，asyncio 提供了三种主要机制:</p>
+<ul>
+<li><p><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.run" target="_blank" rel="noopener"><code>asyncio.run()</code></a> 函数用来运行最高层级的入口点 “main()” 函数 (参见上面的示例。)</p>
+</li>
+<li><p>等待一个协程。以下代码段会在等待 1 秒后打印 “hello”，然后 <em>再次</em> 等待 2 秒后打印 “world”:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">say_after</span><span class="params">(delay, what)</span>:</span></span><br><span class="line">    <span class="keyword">await</span> asyncio.sleep(delay)</span><br><span class="line">    print(what)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">f"started at <span class="subst">&#123;time.strftime(<span class="string">'%X'</span>)&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">await</span> say_after(<span class="number">1</span>, <span class="string">'hello'</span>)</span><br><span class="line">    <span class="keyword">await</span> say_after(<span class="number">2</span>, <span class="string">'world'</span>)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">f"finished at <span class="subst">&#123;time.strftime(<span class="string">'%X'</span>)&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line">asyncio.run(main())</span><br></pre></td></tr></table></figure>
+<p>预期的输出:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">started at <span class="number">17</span>:<span class="number">13</span>:<span class="number">52</span></span><br><span class="line">hello</span><br><span class="line">world</span><br><span class="line">finished at <span class="number">17</span>:<span class="number">13</span>:<span class="number">55</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.create_task" target="_blank" rel="noopener"><code>asyncio.create_task()</code></a> 函数用来并发运行作为 asyncio <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.Task" target="_blank" rel="noopener"><code>任务</code></a> 的多个协程。 </p>
+<p>让我们修改以上示例，<em>并发</em> 运行两个 <code>say_after</code> 协程:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    task1 = asyncio.create_task(</span><br><span class="line">        say_after(<span class="number">1</span>, <span class="string">'hello'</span>))</span><br><span class="line"></span><br><span class="line">    task2 = asyncio.create_task(</span><br><span class="line">        say_after(<span class="number">2</span>, <span class="string">'world'</span>))</span><br><span class="line"></span><br><span class="line">    print(<span class="string">f"started at <span class="subst">&#123;time.strftime(<span class="string">'%X'</span>)&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Wait until both tasks are completed (should take</span></span><br><span class="line">    <span class="comment"># around 2 seconds.)</span></span><br><span class="line">    <span class="keyword">await</span> task1</span><br><span class="line">    <span class="keyword">await</span> task2</span><br><span class="line"></span><br><span class="line">    print(<span class="string">f"finished at <span class="subst">&#123;time.strftime(<span class="string">'%X'</span>)&#125;</span>"</span>)</span><br></pre></td></tr></table></figure>
+<p>注意，预期的输出显示代码段的运行时间比之前快了 1 秒:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">started at <span class="number">17</span>:<span class="number">14</span>:<span class="number">32</span></span><br><span class="line">hello</span><br><span class="line">world</span><br><span class="line">finished at <span class="number">17</span>:<span class="number">14</span>:<span class="number">34</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="可等待对象"><a href="#可等待对象" class="headerlink" title="可等待对象"></a><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#id3" target="_blank" rel="noopener">可等待对象</a></h2><p>如果一个对象可以在 <a href="https://docs.python.org/zh-cn/3.8/reference/expressions.html#await" target="_blank" rel="noopener"><code>await</code></a> 语句中使用，那么它就是 <strong>可等待</strong> 对象。许多 asyncio API 都被设计为接受可等待对象。</p>
+<p><em>可等待</em> 对象有三种主要类型: <strong>协程</strong>, <strong>任务</strong> 和 <strong>Future</strong>.</p>
+<p>协程</p>
+<p>Python 协程属于 <em>可等待</em> 对象，因此可以在其他协程中被等待:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">nested</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">42</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># Nothing happens if we just call "nested()".</span></span><br><span class="line">    <span class="comment"># A coroutine object is created but not awaited,</span></span><br><span class="line">    <span class="comment"># so it *won't run at all*.</span></span><br><span class="line">    nested()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Let's do it differently now and await it:</span></span><br><span class="line">    print(<span class="keyword">await</span> nested())  <span class="comment"># will print "42".</span></span><br><span class="line"></span><br><span class="line">asyncio.run(main())</span><br></pre></td></tr></table></figure>
+<p>重要</p>
+<p>在本文档中 “协程” 可用来表示两个紧密关联的概念:</p>
+<ul>
+<li><em>协程函数</em>: 定义形式为 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#async-def" target="_blank" rel="noopener"><code>async def</code></a> 的函数;</li>
+<li><p><em>协程对象</em>: 调用 <em>协程函数</em> 所返回的对象。</p>
+<p>asyncio 也支持旧式的 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio-generator-based-coro" target="_blank" rel="noopener">基于生成器的</a> 协程。 </p>
+</li>
+</ul>
+<p>任务</p>
+<p><em>任务</em> 被用来设置日程以便 <em>并发</em> 执行协程。</p>
+<p>当一个协程通过 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.create_task" target="_blank" rel="noopener"><code>asyncio.create_task()</code></a> 等函数被打包为一个 <em>任务</em>，该协程将自动排入日程准备立即运行:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">nested</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">42</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># Schedule nested() to run soon concurrently</span></span><br><span class="line">    <span class="comment"># with "main()".</span></span><br><span class="line">    task = asyncio.create_task(nested())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># "task" can now be used to cancel "nested()", or</span></span><br><span class="line">    <span class="comment"># can simply be awaited to wait until it is complete:</span></span><br><span class="line">    <span class="keyword">await</span> task</span><br><span class="line"></span><br><span class="line">asyncio.run(main())</span><br></pre></td></tr></table></figure>
+<p>Future 对象</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-future.html#asyncio.Future" target="_blank" rel="noopener"><code>Future</code></a> 是一种特殊的 <strong>低层级</strong> 可等待对象，表示一个异步操作的 <strong>最终结果</strong>。</p>
+<p>当一个 Future 对象 <em>被等待</em>，这意味着协程将保持等待直到该 Future 对象在其他地方操作完毕。</p>
+<p>在 asyncio 中需要 Future 对象以便允许通过 async/await 使用基于回调的代码。</p>
+<p>通常情况下 <strong>没有必要</strong> 在应用层级的代码中创建 Future 对象。</p>
+<p>Future 对象有时会由库和某些 asyncio API 暴露给用户，用作可等待对象:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">await</span> function_that_returns_a_future_object()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># this is also valid:</span></span><br><span class="line">    <span class="keyword">await</span> asyncio.gather(</span><br><span class="line">        function_that_returns_a_future_object(),</span><br><span class="line">        some_python_coroutine()</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+<p>一个很好的返回对象的低层级函数的示例是 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-eventloop.html#asyncio.loop.run_in_executor" target="_blank" rel="noopener"><code>loop.run_in_executor()</code></a>。</p>
+<h2 id="运行-asyncio-程序"><a href="#运行-asyncio-程序" class="headerlink" title="运行 asyncio 程序"></a><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#id4" target="_blank" rel="noopener">运行 asyncio 程序</a></h2><p> <code>asyncio.run</code>(<em>coro</em>, <em>**, </em>debug=False*) </p>
+<p>执行 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-coroutine" target="_blank" rel="noopener">coroutine</a> <em>coro</em> 并返回结果。</p>
+<p>此函数运行传入的协程，负责管理 asyncio 事件循环并 <em>完结异步生成器</em>。</p>
+<p>当有其他 asyncio 事件循环在同一线程中运行时，此函数不能被调用。</p>
+<p>如果 <em>debug</em> 为 <code>True</code>，事件循环将以调试模式运行。</p>
+<p>此函数总是会创建一个新的事件循环并在结束时关闭之。它应当被用作 asyncio 程序的主入口点，理想情况下应当只被调用一次。</p>
+<p>示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">await</span> asyncio.sleep(<span class="number">1</span>)</span><br><span class="line">    print(<span class="string">'hello'</span>)</span><br><span class="line"></span><br><span class="line">asyncio.run(main())</span><br></pre></td></tr></table></figure>
+<p> <em>3.7 新版功能.</em> </p>
+<blockquote>
+<p>  <code>asyncio.run()</code>源代码请移步至 <a href="https://github.com/python/cpython/tree/3.8/Lib/asyncio/runners.py" target="_blank" rel="noopener">Lib/asyncio/runners.py</a>.</p>
+</blockquote>
+<h2 id="创建任务"><a href="#创建任务" class="headerlink" title="创建任务"></a><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#id5" target="_blank" rel="noopener">创建任务</a></h2><ul>
+<li><p><code>asyncio.create_task</code>(<em>coro</em>, <em>**, </em>name=None*)</p>
+<p>将 <em>coro</em> <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#coroutine" target="_blank" rel="noopener">协程</a> 打包为一个 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.Task" target="_blank" rel="noopener"><code>Task</code></a> 排入日程准备执行。返回 Task 对象。</p>
+<p>If <em>name</em> is not <code>None</code>, it is set as the name of the task using <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.Task.set_name" target="_blank" rel="noopener"><code>Task.set_name()</code></a>.</p>
+<p>该任务会在 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-eventloop.html#asyncio.get_running_loop" target="_blank" rel="noopener"><code>get_running_loop()</code></a> 返回的循环中执行，如果当前线程没有在运行的循环则会引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#RuntimeError" target="_blank" rel="noopener"><code>RuntimeError</code></a>。</p>
+<p>此函数 <strong>在 Python 3.7 中被加入</strong>。在 Python 3.7 之前，可以改用低层级的 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-future.html#asyncio.ensure_future" target="_blank" rel="noopener"><code>asyncio.ensure_future()</code></a> 函数。</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">coro</span><span class="params">()</span>:</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line"><span class="comment"># In Python 3.7+</span></span><br><span class="line">task = asyncio.create_task(coro())</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment"># This works in all Python versions but is less readable</span></span><br><span class="line">task = asyncio.ensure_future(coro())</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><em>3.7 新版功能.</em></p>
+<p><em>在 3.8 版更改:</em> Added the <code>name</code> parameter.</p>
+<h2 id="休眠"><a href="#休眠" class="headerlink" title="休眠"></a><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#id6" target="_blank" rel="noopener">休眠</a></h2><ul>
+<li><p><em>coroutine</em> <code>asyncio.sleep</code>(<em>delay</em>, <em>result=None</em>, <em>**, </em>loop=None*)</p>
+<p>阻塞 <em>delay</em> 指定的秒数。</p>
+<p>如果指定了 <em>result</em>，则当协程完成时将其返回给调用者。</p>
+<p><code>sleep()</code> 总是会挂起当前任务，以允许其他任务运行。</p>
+<p><em>Deprecated since version 3.8, will be removed in version 3.10:</em> <em>loop</em> 形参。</p>
+<p>以下协程示例运行 5 秒，每秒显示一次当前日期:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">display_date</span><span class="params">()</span>:</span></span><br><span class="line">    loop = asyncio.get_running_loop()</span><br><span class="line">    end_time = loop.time() + <span class="number">5.0</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        print(datetime.datetime.now())</span><br><span class="line">        <span class="keyword">if</span> (loop.time() + <span class="number">1.0</span>) &gt;= end_time:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">await</span> asyncio.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">asyncio.run(display_date())</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="并发运行任务"><a href="#并发运行任务" class="headerlink" title="并发运行任务"></a><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#id7" target="_blank" rel="noopener">并发运行任务</a></h2><ul>
+<li><p><em>awaitable</em> <code>asyncio.gather</code>(*<em>aws</em>, <em>loop=None</em>, <em>return_exceptions=False</em>) </p>
+<p><em>并发</em> 运行 <em>aws</em> 序列中的 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio-awaitables" target="_blank" rel="noopener">可等待对象</a>。</p>
+<p>如果 <em>aws</em> 中的某个可等待对象为协程，它将自动作为一个任务加入日程。</p>
+<p>如果所有可等待对象都成功完成，结果将是一个由所有返回值聚合而成的列表。结果值的顺序与 <em>aws</em> 中可等待对象的顺序一致。</p>
+<p>如果 <em>return_exceptions</em> 为 <code>False</code> (默认)，所引发的首个异常会立即传播给等待 <code>gather()</code> 的任务。<em>aws</em> 序列中的其他可等待对象 <strong>不会被取消</strong> 并将继续运行。</p>
+<p>如果 <em>return_exceptions</em> 为 <code>True</code>，异常会和成功的结果一样处理，并聚合至结果列表。</p>
+<p>如果 <code>gather()</code> <em>被取消</em>，所有被提交 (尚未完成) 的可等待对象也会 <em>被取消</em>。</p>
+<p>如果 <em>aws</em> 序列中的任一 Task 或 Future 对象 <em>被取消</em>，它将被当作引发了 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-exceptions.html#asyncio.CancelledError" target="_blank" rel="noopener"><code>CancelledError</code></a> 一样处理 – 在此情况下 <code>gather()</code> 调用 <strong>不会</strong> 被取消。这是为了防止一个已提交的 Task/Future 被取消导致其他 Tasks/Future 也被取消。</p>
+<p><em>Deprecated since version 3.8, will be removed in version 3.10:</em> <em>loop</em> 形参。</p>
+<p>示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">factorial</span><span class="params">(name, number)</span>:</span></span><br><span class="line">    f = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, number + <span class="number">1</span>):</span><br><span class="line">        print(<span class="string">f"Task <span class="subst">&#123;name&#125;</span>: Compute factorial(<span class="subst">&#123;i&#125;</span>)..."</span>)</span><br><span class="line">        <span class="keyword">await</span> asyncio.sleep(<span class="number">1</span>)</span><br><span class="line">        f *= i</span><br><span class="line">    print(<span class="string">f"Task <span class="subst">&#123;name&#125;</span>: factorial(<span class="subst">&#123;number&#125;</span>) = <span class="subst">&#123;f&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># Schedule three calls *concurrently*:</span></span><br><span class="line">    <span class="keyword">await</span> asyncio.gather(</span><br><span class="line">        factorial(<span class="string">"A"</span>, <span class="number">2</span>),</span><br><span class="line">        factorial(<span class="string">"B"</span>, <span class="number">3</span>),</span><br><span class="line">        factorial(<span class="string">"C"</span>, <span class="number">4</span>),</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">asyncio.run(main())</span><br><span class="line"></span><br><span class="line"><span class="comment"># Expected output:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#     Task A: Compute factorial(2)...</span></span><br><span class="line"><span class="comment">#     Task B: Compute factorial(2)...</span></span><br><span class="line"><span class="comment">#     Task C: Compute factorial(2)...</span></span><br><span class="line"><span class="comment">#     Task A: factorial(2) = 2</span></span><br><span class="line"><span class="comment">#     Task B: Compute factorial(3)...</span></span><br><span class="line"><span class="comment">#     Task C: Compute factorial(3)...</span></span><br><span class="line"><span class="comment">#     Task B: factorial(3) = 6</span></span><br><span class="line"><span class="comment">#     Task C: Compute factorial(4)...</span></span><br><span class="line"><span class="comment">#     Task C: factorial(4) = 24</span></span><br></pre></td></tr></table></figure>
+<p><em>在 3.7 版更改:</em> 如果 <em>gather</em> 本身被取消，则无论 <em>return_exceptions</em> 取值为何，消息都会被传播。</p>
+</li>
+</ul>
+<h2 id="屏蔽取消操作"><a href="#屏蔽取消操作" class="headerlink" title="屏蔽取消操作"></a><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#id8" target="_blank" rel="noopener">屏蔽取消操作</a></h2><ul>
+<li><p><em>awaitable</em> <code>asyncio.shield</code>(<em>aw</em>, <em>**, </em>loop=None*) </p>
+<p>保护一个 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio-awaitables" target="_blank" rel="noopener">可等待对象</a> 防止其被 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.Task.cancel" target="_blank" rel="noopener"><code>取消</code></a>。</p>
+<p>如果 <em>aw</em> 是一个协程，它将自动作为任务加入日程。</p>
+<p>以下语句:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res = await shield(something())</span><br></pre></td></tr></table></figure>
+<p>相当于:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res = await something()</span><br></pre></td></tr></table></figure>
+<p><em>不同之处</em> 在于如果包含它的协程被取消，在 <code>something()</code> 中运行的任务不会被取消。从 <code>something()</code> 的角度看来，取消操作并没有发生。然而其调用者已被取消，因此 “await” 表达式仍然会引发 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-exceptions.html#asyncio.CancelledError" target="_blank" rel="noopener"><code>CancelledError</code></a>。</p>
+<p>如果通过其他方式取消 <code>something()</code> (例如在其内部操作) 则 <code>shield()</code> 也会取消。</p>
+<p>如果希望完全忽略取消操作 (不推荐) 则 <code>shield()</code> 函数需要配合一个 try/except 代码段，如下所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    res = await shield(something())</span><br><span class="line">except CancelledError:</span><br><span class="line">    res = None</span><br></pre></td></tr></table></figure>
+<p>从 3.8版本加入，将于 3.10版本移除<em>loop</em> 形参。</p>
+</li>
+</ul>
+<h2 id="超时"><a href="#超时" class="headerlink" title="超时"></a><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#id9" target="_blank" rel="noopener">超时</a></h2><ul>
+<li><p><em>coroutine</em> <code>asyncio.wait_for</code>(<em>aw</em>, <em>timeout</em>, <em>**, </em>loop=None*) </p>
+<p>等待 <em>aw</em> <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio-awaitables" target="_blank" rel="noopener">可等待对象</a> 完成，指定 timeout 秒数后超时。</p>
+<p>如果 <em>aw</em> 是一个协程，它将自动作为任务加入日程。</p>
+<p><em>timeout</em> 可以为 <code>None</code>，也可以为 float 或 int 型数值表示的等待秒数。如果 <em>timeout</em> 为 <code>None</code>，则等待直到完成。</p>
+<p>如果发生超时，任务将取消并引发 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-exceptions.html#asyncio.TimeoutError" target="_blank" rel="noopener"><code>asyncio.TimeoutError</code></a>.</p>
+<p>要避免任务 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.Task.cancel" target="_blank" rel="noopener"><code>取消</code></a>，可以加上 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.shield" target="_blank" rel="noopener"><code>shield()</code></a>。</p>
+<p>函数将等待直到目标对象确实被取消，所以总等待时间可能超过 <em>timeout</em> 指定的秒数。</p>
+<p>如果等待被取消，则 <em>aw</em> 指定的对象也会被取消。</p>
+<p><em>Deprecated since version 3.8, will be removed in version 3.10:</em> <em>loop</em> 形参。</p>
+<p>示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">eternity</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># Sleep for one hour</span></span><br><span class="line">    <span class="keyword">await</span> asyncio.sleep(<span class="number">3600</span>)</span><br><span class="line">    print(<span class="string">'yay!'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># Wait for at most 1 second</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">await</span> asyncio.wait_for(eternity(), timeout=<span class="number">1.0</span>)</span><br><span class="line">    <span class="keyword">except</span> asyncio.TimeoutError:</span><br><span class="line">        print(<span class="string">'timeout!'</span>)</span><br><span class="line"></span><br><span class="line">asyncio.run(main())</span><br><span class="line"></span><br><span class="line"><span class="comment"># Expected output:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#     timeout!</span></span><br></pre></td></tr></table></figure>
+<p><em>在 3.7 版更改:</em> 当 <em>aw</em> 因超时被取消，<code>wait_for</code> 会等待 <em>aw</em> 被取消。之前版本则将立即引发 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-exceptions.html#asyncio.TimeoutError" target="_blank" rel="noopener"><code>asyncio.TimeoutError</code></a>。</p>
+</li>
+</ul>
+<h2 id="简单等待"><a href="#简单等待" class="headerlink" title="简单等待"></a><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#id10" target="_blank" rel="noopener">简单等待</a></h2><ul>
+<li><p><em>coroutine</em> <code>asyncio.wait</code>(<em>aws</em>, <em>**, </em>loop=None<em>, </em>timeout=None<em>, </em>return_when=ALL_COMPLETED*) </p>
+<p>并发运行 <em>aws</em> 指定的 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio-awaitables" target="_blank" rel="noopener">可等待对象</a> 并阻塞线程直到满足 <em>return_when</em> 指定的条件。</p>
+<p>返回两个 Task/Future 集合: <code>(done, pending)</code>。</p>
+<p>用法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">done, pending = await asyncio.wait(aws)</span><br></pre></td></tr></table></figure>
+<p>如指定 <em>timeout</em> (float 或 int 类型) 则它将被用于控制返回之前等待的最长秒数。</p>
+<p>请注意此函数不会引发 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-exceptions.html#asyncio.TimeoutError" target="_blank" rel="noopener"><code>asyncio.TimeoutError</code></a>。当超时发生时，未完成的 Future 或 Task 将在指定秒数后被返回。</p>
+<p><em>return_when</em> 指定此函数应在何时返回。它必须为以下常数之一:</p>
+<p>| 常数              | 描述                                                         |<br>| :—————- | :———————————————————– |<br>| <code>FIRST_COMPLETED</code> | 函数将在任意可等待对象结束或取消时返回。                     |<br>| <code>FIRST_EXCEPTION</code> | 函数将在任意可等待对象因引发异常而结束时返回。当没有引发任何异常时它就相当于 <code>ALL_COMPLETED</code>。 |<br>| <code>ALL_COMPLETED</code>   | 函数将在所有可等待对象结束或取消时返回。                     |</p>
+<p>与 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.wait_for" target="_blank" rel="noopener"><code>wait_for()</code></a> 不同，<code>wait()</code> 在超时发生时不会取消可等待对象。</p>
+<p><em>3.8 版后已移除:</em> 如果 <em>aws</em> 中的某个可等待对象为协程，它将自动作为任务加入日程。直接向 <code>wait()</code> 传入协程对象已弃用，因为这会导致 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio-example-wait-coroutine" target="_blank" rel="noopener">令人迷惑的行为</a>。</p>
+<p>从 3.8版本加入，将于 3.10版本移除<em>loop</em> 形参。</p>
+<blockquote>
+<p>注解</p>
+<p><code>wait()</code> 会自动将协程作为任务加入日程，以后将以 <code>(done, pending)</code> 集合形式返回显式创建的任务对象。因此以下代码并不会有预期的行为:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">&gt;     <span class="keyword">return</span> <span class="number">42</span></span><br><span class="line">&gt; </span><br><span class="line">&gt; coro = foo()</span><br><span class="line">&gt; done, pending = <span class="keyword">await</span> asyncio.wait(&#123;coro&#125;)</span><br><span class="line">&gt; </span><br><span class="line">&gt; <span class="keyword">if</span> coro <span class="keyword">in</span> done:</span><br><span class="line">&gt;     <span class="comment"># This branch will never be run!</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>以上代码段的修正方法如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">&gt;     <span class="keyword">return</span> <span class="number">42</span></span><br><span class="line">&gt; </span><br><span class="line">&gt; task = asyncio.create_task(foo())</span><br><span class="line">&gt; done, pending = <span class="keyword">await</span> asyncio.wait(&#123;task&#125;)</span><br><span class="line">&gt; </span><br><span class="line">&gt; <span class="keyword">if</span> task <span class="keyword">in</span> done:</span><br><span class="line">&gt;     <span class="comment"># Everything will work as expected now.</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+<p>​     <em>3.8 版后已移除:</em> 直接向 <code>wait()</code> 传入协程对象的方式已弃用。 </p>
+<ul>
+<li><p><code>asyncio.as_completed</code>(<em>aws</em>, <em>**, </em>loop=None<em>, </em>timeout=None*) </p>
+<p>并发地运行 <em>aws</em> 集合中的 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio-awaitables" target="_blank" rel="noopener">可等待对象</a>。返回一个 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-future.html#asyncio.Future" target="_blank" rel="noopener"><code>Future</code></a> 对象的迭代器。返回的每个 Future 对象代表来自剩余可等待对象集合的最早结果。</p>
+<p>如果在所有 Future 对象完成前发生超时则将引发 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-exceptions.html#asyncio.TimeoutError" target="_blank" rel="noopener"><code>asyncio.TimeoutError</code></a>。</p>
+<p><em>Deprecated since version 3.8, will be removed in version 3.10:</em> <em>loop</em> 形参。</p>
+<p>示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> as_completed(aws):</span><br><span class="line">    earliest_result = <span class="keyword">await</span> f</span><br><span class="line">    <span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="来自其他线程的日程安排"><a href="#来自其他线程的日程安排" class="headerlink" title="来自其他线程的日程安排"></a><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#id11" target="_blank" rel="noopener">来自其他线程的日程安排</a></h2><ul>
+<li><p><code>asyncio.run_coroutine_threadsafe</code>(<em>coro</em>, <em>loop</em>)</p>
+<p>向指定事件循环提交一个协程。线程安全。</p>
+<p>返回一个 <a href="https://docs.python.org/zh-cn/3.8/library/concurrent.futures.html#concurrent.futures.Future" target="_blank" rel="noopener"><code>concurrent.futures.Future</code></a> 以等待来自其他 OS 线程的结果。</p>
+<p>此函数应该从另一个 OS 线程中调用，而非事件循环运行所在线程。示例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Create a coroutine</span><br><span class="line">coro = asyncio.sleep(1, result=3)</span><br><span class="line"></span><br><span class="line"># Submit the coroutine to a given loop</span><br><span class="line">future = asyncio.run_coroutine_threadsafe(coro, loop)</span><br><span class="line"></span><br><span class="line"># Wait for the result with an optional timeout argument</span><br><span class="line">assert future.result(timeout) == 3</span><br></pre></td></tr></table></figure>
+<p>如果在协程内产生了异常，将会通知返回的 Future 对象。它也可被用来取消事件循环中的任务:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">try:</span><br><span class="line">    result = future.result(timeout)</span><br><span class="line">except asyncio.TimeoutError:</span><br><span class="line">    print(&apos;The coroutine took too long, cancelling the task...&apos;)</span><br><span class="line">    future.cancel()</span><br><span class="line">except Exception as exc:</span><br><span class="line">    print(f&apos;The coroutine raised an exception: &#123;exc!r&#125;&apos;)</span><br><span class="line">else:</span><br><span class="line">    print(f&apos;The coroutine returned: &#123;result!r&#125;&apos;)</span><br></pre></td></tr></table></figure>
+<p>查看 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-dev.html#asyncio-multithreading" target="_blank" rel="noopener">并发和多线程</a> 章节的文档。</p>
+<p>不同与其他 asyncio 函数，此函数要求显式地传入 <em>loop</em> 参数。</p>
+<p><em>3.5.1 新版功能.</em></p>
+</li>
+</ul>
+<h2 id="内省"><a href="#内省" class="headerlink" title="内省"></a><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#id12" target="_blank" rel="noopener">内省</a></h2><ul>
+<li><p><code>asyncio.current_task</code>(<em>loop=None</em>)</p>
+<p>返回当前运行的 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.Task" target="_blank" rel="noopener"><code>Task</code></a> 实例，如果没有正在运行的任务则返回 <code>None</code>。如果 <em>loop</em> 为 <code>None</code> 则会使用 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-eventloop.html#asyncio.get_running_loop" target="_blank" rel="noopener"><code>get_running_loop()</code></a> 获取当前事件循环。<em>3.7 新版功能.</em></p>
+</li>
+<li><p><code>asyncio.all_tasks</code>(<em>loop=None</em>)</p>
+<p>返回事件循环所运行的未完成的 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.Task" target="_blank" rel="noopener"><code>Task</code></a> 对象的集合。如果 <em>loop</em> 为 <code>None</code>，则会使用 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-eventloop.html#asyncio.get_running_loop" target="_blank" rel="noopener"><code>get_running_loop()</code></a> 获取当前事件循环。<em>3.7 新版功能.</em></p>
+</li>
+</ul>
+<h2 id="Task-对象"><a href="#Task-对象" class="headerlink" title="Task 对象"></a><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#id13" target="_blank" rel="noopener">Task 对象</a></h2><ul>
+<li><p><em>class</em> <code>asyncio.Task</code>(<em>coro</em>, <em>**, </em>loop=None<em>, </em>name=None*)</p>
+<p>一个与 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-future.html#asyncio.Future" target="_blank" rel="noopener"><code>Future 类似</code></a> 的对象，可运行 Python <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#coroutine" target="_blank" rel="noopener">协程</a>。非线程安全。</p>
+<p>Task 对象被用来在事件循环中运行协程。如果一个协程在等待一个 Future 对象，Task 对象会挂起该协程的执行并等待该 Future 对象完成。当该 Future 对象 <em>完成</em>，被打包的协程将恢复执行。</p>
+<p>事件循环使用协同日程调度: 一个事件循环每次运行一个 Task 对象。而一个 Task 对象会等待一个 Future 对象完成，该事件循环会运行其他 Task、回调或执行 IO 操作。</p>
+<p>使用高层级的 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.create_task" target="_blank" rel="noopener"><code>asyncio.create_task()</code></a> 函数来创建 Task 对象，也可用低层级的 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-eventloop.html#asyncio.loop.create_task" target="_blank" rel="noopener"><code>loop.create_task()</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-future.html#asyncio.ensure_future" target="_blank" rel="noopener"><code>ensure_future()</code></a> 函数。不建议手动实例化 Task 对象。</p>
+<p>要取消一个正在运行的 Task 对象可使用 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.Task.cancel" target="_blank" rel="noopener"><code>cancel()</code></a> 方法。调用此方法将使该 Task 对象抛出一个 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-exceptions.html#asyncio.CancelledError" target="_blank" rel="noopener"><code>CancelledError</code></a> 异常给打包的协程。如果取消期间一个协程正在等待一个 Future 对象，该 Future 对象也将被取消。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.Task.cancelled" target="_blank" rel="noopener"><code>cancelled()</code></a> 可被用来检测 Task 对象是否被取消。如果打包的协程没有抑制 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-exceptions.html#asyncio.CancelledError" target="_blank" rel="noopener"><code>CancelledError</code></a> 异常并且确实被取消，该方法将返回 <code>True</code>。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.Task" target="_blank" rel="noopener"><code>asyncio.Task</code></a> 从 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-future.html#asyncio.Future" target="_blank" rel="noopener"><code>Future</code></a> 继承了其除 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-future.html#asyncio.Future.set_result" target="_blank" rel="noopener"><code>Future.set_result()</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-future.html#asyncio.Future.set_exception" target="_blank" rel="noopener"><code>Future.set_exception()</code></a> 以外的所有 API。</p>
+<p>Task 对象支持 <a href="https://docs.python.org/zh-cn/3.8/library/contextvars.html#module-contextvars" target="_blank" rel="noopener"><code>contextvars</code></a> 模块。当一个 Task 对象被创建，它将复制当前上下文，然后在复制的上下文中运行其协程。</p>
+<p><em>在 3.7 版更改:</em> 加入对 <a href="https://docs.python.org/zh-cn/3.8/library/contextvars.html#module-contextvars" target="_blank" rel="noopener"><code>contextvars</code></a> 模块的支持。</p>
+<p><em>在 3.8 版更改:</em> Added the <code>name</code> parameter.</p>
+<p><em>Deprecated since version 3.8, will be removed in version 3.10:</em> <em>loop</em> 形参。</p>
+<ul>
+<li><p><code>cancel</code>()</p>
+<p>请求取消 Task 对象。这将安排在下一轮事件循环中抛出一个 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-exceptions.html#asyncio.CancelledError" target="_blank" rel="noopener"><code>CancelledError</code></a> 异常给被封包的协程。协程在之后有机会进行清理甚至使用 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#try" target="_blank" rel="noopener"><code>try</code></a> … … <code>except CancelledError</code> … <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#finally" target="_blank" rel="noopener"><code>finally</code></a> 代码块抑制异常来拒绝请求。不同于 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-future.html#asyncio.Future.cancel" target="_blank" rel="noopener"><code>Future.cancel()</code></a>，<a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.Task.cancel" target="_blank" rel="noopener"><code>Task.cancel()</code></a> 不保证 Task 会被取消，虽然抑制完全取消并不常见，也很不鼓励这样做。以下示例演示了协程是如何侦听取消请求的:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">cancel_me</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'cancel_me(): before sleep'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># Wait for 1 hour</span></span><br><span class="line">        <span class="keyword">await</span> asyncio.sleep(<span class="number">3600</span>)</span><br><span class="line">    <span class="keyword">except</span> asyncio.CancelledError:</span><br><span class="line">        print(<span class="string">'cancel_me(): cancel sleep'</span>)</span><br><span class="line">        <span class="keyword">raise</span></span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        print(<span class="string">'cancel_me(): after sleep'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># Create a "cancel_me" Task</span></span><br><span class="line">    task = asyncio.create_task(cancel_me())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Wait for 1 second</span></span><br><span class="line">    <span class="keyword">await</span> asyncio.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    task.cancel()</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">await</span> task</span><br><span class="line">    <span class="keyword">except</span> asyncio.CancelledError:</span><br><span class="line">        print(<span class="string">"main(): cancel_me is cancelled now"</span>)</span><br><span class="line"></span><br><span class="line">asyncio.run(main())</span><br><span class="line"></span><br><span class="line"><span class="comment"># Expected output:</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#     cancel_me(): before sleep</span></span><br><span class="line"><span class="comment">#     cancel_me(): cancel sleep</span></span><br><span class="line"><span class="comment">#     cancel_me(): after sleep</span></span><br><span class="line"><span class="comment">#     main(): cancel_me is cancelled now</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>cancelled</code>()</p>
+<p>如果 Task 对象 <em>被取消</em> 则返回 <code>True</code>。当使用 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.Task.cancel" target="_blank" rel="noopener"><code>cancel()</code></a> 发出取消请求时 Task 会被 <em>取消</em>，其封包的协程将传播被抛入的 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-exceptions.html#asyncio.CancelledError" target="_blank" rel="noopener"><code>CancelledError</code></a> 异常。</p>
+</li>
+<li><p><code>done</code>()</p>
+<p>如果 Task 对象 <em>已完成</em> 则返回 <code>True</code>。当 Task 所封包的协程返回一个值、引发一个异常或 Task 本身被取消时，则会被认为 <em>已完成</em>。</p>
+</li>
+<li><p><code>result</code>()</p>
+<p>返回 Task 的结果。如果 Task 对象 <em>已完成</em>，其封包的协程的结果会被返回 (或者当协程引发异常时，该异常会被重新引发。)如果 Task 对象 <em>被取消</em>，此方法会引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-exceptions.html#asyncio.CancelledError" target="_blank" rel="noopener"><code>CancelledError</code></a> 异常。如果 Task 对象的结果还不可用，此方法会引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-exceptions.html#asyncio.InvalidStateError" target="_blank" rel="noopener"><code>InvalidStateError</code></a> 异常。</p>
+</li>
+<li><p><code>exception</code>()</p>
+<p>返回 Task 对象的异常。如果所封包的协程引发了一个异常，该异常将被返回。如果所封包的协程正常返回则该方法将返回 <code>None</code>。如果 Task 对象 <em>被取消</em>，此方法会引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-exceptions.html#asyncio.CancelledError" target="_blank" rel="noopener"><code>CancelledError</code></a> 异常。如果 Task 对象尚未 <em>完成</em>，此方法将引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-exceptions.html#asyncio.InvalidStateError" target="_blank" rel="noopener"><code>InvalidStateError</code></a> 异常。</p>
+</li>
+<li><p><code>add_done_callback</code>(<em>callback</em>, <em>**, </em>context=None*)</p>
+<p>添加一个回调，将在 Task 对象 <em>完成</em> 时被运行。此方法应该仅在低层级的基于回调的代码中使用。要了解更多细节请查看 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-future.html#asyncio.Future.add_done_callback" target="_blank" rel="noopener"><code>Future.add_done_callback()</code></a> 的文档。</p>
+</li>
+<li><p><code>remove_done_callback</code>(<em>callback</em>)</p>
+<p>从回调列表中移除 <em>callback</em> 指定的回调。此方法应该仅在低层级的基于回调的代码中使用。要了解更多细节请查看 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-future.html#asyncio.Future.remove_done_callback" target="_blank" rel="noopener"><code>Future.remove_done_callback()</code></a> 的文档。</p>
+</li>
+<li><p><code>get_stack</code>(<em>**, </em>limit=None*)</p>
+<p>返回此 Task 对象的栈框架列表。如果所封包的协程未完成，这将返回其挂起所在的栈。如果协程已成功完成或被取消，这将返回一个空列表。如果协程被一个异常终止，这将返回回溯框架列表。框架总是从按从旧到新排序。每个被挂起的协程只返回一个栈框架。可选的 <em>limit</em> 参数指定返回框架的数量上限；默认返回所有框架。返回列表的顺序要看是返回一个栈还是一个回溯：栈返回最新的框架，回溯返回最旧的框架。(这与 traceback 模块的行为保持一致。)</p>
+</li>
+<li><p><code>print_stack</code>(<em>**, </em>limit=None<em>, </em>file=None*)</p>
+<p>打印此 Task 对象的栈或回溯。此方法产生的输出类似于 traceback 模块通过 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.Task.get_stack" target="_blank" rel="noopener"><code>get_stack()</code></a> 所获取的框架。<em>limit</em> 参数会直接传递给 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.Task.get_stack" target="_blank" rel="noopener"><code>get_stack()</code></a>。<em>file</em> 参数是输出所写入的 I/O 流；默认情况下输出会写入 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#sys.stderr" target="_blank" rel="noopener"><code>sys.stderr</code></a>。</p>
+</li>
+<li><p><code>get_coro</code>()</p>
+<p>返回绑定到 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.Task" target="_blank" rel="noopener"><code>Task</code></a>.的协程对象。<em>3.8 新版功能.</em></p>
+</li>
+<li><p><code>get_name</code>()</p>
+<p>返回Task 名字。如果没有显式分配给Task一个名字,则默认的异步Task将分配给默认的生成的名字。<em>3.8 新版功能.</em></p>
+</li>
+<li><p><code>set_name</code>(<em>value</em>)</p>
+<p>设置Task名字。参数值可以是任意数据类型,都将被转换成字符串。默认的Task实现，可以通过在task对象中实现 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#repr" target="_blank" rel="noopener"><code>repr()</code></a>函数显式输出。<em>3.8 新版功能.</em></p>
+</li>
+<li><p><em>classmethod</em> <code>all_tasks</code>(<em>loop=None</em>)</p>
+<p>返回一个事件循环中所有任务的集合。默认情况下将返回当前事件循环中所有任务。如果 <em>loop</em> 为 <code>None</code>，则会使用 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-eventloop.html#asyncio.get_event_loop" target="_blank" rel="noopener"><code>get_event_loop()</code></a> 函数来获取当前事件循环。从3.7版本就被废弃,3.9版本将会被移除。尽量不要作为一个task方法来使用,建议使用 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.all_tasks" target="_blank" rel="noopener"><code>asyncio.all_tasks()</code></a> 代替。</p>
+</li>
+<li><p><em>classmethod</em> <code>current_task</code>(<em>loop=None</em>)</p>
+<p>返回当前运行任务或 <code>None</code>。如果 <em>loop</em> 为 <code>None</code>，则会使用 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-eventloop.html#asyncio.get_event_loop" target="_blank" rel="noopener"><code>get_event_loop()</code></a> 函数来获取当前事件循环。</p>
+<p>从3.7版本就被废弃,3.9版本将会被移除。尽量不要作为一个task方法来使用,建议使用 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.current_task" target="_blank" rel="noopener"><code>asyncio.current_task()</code></a> 代替。</p>
+</li>
+</ul>
+<h2 id="基于生成器的协程"><a href="#基于生成器的协程" class="headerlink" title="基于生成器的协程"></a><a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#id14" target="_blank" rel="noopener">基于生成器的协程</a></h2><blockquote>
+<p>对基于生成器的协程的支持 <strong>已弃用</strong> 并计划在 Python 3.10 中移除。</p>
+</blockquote>
+<p>基于生成器的协程是 async/await 语法的前身。它们是使用 <code>yield from</code> 语句创建的 Python 生成器，可以等待 Future 和其他协程。</p>
+<p>基于生成器的协程应该使用 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.coroutine" target="_blank" rel="noopener"><code>@asyncio.coroutine</code></a> 装饰，虽然这并非强制。</p>
+<ul>
+<li><p><a href="mailto:`@asyncio.coroutine" target="_blank" rel="noopener">`@asyncio.coroutine</a>`</p>
+<p>用来标记基于生成器的协程的装饰器。此装饰器使得旧式的基于生成器的协程能与 async/await 代码相兼容:</p>
+<p>此装饰器使得旧式的基于生成器的协程能与 async/await 代码相兼容:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@asyncio.coroutine</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">old_style_coroutine</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> asyncio.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">await</span> old_style_coroutine()</span><br></pre></td></tr></table></figure>
+<p>此装饰器不应该被用于 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#async-def" target="_blank" rel="noopener"><code>async def</code></a> 协程。</p>
+<p> 从3.8版本被废弃, 将于3.10版本移除:* 使用 <a href="https://docs.python.org/zh-cn/3.8/reference/compound_stmts.html#async-def" target="_blank" rel="noopener"><code>async def</code></a> 代替。</p>
+</li>
+<li><p><code>asyncio.iscoroutine</code>(<em>obj</em>)</p>
+<p>如果 <em>obj</em> 是一个 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#coroutine" target="_blank" rel="noopener">协程对象</a> 则返回 <code>True</code>。此方法不同于 <a href="https://docs.python.org/zh-cn/3.8/library/inspect.html#inspect.iscoroutine" target="_blank" rel="noopener"><code>inspect.iscoroutine()</code></a> 因为它对基于生成器的协程返回 <code>True</code>。</p>
+</li>
+<li><p><code>asyncio.iscoroutinefunction</code>(<em>func</em>)</p>
+<p>如果 <em>func</em> 是一个 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#coroutine" target="_blank" rel="noopener">协程函数</a> 则返回 <code>True</code>。此方法不同于 <a href="https://docs.python.org/zh-cn/3.8/library/inspect.html#inspect.iscoroutinefunction" target="_blank" rel="noopener"><code>inspect.iscoroutinefunction()</code></a> 因为它对以 <a href="https://docs.python.org/zh-cn/3.8/library/asyncio-task.html#asyncio.coroutine" target="_blank" rel="noopener"><code>@coroutine</code></a> 装饰的基于生成器的协程函数返回 <code>True</code>。</p>
+</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>转自 <a href="https://www.zhihu.com/question/35139020" target="_blank" rel="noopener">python协程</a></p>
+<p>作者：侠三十六</p>
+<p><strong>协程</strong></p>
+<p>首先要明确，线程和进程都是系统帮咱们开辟的，不管是thread还是process他内部都是调用的系统的API,而对于协程来说它和系统毫无关系;</p>
+<p>协程不同于线程的是，线程是抢占式的调度，而协程是协同式的调度，也就是说，协程需要自己做调度。</p>
+<p>他就和程序员有关系，对于线程和进程来说，调度是由CPU来决定调度的;</p>
+<p>对于协程来说，程序员就是上帝，你想让谁执行到哪里他就执行到哪里;</p>
+<p>协程存在的意义：对于多线程应用，CPU通过切片的方式来切换线程间的执行，线程切换时需要耗时（保存状态，下次继续）。协程，则只使用一个线程，在一个线程中规定某个代码块执行顺序。</p>
+<p><strong>适用场景：</strong>其实在其他语言中，协程的其实是意义不大的多线程即可已解决I/O的问题，但是在python因为他有GIL（Global Interpreter Lock 全局解释器锁 ）在同一时间只有一个线程在工作，所以：如果一个线程里面I/O操作特别多，协程就比较适用;</p>
+<p>协程，又称微线程，纤程。英文名Coroutine。一句话说明什么是线程：协程是一种用户态的轻量级线程。</p>
+<p>协程拥有自己的寄存器上下文和栈。协程调度切换时，将寄存器上下文和栈保存到其他地方，在切回来的时候，恢复先前保存的寄存器上下文和栈。因此：</p>
+<p>协程能保留上一次调用时的状态（即所有局部状态的一个特定组合），每次过程重入时，就相当于进入上一次调用的状态，换种说法：进入上一次离开时所处逻辑流的位置。</p>
+<p><strong>协程的好处：</strong></p>
+<p>无需线程上下文切换的开销</p>
+<p>无需原子操作锁定及同步的开销</p>
+<p>方便切换控制流，简化编程模型</p>
+<p>高并发+高扩展性+低成本：一个CPU支持上万的协程都不是问题。所以很适合用于高并发处理。</p>
+<p><strong>缺点：</strong></p>
+<p>无法利用多核资源：协程的本质是个单线程,它不能同时将 单个CPU 的多个核用上,协程需要和进程配合才能运行在多CPU上.当然我们日常所编写的绝大部分应用都没有这个必要，除非是cpu密集型应用。</p>
+<p>进行阻塞（Blocking）操作（如IO时）会阻塞掉整个程序</p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/02/12/python-standard-library-coroutines/" title="python standard library coroutines">https://pinghailinfeng.gitee.io/2020/02/12/python-standard-library-coroutines/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/coroutines/" rel="tag"># coroutines</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/11/python-standard-library-weakref/" rel="next" title="python standard library weakref">
+                <i class="fa fa-chevron-left"></i> python standard library weakref
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/13/python-standard-library-tempfile/" rel="prev" title="python standard library tempfile">
+                python standard library tempfile <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">135</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">154</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-coroutines-协程"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 coroutines 协程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#协程"><span class="nav-number">1.1.</span> <span class="nav-text">协程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可等待对象"><span class="nav-number">1.2.</span> <span class="nav-text">可等待对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行-asyncio-程序"><span class="nav-number">1.3.</span> <span class="nav-text">运行 asyncio 程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建任务"><span class="nav-number">1.4.</span> <span class="nav-text">创建任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#休眠"><span class="nav-number">1.5.</span> <span class="nav-text">休眠</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发运行任务"><span class="nav-number">1.6.</span> <span class="nav-text">并发运行任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#屏蔽取消操作"><span class="nav-number">1.7.</span> <span class="nav-text">屏蔽取消操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#超时"><span class="nav-number">1.8.</span> <span class="nav-text">超时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单等待"><span class="nav-number">1.9.</span> <span class="nav-text">简单等待</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#来自其他线程的日程安排"><span class="nav-number">1.10.</span> <span class="nav-text">来自其他线程的日程安排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内省"><span class="nav-number">1.11.</span> <span class="nav-text">内省</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Task-对象"><span class="nav-number">1.12.</span> <span class="nav-text">Task 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于生成器的协程"><span class="nav-number">1.13.</span> <span class="nav-text">基于生成器的协程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">1.14.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2020/">2020</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2to3/">2to3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tkinter/">Tkinter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">_thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/argparse/">argparse</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atexit/">atexit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/code/">code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dis/">dis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doctest/">doctest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dom/">dom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp32/">esp32</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esptool/">esptool</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fileinput/">fileinput</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/">futures</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keyword/">keyword</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lite-server/">lite-server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micorpython/">micorpython</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micropython/">micropython</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minidom/">minidom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modulefinder/">modulefinder</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/others/">others</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwd/">pwd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">89</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re/">re</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/readline/">readline</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sax/">sax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sched/">sched</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/select/">select</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selectors/">selectors</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standar-library/">standar_library</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">78</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/">turtle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/">typescript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uPycraft/">uPycraft</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unittest/">unittest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/">venv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webrepl/">webrepl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/">xml</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环/">循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感悟/">感悟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化测试/">自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">787k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">11:55</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

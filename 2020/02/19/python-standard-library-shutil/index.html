@@ -1,0 +1,2045 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 shutil 高阶文件操作">
+<meta name="keywords" content="python,standard_library,shutil">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library shutil">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/02/19/python-standard-library-shutil/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 shutil 高阶文件操作">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200219python3_sheet.png?raw=true">
+<meta property="og:updated_time" content="2022-08-18T08:03:08.593Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library shutil">
+<meta name="twitter:description" content="python 标准库 shutil 高阶文件操作">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20200219python3_sheet.png?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/02/19/python-standard-library-shutil/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library shutil | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/02/19/python-standard-library-shutil/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library shutil
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-19 21:24:47" itemprop="dateCreated datePublished" datetime="2020-02-19T21:24:47+08:00">2020-02-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-08-18 16:03:08" itemprop="dateModified" datetime="2022-08-18T16:03:08+08:00">2022-08-18</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">18k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">17 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-shutil-高阶文件操作"><a href="#python-标准库-shutil-高阶文件操作" class="headerlink" title="python 标准库 shutil 高阶文件操作"></a>python 标准库 shutil 高阶文件操作</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200219python3_sheet.png?raw=true" alt></p>
+<a id="more"></a>
+<p>收集了一些网上找到的学习python的资源,分享给大家。</p>
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p><strong>源代码：</strong> <a href="https://github.com/python/cpython/tree/3.8/Lib/shutil.py" target="_blank" rel="noopener">Lib/shutil.py</a></p>
+<hr>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#module-shutil" target="_blank" rel="noopener"><code>shutil</code></a> 模块提供了一系列对文件和文件集合的高阶操作。 特别是提供了一些支持文件拷贝和删除的函数。 对于单个文件的操作，请参阅 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#module-os" target="_blank" rel="noopener"><code>os</code></a> 模块。</p>
+<blockquote>
+<p>警告：即便是高阶文件拷贝函数 (<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy" target="_blank" rel="noopener"><code>shutil.copy()</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy2" target="_blank" rel="noopener"><code>shutil.copy2()</code></a>) 也无法拷贝所有的文件元数据。</p>
+<p>在 POSIX 平台上，这意味着将丢失文件所有者和组以及 ACL 数据。 在 Mac OS 上，资源钩子和其他元数据不被使用。 这意味着将丢失这些资源并且文件类型和创建者代码将不正确。 在 Windows 上，将不会拷贝文件所有者、ACL 和替代数据流。</p>
+</blockquote>
+<h2 id="目录和文件操作"><a href="#目录和文件操作" class="headerlink" title="目录和文件操作"></a>目录和文件操作</h2><ul>
+<li><p><code>shutil.copyfileobj</code>(<em>fsrc</em>, <em>fdst</em>[, <em>length</em>])</p>
+<p>将文件类对象 <em>fsrc</em> 的内容拷贝到文件类对象 <em>fdst</em>。 整数值 <em>length</em> 如果给出则为缓冲区大小。 特别地， <em>length</em> 为负值表示拷贝数据时不对源数据进行分块循环处理；默认情况下会分块读取数据以避免不受控制的内存消耗。 请注意如果 <em>fsrc</em> 对象的当前文件位置不为 0，则只有从当前文件位置到文件末尾的内容会被拷贝。</p>
+</li>
+<li><p><code>shutil.copyfile</code>(<em>src</em>, <em>dst</em>, <em>**, </em>follow_symlinks=True*)</p>
+<p>将名为 <em>src</em> 的文件的内容（不包括元数据）拷贝到名为 <em>dst</em> 的文件并以尽可能高效的方式返回 <em>dst</em>。 <em>src</em> 和 <em>dst</em> 均为路径类对象或以字符串形式给出的路径名。<em>dst</em> 必须是完整的目标文件名；对于接受目标目录路径的拷贝请参见 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy" target="_blank" rel="noopener"><code>copy()</code></a>。 如果 <em>src</em> 和 <em>dst</em> 指定了同一个文件，则将引发 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.SameFileError" target="_blank" rel="noopener"><code>SameFileError</code></a>。目标位置必须是可写的；否则将引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a> 异常。 如果 <em>dst</em> 已经存在，它将被替换。 特殊文件如字符或块设备以及管道无法用此函数来拷贝。如果 <em>follow_symlinks</em> 为假值且 <em>src</em> 为符号链接，则将创建一个新的符号链接而不是拷贝 <em>src</em> 所指向的文件。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.copyfile</code> 附带参数 <code>src</code>, <code>dst</code>。<em>在 3.3 版更改:</em> 曾经是引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#IOError" target="_blank" rel="noopener"><code>IOError</code></a> 而不是 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OSError" target="_blank" rel="noopener"><code>OSError</code></a>。 增加了 <em>follow_symlinks</em> 参数。 现在是返回 <em>dst</em>。<em>在 3.4 版更改:</em> 引发 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.SameFileError" target="_blank" rel="noopener"><code>SameFileError</code></a> 而不是 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.Error" target="_blank" rel="noopener"><code>Error</code></a>。 由于前者是后者的子类，此改变是向后兼容的。<em>在 3.8 版更改:</em> 可能会在内部使用平台专属的快速拷贝系统调用以更高效地拷贝文件。 参见 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil-platform-dependent-efficient-copy-operations" target="_blank" rel="noopener">依赖于具体平台的高效拷贝操作</a> 一节。</p>
+</li>
+<li><p><em>exception</em> <code>shutil.SameFileError</code></p>
+<p>此异常会在 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copyfile" target="_blank" rel="noopener"><code>copyfile()</code></a> 中的源和目标为同一文件时被引发。<em>3.4 新版功能.</em></p>
+</li>
+<li><p><code>shutil.copymode</code>(<em>src</em>, <em>dst</em>, <em>**, </em>follow_symlinks=True*)</p>
+<p>从 <em>src</em> 拷贝权限位到 <em>dst</em>。 文件的内容、所有者和分组将不受影响。 <em>src</em> 和 <em>dst</em> 均为路径类对象或字符串形式的路径名。 如果 <em>follow_symlinks</em> 为假值，并且 <em>src</em> 和 <em>dst</em> 均为符号链接，<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copymode" target="_blank" rel="noopener"><code>copymode()</code></a> 将尝试修改 <em>dst</em> 本身的模式（而非它所指向的文件）。 此功能并不是在所有平台上均可用；请参阅 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copystat" target="_blank" rel="noopener"><code>copystat()</code></a> 了解详情。 如果 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copymode" target="_blank" rel="noopener"><code>copymode()</code></a> 无法修改本机平台上的符号链接，而它被要求这样做，它将不做任何操作即返回。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.copymode</code> 附带参数 <code>src</code>, <code>dst</code>。<em>在 3.3 版更改:</em> 加入 <em>follow_symlinks</em> 参数。</p>
+</li>
+<li><p><code>shutil.copystat</code>(<em>src</em>, <em>dst</em>, <em>**, </em>follow_symlinks=True*)</p>
+<p>从 <em>src</em> 拷贝权限位、最近访问时间、最近修改时间以及旗标到 <em>dst</em>。 在 Linux上，<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copystat" target="_blank" rel="noopener"><code>copystat()</code></a> 还会在可能的情况下拷贝“扩展属性”。 文件的内容、所有者和分组将不受影响。 <em>src</em> 和 <em>dst</em> 均为路径类对象或字符串形式的路径名。如果 <em>follow_symlinks</em> 为假值，并且 <em>src</em> 和 <em>dst</em> 均指向符号链接，<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copystat" target="_blank" rel="noopener"><code>copystat()</code></a> 将作用于符号链接本身而非该符号链接所指向的文件 — 从 <em>src</em> 符号链接读取信息，并将信息写入 <em>dst</em> 符号链接。</p>
+<blockquote>
+<p>注解:</p>
+<p>并非所有平台者提供检查和修改符号链接的功能。 Python 本身可以告诉你哪些功能是在本机上可用的。</p>
+<ul>
+<li>如果 <code>os.chmod in os.supports_follow_symlinks</code> 为 <code>True</code>，则 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copystat" target="_blank" rel="noopener"><code>copystat()</code></a> 可以修改符号链接的权限位。</li>
+<li>如果 <code>os.utime in os.supports_follow_symlinks</code> 为 <code>True</code>，则 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copystat" target="_blank" rel="noopener"><code>copystat()</code></a> 可以修改符号链接的最近访问和修改时间。</li>
+<li>如果 <code>os.chflags in os.supports_follow_symlinks</code> 为 <code>True</code>，则 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copystat" target="_blank" rel="noopener"><code>copystat()</code></a> 可以修改符号链接的旗标。 (<code>os.chflags</code> 不是在所有平台上均可用。)</li>
+</ul>
+<p>在此功能部分或全部不可用的平台上，当被要求修改一个符号链接时，<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copystat" target="_blank" rel="noopener"><code>copystat()</code></a> 将尽量拷贝所有内容。 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copystat" target="_blank" rel="noopener"><code>copystat()</code></a> 一定不会返回失败信息。</p>
+<p>更多信息请参阅 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.supports_follow_symlinks" target="_blank" rel="noopener"><code>os.supports_follow_symlinks</code></a>。</p>
+</blockquote>
+<p>引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.copystat</code> 附带参数 <code>src</code>, <code>dst</code>。</p>
+<p><em>在 3.3 版更改:</em> 添加了 <em>follow_symlinks</em> 参数并且支持 Linux 扩展属性。</p>
+</li>
+<li><p><code>shutil.copy</code>(<em>src</em>, <em>dst</em>, <em>**, </em>follow_symlinks=True*)</p>
+<p>将文件 <em>src</em> 拷贝到文件或目录 <em>dst</em>。 <em>src</em> 和 <em>dst</em> 应为字符串。 如果 <em>dst</em> 指定了一个目录，文件将使用 <em>src</em> 中的基准文件名拷贝到 <em>dst</em>。 返回新创建文件的路径。如果 <em>follow_symlinks</em> 为假值且 <em>src</em> 为符号链接，则 <em>dst</em> 也将被创建为符号链接。 如果 <em>follow_symlinks</em> 为真值且 <em>src</em> 为符号链接，<em>dst</em> 将成为 <em>src</em> 所指向的文件的一个副本。<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy" target="_blank" rel="noopener"><code>copy()</code></a> 会拷贝文件数据和文件的权限模式 (参见 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.chmod" target="_blank" rel="noopener"><code>os.chmod()</code></a>)。 其他元数据，例如文件的创建和修改时间不会被保留。 要保留所有原有的元数据，请改用 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy2" target="_blank" rel="noopener"><code>copy2()</code></a> 。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.copyfile</code> 附带参数 <code>src</code>, <code>dst</code>。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.copymode</code> 附带参数 <code>src</code>, <code>dst</code>。<em>在 3.3 版更改:</em> 添加了 <em>follow_symlinks</em> 参数。 现在会返回新创建文件的路径。<em>在 3.8 版更改:</em> 可能会在内部使用平台专属的快速拷贝系统调用以更高效地拷贝文件。 参见 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil-platform-dependent-efficient-copy-operations" target="_blank" rel="noopener">依赖于具体平台的高效拷贝操作</a> 一节。</p>
+</li>
+<li><p><code>shutil.copy2</code>(<em>src</em>, <em>dst</em>, <em>**, </em>follow_symlinks=True*)</p>
+<p>类似于 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy" target="_blank" rel="noopener"><code>copy()</code></a>，区别在于 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy2" target="_blank" rel="noopener"><code>copy2()</code></a> 还会尝试保留文件的元数据。当 <em>follow_symlinks</em> 为假值且 <em>src</em> 为符号链接时，<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy2" target="_blank" rel="noopener"><code>copy2()</code></a> 会尝试将来自 <em>src</em> 符号链接的所有元数据拷贝到新创建的 <em>dst</em> 符号链接。 但是，此功能不是在所有平台上均可用。 在此功能部分或全部不可用的平台上，<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy2" target="_blank" rel="noopener"><code>copy2()</code></a> 将尽量保留所有元数据；<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy2" target="_blank" rel="noopener"><code>copy2()</code></a> 一定不会由于无法保留文件元数据而引发异常。<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy2" target="_blank" rel="noopener"><code>copy2()</code></a> 会使用 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copystat" target="_blank" rel="noopener"><code>copystat()</code></a> 来拷贝文件元数据。 请参阅 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copystat" target="_blank" rel="noopener"><code>copystat()</code></a> 了解有关修改符号链接元数据的平台支持的更多信息。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.copyfile</code> 附带参数 <code>src</code>, <code>dst</code>。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.copystat</code> 附带参数 <code>src</code>, <code>dst</code>。<em>在 3.3 版更改:</em> 添加了 <em>follow_symlinks</em> 参数，还会尝试拷贝扩展文件系统属性（目前仅限 Linux）。 现在会返回新创建文件的路径。<em>在 3.8 版更改:</em> 可能会在内部使用平台专属的快速拷贝系统调用以更高效地拷贝文件。 参见 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil-platform-dependent-efficient-copy-operations" target="_blank" rel="noopener">依赖于具体平台的高效拷贝操作</a> 一节。</p>
+</li>
+<li><p><code>shutil.ignore_patterns</code>(*<em>patterns</em>)</p>
+<p>这个工厂函数会创建一个函数，它可被用作 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copytree" target="_blank" rel="noopener"><code>copytree()</code></a> 的 <em>ignore</em> 可调用对象参数，以忽略那些匹配所提供的 glob 风格的 <em>patterns</em> 之一的文件和目录。 参见以下示例。</p>
+</li>
+<li><p><code>shutil.copytree</code>(<em>src</em>, <em>dst</em>, <em>symlinks=False</em>, <em>ignore=None</em>, <em>copy_function=copy2</em>, <em>ignore_dangling_symlinks=False</em>, <em>dirs_exist_ok=False</em>)</p>
+<p>将以 <em>src</em> 为根起点的整个目录树拷贝到名为 <em>dst</em> 的目录并返回目标目录。 <em>dirs_exist_ok</em> 指明是否要在 <em>dst</em> 或任何丢失的父目录已存在的情况下引发异常。目录的权限和时间会通过 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copystat" target="_blank" rel="noopener"><code>copystat()</code></a> 来拷贝，单个文件则会使用 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy2" target="_blank" rel="noopener"><code>copy2()</code></a> 来拷贝。如果 <em>symlinks</em> 为真值，源目录树中的符号链接会在新目录树中表示为符号链接，并且原链接的元数据在平台允许的情况下也会被拷贝；如果为假值或省略，则会将被链接文件的内容和元数据拷贝到新目录树。当 <em>symlinks</em> 为假值时，如果符号链接所指向的文件不存在，则会在拷贝进程的末尾将一个异常添加到 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.Error" target="_blank" rel="noopener"><code>Error</code></a> 异常中的错误列表。 如果你希望屏蔽此异常那就将可选的 <em>ignore_dangling_symlinks</em> 旗标设为真值。 请注意此选项在不支持 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.symlink" target="_blank" rel="noopener"><code>os.symlink()</code></a> 的平台上将不起作用。如果给出了 <em>ignore</em>，它必须是一个可调用对象，该对象将接受 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copytree" target="_blank" rel="noopener"><code>copytree()</code></a> 所访问的目录以及 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.listdir" target="_blank" rel="noopener"><code>os.listdir()</code></a> 所返回的目录内容列表作为其参数。 由于 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copytree" target="_blank" rel="noopener"><code>copytree()</code></a> 是递归地被调用的，<em>ignore</em> 可调用对象对于每个被拷贝目录都将被调用一次。 该可调用对象必须返回一个相对于当前目录的目录和文件名序列（即其第二个参数的子集）；随后这些名称将在拷贝进程中被忽略。 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.ignore_patterns" target="_blank" rel="noopener"><code>ignore_patterns()</code></a> 可被用于创建这种基于 glob 风格模式来忽略特定名称的可调用对象。如果发生了（一个或多个）异常，将引发一个附带原因列表的 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.Error" target="_blank" rel="noopener"><code>Error</code></a>。如果给出了 <em>copy_function</em>，它必须是一个将被用来拷贝每个文件的可调用对象。 它在被调用时会将源路径和目标路径作为参数传入。 默认情况下，<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy2" target="_blank" rel="noopener"><code>copy2()</code></a> 将被使用，但任何支持同样签名（与 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy" target="_blank" rel="noopener"><code>copy()</code></a> 一致）都可以使用。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.copytree</code> 附带参数 <code>src</code>, <code>dst</code>。<em>在 3.3 版更改:</em> 当 <em>symlinks</em> 为假值时拷贝元数据。 现在会返回 <em>dst</em>。<em>在 3.2 版更改:</em> 添加了 <em>copy_function</em> 参数以允许提供定制的拷贝函数。 添加了 <em>ignore_dangling_symlinks</em> 参数以便在 <em>symlinks</em> 为假值时屏蔽符号链接错误。<em>在 3.8 版更改:</em> 可能会在内部使用平台专属的快速拷贝系统调用以更高效地拷贝文件。 参见 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil-platform-dependent-efficient-copy-operations" target="_blank" rel="noopener">依赖于具体平台的高效拷贝操作</a> 一节。<em>3.8 新版功能:</em> <em>dirs_exist_ok</em> 形参。</p>
+</li>
+<li><p><code>shutil.rmtree</code>(<em>path</em>, <em>ignore_errors=False</em>, <em>onerror=None</em>)</p>
+<p>删除一个完整的目录树；<em>path</em> 必须指向一个目录（但不能是一个目录的符号链接）。 如果 <em>ignore_errors</em> 为真值，删除失败导致的错误将被忽略；如果为假值或是省略，此类错误将通过调用由 <em>onerror</em> 所指定的处理程序来处理，或者如果此参数被省略则将引发一个异常。</p>
+<blockquote>
+<p>注解:</p>
+<p>在支持必要的基于 fd 的函数的平台上，默认会使用 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.rmtree" target="_blank" rel="noopener"><code>rmtree()</code></a> 的可防御符号链接攻击的版本。 在其他平台上，<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.rmtree" target="_blank" rel="noopener"><code>rmtree()</code></a> 较易遭受符号链接攻击：给定适当的时间和环境，攻击者可以操纵文件系统中的符号链接来删除他们在其他情况下无法访问的文件。 应用程序可以使用 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.rmtree.avoids_symlink_attacks" target="_blank" rel="noopener"><code>rmtree.avoids_symlink_attacks</code></a> 函数属性来确定此类情况具体是哪一些。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p><code>shutil.move</code>(<em>src</em>, <em>dst</em>, <em>copy_function=copy2</em>)</p>
+<p>递归地将一个文件或目录 (<em>src</em>) 移至另一位置 (<em>dst</em>) 并返回目标位置。如果目标是已存在的目录，则 <em>src</em> 会被移至该目录下。 如果目标已存在但不是目录，它可能会被覆盖，具体取决于 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.rename" target="_blank" rel="noopener"><code>os.rename()</code></a> 的语义。如果目标是在当前文件系统中，则会使用 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.rename" target="_blank" rel="noopener"><code>os.rename()</code></a>。 在其他情况下，<em>src</em> 将被拷贝至 <em>dst</em>，使用的函数为 <em>copy_function</em>，然后目标会被移除。 对于符号链接，则将在 <em>dst</em> 之下或以其本身为名称创建一个指向 <em>src</em> 目标的新符号链接，并且 <em>src</em> 将被移除。如果给出了 <em>copy_function</em>，则它必须为接受两个参数 <em>src</em> 和 <em>dst</em> 的可调用对象，并会在 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.rename" target="_blank" rel="noopener"><code>os.rename()</code></a> 无法使用时被用来将 <em>src</em> 拷贝到 <em>dest</em>。 如果源位置是一个目录，则会调用 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copytree" target="_blank" rel="noopener"><code>copytree()</code></a>，并向它传入 <code>copy_function()</code>。 默认的 <em>copy_function</em> 是 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy2" target="_blank" rel="noopener"><code>copy2()</code></a>。 使用 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy" target="_blank" rel="noopener"><code>copy()</code></a> 作为 <em>copy_function</em> 允许在无法附带拷贝元数据时让移动操作成功执行，但其代价是不拷贝任何元数据。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.move</code> 附带参数 <code>src</code>, <code>dst</code>。<em>在 3.3 版更改:</em> 为异类文件系统添加了显式的符号链接处理，以便使它适应 GNU 的 <strong>mv</strong> 的行为。 现在会返回 <em>dst</em>。<em>在 3.5 版更改:</em> 增加了 <em>copy_function</em> 关键字参数。<em>在 3.8 版更改:</em> 可能会在内部使用平台专属的快速拷贝系统调用以更高效地拷贝文件。 参见 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil-platform-dependent-efficient-copy-operations" target="_blank" rel="noopener">依赖于具体平台的高效拷贝操作</a> 一节。</p>
+</li>
+<li><p><code>shutil.disk_usage</code>(<em>path</em>)</p>
+<p>返回给定路径的磁盘使用统计数据，形式为一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-named-tuple" target="_blank" rel="noopener">named tuple</a>，其中包含 <em>total</em>, <em>used</em> 和 <em>free</em> 属性，分别表示总计、已使用和未使用空间的字节数。 <em>path</em> 可以是一个文件或是一个目录。<em>3.3 新版功能.**在 3.8 版更改:</em> 在 Windows 上，<em>path</em> 现在可以是一个文件或目录。<a href="https://docs.python.org/zh-cn/3.8/library/intro.html#availability" target="_blank" rel="noopener">可用性</a>: Unix, Windows。</p>
+</li>
+<li><p><code>shutil.chown</code>(<em>path</em>, <em>user=None</em>, <em>group=None</em>)</p>
+<p>修改给定 <em>path</em> 的所有者 <em>user</em> 和/或 <em>group</em>。<em>user</em> 可以是一个系统用户名或 uid；<em>group</em> 同样如此。 要求至少有一个参数。另请参阅下层的函数 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.chown" target="_blank" rel="noopener"><code>os.chown()</code></a>。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.chown</code> 附带参数 <code>path</code>, <code>user</code>, <code>group</code>。<a href="https://docs.python.org/zh-cn/3.8/library/intro.html#availability" target="_blank" rel="noopener">Availability</a>: Unix.<em>3.3 新版功能.</em></p>
+</li>
+<li><p><code>shutil.which</code>(<em>cmd</em>, <em>mode=os.F_OK | os.X_OK</em>, <em>path=None</em>)</p>
+<p>返回当给定的 <em>cmd</em> 被调用时将要运行的可执行文件的路径。 如果没有 <em>cmd</em> 会被调用则返回 <code>None</code>。<em>mode</em> 是一个传递给 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.access" target="_blank" rel="noopener"><code>os.access()</code></a> 的权限掩码，在默认情况下将确定文件是否存在并且为可执行文件。当未指定 <em>path</em> 时，将会使用 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.environ" target="_blank" rel="noopener"><code>os.environ()</code></a> 的结果，返回 “PATH” 的值或回退为 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.defpath" target="_blank" rel="noopener"><code>os.defpath</code></a>。在 Windows 上当前目录总是会被添加为 <em>path</em> 的第一项，无论你是否使用默认值或提供你自己的路径，这是命令行终端在查找可执行文件时所采用的行为方式。 此外，当在 <em>path</em> 中查找 <em>cmd</em> 时，还会检查 <code>PATHEXT</code> 环境变量。 例如，如果你调用 <code>shutil.which(&quot;python&quot;)</code>，<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.which" target="_blank" rel="noopener"><code>which()</code></a> 将搜索 <code>PATHEXT</code> 来确定它要在 <em>path</em> 目录中查找 <code>python.exe</code>。 例如，在 Windows 上:&gt;&gt;&gt;<code>&gt;&gt;&gt; shutil.which(&quot;python&quot;) &#39;C:\\Python33\\python.EXE&#39;</code><em>3.3 新版功能.**在 3.8 版更改:</em> 现在可以接受 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#bytes" target="_blank" rel="noopener"><code>bytes</code></a> 类型。 如果 <em>cmd</em> 的类型为 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#bytes" target="_blank" rel="noopener"><code>bytes</code></a>，结果的类型也将为 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#bytes" target="_blank" rel="noopener"><code>bytes</code></a>。</p>
+</li>
+<li><p><em>exception</em> <code>shutil.Error</code></p>
+<p>此异常会收集在多文件操作期间所引发的异常。 对于 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copytree" target="_blank" rel="noopener"><code>copytree()</code></a>，此异常参数将是一个由三元组 (<em>srcname</em>, <em>dstname</em>, <em>exception</em>) 构成的列表。</p>
+</li>
+</ul>
+<h2 id="依赖于具体平台的高效拷贝操作"><a href="#依赖于具体平台的高效拷贝操作" class="headerlink" title="依赖于具体平台的高效拷贝操作"></a>依赖于具体平台的高效拷贝操作</h2><p>从 Python 3.8 开始，所有涉及文件拷贝的函数 (<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copyfile" target="_blank" rel="noopener"><code>copyfile()</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/copy.html#module-copy" target="_blank" rel="noopener"><code>copy()</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copy2" target="_blank" rel="noopener"><code>copy2()</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copytree" target="_blank" rel="noopener"><code>copytree()</code></a>, 以及 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.move" target="_blank" rel="noopener"><code>move()</code></a>) 将会使用平台专属的 “fast-copy” 系统调用以便更高效地拷贝文件 (参见 <a href="https://bugs.python.org/issue33671" target="_blank" rel="noopener">bpo-33671</a>)。 “fast-copy” 意味着拷贝操作将发生于内核之中，避免像在 “<code>outfd.write(infd.read())</code>“ 中那样使用用户空间的缓冲区。</p>
+<p>在 macOS 上将会使用 <a href="http://www.manpagez.com/man/3/copyfile/" target="_blank" rel="noopener">fcopyfile</a> 来拷贝文件内容（不含元数据）。</p>
+<p>在 Linux 上将会使用 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.sendfile" target="_blank" rel="noopener"><code>os.sendfile()</code></a>。</p>
+<p>在 Windows 上 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copyfile" target="_blank" rel="noopener"><code>shutil.copyfile()</code></a> 将会使用更大的默认缓冲区（1 MiB 而非 64 KiB）并且会使用基于 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#memoryview" target="_blank" rel="noopener"><code>memoryview()</code></a> 的 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copyfileobj" target="_blank" rel="noopener"><code>shutil.copyfileobj()</code></a> 变种形式。</p>
+<p>如果快速拷贝操作失败并且没有数据被写入目标文件，则 shutil 将在内部静默地回退到使用效率较低的 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copyfileobj" target="_blank" rel="noopener"><code>copyfileobj()</code></a> 函数。</p>
+<p><em>在 3.8 版更改.</em></p>
+<h3 id="copytree-示例"><a href="#copytree-示例" class="headerlink" title="copytree 示例"></a>copytree 示例</h3><p>这个示例就是上面所描述的 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.copytree" target="_blank" rel="noopener"><code>copytree()</code></a> 函数的实现，其中省略了文档字符串。 它还展示了此模块所提供的许多其他函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">copytree</span><span class="params">(src, dst, symlinks=False)</span>:</span></span><br><span class="line">    names = os.listdir(src)</span><br><span class="line">    os.makedirs(dst)</span><br><span class="line">    errors = []</span><br><span class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> names:</span><br><span class="line">        srcname = os.path.join(src, name)</span><br><span class="line">        dstname = os.path.join(dst, name)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span> symlinks <span class="keyword">and</span> os.path.islink(srcname):</span><br><span class="line">                linkto = os.readlink(srcname)</span><br><span class="line">                os.symlink(linkto, dstname)</span><br><span class="line">            <span class="keyword">elif</span> os.path.isdir(srcname):</span><br><span class="line">                copytree(srcname, dstname, symlinks)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                copy2(srcname, dstname)</span><br><span class="line">            <span class="comment"># XXX What about devices, sockets etc.?</span></span><br><span class="line">        <span class="keyword">except</span> OSError <span class="keyword">as</span> why:</span><br><span class="line">            errors.append((srcname, dstname, str(why)))</span><br><span class="line">        <span class="comment"># catch the Error from the recursive copytree so that we can</span></span><br><span class="line">        <span class="comment"># continue with other files</span></span><br><span class="line">        <span class="keyword">except</span> Error <span class="keyword">as</span> err:</span><br><span class="line">            errors.extend(err.args[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        copystat(src, dst)</span><br><span class="line">    <span class="keyword">except</span> OSError <span class="keyword">as</span> why:</span><br><span class="line">        <span class="comment"># can't copy file access times on Windows</span></span><br><span class="line">        <span class="keyword">if</span> why.winerror <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            errors.extend((src, dst, str(why)))</span><br><span class="line">    <span class="keyword">if</span> errors:</span><br><span class="line">        <span class="keyword">raise</span> Error(errors)</span><br></pre></td></tr></table></figure>
+<p>另一个使用 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.ignore_patterns" target="_blank" rel="noopener"><code>ignore_patterns()</code></a> 辅助函数的例子:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> shutil <span class="keyword">import</span> copytree, ignore_patterns</span><br><span class="line"></span><br><span class="line">copytree(source, destination, ignore=ignore_patterns(<span class="string">'*.pyc'</span>, <span class="string">'tmp*'</span>))</span><br></pre></td></tr></table></figure>
+<p>这将会拷贝除 <code>.pyc</code> 文件和以 <code>tmp</code> 打头的文件或目录以外的所有条目.</p>
+<p>另一个使用 <em>ignore</em> 参数来添加记录调用的例子:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> shutil <span class="keyword">import</span> copytree</span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_logpath</span><span class="params">(path, names)</span>:</span></span><br><span class="line">    logging.info(<span class="string">'Working in %s'</span>, path)</span><br><span class="line">    <span class="keyword">return</span> []   <span class="comment"># nothing will be ignored</span></span><br><span class="line"></span><br><span class="line">copytree(source, destination, ignore=_logpath)</span><br></pre></td></tr></table></figure>
+<h3 id="rmtree-示例"><a href="#rmtree-示例" class="headerlink" title="rmtree 示例"></a>rmtree 示例</h3><p>这个例子演示了如何在 Windows 上删除一个目录树，其中部分文件设置了只读属性位。 它会使用 onerror 回调函数来清除只读属性位并再次尝试删除。 任何后续的失败都将被传播。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os, stat</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">remove_readonly</span><span class="params">(func, path, _)</span>:</span></span><br><span class="line">    <span class="string">"Clear the readonly bit and reattempt the removal"</span></span><br><span class="line">    os.chmod(path, stat.S_IWRITE)</span><br><span class="line">    func(path)</span><br><span class="line"></span><br><span class="line">shutil.rmtree(directory, onerror=remove_readonly)</span><br></pre></td></tr></table></figure>
+<h2 id="归档操作"><a href="#归档操作" class="headerlink" title="归档操作"></a>归档操作</h2><p><em>3.2 新版功能.</em></p>
+<p><em>在 3.5 版更改:</em> 添加了对 <em>xztar</em> 格式的支持。</p>
+<p>本模块也提供了用于创建和读取压缩和归档文件的高层级工具。 它们依赖于 <a href="https://docs.python.org/zh-cn/3.8/library/zipfile.html#module-zipfile" target="_blank" rel="noopener"><code>zipfile</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/tarfile.html#module-tarfile" target="_blank" rel="noopener"><code>tarfile</code></a> 模块。</p>
+<ul>
+<li><p><code>shutil.make_archive</code>(<em>base_name</em>, <em>format</em>[, <em>root_dir</em>[, <em>base_dir</em>[, <em>verbose</em>[, <em>dry_run</em>[, <em>owner</em>[, <em>group</em>[, <em>logger</em>]]]]]]])</p>
+<p>创建一个归档文件（例如 zip 或 tar）并返回其名称。<em>base_name</em> 是要创建的文件名称，包括路径，去除任何特定格式的扩展名。 <em>format</em> 是归档格式：为 “zip” (如果 <a href="https://docs.python.org/zh-cn/3.8/library/zlib.html#module-zlib" target="_blank" rel="noopener"><code>zlib</code></a> 模块可用), “tar”, “gztar” (如果 <a href="https://docs.python.org/zh-cn/3.8/library/zlib.html#module-zlib" target="_blank" rel="noopener"><code>zlib</code></a> 模块可用), “bztar” (如果 <a href="https://docs.python.org/zh-cn/3.8/library/bz2.html#module-bz2" target="_blank" rel="noopener"><code>bz2</code></a> 模块可用) 或 “xztar” (如果 <a href="https://docs.python.org/zh-cn/3.8/library/lzma.html#module-lzma" target="_blank" rel="noopener"><code>lzma</code></a> 模块可用) 中的一个。<em>root_dir</em> 是一个目录，它将作为归档文件的根目录；例如，我们通常会在创建归档文件之前用 chdir 命令切换到 <em>root_dir</em>。<em>base_dir</em> 是我们要执行归档的起始目录；也就是说 <em>base_dir</em> 将成为归档文件中所有文件和目录共有的路径前缀。<em>root_dir</em> 和 <em>base_dir</em> 默认均为当前目录。如果 <em>dry_run</em> 为真值，则不会创建归档文件，但将要被执行的操作会被记录到 <em>logger</em>。<em>owner</em> 和 <em>group</em> 将在创建 tar 归档文件时被使用。 默认会使用当前的所有者和分组。<em>logger</em> 必须是一个兼容 <a href="https://www.python.org/dev/peps/pep-0282" target="_blank" rel="noopener"><strong>PEP 282</strong></a> 的对象，通常为 <a href="https://docs.python.org/zh-cn/3.8/library/logging.html#logging.Logger" target="_blank" rel="noopener"><code>logging.Logger</code></a> 的实例。<em>verbose</em> 参数已不再使用并进入弃用状态。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.make_archive</code> 并附带参数 <code>base_name</code>, <code>format</code>, <code>root_dir</code>, <code>base_dir</code>。<em>在 3.8 版更改:</em> 现在对于通过 <code>format=&quot;tar&quot;</code> 创建的归档文件将使用新式的 pax (POSIX.1-2001) 格式而非旧式的 GNU 格式。</p>
+</li>
+<li><p><code>shutil.get_archive_formats</code>()</p>
+<p>返回支持的归档格式列表。 所返回序列中的每个元素为一个元组 <code>(name, description)</code>。默认情况下 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#module-shutil" target="_blank" rel="noopener"><code>shutil</code></a> 提供以下格式:<em>zip</em>: ZIP 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/zlib.html#module-zlib" target="_blank" rel="noopener"><code>zlib</code></a> 模块可用）。<em>tar</em>: 未压缩的 tar 文件。 对于新归档文件将使用 POSIX.1-2001 pax 格式。<em>gztar</em>: gzip 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/zlib.html#module-zlib" target="_blank" rel="noopener"><code>zlib</code></a> 模块可用）。<em>bztar</em>: bzip2 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/bz2.html#module-bz2" target="_blank" rel="noopener"><code>bz2</code></a> 模块可用）。<em>xztar</em>: xz 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/lzma.html#module-lzma" target="_blank" rel="noopener"><code>lzma</code></a> 模块可用）。你可以通过使用 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.register_archive_format" target="_blank" rel="noopener"><code>register_archive_format()</code></a> 注册新的格式或为任何现有格式提供你自己的归档器。</p>
+</li>
+<li><p><code>shutil.register_archive_format</code>(<em>name</em>, <em>function</em>[, <em>extra_args</em>[, <em>description</em>]])</p>
+<p>为 <em>name</em> 格式注册一个归档器。<em>function</em> 是将被用来解包归档文件的可调用对象。 该可调用对象将接收要创建文件的 <em>base_name</em>，再加上要归档内容的 <em>base_dir</em> (其默认值为 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.curdir" target="_blank" rel="noopener"><code>os.curdir</code></a>)。 更多参数会被作为关键字参数传入: <em>owner</em>, <em>group</em>, <em>dry_run</em> 和 <em>logger</em> (与向 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.make_archive" target="_blank" rel="noopener"><code>make_archive()</code></a> 传入的参数一致)。如果给出了 <em>extra_args</em>，则其应为一个 <code>(name, value)</code> 对的序列，将在归档器可调用对象被使用时作为附加的关键字参数。<em>description</em> 由 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.get_archive_formats" target="_blank" rel="noopener"><code>get_archive_formats()</code></a> 使用，它将返回归档器的列表。 默认值为一个空字符串。</p>
+</li>
+<li><p><code>shutil.unregister_archive_format</code>(<em>name</em>)</p>
+<p>从支持的格式中移除归档格式 <em>name</em>。</p>
+</li>
+<li><p><code>shutil.unpack_archive</code>(<em>filename</em>[, <em>extract_dir</em>[, <em>format</em>]])</p>
+<p>解包一个归档文件。 <em>filename</em> 是归档文件的完整路径。<em>extract_dir</em> 是归档文件解包的目标目录名称。 如果未提供，则将使用当前工作目录。<em>format</em> 是归档格式：应为 “zip”, “tar”, “gztar”, “bztar” 或 “xztar” 之一。 或者任何通过 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.register_unpack_format" target="_blank" rel="noopener"><code>register_unpack_format()</code></a> 注册的其他格式。 如果未提供，<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.unpack_archive" target="_blank" rel="noopener"><code>unpack_archive()</code></a> 将使用归档文件的扩展名来检查是否注册了对应于该扩展名的解包器。 在未找到任何解包器的情况下，将引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a>。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.unpack_archive</code> 附带参数 <code>filename</code>, <code>extract_dir</code>, <code>format</code>。<em>在 3.7 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">path-like object</a> 作为 <em>filename</em> 和 <em>extract_dir</em>。</p>
+</li>
+<li><p><code>shutil.register_unpack_format</code>(<em>name</em>, <em>extensions</em>, <em>function</em>[, <em>extra_args</em>[, <em>description</em>]])</p>
+<p>注册一个解包格式。 <em>name</em> 为格式名称而 <em>extensions</em> 为对应于该格式的扩展名列表，例如 Zip 文件的扩展名为 <code>.zip</code>。<em>function</em> 是将被用来解包归档文件的可调用对象。 该可调用对象将接受归档文件的路径，加上该归档文件要被解包的目标目录。如果提供了 <em>extra_args</em>，则其应为一个 <code>(name, value)</code> 元组的序列，将被作为关键字参数传递给该可调用对象。可以提供 <em>description</em> 来描述该格式，它将被 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.get_unpack_formats" target="_blank" rel="noopener"><code>get_unpack_formats()</code></a> 返回。</p>
+</li>
+<li><p><code>shutil.unregister_unpack_format</code>(<em>name</em>)</p>
+<p>撤销注册一个解包格式。 <em>name</em> 为格式的名称。</p>
+</li>
+<li><p><code>shutil.get_unpack_formats</code>()</p>
+<p>返回所有已注册的解包格式列表。 所返回序列中的每个元素为一个元组 <code>(name, extensions, description)</code>。默认情况下 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#module-shutil" target="_blank" rel="noopener"><code>shutil</code></a> 提供以下格式:<em>zip</em>: ZIP 文件（只有在相应模块可用时才能解包压缩文件）。<em>tar</em>: 未压缩的 tar 文件。<em>gztar</em>: gzip 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/zlib.html#module-zlib" target="_blank" rel="noopener"><code>zlib</code></a> 模块可用）。<em>bztar</em>: bzip2 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/bz2.html#module-bz2" target="_blank" rel="noopener"><code>bz2</code></a> 模块可用）。<em>xztar</em>: xz 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/lzma.html#module-lzma" target="_blank" rel="noopener"><code>lzma</code></a> 模块可用）。你可以通过使用 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.register_unpack_format" target="_blank" rel="noopener"><code>register_unpack_format()</code></a> 注册新的格式或为任何现有格式提供你自己的解包器。</p>
+</li>
+</ul>
+<p><em>3.2 新版功能.</em></p>
+<p><em>在 3.5 版更改:</em> 添加了对 <em>xztar</em> 格式的支持。</p>
+<p>本模块也提供了用于创建和读取压缩和归档文件的高层级工具。 它们依赖于 <a href="https://docs.python.org/zh-cn/3.8/library/zipfile.html#module-zipfile" target="_blank" rel="noopener"><code>zipfile</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/tarfile.html#module-tarfile" target="_blank" rel="noopener"><code>tarfile</code></a> 模块。</p>
+<ul>
+<li><p><code>shutil.make_archive</code>(<em>base_name</em>, <em>format</em>[, <em>root_dir</em>[, <em>base_dir</em>[, <em>verbose</em>[, <em>dry_run</em>[, <em>owner</em>[, <em>group</em>[, <em>logger</em>]]]]]]])</p>
+<p>创建一个归档文件（例如 zip 或 tar）并返回其名称。<em>base_name</em> 是要创建的文件名称，包括路径，去除任何特定格式的扩展名。 <em>format</em> 是归档格式：为 “zip” (如果 <a href="https://docs.python.org/zh-cn/3.8/library/zlib.html#module-zlib" target="_blank" rel="noopener"><code>zlib</code></a> 模块可用), “tar”, “gztar” (如果 <a href="https://docs.python.org/zh-cn/3.8/library/zlib.html#module-zlib" target="_blank" rel="noopener"><code>zlib</code></a> 模块可用), “bztar” (如果 <a href="https://docs.python.org/zh-cn/3.8/library/bz2.html#module-bz2" target="_blank" rel="noopener"><code>bz2</code></a> 模块可用) 或 “xztar” (如果 <a href="https://docs.python.org/zh-cn/3.8/library/lzma.html#module-lzma" target="_blank" rel="noopener"><code>lzma</code></a> 模块可用) 中的一个。<em>root_dir</em> 是一个目录，它将作为归档文件的根目录；例如，我们通常会在创建归档文件之前用 chdir 命令切换到 <em>root_dir</em>。<em>base_dir</em> 是我们要执行归档的起始目录；也就是说 <em>base_dir</em> 将成为归档文件中所有文件和目录共有的路径前缀。<em>root_dir</em> 和 <em>base_dir</em> 默认均为当前目录。如果 <em>dry_run</em> 为真值，则不会创建归档文件，但将要被执行的操作会被记录到 <em>logger</em>。<em>owner</em> 和 <em>group</em> 将在创建 tar 归档文件时被使用。 默认会使用当前的所有者和分组。<em>logger</em> 必须是一个兼容 <a href="https://www.python.org/dev/peps/pep-0282" target="_blank" rel="noopener"><strong>PEP 282</strong></a> 的对象，通常为 <a href="https://docs.python.org/zh-cn/3.8/library/logging.html#logging.Logger" target="_blank" rel="noopener"><code>logging.Logger</code></a> 的实例。<em>verbose</em> 参数已不再使用并进入弃用状态。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.make_archive</code> 并附带参数 <code>base_name</code>, <code>format</code>, <code>root_dir</code>, <code>base_dir</code>。<em>在 3.8 版更改:</em> 现在对于通过 <code>format=&quot;tar&quot;</code> 创建的归档文件将使用新式的 pax (POSIX.1-2001) 格式而非旧式的 GNU 格式。</p>
+</li>
+<li><p><code>shutil.get_archive_formats</code>()</p>
+<p>返回支持的归档格式列表。 所返回序列中的每个元素为一个元组 <code>(name, description)</code>。默认情况下 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#module-shutil" target="_blank" rel="noopener"><code>shutil</code></a> 提供以下格式:<em>zip</em>: ZIP 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/zlib.html#module-zlib" target="_blank" rel="noopener"><code>zlib</code></a> 模块可用）。<em>tar</em>: 未压缩的 tar 文件。 对于新归档文件将使用 POSIX.1-2001 pax 格式。<em>gztar</em>: gzip 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/zlib.html#module-zlib" target="_blank" rel="noopener"><code>zlib</code></a> 模块可用）。<em>bztar</em>: bzip2 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/bz2.html#module-bz2" target="_blank" rel="noopener"><code>bz2</code></a> 模块可用）。<em>xztar</em>: xz 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/lzma.html#module-lzma" target="_blank" rel="noopener"><code>lzma</code></a> 模块可用）。你可以通过使用 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.register_archive_format" target="_blank" rel="noopener"><code>register_archive_format()</code></a> 注册新的格式或为任何现有格式提供你自己的归档器。</p>
+</li>
+<li><p><code>shutil.register_archive_format</code>(<em>name</em>, <em>function</em>[, <em>extra_args</em>[, <em>description</em>]])</p>
+<p>为 <em>name</em> 格式注册一个归档器。<em>function</em> 是将被用来解包归档文件的可调用对象。 该可调用对象将接收要创建文件的 <em>base_name</em>，再加上要归档内容的 <em>base_dir</em> (其默认值为 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.curdir" target="_blank" rel="noopener"><code>os.curdir</code></a>)。 更多参数会被作为关键字参数传入: <em>owner</em>, <em>group</em>, <em>dry_run</em> 和 <em>logger</em> (与向 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.make_archive" target="_blank" rel="noopener"><code>make_archive()</code></a> 传入的参数一致)。如果给出了 <em>extra_args</em>，则其应为一个 <code>(name, value)</code> 对的序列，将在归档器可调用对象被使用时作为附加的关键字参数。<em>description</em> 由 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.get_archive_formats" target="_blank" rel="noopener"><code>get_archive_formats()</code></a> 使用，它将返回归档器的列表。 默认值为一个空字符串。</p>
+</li>
+<li><p><code>shutil.unregister_archive_format</code>(<em>name</em>)</p>
+<p>从支持的格式中移除归档格式 <em>name</em>。</p>
+</li>
+<li><p><code>shutil.unpack_archive</code>(<em>filename</em>[, <em>extract_dir</em>[, <em>format</em>]])</p>
+<p>解包一个归档文件。 <em>filename</em> 是归档文件的完整路径。<em>extract_dir</em> 是归档文件解包的目标目录名称。 如果未提供，则将使用当前工作目录。<em>format</em> 是归档格式：应为 “zip”, “tar”, “gztar”, “bztar” 或 “xztar” 之一。 或者任何通过 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.register_unpack_format" target="_blank" rel="noopener"><code>register_unpack_format()</code></a> 注册的其他格式。 如果未提供，<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.unpack_archive" target="_blank" rel="noopener"><code>unpack_archive()</code></a> 将使用归档文件的扩展名来检查是否注册了对应于该扩展名的解包器。 在未找到任何解包器的情况下，将引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a>。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.unpack_archive</code> 附带参数 <code>filename</code>, <code>extract_dir</code>, <code>format</code>。<em>在 3.7 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">path-like object</a> 作为 <em>filename</em> 和 <em>extract_dir</em>。</p>
+</li>
+<li><p><code>shutil.register_unpack_format</code>(<em>name</em>, <em>extensions</em>, <em>function</em>[, <em>extra_args</em>[, <em>description</em>]])</p>
+<p>注册一个解包格式。 <em>name</em> 为格式名称而 <em>extensions</em> 为对应于该格式的扩展名列表，例如 Zip 文件的扩展名为 <code>.zip</code>。<em>function</em> 是将被用来解包归档文件的可调用对象。 该可调用对象将接受归档文件的路径，加上该归档文件要被解包的目标目录。如果提供了 <em>extra_args</em>，则其应为一个 <code>(name, value)</code> 元组的序列，将被作为关键字参数传递给该可调用对象。可以提供 <em>description</em> 来描述该格式，它将被 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.get_unpack_formats" target="_blank" rel="noopener"><code>get_unpack_formats()</code></a> 返回。</p>
+</li>
+<li><p><code>shutil.unregister_unpack_format</code>(<em>name</em>)</p>
+<p>撤销注册一个解包格式。 <em>name</em> 为格式的名称。</p>
+</li>
+<li><p><code>shutil.get_unpack_formats</code>()</p>
+<p>返回所有已注册的解包格式列表。 所返回序列中的每个元素为一个元组 <code>(name, extensions, description)</code>。默认情况下 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#module-shutil" target="_blank" rel="noopener"><code>shutil</code></a> 提供以下格式:<em>zip</em>: ZIP 文件（只有在相应模块可用时才能解包压缩文件）。<em>tar</em>: 未压缩的 tar 文件。<em>gztar</em>: gzip 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/zlib.html#module-zlib" target="_blank" rel="noopener"><code>zlib</code></a> 模块可用）。<em>bztar</em>: bzip2 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/bz2.html#module-bz2" target="_blank" rel="noopener"><code>bz2</code></a> 模块可用）。<em>xztar</em>: xz 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/lzma.html#module-lzma" target="_blank" rel="noopener"><code>lzma</code></a> 模块可用）。你可以通过使用 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.register_unpack_format" target="_blank" rel="noopener"><code>register_unpack_format()</code></a> 注册新的格式或为任何现有格式提供你自己的解包器。</p>
+</li>
+</ul>
+<p><em>3.2 新版功能.</em></p>
+<p><em>在 3.5 版更改:</em> 添加了对 <em>xztar</em> 格式的支持。</p>
+<p>本模块也提供了用于创建和读取压缩和归档文件的高层级工具。 它们依赖于 <a href="https://docs.python.org/zh-cn/3.8/library/zipfile.html#module-zipfile" target="_blank" rel="noopener"><code>zipfile</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/tarfile.html#module-tarfile" target="_blank" rel="noopener"><code>tarfile</code></a> 模块。</p>
+<ul>
+<li><p><code>shutil.make_archive</code>(<em>base_name</em>, <em>format</em>[, <em>root_dir</em>[, <em>base_dir</em>[, <em>verbose</em>[, <em>dry_run</em>[, <em>owner</em>[, <em>group</em>[, <em>logger</em>]]]]]]])</p>
+<p>创建一个归档文件（例如 zip 或 tar）并返回其名称。<em>base_name</em> 是要创建的文件名称，包括路径，去除任何特定格式的扩展名。 <em>format</em> 是归档格式：为 “zip” (如果 <a href="https://docs.python.org/zh-cn/3.8/library/zlib.html#module-zlib" target="_blank" rel="noopener"><code>zlib</code></a> 模块可用), “tar”, “gztar” (如果 <a href="https://docs.python.org/zh-cn/3.8/library/zlib.html#module-zlib" target="_blank" rel="noopener"><code>zlib</code></a> 模块可用), “bztar” (如果 <a href="https://docs.python.org/zh-cn/3.8/library/bz2.html#module-bz2" target="_blank" rel="noopener"><code>bz2</code></a> 模块可用) 或 “xztar” (如果 <a href="https://docs.python.org/zh-cn/3.8/library/lzma.html#module-lzma" target="_blank" rel="noopener"><code>lzma</code></a> 模块可用) 中的一个。<em>root_dir</em> 是一个目录，它将作为归档文件的根目录；例如，我们通常会在创建归档文件之前用 chdir 命令切换到 <em>root_dir</em>。<em>base_dir</em> 是我们要执行归档的起始目录；也就是说 <em>base_dir</em> 将成为归档文件中所有文件和目录共有的路径前缀。<em>root_dir</em> 和 <em>base_dir</em> 默认均为当前目录。如果 <em>dry_run</em> 为真值，则不会创建归档文件，但将要被执行的操作会被记录到 <em>logger</em>。<em>owner</em> 和 <em>group</em> 将在创建 tar 归档文件时被使用。 默认会使用当前的所有者和分组。<em>logger</em> 必须是一个兼容 <a href="https://www.python.org/dev/peps/pep-0282" target="_blank" rel="noopener"><strong>PEP 282</strong></a> 的对象，通常为 <a href="https://docs.python.org/zh-cn/3.8/library/logging.html#logging.Logger" target="_blank" rel="noopener"><code>logging.Logger</code></a> 的实例。<em>verbose</em> 参数已不再使用并进入弃用状态。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.make_archive</code> 并附带参数 <code>base_name</code>, <code>format</code>, <code>root_dir</code>, <code>base_dir</code>。<em>在 3.8 版更改:</em> 现在对于通过 <code>format=&quot;tar&quot;</code> 创建的归档文件将使用新式的 pax (POSIX.1-2001) 格式而非旧式的 GNU 格式。</p>
+</li>
+<li><p><code>shutil.get_archive_formats</code>()</p>
+<p>返回支持的归档格式列表。 所返回序列中的每个元素为一个元组 <code>(name, description)</code>。默认情况下 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#module-shutil" target="_blank" rel="noopener"><code>shutil</code></a> 提供以下格式:<em>zip</em>: ZIP 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/zlib.html#module-zlib" target="_blank" rel="noopener"><code>zlib</code></a> 模块可用）。<em>tar</em>: 未压缩的 tar 文件。 对于新归档文件将使用 POSIX.1-2001 pax 格式。<em>gztar</em>: gzip 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/zlib.html#module-zlib" target="_blank" rel="noopener"><code>zlib</code></a> 模块可用）。<em>bztar</em>: bzip2 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/bz2.html#module-bz2" target="_blank" rel="noopener"><code>bz2</code></a> 模块可用）。<em>xztar</em>: xz 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/lzma.html#module-lzma" target="_blank" rel="noopener"><code>lzma</code></a> 模块可用）。你可以通过使用 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.register_archive_format" target="_blank" rel="noopener"><code>register_archive_format()</code></a> 注册新的格式或为任何现有格式提供你自己的归档器。</p>
+</li>
+<li><p><code>shutil.register_archive_format</code>(<em>name</em>, <em>function</em>[, <em>extra_args</em>[, <em>description</em>]])</p>
+<p>为 <em>name</em> 格式注册一个归档器。<em>function</em> 是将被用来解包归档文件的可调用对象。 该可调用对象将接收要创建文件的 <em>base_name</em>，再加上要归档内容的 <em>base_dir</em> (其默认值为 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.curdir" target="_blank" rel="noopener"><code>os.curdir</code></a>)。 更多参数会被作为关键字参数传入: <em>owner</em>, <em>group</em>, <em>dry_run</em> 和 <em>logger</em> (与向 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.make_archive" target="_blank" rel="noopener"><code>make_archive()</code></a> 传入的参数一致)。如果给出了 <em>extra_args</em>，则其应为一个 <code>(name, value)</code> 对的序列，将在归档器可调用对象被使用时作为附加的关键字参数。<em>description</em> 由 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.get_archive_formats" target="_blank" rel="noopener"><code>get_archive_formats()</code></a> 使用，它将返回归档器的列表。 默认值为一个空字符串。</p>
+</li>
+<li><p><code>shutil.unregister_archive_format</code>(<em>name</em>)</p>
+<p>从支持的格式中移除归档格式 <em>name</em>。</p>
+</li>
+<li><p><code>shutil.unpack_archive</code>(<em>filename</em>[, <em>extract_dir</em>[, <em>format</em>]])</p>
+<p>解包一个归档文件。 <em>filename</em> 是归档文件的完整路径。<em>extract_dir</em> 是归档文件解包的目标目录名称。 如果未提供，则将使用当前工作目录。<em>format</em> 是归档格式：应为 “zip”, “tar”, “gztar”, “bztar” 或 “xztar” 之一。 或者任何通过 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.register_unpack_format" target="_blank" rel="noopener"><code>register_unpack_format()</code></a> 注册的其他格式。 如果未提供，<a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.unpack_archive" target="_blank" rel="noopener"><code>unpack_archive()</code></a> 将使用归档文件的扩展名来检查是否注册了对应于该扩展名的解包器。 在未找到任何解包器的情况下，将引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a>。引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#auditing" target="_blank" rel="noopener">审计事件</a> <code>shutil.unpack_archive</code> 附带参数 <code>filename</code>, <code>extract_dir</code>, <code>format</code>。<em>在 3.7 版更改:</em> 接受一个 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-path-like-object" target="_blank" rel="noopener">path-like object</a> 作为 <em>filename</em> 和 <em>extract_dir</em>。</p>
+</li>
+<li><p><code>shutil.register_unpack_format</code>(<em>name</em>, <em>extensions</em>, <em>function</em>[, <em>extra_args</em>[, <em>description</em>]])</p>
+<p>注册一个解包格式。 <em>name</em> 为格式名称而 <em>extensions</em> 为对应于该格式的扩展名列表，例如 Zip 文件的扩展名为 <code>.zip</code>。<em>function</em> 是将被用来解包归档文件的可调用对象。 该可调用对象将接受归档文件的路径，加上该归档文件要被解包的目标目录。如果提供了 <em>extra_args</em>，则其应为一个 <code>(name, value)</code> 元组的序列，将被作为关键字参数传递给该可调用对象。可以提供 <em>description</em> 来描述该格式，它将被 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.get_unpack_formats" target="_blank" rel="noopener"><code>get_unpack_formats()</code></a> 返回。</p>
+</li>
+<li><p><code>shutil.unregister_unpack_format</code>(<em>name</em>)</p>
+<p>撤销注册一个解包格式。 <em>name</em> 为格式的名称。</p>
+</li>
+<li><p><code>shutil.get_unpack_formats</code>()</p>
+<p>返回所有已注册的解包格式列表。 所返回序列中的每个元素为一个元组 <code>(name, extensions, description)</code>。默认情况下 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#module-shutil" target="_blank" rel="noopener"><code>shutil</code></a> 提供以下格式:<em>zip</em>: ZIP 文件（只有在相应模块可用时才能解包压缩文件）。<em>tar</em>: 未压缩的 tar 文件。<em>gztar</em>: gzip 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/zlib.html#module-zlib" target="_blank" rel="noopener"><code>zlib</code></a> 模块可用）。<em>bztar</em>: bzip2 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/bz2.html#module-bz2" target="_blank" rel="noopener"><code>bz2</code></a> 模块可用）。<em>xztar</em>: xz 压缩的 tar 文件（如果 <a href="https://docs.python.org/zh-cn/3.8/library/lzma.html#module-lzma" target="_blank" rel="noopener"><code>lzma</code></a> 模块可用）。你可以通过使用 <a href="https://docs.python.org/zh-cn/3.8/library/shutil.html#shutil.register_unpack_format" target="_blank" rel="noopener"><code>register_unpack_format()</code></a> 注册新的格式或为任何现有格式提供你自己的解包器。</p>
+</li>
+</ul>
+<h3 id="归档程序示例"><a href="#归档程序示例" class="headerlink" title="归档程序示例"></a>归档程序示例</h3><p>在这个示例中，我们创建了一个 gzip 压缩的 tar 归档文件，其中包含用户的 <code>.ssh</code> 目录下的所有文件:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> shutil <span class="keyword">import</span> make_archive</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> os</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>archive_name = os.path.expanduser(os.path.join(<span class="string">'~'</span>, <span class="string">'myarchive'</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>root_dir = os.path.expanduser(os.path.join(<span class="string">'~'</span>, <span class="string">'.ssh'</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>make_archive(archive_name, <span class="string">'gztar'</span>, root_dir)</span><br><span class="line"><span class="string">'/Users/tarek/myarchive.tar.gz'</span></span><br></pre></td></tr></table></figure>
+<p>结果归档文件中包含有:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ tar -tzvf /Users/tarek/myarchive.tar.gz</span><br><span class="line">drwx------ tarek/staff       <span class="number">0</span> <span class="number">2010</span><span class="number">-02</span><span class="number">-01</span> <span class="number">16</span>:<span class="number">23</span>:<span class="number">40</span> ./</span><br><span class="line">-rw-r--r-- tarek/staff     <span class="number">609</span> <span class="number">2008</span><span class="number">-06</span><span class="number">-09</span> <span class="number">13</span>:<span class="number">26</span>:<span class="number">54</span> ./authorized_keys</span><br><span class="line">-rwxr-xr-x tarek/staff      <span class="number">65</span> <span class="number">2008</span><span class="number">-06</span><span class="number">-09</span> <span class="number">13</span>:<span class="number">26</span>:<span class="number">54</span> ./config</span><br><span class="line">-rwx------ tarek/staff     <span class="number">668</span> <span class="number">2008</span><span class="number">-06</span><span class="number">-09</span> <span class="number">13</span>:<span class="number">26</span>:<span class="number">54</span> ./id_dsa</span><br><span class="line">-rwxr-xr-x tarek/staff     <span class="number">609</span> <span class="number">2008</span><span class="number">-06</span><span class="number">-09</span> <span class="number">13</span>:<span class="number">26</span>:<span class="number">54</span> ./id_dsa.pub</span><br><span class="line">-rw------- tarek/staff    <span class="number">1675</span> <span class="number">2008</span><span class="number">-06</span><span class="number">-09</span> <span class="number">13</span>:<span class="number">26</span>:<span class="number">54</span> ./id_rsa</span><br><span class="line">-rw-r--r-- tarek/staff     <span class="number">397</span> <span class="number">2008</span><span class="number">-06</span><span class="number">-09</span> <span class="number">13</span>:<span class="number">26</span>:<span class="number">54</span> ./id_rsa.pub</span><br><span class="line">-rw-r--r-- tarek/staff   <span class="number">37192</span> <span class="number">2010</span><span class="number">-02</span><span class="number">-06</span> <span class="number">18</span>:<span class="number">23</span>:<span class="number">10</span> ./known_hosts</span><br></pre></td></tr></table></figure>
+<h2 id="查询输出终端的尺寸"><a href="#查询输出终端的尺寸" class="headerlink" title="查询输出终端的尺寸"></a>查询输出终端的尺寸</h2><ul>
+<li><p><code>shutil.get_terminal_size</code>(<em>fallback=(columns</em>, <em>lines)</em>)</p>
+<p>获取终端窗口的尺寸。</p>
+<p>对于两个维度中的每一个，会分别检查环境变量 <code>COLUMNS</code> 和 <code>LINES</code>。 如果定义了这些变量并且其值为正整数，则将使用这些值。</p>
+<p>如果未定义 <code>COLUMNS</code> 或 <code>LINES</code>，这是通常的情况，则连接到 <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#sys.__stdout__" target="_blank" rel="noopener"><code>sys.__stdout__</code></a> 的终端将通过发起调用 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.get_terminal_size" target="_blank" rel="noopener"><code>os.get_terminal_size()</code></a> 被查询。</p>
+<p>如果由于系统不支持查询，或是由于我们未连接到某个终端而导致查询终端尺寸不成功，则会使用在 <code>fallback</code> 形参中给出的值。 <code>fallback</code> 默认为 <code>(80, 24)</code>，这是许多终端模拟器所使用的默认尺寸。</p>
+<p>返回的值是一个 <a href="https://docs.python.org/zh-cn/3.8/library/os.html#os.terminal_size" target="_blank" rel="noopener"><code>os.terminal_size</code></a> 类型的具名元组。</p>
+<p>另请参阅: The Single UNIX Specification, Version 2, <a href="http://pubs.opengroup.org/onlinepubs/7908799/xbd/envvar.html#tag_002_003" target="_blank" rel="noopener">Other Environment Variables</a>.</p>
+<p><em>3.3 新版功能.</em></p>
+</li>
+</ul>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">shutil主要API:</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>  shutil.copyfileobj(fsrc, fdst[, length=<span class="number">16</span>*<span class="number">1024</span>])    <span class="comment">#copy文件内容到另一个文件，可以copy指定大小的内容</span></span><br><span class="line"> </span><br><span class="line"><span class="number">2</span>  shutil.copyfile(src,dst)   <span class="comment">#copy文件内容，是不是感觉上面的文件复制很麻烦？还需要自己手动用open函数打开文件，在这里就不需要了，事实上，copyfile调用了copyfileobj</span></span><br><span class="line"> </span><br><span class="line"><span class="number">3</span>  shutil.copymode(src,dst)   <span class="comment">#仅copy权限，不更改文件内容，组和用户。</span></span><br><span class="line"> </span><br><span class="line"><span class="number">4</span>  shutil.copystat(src,dst)    <span class="comment">#复制所有的状态信息，包括权限，组，用户，时间等</span></span><br><span class="line"> </span><br><span class="line"><span class="number">5</span>  shutil.copy(src,dst)   <span class="comment">#复制文件的内容以及权限，先copyfile后copymode</span></span><br><span class="line"> </span><br><span class="line"><span class="number">6</span>  shutil.copy2(src,dst)    <span class="comment">#复制文件的内容以及文件的所有状态信息。先copyfile后copystat</span></span><br><span class="line"> </span><br><span class="line"><span class="number">7</span>  shutil.copytree(src, dst, symlinks=<span class="literal">False</span>, ignore=<span class="literal">None</span>, copy_function=copy2,ignore_dangling_symlinks=<span class="literal">False</span>)   <span class="comment">#递归的复制文件内容及状态信息</span></span><br><span class="line"> </span><br><span class="line"><span class="number">8</span>  shutil.rmtree(path, ignore_errors=<span class="literal">False</span>, onerror=<span class="literal">None</span>)   <span class="comment">#递归地删除文件</span></span><br><span class="line"> </span><br><span class="line"><span class="number">9</span>  shutil.move(src, dst)    <span class="comment">#递归的移动文件</span></span><br><span class="line"> </span><br><span class="line"><span class="number">10</span>  make_archive(base_name, format, root_dir=<span class="literal">None</span>, base_dir=<span class="literal">None</span>, verbose=<span class="number">0</span>,dry_run=<span class="number">0</span>, owner=<span class="literal">None</span>, group=<span class="literal">None</span>, logger=<span class="literal">None</span>)  <span class="comment">#压缩打包</span></span><br><span class="line"> </span><br><span class="line">base_name：    压缩打包后的文件名或者路径名</span><br><span class="line"></span><br><span class="line">format：          压缩或者打包格式    <span class="string">"zip"</span>, <span class="string">"tar"</span>, <span class="string">"bztar"</span><span class="keyword">or</span> <span class="string">"gztar"</span></span><br><span class="line"></span><br><span class="line">root_dir :         将哪个目录或者文件打包（也就是源文件）</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/02/19/python-standard-library-shutil/" title="python standard library shutil">https://pinghailinfeng.gitee.io/2020/02/19/python-standard-library-shutil/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/shutil/" rel="tag"># shutil</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/18/using-ffmpeg-download-yizhibo-m3u8-type-playback-video/" rel="next" title="using ffmpeg download yizhibo m3u8 type playback video">
+                <i class="fa fa-chevron-left"></i> using ffmpeg download yizhibo m3u8 type playback video
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/20/python-standard-library-os/" rel="prev" title="python standard library os">
+                python standard library os <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">135</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">154</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-shutil-高阶文件操作"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 shutil 高阶文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">1.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录和文件操作"><span class="nav-number">1.2.</span> <span class="nav-text">目录和文件操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖于具体平台的高效拷贝操作"><span class="nav-number">1.3.</span> <span class="nav-text">依赖于具体平台的高效拷贝操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#copytree-示例"><span class="nav-number">1.3.1.</span> <span class="nav-text">copytree 示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rmtree-示例"><span class="nav-number">1.3.2.</span> <span class="nav-text">rmtree 示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#归档操作"><span class="nav-number">1.4.</span> <span class="nav-text">归档操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#归档程序示例"><span class="nav-number">1.4.1.</span> <span class="nav-text">归档程序示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询输出终端的尺寸"><span class="nav-number">1.5.</span> <span class="nav-text">查询输出终端的尺寸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">1.6.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2020/">2020</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2to3/">2to3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tkinter/">Tkinter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">_thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/argparse/">argparse</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atexit/">atexit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/code/">code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dis/">dis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doctest/">doctest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dom/">dom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp32/">esp32</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esptool/">esptool</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fileinput/">fileinput</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/">futures</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keyword/">keyword</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lite-server/">lite-server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micorpython/">micorpython</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micropython/">micropython</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minidom/">minidom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modulefinder/">modulefinder</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/others/">others</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwd/">pwd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">89</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re/">re</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/readline/">readline</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sax/">sax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sched/">sched</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/select/">select</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selectors/">selectors</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standar-library/">standar_library</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">78</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/">turtle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/">typescript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uPycraft/">uPycraft</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unittest/">unittest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/">venv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webrepl/">webrepl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/">xml</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环/">循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感悟/">感悟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化测试/">自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">787k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">11:55</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>

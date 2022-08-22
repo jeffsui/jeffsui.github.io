@@ -1,0 +1,2052 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="214VUocOxt">
+
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: true,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="python 标准库 json">
+<meta name="keywords" content="python,standard_library,json">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python standard library json">
+<meta property="og:url" content="https://pinghailinfeng.gitee.io/2020/02/08/python-standard-library-json/index.html">
+<meta property="og:site_name" content="凭海临风的IT江湖">
+<meta property="og:description" content="python 标准库 json">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20191223_blog_6.jpg?raw=true">
+<meta property="og:updated_time" content="2022-08-18T08:03:08.587Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python standard library json">
+<meta name="twitter:description" content="python 标准库 json">
+<meta name="twitter:image" content="https://github.com/jeffsui/app_image_resource/blob/master/20191223_blog_6.jpg?raw=true">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="凭海临风的IT江湖" type="application/atom+xml">
+
+
+
+  
+  
+  <link rel="canonical" href="https://pinghailinfeng.gitee.io/2020/02/08/python-standard-library-json/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python standard library json | 凭海临风的IT江湖</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">凭海临风的IT江湖</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/top/" rel="section"><i class="menu-item-icon fa fa-fw fa-signal"></i> <br>排行榜</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>站点地图</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-timeline">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/timeline/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>时间轴</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/jeffsui" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+    <div class="reading-progress-bar"></div>
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://pinghailinfeng.gitee.io/2020/02/08/python-standard-library-json/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jeff Sui">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="凭海临风的IT江湖">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python standard library json
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-08 11:53:06" itemprop="dateCreated datePublished" datetime="2020-02-08T11:53:06+08:00">2020-02-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2022-08-18 16:03:08" itemprop="dateModified" datetime="2022-08-18T16:03:08+08:00">2022-08-18</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/python/standard-library/" itemprop="url" rel="index"><span itemprop="name">standard_library</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">11k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">10 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python-标准库-json"><a href="#python-标准库-json" class="headerlink" title="python 标准库 json"></a>python 标准库 json</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20191223_blog_6.jpg?raw=true" alt></p>
+<a id="more"></a>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=25706282&auto=0&height=66"></iframe>
+
+<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p><strong>源代码:</strong> <a href="https://github.com/python/cpython/tree/3.8/Lib/json/__init__.py" target="_blank" rel="noopener">Lib/json/<strong>init</strong>.py</a></p>
+<p> <a href="http://json.org/" target="_blank" rel="noopener">JSON (JavaScript Object Notation)</a>，由 <a href="https://tools.ietf.org/html/rfc7159.html" target="_blank" rel="noopener"><strong>RFC 7159</strong></a> (which obsoletes <a href="https://tools.ietf.org/html/rfc4627.html" target="_blank" rel="noopener"><strong>RFC 4627</strong></a>) 和 <a href="http://www.ecma-international.org/publications/standards/Ecma-404.htm" target="_blank" rel="noopener">ECMA-404</a> 指定，是一个受 <a href="https://en.wikipedia.org/wiki/JavaScript" target="_blank" rel="noopener">JavaScript</a> 的对象字面量语法启发的轻量级数据交换格式，尽管它不仅仅是一个严格意义上的 JavaScript 的字集。</p>
+<p> <a href="https://docs.python.org/zh-cn/3.8/library/json.html#module-json" target="_blank" rel="noopener"><code>json</code></a> 提供了与标准库 <a href="https://docs.python.org/zh-cn/3.8/library/marshal.html#module-marshal" target="_blank" rel="noopener"><code>marshal</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/pickle.html#module-pickle" target="_blank" rel="noopener"><code>pickle</code></a> 相似的API接口。 </p>
+<p> 对基本的 Python 对象层次结构进行编码： </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> json</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.dumps([<span class="string">'foo'</span>, &#123;<span class="string">'bar'</span>: (<span class="string">'baz'</span>, <span class="literal">None</span>, <span class="number">1.0</span>, <span class="number">2</span>)&#125;])</span><br><span class="line"><span class="string">'["foo", &#123;"bar": ["baz", null, 1.0, 2]&#125;]'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(json.dumps(<span class="string">"\"foo\bar"</span>))</span><br><span class="line"><span class="string">"\"foo\bar"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(json.dumps(<span class="string">'\u1234'</span>))</span><br><span class="line"><span class="string">"\u1234"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(json.dumps(<span class="string">'\\'</span>))</span><br><span class="line"><span class="string">"\\"</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(json.dumps(&#123;<span class="string">"c"</span>: <span class="number">0</span>, <span class="string">"b"</span>: <span class="number">0</span>, <span class="string">"a"</span>: <span class="number">0</span>&#125;, sort_keys=<span class="literal">True</span>))</span><br><span class="line">&#123;<span class="string">"a"</span>: <span class="number">0</span>, <span class="string">"b"</span>: <span class="number">0</span>, <span class="string">"c"</span>: <span class="number">0</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> io <span class="keyword">import</span> StringIO</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>io = StringIO()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.dump([<span class="string">'streaming API'</span>], io)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>io.getvalue()</span><br><span class="line"><span class="string">'["streaming API"]'</span></span><br></pre></td></tr></table></figure>
+<p> 紧凑编码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> json</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.dumps([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, &#123;<span class="string">'4'</span>: <span class="number">5</span>, <span class="string">'6'</span>: <span class="number">7</span>&#125;], separators=(<span class="string">','</span>, <span class="string">':'</span>))</span><br><span class="line"><span class="string">'[1,2,3,&#123;"4":5,"6":7&#125;]'</span></span><br></pre></td></tr></table></figure>
+<p>美化输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> json</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(json.dumps(&#123;<span class="string">'4'</span>: <span class="number">5</span>, <span class="string">'6'</span>: <span class="number">7</span>&#125;, sort_keys=<span class="literal">True</span>, indent=<span class="number">4</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"4"</span>: <span class="number">5</span>,</span><br><span class="line">    <span class="string">"6"</span>: <span class="number">7</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>JSON解码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> json</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.loads(<span class="string">'["foo", &#123;"bar":["baz", null, 1.0, 2]&#125;]'</span>)</span><br><span class="line">[<span class="string">'foo'</span>, &#123;<span class="string">'bar'</span>: [<span class="string">'baz'</span>, <span class="literal">None</span>, <span class="number">1.0</span>, <span class="number">2</span>]&#125;]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.loads(<span class="string">'"\\"foo\\bar"'</span>)</span><br><span class="line"><span class="string">'"foo\x08ar'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> io <span class="keyword">import</span> StringIO</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>io = StringIO(<span class="string">'["streaming API"]'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.load(io)</span><br><span class="line">[<span class="string">'streaming API'</span>]</span><br></pre></td></tr></table></figure>
+<p> 特殊JSON对象解码: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> json</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="function"><span class="keyword">def</span> <span class="title">as_complex</span><span class="params">(dct)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="keyword">if</span> <span class="string">'__complex__'</span> <span class="keyword">in</span> dct:</span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> complex(dct[<span class="string">'real'</span>], dct[<span class="string">'imag'</span>])</span><br><span class="line"><span class="meta">... </span>    <span class="keyword">return</span> dct</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.loads(<span class="string">'&#123;"__complex__": true, "real": 1, "imag": 2&#125;'</span>,</span><br><span class="line"><span class="meta">... </span>    object_hook=as_complex)</span><br><span class="line">(<span class="number">1</span>+<span class="number">2j</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> decimal</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.loads(<span class="string">'1.1'</span>, parse_float=decimal.Decimal)</span><br><span class="line">Decimal(<span class="string">'1.1'</span>)</span><br></pre></td></tr></table></figure>
+<p>扩展 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json.JSONEncoder" target="_blank" rel="noopener"><code>JSONEncoder</code></a>: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> json</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="class"><span class="keyword">class</span> <span class="title">ComplexEncoder</span><span class="params">(json.JSONEncoder)</span>:</span></span><br><span class="line"><span class="meta">... </span>    <span class="function"><span class="keyword">def</span> <span class="title">default</span><span class="params">(self, obj)</span>:</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">if</span> isinstance(obj, complex):</span><br><span class="line"><span class="meta">... </span>            <span class="keyword">return</span> [obj.real, obj.imag]</span><br><span class="line"><span class="meta">... </span>        <span class="comment"># Let the base class default method raise the TypeError</span></span><br><span class="line"><span class="meta">... </span>        <span class="keyword">return</span> json.JSONEncoder.default(self, obj)</span><br><span class="line">...</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.dumps(<span class="number">2</span> + <span class="number">1j</span>, cls=ComplexEncoder)</span><br><span class="line"><span class="string">'[2.0, 1.0]'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ComplexEncoder().encode(<span class="number">2</span> + <span class="number">1j</span>)</span><br><span class="line"><span class="string">'[2.0, 1.0]'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list(ComplexEncoder().iterencode(<span class="number">2</span> + <span class="number">1j</span>))</span><br><span class="line">[<span class="string">'[2.0'</span>, <span class="string">', 1.0'</span>, <span class="string">']'</span>]</span><br></pre></td></tr></table></figure>
+<p> 从命令行使用 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#module-json.tool" target="_blank" rel="noopener"><code>json.tool</code></a> 来验证并美化输出： </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ echo <span class="string">'&#123;"json":"obj"&#125;'</span> | python -m json.tool</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"json"</span>: <span class="string">"obj"</span></span><br><span class="line">&#125;</span><br><span class="line">$ echo <span class="string">'&#123;1.2:3.4&#125;'</span> | python -m json.tool</span><br><span class="line">Expecting property name enclosed <span class="keyword">in</span> double quotes: line <span class="number">1</span> column <span class="number">2</span> (char <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p> 详细文档请参见 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json-commandline" target="_blank" rel="noopener">命令行界面</a>。 </p>
+<blockquote>
+<p> JSON 是 <a href="http://yaml.org/" target="_blank" rel="noopener">YAML</a> 1.2 的一个子集。由该模块的默认设置生成的 JSON （尤其是默认的 “分隔符” 设置值）也是 YAML 1.0 and 1.1 的一个子集。因此该模块也能够用于序列化为 YAML。 </p>
+</blockquote>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><ul>
+<li><p><code>json.dump</code>(<em>obj</em>, <em>fp</em>, <strong><em>, </em>skipkeys=False<em>, </em>ensure_ascii=True<em>, </em>check_circular=True<em>, </em>allow_nan=True<em>, </em>cls=None<em>, </em>indent=None<em>, </em>separators=None<em>, </em>default=None<em>, </em>sort_keys=False<em>, </em></strong>kw*) </p>
+<p> 使用这个 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#py-to-json-table" target="_blank" rel="noopener">转换表</a> 将 <em>obj</em> 序列化为 JSON 格式化流形式的 <em>fp</em> (支持 <code>.write()</code> 的 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-file-like-object" target="_blank" rel="noopener">file-like object</a>)。 </p>
+<p>如果 <em>skipkeys</em> 是 true （默认为 <code>False</code>），那么那些不是基本对象（包括 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a>、<a href="https://docs.python.org/zh-cn/3.8/library/functions.html#float" target="_blank" rel="noopener"><code>float</code></a>、<a href="https://docs.python.org/zh-cn/3.8/library/functions.html#bool" target="_blank" rel="noopener"><code>bool</code></a>、<code>None</code>）的字典的键会被跳过；否则引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a>。</p>
+<p><a href="https://docs.python.org/zh-cn/3.8/library/json.html#module-json" target="_blank" rel="noopener"><code>json</code></a> 模块始终产生 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a> 对象而非 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#bytes" target="_blank" rel="noopener"><code>bytes</code></a> 对象。因此，<code>fp.write()</code> 必须支持 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a> 输入。</p>
+<p>如果 <em>ensure_ascii</em> 是 true （即默认值），输出保证将所有输入的非 ASCII 字符转义。如果 <em>ensure_ascii</em> 是 false，这些字符会原样输出。</p>
+<p>如果 <em>check_circular</em> 是为假值 (默认为 <code>True</code>)，那么容器类型的循环引用检验会被跳过并且循环引用会引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OverflowError" target="_blank" rel="noopener"><code>OverflowError</code></a> (或者更糟的情况)。</p>
+<p>如果 <em>allow_nan</em> 是 false（默认为 <code>True</code>），那么在对严格 JSON 规格范围外的 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#float" target="_blank" rel="noopener"><code>float</code></a> 类型值（<code>nan</code>、<code>inf</code> 和 <code>-inf</code>）进行序列化时会引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a>。如果 <em>allow_nan</em> 是 true，则使用它们的 JavaScript 等价形式（<code>NaN</code>、<code>Infinity</code> 和 <code>-Infinity</code>）。</p>
+<p>如果 <em>indent</em> 是一个非负整数或者字符串，那么 JSON 数组元素和对象成员会被美化输出为该值指定的缩进等级。如果缩进等级为零、负数或者 <code>&quot;&quot;</code>，则只会添加换行符。<code>None（默认值）选择最紧凑的表达。使用一个正整数会让每一层缩进同样数量的空格。如果 *indent* 是一个字符串（比如 &quot;\t&quot;</code>），那个字符串会被用于缩进每一层。</p>
+<p><em>在 3.2 版更改:</em> 允许使用字符串作为 <em>indent</em> 而不再仅仅是整数。</p>
+<p>当指定时，<em>separators</em> 应当是一个 <code>(item_separator, key_separator)</code> 元组。当 <em>indent</em> 为 <code>None</code> 时，默认值取 <code>(&#39;, &#39;, &#39;: &#39;)</code>，否则取 <code>(&#39;,&#39;, &#39;: &#39;)</code>。为了得到最紧凑的 JSON 表达式，你应该指定其为 <code>(&#39;,&#39;, &#39;:&#39;)</code> 以消除空白字符。</p>
+<p><em>在 3.4 版更改:</em> 现当 <em>indent</em> 不是 <code>None</code> 时，采用 <code>(&#39;,&#39;, &#39;: &#39;)</code> 作为默认值。</p>
+<p>当 <em>default</em> 被指定时，其应该是一个函数，每当某个对象无法被序列化时它会被调用。它应该返回该对象的一个可以被 JSON 编码的版本或者引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a>。如果没有被指定，则会直接引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a>。</p>
+<p>如果 <em>sort_keys</em> 是 true（默认为 <code>False</code>），那么字典的输出会以键的顺序排序。</p>
+<p>为了使用一个自定义的 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json.JSONEncoder" target="_blank" rel="noopener"><code>JSONEncoder</code></a> 子类（比如：覆盖了 <code>default()</code> 方法来序列化额外的类型）， 通过 <em>cls</em> 关键字参数来指定；否则将使用 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json.JSONEncoder" target="_blank" rel="noopener"><code>JSONEncoder</code></a>。</p>
+</li>
+<li><p>json.dumps(obj, *, skipkeys=False, ensure_ascii=True, check_circular=True, allow_nan=True, cls=None, indent=None, separators=None, default=None, sort_keys=False, **kw)</p>
+<p> 使用这个 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#py-to-json-table" target="_blank" rel="noopener">转换表</a> 将 <em>obj</em> 序列化为 JSON 格式的 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a>。 其参数的含义与 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json.dump" target="_blank" rel="noopener"><code>dump()</code></a> 中的相同。 </p>
+</li>
+<li><p><code>json.load</code>(<em>fp</em>, <strong><em>, </em>cls=None<em>, </em>object_hook=None<em>, </em>parse_float=None<em>, </em>parse_int=None<em>, </em>parse_constant=None<em>, </em>object_pairs_hook=None<em>, </em></strong>kw*) </p>
+<p>使用这个 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json-to-py-table" target="_blank" rel="noopener">转换表</a> 将 <em>fp</em> (一个支持 <code>.read()</code> 并包含一个 JSON 文档的 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-text-file" target="_blank" rel="noopener">text file</a> 或者 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-binary-file" target="_blank" rel="noopener">binary file</a>) 反序列化为一个 Python 对象。</p>
+<p><em>object_hook</em> 是一个可选的函数，它会被调用于每一个解码出的对象字面量（即一个 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#dict" target="_blank" rel="noopener"><code>dict</code></a>）。<em>object_hook</em> 的返回值会取代原本的 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#dict" target="_blank" rel="noopener"><code>dict</code></a>。这一特性能够被用于实现自定义解码器（如 <a href="http://www.jsonrpc.org/" target="_blank" rel="noopener">JSON-RPC</a> 的类型提示)。</p>
+<p><em>object_pairs_hook</em> 是一个可选的函数，它会被调用于每一个有序列表对解码出的对象字面量。 <em>object_pairs_hook</em> 的返回值将会取代原本的 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#dict" target="_blank" rel="noopener"><code>dict</code></a> 。这一特性能够被用于实现自定义解码器。如果 <em>object_hook</em> 也被定义， <em>object_pairs_hook</em> 优先。</p>
+<p><em>在 3.1 版更改:</em> 添加了对 <em>object_pairs_hook</em> 的支持。</p>
+<p><em>parse_float</em> ，如果指定，将与每个要解码 JSON 浮点数的字符串一同调用。默认状态下，相当于 <code>float(num_str)</code> 。可以用于对 JSON 浮点数使用其它数据类型和语法分析程序 （比如 <a href="https://docs.python.org/zh-cn/3.8/library/decimal.html#decimal.Decimal" target="_blank" rel="noopener"><code>decimal.Decimal</code></a> ）。</p>
+<p><em>parse_int</em> ，如果指定，将与每个要解码 JSON 整数的字符串一同调用。默认状态下，相当于 <code>int(num_str)</code> 。可以用于对 JSON 整数使用其它数据类型和语法分析程序 （比如 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#float" target="_blank" rel="noopener"><code>float</code></a> ）。</p>
+<p><em>parse_constant</em> ，如果指定，将要与以下字符串中的一个一同调用： <code>&#39;-Infinity&#39;</code> ， <code>&#39;Infinity&#39;</code> ， <code>&#39;NaN&#39;</code> 。如果遇到无效的 JSON 数字则可以使用它引发异常。</p>
+<p><em>在 3.1 版更改:</em> <em>parse_constant</em> 不再调用 ‘null’ ， ‘true’ ， ‘false’ 。</p>
+<p>要使用自定义的 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json.JSONDecoder" target="_blank" rel="noopener"><code>JSONDecoder</code></a> 子类，用 <code>cls</code> 指定他；否则使用 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json.JSONDecoder" target="_blank" rel="noopener"><code>JSONDecoder</code></a> 。额外的关键词参数会通过类的构造函数传递。</p>
+<p>如果反序列化的数据不是有效 JSON 文档，引发 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json.JSONDecodeError" target="_blank" rel="noopener"><code>JSONDecodeError</code></a> 错误。</p>
+<p><em>在 3.6 版更改:</em> 所有的可选参数现在是 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#keyword-only-parameter" target="_blank" rel="noopener">keyword-only</a> 的了。</p>
+<p><em>在 3.6 版更改:</em> <em>fp</em> 现在可以是 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#term-binary-file" target="_blank" rel="noopener">binary file</a> 。输入编码应当是 UTF-8 ， UTF-16 或者 UTF-32 。</p>
+</li>
+<li><p><code>json.loads</code>(<em>s</em>, <strong><em>, </em>cls=None<em>, </em>object_hook=None<em>, </em>parse_float=None<em>, </em>parse_int=None<em>, </em>parse_constant=None<em>, </em>object_pairs_hook=None<em>, </em></strong>kw*) </p>
+<p>使用这个 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json-to-py-table" target="_blank" rel="noopener">转换表</a> 将 <em>s</em> (一个包含 JSON 文档的 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#bytes" target="_blank" rel="noopener"><code>bytes</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#bytearray" target="_blank" rel="noopener"><code>bytearray</code></a> 实例) 反序列化为 Python 对象。</p>
+<p>除了<em>encoding</em>被忽略和弃用自 Python 3.1 以来，其他参数的含义与 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json.load" target="_blank" rel="noopener"><code>load()</code></a> 中相同。</p>
+<p>如果反序列化的数据不是有效 JSON 文档，引发 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json.JSONDecodeError" target="_blank" rel="noopener"><code>JSONDecodeError</code></a> 错误。</p>
+<p><em>Deprecated since version 3.1, will be removed in version 3.9:</em> <em>encoding</em> 关键字参数。</p>
+<p><em>在 3.6 版更改:</em> <em>s</em> 现在可以为 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#bytes" target="_blank" rel="noopener"><code>bytes</code></a> 或 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#bytearray" target="_blank" rel="noopener"><code>bytearray</code></a> 类型。 输入编码应为 UTF-8, UTF-16 或 UTF-32。</p>
+</li>
+</ul>
+<h2 id="编码器和解码器"><a href="#编码器和解码器" class="headerlink" title="编码器和解码器"></a>编码器和解码器</h2><ul>
+<li><p><em>class</em> <code>json.JSONDecoder</code>(<em>**, </em>object_hook=None<em>, </em>parse_float=None<em>, </em>parse_int=None<em>, </em>parse_constant=None<em>, </em>strict=True<em>, </em>object_pairs_hook=None*) </p>
+<p>简单的JSON解码器。</p>
+<p>默认情况下，解码执行以下翻译:</p>
+<p>| JSON          | Python |<br>| :———— | :—– |<br>| object        | dict   |<br>| array         | list   |<br>| string        | str    |<br>| number (int)  | int    |<br>| number (real) | float  |<br>| true          | True   |<br>| false         | False  |<br>| null          | None   |</p>
+</li>
+</ul>
+<p>​      它还将“NaN”、“Infinity”和“-Infinity”理解为它们对应的“float”值，这超出了JSON规范。</p>
+<p>​    <em>object_hook</em> ，如果指定，会被每个解码的 JSON 对象的结果调用，并且返回值会替代给定 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#dict" target="_blank" rel="noopener"><code>dict</code></a> 。它可被用于提供自定义反序列化（比如去支持 JSON-RPC 类的暗示）。</p>
+<p>如果指定了 <em>object_pairs_hook</em> 则它将被调用并传入以对照值有序列表进行解码的每个 JSON 对象的结果。 <em>object_pairs_hook</em> 的结果值将被用来替代 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#dict" target="_blank" rel="noopener"><code>dict</code></a>。 这一特性可被用于实现自定义解码器。 如果还定义了 <em>object_hook</em>，则 <em>object_pairs_hook</em> 的优先级更高。</p>
+<p><em>在 3.1 版更改:</em> 添加了对 <em>object_pairs_hook</em> 的支持。</p>
+<p><em>parse_float</em> ，如果指定，将与每个要解码 JSON 浮点数的字符串一同调用。默认状态下，相当于 <code>float(num_str)</code> 。可以用于对 JSON 浮点数使用其它数据类型和语法分析程序 （比如 <a href="https://docs.python.org/zh-cn/3.8/library/decimal.html#decimal.Decimal" target="_blank" rel="noopener"><code>decimal.Decimal</code></a> ）。</p>
+<p><em>parse_int</em> ，如果指定，将与每个要解码 JSON 整数的字符串一同调用。默认状态下，相当于 <code>int(num_str)</code> 。可以用于对 JSON 整数使用其它数据类型和语法分析程序 （比如 <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#float" target="_blank" rel="noopener"><code>float</code></a> ）。</p>
+<p><em>parse_constant</em> ，如果指定，将要与以下字符串中的一个一同调用： <code>&#39;-Infinity&#39;</code> ， <code>&#39;Infinity&#39;</code> ， <code>&#39;NaN&#39;</code> 。如果遇到无效的 JSON 数字则可以使用它引发异常。</p>
+<p>如果 <em>strict</em> 为 false （默认为 <code>True</code> ），那么控制字符将被允许在字符串内。在此上下文中的控制字符编码在范围 0–31 内的字符，包括 <code>&#39;\t&#39;</code> (制表符）， <code>&#39;\n&#39;</code> ， <code>&#39;\r&#39;</code> 和 <code>&#39;\0&#39;</code> 。</p>
+<p>如果反序列化的数据不是有效 JSON 文档，引发 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json.JSONDecodeError" target="_blank" rel="noopener"><code>JSONDecodeError</code></a> 错误。</p>
+<p><em>在 3.6 版更改:</em> 所有形参现在都是 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#keyword-only-parameter" target="_blank" rel="noopener">仅限关键字参数</a>。</p>
+<ul>
+<li><p><code>decode</code>(<em>s</em>) </p>
+<p>返回 <em>s</em> 的 Python 表示形式（包含一个 JSON 文档的 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a> 实例）。</p>
+<p>如果给定的 JSON 文档无效则将引发 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json.JSONDecodeError" target="_blank" rel="noopener"><code>JSONDecodeError</code></a>。</p>
+</li>
+<li><p><code>raw_decode</code>(<em>s</em>) </p>
+<p>从 <em>s</em> 中解码出 JSON 文档（以 JSON 文档开头的一个 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a> 对象）并返回一个 Python 表示形式为 2 元组以及指明该文档在 <em>s</em> 中结束位置的序号。</p>
+<p>这可以用于从一个字符串解码JSON文档，该字符串的末尾可能有无关的数据。</p>
+</li>
+</ul>
+<ul>
+<li><p><em>lass</em> <code>json.JSONEncoder</code>(<em>**, </em>skipkeys=False<em>, </em>ensure_ascii=True<em>, </em>check_circular=True<em>, </em>allow_nan=True<em>, </em>sort_keys=False<em>, </em>indent=None<em>, </em>separators=None<em>, </em>default=None*) </p>
+<p>用于Python数据结构的可扩展JSON编码器。</p>
+<p>默认支持以下对象和类型：</p>
+<p>| Python                              | JSON   |<br>| :———————————- | :—– |<br>| dict                                | object |<br>| list, tuple                         | array  |<br>| str                                 | string |<br>| int, float, int 和 float 派生的枚举 | number |<br>| True                                | true   |<br>| False                               | false  |<br>| None                                | null   |</p>
+<p><em>在 3.4 版更改:</em> 添加了对 int 和 float 派生的枚举类的支持</p>
+<p>为了将其拓展至识别其他对象，需要子类化并实现 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json.JSONEncoder.default" target="_blank" rel="noopener"><code>default()</code></a> 方法于另一种返回 <code>o</code> 的可序列化对象的方法如果可行，否则它应该调用超类实现（来引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a> ）。</p>
+<p>如果 <em>skipkeys</em> 为假值（默认），则尝试对不是 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#int" target="_blank" rel="noopener"><code>int</code></a>, <a href="https://docs.python.org/zh-cn/3.8/library/functions.html#float" target="_blank" rel="noopener"><code>float</code></a> 或 <code>None</code> 的键进行编码将会引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a>。 如果 <em>skipkeys</em> 为真值，这些条目将被直接跳过。</p>
+<p>如果 <em>ensure_ascii</em> 是 true （即默认值），输出保证将所有输入的非 ASCII 字符转义。如果 <em>ensure_ascii</em> 是 false，这些字符会原样输出。</p>
+<p>如果 <em>check_circular</em> 为 true （默认），那么列表，字典，和自定义编码的对象在编码期间会被检查重复循环引用防止无限递归（无限递归将导致 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#OverflowError" target="_blank" rel="noopener"><code>OverflowError</code></a> ）。否则，这样进行检查。</p>
+<p>如果 <em>allow_nan</em> 为 true （默认），那么 <code>NaN</code> ， <code>Infinity</code> ，和 <code>-Infinity</code> 进行编码。此行为不符合 JSON 规范，但与大多数的基于 Javascript 的编码器和解码器一致。否则，它将是一个 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a> 来编码这些浮点数。</p>
+<p>如果 <em>sort_keys</em> 为 true （默认为： <code>False</code> ），那么字典的输出是按照键排序；这对回归测试很有用，以确保可以每天比较 JSON 序列化。</p>
+<p>如果 <em>indent</em> 是一个非负整数或者字符串，那么 JSON 数组元素和对象成员会被美化输出为该值指定的缩进等级。如果缩进等级为零、负数或者 <code>&quot;&quot;</code>，则只会添加换行符。<code>None（默认值）选择最紧凑的表达。使用一个正整数会让每一层缩进同样数量的空格。如果 *indent* 是一个字符串（比如 &quot;\t&quot;</code>），那个字符串会被用于缩进每一层。</p>
+<p><em>在 3.2 版更改:</em> 允许使用字符串作为 <em>indent</em> 而不再仅仅是整数。</p>
+<p>当指定时，<em>separators</em> 应当是一个 <code>(item_separator, key_separator)</code> 元组。当 <em>indent</em> 为 <code>None</code> 时，默认值取 <code>(&#39;, &#39;, &#39;: &#39;)</code>，否则取 <code>(&#39;,&#39;, &#39;: &#39;)</code>。为了得到最紧凑的 JSON 表达式，你应该指定其为 <code>(&#39;,&#39;, &#39;:&#39;)</code> 以消除空白字符。</p>
+<p><em>在 3.4 版更改:</em> 现当 <em>indent</em> 不是 <code>None</code> 时，采用 <code>(&#39;,&#39;, &#39;: &#39;)</code> 作为默认值。</p>
+<p>当 <em>default</em> 被指定时，其应该是一个函数，每当某个对象无法被序列化时它会被调用。它应该返回该对象的一个可以被 JSON 编码的版本或者引发一个 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a>。如果没有被指定，则会直接引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a>。</p>
+<p><em>在 3.6 版更改:</em> 所有形参现在都是 <a href="https://docs.python.org/zh-cn/3.8/glossary.html#keyword-only-parameter" target="_blank" rel="noopener">仅限关键字参数</a>。</p>
+<ul>
+<li><p><code>default</code>(<em>o</em>) </p>
+<p>在子类中实现这种方法使其返回 <em>o</em> 的可序列化对象，或者调用基础实现（引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#TypeError" target="_blank" rel="noopener"><code>TypeError</code></a> ）。</p>
+<p>比如说，为了支持任意迭代器，你可以像这样实现默认设置:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">default</span><span class="params">(self, o)</span>:</span></span><br><span class="line">   <span class="keyword">try</span>:</span><br><span class="line">       iterable = iter(o)</span><br><span class="line">   <span class="keyword">except</span> TypeError:</span><br><span class="line">       <span class="keyword">pass</span></span><br><span class="line">   <span class="keyword">else</span>:</span><br><span class="line">       <span class="keyword">return</span> list(iterable)</span><br><span class="line">   <span class="comment"># Let the base class default method raise the TypeError</span></span><br><span class="line">   <span class="keyword">return</span> json.JSONEncoder.default(self, o)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>encode</code>(<em>o</em>) </p>
+<p>返回 Python <em>o</em> 数据结构的 JSON 字符串表达方式。例如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.JSONEncoder().encode(&#123;<span class="string">"foo"</span>: [<span class="string">"bar"</span>, <span class="string">"baz"</span>]&#125;)</span><br><span class="line"><span class="string">'&#123;"foo": ["bar", "baz"]&#125;'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>iterencode</code>(<em>o</em>) </p>
+<p>编码给定对象 <em>o</em> ，并且让每个可用的字符串表达方式。例如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> chunk <span class="keyword">in</span> json.JSONEncoder().iterencode(bigobject):</span><br><span class="line">    mysocket.write(chunk)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p><em>exception</em> <code>json.JSONDecodeError</code>(<em>msg</em>, <em>doc</em>, <em>pos</em>)</p>
+<p>拥有以下附加属性的 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a> 的子类：</p>
+<ul>
+<li><p><code>msg</code></p>
+<p>未格式化的错误消息。</p>
+</li>
+<li><p><code>doc</code></p>
+<p>正在解析的 JSON 文档。</p>
+</li>
+<li><p><code>pos</code></p>
+<p>从文档开始解析失败的索引</p>
+</li>
+<li><p><code>lineno</code></p>
+<p>定位的行号</p>
+</li>
+<li><p><code>colno</code></p>
+<p>定位的列号</p>
+</li>
+</ul>
+<h2 id="标准符合性和互操作性"><a href="#标准符合性和互操作性" class="headerlink" title="标准符合性和互操作性"></a>标准符合性和互操作性</h2><p>JSON 格式由 <a href="https://tools.ietf.org/html/rfc7159.html" target="_blank" rel="noopener"><strong>RFC 7159</strong></a> 和 <a href="http://www.ecma-international.org/publications/standards/Ecma-404.htm" target="_blank" rel="noopener">ECMA-404</a> 指定。此段落详细讲了这个模块符合 RFC 的级别。简单来说， <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json.JSONEncoder" target="_blank" rel="noopener"><code>JSONEncoder</code></a> 和 <a href="https://docs.python.org/zh-cn/3.8/library/json.html#json.JSONDecoder" target="_blank" rel="noopener"><code>JSONDecoder</code></a> 子类，和明确提到的参数以外的参数，不作考虑。</p>
+<p>此模块不严格遵循于 RFC ，它实现了一些扩展是有效的 Javascript 但不是有效的 JSON。尤其是：</p>
+<ul>
+<li>无限和 NaN 数值是被接受并输出；</li>
+<li>对象内的重复名称是接受的，并且仅使用最后一对属性-值对的值。</li>
+</ul>
+<p>自从 RFC 允许符合 RFC 的语法分析程序接收 不符合 RFC 的输入文本以来，这个模块的解串器在默认状态下默认符合 RFC 。</p>
+<h3 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h3><p>RFC 要求使用 UTF-8 ， UTF-16 ，或 UTF-32 之一来表示 JSON ，为了最大互通性推荐使用 UTF-8 。</p>
+<p>RFC允许，尽管不是必须的，这个模块的序列化默认设置为 <em>ensure_ascii=True</em> ，这样消除输出以便结果字符串至容纳 ASCII 字符。</p>
+<p><em>ensure_ascii</em> 参数以外，此模块是严格的按照在 Python 对象和 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>Unicode strings</code></a> 间的转换定义的，并且因此不能直接解决字符编码的问题。</p>
+<p>RFC 禁止添加字符顺序标记（ BOM ）在 JSON 文本的开头，这个模块的序列化器不添加 BOM 标记在它的输出上。 RFC，准许 JSON 反序列化器忽略它们输入中的初始 BOM 标记，但不要求。此模块的反序列化器引发 <a href="https://docs.python.org/zh-cn/3.8/library/exceptions.html#ValueError" target="_blank" rel="noopener"><code>ValueError</code></a> 当存在初始 BOM 标记。</p>
+<p>RFC 不会明确禁止包含字节序列的 JSON 字符串这不对应有效的 Unicode 字符（比如 不成对的 UTF-16 的替代物），但是它确实指出它们可能会导致互操作性问题。默认下，模块对这样的序列接受和输出（当在原始 <a href="https://docs.python.org/zh-cn/3.8/library/stdtypes.html#str" target="_blank" rel="noopener"><code>str</code></a> 存在时）代码点。</p>
+<h3 id="Infinite-和-NaN-数值"><a href="#Infinite-和-NaN-数值" class="headerlink" title="Infinite 和 NaN 数值"></a>Infinite 和 NaN 数值</h3><p>RFC 不允许 infinite 或者 NaN 数值的表达方式。尽管这样，默认情况下，此模块接受并且输出 <code>Infinity</code> ， <code>-Infinity</code>，和 <code>NaN</code> 好像它们是有效的JSON数字字面值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Neither of these calls raises an exception, but the results are not valid JSON</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.dumps(float(<span class="string">'-inf'</span>))</span><br><span class="line"><span class="string">'-Infinity'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.dumps(float(<span class="string">'nan'</span>))</span><br><span class="line"><span class="string">'NaN'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="comment"># Same when deserializing</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.loads(<span class="string">'-Infinity'</span>)</span><br><span class="line">-inf</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.loads(<span class="string">'NaN'</span>)</span><br><span class="line">nan</span><br></pre></td></tr></table></figure>
+<p>序列化器中， <em>allow_nan</em> 参数可用于替代这个行为。反序列化器中， <em>parse_constant</em> 参数，可用于替代这个行为。</p>
+<h3 id="对象中的重复名称"><a href="#对象中的重复名称" class="headerlink" title="对象中的重复名称"></a>对象中的重复名称</h3><p>RFC 具体说明了 在 JSON对象里的名字应该是唯一的，但没有规定如何处理JSON对象中的重复名称。默认下，此模块不引发异常；作为替代，对于给定名它将忽略除姓-值对之外的所有对:</p>
+<p>>&gt;&gt;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; weird_json = &apos;&#123;&quot;x&quot;: 1, &quot;x&quot;: 2, &quot;x&quot;: 3&#125;&apos;</span><br><span class="line">&gt;&gt;&gt; json.loads(weird_json)</span><br><span class="line">&#123;&apos;x&apos;: 3&#125;</span><br></pre></td></tr></table></figure>
+<p>参数 <code>*object_pairs_hook*</code> 可以改变这个行为</p>
+<h3 id="顶级非对象，非数组值"><a href="#顶级非对象，非数组值" class="headerlink" title="顶级非对象，非数组值"></a>顶级非对象，非数组值</h3><p>老版本的JSON声明遵循<a href="https://tools.ietf.org/html/rfc4627.html" target="_blank" rel="noopener"><strong>RFC 4627</strong></a> ,需要顶级的JSON 文本必须是JSON对象或数组(Python中的字典或列表),并且不能是null,boolean,number或字符串。<a href="https://tools.ietf.org/html/rfc7159.html" target="_blank" rel="noopener"><strong>RFC 7159</strong></a> 移除了这个限制,意味着无需在序列化和反序列化时实现该规范。</p>
+<p>除此以外,为了获得最大限度的操作灵活性,你可以根据自己的实际情况选择是否遵循该规范。</p>
+<h3 id="实现限制"><a href="#实现限制" class="headerlink" title="实现限制"></a>实现限制</h3><p>一些json 实现可能有下面的限制:</p>
+<ul>
+<li>可以接受的 JSON 文本大小 </li>
+<li>对象和数组的最大层数</li>
+<li>JSON numbers的范围以及小数位数。</li>
+<li>JSON字符串的内容和最大长度</li>
+</ul>
+<p>json模块并不会强制这些限制,这取决于自定义Python数据类型自身的实现。</p>
+<h2 id="命令行界面"><a href="#命令行界面" class="headerlink" title="命令行界面"></a>命令行界面</h2><p> <a href="https://docs.python.org/zh-cn/3.8/library/json.html#module-json.tool" target="_blank" rel="noopener"><code>json.tool</code></a> 模块实现了一个简易的命令行接口,用来验证和打印格式良好的JSON 对象。</p>
+<p>如果没有设定可选参数<code>infile</code> and <code>outfile</code>,将会使用<a href="https://docs.python.org/zh-cn/3.8/library/sys.html#sys.stdin" target="_blank" rel="noopener"><code>sys.stdin</code></a> and <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#sys.stdout" target="_blank" rel="noopener"><code>sys.stdout</code></a> 标准输入输出代替。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ echo <span class="string">'&#123;"json": "obj"&#125;'</span> | python -m json.tool</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"json"</span>: <span class="string">"obj"</span></span><br><span class="line">&#125;</span><br><span class="line">$ echo <span class="string">'&#123;1.2:3.4&#125;'</span> | python -m json.tool</span><br><span class="line">Expecting property name enclosed <span class="keyword">in</span> double quotes: line <span class="number">1</span> column <span class="number">2</span> (char <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="命令行选项"><a href="#命令行选项" class="headerlink" title="命令行选项"></a>命令行选项</h3><p> <strong>infile</strong> </p>
+<p>JSON 文件校验或美化打印。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ python -m json.tool mp_films.json</span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"title"</span>: <span class="string">"And Now for Something Completely Different"</span>,</span><br><span class="line">        <span class="string">"year"</span>: <span class="number">1971</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">"title"</span>: <span class="string">"Monty Python and the Holy Grail"</span>,</span><br><span class="line">        <span class="string">"year"</span>: <span class="number">1975</span></span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>If <em>infile</em> is not specified, read from <a href="https://docs.python.org/zh-cn/3.8/library/sys.html#sys.stdin" target="_blank" rel="noopener"><code>sys.stdin</code></a>.</p>
+<p> <strong>outfile</strong> </p>
+<p> Write the output of the <em>infile</em> to the given <em>outfile</em>. Otherwise, write it to </p>
+<p>输出到文件,如果没有设置则使用<a href="https://docs.python.org/zh-cn/3.8/library/sys.html#sys.stdout" target="_blank" rel="noopener"><code>sys.stdout</code></a>(标准输出)</p>
+<p> <strong>–sort-keys</strong> </p>
+<p>根据输出的字典的键根据字母顺序排序</p>
+<p> <strong>–json-lines</strong> </p>
+<p>解析每一行作为单独的JSON对象</p>
+<p> <code>-h, --help</code> </p>
+<p>显示帮助信息</p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechat_pay.jpg" alt="Jeff Sui 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/alipay.jpg" alt="Jeff Sui 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Jeff Sui</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://pinghailinfeng.gitee.io/2020/02/08/python-standard-library-json/" title="python standard library json">https://pinghailinfeng.gitee.io/2020/02/08/python-standard-library-json/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/standard-library/" rel="tag"># standard_library</a>
+          
+            <a href="/tags/json/" rel="tag"># json</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/07/python-standard-library-types/" rel="next" title="python standard library types">
+                <i class="fa fa-chevron-left"></i> python standard library types
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/09/python-standard-library-fractions/" rel="prev" title="python standard library fractions">
+                python standard library fractions <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jeff Sui">
+            
+              <p class="site-author-name" itemprop="name">Jeff Sui</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">135</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">154</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/jeffsui" title="GitHub &rarr; https://github.com/jeffsui" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:215687736@qq.com" title="E-Mail &rarr; mailto:215687736@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python-标准库-json"><span class="nav-number">1.</span> <span class="nav-text">python 标准库 json</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">1.1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本使用"><span class="nav-number">1.2.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编码器和解码器"><span class="nav-number">1.3.</span> <span class="nav-text">编码器和解码器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常"><span class="nav-number">1.4.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准符合性和互操作性"><span class="nav-number">1.5.</span> <span class="nav-text">标准符合性和互操作性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符编码"><span class="nav-number">1.5.1.</span> <span class="nav-text">字符编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Infinite-和-NaN-数值"><span class="nav-number">1.5.2.</span> <span class="nav-text">Infinite 和 NaN 数值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象中的重复名称"><span class="nav-number">1.5.3.</span> <span class="nav-text">对象中的重复名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#顶级非对象，非数组值"><span class="nav-number">1.5.4.</span> <span class="nav-text">顶级非对象，非数组值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现限制"><span class="nav-number">1.5.5.</span> <span class="nav-text">实现限制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行界面"><span class="nav-number">1.6.</span> <span class="nav-text">命令行界面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命令行选项"><span class="nav-number">1.6.1.</span> <span class="nav-text">命令行选项</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+  
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2020/">2020</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2to3/">2to3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Boolean/">Boolean</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Exception/">Exception</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GIL/">GIL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitGutter/">GitGutter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tkinter/">Tkinter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/all/">__all__</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">_thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/argparse/">argparse</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atexit/">atexit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bisect/">bisect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/calendar/">calendar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmath/">cmath</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/code/">code</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collections-abc/">collections.abc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/concurrent/">concurrent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/context-manager-types/">context-manager-types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cookies/">cookies</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/copy/">copy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coroutines/">coroutines</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/csv/">csv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cygwin/">cygwin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dataclasses/">dataclasses</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbm/">dbm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dict/">dict</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dictionary/">dictionary</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/difflib/">difflib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dis/">dis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/django/">django</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doctest/">doctest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dom/">dom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/enum/">enum</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp32/">esp32</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esptool/">esptool</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ffmpeg/">ffmpeg</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/filecmp/">filecmp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fileinput/">fileinput</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fractions/">fractions</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/functools/">functools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/futures/">futures</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gc/">gc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/generator/">generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gitcafe/">gitcafe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/heapq/">heapq</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-parser/">html.parser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-server/">http.server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ios/">ios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iterator/">iterator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/itertools/">itertools</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javaweb/">javaweb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/juypter/">juypter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keyword/">keyword</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linecache/">linecache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lite-server/">lite-server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/m3u8/">m3u8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micorpython/">micorpython</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micropython/">micropython</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/minidom/">minidom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modulefinder/">modulefinder</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nbextension/">nbextension</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oop/">oop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/operator/">operator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os-path/">os.path</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/others/">others</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pickle/">pickle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pprint/">pprint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pwd/">pwd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">89</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3/">python3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/queue/">queue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/re/">re</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/readline/">readline</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry/">registry</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/registry-ui/">registry-ui</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reprlib/">reprlib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sax/">sax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sched/">sched</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/select/">select</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selectors/">selectors</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/selenium/">selenium</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shutil/">shutil</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/">sort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite3/">sqlite3</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standar-library/">standar_library</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/standard-library/">standard_library</a><span class="tag-list-count">78</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/statistics/">statistics</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/string/">string</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/">sublime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tempfile/">tempfile</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/this/">this</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/thread/">thread</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timeit/">timeit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/turtle/">turtle</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/types/">types</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/typescript/">typescript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uPycraft/">uPycraft</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unittest/">unittest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/urllib-robotparser/">urllib.robotparser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/uuid/">uuid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/venv/">venv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/">vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weakref/">weakref</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web-test/">web test</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webbrowser/">webbrowser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webrepl/">webrepl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/">windows</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xml/">xml</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二维码/">二维码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客/">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/坑/">坑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典/">字典</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步/">异步</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环/">循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/感悟/">感悟</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/持续集成/">持续集成</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建/">搭建</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搭建博客/">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文章/">文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/版本管理/">版本管理</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/短网址/">短网址</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网易音乐/">网易音乐</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/美化/">美化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自动化测试/">自动化测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程/">软件工程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/闭包/">闭包</a><span class="tag-list-count">1</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+           <div>
+              <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="210" height="110" src="//music.163.com/outchain/player?type=2&id=1331901657&auto=0&height=66"></iframe>
+           </div>
+        
+
+    </div>
+  </aside>
+  
+
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeff Sui</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">787k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">11:55</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+  
+  <script src="/lib/reading_progress/reading_progress.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body>
+</html>
