@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2023-06-08T09:26:27.771Z</updated>
+  <updated>2023-06-09T06:19:44.680Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://pinghailinfeng.gitee.io/2022/12/06/word%E5%92%8Cpdf%E8%BD%AC%E6%8D%A2/"/>
     <id>https://pinghailinfeng.gitee.io/2022/12/06/word和pdf转换/</id>
     <published>2022-12-06T01:22:39.000Z</published>
-    <updated>2023-06-08T09:26:27.771Z</updated>
+    <updated>2023-06-09T06:19:44.680Z</updated>
     
     <content type="html"><![CDATA[<h1 id="使用Python-进行word和pdf转换"><a href="#使用Python-进行word和pdf转换" class="headerlink" title="使用Python 进行word和pdf转换"></a>使用Python 进行word和pdf转换</h1><p><img src="https://img.wmzhe.top/pics/f4/4c/f44ccd1b1ae065727d5f80ce8bdfdc6e.jpg" alt></p><a id="more"></a><h2 id="安装第三方库"><a href="#安装第三方库" class="headerlink" title="安装第三方库"></a>安装第三方库</h2><p><code>pip install docx2pdf</code></p><ul><li>WORD TO PDF</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> docx2pdf <span class="keyword">import</span> convert</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件位置</span></span><br><span class="line">path = <span class="string">'d:/word_list/'</span></span><br><span class="line"><span class="comment"># 定义空list,存放文件夹中的文件名</span></span><br><span class="line">files = []</span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> os.listdir(path):</span><br><span class="line">    <span class="keyword">if</span> file.endswith(<span class="string">".docx"</span>):</span><br><span class="line">        files.append(path+file)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> files:</span><br><span class="line">   a = convert(file,file.split(<span class="string">'.'</span>)[<span class="number">0</span>]+<span class="string">'.pdf'</span>) <span class="comment">#创建生成的pdf文件和文件名的文件名</span></span><br><span class="line">   time.sleep(<span class="number">1.2</span>)</span><br><span class="line"></span><br><span class="line">   print(file+<span class="string">'转换成功'</span>)</span><br></pre></td></tr></table></figure><ul><li>PDF TO WORD</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pdf2docx <span class="keyword">import</span> Converter</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="comment">#批量pdf转word</span></span><br><span class="line"></span><br><span class="line">path = <span class="string">'d:/pdf_list/'</span></span><br><span class="line"><span class="comment"># 定义空list,存放文件夹中的文件名</span></span><br><span class="line">files = []</span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> os.listdir(path):</span><br><span class="line">    <span class="keyword">if</span> file.endswith(<span class="string">".pdf"</span>):</span><br><span class="line">        files.append(path+file)</span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> files:</span><br><span class="line">    a = Converter(file)</span><br><span class="line">    a.convert(file.split(<span class="string">'.'</span>)[<span class="number">0</span>]+<span class="string">'.docx'</span>) <span class="comment">#创建生成的docx文件和文件名的文件名</span></span><br><span class="line">    a.close()</span><br><span class="line">    print(file+<span class="string">'转换成功'</span>)</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -31,12 +31,12 @@
     
     </summary>
     
-      <category term="办公" scheme="https://pinghailinfeng.gitee.io/categories/%E5%8A%9E%E5%85%AC/"/>
+      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
     
     
       <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
     
-      <category term="word" scheme="https://pinghailinfeng.gitee.io/tags/word/"/>
+      <category term="办公" scheme="https://pinghailinfeng.gitee.io/tags/%E5%8A%9E%E5%85%AC/"/>
     
   </entry>
   
@@ -301,9 +301,9 @@
       <category term="java" scheme="https://pinghailinfeng.gitee.io/categories/selenium/java/"/>
     
     
-      <category term="java" scheme="https://pinghailinfeng.gitee.io/tags/java/"/>
-    
       <category term="selenium" scheme="https://pinghailinfeng.gitee.io/tags/selenium/"/>
+    
+      <category term="java" scheme="https://pinghailinfeng.gitee.io/tags/java/"/>
     
       <category term="自动化测试" scheme="https://pinghailinfeng.gitee.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
     
