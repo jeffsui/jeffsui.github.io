@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2023-06-09T07:48:33.104Z</updated>
+  <updated>2023-07-11T07:28:45.452Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Centos jira automatatic start</title>
+    <link href="https://pinghailinfeng.gitee.io/2023/07/11/Centos-jira-automatatic-start/"/>
+    <id>https://pinghailinfeng.gitee.io/2023/07/11/Centos-jira-automatatic-start/</id>
+    <published>2023-07-11T07:23:17.000Z</published>
+    <updated>2023-07-11T07:28:45.452Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Centos下jira自启动"><a href="#Centos下jira自启动" class="headerlink" title="Centos下jira自启动"></a>Centos下jira自启动</h1><p><img src="https://marlacummins.com/wp-content/uploads/2014/07/start.jpg" alt></p><a id="more"></a><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>jira版本</p><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><ol><li>启动脚本</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: 2345 10 90</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description:jira server</span></span><br><span class="line"></span><br><span class="line">jira_home=/opt/atlassian/jira</span><br><span class="line">server_name=jira</span><br><span class="line"></span><br><span class="line">case "$1" in</span><br><span class="line">start)</span><br><span class="line">    echo "Starting $server_name "</span><br><span class="line">    $jira_home/bin/start-jira.sh</span><br><span class="line">    ;;</span><br><span class="line">stop)</span><br><span class="line">    echo "Stoping $server_name "</span><br><span class="line">    $jira_home/bin/stop-jira.sh</span><br><span class="line">    ;;</span><br><span class="line">restart)</span><br><span class="line">    stop</span><br><span class="line">    start</span><br><span class="line">    ;;</span><br><span class="line">status)</span><br><span class="line">    ps aux|grep $jira_home</span><br><span class="line">    ;;</span><br><span class="line">*)</span><br><span class="line">    echo 'Usage: %s &#123;start|stop|restart|status&#125;\n' "$prog"</span><br><span class="line">    exit 1</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure><ol start="2"><li>设置自启动</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: 2345 10 90</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description:jira server</span></span><br><span class="line"></span><br><span class="line">jira_home=/opt/atlassian/jira</span><br><span class="line">server_name=jira</span><br><span class="line"></span><br><span class="line">case "$1" in</span><br><span class="line">start)</span><br><span class="line">    echo "Starting $server_name "</span><br><span class="line">    $jira_home/bin/start-jira.sh</span><br><span class="line">    ;;</span><br><span class="line">stop)</span><br><span class="line">    echo "Stoping $server_name "</span><br><span class="line">    $jira_home/bin/stop-jira.sh</span><br><span class="line">    ;;</span><br><span class="line">restart)</span><br><span class="line">    stop</span><br><span class="line">    start</span><br><span class="line">    ;;</span><br><span class="line">status)</span><br><span class="line">    ps aux|grep $jira_home</span><br><span class="line">    ;;</span><br><span class="line">*)</span><br><span class="line">    echo 'Usage: %s &#123;start|stop|restart|status&#125;\n' "$prog"</span><br><span class="line">    exit 1</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Centos下jira自启动&quot;&gt;&lt;a href=&quot;#Centos下jira自启动&quot; class=&quot;headerlink&quot; title=&quot;Centos下jira自启动&quot;&gt;&lt;/a&gt;Centos下jira自启动&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://marlacummins.com/wp-content/uploads/2014/07/start.jpg&quot; alt&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="测试" scheme="https://pinghailinfeng.gitee.io/categories/%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="项目管理" scheme="https://pinghailinfeng.gitee.io/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
+    
+      <category term="jira" scheme="https://pinghailinfeng.gitee.io/tags/jira/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>zentao automatic start</title>
+    <link href="https://pinghailinfeng.gitee.io/2023/07/11/zentao-automatic-start/"/>
+    <id>https://pinghailinfeng.gitee.io/2023/07/11/zentao-automatic-start/</id>
+    <published>2023-07-11T06:56:18.000Z</published>
+    <updated>2023-07-11T07:29:08.577Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Centos禅道自启动"><a href="#Centos禅道自启动" class="headerlink" title="Centos禅道自启动"></a>Centos禅道自启动</h1><p><img src="https://wallpapercave.com/wp/wp5498747.jpg" alt></p><a id="more"></a><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><blockquote><p>有时候linux服务器关机还要手动启动禅道服务，很麻烦，就添加一行命令或一个脚步或设置开机自行启动</p></blockquote><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="第一种方法"><a href="#第一种方法" class="headerlink" title="第一种方法"></a>第一种方法</h3><blockquote><p>/etc/rc.local 中添加 /opt/zbox/zbox start</p></blockquote><h3 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h3><blockquote><p>CentOS7设置自定义开机启动,添加自定义系统服务</p></blockquote><ol><li><p>建立service文件</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /lib/systemd/system/zentao.service</span><br></pre></td></tr></table></figure></li><li><p>内容如下:</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=zentao</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/opt/zbox/zbox start</span><br><span class="line">ExecReload=/opt/zbox/zbox restart</span><br><span class="line">ExecStop=/opt/zbox/zbox stop</span><br><span class="line">PrivateTmp=true</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure></li><li><p>赋予权限</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 以754的权限保存在目录</span></span><br><span class="line">chmod u+x zentao.service</span><br></pre></td></tr></table></figure></li><li><p>查看服务状态</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stutus zentao</span><br></pre></td></tr></table></figure></li><li><p>设置开机启动</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable zentao.service</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Centos禅道自启动&quot;&gt;&lt;a href=&quot;#Centos禅道自启动&quot; class=&quot;headerlink&quot; title=&quot;Centos禅道自启动&quot;&gt;&lt;/a&gt;Centos禅道自启动&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://wallpapercave.com/wp/wp5498747.jpg&quot; alt&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="测试" scheme="https://pinghailinfeng.gitee.io/categories/%E6%B5%8B%E8%AF%95/"/>
+    
+    
+      <category term="禅道" scheme="https://pinghailinfeng.gitee.io/tags/%E7%A6%85%E9%81%93/"/>
+    
+      <category term="项目管理" scheme="https://pinghailinfeng.gitee.io/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
+    
+      <category term="Centos" scheme="https://pinghailinfeng.gitee.io/tags/Centos/"/>
+    
+  </entry>
   
   <entry>
     <title>Django Recursive generation</title>
@@ -462,64 +512,6 @@
       <category term="micorpython" scheme="https://pinghailinfeng.gitee.io/tags/micorpython/"/>
     
       <category term="webrepl" scheme="https://pinghailinfeng.gitee.io/tags/webrepl/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>esp32 micropython using uPycraft IDE</title>
-    <link href="https://pinghailinfeng.gitee.io/2020/03/24/esp32-micropython-using-uPyCraft/"/>
-    <id>https://pinghailinfeng.gitee.io/2020/03/24/esp32-micropython-using-uPyCraft/</id>
-    <published>2020-03-24T15:51:00.000Z</published>
-    <updated>2022-08-18T08:03:08.612Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="esp32-micropython-之旅-02-使用uPycraft-IDE"><a href="#esp32-micropython-之旅-02-使用uPycraft-IDE" class="headerlink" title="esp32 micropython 之旅 02 使用uPycraft IDE"></a>esp32 micropython 之旅 02 使用uPycraft IDE</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200326getting-started-esp32.jpg?raw=true" alt></p><a id="more"></a><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>上次使用命令方式推送代码烧录到固件,今天介绍下micropython的几个著名的IDE。</p><h3 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h3><ul><li>Thonny IDE </li><li>uPyCraft IDE.</li></ul><h3 id="使用uPyCraft"><a href="#使用uPyCraft" class="headerlink" title="使用uPyCraft"></a>使用<strong>uPyCraft</strong></h3><h4 id="Step-1-点击这个链接下载uPyCraft-的-exe文件"><a href="#Step-1-点击这个链接下载uPyCraft-的-exe文件" class="headerlink" title="Step 1.  点击这个链接下载uPyCraft 的.exe文件"></a><strong>Step 1.</strong>  点击这个<a href="https://github.com/DFRobot/uPyCraft" target="_blank" rel="noopener">链接</a>下载<strong>uPyCraft</strong> 的.exe文件</h4><h4 id="Step-2-双击安装包-打开安装后偶uPyCraft-可能是这个样子"><a href="#Step-2-双击安装包-打开安装后偶uPyCraft-可能是这个样子" class="headerlink" title="Step 2.   双击安装包,打开安装后偶uPyCraft 可能是这个样子"></a><strong>Step 2.</strong>   双击安装包,打开安装后偶uPyCraft 可能是这个样子</h4><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200326-Installing-uPyCraft-IDE-on-Windows-to-Program-ESP32.png?raw=true" alt></p><h4 id="uPyCraft-核心组件"><a href="#uPyCraft-核心组件" class="headerlink" title="uPyCraft 核心组件"></a>uPyCraft 核心组件</h4><h5 id="1-Folder-and-Files"><a href="#1-Folder-and-Files" class="headerlink" title="1. Folder and Files"></a>1. Folder and Files</h5><ul><li><p>Device ：设备 是esp32还是esp8266 还是microbit</p></li><li><p>SD : 包含文件存储的 SD 卡。很多不开发版都支持SD </p></li><li><p>uPy_lib:  包含micropython 内置模块</p></li><li><p>workSpace : 将保结果存到本地</p></li></ul><h5 id="2-Editor-：编写python代码。"><a href="#2-Editor-：编写python代码。" class="headerlink" title="2. Editor ：编写python代码。"></a>2. Editor ：编写python代码。</h5><p><strong>3. Shell/Terminal:</strong>  终端</p><h5 id="4-Tools-创建新文件，保存和上传文件到开发板上，关闭连接等功能。"><a href="#4-Tools-创建新文件，保存和上传文件到开发板上，关闭连接等功能。" class="headerlink" title="4. Tools:   创建新文件，保存和上传文件到开发板上，关闭连接等功能。"></a><strong>4. Tools:</strong>   创建新文件，保存和上传文件到开发板上，关闭连接等功能。</h5><h3 id="开始烧录最新的-esp32-micropython-固件"><a href="#开始烧录最新的-esp32-micropython-固件" class="headerlink" title="开始烧录最新的 esp32 micropython 固件"></a>开始烧录最新的 esp32 micropython 固件</h3><p>首先,从<a href="https://micropython.org/download#esp32" target="_blank" rel="noopener">这个</a>站点,下载最新的esp32 micropython固件</p><p><strong>Step 2.</strong>,打开 <strong>uPyCraft</strong> ，点击 <strong>*Tools-&gt; Serial**</strong> 选择映射端口. </p><p>  <img src="https://github.com/jeffsui/app_image_resource/blob/master/20200326Flashing-MicroPython-Firmware-on-ESP32-Board.png?raw=true" alt></p><p> <strong>Step 2.</strong> 选择<strong>*Tools-&gt;board*</strong>.这里我们选择esp32</p><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200326-using-uPyCrfaft-burn-micropython.png?raw=true" alt></p><p> <strong>Step 3.</strong> 开始烧录</p><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200326Flashing-MicroPython-Firmware-on-ESP32.png?raw=true" alt></p><h3 id="使用-uPyCraft-IDE-上传代码到esp32"><a href="#使用-uPyCraft-IDE-上传代码到esp32" class="headerlink" title="使用  uPyCraft IDE 上传代码到esp32"></a>使用  <strong>uPyCraft IDE</strong> 上传代码到esp32</h3><p><strong>Step 1.</strong> 打开 uPyCraft IDE 和 <strong>Tools-&gt;boards</strong>，选择你的主板</p><p><strong>Step 2.</strong> 直接点击 <strong><em>tools-&gt; Serial\</em></strong> 选择COM口.</p><p><strong>Step 3.</strong> 点击Connect 连接IDE和esp主板</p><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200326Uploading-the-Code%20into-ESP32.png?raw=true" alt></p><p> <strong>Step 4.</strong> 如果连接正常,则下面的终端区会显示  <strong>&gt;&gt;&gt;</strong> 符号,此时可以执行micropython的命令。</p><p>  <strong>Step 5.</strong>现在点击iNew File,并保存到本地。</p><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200326Programming-and-uploading-the-code-into-ESP32-using-uPyCraft-IDE.png?raw=true" alt></p><p><strong>Step 6.</strong> 点击新创建的文件,开始编写小灯程序的代码</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line"><span class="keyword">from</span> machine <span class="keyword">import</span> Pin</span><br><span class="line">led = Pin(<span class="number">2</span>, Pin.OUT)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    led.value(<span class="keyword">not</span> led.value())</span><br><span class="line">    sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure><p>​    </p><p> <strong>Step 7.</strong> 点击 <strong><em>Download and run\</em></strong> 按钮</p><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200326uPyCraft-IDE-blink-script-to-board.png?raw=true" alt></p><p> <strong>Step 8.</strong> 重新测试代码是否正确,点击 <strong><em>En/Reset\</em></strong> 按钮。</p><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>不知道什么原因,win7操作系统 uPycraft 就是识别不了 我的板子,换成win10 一次性搞定。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;esp32-micropython-之旅-02-使用uPycraft-IDE&quot;&gt;&lt;a href=&quot;#esp32-micropython-之旅-02-使用uPycraft-IDE&quot; class=&quot;headerlink&quot; title=&quot;esp32 micropython 之旅 02 使用uPycraft IDE&quot;&gt;&lt;/a&gt;esp32 micropython 之旅 02 使用uPycraft IDE&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://github.com/jeffsui/app_image_resource/blob/master/20200326getting-started-esp32.jpg?raw=true&quot; alt&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
-    
-      <category term="micropython" scheme="https://pinghailinfeng.gitee.io/categories/python/micropython/"/>
-    
-    
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
-    
-      <category term="micropython" scheme="https://pinghailinfeng.gitee.io/tags/micropython/"/>
-    
-      <category term="esp32" scheme="https://pinghailinfeng.gitee.io/tags/esp32/"/>
-    
-      <category term="uPycraft" scheme="https://pinghailinfeng.gitee.io/tags/uPycraft/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>esp32 micropython tutorial 01 environment setup</title>
-    <link href="https://pinghailinfeng.gitee.io/2020/03/23/esp32-micropython-tutorial-01-environment-setup/"/>
-    <id>https://pinghailinfeng.gitee.io/2020/03/23/esp32-micropython-tutorial-01-environment-setup/</id>
-    <published>2020-03-23T15:27:29.000Z</published>
-    <updated>2022-08-18T08:03:08.611Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="esp32-micropython-之旅-01-环境搭建"><a href="#esp32-micropython-之旅-01-环境搭建" class="headerlink" title="esp32  micropython 之旅 01 环境搭建"></a>esp32  micropython 之旅 01 环境搭建</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/ardunio_logo.jpg?raw=true" alt></p><a id="more"></a><p>今天开始另一个系列的文章,有关嵌入式的专题,希望大家能支持我！</p><h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><table><thead><tr><th>环境</th><th>版本</th></tr></thead><tbody><tr><td>操作系统</td><td>win7 64位 旗舰版</td></tr><tr><td>micropython</td><td>v1.12</td></tr><tr><td>esp32</td><td>uno D1 R32</td></tr><tr><td>ardunio ide</td><td>v1.8.12</td></tr></tbody></table><h2 id="开箱时刻"><a href="#开箱时刻" class="headerlink" title="开箱时刻"></a>开箱时刻</h2><p>某宝买了一个不到30块钱的板子,支持蓝牙、WIFI,4m缓存,直接开搞</p><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/b3c9d52def57969321ed5dad73c169a.jpg?raw=true" alt></p><p>开箱通电</p><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/6fd65f0e334bf5b843ec2a3367e0b7c.jpg?raw=true" alt></p><p>安装驱动部分我一篇再说,下面是具体刷<code>micropython</code>固件过程</p><h2 id="安装-esptool"><a href="#安装-esptool" class="headerlink" title="安装 esptool"></a>安装 esptool</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install esptool</span><br></pre></td></tr></table></figure><h2 id="擦除固件"><a href="#擦除固件" class="headerlink" title="擦除固件"></a>擦除固件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">esptool.py --chip esp32 --port /dev/ttyUSB0 erase_flash</span><br></pre></td></tr></table></figure><h2 id="刷micropython固件"><a href="#刷micropython固件" class="headerlink" title="刷micropython固件"></a>刷micropython固件</h2><p><a href="https://micropython.org/download#esp32" target="_blank" rel="noopener">固件下载地址</a></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">esptool.py --port COM13 write_flash 0x1000 esp32-idf3-20200323-v1.12-270-g38ccb4c64.bin</span><br></pre></td></tr></table></figure><h2 id="编写小灯闪亮程序"><a href="#编写小灯闪亮程序" class="headerlink" title="编写小灯闪亮程序"></a>编写小灯闪亮程序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> machine <span class="keyword">import</span> Pin</span><br><span class="line">p0 = Pin(<span class="number">2</span>,Pin.OUT)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    p0.value(<span class="number">0</span>)</span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    p0.value(<span class="number">1</span>)</span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure><h2 id="通过ampy命令推送到uno中"><a href="#通过ampy命令推送到uno中" class="headerlink" title="通过ampy命令推送到uno中"></a>通过ampy命令推送到uno中</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install adafruit-ampy</span><br></pre></td></tr></table></figure><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ampy --port COM13 put blink.py</span><br></pre></td></tr></table></figure><h2 id="查看固件中的文件"><a href="#查看固件中的文件" class="headerlink" title="查看固件中的文件"></a>查看固件中的文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Type "help()" for more information.</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; import os</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; os.listdir()</span></span><br><span class="line">['boot.py', 'blink.py']</span><br></pre></td></tr></table></figure><h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.remove('blink.py')</span><br></pre></td></tr></table></figure><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>引脚问题还没解决,小灯正常应该可以点亮,以后有得玩了。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;esp32-micropython-之旅-01-环境搭建&quot;&gt;&lt;a href=&quot;#esp32-micropython-之旅-01-环境搭建&quot; class=&quot;headerlink&quot; title=&quot;esp32  micropython 之旅 01 环境搭建&quot;&gt;&lt;/a&gt;esp32  micropython 之旅 01 环境搭建&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://github.com/jeffsui/app_image_resource/blob/master/ardunio_logo.jpg?raw=true&quot; alt&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="micropython" scheme="https://pinghailinfeng.gitee.io/categories/micropython/"/>
-    
-      <category term="esp32" scheme="https://pinghailinfeng.gitee.io/categories/micropython/esp32/"/>
-    
-    
-      <category term="micropython" scheme="https://pinghailinfeng.gitee.io/tags/micropython/"/>
-    
-      <category term="esp32" scheme="https://pinghailinfeng.gitee.io/tags/esp32/"/>
-    
-      <category term="esptool" scheme="https://pinghailinfeng.gitee.io/tags/esptool/"/>
     
   </entry>
   
