@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2023-07-11T07:44:30.104Z</updated>
+  <updated>2023-11-20T02:58:06.720Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>TypeScript 01 Type Erasure</title>
+    <link href="https://pinghailinfeng.gitee.io/2023/11/20/TypeScript-01-Type-Erasure/"/>
+    <id>https://pinghailinfeng.gitee.io/2023/11/20/TypeScript-01-Type-Erasure/</id>
+    <published>2023-11-20T02:12:16.000Z</published>
+    <updated>2023-11-20T02:58:06.720Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="TypeScript-学习笔记01-类型擦除"><a href="#TypeScript-学习笔记01-类型擦除" class="headerlink" title="TypeScript 学习笔记01 类型擦除"></a>TypeScript 学习笔记01 类型擦除</h1><p><img src="https://www.positronx.io/wp-content/uploads/2018/11/positronx-banner-1152-1.jpg" alt></p><a id="more"></a><h2 id="TypeScript-环境搭建"><a href="#TypeScript-环境搭建" class="headerlink" title="TypeScript 环境搭建"></a>TypeScript 环境搭建</h2><h3 id="TypeScript-编译环境"><a href="#TypeScript-编译环境" class="headerlink" title="TypeScript 编译环境"></a>TypeScript 编译环境</h3><ul><li>esbuild (不检查ts语法)</li><li>swc (不检查ts语法)</li><li>neno<ul><li>一个在线<code>neno</code>环境 <a href="https://www.mycompiler.io/new/deno" target="_blank" rel="noopener">https://www.mycompiler.io/new/deno</a></li></ul></li><li>babel –presets @babel/preset-typescript 1.ts</li><li>nodejs</li></ul><p>下面是nodejs环境下 typescript 环境搭建过程</p><h3 id="安装-TypeScript"><a href="#安装-TypeScript" class="headerlink" title="安装 TypeScript"></a>安装 TypeScript</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g typescript</span><br></pre></td></tr></table></figure><p><code>-g</code> 表示全局安装<br>node新版本会有一个warning,可以忽略</p><p><code>npm WARN config global --global, --local are deprecated. Use --location=global instead&quot; occurs because the --global option was deprecated in an older version of npm</code></p><h2 id="类型擦除-Type-Erasure"><a href="#类型擦除-Type-Erasure" class="headerlink" title="类型擦除 (Type Erasure)"></a>类型擦除 (Type Erasure)</h2><h3 id="什么是类型擦除"><a href="#什么是类型擦除" class="headerlink" title="什么是类型擦除"></a>什么是类型擦除</h3><blockquote><p>粗略地说，一旦 TypeScript 的编译器检查完您的代码，它就会擦除类型以生成生成的 “compiled” 代码。这意味着一旦你的代码被编译，生成的普通 JS 代码就没有类型信息。</p></blockquote><p>Roughly speaking, once TypeScript’s compiler is done with checking your code, it erases the types to produce the resulting “compiled” code. This means that once your code is compiled, the resulting plain JS code has no type information.</p><blockquote><p>这也意味着 TypeScript 永远不会根据它推断的类型更改程序的行为。最重要的是，虽然您可能会在编译期间看到类型错误，但类型系统本身与程序运行时的工作方式无关。</p></blockquote><p>This also means that TypeScript never changes the behavior of your program based on the types it inferred. The bottom line is that while you might see type errors during compilation, the type system itself has no bearing on how your program works when it runs.</p><blockquote><p>最后，TypeScript 不提供任何额外的运行时库。您的程序将使用与 JavaScript 程序相同的标准库（或外部库），因此无需学习额外的 TypeScript 特定框架。</p></blockquote><p>Finally, TypeScript doesn’t provide any additional runtime libraries. Your programs will use the same standard library (or external libraries) as JavaScript programs, so there’s no additional TypeScript-specific framework to learn.</p><p><a href="https://nodejs.cn/typescript/get-started/typescript-from-scratch/~/erased-types/" target="_blank" rel="noopener">typescript新手指引</a></p><h3 id="类型擦除-Type-Erasure-示例"><a href="#类型擦除-Type-Erasure-示例" class="headerlink" title="类型擦除 (Type Erasure) 示例"></a>类型擦除 (Type Erasure) 示例</h3><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a:<span class="built_in">number</span> = <span class="number">1</span>+<span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a)</span><br></pre></td></tr></table></figure><p>执行编译<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tsc 1.ts</span><br></pre></td></tr></table></figure></p><p>执行编译后，会生成一个 1.js 文件<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span> + <span class="number">2</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure></p><p>运行结果<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt;3</span></span><br></pre></td></tr></table></figure></p><h3 id="TypeScript工作原理"><a href="#TypeScript工作原理" class="headerlink" title="TypeScript工作原理"></a>TypeScript工作原理</h3><p>TypeScript 编译器将 TypeScript 代码转换为 JavaScript 代码。 它使用类型信息来执行以下操作：</p><ul><li>验证代码中的类型</li><li>推断类型</li><li>生成 JavaScript 代码</li><li>生成与 JavaScript 代码兼容的类型信息</li><li>生成与 JavaScript 代码兼容的运行时</li><li>生成与 JavaScript 代码兼容的源映射</li><li>生成与 JavaScript 代码兼容的调试器支持</li><li>生成与 JavaScript 代码兼容的文档</li><li>生成与 JavaScript 代码兼容的测试</li><li>生成与 JavaScript 代码兼容的类型检查器支持<br>…..</li></ul><h2 id="如何查看ES6兼容表"><a href="#如何查看ES6兼容表" class="headerlink" title="如何查看ES6兼容表"></a>如何查看ES6兼容表</h2><p><a href="https://compat-table.github.io/compat-table/es6/" target="_blank" rel="noopener">ES6兼容性表在线查看</a></p><h2 id="几种在线编辑器"><a href="#几种在线编辑器" class="headerlink" title="几种在线编辑器"></a>几种在线编辑器</h2><ul><li>PlayCode.io</li><li>Stackblitz.com</li><li>Codesandbox.io</li><li>Codepen.io</li></ul><h2 id="VSCode-插件-持续更新"><a href="#VSCode-插件-持续更新" class="headerlink" title="VSCode 插件(持续更新)"></a>VSCode 插件(持续更新)</h2><ul><li>pretty-ts-errors<ul><li>一个查看typescript报错信息格式化擦插件(20231116)</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;TypeScript-学习笔记01-类型擦除&quot;&gt;&lt;a href=&quot;#TypeScript-学习笔记01-类型擦除&quot; class=&quot;headerlink&quot; title=&quot;TypeScript 学习笔记01 类型擦除&quot;&gt;&lt;/a&gt;TypeScript 学习笔记01 类型擦除&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://www.positronx.io/wp-content/uploads/2018/11/positronx-banner-1152-1.jpg&quot; alt&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="TypeScript" scheme="https://pinghailinfeng.gitee.io/categories/TypeScript/"/>
+    
+    
+      <category term="TypeScript" scheme="https://pinghailinfeng.gitee.io/tags/TypeScript/"/>
+    
+  </entry>
   
   <entry>
     <title>Centos jira automatatic start</title>
@@ -34,11 +56,11 @@
       <category term="测试" scheme="https://pinghailinfeng.gitee.io/categories/%E6%B5%8B%E8%AF%95/"/>
     
     
+      <category term="jira" scheme="https://pinghailinfeng.gitee.io/tags/jira/"/>
+    
       <category term="项目管理" scheme="https://pinghailinfeng.gitee.io/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
     
       <category term="Centos" scheme="https://pinghailinfeng.gitee.io/tags/Centos/"/>
-    
-      <category term="jira" scheme="https://pinghailinfeng.gitee.io/tags/jira/"/>
     
   </entry>
   
@@ -60,11 +82,11 @@
       <category term="测试" scheme="https://pinghailinfeng.gitee.io/categories/%E6%B5%8B%E8%AF%95/"/>
     
     
-      <category term="禅道" scheme="https://pinghailinfeng.gitee.io/tags/%E7%A6%85%E9%81%93/"/>
-    
       <category term="项目管理" scheme="https://pinghailinfeng.gitee.io/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
     
       <category term="Centos" scheme="https://pinghailinfeng.gitee.io/tags/Centos/"/>
+    
+      <category term="禅道" scheme="https://pinghailinfeng.gitee.io/tags/%E7%A6%85%E9%81%93/"/>
     
   </entry>
   
@@ -411,7 +433,7 @@
     <link href="https://pinghailinfeng.gitee.io/2020/04/13/from-beginning-to-setup-a-typescript-develop-environment/"/>
     <id>https://pinghailinfeng.gitee.io/2020/04/13/from-beginning-to-setup-a-typescript-develop-environment/</id>
     <published>2020-04-13T09:22:58.000Z</published>
-    <updated>2022-08-18T08:03:08.614Z</updated>
+    <updated>2023-11-20T02:59:52.849Z</updated>
     
     <content type="html"><![CDATA[<h1 id="从零开始搭建typescript开发环境"><a href="#从零开始搭建typescript开发环境" class="headerlink" title="从零开始搭建typescript开发环境"></a>从零开始搭建typescript开发环境</h1><p><img src="https://pic3.zhimg.com/v2-7ae2e2942fa8ae187a24cae8afe9547e_1200x500.jpg" alt></p><a id="more"></a><h2 id="【背景】"><a href="#【背景】" class="headerlink" title="【背景】"></a>【背景】</h2><p>从零开始搭建一个typescript项目中使用了lite-server 模块,备忘一下</p><h2 id="【解决方案】"><a href="#【解决方案】" class="headerlink" title="【解决方案】"></a>【解决方案】</h2><h3 id="项目下-创建一个-bs-config-json文件"><a href="#项目下-创建一个-bs-config-json文件" class="headerlink" title="项目下 创建一个 bs-config.json文件"></a>项目下 创建一个 <code>bs-config.json</code>文件</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"port"</span> : <span class="number">3000</span>,</span><br><span class="line">    <span class="attr">"files"</span>: [<span class="string">"../dist/**/*.&#123;html,htm,css,js&#125;"</span>],</span><br><span class="line">    <span class="attr">"server"</span>: &#123;<span class="attr">"baseDir"</span> : <span class="string">"./dist"</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>port 参数指定端口</li><li>files 指定包含的文件类型</li><li>server 中 baseDir参数指定 静态文件所在目录,根据自己项目目录结构调整</li></ul><h3 id="添加-lite-server-到-package-json-的-script"><a href="#添加-lite-server-到-package-json-的-script" class="headerlink" title="添加 lite-server 到 package.json 的 script"></a>添加 lite-server 到 package.json 的 script</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"scripts": &#123;</span><br><span class="line">    "start": "lite-server",</span><br><span class="line">    "tsc-build": "tsc -w",</span><br><span class="line">    "tsc-watch": "nodemon dist/hello.js"</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure><h3 id="命令行运行"><a href="#命令行运行" class="headerlink" title="命令行运行"></a>命令行运行</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm start</span><br></pre></td></tr></table></figure><h2 id="【参考文档】"><a href="#【参考文档】" class="headerlink" title="【参考文档】"></a>【参考文档】</h2><p><a href="https://github.com/johnpapa/lite-server" target="_blank" rel="noopener">lite-server官方github</a></p>]]></content>
     
@@ -421,14 +443,14 @@
     
     </summary>
     
-      <category term="typescript" scheme="https://pinghailinfeng.gitee.io/categories/typescript/"/>
+      <category term="TypeScript" scheme="https://pinghailinfeng.gitee.io/categories/TypeScript/"/>
     
-      <category term="basic" scheme="https://pinghailinfeng.gitee.io/categories/typescript/basic/"/>
+      <category term="basic" scheme="https://pinghailinfeng.gitee.io/categories/TypeScript/basic/"/>
     
-    
-      <category term="typescript" scheme="https://pinghailinfeng.gitee.io/tags/typescript/"/>
     
       <category term="lite-server" scheme="https://pinghailinfeng.gitee.io/tags/lite-server/"/>
+    
+      <category term="TypeScript" scheme="https://pinghailinfeng.gitee.io/tags/TypeScript/"/>
     
   </entry>
   
@@ -455,9 +477,9 @@
       <category term="java" scheme="https://pinghailinfeng.gitee.io/categories/selenium/java/"/>
     
     
-      <category term="java" scheme="https://pinghailinfeng.gitee.io/tags/java/"/>
-    
       <category term="selenium" scheme="https://pinghailinfeng.gitee.io/tags/selenium/"/>
+    
+      <category term="java" scheme="https://pinghailinfeng.gitee.io/tags/java/"/>
     
       <category term="自动化测试" scheme="https://pinghailinfeng.gitee.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
     
@@ -484,36 +506,6 @@
       <category term="杂记" scheme="https://pinghailinfeng.gitee.io/tags/%E6%9D%82%E8%AE%B0/"/>
     
       <category term="感悟" scheme="https://pinghailinfeng.gitee.io/tags/%E6%84%9F%E6%82%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>esp32 micropython 03 webrepl</title>
-    <link href="https://pinghailinfeng.gitee.io/2020/03/27/esp32-micropython-03-webrepl/"/>
-    <id>https://pinghailinfeng.gitee.io/2020/03/27/esp32-micropython-03-webrepl/</id>
-    <published>2020-03-27T14:46:44.000Z</published>
-    <updated>2022-08-18T08:03:08.612Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="esp32-micropython-之旅-03-webrepl"><a href="#esp32-micropython-之旅-03-webrepl" class="headerlink" title="esp32  micropython 之旅 03 webrepl"></a>esp32  micropython 之旅 03 webrepl</h1><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200327_dianlu.jpg?raw=true" alt></p><a id="more"></a><h2 id="使用network模块连接WIFI"><a href="#使用network模块连接WIFI" class="headerlink" title="使用network模块连接WIFI"></a>使用network模块连接WIFI</h2><p><code>network</code>模块是和网络相关的模块。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> network <span class="comment"># 导入network模块</span></span><br><span class="line">wifi = network.WLAN(network.STA_IF)  <span class="comment"># 设置为STA_IF模式，即接入wifi路由器的模式AP_IF为作为热点</span></span><br></pre></td></tr></table></figure><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200327_wifi.png?raw=true" alt></p><p>接下来我们需要激活wifi，并进行连接</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wifi.active(<span class="literal">True</span>) <span class="comment"># 将wifi激活</span></span><br><span class="line">wifi.connect(<span class="string">'&lt;essid&gt;'</span>,<span class="string">'&lt;password&gt;'</span>) <span class="comment">#连接至wifi</span></span><br></pre></td></tr></table></figure><h3 id="查看wifi连接状态"><a href="#查看wifi连接状态" class="headerlink" title="查看wifi连接状态"></a>查看wifi连接状态</h3><p>使用<code>ifconfig</code>查看网络状态：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wifi.ifconfig()</span><br></pre></td></tr></table></figure><h2 id="WebREPL"><a href="#WebREPL" class="headerlink" title="WebREPL"></a>WebREPL</h2><p>WebREPL是一个使用Web前端技术栈构建的单页应用。</p><p><strong>WebREPL允许你通过WiFi使用MicroPython的REPL，通过浏览器连接，使用了WebSockt通信协议</strong>。</p><p>在MicroPython的网站上托管了WebREPL的单页应用，点击如下链接即可访问：</p><p><a href="http://micropython.org/webrepl" target="_blank" rel="noopener">http://micropython.org/webrepl</a></p><p>两个步骤</p><ul><li>初始化WebREPL</li><li>开启WebREPL</li></ul><h3 id="初始化WebREPL"><a href="#初始化WebREPL" class="headerlink" title="初始化WebREPL"></a>初始化WebREPL</h3><p>初次使用WebREPL，我们先要使用<code>webrepl_setup</code>模块来进行初始化设置。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> webrepl_setup</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200327_repl_confirm_password.png?raw=true" alt></p><p>当你看到亲切的<code>&gt;&gt;&gt;</code>提示符时，则表明你已成功的连接到了WebREPL</p><h3 id="开启WebREPL"><a href="#开启WebREPL" class="headerlink" title="开启WebREPL"></a>开启WebREPL</h3><p>接下来，我们直接开启webrepl的服务:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> webrepl</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>webrepl.start()</span><br></pre></td></tr></table></figure><p>如上两句指令执行后，如下图所示：</p><h3 id="连接WebREPL"><a href="#连接WebREPL" class="headerlink" title="连接WebREPL"></a>连接WebREPL</h3><p>访问<a href="http://micropython.org/webrepl" target="_blank" rel="noopener">http://micropython.org/webrepl</a></p><p>输入正确的URL,然后点击Connet按钮</p><p><img src="https://github.com/jeffsui/app_image_resource/blob/master/20200327_repl_connection_success.png?raw=true" alt></p><h3 id="试试WebREPL"><a href="#试试WebREPL" class="headerlink" title="试试WebREPL"></a>试试WebREPL</h3><p>现在，你可以在这个Web页面上欢快的玩耍了。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;esp32-micropython-之旅-03-webrepl&quot;&gt;&lt;a href=&quot;#esp32-micropython-之旅-03-webrepl&quot; class=&quot;headerlink&quot; title=&quot;esp32  micropython 之旅 03 webrepl&quot;&gt;&lt;/a&gt;esp32  micropython 之旅 03 webrepl&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://github.com/jeffsui/app_image_resource/blob/master/20200327_dianlu.jpg?raw=true&quot; alt&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
-    
-      <category term="micropython" scheme="https://pinghailinfeng.gitee.io/categories/python/micropython/"/>
-    
-    
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
-    
-      <category term="esp32" scheme="https://pinghailinfeng.gitee.io/tags/esp32/"/>
-    
-      <category term="micorpython" scheme="https://pinghailinfeng.gitee.io/tags/micorpython/"/>
-    
-      <category term="webrepl" scheme="https://pinghailinfeng.gitee.io/tags/webrepl/"/>
     
   </entry>
   
