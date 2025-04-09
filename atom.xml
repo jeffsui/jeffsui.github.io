@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2024-10-15T03:02:59.527Z</updated>
+  <updated>2025-04-09T14:34:58.674Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>docker service start failed</title>
+    <link href="https://pinghailinfeng.gitee.io/2025/04/09/docker-service-start-failed/"/>
+    <id>https://pinghailinfeng.gitee.io/2025/04/09/docker-service-start-failed/</id>
+    <published>2025-04-09T14:28:05.000Z</published>
+    <updated>2025-04-09T14:34:58.674Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Docker-服务启动失败排查指南"><a href="#Docker-服务启动失败排查指南" class="headerlink" title="Docker 服务启动失败排查指南"></a>Docker 服务启动失败排查指南</h1><p><img src="https://cdn.pixabay.com/photo/2025/03/31/15/31/mountains-9504977_1280.jpg" alt></p><a id="more"></a><h2 id="1-当前状态"><a href="#1-当前状态" class="headerlink" title="1. 当前状态"></a>1. 当前状态</h2><ul><li>❌ 服务禁用：disabled（开机不启动）</li><li>🔴 启动失败：failed (Result: start-limit)（触发系统保护机制，阻止重复崩溃）</li><li>⏳ 最后一次尝试：2025-04-10 03:20:22（2分钟前）</li></ul><h2 id="2-核心错误"><a href="#2-核心错误" class="headerlink" title="2. 核心错误"></a>2. 核心错误</h2><ul><li>📛 进程退出码：status=1/FAILURE</li><li>🔧 可疑配置：ExecStart=/usr/bin/dockerd -H fd://…（参数可能异常）</li><li>📜 日志线索：containerd.sock（容器运行时通信异常）</li></ul><h2 id="3-紧急处理"><a href="#3-紧急处理" class="headerlink" title="3. 紧急处理"></a>3. 紧急处理</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1. 查看实时崩溃日志（按q退出）</span></span><br><span class="line">journalctl -u docker.service --since "2 minutes ago" -f</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. 检查依赖服务状态</span></span><br><span class="line">systemctl status containerd</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3. 强制重置服务配置（慎用）</span></span><br><span class="line">sudo systemctl reset-failed docker.service</span><br></pre></td></tr></table></figure><h2 id="4-高频故障方向"><a href="#4-高频故障方向" class="headerlink" title="4.高频故障方向"></a>4.高频故障方向</h2><p>▶️ Containerd 未运行 → sudo systemctl start containerd ▶️ 存储驱动冲突 → 检查/etc/docker/daemon.json ▶️ 端口占用 → netstat -tulpn | grep 2375</p><p>建议优先执行 journalctl -xe | grep -i -C10 “dockerd” 查看崩溃前10行上下文日</p><h2 id="5-问题解决"><a href="#5-问题解决" class="headerlink" title="5. 问题解决"></a>5. 问题解决</h2><p><code>vi /etc/docker/daemon.json</code> 后发现 json 数据少了一个空格</p><p>囧………</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Docker-服务启动失败排查指南&quot;&gt;&lt;a href=&quot;#Docker-服务启动失败排查指南&quot; class=&quot;headerlink&quot; title=&quot;Docker 服务启动失败排查指南&quot;&gt;&lt;/a&gt;Docker 服务启动失败排查指南&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://cdn.pixabay.com/photo/2025/03/31/15/31/mountains-9504977_1280.jpg&quot; alt&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="https://pinghailinfeng.gitee.io/categories/linux/"/>
+    
+    
+      <category term="docker" scheme="https://pinghailinfeng.gitee.io/tags/docker/"/>
+    
+      <category term="linux" scheme="https://pinghailinfeng.gitee.io/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>ssm integration</title>
@@ -82,11 +106,11 @@
       <category term="测试" scheme="https://pinghailinfeng.gitee.io/categories/%E6%B5%8B%E8%AF%95/"/>
     
     
+      <category term="jira" scheme="https://pinghailinfeng.gitee.io/tags/jira/"/>
+    
       <category term="项目管理" scheme="https://pinghailinfeng.gitee.io/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
     
       <category term="Centos" scheme="https://pinghailinfeng.gitee.io/tags/Centos/"/>
-    
-      <category term="jira" scheme="https://pinghailinfeng.gitee.io/tags/jira/"/>
     
   </entry>
   
@@ -108,11 +132,11 @@
       <category term="测试" scheme="https://pinghailinfeng.gitee.io/categories/%E6%B5%8B%E8%AF%95/"/>
     
     
-      <category term="禅道" scheme="https://pinghailinfeng.gitee.io/tags/%E7%A6%85%E9%81%93/"/>
-    
       <category term="项目管理" scheme="https://pinghailinfeng.gitee.io/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
     
       <category term="Centos" scheme="https://pinghailinfeng.gitee.io/tags/Centos/"/>
+    
+      <category term="禅道" scheme="https://pinghailinfeng.gitee.io/tags/%E7%A6%85%E9%81%93/"/>
     
   </entry>
   
@@ -477,37 +501,6 @@
       <category term="TypeScript" scheme="https://pinghailinfeng.gitee.io/tags/TypeScript/"/>
     
       <category term="lite-server" scheme="https://pinghailinfeng.gitee.io/tags/lite-server/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>using selenium execute JavaScript controll browser scroll</title>
-    <link href="https://pinghailinfeng.gitee.io/2020/04/10/using-selenium-execute-JavaScript-controll-browser-scroll/"/>
-    <id>https://pinghailinfeng.gitee.io/2020/04/10/using-selenium-execute-JavaScript-controll-browser-scroll/</id>
-    <published>2020-04-10T09:18:09.000Z</published>
-    <updated>2022-08-18T08:03:08.613Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="selenium中使用JavaScript控制浏览器"><a href="#selenium中使用JavaScript控制浏览器" class="headerlink" title="selenium中使用JavaScript控制浏览器"></a>selenium中使用JavaScript控制浏览器</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//移动到元素element对象的“顶端”与当前窗口的“顶部”对齐</span></span><br><span class="line">((JavascriptExecutor) driver).executeScript(<span class="string">"arguments[0].scrollIntoView();"</span>, element);</span><br><span class="line">((JavascriptExecutor) driver).executeScript(<span class="string">"arguments[0].scrollIntoView(true);"</span>, element);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//移动到元素element对象的“底端”与当前窗口的“底部”对齐</span></span><br><span class="line">((JavascriptExecutor) driver).executeScript(<span class="string">"arguments[0].scrollIntoView(false);"</span>, element);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//移动到页面最底部</span></span><br><span class="line">((JavascriptExecutor) driver).executeScript(<span class="string">"window.scrollTo(0, document.body.scrollHeight)"</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//移动到指定的坐标(相对当前的坐标移动)</span></span><br><span class="line">((JavascriptExecutor) driver).executeScript(<span class="string">"window.scrollBy(0, 700)"</span>);</span><br><span class="line">Thread.sleep(<span class="number">3000</span>);</span><br><span class="line"><span class="comment">//结合上面的scrollBy语句，相当于移动到700+800=1600像素位置</span></span><br><span class="line">((JavascriptExecutor) driver).executeScript(<span class="string">"window.scrollBy(0, 800)"</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//移动到窗口绝对位置坐标，如下移动到纵坐标1600像素位置</span></span><br><span class="line">((JavascriptExecutor) driver).executeScript(<span class="string">"window.scrollTo(0, 1600)"</span>);</span><br><span class="line">Thread.sleep(<span class="number">3000</span>);</span><br><span class="line"><span class="comment">//结合上面的scrollTo语句，仍然移动到纵坐标1200像素位置</span></span><br><span class="line">((JavascriptExecutor) driver).executeScript(<span class="string">"window.scrollTo(0, 1200)"</span>);</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;selenium中使用JavaScript控制浏览器&quot;&gt;&lt;a href=&quot;#selenium中使用JavaScript控制浏览器&quot; class=&quot;headerlink&quot; title=&quot;selenium中使用JavaScript控制浏览器&quot;&gt;&lt;/a&gt;selenium
-      
-    
-    </summary>
-    
-      <category term="selenium" scheme="https://pinghailinfeng.gitee.io/categories/selenium/"/>
-    
-      <category term="java" scheme="https://pinghailinfeng.gitee.io/categories/selenium/java/"/>
-    
-    
-      <category term="java" scheme="https://pinghailinfeng.gitee.io/tags/java/"/>
-    
-      <category term="selenium" scheme="https://pinghailinfeng.gitee.io/tags/selenium/"/>
-    
-      <category term="自动化测试" scheme="https://pinghailinfeng.gitee.io/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
