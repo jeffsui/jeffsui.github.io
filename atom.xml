@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2025-06-03T07:36:48.709Z</updated>
+  <updated>2025-06-14T08:25:28.887Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>How to setting Pycharm conda environment</title>
+    <link href="https://pinghailinfeng.gitee.io/2025/06/14/How-to-setting-Pycharm-conda-environment/"/>
+    <id>https://pinghailinfeng.gitee.io/2025/06/14/How-to-setting-Pycharm-conda-environment/</id>
+    <published>2025-06-14T08:02:27.000Z</published>
+    <updated>2025-06-14T08:25:28.887Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="How-to-setting-Pycharm-conda-environment"><a href="#How-to-setting-Pycharm-conda-environment" class="headerlink" title="How to setting Pycharm conda environment"></a>How to setting Pycharm conda environment</h1><p><img src="https://cdn.pixabay.com/photo/2024/04/29/14/43/earth-8728077_1280.jpg" alt></p><a id="more"></a><blockquote><p>下面是win10系统的操作步骤</p></blockquote><h2 id="1-Install-conda"><a href="#1-Install-conda" class="headerlink" title="1. Install conda"></a>1. Install conda</h2><p>访问conda官网，下载安装包，安装即可。<br>我这里使用的是<a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank" rel="noopener">miniconda</a></p><h2 id="2-Create-conda-environment-and-activate"><a href="#2-Create-conda-environment-and-activate" class="headerlink" title="2. Create conda environment and activate"></a>2. Create conda environment and activate</h2><p>创建一个名为<code>py11</code>的conda环境，python版本为3.11<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n py11 python=3.11</span><br></pre></td></tr></table></figure></p><p>激活该环境<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate py11</span><br></pre></td></tr></table></figure></p><h2 id="3-Setting-Pycharm-conda-environment"><a href="#3-Setting-Pycharm-conda-environment" class="headerlink" title="3. Setting Pycharm conda environment"></a>3. Setting Pycharm conda environment</h2><h3 id="3-1-import-conda-environment-interpreter"><a href="#3-1-import-conda-environment-interpreter" class="headerlink" title="3.1 import conda environment interpreter"></a>3.1 import conda environment interpreter</h3><h3 id="3-2-choose-conda-interpreter"><a href="#3-2-choose-conda-interpreter" class="headerlink" title="3.2 choose conda interpreter"></a>3.2 choose conda interpreter</h3><p><strong>tips</strong> :</p><ol><li>path to conda</li></ol><p>一定要选择 <code>..\miniconda3\Libary\bin\conda.bat</code> 💡</p><ol start="2"><li><p><code>Reload environment</code>:  check conda environment list</p></li><li><p>选择你创建好的 conda 环境,但是仍然报错😡</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No Conda environment is selected</span><br></pre></td></tr></table></figure></li></ol><h2 id="4-解决方案"><a href="#4-解决方案" class="headerlink" title="4. 解决方案"></a>4. 解决方案</h2><h3 id="4-1-操作步骤"><a href="#4-1-操作步骤" class="headerlink" title="4.1 操作步骤"></a>4.1 操作步骤</h3><p>手动删除<code>Path to conda</code>中文件路径的最后俩字母，随后再手动补全</p><h3 id="4-2-问题解决😁"><a href="#4-2-问题解决😁" class="headerlink" title="4.2 问题解决😁"></a>4.2 问题解决😁</h3><p>此时可以看到OK图标已经变蓝,点击OK图表即可。</p><h2 id="5-Enjoy-it-🙂"><a href="#5-Enjoy-it-🙂" class="headerlink" title="5. Enjoy it!🙂"></a>5. Enjoy it!🙂</h2><p>这个bug历史悠久,现在还没有修复不知道是什么原因。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;How-to-setting-Pycharm-conda-environment&quot;&gt;&lt;a href=&quot;#How-to-setting-Pycharm-conda-environment&quot; class=&quot;headerlink&quot; title=&quot;How to setting Pycharm conda environment&quot;&gt;&lt;/a&gt;How to setting Pycharm conda environment&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://cdn.pixabay.com/photo/2024/04/29/14/43/earth-8728077_1280.jpg&quot; alt&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+    
+      <category term="工具篇" scheme="https://pinghailinfeng.gitee.io/categories/python/%E5%B7%A5%E5%85%B7%E7%AF%87/"/>
+    
+    
+      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+    
+      <category term="conda" scheme="https://pinghailinfeng.gitee.io/tags/conda/"/>
+    
+      <category term="pycharm" scheme="https://pinghailinfeng.gitee.io/tags/pycharm/"/>
+    
+  </entry>
   
   <entry>
     <title>Faster Linter Tool Ruff Usage</title>
@@ -483,28 +511,6 @@
     
     
       <category term="hexo" scheme="https://pinghailinfeng.gitee.io/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Farewell, 2020</title>
-    <link href="https://pinghailinfeng.gitee.io/2020/12/26/Farewell-2020/"/>
-    <id>https://pinghailinfeng.gitee.io/2020/12/26/Farewell-2020/</id>
-    <published>2020-12-26T08:22:08.000Z</published>
-    <updated>2022-08-18T08:03:08.616Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Farewell-2020"><a href="#Farewell-2020" class="headerlink" title="Farewell, 2020"></a>Farewell, 2020</h1><p><img src="https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/7acb0a46f21fbe09cd42640566600c338744ad87.jpg" alt></p><a id="more"></a><p>2020年还有不到五天就要过去了,时光如梭,这一年一眨眼就过去了。</p><p>大连又一次迎来了第三次新冠疫情,大街上冷冷清清。商场里也没有往日的喧闹。这个城市又一次变得安静了下来。</p><p>2020年,大家说得最多的一个字就是”难”。大家好不容易挺过来,来势汹汹的疫情打乱了节奏。很多人心情跌落谷底。</p><p>昨天回到家,媳妇说孩子网课表现很优秀,一边跟着老师听讲,一边和老师互动,还知道静音,非常投入，孩子这是长大了。我心里却不是滋味,和去年疫情相比,网课一天不上,天天就是看平板电脑形成了强烈的反差。孩子不是长大了,是社会让她不得不遵守规则。</p><p>学生问我,你白天上课,晚上还上晚课,收入一定很高,我笑了笑说,还可以吧,他接着又问,你肯定是学校股东,要不谁能这么拼命。我回答,成年人的世界里哪有什么不容易。师生相视一笑。大家都明白,个中滋味自己体会吧。</p><p>疫情让我们明白一些道理,什么都没有活着和生存更重要。只要活着,就有希望。</p><p>2020让我们体会到生命的伟大,致敬那些工作在一线的医护工作者们,他们是最美的逆行者。</p><p>致敬那些为了后勤保障,辛勤工作的各行各业的人们,他们社会能正常运转。</p><p>为人父,为人母,体会到了父母的艰辛。</p><p>就像奥特曼经常说的一样,相信光，会守护世界。每个人心中都有奥特曼。我也会守护我的家人,守护我身边的一切。</p><p>希望在新的一年,一切都会变好。</p><p>祝愿大家都身体健康,因为有光,就有希望。</p><p>未来可期,再见2020!</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Farewell-2020&quot;&gt;&lt;a href=&quot;#Farewell-2020&quot; class=&quot;headerlink&quot; title=&quot;Farewell, 2020&quot;&gt;&lt;/a&gt;Farewell, 2020&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/7acb0a46f21fbe09cd42640566600c338744ad87.jpg&quot; alt&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="杂记" scheme="https://pinghailinfeng.gitee.io/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-      <category term="2020" scheme="https://pinghailinfeng.gitee.io/tags/2020/"/>
     
   </entry>
   
