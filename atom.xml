@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2025-06-14T08:29:29.721Z</updated>
+  <updated>2025-07-23T22:58:04.331Z</updated>
   <id>https://pinghailinfeng.gitee.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>TypeError: crypto.hash is not a function</title>
+    <link href="https://pinghailinfeng.gitee.io/2025/07/24/TypeError-crypto-hash-is-not-a-function/"/>
+    <id>https://pinghailinfeng.gitee.io/2025/07/24/TypeError-crypto-hash-is-not-a-function/</id>
+    <published>2025-07-23T22:31:14.000Z</published>
+    <updated>2025-07-23T22:58:04.331Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="vue3-vite启动报错"><a href="#vue3-vite启动报错" class="headerlink" title="vue3+vite启动报错"></a>vue3+vite启动报错</h1><p><img src="https://cdn.pixabay.com/photo/2016/09/15/18/28/update-1672349_1280.png" alt></p><a id="more"></a><h2 id="【问题描述】"><a href="#【问题描述】" class="headerlink" title="【问题描述】"></a>【问题描述】</h2><p>vue3 环境搭建</p><p>os: win10</p><p>node 版本 20.10.0</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pnpm create myapp</span><br><span class="line">cd myapp</span><br><span class="line">npm i</span><br><span class="line">npm run dev</span><br></pre></td></tr></table></figure><p>启动报错 <code>TypeError: crypto.hash is not a function</code></p><h2 id="【问题分析】"><a href="#【问题分析】" class="headerlink" title="【问题分析】"></a>【问题分析】</h2><p>根据<code>vite</code>最新版本的package.json 文件</p><p><a href="https://github.com/vitejs/vite/blob/ac528a44c384fefb6f10c3f531df93b5ac39324c/packages/vite/package.json#L57" target="_blank" rel="noopener">https://github.com/vitejs/vite/blob/ac528a44c384fefb6f10c3f531df93b5ac39324c/packages/vite/package.json#L57</a></p><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">"engines": &#123;</span><br><span class="line">    "node": "^20.19.0 || &gt;=22.12.0"</span><br><span class="line">  &#125;,</span><br><span class="line">....</span><br></pre></td></tr></table></figure><p><code>vite</code> 目前已经更新到了7版本，其中 crypto.hash 至少要 node 20版本或者22以上版本才能用。所以要么降低（指定）vite 版本创建项目，要么把 node 更新到最新版本。</p><h2 id="【解决方案】"><a href="#【解决方案】" class="headerlink" title="【解决方案】"></a>【解决方案】</h2><ul><li>创建指定vite版本的项目</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 运行该命令可以查看 create-vite 的所有可用版本</span><br><span class="line">npm view create-vite versions</span><br><span class="line"></span><br><span class="line">// 创建指定 vite 版本的项目</span><br><span class="line">npm create vite@&lt;version&gt; project-name  // 如 npm create vite@5.5.0 project-name</span><br></pre></td></tr></table></figure><ul><li>更新 node 版本</li></ul><p>建议大家用<code>nvm</code>管理<code>nodejs</code>版本</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">nvm list</span><br><span class="line"></span><br><span class="line">  * 22.12.0(Currently using 64-bit executable)</span><br><span class="line">    20.12.2</span><br><span class="line">    20.10.0</span><br><span class="line">    18.19.0</span><br><span class="line">    18.16.0</span><br><span class="line">    16.18.1</span><br><span class="line">    14.18.1</span><br><span class="line">    12.14.0</span><br></pre></td></tr></table></figure><p><strong>tips</strong> 注意时效性: 20250723</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;vue3-vite启动报错&quot;&gt;&lt;a href=&quot;#vue3-vite启动报错&quot; class=&quot;headerlink&quot; title=&quot;vue3+vite启动报错&quot;&gt;&lt;/a&gt;vue3+vite启动报错&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://cdn.pixabay.com/photo/2016/09/15/18/28/update-1672349_1280.png&quot; alt&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="前端" scheme="https://pinghailinfeng.gitee.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="nodejs" scheme="https://pinghailinfeng.gitee.io/tags/nodejs/"/>
+    
+      <category term="vue3" scheme="https://pinghailinfeng.gitee.io/tags/vue3/"/>
+    
+      <category term="vite" scheme="https://pinghailinfeng.gitee.io/tags/vite/"/>
+    
+  </entry>
   
   <entry>
     <title>How to setting Pycharm conda environment</title>
@@ -487,30 +513,6 @@
       <category term="es6" scheme="https://pinghailinfeng.gitee.io/tags/es6/"/>
     
       <category term="this" scheme="https://pinghailinfeng.gitee.io/tags/this/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>node14.4 run hexo TypeError [ERR_INVALID_ARG_TYPE]</title>
-    <link href="https://pinghailinfeng.gitee.io/2020/12/27/node14-4-run-hexo-TypeError-ERR-INVALID-ARG-TYPE/"/>
-    <id>https://pinghailinfeng.gitee.io/2020/12/27/node14-4-run-hexo-TypeError-ERR-INVALID-ARG-TYPE/</id>
-    <published>2020-12-26T21:35:28.000Z</published>
-    <updated>2022-08-18T08:03:08.616Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Node升级到14-4-hexo-运行失败"><a href="#Node升级到14-4-hexo-运行失败" class="headerlink" title="Node升级到14.4 hexo 运行失败"></a>Node升级到14.4 hexo 运行失败</h1><p><img src="https://www.prajwaldesai.com/wp-content/uploads/2014/01/error-code.jpeg" alt></p><a id="more"></a><p>node刚升级到14.4,结果发现使用<code>hexo d</code>命令部署到<code>gitee</code>上发现如下错误</p><blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; typeError [ERR_INVALID_ARG_TYPE]: The <span class="string">"mode"</span> argument must be <span class="built_in">integer</span>. Received an instance of Object</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote><p>查阅相关资料发现是node版本太高导致,最终将node降级到12.14.0后,重新部署就成功了。</p><p>当然你也可以使用nvm来切换node版本。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;Node升级到14-4-hexo-运行失败&quot;&gt;&lt;a href=&quot;#Node升级到14-4-hexo-运行失败&quot; class=&quot;headerlink&quot; title=&quot;Node升级到14.4 hexo 运行失败&quot;&gt;&lt;/a&gt;Node升级到14.4 hexo 运行失败&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://www.prajwaldesai.com/wp-content/uploads/2014/01/error-code.jpeg&quot; alt&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="hexo" scheme="https://pinghailinfeng.gitee.io/categories/hexo/"/>
-    
-      <category term="博客搭建" scheme="https://pinghailinfeng.gitee.io/categories/hexo/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
-    
-    
-      <category term="hexo" scheme="https://pinghailinfeng.gitee.io/tags/hexo/"/>
     
   </entry>
   
