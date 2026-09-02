@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://pinghailinfeng.gitee.io/"/>
-  <updated>2026-02-07T16:58:43.841Z</updated>
-  <id>https://pinghailinfeng.gitee.io/</id>
+  <link href="https://pinghailinfeng.github.io/"/>
+  <updated>2026-09-02T15:05:59.219Z</updated>
+  <id>https://pinghailinfeng.github.io/</id>
   
   <author>
     <name>Jeff Sui</name>
@@ -17,9 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>install docker on wsl2</title>
+    <link href="https://pinghailinfeng.github.io/2026/09/02/install-docker-on-wsl2/"/>
+    <id>https://pinghailinfeng.github.io/2026/09/02/install-docker-on-wsl2/</id>
+    <published>2026-09-02T14:49:15.000Z</published>
+    <updated>2026-09-02T15:05:59.219Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Wsl2-上安装Docker"><a href="#Wsl2-上安装Docker" class="headerlink" title="Wsl2 上安装Docker"></a>Wsl2 上安装Docker</h1><p><img src="https://cdn.pixabay.com/photo/2016/03/18/01/47/pet-1264256_1280.jpg" alt></p><a id="more"></a><h3 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h3><p>在正式操作前，我们先明确前置要求：假设你已安装并配置好WSL 2，且已设置好Linux发行版（我将以Ubuntu为例）。首先需要确认WSL版本高于0.67.6，这是systemd运行所需的最低版本。</p><h3 id="配置Systemd"><a href="#配置Systemd" class="headerlink" title="配置Systemd"></a>配置Systemd</h3><ol><li>启动WSL并进入Ubuntu实例。</li><li><p>查看WSL配置文件，cat /etc/wsl.conf 确保在引导选项中systemd被设置为true。若尚未设置，需在配置中添加：</p> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[boot]</span><br><span class="line">systemd = true</span><br></pre></td></tr></table></figure></li><li><p>执行wsl.exe shutdown命令，让WSL重启以启用systemd。</p></li><li>重新进入Ubuntu实例后，通过systemctl status检查systemd状态，可看到控制组的树形输出，其中会列出所有进程及其PID，确认系统功能正常。通过systemctl list-unit-files –type=service可发现当前无Docker服务运行。<h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3></li><li>访问Docker官网，在文档中找到适用于Ubuntu的快速安装脚本。</li><li><p>首先通过curl下载脚本：</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com -o get-docker.sh</span><br></pre></td></tr></table></figure></li><li><p>执行脚本安装Docker：</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh get-docker.sh</span><br></pre></td></tr></table></figure><p> 等待20秒</p></li><li>安装完成后，可通过docker version查看Docker引擎的客户端版本、服务器版本，以及引擎、containerd、runc和Docker init的具体版本信息。<h3 id="以非root用户运行Docker"><a href="#以非root用户运行Docker" class="headerlink" title="以非root用户运行Docker"></a>以非root用户运行Docker</h3></li><li>直接运行docker run hello-world会遇到权限拒绝错误；</li><li>执行id命令，确认当前用户不在docker组中。若需解决：<ul><li>执行groupadd docker（若组已存在，此命令无影响）。</li><li>执行`usermod -aG docker $USER，将当前用户添加到docker组。</li><li>执行newgrp docker刷新用户组权限。</li></ul></li><li>再次执行docker run hello-world，系统会拉取镜像并显示“hello from docker”，确认非root用户已可正常运行Docker。<h3 id="网络问题"><a href="#网络问题" class="headerlink" title="网络问题"></a>网络问题</h3></li></ol><ul><li><p>docker 的代理设置：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br></pre></td></tr></table></figure></li><li><p>设置加速器（可用加速器经常变化，网络搜索最新的服务器）：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">"registry-mirrors"</span>: [</span><br><span class="line">        <span class="string">"https://docker.xuanyuan.me"</span>,</span><br><span class="line">        <span class="string">"https://docker.m.daocloud.io"</span>,</span><br><span class="line">        <span class="string">"https://docker.1ms.run"</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure></li><li><p>重启docker服务，使其生效：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload &amp;&amp; sudo systemctl restart docker</span><br></pre></td></tr></table></figure></li></ul><h3 id="配置Docker随系统启动"><a href="#配置Docker随系统启动" class="headerlink" title="配置Docker随系统启动"></a>配置Docker随系统启动</h3><p>借助此前配置的systemd，我们可以让Docker在WSL启动时自动运行：</p><ol><li><p>启用Docker服务自启动：</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> docker.service</span><br></pre></td></tr></table></figure></li><li><p>启用containerd服务自启动：</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">enable</span> containerd.service</span><br></pre></td></tr></table></figure></li><li><p>通过systemctl status docker和systemctl status containerd检查服务状态，若显示“enabled”，则表示已成功配置为开机启动。</p><h3 id="安装Docker-Compose"><a href="#安装Docker-Compose" class="headerlink" title="安装Docker Compose"></a>安装Docker Compose</h3></li><li><p>再次访问Docker官网文档，执行以下命令：</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install docker-compose-plugin</span><br></pre></td></tr></table></figure></li><li><p>检查Docker Compose版本（示例版本为2.3.6.2）：</p> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose version</span><br></pre></td></tr></table></figure></li><li><p>验证功能：在测试项目中执行docker compose up，启动后访问localhost:8000，刷新页面可看到Flask应用正常运行。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">测试项目构建方法，官网链接：</span><br><span class="line">https://docs.docker.com/compose/gettingstarted/</span><br></pre></td></tr></table></figure></li><li><p>测试项目推荐的Dockerfile配置（官网配置有网络问题，耗时很长）：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># syntax=docker/dockerfile:1</span></span><br><span class="line">FROM python:3.10-slim</span><br><span class="line">WORKDIR /app</span><br><span class="line">RUN <span class="built_in">echo</span> <span class="string">"deb http://mirrors.aliyun.com/debian bookworm main"</span> &gt; /etc/apt/sources.list &amp;&amp; \</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"deb http://mirrors.aliyun.com/debian bookworm-updates main"</span> &gt;&gt; /etc/apt/sources.list &amp;&amp; \</span><br><span class="line">    apt-get update &amp;&amp; apt-get install -y --no-install-recommends gcc &amp;&amp; \</span><br><span class="line">    rm -rf /var/lib/apt/lists/*</span><br><span class="line">COPY requirements.txt .</span><br><span class="line">RUN pip install --no-cache-dir -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt</span><br><span class="line">COPY . .</span><br><span class="line">ENV FLASK_APP=app.py</span><br><span class="line">ENV FLASK_RUN_HOST=0.0.0.0</span><br><span class="line">EXPOSE 5000</span><br><span class="line">CMD [<span class="string">"flask"</span>, <span class="string">"run"</span>, <span class="string">"--debug"</span>]</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Wsl2-上安装Docker&quot;&gt;&lt;a href=&quot;#Wsl2-上安装Docker&quot; class=&quot;headerlink&quot; title=&quot;Wsl2 上安装Docker&quot;&gt;&lt;/a&gt;Wsl2 上安装Docker&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://cdn.pixabay.com/photo/2016/03/18/01/47/pet-1264256_1280.jpg&quot; alt&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="docker" scheme="https://pinghailinfeng.github.io/categories/docker/"/>
+    
+    
+      <category term="docker" scheme="https://pinghailinfeng.github.io/tags/docker/"/>
+    
+      <category term="wsl2" scheme="https://pinghailinfeng.github.io/tags/wsl2/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ollama quick start</title>
-    <link href="https://pinghailinfeng.gitee.io/2026/02/08/ollama-quick-start/"/>
-    <id>https://pinghailinfeng.gitee.io/2026/02/08/ollama-quick-start/</id>
+    <link href="https://pinghailinfeng.github.io/2026/02/08/ollama-quick-start/"/>
+    <id>https://pinghailinfeng.github.io/2026/02/08/ollama-quick-start/</id>
     <published>2026-02-07T16:50:19.000Z</published>
     <updated>2026-02-07T16:58:43.841Z</updated>
     
@@ -31,19 +55,19 @@
     
     </summary>
     
-      <category term="AI" scheme="https://pinghailinfeng.gitee.io/categories/AI/"/>
+      <category term="AI" scheme="https://pinghailinfeng.github.io/categories/AI/"/>
     
-      <category term="model" scheme="https://pinghailinfeng.gitee.io/categories/AI/model/"/>
+      <category term="model" scheme="https://pinghailinfeng.github.io/categories/AI/model/"/>
     
     
-      <category term="ollama" scheme="https://pinghailinfeng.gitee.io/tags/ollama/"/>
+      <category term="ollama" scheme="https://pinghailinfeng.github.io/tags/ollama/"/>
     
   </entry>
   
   <entry>
     <title>python string substring</title>
-    <link href="https://pinghailinfeng.gitee.io/2026/01/16/python-string-substring/"/>
-    <id>https://pinghailinfeng.gitee.io/2026/01/16/python-string-substring/</id>
+    <link href="https://pinghailinfeng.github.io/2026/01/16/python-string-substring/"/>
+    <id>https://pinghailinfeng.github.io/2026/01/16/python-string-substring/</id>
     <published>2026-01-16T05:50:19.000Z</published>
     <updated>2026-02-07T17:11:14.417Z</updated>
     
@@ -55,21 +79,21 @@
     
     </summary>
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/categories/python/"/>
     
-      <category term="string" scheme="https://pinghailinfeng.gitee.io/categories/python/string/"/>
+      <category term="string" scheme="https://pinghailinfeng.github.io/categories/python/string/"/>
     
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/tags/python/"/>
     
-      <category term="string" scheme="https://pinghailinfeng.gitee.io/tags/string/"/>
+      <category term="string" scheme="https://pinghailinfeng.github.io/tags/string/"/>
     
   </entry>
   
   <entry>
     <title>python 3.14 new feature</title>
-    <link href="https://pinghailinfeng.gitee.io/2025/12/12/python-3-14-new-feature/"/>
-    <id>https://pinghailinfeng.gitee.io/2025/12/12/python-3-14-new-feature/</id>
+    <link href="https://pinghailinfeng.github.io/2025/12/12/python-3-14-new-feature/"/>
+    <id>https://pinghailinfeng.github.io/2025/12/12/python-3-14-new-feature/</id>
     <published>2025-12-12T06:57:33.000Z</published>
     <updated>2025-12-12T07:17:04.583Z</updated>
     
@@ -81,19 +105,19 @@
     
     </summary>
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/tags/python/"/>
     
-      <category term="新特性" scheme="https://pinghailinfeng.gitee.io/tags/%E6%96%B0%E7%89%B9%E6%80%A7/"/>
+      <category term="新特性" scheme="https://pinghailinfeng.github.io/tags/%E6%96%B0%E7%89%B9%E6%80%A7/"/>
     
   </entry>
   
   <entry>
     <title>TypeError: crypto.hash is not a function</title>
-    <link href="https://pinghailinfeng.gitee.io/2025/07/24/TypeError-crypto-hash-is-not-a-function/"/>
-    <id>https://pinghailinfeng.gitee.io/2025/07/24/TypeError-crypto-hash-is-not-a-function/</id>
+    <link href="https://pinghailinfeng.github.io/2025/07/24/TypeError-crypto-hash-is-not-a-function/"/>
+    <id>https://pinghailinfeng.github.io/2025/07/24/TypeError-crypto-hash-is-not-a-function/</id>
     <published>2025-07-23T22:31:14.000Z</published>
     <updated>2025-07-23T22:58:04.331Z</updated>
     
@@ -105,21 +129,21 @@
     
     </summary>
     
-      <category term="前端" scheme="https://pinghailinfeng.gitee.io/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://pinghailinfeng.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="nodejs" scheme="https://pinghailinfeng.gitee.io/tags/nodejs/"/>
+      <category term="nodejs" scheme="https://pinghailinfeng.github.io/tags/nodejs/"/>
     
-      <category term="vue3" scheme="https://pinghailinfeng.gitee.io/tags/vue3/"/>
+      <category term="vue3" scheme="https://pinghailinfeng.github.io/tags/vue3/"/>
     
-      <category term="vite" scheme="https://pinghailinfeng.gitee.io/tags/vite/"/>
+      <category term="vite" scheme="https://pinghailinfeng.github.io/tags/vite/"/>
     
   </entry>
   
   <entry>
     <title>How to setting Pycharm conda environment</title>
-    <link href="https://pinghailinfeng.gitee.io/2025/06/14/How-to-setting-Pycharm-conda-environment/"/>
-    <id>https://pinghailinfeng.gitee.io/2025/06/14/How-to-setting-Pycharm-conda-environment/</id>
+    <link href="https://pinghailinfeng.github.io/2025/06/14/How-to-setting-Pycharm-conda-environment/"/>
+    <id>https://pinghailinfeng.github.io/2025/06/14/How-to-setting-Pycharm-conda-environment/</id>
     <published>2025-06-14T08:02:27.000Z</published>
     <updated>2025-06-14T08:29:29.721Z</updated>
     
@@ -131,23 +155,23 @@
     
     </summary>
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/categories/python/"/>
     
-      <category term="工具篇" scheme="https://pinghailinfeng.gitee.io/categories/python/%E5%B7%A5%E5%85%B7%E7%AF%87/"/>
+      <category term="工具篇" scheme="https://pinghailinfeng.github.io/categories/python/%E5%B7%A5%E5%85%B7%E7%AF%87/"/>
     
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/tags/python/"/>
     
-      <category term="conda" scheme="https://pinghailinfeng.gitee.io/tags/conda/"/>
+      <category term="conda" scheme="https://pinghailinfeng.github.io/tags/conda/"/>
     
-      <category term="pycharm" scheme="https://pinghailinfeng.gitee.io/tags/pycharm/"/>
+      <category term="pycharm" scheme="https://pinghailinfeng.github.io/tags/pycharm/"/>
     
   </entry>
   
   <entry>
     <title>Faster Linter Tool Ruff Usage</title>
-    <link href="https://pinghailinfeng.gitee.io/2025/06/03/Faster-Linter-Tool-Ruff-Usage/"/>
-    <id>https://pinghailinfeng.gitee.io/2025/06/03/Faster-Linter-Tool-Ruff-Usage/</id>
+    <link href="https://pinghailinfeng.github.io/2025/06/03/Faster-Linter-Tool-Ruff-Usage/"/>
+    <id>https://pinghailinfeng.github.io/2025/06/03/Faster-Linter-Tool-Ruff-Usage/</id>
     <published>2025-06-03T06:41:17.000Z</published>
     <updated>2025-06-03T07:36:48.709Z</updated>
     
@@ -159,23 +183,23 @@
     
     </summary>
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/categories/python/"/>
     
-      <category term="工具篇" scheme="https://pinghailinfeng.gitee.io/categories/python/%E5%B7%A5%E5%85%B7%E7%AF%87/"/>
+      <category term="工具篇" scheme="https://pinghailinfeng.github.io/categories/python/%E5%B7%A5%E5%85%B7%E7%AF%87/"/>
     
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/tags/python/"/>
     
-      <category term="rust" scheme="https://pinghailinfeng.gitee.io/tags/rust/"/>
+      <category term="rust" scheme="https://pinghailinfeng.github.io/tags/rust/"/>
     
-      <category term="linter" scheme="https://pinghailinfeng.gitee.io/tags/linter/"/>
+      <category term="linter" scheme="https://pinghailinfeng.github.io/tags/linter/"/>
     
   </entry>
   
   <entry>
     <title>Using pathlib module in python3</title>
-    <link href="https://pinghailinfeng.gitee.io/2025/06/03/Using-Pathlib-module-in-python3/"/>
-    <id>https://pinghailinfeng.gitee.io/2025/06/03/Using-Pathlib-module-in-python3/</id>
+    <link href="https://pinghailinfeng.github.io/2025/06/03/Using-Pathlib-module-in-python3/"/>
+    <id>https://pinghailinfeng.github.io/2025/06/03/Using-Pathlib-module-in-python3/</id>
     <published>2025-06-03T03:00:30.000Z</published>
     <updated>2025-06-03T03:18:36.545Z</updated>
     
@@ -187,21 +211,21 @@
     
     </summary>
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/categories/python/"/>
     
-      <category term="standard_library" scheme="https://pinghailinfeng.gitee.io/categories/python/standard-library/"/>
+      <category term="standard_library" scheme="https://pinghailinfeng.github.io/categories/python/standard-library/"/>
     
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/tags/python/"/>
     
-      <category term="pathlib" scheme="https://pinghailinfeng.gitee.io/tags/pathlib/"/>
+      <category term="pathlib" scheme="https://pinghailinfeng.github.io/tags/pathlib/"/>
     
   </entry>
   
   <entry>
     <title>uv usage guide</title>
-    <link href="https://pinghailinfeng.gitee.io/2025/05/13/uv-usage-guide/"/>
-    <id>https://pinghailinfeng.gitee.io/2025/05/13/uv-usage-guide/</id>
+    <link href="https://pinghailinfeng.github.io/2025/05/13/uv-usage-guide/"/>
+    <id>https://pinghailinfeng.github.io/2025/05/13/uv-usage-guide/</id>
     <published>2025-05-13T06:37:25.000Z</published>
     <updated>2025-05-13T07:05:32.546Z</updated>
     
@@ -213,19 +237,19 @@
     
     </summary>
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/tags/python/"/>
     
-      <category term="uv" scheme="https://pinghailinfeng.gitee.io/tags/uv/"/>
+      <category term="uv" scheme="https://pinghailinfeng.github.io/tags/uv/"/>
     
   </entry>
   
   <entry>
     <title>docker service start failed</title>
-    <link href="https://pinghailinfeng.gitee.io/2025/04/09/docker-service-start-failed/"/>
-    <id>https://pinghailinfeng.gitee.io/2025/04/09/docker-service-start-failed/</id>
+    <link href="https://pinghailinfeng.github.io/2025/04/09/docker-service-start-failed/"/>
+    <id>https://pinghailinfeng.github.io/2025/04/09/docker-service-start-failed/</id>
     <published>2025-04-09T14:28:05.000Z</published>
     <updated>2025-04-09T14:34:58.674Z</updated>
     
@@ -237,19 +261,19 @@
     
     </summary>
     
-      <category term="linux" scheme="https://pinghailinfeng.gitee.io/categories/linux/"/>
+      <category term="linux" scheme="https://pinghailinfeng.github.io/categories/linux/"/>
     
     
-      <category term="docker" scheme="https://pinghailinfeng.gitee.io/tags/docker/"/>
+      <category term="docker" scheme="https://pinghailinfeng.github.io/tags/docker/"/>
     
-      <category term="linux" scheme="https://pinghailinfeng.gitee.io/tags/linux/"/>
+      <category term="linux" scheme="https://pinghailinfeng.github.io/tags/linux/"/>
     
   </entry>
   
   <entry>
     <title>ssm integration</title>
-    <link href="https://pinghailinfeng.gitee.io/2024/10/15/ssm-integration/"/>
-    <id>https://pinghailinfeng.gitee.io/2024/10/15/ssm-integration/</id>
+    <link href="https://pinghailinfeng.github.io/2024/10/15/ssm-integration/"/>
+    <id>https://pinghailinfeng.github.io/2024/10/15/ssm-integration/</id>
     <published>2024-10-15T02:59:08.000Z</published>
     <updated>2024-10-15T03:02:59.527Z</updated>
     
@@ -261,21 +285,21 @@
     
     </summary>
     
-      <category term="java" scheme="https://pinghailinfeng.gitee.io/categories/java/"/>
+      <category term="java" scheme="https://pinghailinfeng.github.io/categories/java/"/>
     
     
-      <category term="ssm" scheme="https://pinghailinfeng.gitee.io/tags/ssm/"/>
+      <category term="ssm" scheme="https://pinghailinfeng.github.io/tags/ssm/"/>
     
-      <category term="spring" scheme="https://pinghailinfeng.gitee.io/tags/spring/"/>
+      <category term="spring" scheme="https://pinghailinfeng.github.io/tags/spring/"/>
     
-      <category term="mybatis" scheme="https://pinghailinfeng.gitee.io/tags/mybatis/"/>
+      <category term="mybatis" scheme="https://pinghailinfeng.github.io/tags/mybatis/"/>
     
   </entry>
   
   <entry>
     <title>TypeScript 01 Type Erasure</title>
-    <link href="https://pinghailinfeng.gitee.io/2023/11/20/TypeScript-01-Type-Erasure/"/>
-    <id>https://pinghailinfeng.gitee.io/2023/11/20/TypeScript-01-Type-Erasure/</id>
+    <link href="https://pinghailinfeng.github.io/2023/11/20/TypeScript-01-Type-Erasure/"/>
+    <id>https://pinghailinfeng.github.io/2023/11/20/TypeScript-01-Type-Erasure/</id>
     <published>2023-11-20T02:12:16.000Z</published>
     <updated>2023-11-20T02:58:06.720Z</updated>
     
@@ -287,17 +311,17 @@
     
     </summary>
     
-      <category term="TypeScript" scheme="https://pinghailinfeng.gitee.io/categories/TypeScript/"/>
+      <category term="TypeScript" scheme="https://pinghailinfeng.github.io/categories/TypeScript/"/>
     
     
-      <category term="TypeScript" scheme="https://pinghailinfeng.gitee.io/tags/TypeScript/"/>
+      <category term="TypeScript" scheme="https://pinghailinfeng.github.io/tags/TypeScript/"/>
     
   </entry>
   
   <entry>
     <title>Centos jira automatatic start</title>
-    <link href="https://pinghailinfeng.gitee.io/2023/07/11/Centos-jira-automatatic-start/"/>
-    <id>https://pinghailinfeng.gitee.io/2023/07/11/Centos-jira-automatatic-start/</id>
+    <link href="https://pinghailinfeng.github.io/2023/07/11/Centos-jira-automatatic-start/"/>
+    <id>https://pinghailinfeng.github.io/2023/07/11/Centos-jira-automatatic-start/</id>
     <published>2023-07-11T07:23:17.000Z</published>
     <updated>2023-07-11T07:44:30.104Z</updated>
     
@@ -309,21 +333,21 @@
     
     </summary>
     
-      <category term="测试" scheme="https://pinghailinfeng.gitee.io/categories/%E6%B5%8B%E8%AF%95/"/>
+      <category term="测试" scheme="https://pinghailinfeng.github.io/categories/%E6%B5%8B%E8%AF%95/"/>
     
     
-      <category term="项目管理" scheme="https://pinghailinfeng.gitee.io/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
+      <category term="jira" scheme="https://pinghailinfeng.github.io/tags/jira/"/>
     
-      <category term="Centos" scheme="https://pinghailinfeng.gitee.io/tags/Centos/"/>
+      <category term="项目管理" scheme="https://pinghailinfeng.github.io/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
     
-      <category term="jira" scheme="https://pinghailinfeng.gitee.io/tags/jira/"/>
+      <category term="Centos" scheme="https://pinghailinfeng.github.io/tags/Centos/"/>
     
   </entry>
   
   <entry>
     <title>zentao automatic start</title>
-    <link href="https://pinghailinfeng.gitee.io/2023/07/11/zentao-automatic-start/"/>
-    <id>https://pinghailinfeng.gitee.io/2023/07/11/zentao-automatic-start/</id>
+    <link href="https://pinghailinfeng.github.io/2023/07/11/zentao-automatic-start/"/>
+    <id>https://pinghailinfeng.github.io/2023/07/11/zentao-automatic-start/</id>
     <published>2023-07-11T06:56:18.000Z</published>
     <updated>2023-07-11T07:34:02.976Z</updated>
     
@@ -335,21 +359,21 @@
     
     </summary>
     
-      <category term="测试" scheme="https://pinghailinfeng.gitee.io/categories/%E6%B5%8B%E8%AF%95/"/>
+      <category term="测试" scheme="https://pinghailinfeng.github.io/categories/%E6%B5%8B%E8%AF%95/"/>
     
     
-      <category term="禅道" scheme="https://pinghailinfeng.gitee.io/tags/%E7%A6%85%E9%81%93/"/>
+      <category term="项目管理" scheme="https://pinghailinfeng.github.io/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
     
-      <category term="项目管理" scheme="https://pinghailinfeng.gitee.io/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"/>
+      <category term="Centos" scheme="https://pinghailinfeng.github.io/tags/Centos/"/>
     
-      <category term="Centos" scheme="https://pinghailinfeng.gitee.io/tags/Centos/"/>
+      <category term="禅道" scheme="https://pinghailinfeng.github.io/tags/%E7%A6%85%E9%81%93/"/>
     
   </entry>
   
   <entry>
     <title>Django Recursive generation</title>
-    <link href="https://pinghailinfeng.gitee.io/2023/06/09/Django-Recursive-generation/"/>
-    <id>https://pinghailinfeng.gitee.io/2023/06/09/Django-Recursive-generation/</id>
+    <link href="https://pinghailinfeng.github.io/2023/06/09/Django-Recursive-generation/"/>
+    <id>https://pinghailinfeng.github.io/2023/06/09/Django-Recursive-generation/</id>
     <published>2023-06-09T07:45:37.000Z</published>
     <updated>2023-06-09T07:48:33.104Z</updated>
     
@@ -361,21 +385,21 @@
     
     </summary>
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/categories/python/"/>
     
-      <category term="django" scheme="https://pinghailinfeng.gitee.io/categories/python/django/"/>
+      <category term="django" scheme="https://pinghailinfeng.github.io/categories/python/django/"/>
     
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/tags/python/"/>
     
-      <category term="逆向工程" scheme="https://pinghailinfeng.gitee.io/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/"/>
+      <category term="逆向工程" scheme="https://pinghailinfeng.github.io/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/"/>
     
   </entry>
   
   <entry>
     <title>django field constraint</title>
-    <link href="https://pinghailinfeng.gitee.io/2023/06/09/django-field-constraint/"/>
-    <id>https://pinghailinfeng.gitee.io/2023/06/09/django-field-constraint/</id>
+    <link href="https://pinghailinfeng.github.io/2023/06/09/django-field-constraint/"/>
+    <id>https://pinghailinfeng.github.io/2023/06/09/django-field-constraint/</id>
     <published>2023-06-09T07:32:41.000Z</published>
     <updated>2023-06-09T07:40:26.747Z</updated>
     
@@ -387,23 +411,23 @@
     
     </summary>
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/categories/python/"/>
     
-      <category term="django" scheme="https://pinghailinfeng.gitee.io/categories/python/django/"/>
+      <category term="django" scheme="https://pinghailinfeng.github.io/categories/python/django/"/>
     
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/tags/python/"/>
     
-      <category term="django" scheme="https://pinghailinfeng.gitee.io/tags/django/"/>
+      <category term="django" scheme="https://pinghailinfeng.github.io/tags/django/"/>
     
-      <category term="约束" scheme="https://pinghailinfeng.gitee.io/tags/%E7%BA%A6%E6%9D%9F/"/>
+      <category term="约束" scheme="https://pinghailinfeng.github.io/tags/%E7%BA%A6%E6%9D%9F/"/>
     
   </entry>
   
   <entry>
     <title>django migrations</title>
-    <link href="https://pinghailinfeng.gitee.io/2023/06/09/django-migrations/"/>
-    <id>https://pinghailinfeng.gitee.io/2023/06/09/django-migrations/</id>
+    <link href="https://pinghailinfeng.github.io/2023/06/09/django-migrations/"/>
+    <id>https://pinghailinfeng.github.io/2023/06/09/django-migrations/</id>
     <published>2023-06-09T07:16:35.000Z</published>
     <updated>2023-06-09T07:29:54.390Z</updated>
     
@@ -415,21 +439,21 @@
     
     </summary>
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/categories/python/"/>
     
-      <category term="django" scheme="https://pinghailinfeng.gitee.io/categories/python/django/"/>
+      <category term="django" scheme="https://pinghailinfeng.github.io/categories/python/django/"/>
     
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/tags/python/"/>
     
-      <category term="django" scheme="https://pinghailinfeng.gitee.io/tags/django/"/>
+      <category term="django" scheme="https://pinghailinfeng.github.io/tags/django/"/>
     
   </entry>
   
   <entry>
     <title>table tablespace schema etc</title>
-    <link href="https://pinghailinfeng.gitee.io/2023/06/09/table-tablespace-schema-etc/"/>
-    <id>https://pinghailinfeng.gitee.io/2023/06/09/table-tablespace-schema-etc/</id>
+    <link href="https://pinghailinfeng.github.io/2023/06/09/table-tablespace-schema-etc/"/>
+    <id>https://pinghailinfeng.github.io/2023/06/09/table-tablespace-schema-etc/</id>
     <published>2023-06-09T07:05:50.000Z</published>
     <updated>2023-06-09T07:21:53.850Z</updated>
     
@@ -441,17 +465,17 @@
     
     </summary>
     
-      <category term="数据库" scheme="https://pinghailinfeng.gitee.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="https://pinghailinfeng.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-      <category term="mysql" scheme="https://pinghailinfeng.gitee.io/tags/mysql/"/>
+      <category term="mysql" scheme="https://pinghailinfeng.github.io/tags/mysql/"/>
     
   </entry>
   
   <entry>
     <title>word和pdf转换</title>
-    <link href="https://pinghailinfeng.gitee.io/2022/12/06/word%E5%92%8Cpdf%E8%BD%AC%E6%8D%A2/"/>
-    <id>https://pinghailinfeng.gitee.io/2022/12/06/word和pdf转换/</id>
+    <link href="https://pinghailinfeng.github.io/2022/12/06/word%E5%92%8Cpdf%E8%BD%AC%E6%8D%A2/"/>
+    <id>https://pinghailinfeng.github.io/2022/12/06/word和pdf转换/</id>
     <published>2022-12-06T01:22:39.000Z</published>
     <updated>2023-06-09T06:19:44.680Z</updated>
     
@@ -463,19 +487,19 @@
     
     </summary>
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/categories/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="https://pinghailinfeng.gitee.io/tags/python/"/>
+      <category term="python" scheme="https://pinghailinfeng.github.io/tags/python/"/>
     
-      <category term="办公" scheme="https://pinghailinfeng.gitee.io/tags/%E5%8A%9E%E5%85%AC/"/>
+      <category term="办公" scheme="https://pinghailinfeng.github.io/tags/%E5%8A%9E%E5%85%AC/"/>
     
   </entry>
   
   <entry>
     <title>fix FinalShell error channel is not opened</title>
-    <link href="https://pinghailinfeng.gitee.io/2022/08/22/fix-FinalShell-error-channel-is-not-opened/"/>
-    <id>https://pinghailinfeng.gitee.io/2022/08/22/fix-FinalShell-error-channel-is-not-opened/</id>
+    <link href="https://pinghailinfeng.github.io/2022/08/22/fix-FinalShell-error-channel-is-not-opened/"/>
+    <id>https://pinghailinfeng.github.io/2022/08/22/fix-FinalShell-error-channel-is-not-opened/</id>
     <published>2022-08-22T06:04:49.000Z</published>
     <updated>2022-08-22T06:14:06.231Z</updated>
     
@@ -487,32 +511,10 @@
     
     </summary>
     
-      <category term="终端" scheme="https://pinghailinfeng.gitee.io/categories/%E7%BB%88%E7%AB%AF/"/>
+      <category term="终端" scheme="https://pinghailinfeng.github.io/categories/%E7%BB%88%E7%AB%AF/"/>
     
     
-      <category term="linux" scheme="https://pinghailinfeng.gitee.io/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>missing you</title>
-    <link href="https://pinghailinfeng.gitee.io/2021/04/21/missing-you/"/>
-    <id>https://pinghailinfeng.gitee.io/2021/04/21/missing-you/</id>
-    <published>2021-04-21T14:49:36.000Z</published>
-    <updated>2022-08-22T06:01:37.433Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="夜已深-天凉-想您了"><a href="#夜已深-天凉-想您了" class="headerlink" title="夜已深,天凉,想您了"></a>夜已深,天凉,想您了</h1><p><img src="https://bpic.588ku.com/element_origin_min_pic/19/04/11/e9a157f9c729af7aac211ce53eb1b8a7.jpg" alt></p><a id="more"></a><p>对一个人的思念可以到什么程度？可能只有真正失去的人才能懂吧。一晃父亲离开我们已经2年了…….</p><p>前段时间无意中看到迟尚斌因病逝世的消息,突然想起了父亲生前也是球迷。</p><p>回想起小时候,爸爸每周六都要看cctv5转播的意大利联赛,我也耳濡目染喜欢上了足球。</p><p>“足球是圆的,没到最后一刻,一切皆有可能。”马拉多纳、齐达内、博格坎普、伊基塔那些在球场上闪耀的球星,我只要听到他们的名字内心都莫名的激动。</p><p>然而父亲并没有让我踢足球,我记得又一次我自己拿了个破足球在球场上踢,爸爸默默走过来说:你也喜欢足球？我点了点头。知道为啥不让你踢足球吗？我摇了摇头。因为你太瘦了,足球对抗性太强,怕你受伤。我似懂非懂的点了点头。</p><p>我和父亲的话题也渐渐多了起来,从五大联赛到欧洲杯、世界杯到甲A联赛,基本上有关足球的东西都是茶余饭后的谈资。我熬夜看球,父亲慢慢熬不了夜,只能让我把白天录播的时间给他记下来,他白天没事的时候看。每次看到漂亮的进球总想和父亲分享,一转身,父亲已经睡着了。</p><p>父亲中年的时候担任分厂足球队的教练,我偷摸在场边看着父亲,整个人在球场上的感觉都不一样了。心里别提多自豪了。听妈妈说,你爸年轻的时候,不光是足球,篮球、排球都很厉害,刚开始还能踢前锋,伴随着年龄增长,就改踢中场,到最后只能踢后卫了。我没想到爸爸还有这么风光的经历。我眼中的父亲,话很少,很严厉,工作起来很认真。</p><p>说点高兴的事,爸爸告诉你个事儿,今年女足挺进了世界杯,贾秀全也是大连人。我想您在天上应该也会很开心的。</p><p>一天,媳妇调侃闺女说,你以后找对象会找你爸这样的吗？闺女说,不会啊,因为爸爸只有一个啊。我听到了,心里莫名感动。现在能理解为人父母那份不需要回报的心了。</p><p>挚爱亲朋的离开,与其悲伤,我们只能选择坚强。做好一个父亲,尽可能地呵护家人,我会照顾好自己，父亲不用再为我担心。</p><p>夜已深,父亲,我又想您了。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;夜已深-天凉-想您了&quot;&gt;&lt;a href=&quot;#夜已深-天凉-想您了&quot; class=&quot;headerlink&quot; title=&quot;夜已深,天凉,想您了&quot;&gt;&lt;/a&gt;夜已深,天凉,想您了&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://bpic.588ku.com/element_origin_min_pic/19/04/11/e9a157f9c729af7aac211ce53eb1b8a7.jpg&quot; alt&gt;&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="杂记" scheme="https://pinghailinfeng.gitee.io/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-      <category term="others" scheme="https://pinghailinfeng.gitee.io/tags/others/"/>
+      <category term="linux" scheme="https://pinghailinfeng.github.io/tags/linux/"/>
     
   </entry>
   
